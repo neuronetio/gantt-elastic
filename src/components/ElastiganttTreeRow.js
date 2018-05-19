@@ -1,42 +1,40 @@
 export function ElastiganttTreeRow(prefix, self) {
   return {
-
-    props: ['data', 'task', 'index'],
-
+    props: ['task', 'index'],
     template: `<rect 
       class="elastigantt__tree-row" 
-      :id="getElementId(task.key)" 
+      :id="getId" 
       :x="0"
       :y="getY"
       :width="getWidth"
       :height="getHeight"
       :style="getStyle"></rect>`,
 
-    data(){
-      return {store:elastiganttStore};
+    data() {
+      return window.elastiganttStore.initStore(prefix, 'ElastiganttTreeRow', {});
     },
 
     methods: {
-      getElementId(id) {
-        return `elastigantt__tree-row--${id}`;
-      }
+     
     },
 
     computed: {
-      getData() {
-        return this.data;
+      getId(){
+        return this.task.key;
       },
       getHeight() {
-        return this.data.options.row.height;
+        return this.shared.options.row.height;
       },
       getWidth() {
-        return 50;
+        let day = this.shared.options.day;
+        return (day.width + day.gap) * this.task.duration - day.gap;
       },
       getY() {
-        return (this.data.options.row.height + this.data.options.row.gap) * this.index;
+        let row = this.shared.options.row;
+        return (row.height + row.gap) * this.index;
       },
-      getStyle() {
-        return this.data.options.row.style;
+      getStyle(){
+        return this.task.style ? this.task.style : this.shared.options.row.style;
       },
     }
   };

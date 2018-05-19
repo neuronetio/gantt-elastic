@@ -23,9 +23,9 @@ class Elastigantt {
     let self = this;
 
     let components = {
-      'elastigantt-tree-row': ElastiganttTreeRow(prefix, self),
-      'elastigantt-tree': ElastiganttTree(prefix, self),
       'elastigantt-main': ElastiganttMain(prefix, self),
+      'elastigantt-tree': ElastiganttTree(prefix, self),
+      'elastigantt-tree-row': ElastiganttTreeRow(prefix, self),
     };
 
     let customComponents = {};
@@ -54,10 +54,14 @@ class Elastigantt {
   getDefaultOptions() {
     return {
       debug: false,
+      day:{
+        width:20,
+        gap:1,
+      },
       row: {
         height: 50,
         gap: 2,
-        style: 'fill:#ff0000'
+        style:'fill:#FF0000'
       }
     };
   }
@@ -86,9 +90,6 @@ class Elastigantt {
     this.data = data;
     this.tasks = data.tasks.map(task => task);
     this.options = Object.assign(this.getDefaultOptions(), options);
-
-    this.customComponents = customComponents;
-    this.registerComponents();
     
     const globalState = window.elastiganttStore.getGlobalState();
     globalState.classInstance = this;
@@ -96,11 +97,13 @@ class Elastigantt {
     globalState.tasks = this.tasks;
     globalState.options = this.options;
 
+    this.customComponents = customComponents;
+    this.registerComponents();
 
     this.app = new Vue({
       el: '#' + containerId,
-      template: `<div id="${prefix}-elastigantt" style="width:100%;height:100%;">
-        <${self.prefixPascal}-elastigantt-main></${self.prefixPascal}-elastigantt-main>
+      template: `<div id="${prefix}-elastigantt">
+        <${self.prefix}-elastigantt-main></${self.prefix}-elastigantt-main>
       </div>`,
 
       data: {
@@ -117,22 +120,46 @@ class Elastigantt {
 
 
 let elastigantt = new Elastigantt('app', '#app', {
-  tasks: [{
+  tasks: [
+    {
       id: 1,
       key: 'T1',
-      label: 'row1'
+      label: 'row1',
+      duration:1,
     },
     {
       id: 2,
       key: 'T2',
       label: 'Kałabangaaaa!!!! :D:D:D:D',
-      parent: 1
+      parent: 1,
+      duration:2,
     },
     {
       id: 3,
       key: 'T3',
       label: 'row3',
-      parent: 2
+      parent: 2,
+      duration:1,
+    },
+    {
+      id: 4,
+      key: 'T4',
+      label: 'row4',
+      duration:1,
+    },
+    {
+      id: 5,
+      key: 'T5',
+      label: 'row5',
+      parent: 1,
+      duration:2,
+    },
+    {
+      id: 6,
+      key: 'T6',
+      label: 'row6',
+      parent: 2,
+      duration:1,
     },
   ]
 }, {

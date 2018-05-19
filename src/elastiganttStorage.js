@@ -26,7 +26,7 @@ const elastiganttStore = function elastiganttStore(debug) {
             console.groupEnd();
           }
         }
-        if (typeof value === 'object') {
+        if (typeof value === 'object' && !Array.isArray(value)) {
           value._isProxy = true;
           target[name] = new Proxy(value, stateHandler(fullPath+'.'+name));
         } else {
