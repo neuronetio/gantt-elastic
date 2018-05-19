@@ -1,4 +1,4 @@
-export function ElastiganttTreeRow(prefix, self) {
+export function TreeRow(prefix, self) {
   return {
     props: ['task', 'index'],
     template: `<rect 
@@ -11,7 +11,7 @@ export function ElastiganttTreeRow(prefix, self) {
       :style="getStyle"></rect>`,
 
     data() {
-      return window.elastiganttStore.initStore(prefix, 'ElastiganttTreeRow', {});
+      return window.elastiganttStore.initStore(prefix, 'TreeRow', {});
     },
 
     methods: {
@@ -26,8 +26,8 @@ export function ElastiganttTreeRow(prefix, self) {
         return this.shared.options.row.height;
       },
       getWidth() {
-        let day = this.shared.options.day;
-        return (day.width + day.gap) * this.task.duration - day.gap;
+        let duration = this.shared.options.duration;
+        return this.task.duration/duration.scale;
       },
       getY() {
         let row = this.shared.options.row;

@@ -1,14 +1,14 @@
-export function ElastiganttMain(prefix, self) {
+export function Main(prefix, self) {
   
   return {
     template: `<svg class="elastigantt__main" 
       :width="getWidth" 
       :height="getHeight">
-      <${prefix}-elastigantt-tree></${prefix}-elastigantt-tree>
+      <${prefix}-tree></${prefix}-tree>
     </svg>`,
 
     data() {
-      return window.elastiganttStore.initStore(prefix,'ElastiganttMain',{});
+      return window.elastiganttStore.initStore(prefix,'Main',{});
     },
 
     mounted(){

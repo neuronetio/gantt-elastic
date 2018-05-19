@@ -1,15 +1,9 @@
-import {
-  elastiganttStore
-} from "./elastiganttStorage.js";
-import {
-  ElastiganttMain
-} from "./components/ElastiganttMain.js";
-import {
-  ElastiganttTree
-} from "./components/ElastigantTree.js";
-import {
-  ElastiganttTreeRow
-} from "./components/ElastiganttTreeRow.js";
+import { elastiganttStore } from "./elastiganttStorage.js";
+import { Main } from "./components/Main.js";
+import { Grid } from "./components/Grid.js";
+import { GridHeader } from "./components/GridHeader.js";
+import { Tree } from "./components/Tree.js";
+import { TreeRow } from "./components/TreeRow.js";
 
 class Elastigantt {
 
@@ -23,9 +17,11 @@ class Elastigantt {
     let self = this;
 
     let components = {
-      'elastigantt-main': ElastiganttMain(prefix, self),
-      'elastigantt-tree': ElastiganttTree(prefix, self),
-      'elastigantt-tree-row': ElastiganttTreeRow(prefix, self),
+      'main': Main(prefix, self),
+      'tree': Tree(prefix, self),
+      'grid': Grid(prefix, self),
+      'grid-header': GridHeader(prefix, self),
+      'tree-row': TreeRow(prefix, self),
     };
 
     let customComponents = {};
@@ -54,8 +50,8 @@ class Elastigantt {
   getDefaultOptions() {
     return {
       debug: false,
-      day:{
-        width:20,
+      duration:{
+        scale:60*60,
         gap:1,
       },
       row: {
@@ -103,11 +99,12 @@ class Elastigantt {
     this.app = new Vue({
       el: '#' + containerId,
       template: `<div id="${prefix}-elastigantt">
-        <${self.prefix}-elastigantt-main></${self.prefix}-elastigantt-main>
+        <${self.prefix}-header></${self.prefix}-header>
+        <${self.prefix}-main></${self.prefix}-main>
       </div>`,
 
       data: {
-        store: elastiganttStore
+        options:self.options,
       },
     });
 
@@ -125,41 +122,47 @@ let elastigantt = new Elastigantt('app', '#app', {
       id: 1,
       key: 'T1',
       label: 'row1',
-      duration:1,
+      start:'2018-05-19 12:00:00',
+      duration:1*24*60*60,
     },
     {
       id: 2,
       key: 'T2',
       label: 'Kałabangaaaa!!!! :D:D:D:D',
       parent: 1,
-      duration:2,
+      start:'2018-05-19 13:00:00',
+      duration:2*24*60*60,
     },
     {
       id: 3,
       key: 'T3',
       label: 'row3',
       parent: 2,
-      duration:1,
+      start:'2018-05-19 12:00:00',
+      duration:3*24*60*60,
     },
     {
       id: 4,
       key: 'T4',
       label: 'row4',
-      duration:1,
+      start:'2018-05-19 12:00:00',
+      duration:2*24*60*60,
     },
     {
       id: 5,
       key: 'T5',
       label: 'row5',
       parent: 1,
-      duration:2,
+      start:'2018-05-19 12:00:00',
+      duration:2*24*60*60,
     },
     {
       id: 6,
       key: 'T6',
       label: 'row6',
       parent: 2,
-      duration:1,
+      start:'2018-05-19 12:00:00',
+      duration:1*24*60*60,
     },
   ]
 }, {
