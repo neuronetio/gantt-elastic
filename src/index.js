@@ -11,8 +11,6 @@ import {
   ElastiganttTreeRow
 } from "./components/ElastiganttTreeRow.js";
 
-window.elastiganttStore = elastiganttStore;
-
 class Elastigantt {
 
   toPascalCase(str) {
@@ -55,7 +53,7 @@ class Elastigantt {
 
   getDefaultOptions() {
     return {
-      debug:false,
+      debug: false,
       row: {
         height: 50,
         gap: 2,
@@ -74,6 +72,9 @@ class Elastigantt {
 
   constructor(prefix, containerId, data, options = {}, customComponents = {}) {
     const self = this;
+    if (typeof window.elastiganttStore === 'undefined') {
+      window.elastiganttStore = elastiganttStore(options.debug , options.showStack);
+    }
     if (containerId.substr(0, 1) === '#') {
       containerId = containerId.substr(1);
     }
@@ -88,15 +89,12 @@ class Elastigantt {
 
     this.customComponents = customComponents;
     this.registerComponents();
-    if(typeof options.debug === 'boolean'){
-      window.elastiganttStore.setDebug(options.debug);
-    }
-    let store = window.elastiganttStore.getStore(prefix);
-
-    store.set('classInstance', this);
-    store.set('data', this.data);
-    store.set('tasks', this.tasks);
-    store.set('options', this.options);
+    
+    const globalState = window.elastiganttStore.getGlobalState();
+    globalState.classInstance = this;
+    globalState.data = this.data;
+    globalState.tasks = this.tasks;
+    globalState.options = this.options;
 
 
     this.app = new Vue({
@@ -137,6 +135,7 @@ let elastigantt = new Elastigantt('app', '#app', {
       parent: 2
     },
   ]
-},{
-  debug:true,
+}, {
+  debug: true,
+  showStack:true,
 });

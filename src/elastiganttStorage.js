@@ -1,137 +1,84 @@
-const elastiganttStore = {
-    debug: false,
-    globalState:{},
-    instancesStates:{},
-  
-    setDebug(value){
-      this.debug = value;
-    },
-
-    _normalizePrefix(prefix) {
-      if (typeof prefix === 'undefined' || prefix === null || prefix === '') {
-        throw new Error("Empty prefix!");
-      }
-      return prefix.replace('.','');
-    },
-  
-    _setProp(prop, value, currentBranch = this.instancesStates) {
-      if (!prop) {
-        throw new Error(`Property not found [${prop}]`);
-      }
-      if(this.debug){ console.groupCollapsed(`elastiganttStore._setProp:${prop}`); }
-      let breadcrumbs = prop.split('.');
-      for (let index = 0, len = breadcrumbs.length; index < len; index++) {
-        let breadcrumb = breadcrumbs[index];
-        if (this.debug) {
-          console.log('current breadcrumb', index, breadcrumb, breadcrumbs.length - 1);
-        }
-        if (index === breadcrumbs.length - 1) {
-          if (this.debug) {
-            console.log('saving', breadcrumb, value);
+const elastiganttStore = function elastiganttStore(debug) {
+  let showStack = true;
+  function stateHandler(fullPath){
+    return {
+      get(target, name){
+        let value = target[name];
+        if (debug && name!=='_isProxy' && name!=='__ob__') {
+          if(!(typeof value==='object' && typeof value._isProxy!=='undefined')){
+            let log = 'GET: '+fullPath+'.'+name.toString();
+            console.groupCollapsed(log);
+            console.log('VALUE:',value);
+            console.trace();
             console.groupEnd();
           }
-          return currentBranch[breadcrumb] = value;
         }
-        if (typeof currentBranch[breadcrumb] === 'undefined') {
-          currentBranch[breadcrumb] = {};
-        }
-        currentBranch = currentBranch[breadcrumb];
-      }
-    },
-  
-    setGlobal(prop, value) {
-      return this._setProp(prop, value, this.globalState);
-    },
-  
-    _setStorage(prefix) {
-      prefix = this._normalizePrefix(prefix);
-      return function set(prop, value) {
-        this._setProp(`${prefix}.${prop}`, value);
-      }.bind(this);
-    },
-  
-    _getProp(prop, currentBranch = this.instancesStates) {
-      if (!prop) {
-        throw new Error(`Property not found [${prop}]`);
-      }
-      if(this.debug){ console.groupCollapsed(`elastiganttStore._getProp:${prop}`); }
-      let breadcrumbs = prop.split('.');
-      for (let index = 0, len = breadcrumbs.length; index < len; index++) {
-        let breadcrumb = breadcrumbs[index];
-        if (this.debug) {
-          console.log('current breadcrumb', index, breadcrumb, breadcrumbs.length - 1);
-        }
-        if (index === breadcrumbs.length - 1) {
-          if (this.debug) {
-            console.log('getting', breadcrumb, currentBranch, currentBranch[breadcrumb]);
+        return target[name];
+      },
+      set(target, name, value){
+        let oldValue = target[name];
+        if (debug) {
+          if(!(typeof oldValue==='object' && typeof oldValue._isProxy!=='undefined')){
+            let log = 'SET: '+fullPath+'.'+name.toString();
+            console.groupCollapsed(log);
+            console.log('VALUE:',value);
+            console.trace();
             console.groupEnd();
           }
-          return currentBranch[breadcrumb];
         }
-        currentBranch = currentBranch[breadcrumb];
-      }
-    },
-  
-    getGlobal(prop) {
-      return this._getProp(prop, this.globalState);
-    },
-  
-    _getStorage(prefix) {
-      prefix = this._normalizePrefix(prefix);
-      return function get(prop) {
-        return this._getProp(`${prefix}.${prop}`);
-      }.bind(this);
-    },
-  
-    _unsetProp(prop, currentBranch = this.instancesStates) {
-      if (!prop) {
-        throw new Error(`Property not found [${prop}]`);
-      }
-      if(this.debug){ console.groupCollapsed(`elastiganttStore._unsetProp:${prop}`); }
-      let breadcrumbs = prop.split('.');
-      for (let index = 0, len = breadcrumbs.length; index < len; index++) {
-        let breadcrumb = breadcrumbs[index];
-        if (this.debug) {
-          console.debug('current breadcrumb', index, breadcrumb, breadcrumbs.length - 1);
+        if (typeof value === 'object') {
+          value._isProxy = true;
+          target[name] = new Proxy(value, stateHandler(fullPath+'.'+name));
+        } else {
+          target[name] = value;
         }
-        if (index === breadcrumbs.length - 1) {
-          if (this.debug) {
-            console.debug('deleting', breadcrumb);
+        return true;
+      },
+      deleteProperty(target, name){
+        let oldValue = target[name];
+        if(debug){
+          if(!(typeof target[name]==='object' && typeof target[name]._isProxy!=='undefined')){
+            let log = 'DEL: '+fullPath+'.'+name.toString();
+            console.groupCollapsed(log);
+            console.log('OLDVAL:',oldValue);
+            console.trace();
             console.groupEnd();
           }
-          return delete currentBranch[breadcrumb];
         }
-        currentBranch = currentBranch[breadcrumb];
+        delete target[name];
+        return true;
       }
-    },
-  
-    unsetGlobal(prop) {
-      return this._unsetProp(prop, this.globalState);
-    },
-  
-    _unsetStorage(prefix) {
-      prefix = this._normalizePrefix(prefix);
-      return function unset(prop) {
-        this._unsetProp(`${prefix}.${prop}`);
-      }.bind(this);
-    },
-
-    getStore(prefix){
-      let store = {};
-      store.get = this._getStorage(prefix);
-      store.set = this._setStorage(prefix);
-      store.unset = this._unsetStorage(prefix);
-      store.getGlobal = this.getGlobal;
-      store.setGlobal = this.setGlobal;
-      store.unsetGlobal = this.unsetGlobal;
-      return store;
-    },
-
-    init(prefix, data = {}){
-      data.store = this.getStore(prefix);
-      return data;
-    },
-  
+    }
   };
 
-  export {elastiganttStore};
+  let globalState = {};
+  let instancesStates = {};
+  if(debug){
+    globalState = new Proxy({}, stateHandler('root'));
+    instancesStates = new Proxy({}, stateHandler('root'));
+  }
+
+  return {
+
+    getGlobalState(){
+      return globalState;
+    },
+
+    getInstanceStates(){
+      return instancesStates;
+    },
+
+    initStore(prefix , componentName, initialValue = {}) {
+      initialValue.shared = globalState;
+      if(typeof instancesStates[prefix]==='undefined'){
+        instancesStates[prefix]={};
+      }
+      return instancesStates[prefix][componentName] = new Proxy(initialValue,stateHandler(componentName));
+    },
+
+  };
+};
+
+export {
+  elastiganttStore
+};
