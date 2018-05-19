@@ -53,27 +53,48 @@ const elastiganttStore = function elastiganttStore(debug) {
 
   let globalState = {};
   let instancesStates = {};
+  let componentsStates = {};
   if(debug){
     globalState = new Proxy({}, stateHandler('root'));
     instancesStates = new Proxy({}, stateHandler('root'));
+    componentsStates = new Proxy({}, stateHandler('root'));
   }
+
+  let lastId={};
 
   return {
 
-    getGlobalState(){
+    getGlobalState(prop){
+      if(prop){
+        return globalState[prop];
+      }
       return globalState;
     },
 
-    getInstanceStates(){
+    getInstanceState(prefix){
+      if(prefix){
+        return instancesStates[prefix];
+      }
       return instancesStates;
     },
 
-    initStore(prefix , componentName, initialValue = {}) {
-      initialValue.shared = globalState;
-      if(typeof instancesStates[prefix]==='undefined'){
-        instancesStates[prefix]={};
+    getComponentState(prefix, componentId){
+      if(prefix && componentId){
+        return componentsStates[prefix][componentId];
       }
-      return instancesStates[prefix][componentName] = new Proxy(initialValue,stateHandler(componentName));
+      return componentsStates;
+    },
+
+    initStore(prefix , componentName, initialValue = {}) {
+      if(typeof lastId[prefix]==='undefined'){
+        lastId[prefix]=0;
+      }
+      const componentId = lastId[prefix]++;
+      initialValue.shared = globalState;
+      if(typeof componentsStates[prefix]==='undefined'){
+        componentsStates[prefix]={};
+      }
+      return componentsStates[prefix][componentId] = new Proxy(initialValue,stateHandler(`${componentName}[${componentId}]`));
     },
 
   };

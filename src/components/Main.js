@@ -8,15 +8,12 @@ export function Main(prefix, self) {
     </svg>`,
 
     data() {
+      console.log(this);
       return window.elastiganttStore.initStore(prefix,'Main',{});
     },
 
-    mounted(){
-      console.log('mounted!',this);
-    },
-
-    beforeCreate(){
-      console.log('beforeCreate',this);
+    created(){
+      
     },
 
     methods:{
