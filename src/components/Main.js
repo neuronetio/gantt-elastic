@@ -1,10 +1,14 @@
 export function Main(prefix, self) {
   return self.wrapComponent({
-    template: `<svg class="elastigantt__main" 
-      :width="getWidth" 
-      :height="getHeight">
-      <${prefix}-tree></${prefix}-tree>
-    </svg>`,
+    template: `
+    <div class="elastigantt__main">
+      <${prefix}-header></${prefix}-header>
+      <svg class="elastigantt__main-svg" 
+        :width="getWidth" 
+        :height="getHeight">
+        <${prefix}-tree></${prefix}-tree>
+      </svg>
+    </div>`,
 
     data() {
       console.log(this);

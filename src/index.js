@@ -120,7 +120,6 @@ class Elastigantt {
     this.app = new Vue({
       el: '#' + containerId,
       template: `<div id="${prefix}-elastigantt">
-        <${self.prefix}-header></${self.prefix}-header>
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
       data:{},
