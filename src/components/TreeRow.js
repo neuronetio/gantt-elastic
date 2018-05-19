@@ -1,5 +1,5 @@
 export function TreeRow(prefix, self) {
-  return {
+  return self.wrapComponent({
     props: ['task', 'index'],
     template: `<rect 
       class="elastigantt__tree-row" 
@@ -37,5 +37,5 @@ export function TreeRow(prefix, self) {
         return this.task.style ? this.task.style : this.shared.options.row.style;
       },
     }
-  };
+  });
 }

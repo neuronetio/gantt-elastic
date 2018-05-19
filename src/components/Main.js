@@ -1,6 +1,5 @@
 export function Main(prefix, self) {
-  
-  return {
+  return self.wrapComponent({
     template: `<svg class="elastigantt__main" 
       :width="getWidth" 
       :height="getHeight">
@@ -32,5 +31,5 @@ export function Main(prefix, self) {
       },
     },
 
-  };
+  });
 }

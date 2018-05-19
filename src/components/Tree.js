@@ -1,5 +1,5 @@
 export function Tree(prefix, self) {
-  return {
+  return self.wrapComponent({
 
     template: `<g>
       <${prefix}-grid></${prefix}-grid>
@@ -22,5 +22,5 @@ export function Tree(prefix, self) {
         return this.shared.height;
       }
     }
-  };
+  });
 }

@@ -1,5 +1,5 @@
 export function Header(prefix, self) {
-    return {
+    return self.wrapComponent({
   
       template: `<g></g>`,
       
@@ -10,5 +10,5 @@ export function Header(prefix, self) {
       computed: {
         
       }
-    };
+    });
   }

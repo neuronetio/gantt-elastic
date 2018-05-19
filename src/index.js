@@ -49,6 +49,11 @@ class Elastigantt {
     }
   }
 
+  wrapComponent(props){
+    props.beforeCreate = function(){console.log('beforecreate');}
+    return props;
+  }
+
   getDefaultOptions() {
     return {
       debug: false,
@@ -105,9 +110,6 @@ class Elastigantt {
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
 
-      data: {
-        options:self.options,
-      },
     });
 
   }
