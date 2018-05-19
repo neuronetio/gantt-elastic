@@ -1,6 +1,7 @@
 const elastiganttStore = {
     debug: false,
-    state: {},
+    globalState:{},
+    instancesStates:{},
   
     setDebug(value){
       this.debug = value;
@@ -13,13 +14,12 @@ const elastiganttStore = {
       return prefix.replace('.','');
     },
   
-    _setProp(prop, value) {
+    _setProp(prop, value, currentBranch = this.instancesStates) {
       if (!prop) {
         throw new Error(`Property not found [${prop}]`);
       }
       if(this.debug){ console.groupCollapsed(`elastiganttStore._setProp:${prop}`); }
       let breadcrumbs = prop.split('.');
-      let currentBranch = this.state;
       for (let index = 0, len = breadcrumbs.length; index < len; index++) {
         let breadcrumb = breadcrumbs[index];
         if (this.debug) {
@@ -40,7 +40,7 @@ const elastiganttStore = {
     },
   
     setGlobal(prop, value) {
-      return this._setProp(prop, value);
+      return this._setProp(prop, value, this.globalState);
     },
   
     _setStorage(prefix) {
@@ -50,13 +50,12 @@ const elastiganttStore = {
       }.bind(this);
     },
   
-    _getProp(prop) {
+    _getProp(prop, currentBranch = this.instancesStates) {
       if (!prop) {
         throw new Error(`Property not found [${prop}]`);
       }
       if(this.debug){ console.groupCollapsed(`elastiganttStore._getProp:${prop}`); }
       let breadcrumbs = prop.split('.');
-      let currentBranch = this.state;
       for (let index = 0, len = breadcrumbs.length; index < len; index++) {
         let breadcrumb = breadcrumbs[index];
         if (this.debug) {
@@ -74,7 +73,7 @@ const elastiganttStore = {
     },
   
     getGlobal(prop) {
-      return this._getProp(prop);
+      return this._getProp(prop, this.globalState);
     },
   
     _getStorage(prefix) {
@@ -84,13 +83,12 @@ const elastiganttStore = {
       }.bind(this);
     },
   
-    _unsetProp(prop) {
+    _unsetProp(prop, currentBranch = this.instancesStates) {
       if (!prop) {
         throw new Error(`Property not found [${prop}]`);
       }
       if(this.debug){ console.groupCollapsed(`elastiganttStore._unsetProp:${prop}`); }
       let breadcrumbs = prop.split('.');
-      let currentBranch = this.state;
       for (let index = 0, len = breadcrumbs.length; index < len; index++) {
         let breadcrumb = breadcrumbs[index];
         if (this.debug) {
@@ -108,7 +106,7 @@ const elastiganttStore = {
     },
   
     unsetGlobal(prop) {
-      return this._unsetProp(prop);
+      return this._unsetProp(prop, this.globalState);
     },
   
     _unsetStorage(prefix) {
