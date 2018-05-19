@@ -14,7 +14,11 @@ class Elastigantt {
     }).replace(/\-/g, '');
   }
 
-  getComponents(prefix) {
+  toKebabCase(str){
+    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  }
+
+  getComponents(prefix, kebabCase = true) {
     let self = this;
 
     let components = {
@@ -37,11 +41,21 @@ class Elastigantt {
       }
       customComponents[this.toPascalCase(prefix + '-' + componentName)] = component;
     }
+
+    if(kebabCase){
+      let kebabComponents = {};
+      for(let name in customComponents){
+        let value = customComponents[name];
+        kebabComponents[this.toKebabCase(name)] = value;
+      }
+      return kebabComponents;
+    }
+
     return customComponents;
   }
 
   registerComponents() {
-    const components = this.getComponents(this.prefix);
+    const components = this.getComponents(this.prefix,true);
     for (let componentName in components) {
       let component = components[componentName];
       let currentInstanceComponentName = componentName;
@@ -101,7 +115,7 @@ class Elastigantt {
     globalState.options = this.options;
 
     this.customComponents = customComponents;
-    this.registerComponents();
+    //this.registerComponents();
 
     this.app = new Vue({
       el: '#' + containerId,
@@ -109,7 +123,7 @@ class Elastigantt {
         <${self.prefix}-header></${self.prefix}-header>
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-
+      components:self.getComponents(self.prefix)
     });
 
   }
