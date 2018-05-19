@@ -1,15 +1,33 @@
-function ElastigantMain(slug, self) {
+export function ElastiganttMain(prefix, self) {
   return {
-    props: ['task'],
-    template: `<div class="row" :id="getElementId(task.key)">
-        <div class="col-md-6 elastigantt__tree-row">{{ task.key }}</div>
-        <div class="col-md-6 elastigantt__tree-row">{{ task.label }}</div>
-      </div>`,
-    methods: {
-      getElementId(id) {
-        return `elastigantt__tree-row--${id}`;
+
+    props: ['data'],
+    template: `<svg class="elastigantt__main" 
+      :width="getWidth" 
+      :height="getHeight"
+      >
+
+      </svg>`,
+
+    data() {
+      return window.elastiganttStore.init(prefix,{
+        
+      });
+    },
+
+    computed:{
+      getWidth(){
+        let width = this.store.get('classInstance.containerElement.clientWidth');
+        console.log(width);
+        return width;
+      },
+      getHeight(){
+        let height = this.store.get('classInstance.containerElement.clientHeight');
+        console.log(height);
+        return height;
       }
-    }
+
+    },
+
   };
 }
-export default ElastigantMain;

@@ -1,14 +1,36 @@
-function ElastiganttTree(slug, self) {
-    return {
-        props: ['tasks'],
-        template: `<div class="elastigantt__tree">
-            <${slug+'-elastigantt-tree-row'}
-            v-for="item in tasks"
-            v-bind:key="item.id"
-            v-bind:task="item">
-            </${slug+'-elastigantt-tree-row'}>
-        </div>`,
-    };
-}
+export function ElastiganttTree(prefix, self) {
+  return {
 
-export default ElastiganttTree;
+    props: ['data'],
+
+    template: `<g><rect class="elastigantt__tree" 
+        :x="0" 
+        :y="0" 
+        :width="getWidth" 
+        :height="getHeight">
+        </rect>
+        <${prefix}-elastigantt-tree-row
+          v-for="(item, index) in data.tasks"
+          :key="item.id"
+          :task="item"
+          :index="index"
+          ></${prefix}-elastigantt-tree-row>
+        </g>`,
+    
+    data(){
+      return {store:elastiganttStore};
+    },
+
+    computed: {
+      getData() {
+        return this.data;
+      },
+      getWidth() {
+        return 100;
+      },
+      getHeight() {
+        return this.data.tasks.length * (this.data.options.row.height + this.data.options.row.gap);
+      }
+    }
+  };
+}
