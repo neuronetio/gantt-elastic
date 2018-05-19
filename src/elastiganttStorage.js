@@ -79,8 +79,11 @@ const elastiganttStore = function elastiganttStore(debug) {
     },
 
     getComponentState(prefix, componentId){
-      if(prefix && componentId){
-        return componentsStates[prefix][componentId];
+      if(prefix){
+        if(componentId){
+          return componentsStates[prefix][componentId];
+        }
+        return componentsStates[prefix];
       }
       return componentsStates;
     },
