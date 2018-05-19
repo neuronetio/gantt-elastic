@@ -115,7 +115,7 @@ class Elastigantt {
     globalState.options = this.options;
 
     this.customComponents = customComponents;
-    //this.registerComponents();
+    this.registerComponents();
 
     this.app = new Vue({
       el: '#' + containerId,
@@ -123,7 +123,7 @@ class Elastigantt {
         <${self.prefix}-header></${self.prefix}-header>
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-      components:self.getComponents(self.prefix)
+      data:{},
     });
 
   }
