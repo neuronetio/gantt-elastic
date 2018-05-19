@@ -15,6 +15,10 @@ export function Main(prefix, self) {
       console.log('mounted!',this);
     },
 
+    beforeCreate(){
+      console.log('beforeCreate',this);
+    },
+
     methods:{
       calculateHeight(){
         return this.shared.height = this.shared.tasks.length*(this.shared.options.row.height+this.shared.options.row.gap);

@@ -1,5 +1,6 @@
 import { elastiganttStore } from "./elastiganttStorage.js";
 import { Main } from "./components/Main.js";
+import { Header } from "./components/Header.js";
 import { Grid } from "./components/Grid.js";
 import { GridHeader } from "./components/GridHeader.js";
 import { Tree } from "./components/Tree.js";
@@ -19,6 +20,7 @@ class Elastigantt {
     let components = {
       'main': Main(prefix, self),
       'tree': Tree(prefix, self),
+      'header': Header(prefix, self),
       'grid': Grid(prefix, self),
       'grid-header': GridHeader(prefix, self),
       'tree-row': TreeRow(prefix, self),
