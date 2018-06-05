@@ -1,33 +1,33 @@
-import { elastiganttStore } from "./elastiganttStorage.js";
-import { Main } from "./components/Main.js";
-import { Header } from "./components/Header.js";
-import { Grid } from "./components/Grid.js";
-import { GridHeader } from "./components/GridHeader.js";
-import { Tree } from "./components/Tree.js";
-import { TreeRow } from "./components/TreeRow.js";
+import { Elastigantt } from './components/Elastigantt.js';
+import { Grid } from './components/Grid.js';
+import { GridHeader } from './components/GridHeader.js';
+import { Header } from './components/Header.js';
+import { Main } from './components/Main.js';
+import { Tree } from './components/Tree.js';
+import { TreeRow } from './components/TreeRow.js';
+import { elastiganttStore } from './elastiganttStorage.js';
 
-class Elastigantt {
-
-  toPascalCase(str) {
+class ElastiganttApp {
+  toPascalCase (str) {
     return str.replace(/(\w)(\w*)/g, function (g0, g1, g2) {
       return g1.toUpperCase() + g2.toLowerCase();
     }).replace(/\-/g, '');
   }
 
-  toKebabCase(str){
+  toKebabCase (str) {
     return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
   }
 
-  getComponents(prefix, kebabCase = true) {
+  getComponents (prefix, kebabCase = true) {
     let self = this;
 
     let components = {
-      'main': Main(prefix, self),
-      'tree': Tree(prefix, self),
-      'header': Header(prefix, self),
-      'grid': Grid(prefix, self),
+      main: Main(prefix, self),
+      tree: Tree(prefix, self),
+      header: Header(prefix, self),
+      grid: Grid(prefix, self),
       'grid-header': GridHeader(prefix, self),
-      'tree-row': TreeRow(prefix, self),
+      'tree-row': TreeRow(prefix, self)
     };
 
     let customComponents = {};
@@ -35,16 +35,16 @@ class Elastigantt {
       let component = components[componentName];
       // shallow extend
       if (typeof this.customComponents[componentName] !== 'undefined') {
-        component = { ...component,
-          ...this.customComponents[componentName]
-        };
+        component = { ...component, ...this.customComponents[componentName] };
       }
-      customComponents[this.toPascalCase(prefix + '-' + componentName)] = component;
+      customComponents[this.toPascalCase(
+        prefix + '-' + componentName
+      )] = component;
     }
 
-    if(kebabCase){
+    if (kebabCase) {
       let kebabComponents = {};
-      for(let name in customComponents){
+      for (let name in customComponents) {
         let value = customComponents[name];
         kebabComponents[this.toKebabCase(name)] = value;
       }
@@ -54,47 +54,38 @@ class Elastigantt {
     return customComponents;
   }
 
-  registerComponents() {
-    const components = this.getComponents(this.prefix,true);
+  registerComponents () {
+    const components = this.getComponents(this.prefix, true);
     for (let componentName in components) {
-      let component = components[componentName];
+      let component = components[componentName]
       let currentInstanceComponentName = componentName;
       Vue.component(currentInstanceComponentName, component);
     }
   }
 
-  wrapComponent(props){
-    props.beforeCreate = function(){console.log('beforecreate');}
+  wrapComponent (props) {
+    props.beforeCreate = function () {
+      console.log('beforecreate');
+    };
     return props;
   }
 
-  getDefaultOptions() {
+  getDefaultOptions () {
     return {
       debug: false,
-      duration:{
-        scale:60*60,
-        gap:1,
-      },
-      row: {
-        height: 50,
-        gap: 2,
-        style:'fill:#FF0000'
-      }
+      scaleX: 60*60*100,
+      row: { height: 50, style: 'fill:#FF0000' },
+      horizontalGrid: { gap:6, style: "stroke:#00000055;strokeWidth:2" },
     };
   }
 
-  makeTree(tasks) {
-    for (let task in tasks) {
-      for (let parent in tasks) {
-
-      }
-    }
-  }
-
-  constructor(prefix, containerId, data, options = {}, customComponents = {}) {
+  constructor (prefix, containerId, data, options = {}, customComponents = {}) {
     const self = this;
     if (typeof window.elastiganttStore === 'undefined') {
-      window.elastiganttStore = elastiganttStore(options.debug , options.showStack);
+      window.elastiganttStore = elastiganttStore(
+        options.debug,
+        options.showStack
+      );
     }
     if (containerId.substr(0, 1) === '#') {
       containerId = containerId.substr(1);
@@ -107,7 +98,7 @@ class Elastigantt {
     this.data = data;
     this.tasks = data.tasks.map(task => task);
     this.options = Object.assign(this.getDefaultOptions(), options);
-    
+
     const globalState = window.elastiganttStore.getGlobalState();
     globalState.classInstance = this;
     globalState.data = this.data;
@@ -122,67 +113,64 @@ class Elastigantt {
       template: `<div id="${prefix}-elastigantt">
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-      data:{},
+      data: {}
     });
-
   }
 }
 
-
-
 // initialization
-
-
-let elastigantt = new Elastigantt('app', '#app', {
-  tasks: [
-    {
-      id: 1,
-      key: 'T1',
-      label: 'row1',
-      start:'2018-05-19 12:00:00',
-      duration:1*24*60*60,
-    },
-    {
-      id: 2,
-      key: 'T2',
-      label: 'Kałabangaaaa!!!! :D:D:D:D',
-      parent: 1,
-      start:'2018-05-19 13:00:00',
-      duration:2*24*60*60,
-    },
-    {
-      id: 3,
-      key: 'T3',
-      label: 'row3',
-      parent: 2,
-      start:'2018-05-19 12:00:00',
-      duration:3*24*60*60,
-    },
-    {
-      id: 4,
-      key: 'T4',
-      label: 'row4',
-      start:'2018-05-19 12:00:00',
-      duration:2*24*60*60,
-    },
-    {
-      id: 5,
-      key: 'T5',
-      label: 'row5',
-      parent: 1,
-      start:'2018-05-19 12:00:00',
-      duration:2*24*60*60,
-    },
-    {
-      id: 6,
-      key: 'T6',
-      label: 'row6',
-      parent: 2,
-      start:'2018-05-19 12:00:00',
-      duration:1*24*60*60,
-    },
-  ]
-}, {
-  debug: true,
-  showStack:true,
-});
+let elastigantt = new ElastiganttApp(
+  'app',
+  '#app',
+  {
+    tasks: [
+      {
+        id: 1,
+        key: 'T1',
+        label: 'row1',
+        start: '2018-05-18T12:00:00',
+        duration: 1 * 24 * 60 * 60
+      },
+      {
+        id: 2,
+        key: 'T2',
+        label: 'Ka\u0142abangaaaa!!!! :D:D:D:D',
+        parent: 1,
+        start: '2018-05-19T12:00:00',
+        duration: 2 * 24 * 60 * 60
+      },
+      {
+        id: 3,
+        key: 'T3',
+        label: 'row3',
+        parent: 2,
+        start: '2018-05-20T12:00:00',
+        duration: 3 * 24 * 60 * 60
+      },
+      {
+        id: 4,
+        key: 'T4',
+        label: 'row4',
+        start: '2018-05-21T12:00:00',
+        duration: 2 * 24 * 60 * 60
+      },
+      {
+        id: 5,
+        key: 'T5',
+        label: 'row5',
+        parent: 1,
+        start: '2018-05-19T12:00:00',
+        duration: 2 * 24 * 60 * 60
+      },
+      {
+        id: 6,
+        key: 'T6',
+        label: 'row6',
+        parent: 2,
+        start: '2018-05-22T12:00:00',
+        duration: 1 * 24 * 60 * 60
+      }
+    ]
+  },
+  { debug: false, showStack: true }
+);

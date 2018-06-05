@@ -6,16 +6,16 @@ export function Header(prefix, self) {
       </div>`,
       
       data(){
-        return window.elastiganttStore.initStore(prefix,'GridHeader',{});
+        return window.elastiganttStore.initStore(prefix,'Header',{});
       },
   
       computed: {
         scale:{
             get(){
-                return this.shared.options.duration.scale;
+                return this.shared.options.scaleX;
             },
             set(value){
-                this.shared.options.duration.scale = value;
+                this.shared.options.scaleX = value;
             }
         }
         

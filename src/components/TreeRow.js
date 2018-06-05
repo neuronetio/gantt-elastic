@@ -4,7 +4,7 @@ export function TreeRow(prefix, self) {
     template: `<rect 
       class="elastigantt__tree-row" 
       :id="getId" 
-      :x="0"
+      :x="getX"
       :y="getY"
       :width="getWidth"
       :height="getHeight"
@@ -26,12 +26,22 @@ export function TreeRow(prefix, self) {
         return this.shared.options.row.height;
       },
       getWidth() {
-        let duration = this.shared.options.duration;
-        return this.task.duration/duration.scale;
+        if(this.task.durationMs){
+          return this.task.durationMs / this.shared.options.scaleX;
+        }
+        return this.task.duration;
+      },
+      getX(){
+        let x = this.task.startTime - this.shared.firstTaskTime;
+        if(x){
+          x = x / this.shared.options.scaleX;
+        }
+        return x;
       },
       getY() {
         let row = this.shared.options.row;
-        return (row.height + row.gap) * this.index;
+        let horizontalGrid = this.shared.options.horizontalGrid;
+        return ((row.height + horizontalGrid.gap) * this.index) + horizontalGrid.gap;
       },
       getStyle(){
         return this.task.style ? this.task.style : this.shared.options.row.style;

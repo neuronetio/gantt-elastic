@@ -10,5 +10,5 @@ export function GridHeader(prefix, self) {
       computed: {
         
       }
-    })
+    });
   }
