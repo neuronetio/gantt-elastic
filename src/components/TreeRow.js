@@ -29,7 +29,7 @@ export function TreeRow(prefix, self) {
         if(this.task.durationMs){
           return this.task.durationMs / this.shared.options.scaleX;
         }
-        return this.task.duration;
+        return this.task.durationMs;
       },
       getX(){
         let x = this.task.startTime - this.shared.firstTaskTime;
