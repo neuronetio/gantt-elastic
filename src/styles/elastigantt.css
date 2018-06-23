@@ -1,3 +1,6 @@
+body {
+  background: #3e3e3e;
+}
 .elastigantt__main{
     overflow: scroll;
 }

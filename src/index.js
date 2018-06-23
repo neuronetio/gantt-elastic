@@ -8,17 +8,17 @@ import { TreeRow } from './components/TreeRow.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
 class ElastiganttApp {
-  toPascalCase (str) {
-    return str.replace(/(\w)(\w*)/g, function (g0, g1, g2) {
+  toPascalCase(str) {
+    return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) {
       return g1.toUpperCase() + g2.toLowerCase();
     }).replace(/\-/g, '');
   }
 
-  toKebabCase (str) {
+  toKebabCase(str) {
     return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
   }
 
-  getComponents (prefix, kebabCase = true) {
+  getComponents(prefix, kebabCase = true) {
     let self = this;
 
     let components = {
@@ -35,7 +35,9 @@ class ElastiganttApp {
       let component = components[componentName];
       // shallow extend
       if (typeof this.customComponents[componentName] !== 'undefined') {
-        component = { ...component, ...this.customComponents[componentName] };
+        component = {
+          ...component, ...this.customComponents[componentName]
+        };
       }
       customComponents[this.toPascalCase(
         prefix + '-' + componentName
@@ -54,7 +56,7 @@ class ElastiganttApp {
     return customComponents;
   }
 
-  registerComponents () {
+  registerComponents() {
     const components = this.getComponents(this.prefix, true);
     for (let componentName in components) {
       let component = components[componentName]
@@ -63,23 +65,33 @@ class ElastiganttApp {
     }
   }
 
-  wrapComponent (props) {
-    props.beforeCreate = function () {
-      console.log('beforecreate');
-    };
+  wrapComponent(props) {
     return props;
   }
 
-  getDefaultOptions () {
+  getDefaultOptions() {
     return {
       debug: false,
-      scaleX: 60*60*100,
-      row: { height: 50, style: 'fill:#FF0000' },
-      horizontalGrid: { gap:6, style: "stroke:#00000055;strokeWidth:2" },
+      times: {
+        timeScale: 60 * 1000,
+        timeZoom: 1, // timeScale multiplier
+      },
+      row: {
+        height: 50,
+        style: 'fill:#FF0000'
+      },
+      horizontalGrid: {
+        gap: 6,
+        style: "stroke:#00000055;strokeWidth:2"
+      },
+      verticalGrid: {
+        step: 24 * 60 * 60 * 1000,
+        style: "stroke:#00000055;strokeWidth:2"
+      },
     };
   }
 
-  constructor (prefix, containerId, data, options = {}, customComponents = {}) {
+  constructor(prefix, containerId, data, options = {}, customComponents = {}) {
     const self = this;
     if (typeof window.elastiganttStore === 'undefined') {
       window.elastiganttStore = elastiganttStore(
@@ -87,6 +99,7 @@ class ElastiganttApp {
         options.showStack
       );
     }
+
     if (containerId.substr(0, 1) === '#') {
       containerId = containerId.substr(1);
     }
@@ -96,14 +109,24 @@ class ElastiganttApp {
     this.prefixPascal = this.toPascalCase(this.prefix);
 
     this.data = data;
-    this.tasks = data.tasks.map(task => task);
+    this.tasks = data.tasks;
     this.options = Object.assign(this.getDefaultOptions(), options);
 
+    // initialize observer
+    this.tasks = this.tasks.map((task) => {
+      task.x = 0;
+      task.y = 0;
+      task.width = 0;
+      task.height = 0;
+      return task;
+    });
+
+    window.elastiganttStore.saveGlobalState(this.options);
     const globalState = window.elastiganttStore.getGlobalState();
+
     globalState.classInstance = this;
     globalState.data = this.data;
     globalState.tasks = this.tasks;
-    globalState.options = this.options;
 
     this.customComponents = customComponents;
     this.registerComponents();
@@ -113,7 +136,10 @@ class ElastiganttApp {
       template: `<div id="${prefix}-elastigantt">
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-      data: {}
+      data() {
+        return window.elastiganttStore.initStore(prefix, 'ElastiganttApp', {});
+      },
+
     });
   }
 }
@@ -129,7 +155,8 @@ let elastigantt = new ElastiganttApp(
         key: 'T1',
         label: 'row1',
         start: '2018-05-18T12:00:00',
-        duration: 1 * 24 * 60 * 60
+        duration: 1 * 24 * 60 * 60,
+        progress: 50,
       },
       {
         id: 2,
@@ -137,7 +164,8 @@ let elastigantt = new ElastiganttApp(
         label: 'Ka\u0142abangaaaa!!!! :D:D:D:D',
         parent: 1,
         start: '2018-05-19T12:00:00',
-        duration: 2 * 24 * 60 * 60
+        duration: 2 * 24 * 60 * 60,
+        progress: 50,
       },
       {
         id: 3,
@@ -145,14 +173,16 @@ let elastigantt = new ElastiganttApp(
         label: 'row3',
         parent: 2,
         start: '2018-05-20T12:00:00',
-        duration: 3 * 24 * 60 * 60
+        duration: 3 * 24 * 60 * 60,
+        progress: 50,
       },
       {
         id: 4,
         key: 'T4',
         label: 'row4',
         start: '2018-05-21T12:00:00',
-        duration: 2 * 24 * 60 * 60
+        duration: 2 * 24 * 60 * 60,
+        progress: 50,
       },
       {
         id: 5,
@@ -160,7 +190,8 @@ let elastigantt = new ElastiganttApp(
         label: 'row5',
         parent: 1,
         start: '2018-05-19T12:00:00',
-        duration: 2 * 24 * 60 * 60
+        duration: 2 * 24 * 60 * 60,
+        progress: 50,
       },
       {
         id: 6,
@@ -168,9 +199,13 @@ let elastigantt = new ElastiganttApp(
         label: 'row6',
         parent: 2,
         start: '2018-05-22T12:00:00',
-        duration: 1 * 24 * 60 * 60
+        duration: 1 * 24 * 60 * 60,
+        progress: 50,
       }
     ]
   },
-  { debug: false, showStack: true }
+  {
+    debug: false,
+    showStack: true
+  }
 );

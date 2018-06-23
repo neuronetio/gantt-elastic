@@ -1,24 +1,24 @@
 export function Header(prefix, self) {
-    return self.wrapComponent({
-  
-      template: `<div class="elastigantt__header">
-          <input type="text" v-model="scale">
+  return self.wrapComponent({
+
+    template: `<div class="elastigantt__header">
+          <input type="number" v-model="scale">
       </div>`,
-      
-      data(){
-        return window.elastiganttStore.initStore(prefix,'Header',{});
-      },
-  
-      computed: {
-        scale:{
-            get(){
-                return this.shared.options.scaleX;
-            },
-            set(value){
-                this.shared.options.scaleX = value;
-            }
+
+    data() {
+      return window.elastiganttStore.initStore(prefix, 'Header', {});
+    },
+
+    computed: {
+      scale: {
+        get() {
+          return this.shared.times.timeZoom;
+        },
+        set(value) {
+          this.shared.times.timeZoom = value;
         }
-        
       }
-    });
-  }
+
+    }
+  });
+}

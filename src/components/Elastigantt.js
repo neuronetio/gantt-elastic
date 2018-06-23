@@ -3,14 +3,11 @@ const Elastigantt = Vue.component("Elastigantt", {
     <elastigantt-main></elastigantt-main>
   </div>`,
   data() {
-    return {};
+    return window.elastiganttStore.initStore(prefix, 'Elastigantt', {});
   },
   methods: {
 
-    test(){
-      console.log('test');
-    }
   }
 });
 
-export {Elastigantt};
+export { Elastigantt };
