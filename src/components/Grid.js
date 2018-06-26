@@ -1,5 +1,6 @@
 export function Grid(prefix, self) {
   return self.wrapComponent({
+
     template: `<g>
         <line
           v-for="(line,index) in horizontalLines"
@@ -22,20 +23,17 @@ export function Grid(prefix, self) {
       </g>`,
 
     data() {
-      return {
-        vertical: [],
-        horizontal: []
-      };
+      return {};
     },
     methods: {
 
     },
     computed: {
       verticalLines() {
-        this.vertical = [];
+        this.$root.$data.verticalGrid.lines = [];
         for (let step = 0; step < this.$root.$data.times.steps; step++) {
           let x = step * this.$root.$data.times.stepPx;
-          this.vertical.push({
+          this.$root.$data.verticalGrid.lines.push({
             key: step,
             x1: x,
             y1: 0,
@@ -44,7 +42,7 @@ export function Grid(prefix, self) {
             style: this.$root.$data.verticalGrid.style
           });
         }
-        return this.vertical;
+        return this.$root.$data.verticalGrid.lines;
       },
       horizontalLines() {
         this.$root.$data.horizontalGrid.lines = [];
