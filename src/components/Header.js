@@ -6,16 +6,17 @@ export function Header(prefix, self) {
       </div>`,
 
     data() {
-      return window.elastiganttStore.initStore(prefix, 'Header', {});
+      return {};
     },
 
     computed: {
       scale: {
         get() {
-          return this.shared.times.timeZoom;
+          return this.$root.$data.times.timeZoom;
         },
         set(value) {
-          this.shared.times.timeZoom = value;
+          this.$root.$data.times.timeZoom = value;
+          this.$root.recalculate();
         }
       }
 

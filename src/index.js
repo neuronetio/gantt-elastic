@@ -75,6 +75,11 @@ class ElastiganttApp {
       times: {
         timeScale: 60 * 1000,
         timeZoom: 1, // timeScale multiplier
+        timePerPixel: 0,
+        totalTasksDurationMs: 0,
+        totalTasksDurationPx: 0,
+        stepPx: 0,
+        steps: 0,
       },
       row: {
         height: 50,
@@ -82,11 +87,13 @@ class ElastiganttApp {
       },
       horizontalGrid: {
         gap: 6,
-        style: "stroke:#00000055;strokeWidth:2"
+        style: "stroke:#00000055;strokeWidth:2",
+        lines: [],
       },
       verticalGrid: {
         step: 24 * 60 * 60 * 1000,
-        style: "stroke:#00000055;strokeWidth:2"
+        style: "stroke:#00000055;strokeWidth:2",
+        lines: [],
       },
     };
   }
@@ -121,8 +128,7 @@ class ElastiganttApp {
       return task;
     });
 
-    window.elastiganttStore.saveGlobalState(this.options);
-    const globalState = window.elastiganttStore.getGlobalState();
+    const globalState = this.options;
 
     globalState.classInstance = this;
     globalState.data = this.data;
@@ -136,10 +142,27 @@ class ElastiganttApp {
       template: `<div id="${prefix}-elastigantt">
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-      data() {
-        return window.elastiganttStore.initStore(prefix, 'ElastiganttApp', {});
-      },
-
+      data: globalState,
+      methods: {
+        recalculate() {
+          this.times.timePerPixel = this.times.timeScale * this.times.timeZoom;
+          this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
+          this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
+          this.times.stepPx = this.verticalGrid.step / this.times.timePerPixel;
+          this.times.steps = Math.ceil(this.times.totalTasksDurationPx / this.times.stepPx);
+          for (let index = 0, len = this.tasks.length; index < len; index++) {
+            let task = this.tasks[index];
+            task.width = task.durationMs / this.times.timePerPixel;
+            task.height = this.row.height;
+            let x = task.startTime - this.times.firstTaskTime;
+            if (x) {
+              x = x / this.times.timePerPixel;
+            }
+            task.x = x;
+            task.y = ((this.row.height + this.horizontalGrid.gap) * index) + this.horizontalGrid.gap;
+          }
+        },
+      }
     });
   }
 }

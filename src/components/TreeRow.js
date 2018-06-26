@@ -13,43 +13,41 @@ export function TreeRow(prefix, self) {
       </g>`,
 
     data() {
-      return window.elastiganttStore.initStore(prefix, 'TreeRow', {});
+      return {};
     },
     computed: {
       getId() {
         return this.task.key;
       },
       getHeight() {
-        return this.shared.row.height;
+        return this.$root.$data.row.height;
       },
       getWidth() {
-        console.log('getWidth', this.task.durationMs)
         if (this.task.durationMs) {
-          return this.task.durationMs / this.shared.times.timePerPixel;
+          return this.task.durationMs / this.$root.$data.times.timePerPixel;
         }
         return this.task.durationMs;
       },
       getX() {
-        console.log('getX')
-        let x = this.task.startTime - this.shared.times.firstTaskTime;
+        let x = this.task.startTime - this.$root.$data.times.firstTaskTime;
         if (x) {
-          x = x / this.shared.times.timePerPixel;
+          x = x / this.$root.$data.times.timePerPixel;
         }
         return x;
       },
       getY() {
-        let row = this.shared.row;
-        let horizontalGrid = this.shared.horizontalGrid;
+        let row = this.$root.$data.row;
+        let horizontalGrid = this.$root.$data.horizontalGrid;
         return ((row.height + horizontalGrid.gap) * this.index) + horizontalGrid.gap;
       },
       getTextX() {
         return this.getX + 10;
       },
       getTextY() {
-        return this.getY + this.shared.row.height / 10;
+        return this.getY + this.$root.$data.row.height / 10;
       },
       getStyle() {
-        return this.task.style ? this.task.style : this.shared.row.style;
+        return this.task.style ? this.task.style : this.$root.$data.row.style;
       },
     }
   });

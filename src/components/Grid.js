@@ -1,6 +1,5 @@
 export function Grid(prefix, self) {
   return self.wrapComponent({
-
     template: `<g>
         <line
           v-for="(line,index) in horizontalLines"
@@ -23,41 +22,43 @@ export function Grid(prefix, self) {
       </g>`,
 
     data() {
-      return window.elastiganttStore.initStore(prefix, 'Grid', {});
+      return {
+        vertical: [],
+        horizontal: []
+      };
     },
     methods: {
 
     },
     computed: {
       verticalLines() {
-        let lines = [];
-        for (let step = 0; step < this.shared.times.steps; step++) {
-          let x = step * this.shared.times.stepPx;
-          console.log(x);
-          lines.push({
+        this.vertical = [];
+        for (let step = 0; step < this.$root.$data.times.steps; step++) {
+          let x = step * this.$root.$data.times.stepPx;
+          this.vertical.push({
             key: step,
             x1: x,
             y1: 0,
             x2: x,
             y2: '100%',
-            style: this.shared.verticalGrid.style
+            style: this.$root.$data.verticalGrid.style
           });
         }
-        return lines;
+        return this.vertical;
       },
       horizontalLines() {
-        let lines = [];
-        for (let [index, task] of this.shared.tasks.entries()) {
-          lines.push({
+        this.$root.$data.horizontalGrid.lines = [];
+        for (let [index, task] of this.$root.$data.tasks.entries()) {
+          this.$root.$data.horizontalGrid.lines.push({
             key: 'hl' + task.key,
             x1: 0,
-            y1: index * (this.shared.row.height + this.shared.horizontalGrid.gap) + this.shared.horizontalGrid.gap / 2,
+            y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap) + this.$root.$data.horizontalGrid.gap / 2,
             x2: '100%',
-            y2: index * (this.shared.row.height + this.shared.horizontalGrid.gap) + this.shared.horizontalGrid.gap / 2,
-            style: this.shared.horizontalGrid.style
+            y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap) + this.$root.$data.horizontalGrid.gap / 2,
+            style: this.$root.$data.horizontalGrid.style
           });
         }
-        return lines;
+        return this.$root.$data.horizontalGrid.lines;
       }
     }
   });

@@ -94,19 +94,18 @@ const elastiganttStore = function elastiganttStore(debug) {
       return componentsStates;
     },
 
-    initStore(prefix, componentName, initialValue = {}) {
+    initStore(prefix, componentName) {
       if (typeof lastId[prefix] === 'undefined') {
         lastId[prefix] = 0;
       }
       const componentId = lastId[prefix]++;
-      initialValue.shared = globalState;
       if (typeof componentsStates[prefix] === 'undefined') {
         componentsStates[prefix] = {};
       }
       if (debug) {
-        return componentsStates[prefix][componentId] = new Proxy(initialValue, stateHandler(`${componentName}[${componentId}]`));
+        return componentsStates[prefix][componentId] = new Proxy(globalState, stateHandler(`${componentName}[${componentId}]`));
       }
-      return componentsStates[prefix][componentId] = initialValue;
+      return componentsStates[prefix][componentId] = globalState;
     },
 
   };
