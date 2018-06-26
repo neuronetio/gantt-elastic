@@ -74,7 +74,8 @@ class ElastiganttApp {
       debug: false,
       times: {
         timeScale: 60 * 1000,
-        timeZoom: 1, // timeScale multiplier
+        timeZoom: 100,
+        percent: 1,
         timePerPixel: 0,
         totalTasksDurationMs: 0,
         totalTasksDurationPx: 0,
@@ -145,7 +146,10 @@ class ElastiganttApp {
       data: globalState,
       methods: {
         recalculate() {
-          this.times.timePerPixel = this.times.timeScale * this.times.timeZoom;
+          this.times.percent = 100 / this.times.timeZoom;
+          console.log('percent', this.times.percent);
+          this.times.timePerPixel = this.times.timeScale * this.times.percent;
+          console.log('perPixel', this.times.timePerPixel);
           this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
           this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
           this.times.stepPx = this.verticalGrid.step / this.times.timePerPixel;
