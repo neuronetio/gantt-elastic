@@ -149,13 +149,7 @@ class ElastiganttApp {
           let min = this.times.timeScale;
           let steps = max / min;
           let percent = (this.times.timeZoom / 100);
-          let pixelPercent = percent * steps;
-          let radian = percent * 90 * Math.PI / 180;
-          console.log('percent', percent, Math.sin(radian), Math.pow(2, this.times.timeZoom) * Math.sin(radian))
-          //console.log('radian sin', Math.cos(radian), this.times.timeScale, (Math.cos(radian) * this.times.timeScale));
-
           this.times.timePerPixel = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
-          console.log('perPixel', this.times.timePerPixel);
           this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
           this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
           this.times.stepPx = this.verticalGrid.step / this.times.timePerPixel;
