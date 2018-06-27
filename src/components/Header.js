@@ -2,7 +2,7 @@ export function Header(prefix, self) {
   return self.wrapComponent({
 
     template: `<div class="elastigantt__header">
-          <input type="number" v-model="scale"> time zoom:{{$root.$data.times.timePerPixel}}
+          <input type="range" v-model="scale" max="22" min="1">
       </div>`,
 
     data() {
