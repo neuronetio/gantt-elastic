@@ -1,6 +1,9 @@
 body {
   background: #3e3e3e;
 }
-.elastigantt__main{
-    overflow: scroll;
+.elastigantt__container{
+    overflow: auto;
+}
+.elastigantt__header{
+  margin:0 auto;
 }

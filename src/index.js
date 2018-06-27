@@ -5,6 +5,8 @@ import { Header } from './components/Header.js';
 import { Main } from './components/Main.js';
 import { Tree } from './components/Tree.js';
 import { TreeRow } from './components/TreeRow.js';
+import { Calendar } from './components/Calendar.js';
+import { CalendarDay } from './components/CalendarDay.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
 class ElastiganttApp {
@@ -27,7 +29,9 @@ class ElastiganttApp {
       header: Header(prefix, self),
       grid: Grid(prefix, self),
       'grid-header': GridHeader(prefix, self),
-      'tree-row': TreeRow(prefix, self)
+      'tree-row': TreeRow(prefix, self),
+      calendar: Calendar(prefix, self),
+      'calendar-day': CalendarDay(prefix, self)
     };
 
     let customComponents = {};
@@ -72,6 +76,8 @@ class ElastiganttApp {
   getDefaultOptions() {
     return {
       debug: false,
+      width: 0,
+      height: 0,
       times: {
         timeScale: 60 * 1000,
         timeZoom: 18,
@@ -87,14 +93,20 @@ class ElastiganttApp {
       },
       horizontalGrid: {
         gap: 6,
+        width: 2,
         style: "stroke:#00000055;strokeWidth:2",
         lines: [],
       },
       verticalGrid: {
         step: 24 * 60 * 60 * 1000,
+        width: 2,
         style: "stroke:#00000055;strokeWidth:2",
         lines: [],
       },
+      calendar: {
+        height: 20,
+        style: "fill:#00FF00",
+      }
     };
   }
 
@@ -143,6 +155,27 @@ class ElastiganttApp {
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
       data: globalState,
+      created() {
+        let tasks = this.$root.$data.tasks;
+        let firstTaskTime = Number.MAX_SAFE_INTEGER;
+        let lastTaskTime = 0;
+        for (let index = 0, len = this.tasks.length; index < len; index++) {
+          let task = this.tasks[index];
+          task.startDate = new Date(task.start);
+          task.startTime = task.startDate.getTime();
+          task.durationMs = task.duration * 1000;
+          if (task.startTime < firstTaskTime) {
+            firstTaskTime = task.startTime;
+          }
+          if (task.startTime + task.durationMs > lastTaskTime) {
+            lastTaskTime = task.startTime + task.durationMs;
+          }
+        }
+        this.$root.$data.times.firstTaskTime = firstTaskTime;
+        this.$root.$data.times.lastTaskTime = lastTaskTime;
+        this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
+        this.$root.recalculate();
+      },
       methods: {
         recalculate() {
           let max = this.times.timeScale * 60;
@@ -150,10 +183,18 @@ class ElastiganttApp {
           let steps = max / min;
           let percent = (this.times.timeZoom / 100);
           this.times.timePerPixel = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
-          this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
           this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
           this.times.stepPx = this.verticalGrid.step / this.times.timePerPixel;
           this.times.steps = Math.ceil(this.times.totalTasksDurationPx / this.times.stepPx);
+
+          let widthMs = this.$root.$data.times.lastTaskTime - this.$root.$data.times.firstTaskTime;
+          let width = 0;
+          if (widthMs) {
+            width = widthMs / this.$root.$data.times.timePerPixel;
+          }
+          this.width = width + this.verticalGrid.width * 2;
+          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap) + this.horizontalGrid.gap + this.calendar.height;
+
           for (let index = 0, len = this.tasks.length; index < len; index++) {
             let task = this.tasks[index];
             task.width = task.durationMs / this.times.timePerPixel;
@@ -162,17 +203,20 @@ class ElastiganttApp {
             if (x) {
               x = x / this.times.timePerPixel;
             }
-            task.x = x;
-            task.y = ((this.row.height + this.horizontalGrid.gap) * index) + this.horizontalGrid.gap;
+            task.x = x + this.verticalGrid.width;
+            task.y = ((this.row.height + this.horizontalGrid.gap) * index) + this.horizontalGrid.gap + this.calendar.height;
           }
         },
+        getSVG() {
+          console.log(this.$el)
+        }
       }
     });
   }
 }
 
 // initialization
-let elastigantt = new ElastiganttApp(
+window.elastigantt = new ElastiganttApp(
   'app',
   '#app',
   {
