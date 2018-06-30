@@ -9,7 +9,7 @@ import { Calendar } from './components/Calendar.js';
 import { CalendarDay } from './components/CalendarDay.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
-class ElastiganttApp {
+export default class ElastiganttApp {
   toPascalCase(str) {
     return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) {
       return g1.toUpperCase() + g2.toLowerCase();
@@ -229,68 +229,4 @@ class ElastiganttApp {
   }
 }
 
-// initialization
-window.elastigantt = new ElastiganttApp(
-  'app',
-  '#app',
-  {
-    tasks: [
-      {
-        id: 1,
-        key: 'T1',
-        label: 'row1',
-        start: '2018-05-18T12:00:00',
-        duration: 1 * 24 * 60 * 60,
-        progress: 50,
-      },
-      {
-        id: 2,
-        key: 'T2',
-        label: 'Ka\u0142abangaaaa!!!! :D:D:D:D',
-        parent: 1,
-        start: '2018-05-19T12:00:00',
-        duration: 2 * 24 * 60 * 60,
-        progress: 50,
-      },
-      {
-        id: 3,
-        key: 'T3',
-        label: 'row3',
-        parent: 2,
-        start: '2018-05-20T12:00:00',
-        duration: 3 * 24 * 60 * 60,
-        progress: 50,
-      },
-      {
-        id: 4,
-        key: 'T4',
-        label: 'row4',
-        start: '2018-05-21T12:00:00',
-        duration: 2 * 24 * 60 * 60,
-        progress: 50,
-      },
-      {
-        id: 5,
-        key: 'T5',
-        label: 'row5',
-        parent: 1,
-        start: '2018-05-19T12:00:00',
-        duration: 2 * 24 * 60 * 60,
-        progress: 50,
-      },
-      {
-        id: 6,
-        key: 'T6',
-        label: 'row6',
-        parent: 2,
-        start: '2018-05-22T12:00:00',
-        duration: 1 * 24 * 60 * 60,
-        progress: 50,
-      }
-    ]
-  },
-  {
-    debug: false,
-    showStack: true
-  }
-);
+window.ElastiganttApp = ElastiganttApp;

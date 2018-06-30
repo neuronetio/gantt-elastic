@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html charset="utf-8">
+<head>
+  <title>elastigantt demo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="src/styles/elastigantt.css">
+</head>
+<body>
+  <div class="container">
+    <div id="app" style="width:100%;height:100%;"></div>
+  </div>
+  <div class="container">
+    <button onclick="drawCanvas()">get img</button>
+    <hr />
+    <img id="preview" />
+  </div>
+  <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
+  <script src="https://unpkg.com/vue"></script>
+  <!--<script src="https://unpkg.com/vuex"></script>-->
+  <script type="module" src="src/index.js"></script>
+  <script>
+  window.elastigantt = new window.ElastiganttApp(
+    'app',
+    '#app',
+    {
+      tasks: [
+        {
+          id: 1,
+          key: 'T1',
+          label: 'row1',
+          start: '2018-05-18T12:00:00',
+          duration: 1 * 24 * 60 * 60,
+          progress: 50,
+        },
+        {
+          id: 2,
+          key: 'T2',
+          label: 'Ka\u0142abangaaaa!!!! :D:D:D:D',
+          parent: 1,
+          start: '2018-05-19T12:00:00',
+          duration: 2 * 24 * 60 * 60,
+          progress: 50,
+        },
+        {
+          id: 3,
+          key: 'T3',
+          label: 'row3',
+          parent: 2,
+          start: '2018-05-20T12:00:00',
+          duration: 3 * 24 * 60 * 60,
+          progress: 50,
+        },
+        {
+          id: 4,
+          key: 'T4',
+          label: 'row4',
+          start: '2018-05-21T12:00:00',
+          duration: 2 * 24 * 60 * 60,
+          progress: 50,
+        },
+        {
+          id: 5,
+          key: 'T5',
+          label: 'row5',
+          parent: 1,
+          start: '2018-05-19T12:00:00',
+          duration: 2 * 24 * 60 * 60,
+          progress: 50,
+        },
+        {
+          id: 6,
+          key: 'T6',
+          label: 'row6',
+          parent: 2,
+          start: '2018-05-22T12:00:00',
+          duration: 1 * 24 * 60 * 60,
+          progress: 50,
+        }
+      ]
+    },
+    {
+      debug: false,
+      showStack: true
+    }
+  );
+  function drawCanvas(){
+    window.elastigantt.app.getImage().then((img)=>{
+      document.getElementById('preview').src=img;
+    });
+  }
+  </script>
+</body>
+</html>
