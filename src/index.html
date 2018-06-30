@@ -10,8 +10,7 @@
     <div id="app" style="width:100%;height:100%;"></div>
   </div>
   <div class="container">
-    <button onclick="drawCanvas">draw</button>
-    <canvas id="canvas"></canvas>
+    <button onclick="drawCanvas()">draw</button>
   </div>
   <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
   <script src="https://unpkg.com/vue"></script>
@@ -19,8 +18,11 @@
   <script type="module" src="index.js"></script>
   <script>
   function drawCanvas(){
-    let svg = window.elastigantt.app.getSVG();
-    console.log(svg);
+    console.log('drawing canvas...');
+    window.elastigantt.app.getImage().then((img)=>{
+      console.log(img);
+    });
+
   }
   </script>
 </body>

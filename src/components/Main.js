@@ -4,7 +4,7 @@ export function Main(prefix, self) {
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
       <div class="elastigantt__container">
-        <svg class="elastigantt__main-svg"
+        <svg ref="svgElement" class="elastigantt__main-svg" xmlns="http://www.w3.org/2000/svg"
           :width="$root.$data.width"
           :height="$root.$data.height">
           <${prefix}-tree></${prefix}-tree>
@@ -14,5 +14,8 @@ export function Main(prefix, self) {
     data() {
       return {};
     },
+    mounted() {
+      this.$root.svgElement = this.$refs.svgElement;
+    }
   })
 }

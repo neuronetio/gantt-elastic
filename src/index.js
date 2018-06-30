@@ -78,6 +78,7 @@ class ElastiganttApp {
       debug: false,
       width: 0,
       height: 0,
+      svgElement: null,
       times: {
         timeScale: 60 * 1000,
         timeZoom: 18,
@@ -208,7 +209,20 @@ class ElastiganttApp {
           }
         },
         getSVG() {
-          console.log(this.$el)
+          return this.svgElement.outerHTML;
+        },
+        getImage(type = 'image/png') {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              canvas.width = this.svgElement.clientWidth;
+              canvas.height = this.svgElement.clientHeight;
+              canvas.getContext('2d').drawImage(img, 0, 0);
+              resolve(canvas.toDataURL(type));
+            }
+            img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
+          });
         }
       }
     });
