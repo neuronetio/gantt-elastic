@@ -1,4 +1,4 @@
-(function () {
+var ElastiganttApp = (function (exports) {
   'use strict';
 
   const Elastigantt = Vue.component("Elastigantt", {
@@ -547,8 +547,11 @@
       });
     }
   }
-
   window.ElastiganttApp = ElastiganttApp;
 
-}());
+  exports.ElastiganttApp = ElastiganttApp;
+
+  return exports;
+
+}({}));
 //# sourceMappingURL=elastigantt.js.map
