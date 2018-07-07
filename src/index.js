@@ -9,11 +9,12 @@ import { Calendar } from './components/Calendar.js';
 import { CalendarDay } from './components/CalendarDay.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
-export default class ElastiganttApp {
+class ElastiganttApp {
   toPascalCase(str) {
     return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) {
       return g1.toUpperCase() + g2.toLowerCase();
     }).replace(/\-/g, '');
+    console.log('test');
   }
 
   toKebabCase(str) {
@@ -228,5 +229,5 @@ export default class ElastiganttApp {
     });
   }
 }
-
+export { ElastiganttApp };
 window.ElastiganttApp = ElastiganttApp;
