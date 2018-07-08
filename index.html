@@ -10,7 +10,7 @@
     <div id="app" style="width:100%;height:100%;"></div>
   </div>
   <div class="container">
-    <button onclick="drawCanvas()">get img</button>
+    <button id="getimg">get img</button>
     <hr />
     <img id="preview" />
   </div>
@@ -86,10 +86,11 @@
     }
   );
   function drawCanvas(){
-    window.elastigantt.app.getImage().then((img)=>{
+    elastigantt.app.getImage().then((img)=>{
       document.getElementById('preview').src=img;
     });
   }
+  document.getElementById('getimg').onclick = drawCanvas;
   </script>
 </body>
 </html>
