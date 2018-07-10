@@ -5,8 +5,8 @@ import { Header } from './components/Header.js';
 import { Main } from './components/Main.js';
 import { Tree } from './components/Tree.js';
 import { TreeRow } from './components/TreeRow.js';
-import { Calendar } from './components/Calendar.js';
-import { CalendarDay } from './components/CalendarDay.js';
+import { Calendar } from './components/Calendar/Calendar.js';
+import { CalendarDay } from './components/Calendar/CalendarDay.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
 class ElastiganttApp {
