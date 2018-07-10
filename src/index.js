@@ -91,23 +91,23 @@ class ElastiganttApp {
       },
       row: {
         height: 50,
-        style: 'fill:#FF0000'
+        style: 'fill:#FF0000a0'
       },
       horizontalGrid: {
         gap: 6,
         width: 2,
-        style: "stroke:#00000055;strokeWidth:2",
+        style: "stroke:#666;strokeWidth:2",
         lines: [],
       },
       verticalGrid: {
         step: 24 * 60 * 60 * 1000,
         width: 2,
-        style: "stroke:#00000055;strokeWidth:2",
+        style: "stroke:#666;strokeWidth:2",
         lines: [],
       },
       calendar: {
-        height: 20,
-        style: "fill:#00FF00",
+        height: 60,
+        style: "fill:#00FF0055",
       }
     };
   }
@@ -143,7 +143,6 @@ class ElastiganttApp {
     });
 
     const globalState = this.options;
-
     globalState.classInstance = this;
     globalState.data = this.data;
     globalState.tasks = this.tasks;
