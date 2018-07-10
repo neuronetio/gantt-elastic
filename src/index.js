@@ -86,6 +86,7 @@ class ElastiganttApp {
         timePerPixel: 0,
         totalTasksDurationMs: 0,
         totalTasksDurationPx: 0,
+        stepMs: 24 * 60 * 60 * 1000,
         stepPx: 0,
         steps: 0,
       },
@@ -100,7 +101,6 @@ class ElastiganttApp {
         lines: [],
       },
       verticalGrid: {
-        step: 24 * 60 * 60 * 1000,
         width: 2,
         style: "stroke:#666;strokeWidth:2",
         lines: [],
@@ -160,6 +160,7 @@ class ElastiganttApp {
         let tasks = this.$root.$data.tasks;
         let firstTaskTime = Number.MAX_SAFE_INTEGER;
         let lastTaskTime = 0;
+        let firstTaskDate,lastTaskDate;
         for (let index = 0, len = this.tasks.length; index < len; index++) {
           let task = this.tasks[index];
           task.startDate = new Date(task.start);
@@ -167,13 +168,17 @@ class ElastiganttApp {
           task.durationMs = task.duration * 1000;
           if (task.startTime < firstTaskTime) {
             firstTaskTime = task.startTime;
+            firstTaskDate = task.startDate;
           }
           if (task.startTime + task.durationMs > lastTaskTime) {
             lastTaskTime = task.startTime + task.durationMs;
+            lastTaskDate = new Date(task.startTime + task.durationMs);
           }
         }
         this.$root.$data.times.firstTaskTime = firstTaskTime;
         this.$root.$data.times.lastTaskTime = lastTaskTime;
+        this.$root.$data.times.firstTaskDate = firstTaskDate;
+        this.$root.$data.times.lastTaskDate = lastTaskDate;
         this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
         this.$root.recalculate();
       },
@@ -185,7 +190,7 @@ class ElastiganttApp {
           let percent = (this.times.timeZoom / 100);
           this.times.timePerPixel = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
           this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
-          this.times.stepPx = this.verticalGrid.step / this.times.timePerPixel;
+          this.times.stepPx = this.times.stepMs / this.times.timePerPixel;
           this.times.steps = Math.ceil(this.times.totalTasksDurationPx / this.times.stepPx);
 
           let widthMs = this.$root.$data.times.lastTaskTime - this.$root.$data.times.firstTaskTime;
