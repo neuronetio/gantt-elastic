@@ -91,18 +91,18 @@ class ElastiganttApp {
         steps: 0,
       },
       row: {
-        height: 50,
+        height: 20,
         style: 'fill:#FF0000a0'
       },
       horizontalGrid: {
         gap: 6,
         width: 2,
-        style: "stroke:#666;strokeWidth:2",
+        style: "stroke:#00000050;strokeWidth:2",
         lines: [],
       },
       verticalGrid: {
         width: 2,
-        style: "stroke:#666;strokeWidth:2",
+        style: "stroke:#00000050;strokeWidth:2",
         lines: [],
       },
       calendar: {
@@ -198,19 +198,19 @@ class ElastiganttApp {
           if (widthMs) {
             width = widthMs / this.$root.$data.times.timePerPixel;
           }
-          this.width = width + this.verticalGrid.width * 2;
-          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap) + this.horizontalGrid.gap + this.calendar.height;
+          this.width = width + this.verticalGrid.width;
+          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap*2) + this.horizontalGrid.gap + this.calendar.height;
 
           for (let index = 0, len = this.tasks.length; index < len; index++) {
             let task = this.tasks[index];
-            task.width = task.durationMs / this.times.timePerPixel;
+            task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.width;
             task.height = this.row.height;
             let x = task.startTime - this.times.firstTaskTime;
             if (x) {
               x = x / this.times.timePerPixel;
             }
             task.x = x + this.verticalGrid.width;
-            task.y = ((this.row.height + this.horizontalGrid.gap) * index) + this.horizontalGrid.gap + this.calendar.height;
+            task.y = ((this.row.height + this.horizontalGrid.gap*2) * index) + this.horizontalGrid.gap + this.calendar.height;
           }
         },
         getSVG() {
