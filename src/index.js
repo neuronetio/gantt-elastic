@@ -96,18 +96,54 @@ class ElastiganttApp {
       },
       horizontalGrid: {
         gap: 6,
-        width: 2,
+        strokeWidth: 2,
         style: "stroke:#00000050;strokeWidth:2",
         lines: [],
       },
       verticalGrid: {
-        width: 2,
+        strokeWidth: 2,
         style: "stroke:#00000050;strokeWidth:2",
         lines: [],
       },
       calendar: {
-        height: 60,
-        style: "fill:#00FF0055",
+        days:[],
+        weeks:[],
+        months:[],
+        quarters:[],
+        years:[],
+        gap:6,
+        height: 0,
+        strokeWidth:2,
+        style:"fill:#00000020;stroke:#00000000;strokeWidth:2",
+        day:{
+          height: 20,
+          display: true,
+          style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
+          textStyle:'font-family:monospace',
+          format(date){
+            return date.getDate();
+          }
+        },
+        week:{
+          height: 20,
+          display: false,
+          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+        },
+        month:{
+          height: 20,
+          display: false,
+          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+        },
+        quarter:{
+          height: 20,
+          display: false,
+          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+        },
+        year:{
+          height: 20,
+          display: false,
+          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+        },
       }
     };
   }
@@ -183,6 +219,24 @@ class ElastiganttApp {
         this.$root.recalculate();
       },
       methods: {
+        calculateCalendarDimensions(){
+          this.calendar.height = 0;
+          if(this.calendar.day.display){
+            this.calendar.height+=this.calendar.day.height;
+          }
+          if(this.calendar.week.display){
+            this.calendar.height+=this.calendar.week.height;
+          }
+          if(this.calendar.month.display){
+            this.calendar.height+=this.calendar.month.height;
+          }
+          if(this.calendar.quarter.display){
+            this.calendar.height+=this.calendar.quarter.height;
+          }
+          if(this.calendar.year.display){
+            this.calendar.height+=this.calendar.year.height;
+          }
+        },
         recalculate() {
           let max = this.times.timeScale * 60;
           let min = this.times.timeScale;
@@ -198,19 +252,20 @@ class ElastiganttApp {
           if (widthMs) {
             width = widthMs / this.$root.$data.times.timePerPixel;
           }
-          this.width = width + this.verticalGrid.width;
-          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap*2) + this.horizontalGrid.gap + this.calendar.height;
+          this.width = width + this.verticalGrid.strokeWidth;
+          this.calculateCalendarDimensions();
+          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap*2) + this.horizontalGrid.gap + this.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap;
 
           for (let index = 0, len = this.tasks.length; index < len; index++) {
             let task = this.tasks[index];
-            task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.width;
+            task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
             task.height = this.row.height;
             let x = task.startTime - this.times.firstTaskTime;
             if (x) {
               x = x / this.times.timePerPixel;
             }
-            task.x = x + this.verticalGrid.width;
-            task.y = ((this.row.height + this.horizontalGrid.gap*2) * index) + this.horizontalGrid.gap + this.calendar.height;
+            task.x = x + this.verticalGrid.strokeWidth;
+            task.y = ((this.row.height + this.horizontalGrid.gap*2) * index) + this.horizontalGrid.gap + this.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap;
           }
         },
         getSVG() {

@@ -25,20 +25,17 @@ export function Grid(prefix, self) {
     data() {
       return {};
     },
-    methods: {
-
-    },
     computed: {
       verticalLines() {
         this.$root.$data.verticalGrid.lines = [];
         for (let step = 0; step <= this.$root.$data.times.steps; step++) {
-          let x = step * this.$root.$data.times.stepPx + this.$root.$data.verticalGrid.width/2;
+          let x = step * this.$root.$data.times.stepPx + this.$root.$data.verticalGrid.strokeWidth/2;
           this.$root.$data.verticalGrid.lines.push({
             key: step,
             x1: x,
-            y1: this.$root.$data.calendar.height,
+            y1: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap,
             x2: x,
-            y2: this.$root.$data.calendar.height+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.width,
+            y2: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.strokeWidth,
             style: this.$root.$data.verticalGrid.style
           });
         }
@@ -51,9 +48,9 @@ export function Grid(prefix, self) {
           this.$root.$data.horizontalGrid.lines.push({
             key: 'hl' + index,
             x1: 0,
-            y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.horizontalGrid.width/2,
-            x2: this.$root.$data.times.steps*this.$root.$data.times.stepPx+this.$root.$data.verticalGrid.width,
-            y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+ this.$root.$data.horizontalGrid.width/2,
+            y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap + this.$root.$data.horizontalGrid.strokeWidth/2,
+            x2: this.$root.$data.times.steps*this.$root.$data.times.stepPx+this.$root.$data.verticalGrid.strokeWidth,
+            y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+ this.$root.$data.horizontalGrid.strokeWidth/2,
             style: this.$root.$data.horizontalGrid.style
           });
         }
