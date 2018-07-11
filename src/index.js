@@ -255,7 +255,7 @@ class ElastiganttApp {
           this.width = width + this.verticalGrid.strokeWidth;
           this.calculateCalendarDimensions();
           this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap*2) + this.horizontalGrid.gap + this.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap;
-
+          console.log(this.height,this.row.height,this.horizontalGrid.gap);
           for (let index = 0, len = this.tasks.length; index < len; index++) {
             let task = this.tasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
