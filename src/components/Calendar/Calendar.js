@@ -14,6 +14,11 @@ export function Calendar(prefix, self) {
         :key="index"
         :day="day"
       ></${prefix}-calendar-day>
+      <${prefix}-calendar-hour
+        v-for="(hour,index) in hours"
+        :key="index"
+        :hour="hour"
+      ></${prefix}-calendar-hour>
     </g>`,
     data() {
       return {};
@@ -28,10 +33,13 @@ export function Calendar(prefix, self) {
       getWidth(){
         return this.$root.$data.width-this.$root.$data.calendar.strokeWidth;
       },
+      hours(){
+
+      },
       days(){
         this.$root.$data.calendar.days = [];
         for(let i=0,len=this.$root.$data.times.steps; i<len; i++){
-          const date = new Date(this.$root.$data.times.firstTaskDate.getTime()+i*24*60*60*1000);
+          const date = new Date(this.$root.$data.times.firstTime+i*24*60*60*1000);
           this.$root.$data.calendar.days.push({
             x: this.$root.$data.calendar.strokeWidth/2 + i * this.$root.$data.times.stepPx,
             y: this.$root.$data.calendar.strokeWidth/2,

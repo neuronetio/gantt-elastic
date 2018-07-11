@@ -84,6 +84,10 @@ class ElastiganttApp {
         timeScale: 60 * 1000,
         timeZoom: 18,
         timePerPixel: 0,
+        fistDate:null,
+        firstTime:null, // firstDate getTime()
+        lastDate:null,
+        lastTime:null, // last date getTime()
         totalTasksDurationMs: 0,
         totalTasksDurationPx: 0,
         stepMs: 24 * 60 * 60 * 1000,
@@ -106,6 +110,7 @@ class ElastiganttApp {
         lines: [],
       },
       calendar: {
+        hours:[],
         days:[],
         weeks:[],
         months:[],
@@ -115,6 +120,15 @@ class ElastiganttApp {
         height: 0,
         strokeWidth:2,
         style:"fill:#00000020;stroke:#00000000;strokeWidth:2",
+        hour:{
+          height: 20,
+          display: true,
+          style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
+          textStyle:'font-family:monospace',
+          format(date){
+            return date.getHours();
+          }
+        },
         day:{
           height: 20,
           display: true,
@@ -211,12 +225,18 @@ class ElastiganttApp {
             lastTaskDate = new Date(task.startTime + task.durationMs);
           }
         }
-        this.$root.$data.times.firstTaskTime = firstTaskTime;
-        this.$root.$data.times.lastTaskTime = lastTaskTime;
-        this.$root.$data.times.firstTaskDate = firstTaskDate;
-        this.$root.$data.times.lastTaskDate = lastTaskDate;
-        this.times.totalTasksDurationMs = this.times.lastTaskTime - this.times.firstTaskTime;
-        this.$root.recalculate();
+        this.times.firstTaskTime = firstTaskTime;
+        this.times.lastTaskTime = lastTaskTime;
+        const firstDate = firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
+        const lastDate = lastTaskDate.toISOString().split('T')[0]+'T23:59:59';
+        this.times.firstDate = new Date(firstDate);
+        this.times.lastDate = new Date(lastDate);
+        this.times.firstTime = this.times.firstDate.getTime();
+        this.times.lastTime = this.times.lastDate.getTime();
+        this.times.firstTaskDate = firstTaskDate;
+        this.times.lastTaskDate = lastTaskDate;
+        this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
+        this.recalculate();
       },
       methods: {
         calculateCalendarDimensions(){
@@ -243,14 +263,14 @@ class ElastiganttApp {
           let steps = max / min;
           let percent = (this.times.timeZoom / 100);
           this.times.timePerPixel = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
-          this.times.totalTasksDurationPx = this.times.totalTasksDurationMs / this.times.timePerPixel;
+          this.times.totalViewDurationPx = this.times.totalViewDurationMs / this.times.timePerPixel;
           this.times.stepPx = this.times.stepMs / this.times.timePerPixel;
-          this.times.steps = Math.ceil(this.times.totalTasksDurationPx / this.times.stepPx);
+          this.times.steps = Math.ceil(this.times.totalViewDurationPx / this.times.stepPx);
 
-          let widthMs = this.$root.$data.times.lastTaskTime - this.$root.$data.times.firstTaskTime;
+          let widthMs = this.times.lastTime - this.times.firstTime;
           let width = 0;
           if (widthMs) {
-            width = widthMs / this.$root.$data.times.timePerPixel;
+            width = widthMs / this.times.timePerPixel;
           }
           this.width = width + this.verticalGrid.strokeWidth;
           this.calculateCalendarDimensions();
@@ -259,7 +279,7 @@ class ElastiganttApp {
             let task = this.tasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
             task.height = this.row.height;
-            let x = task.startTime - this.times.firstTaskTime;
+            let x = task.startTime - this.times.firstTime;
             if (x) {
               x = x / this.times.timePerPixel;
             }
