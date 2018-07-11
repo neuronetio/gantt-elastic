@@ -7,6 +7,7 @@ import { Tree } from './components/Tree.js';
 import { TreeRow } from './components/TreeRow.js';
 import { Calendar } from './components/Calendar/Calendar.js';
 import { CalendarDay } from './components/Calendar/CalendarDay.js';
+import { CalendarHour } from './components/Calendar/CalendarHour.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
 class ElastiganttApp {
@@ -32,7 +33,8 @@ class ElastiganttApp {
       'grid-header': GridHeader(prefix, self),
       'tree-row': TreeRow(prefix, self),
       calendar: Calendar(prefix, self),
-      'calendar-day': CalendarDay(prefix, self)
+      'calendar-day': CalendarDay(prefix, self),
+      'calendar-hour': CalendarHour(prefix, self),
     };
 
     let customComponents = {};
@@ -126,7 +128,11 @@ class ElastiganttApp {
           style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
           textStyle:'font-family:monospace',
           format(date){
-            return date.getHours();
+            let hour = date.getHours();
+            if(hour<10){
+              hour='0'+hour;
+            }
+            return hour.toString();
           }
         },
         day:{
@@ -241,6 +247,9 @@ class ElastiganttApp {
       methods: {
         calculateCalendarDimensions(){
           this.calendar.height = 0;
+          if(this.calendar.hour.display){
+            this.calendar.height+=this.calendar.hour.height;
+          }
           if(this.calendar.day.display){
             this.calendar.height+=this.calendar.day.height;
           }
