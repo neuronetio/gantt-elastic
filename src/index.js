@@ -278,6 +278,9 @@ class ElastiganttApp {
           for (let index = 0, len = this.tasks.length; index < len; index++) {
             let task = this.tasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
+            if(task.width < 0){
+              task.width = 0;
+            }
             task.height = this.row.height;
             let x = task.startTime - this.times.firstTime;
             if (x) {
