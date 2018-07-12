@@ -126,7 +126,9 @@ class ElastiganttApp {
           height: 20,
           display: true,
           style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
-          textStyle:'font-family:monospace',
+          textStyle:'',
+          fontFamily:'monospace',
+          fontSize:'12px',
           format(date){
             let hour = date.getHours();
             if(hour<10){
@@ -139,7 +141,9 @@ class ElastiganttApp {
           height: 20,
           display: true,
           style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
-          textStyle:'font-family:monospace',
+          textStyle:'',
+          fontFamily:'monospace',
+          fontSize:'12px',
           format(date){
             return date.getDate();
           }
