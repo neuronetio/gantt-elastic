@@ -76,7 +76,7 @@ class ElastiganttApp {
     return props;
   }
 
-  getDefaultOptions() {
+  getDefaultOptions(userOptions) {
     return {
       debug: false,
       width: 0,
@@ -90,8 +90,8 @@ class ElastiganttApp {
         firstTime:null, // firstDate getTime()
         lastDate:null,
         lastTime:null, // last date getTime()
-        totalTasksDurationMs: 0,
-        totalTasksDurationPx: 0,
+        totalViewDurationMs: 0,
+        totalViewDurationPx: 0,
         stepMs: 24 * 60 * 60 * 1000,
         stepPx: 0,
         steps: 0,
@@ -127,14 +127,18 @@ class ElastiganttApp {
           display: true,
           style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
           textStyle:'',
-          fontFamily:'monospace',
+          fontFamily:'Arial',
           fontSize:'12px',
-          format(date){
-            let hour = date.getHours();
-            if(hour<10){
-              hour='0'+hour;
+          format:{
+            short(date){
+              return moment(date).locale(userOptions.locale).format('HH');
+            },
+            medium(date){
+              return moment(date).locale(userOptions.locale).format('HH:mm');
+            },
+            long(date){
+              return moment(date).locale(userOptions.locale).format('HH:mm');
             }
-            return hour.toString();
           }
         },
         day:{
@@ -142,10 +146,18 @@ class ElastiganttApp {
           display: true,
           style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
           textStyle:'',
-          fontFamily:'monospace',
+          fontFamily:'Arial',
           fontSize:'12px',
-          format(date){
-            return date.getDate();
+          format:{
+            short(date){
+              return moment(date).locale(userOptions.locale).format('DD');
+            },
+            medium(date){
+              return moment(date).locale(userOptions.locale).format('DD ddd');
+            },
+            long(date){
+              return moment(date).locale(userOptions.locale).format('DD dddd');
+            }
           }
         },
         week:{
@@ -191,7 +203,7 @@ class ElastiganttApp {
 
     this.data = data;
     this.tasks = data.tasks;
-    this.options = Object.assign(this.getDefaultOptions(), options);
+    this.options = Object.assign(this.getDefaultOptions(options), options);
 
     // initialize observer
     this.tasks = this.tasks.map((task) => {
