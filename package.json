@@ -1,0 +1,32 @@
+{
+  "name": "elastigantt",
+  "version": "0.0.1",
+  "description": "elastic gantt chart",
+  "main": "dist/elastigantt.js",
+  "dependencies": {
+    "moment": "^2.22.2"
+  },
+  "devDependencies": {
+    "rollup": "^0.62.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neuronetio/elastigantt.git"
+  },
+  "keywords": [
+    "elastigantt",
+    "gantt",
+    "gantt-chart",
+    "vue",
+    "vue-gantt"
+  ],
+  "author": "Rafal Pospiech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neuronetio/elastigantt/issues"
+  },
+  "homepage": "https://github.com/neuronetio/elastigantt#readme"
+}
