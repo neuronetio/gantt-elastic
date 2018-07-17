@@ -82,6 +82,10 @@ class ElastiganttApp {
       width: 0,
       height: 0,
       svgElement: null,
+      scope:{
+        before:10,
+        after:10,
+      },
       times: {
         timeScale: 60 * 1000,
         timeZoom: 18,
@@ -249,16 +253,8 @@ class ElastiganttApp {
         }
         this.times.firstTaskTime = firstTaskTime;
         this.times.lastTaskTime = lastTaskTime;
-        const firstDate = firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
-        const lastDate = lastTaskDate.toISOString().split('T')[0]+'T23:59:59';
-        this.times.firstDate = new Date(firstDate);
-        this.times.lastDate = new Date(lastDate);
-        this.times.firstTime = this.times.firstDate.getTime();
-        this.times.lastTime = this.times.lastDate.getTime();
         this.times.firstTaskDate = firstTaskDate;
         this.times.lastTaskDate = lastTaskDate;
-        this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
-
         this.recalculate();
       },
       methods: {
@@ -284,6 +280,14 @@ class ElastiganttApp {
           }
         },
         recalculate() {
+          const firstDate = this.times.firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
+          const lastDate = this.times.lastTaskDate.toISOString().split('T')[0]+'T23:59:59';
+          this.times.firstDate = moment(firstDate).locale(this.locale).subtract(this.scope.before,'days').toDate();
+          this.times.lastDate = moment(lastDate).locale(this.locale).add(this.scope.after,'days').toDate();
+          this.times.firstTime = this.times.firstDate.getTime();
+          this.times.lastTime = this.times.lastDate.getTime();
+          this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
+
           let max = this.times.timeScale * 60;
           let min = this.times.timeScale;
           let steps = max / min;
