@@ -246,6 +246,7 @@ class ElastiganttApp {
         this.times.firstTaskDate = firstTaskDate;
         this.times.lastTaskDate = lastTaskDate;
         this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
+
         this.recalculate();
       },
       methods: {

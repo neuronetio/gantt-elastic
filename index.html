@@ -19,6 +19,7 @@
   <script src="src/vue.js"></script>
   <!--<script src="https://unpkg.com/vuex"></script>-->
   <!--<script type="module" src="dist/elastigantt.js"></script>-->
+  <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
   <script type="module" src="src/index.js"></script>
   <script type="module">
   //import {ElastiganttApp} from "./src/index.js";
@@ -92,7 +93,8 @@
     },
     {
       debug: false,
-      showStack: true
+      showStack: true,
+      locale:'pl'
     }
   );
   function drawCanvas(){

@@ -60,6 +60,41 @@ export function Calendar(prefix, self) {
         }
         return current;
       },
+      howManyDaysFit(current = 24){
+        let max = 0;
+        let ctx;
+        try {
+            ctx = document.createElement('canvas').getContext('2d');
+            ctx.font = this.$root.$data.calendar.hour.fontSize+' '+this.$root.$data.calendar.fontFamily;
+        } catch (err) {
+            throw new Error('Canvas support required');
+        }
+        for(let i=1;i<=current;i++){
+          let text= i.toString();
+          if(i<10){
+            text='0'+text;
+          }
+          let width = ctx.measureText(text).width;
+          if(width>max){
+            max=width;
+          }
+        }
+        let cellWidth=this.$root.$data.times.stepPx/current - this.$root.$data.calendar.strokeWidth - 2;
+        if(max>cellWidth && current>1){
+          let next=2;
+          switch(current){
+            case 24:next=12;break;
+            case 12:next=8;break;
+            case 8:next=6;break;
+            case 6:next=4;break;
+            case 4:next=3;break;
+            case 3:next=2;break;
+            case 2:next=0;
+          }
+          return this.howManyHoursFit(next);
+        }
+        return current;
+      },
     },
     computed:{
       getX(){
