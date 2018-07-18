@@ -32,20 +32,14 @@ export function Calendar(prefix, self) {
           long:0
         };
         const state = this.$root.$data;
-        let ctx;
-        try {
-            ctx = document.createElement('canvas').getContext('2d');
-            ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-        } catch (err) {
-            throw new Error('Canvas support required');
-        }
+        self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
         let firstDate = moment(state.times.firstDate).locale(state.locale);
         for(let i=0;i<current;i++){
           let currentDate = firstDate.add(i,'hours').toDate();
           let textWidth = {
-            short:ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
-            medium:ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
-            long:ctx.measureText(state.calendar.hour.format.long(currentDate)).width,
+            short:self.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
+            medium:self.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
+            long:self.ctx.measureText(state.calendar.hour.format.long(currentDate)).width,
           };
           if(textWidth.short>=max.short){
             max.short=textWidth.short;
@@ -84,20 +78,14 @@ export function Calendar(prefix, self) {
           long:0
         };
         const state = this.$root.$data;
-        let ctx;
-        try {
-            ctx = document.createElement('canvas').getContext('2d');
-            ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-        } catch (err) {
-            throw new Error('Canvas support required');
-        }
+        self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
         let firstDate = moment(state.times.firstDate).locale(state.locale);
         for(let i=0;i<current;i++){
           let currentDate = firstDate.add(i,'days').toDate();
           let textWidth = {
-            short:ctx.measureText(state.calendar.day.format.short(currentDate)).width,
-            medium:ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
-            long:ctx.measureText(state.calendar.day.format.long(currentDate)).width,
+            short:self.ctx.measureText(state.calendar.day.format.short(currentDate)).width,
+            medium:self.ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
+            long:self.ctx.measureText(state.calendar.day.format.long(currentDate)).width,
           };
           if(textWidth.short>=max.short){
             max.short=textWidth.short;
@@ -146,48 +134,39 @@ export function Calendar(prefix, self) {
       },
 
       hours(){
-        this.$root.$data.calendar.hours = [];
+        let hours = [];
         let hoursCount = this.howManyHoursFit();
         let hourStep=24/hoursCount.count;
-        for(let i=0,len=this.$root.$data.times.steps*hoursCount.count; i<len; i++){
-          const date = new Date(this.$root.$data.times.firstTime+i*hourStep*60*60*1000);
-          this.$root.$data.calendar.hours.push({
+        let state = this.$root.$data;
+        for(let i=0,len=state.times.steps*hoursCount.count; i<len; i++){
+          const date = new Date(state.times.firstTime+i*hourStep*60*60*1000);
+          hours.push({
             key:'h'+i,
-            x: this.$root.$data.calendar.strokeWidth/2 + i * this.$root.$data.times.stepPx/hoursCount.count,
-            y: this.$root.$data.calendar.strokeWidth/2+this.$root.$data.calendar.day.height,
-            width: this.$root.$data.times.stepPx/hoursCount.count,
-            height: this.$root.$data.calendar.hour.height,
-            style: this.$root.$data.calendar.hour.style,
-            textStyle: this.$root.$data.calendar.hour.textStyle,
-            fontFamily: this.$root.$data.calendar.hour.fontFamily,
-            fontSize: this.$root.$data.calendar.hour.fontSize,
-            date: date,
-            label: this.$root.$data.calendar.hour.format[hoursCount.type](date)
+            x: state.calendar.strokeWidth/2 + i * state.times.stepPx/hoursCount.count,
+            y: state.calendar.strokeWidth/2+state.calendar.day.height,
+            width: state.times.stepPx/hoursCount.count,
+            height: state.calendar.hour.height,
+            label: state.calendar.hour.format[hoursCount.type](date)
           });
         }
-        return this.$root.$data.calendar.hours;
+        return state.calendar.hours = hours;
       },
       days(){
-        this.$root.$data.calendar.days = [];
+        let days = [];
         let daysCount = this.howManyDaysFit();
         let dayStep = this.$root.$data.times.steps / daysCount.count;
         for(let i=0,len=daysCount.count; i<len; i++){
           const date = new Date(this.$root.$data.times.firstTime+i*dayStep*24*60*60*1000);
-          this.$root.$data.calendar.days.push({
+          days.push({
             key:'d'+i,
             x: this.$root.$data.calendar.strokeWidth/2 + i * this.$root.$data.times.totalViewDurationPx / daysCount.count,
             y: this.$root.$data.calendar.strokeWidth/2,
             width: this.$root.$data.times.totalViewDurationPx / daysCount.count,
             height: this.$root.$data.calendar.day.height,
-            style: this.$root.$data.calendar.day.style,
-            textStyle: this.dayTextStyle(),
-            fontFamily: this.$root.$data.calendar.hour.fontFamily,
-            fontSize: this.$root.$data.calendar.hour.fontSize,
-            date: date,
             label: this.$root.$data.calendar.day.format[daysCount.type](date)
           });
         }
-        return this.$root.$data.calendar.days;
+        return this.$root.$data.calendar.days = days;
       },
     }
   });

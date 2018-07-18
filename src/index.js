@@ -222,6 +222,7 @@ class ElastiganttApp {
     globalState.classInstance = this;
     globalState.data = this.data;
     globalState.tasks = this.tasks;
+    this.ctx = document.createElement('canvas').getContext('2d');
 
     this.customComponents = customComponents;
     this.registerComponents();
