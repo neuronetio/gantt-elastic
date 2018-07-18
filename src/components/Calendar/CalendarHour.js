@@ -8,14 +8,12 @@ export function CalendarHour(prefix, self) {
       :y="hour.y"
       :width="hour.width"
       :height="hour.height"
-      :style="hour.style"
     ></rect>
     <text
       :x="getTextX"
       :y="getTextY"
       alignment-baseline="middle"
       text-anchor="middle"
-      :style="getTextStyle"
     >{{hour.label}}</text>
     </g>`,
     data() {
@@ -28,9 +26,6 @@ export function CalendarHour(prefix, self) {
       getTextY(){
         return this.hour.y+this.hour.height/2;
       },
-      getTextStyle(){
-        return 'font-family:'+this.hour.fontFamily+';font-size:'+this.hour.fontSize+';'+this.hour.textStyle;
-      }
     }
   });
 }

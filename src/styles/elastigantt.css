@@ -7,3 +7,17 @@ body {
 .elastigantt__header{
   margin:0 auto;
 }
+.elastigantt__grid-horizontal-line, .elastigantt__grid-vertical-line{
+  stroke: #a0a0a0;
+  stroke-width: 2;
+}
+.elastigantt__calendar-day-group rect,.elastigantt__calendar-hour-group rect{
+  fill:#ddd;
+  stroke:#A0A0A0;
+  stroke-width:2;
+}
+.elastigantt__calendar-day-group text,.elastigantt__calendar-hour-group text{
+  fill:#000;
+  font-family: 'Arial';
+  font-size: 12px;
+}

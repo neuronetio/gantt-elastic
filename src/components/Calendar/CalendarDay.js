@@ -8,14 +8,12 @@ export function CalendarDay(prefix, self) {
       :y="day.y"
       :width="day.width"
       :height="day.height"
-      :style="day.style"
     ></rect>
     <text
       :x="getTextX"
       :y="getTextY"
       alignment-baseline="middle"
       text-anchor="middle"
-      :style="day.textStyle"
     >{{day.label}}</text>
     </g>`,
     data() {
@@ -27,7 +25,7 @@ export function CalendarDay(prefix, self) {
       },
       getTextY(){
         return this.day.y+this.day.height/2;
-      }
+      },
     }
   });
 }
