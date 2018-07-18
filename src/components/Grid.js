@@ -3,22 +3,22 @@ export function Grid(prefix, self) {
 
     template: `<g>
         <line
+          class="elastigantt__grid-vertical-line"
           v-for="(line,index) in horizontalLines"
           :key="line.key"
           :x1="line.x1"
           :y1="line.y1"
           :x2="line.x2"
           :y2="line.y2"
-          :style="line.style"
         ></line>
         <line
+          class="elastigantt__grid-vertical-line"
           v-for="(line,index) in verticalLines"
           :key="line.key"
           :x1="line.x1"
           :y1="line.y1"
           :x2="line.x2"
           :y2="line.y2"
-          :style="line.style"
         ></line>
       </g>`,
 
@@ -36,7 +36,6 @@ export function Grid(prefix, self) {
             y1: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap,
             x2: x,
             y2: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.strokeWidth,
-            style: this.$root.$data.verticalGrid.style
           });
         }
         return this.$root.$data.verticalGrid.lines;
@@ -51,7 +50,6 @@ export function Grid(prefix, self) {
             y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap + this.$root.$data.horizontalGrid.strokeWidth/2,
             x2: this.$root.$data.times.steps*this.$root.$data.times.stepPx+this.$root.$data.verticalGrid.strokeWidth,
             y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+ this.$root.$data.horizontalGrid.strokeWidth/2,
-            style: this.$root.$data.horizontalGrid.style
           });
         }
         return this.$root.$data.horizontalGrid.lines;
