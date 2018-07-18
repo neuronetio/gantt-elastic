@@ -26,9 +26,6 @@ export function CalendarHour(prefix, self) {
       getTextY(){
         return this.hour.y+this.hour.height/2;
       },
-      getTextStyle(){
-        return 'font-family:'+this.hour.fontFamily+';font-size:'+this.hour.fontSize+';'+this.hour.textStyle;
-      }
     }
   });
 }

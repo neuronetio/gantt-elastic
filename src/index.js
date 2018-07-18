@@ -125,13 +125,11 @@ class ElastiganttApp {
         gap:6,
         height: 0,
         strokeWidth:2,
+        fontFamily:'sans-serif',
         style:"fill:#00000020;stroke:#00000000;strokeWidth:2",
         hour:{
           height: 20,
           display: true,
-          style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
-          textStyle:'',
-          fontFamily:'Arial',
           fontSize:'12px',
           format:{
             short(date){
@@ -148,9 +146,6 @@ class ElastiganttApp {
         day:{
           height: 20,
           display: true,
-          style: "fill:#00000000;stroke:#A0A0A0;strokeWidth:2",
-          textStyle:'',
-          fontFamily:'Arial',
           fontSize:'12px',
           format:{
             short(date){

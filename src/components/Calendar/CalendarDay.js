@@ -25,7 +25,7 @@ export function CalendarDay(prefix, self) {
       },
       getTextY(){
         return this.day.y+this.day.height/2;
-      }
+      },
     }
   });
 }

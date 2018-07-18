@@ -22,7 +22,9 @@ export function Calendar(prefix, self) {
       <div ref="hourText" :style="hourTextStyle"></div>
     </g>`,
     data() {
-      return {};
+      return {
+        cache:{}
+      };
     },
     methods:{
       howManyHoursFit(current = 24, currentRecurrection = 1){

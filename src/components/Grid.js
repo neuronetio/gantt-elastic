@@ -12,7 +12,7 @@ export function Grid(prefix, self) {
           :y2="line.y2"
         ></line>
         <line
-          class="elastigantt__grid-vertical-line"
+          class="elastigantt__grid-horizontal-line"
           v-for="(line,index) in verticalLines"
           :key="line.key"
           :x1="line.x1"
@@ -27,10 +27,10 @@ export function Grid(prefix, self) {
     },
     computed: {
       verticalLines() {
-        this.$root.$data.verticalGrid.lines = [];
+        let lines = [];
         for (let step = 0; step <= this.$root.$data.times.steps; step++) {
           let x = step * this.$root.$data.times.stepPx + this.$root.$data.verticalGrid.strokeWidth/2;
-          this.$root.$data.verticalGrid.lines.push({
+          lines.push({
             key: step,
             x1: x,
             y1: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap,
@@ -38,13 +38,13 @@ export function Grid(prefix, self) {
             y2: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.strokeWidth,
           });
         }
-        return this.$root.$data.verticalGrid.lines;
+        return this.$root.$data.verticalGrid.lines = lines;
       },
       horizontalLines() {
-        this.$root.$data.horizontalGrid.lines = [];
+        let lines = [];
         let tasks = this.$root.$data.tasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
-          this.$root.$data.horizontalGrid.lines.push({
+          lines.push({
             key: 'hl' + index,
             x1: 0,
             y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap + this.$root.$data.horizontalGrid.strokeWidth/2,
@@ -52,7 +52,7 @@ export function Grid(prefix, self) {
             y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+ this.$root.$data.horizontalGrid.strokeWidth/2,
           });
         }
-        return this.$root.$data.horizontalGrid.lines;
+        return this.$root.$data.horizontalGrid.lines = lines;
       }
     }
   });
