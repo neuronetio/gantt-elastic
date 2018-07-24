@@ -4,10 +4,11 @@
   "description": "elastic gantt chart",
   "main": "dist/elastigantt.js",
   "dependencies": {
-    "moment": "^2.22.2"
+    "dayjs": "^1.7.4"
   },
   "devDependencies": {
-    "rollup": "^0.62.0"
+    "rollup": "^0.62.0",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

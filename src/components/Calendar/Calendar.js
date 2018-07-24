@@ -35,7 +35,7 @@ export function Calendar(prefix, self) {
         };
         const state = this.$root.$data;
         self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-        let firstDate = moment(state.times.firstDate).locale(state.locale);
+        let firstDate = dayjs(state.times.firstDate).locale(state.locale);
         for(let i=0;i<current;i++){
           let currentDate = firstDate.add(i,'hours').toDate();
           let textWidth = {
@@ -81,7 +81,7 @@ export function Calendar(prefix, self) {
         };
         const state = this.$root.$data;
         self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-        let firstDate = moment(state.times.firstDate).locale(state.locale);
+        let firstDate = dayjs(state.times.firstDate).locale(state.locale);
         for(let i=0;i<current;i++){
           let currentDate = firstDate.add(i,'days').toDate();
           let textWidth = {

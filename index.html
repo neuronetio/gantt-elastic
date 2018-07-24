@@ -19,12 +19,12 @@
   <!--<script src="src/vue.js"></script>-->
   <script src="src/vue.min.js"></script>
   <!--<script src="https://unpkg.com/vuex"></script>-->
-  <!--<script type="module" src="dist/elastigantt.js"></script>-->
-  <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
-  <script type="module" src="src/index.js"></script>
-  <script type="module">
+  <script src="https://unpkg.com/dayjs"></script>
+  <script src="dist/elastigantt.js"></script>
+  <!--<script type="module" src="src/index.js"></script>-->
+  <script>
   //import {ElastiganttApp} from "./src/index.js";
-  let elastigantt = new ElastiganttApp(
+  let elastigantt = new ElastiganttApp.ElastiganttApp(
     'app',
     '#app',
     {

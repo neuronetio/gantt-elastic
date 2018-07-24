@@ -15,7 +15,6 @@ class ElastiganttApp {
     return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) {
       return g1.toUpperCase() + g2.toLowerCase();
     }).replace(/\-/g, '');
-    console.log('test');
   }
 
   toKebabCase(str) {
@@ -133,13 +132,13 @@ class ElastiganttApp {
           fontSize:'12px',
           format:{
             short(date){
-              return moment(date).locale(userOptions.locale).format('HH');
+              return dayjs(date).format('HH');
             },
             medium(date){
-              return moment(date).locale(userOptions.locale).format('HH:mm');
+              return dayjs(date).format('HH:mm');
             },
             long(date){
-              return moment(date).locale(userOptions.locale).format('HH:mm');
+              return dayjs(date).format('HH:mm');
             }
           }
         },
@@ -149,13 +148,13 @@ class ElastiganttApp {
           fontSize:'12px',
           format:{
             short(date){
-              return moment(date).locale(userOptions.locale).format('DD');
+              return dayjs(date).format('DD');
             },
             medium(date){
-              return moment(date).locale(userOptions.locale).format('DD ddd');
+              return dayjs(date).format('DD ddd');
             },
             long(date){
-              return moment(date).locale(userOptions.locale).format('DD dddd');
+              return dayjs(date).format('DD dddd');
             }
           }
         },
@@ -278,8 +277,8 @@ class ElastiganttApp {
         recalculate() {
           const firstDate = this.times.firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
           const lastDate = this.times.lastTaskDate.toISOString().split('T')[0]+'T23:59:59';
-          this.times.firstDate = moment(firstDate).locale(this.locale).subtract(this.scope.before,'days').toDate();
-          this.times.lastDate = moment(lastDate).locale(this.locale).add(this.scope.after,'days').toDate();
+          this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before,'days').toDate();
+          this.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.scope.after,'days').toDate();
           this.times.firstTime = this.times.firstDate.getTime();
           this.times.lastTime = this.times.lastDate.getTime();
           this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
