@@ -11,12 +11,12 @@ body {
   stroke: #a0a0a0;
   stroke-width: 2;
 }
-.elastigantt__calendar-day-group rect,.elastigantt__calendar-hour-group rect{
+.elastigantt__calendar-row-group rect{
   fill:#ddd;
   stroke:#A0A0A0;
   stroke-width:2;
 }
-.elastigantt__calendar-day-group text,.elastigantt__calendar-hour-group text{
+.elastigantt__calendar-row-group text{
   fill:#000;
   font-family: 'Arial';
   font-size: 12px;

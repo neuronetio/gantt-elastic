@@ -6,8 +6,7 @@ import { Main } from './components/Main.js';
 import { Tree } from './components/Tree.js';
 import { TreeRow } from './components/TreeRow.js';
 import { Calendar } from './components/Calendar/Calendar.js';
-import { CalendarDay } from './components/Calendar/CalendarDay.js';
-import { CalendarHour } from './components/Calendar/CalendarHour.js';
+import { CalendarRow } from './components/Calendar/CalendarRow.js';
 import { elastiganttStore } from './elastiganttStorage.js';
 
 class ElastiganttApp {
@@ -32,8 +31,7 @@ class ElastiganttApp {
       'grid-header': GridHeader(prefix, self),
       'tree-row': TreeRow(prefix, self),
       calendar: Calendar(prefix, self),
-      'calendar-day': CalendarDay(prefix, self),
-      'calendar-hour': CalendarHour(prefix, self),
+      'calendar-row': CalendarRow(prefix, self),
     };
 
     let customComponents = {};

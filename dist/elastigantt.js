@@ -233,17 +233,16 @@ var ElastiganttApp = (function (exports) {
         :height="$root.$data.calendar.height"
         :style="$root.$data.calendar.style"
       ></rect>
-      <${prefix}-calendar-day
+      <${prefix}-calendar-row
         v-for="(day,index) in days"
         :key="day.key"
-        :day="day"
-      ></${prefix}-calendar-day>
-      <${prefix}-calendar-hour
+        :item="day"
+      ></${prefix}-calendar-row>
+      <${prefix}-calendar-row
         v-for="(hour,index) in hours"
         :key="hour.key"
-        :hour="hour"
-      ></${prefix}-calendar-hour>
-      <div ref="hourText" :style="hourTextStyle"></div>
+        :item="hour"
+      ></${prefix}-calendar-row>
     </g>`,
       data() {
         return {
@@ -378,85 +377,54 @@ var ElastiganttApp = (function (exports) {
           return state.calendar.hours = hours;
         },
         days(){
+          let state = this.$root.$data;
           let days = [];
           let daysCount = this.howManyDaysFit();
-          let dayStep = this.$root.$data.times.steps / daysCount.count;
+          let dayStep = state.times.steps / daysCount.count;
           for(let i=0,len=daysCount.count; i<len; i++){
-            const date = new Date(this.$root.$data.times.firstTime+i*dayStep*24*60*60*1000);
+            const date = new Date(state.times.firstTime+i*dayStep*24*60*60*1000);
             days.push({
               key:'d'+i,
-              x: this.$root.$data.calendar.strokeWidth/2 + i * this.$root.$data.times.totalViewDurationPx / daysCount.count,
-              y: this.$root.$data.calendar.strokeWidth/2,
-              width: this.$root.$data.times.totalViewDurationPx / daysCount.count,
-              height: this.$root.$data.calendar.day.height,
-              label: this.$root.$data.calendar.day.format[daysCount.type](date)
+              x: state.calendar.strokeWidth/2 + i * state.times.totalViewDurationPx / daysCount.count,
+              y: state.calendar.strokeWidth/2,
+              width: state.times.totalViewDurationPx / daysCount.count,
+              height: state.calendar.day.height,
+              label: state.calendar.day.format[daysCount.type](date)
             });
           }
-          return this.$root.$data.calendar.days = days;
+          return state.calendar.days = days;
         },
       }
     });
   }
 
-  function CalendarDay(prefix, self) {
+  function CalendarRow(prefix, self) {
     return self.wrapComponent({
-      props:['day'],
-      template: `<g class="elastigantt__calendar-day-group">
+      props:['item'],
+      template: `<g class="elastigantt__calendar-row-group">
     <rect
-      class="elastigantt__calendar-day"
-      :x="day.x"
-      :y="day.y"
-      :width="day.width"
-      :height="day.height"
+      class="elastigantt__calendar-row"
+      :x="item.x"
+      :y="item.y"
+      :width="item.width"
+      :height="item.height"
     ></rect>
     <text
       :x="getTextX"
       :y="getTextY"
       alignment-baseline="middle"
       text-anchor="middle"
-    >{{day.label}}</text>
+    >{{item.label}}</text>
     </g>`,
       data() {
         return {};
       },
       computed:{
         getTextX(){
-          return this.day.x+this.day.width/2;
+          return this.item.x+this.item.width/2;
         },
         getTextY(){
-          return this.day.y+this.day.height/2;
-        },
-      }
-    });
-  }
-
-  function CalendarHour(prefix, self) {
-    return self.wrapComponent({
-      props:['hour'],
-      template: `<g class="elastigantt__calendar-hour-group">
-    <rect
-      class="elastigantt__calendar-hour"
-      :x="hour.x"
-      :y="hour.y"
-      :width="hour.width"
-      :height="hour.height"
-    ></rect>
-    <text
-      :x="getTextX"
-      :y="getTextY"
-      alignment-baseline="middle"
-      text-anchor="middle"
-    >{{hour.label}}</text>
-    </g>`,
-      data() {
-        return {};
-      },
-      computed:{
-        getTextX(){
-          return this.hour.x+this.hour.width/2;
-        },
-        getTextY(){
-          return this.hour.y+this.hour.height/2;
+          return this.item.y+this.item.height/2;
         },
       }
     });
@@ -596,8 +564,7 @@ var ElastiganttApp = (function (exports) {
         'grid-header': GridHeader(prefix, self),
         'tree-row': TreeRow(prefix, self),
         calendar: Calendar(prefix, self),
-        'calendar-day': CalendarDay(prefix, self),
-        'calendar-hour': CalendarHour(prefix, self),
+        'calendar-row': CalendarRow(prefix, self),
       };
 
       let customComponents = {};

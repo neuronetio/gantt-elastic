@@ -1,4 +1,4 @@
-stateexport function Calendar(prefix, self) {
+export function Calendar(prefix, self) {
   return self.wrapComponent({
     template: `<g class="elastigantt__calendar-group">
       <rect
@@ -9,17 +9,16 @@ stateexport function Calendar(prefix, self) {
         :height="$root.$data.calendar.height"
         :style="$root.$data.calendar.style"
       ></rect>
-      <${prefix}-calendar-day
+      <${prefix}-calendar-row
         v-for="(day,index) in days"
         :key="day.key"
-        :day="day"
-      ></${prefix}-calendar-day>
-      <${prefix}-calendar-hour
+        :item="day"
+      ></${prefix}-calendar-row>
+      <${prefix}-calendar-row
         v-for="(hour,index) in hours"
         :key="hour.key"
-        :hour="hour"
-      ></${prefix}-calendar-hour>
-      <div ref="hourText" :style="hourTextStyle"></div>
+        :item="hour"
+      ></${prefix}-calendar-row>
     </g>`,
     data() {
       return {
@@ -171,10 +170,6 @@ stateexport function Calendar(prefix, self) {
         }
         return state.calendar.days = days;
       },
-      months(){
-        let months = [];
-
-      }
     }
   });
 }

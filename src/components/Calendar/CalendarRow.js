@@ -1,9 +1,9 @@
 export function CalendarRow(prefix, self) {
   return self.wrapComponent({
     props:['item'],
-    template: `<g class="elastigantt__calendar-day-group">
+    template: `<g class="elastigantt__calendar-row-group">
     <rect
-      class="elastigantt__calendar-day"
+      class="elastigantt__calendar-row"
       :x="item.x"
       :y="item.y"
       :width="item.width"
