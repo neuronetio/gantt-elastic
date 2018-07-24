@@ -1,4 +1,4 @@
-export function Calendar(prefix, self) {
+stateexport function Calendar(prefix, self) {
   return self.wrapComponent({
     template: `<g class="elastigantt__calendar-group">
       <rect
@@ -154,22 +154,27 @@ export function Calendar(prefix, self) {
         return state.calendar.hours = hours;
       },
       days(){
+        let state = this.$root.$data;
         let days = [];
         let daysCount = this.howManyDaysFit();
-        let dayStep = this.$root.$data.times.steps / daysCount.count;
+        let dayStep = state.times.steps / daysCount.count;
         for(let i=0,len=daysCount.count; i<len; i++){
-          const date = new Date(this.$root.$data.times.firstTime+i*dayStep*24*60*60*1000);
+          const date = new Date(state.times.firstTime+i*dayStep*24*60*60*1000);
           days.push({
             key:'d'+i,
-            x: this.$root.$data.calendar.strokeWidth/2 + i * this.$root.$data.times.totalViewDurationPx / daysCount.count,
-            y: this.$root.$data.calendar.strokeWidth/2,
-            width: this.$root.$data.times.totalViewDurationPx / daysCount.count,
-            height: this.$root.$data.calendar.day.height,
-            label: this.$root.$data.calendar.day.format[daysCount.type](date)
+            x: state.calendar.strokeWidth/2 + i * state.times.totalViewDurationPx / daysCount.count,
+            y: state.calendar.strokeWidth/2,
+            width: state.times.totalViewDurationPx / daysCount.count,
+            height: state.calendar.day.height,
+            label: state.calendar.day.format[daysCount.type](date)
           });
         }
-        return this.$root.$data.calendar.days = days;
+        return state.calendar.days = days;
       },
+      months(){
+        let months = [];
+
+      }
     }
   });
 }
