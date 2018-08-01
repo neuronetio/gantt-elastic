@@ -98,7 +98,7 @@ class ElastiganttApp {
         steps: 0,
       },
       row: {
-        height: 20,
+        height: 16,
         style: 'fill:#FF0000a0'
       },
       horizontalGrid: {
