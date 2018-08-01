@@ -115,10 +115,7 @@ class ElastiganttApp {
       calendar: {
         hours:[],
         days:[],
-        weeks:[],
         months:[],
-        quarters:[],
-        years:[],
         gap:6,
         height: 0,
         strokeWidth:2,
@@ -156,25 +153,21 @@ class ElastiganttApp {
             }
           }
         },
-        week:{
-          height: 20,
-          display: false,
-          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-        },
         month:{
           height: 20,
-          display: false,
-          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-        },
-        quarter:{
-          height: 20,
-          display: false,
-          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-        },
-        year:{
-          height: 20,
-          display: false,
-          style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+          display: true,
+          fontSize:'12px',
+          format:{
+            short(date){
+              return dayjs(date).format('Y-MM');
+            },
+            medium(date){
+              return dayjs(date).format('YY MMM');
+            },
+            long(date){
+              return dayjs(date).format('YYYY MMMM');
+            }
+          }
         },
       }
     };
@@ -259,17 +252,8 @@ class ElastiganttApp {
           if(this.calendar.day.display){
             this.calendar.height+=this.calendar.day.height;
           }
-          if(this.calendar.week.display){
-            this.calendar.height+=this.calendar.week.height;
-          }
           if(this.calendar.month.display){
             this.calendar.height+=this.calendar.month.height;
-          }
-          if(this.calendar.quarter.display){
-            this.calendar.height+=this.calendar.quarter.height;
-          }
-          if(this.calendar.year.display){
-            this.calendar.height+=this.calendar.year.height;
           }
         },
         recalculate() {

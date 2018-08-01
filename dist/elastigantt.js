@@ -234,6 +234,11 @@ var ElastiganttApp = (function (exports) {
         :style="$root.$data.calendar.style"
       ></rect>
       <${prefix}-calendar-row
+        v-for="(month,index) in months"
+        :key="month.key"
+        :item="month"
+      ></${prefix}-calendar-row>
+      <${prefix}-calendar-row
         v-for="(day,index) in days"
         :key="day.key"
         :item="day"
@@ -258,7 +263,7 @@ var ElastiganttApp = (function (exports) {
           };
           const state = this.$root.$data;
           self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-          let firstDate = dayjs(state.times.firstDate).locale(state.locale);
+          let firstDate = dayjs(state.times.firstDate);
           for(let i=0;i<current;i++){
             let currentDate = firstDate.add(i,'hours').toDate();
             let textWidth = {
@@ -304,7 +309,7 @@ var ElastiganttApp = (function (exports) {
           };
           const state = this.$root.$data;
           self.ctx.font = state.calendar.day.fontSize+' '+state.calendar.fontFamily;
-          let firstDate = dayjs(state.times.firstDate).locale(state.locale);
+          let firstDate = dayjs(state.times.firstDate);
           for(let i=0;i<current;i++){
             let currentDate = firstDate.add(i,'days').toDate();
             let textWidth = {
@@ -368,7 +373,7 @@ var ElastiganttApp = (function (exports) {
             hours.push({
               key:'h'+i,
               x: state.calendar.strokeWidth/2 + i * state.times.stepPx/hoursCount.count,
-              y: state.calendar.strokeWidth/2+state.calendar.day.height,
+              y: state.calendar.strokeWidth+state.calendar.day.height+state.calendar.month.height,
               width: state.times.stepPx/hoursCount.count,
               height: state.calendar.hour.height,
               label: state.calendar.hour.format[hoursCount.type](date)
@@ -386,7 +391,7 @@ var ElastiganttApp = (function (exports) {
             days.push({
               key:'d'+i,
               x: state.calendar.strokeWidth/2 + i * state.times.totalViewDurationPx / daysCount.count,
-              y: state.calendar.strokeWidth/2,
+              y: state.calendar.strokeWidth+state.calendar.month.height,
               width: state.times.totalViewDurationPx / daysCount.count,
               height: state.calendar.day.height,
               label: state.calendar.day.format[daysCount.type](date)
@@ -394,6 +399,50 @@ var ElastiganttApp = (function (exports) {
           }
           return state.calendar.days = days;
         },
+        months(){
+          let state = this.$root.$data;
+          let months = [];
+          let firstDate = state.times.firstDate;
+          let lastDate = state.times.lastDate;
+          let steps = state.times.steps;
+          let currentDate = dayjs(state.times.firstDate);
+          let currentMonth = currentDate.month();
+          let currentDays = 0;
+          let monthDays = [];
+          let currentDateObj = {date:currentDate.clone().toDate() , days:0};
+          for(let i=0;i<steps;i++){
+            currentDays++;
+            currentDate = currentDate.clone().add(1,'days');
+            if(currentDate.month() !== currentMonth){
+              console.log('month',currentDate.month(), currentMonth);
+              currentMonth = currentDate.month();
+              currentDateObj.days = currentDays;
+              monthDays.push(currentDateObj);
+              currentDateObj = {date:currentDate.clone().toDate(), days:0};
+              currentDays = 0;
+            }
+          }
+          if(currentDays){
+            currentDateObj.days = currentDays;
+            monthDays.push(currentDateObj);
+          }
+          let currentOffset = 0;
+          for(let i = 0,len = monthDays.length; i<len; i++){
+            let days = monthDays[i].days;
+            let date = monthDays[i].date;
+            let width = state.times.stepPx * days;
+            months.push({
+              key:'m'+i,
+              x: currentOffset,
+              y: state.calendar.strokeWidth/2,
+              width: width,
+              height: state.calendar.day.height,
+              label: state.calendar.month.format['long'](date)
+            });
+            currentOffset+=width;
+          }
+          return state.calendar.months = months;
+        }
       }
     });
   }
@@ -648,10 +697,7 @@ var ElastiganttApp = (function (exports) {
         calendar: {
           hours:[],
           days:[],
-          weeks:[],
           months:[],
-          quarters:[],
-          years:[],
           gap:6,
           height: 0,
           strokeWidth:2,
@@ -689,25 +735,21 @@ var ElastiganttApp = (function (exports) {
               }
             }
           },
-          week:{
-            height: 20,
-            display: false,
-            style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-          },
           month:{
             height: 20,
-            display: false,
-            style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-          },
-          quarter:{
-            height: 20,
-            display: false,
-            style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
-          },
-          year:{
-            height: 20,
-            display: false,
-            style: "fill:#00FF0000;stroke:#00000050;strokeWidth:2",
+            display: true,
+            fontSize:'12px',
+            format:{
+              short(date){
+                return dayjs(date).format('Y-MM');
+              },
+              medium(date){
+                return dayjs(date).format('YY MMM');
+              },
+              long(date){
+                return dayjs(date).format('YYYY MMMM');
+              }
+            }
           },
         }
       };
@@ -792,17 +834,8 @@ var ElastiganttApp = (function (exports) {
             if(this.calendar.day.display){
               this.calendar.height+=this.calendar.day.height;
             }
-            if(this.calendar.week.display){
-              this.calendar.height+=this.calendar.week.height;
-            }
             if(this.calendar.month.display){
               this.calendar.height+=this.calendar.month.height;
-            }
-            if(this.calendar.quarter.display){
-              this.calendar.height+=this.calendar.quarter.height;
-            }
-            if(this.calendar.year.display){
-              this.calendar.height+=this.calendar.year.height;
             }
           },
           recalculate() {
