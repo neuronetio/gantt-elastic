@@ -373,7 +373,7 @@ var ElastiganttApp = (function (exports) {
             hours.push({
               key:'h'+i,
               x: state.calendar.strokeWidth/2 + i * state.times.stepPx/hoursCount.count,
-              y: state.calendar.strokeWidth+state.calendar.day.height+state.calendar.month.height,
+              y: state.calendar.strokeWidth/2+state.calendar.day.height+state.calendar.month.height,
               width: state.times.stepPx/hoursCount.count,
               height: state.calendar.hour.height,
               label: state.calendar.hour.format[hoursCount.type](date)
@@ -391,7 +391,7 @@ var ElastiganttApp = (function (exports) {
             days.push({
               key:'d'+i,
               x: state.calendar.strokeWidth/2 + i * state.times.totalViewDurationPx / daysCount.count,
-              y: state.calendar.strokeWidth+state.calendar.month.height,
+              y: state.calendar.strokeWidth/2+state.calendar.month.height,
               width: state.times.totalViewDurationPx / daysCount.count,
               height: state.calendar.day.height,
               label: state.calendar.day.format[daysCount.type](date)
@@ -414,7 +414,6 @@ var ElastiganttApp = (function (exports) {
             currentDays++;
             currentDate = currentDate.clone().add(1,'days');
             if(currentDate.month() !== currentMonth){
-              console.log('month',currentDate.month(), currentMonth);
               currentMonth = currentDate.month();
               currentDateObj.days = currentDays;
               monthDays.push(currentDateObj);
@@ -426,7 +425,7 @@ var ElastiganttApp = (function (exports) {
             currentDateObj.days = currentDays;
             monthDays.push(currentDateObj);
           }
-          let currentOffset = 0;
+          let currentOffset = state.calendar.strokeWidth/2;
           for(let i = 0,len = monthDays.length; i<len; i++){
             let days = monthDays[i].days;
             let date = monthDays[i].date;
@@ -709,13 +708,13 @@ var ElastiganttApp = (function (exports) {
             fontSize:'12px',
             format:{
               short(date){
-                return dayjs(date).format('HH');
+                return dayjs(date).locale('pl').format('HH');
               },
               medium(date){
-                return dayjs(date).format('HH:mm');
+                return dayjs(date).locale('pl').format('HH:mm');
               },
               long(date){
-                return dayjs(date).format('HH:mm');
+                return dayjs(date).locale('pl').format('HH:mm');
               }
             }
           },
@@ -725,13 +724,13 @@ var ElastiganttApp = (function (exports) {
             fontSize:'12px',
             format:{
               short(date){
-                return dayjs(date).format('DD');
+                return dayjs(date).locale('pl').format('DD');
               },
               medium(date){
-                return dayjs(date).format('DD ddd');
+                return dayjs(date).locale('pl').format('DD ddd');
               },
               long(date){
-                return dayjs(date).format('DD dddd');
+                return dayjs(date).locale('pl').format('DD dddd');
               }
             }
           },
@@ -741,13 +740,13 @@ var ElastiganttApp = (function (exports) {
             fontSize:'12px',
             format:{
               short(date){
-                return dayjs(date).format('Y-MM');
+                return dayjs(date).locale('pl').format('Y-MM');
               },
               medium(date){
-                return dayjs(date).format('YY MMM');
+                return dayjs(date).locale('pl').format('YY MMM');
               },
               long(date){
-                return dayjs(date).format('YYYY MMMM');
+                return dayjs(date).locale('pl').format('YYYY MMMM');
               }
             }
           },
@@ -771,6 +770,7 @@ var ElastiganttApp = (function (exports) {
       this.containerElement = document.getElementById(containerId);
       this.prefix = prefix.replace(/[^a-z0-9]/gi, '');
       this.prefixPascal = this.toPascalCase(this.prefix);
+      dayjs.locale(options.locale, null, true);
 
       this.data = data;
       this.tasks = data.tasks;
@@ -840,7 +840,7 @@ var ElastiganttApp = (function (exports) {
           },
           recalculate() {
             const firstDate = this.times.firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
-            const lastDate = this.times.lastTaskDate.toISOString().split('T')[0]+'T23:59:59';
+            const lastDate = this.times.lastTaskDate.toISOString().split('T')[0]+'T23:59:59.999';
             this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before,'days').toDate();
             this.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.scope.after,'days').toDate();
             this.times.firstTime = this.times.firstDate.getTime();

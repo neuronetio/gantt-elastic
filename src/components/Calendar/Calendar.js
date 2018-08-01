@@ -149,7 +149,7 @@ export function Calendar(prefix, self) {
           hours.push({
             key:'h'+i,
             x: state.calendar.strokeWidth/2 + i * state.times.stepPx/hoursCount.count,
-            y: state.calendar.strokeWidth+state.calendar.day.height+state.calendar.month.height,
+            y: state.calendar.strokeWidth/2+state.calendar.day.height+state.calendar.month.height,
             width: state.times.stepPx/hoursCount.count,
             height: state.calendar.hour.height,
             label: state.calendar.hour.format[hoursCount.type](date)
@@ -167,7 +167,7 @@ export function Calendar(prefix, self) {
           days.push({
             key:'d'+i,
             x: state.calendar.strokeWidth/2 + i * state.times.totalViewDurationPx / daysCount.count,
-            y: state.calendar.strokeWidth+state.calendar.month.height,
+            y: state.calendar.strokeWidth/2+state.calendar.month.height,
             width: state.times.totalViewDurationPx / daysCount.count,
             height: state.calendar.day.height,
             label: state.calendar.day.format[daysCount.type](date)
@@ -190,7 +190,6 @@ export function Calendar(prefix, self) {
           currentDays++;
           currentDate = currentDate.clone().add(1,'days');
           if(currentDate.month() !== currentMonth){
-            console.log('month',currentDate.month(), currentMonth);
             currentMonth = currentDate.month();
             currentDateObj.days = currentDays;
             monthDays.push(currentDateObj);
@@ -202,7 +201,7 @@ export function Calendar(prefix, self) {
           currentDateObj.days = currentDays;
           monthDays.push(currentDateObj);
         }
-        let currentOffset = 0;
+        let currentOffset = state.calendar.strokeWidth/2;
         for(let i = 0,len = monthDays.length; i<len; i++){
           let days = monthDays[i].days;
           let date = monthDays[i].date;

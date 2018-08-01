@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html charset="utf-8">
 <head>
+  <meta charset="UTF-8">
   <title>elastigantt demo</title>
   <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">-->
   <link rel="stylesheet" href="src/styles/elastigantt.css" title="elastigantt__style">
@@ -19,7 +20,7 @@
   <!--<script src="src/vue.js"></script>-->
   <script src="src/vue.min.js"></script>
   <!--<script src="https://unpkg.com/vuex"></script>-->
-  <script src="https://unpkg.com/dayjs"></script>
+  <script src="node_modules/dayjs/dayjs.min.js"></script>
   <script src="dist/elastigantt.js"></script>
   <!--<script type="module" src="src/index.js"></script>-->
   <script>
@@ -95,7 +96,30 @@
     {
       debug: false,
       showStack: true,
-      locale:'pl'
+      locale:{
+        name: 'pl', // name String
+        weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
+        weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
+        weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
+        months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
+        monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
+        ordinal: n => `${n}`, // ordinal Function (number) => return number + output
+        relativeTime: { // relative time format strings, keep %s %d as the same
+          future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
+          past: '%s temu',
+          s: 'kilka sekund',
+          m: 'minutę',
+          mm: '%d minut',
+          h: 'godzinę',
+          hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
+          d: 'dzień',
+          dd: '%d dni',
+          M: 'miesiąc',
+          MM: '%d miesięcy',
+          y: 'rok',
+          yy: '%d lat'
+        }
+      }
     }
   );
   function drawCanvas(){
