@@ -104,6 +104,10 @@ class ElastiganttApp {
         fontFamily:'sans-serif',
         fontSize: '12px'
       },
+      progress:{
+        height:6,
+        style: 'fill:#00ff92a0',
+      },
       horizontalGrid: {
         gap: 6,
         strokeWidth: 2,

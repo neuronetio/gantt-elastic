@@ -201,14 +201,20 @@ var ElastiganttApp = (function (exports) {
     return self.wrapComponent({
       props: ['task', 'index'],
       template: `<g>
-      <rect
-        class="elastigantt__tree-row"
+      <rect class="elastigantt__tree-row"
         v-bind:id="task.id"
         v-bind:x="task.x"
         v-bind:y="task.y"
         v-bind:width="task.width"
         v-bind:height="task.height"
         v-bind:style="getStyle"
+      ></rect>
+      <rect class="elastigantt__tree-row-progress"
+        :x="task.x"
+        :y="task.y"
+        :width="getProgressWidth"
+        :height="this.$root.$data.progress.height"
+        :style="getProgressStyle"
       ></rect>
       <text
       :x="task.x+2"
@@ -224,6 +230,13 @@ var ElastiganttApp = (function (exports) {
       computed: {
         getStyle() {
           return this.task.style ? this.task.style : this.$root.$data.row.style;
+        },
+        getProgressStyle(){
+          return this.task.progressStyle ? this.task.progressStyle : this.$root.$data.progress.style;
+        },
+        getProgressWidth(){
+          console.log(this.task.width,this.task.progress,this.task.progress/this.task.width*100);
+          return this.task.width/100*this.task.progress;
         },
         getTextY(){
           let state = this.$root.$data;
@@ -705,6 +718,10 @@ var ElastiganttApp = (function (exports) {
           textStyle: 'fill:#ffffff;text-shadow:1px 1px 1px rgba(0,0,0,0.75)',
           fontFamily:'sans-serif',
           fontSize: '12px'
+        },
+        progress:{
+          height:6,
+          style: 'fill:#00ff92a0',
         },
         horizontalGrid: {
           gap: 6,
