@@ -217,20 +217,6 @@ var ElastiganttApp = (function (exports) {
         getGroupTransform(){
           return `translate(${this.task.x} ${this.task.y})`;
         },
-        getStyle() {
-          return this.task.style ? this.task.style : this.$root.$data.row.style;
-        },
-        getProgressStyle(){
-          return this.task.progressStyle ? this.task.progressStyle : this.$root.$data.progress.style;
-        },
-        getProgressWidth(){
-          return this.task.width/100*this.task.progress;
-        },
-        getTextY(){
-          let state = this.$root.$data;
-          return state.row.height/2;
-        },
-
       }
     });
   }
@@ -267,12 +253,14 @@ var ElastiganttApp = (function (exports) {
   function TreeProgressBar(prefix, self) {
     return self.wrapComponent({
       props:['task'],
-      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" width="100%" style="fill:#00ff92a0"></rect>`,
+      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
       data(){
         return {};
       },
       computed:{
-
+        getProgressWidth(){
+          return this.task.progress+'%';
+        },
       }
     });
   }

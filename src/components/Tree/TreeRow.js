@@ -15,20 +15,6 @@ export function TreeRow(prefix, self) {
       getGroupTransform(){
         return `translate(${this.task.x} ${this.task.y})`;
       },
-      getStyle() {
-        return this.task.style ? this.task.style : this.$root.$data.row.style;
-      },
-      getProgressStyle(){
-        return this.task.progressStyle ? this.task.progressStyle : this.$root.$data.progress.style;
-      },
-      getProgressWidth(){
-        return this.task.width/100*this.task.progress;
-      },
-      getTextY(){
-        let state = this.$root.$data;
-        return state.row.height/2;
-      },
-
     }
   });
 }
