@@ -99,7 +99,10 @@ class ElastiganttApp {
       },
       row: {
         height: 16,
-        style: 'fill:#FF0000a0'
+        style: 'fill:#FF0000a0',
+        textStyle: 'fill:#ffffff;text-shadow:1px 1px 1px rgba(0,0,0,0.75)',
+        fontFamily:'sans-serif',
+        fontSize: '12px'
       },
       horizontalGrid: {
         gap: 6,

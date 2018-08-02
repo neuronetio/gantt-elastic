@@ -208,7 +208,14 @@ var ElastiganttApp = (function (exports) {
         v-bind:y="task.y"
         v-bind:width="task.width"
         v-bind:height="task.height"
-        v-bind:style="getStyle"></rect>
+        v-bind:style="getStyle"
+      ></rect>
+      <text
+      :x="task.x+2"
+      :y="getTextY"
+      :style="getTextStyle"
+      alignment-baseline="middle"
+      >{{task.label}}</text>
       </g>`,
 
       data() {
@@ -218,6 +225,14 @@ var ElastiganttApp = (function (exports) {
         getStyle() {
           return this.task.style ? this.task.style : this.$root.$data.row.style;
         },
+        getTextY(){
+          let state = this.$root.$data;
+          return this.task.y + state.row.height/2;
+        },
+        getTextStyle(){
+          let state = this.$root.$data;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize}`;
+        }
       }
     });
   }
@@ -686,7 +701,10 @@ var ElastiganttApp = (function (exports) {
         },
         row: {
           height: 16,
-          style: 'fill:#FF0000a0'
+          style: 'fill:#FF0000a0',
+          textStyle: 'fill:#ffffff;text-shadow:1px 1px 1px rgba(0,0,0,0.75)',
+          fontFamily:'sans-serif',
+          fontSize: '12px'
         },
         horizontalGrid: {
           gap: 6,
