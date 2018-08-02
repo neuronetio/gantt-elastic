@@ -5,6 +5,9 @@ import { Header } from './components/Header.js';
 import { Main } from './components/Main.js';
 import { Tree } from './components/Tree/Tree.js';
 import { TreeRow } from './components/Tree/TreeRow.js';
+import { TreeText } from './components/Tree/Text.js';
+import { TreeBar } from './components/Tree/Bar.js';
+import { TreeProgressBar } from './components/Tree/ProgressBar.js';
 import { Calendar } from './components/Calendar/Calendar.js';
 import { CalendarRow } from './components/Calendar/CalendarRow.js';
 import { elastiganttStore } from './elastiganttStorage.js';
@@ -24,13 +27,16 @@ class ElastiganttApp {
     let self = this;
 
     let components = {
-      main: Main(prefix, self),
-      tree: Tree(prefix, self),
-      header: Header(prefix, self),
-      grid: Grid(prefix, self),
+      'main': Main(prefix, self),
+      'tree': Tree(prefix, self),
+      'header': Header(prefix, self),
+      'grid': Grid(prefix, self),
       'grid-header': GridHeader(prefix, self),
       'tree-row': TreeRow(prefix, self),
-      calendar: Calendar(prefix, self),
+      'tree-text': TreeText(prefix, self),
+      'tree-bar': TreeBar(prefix, self),
+      'tree-progress-bar': TreeProgressBar(prefix, self),
+      'calendar': Calendar(prefix, self),
       'calendar-row': CalendarRow(prefix, self),
     };
 
@@ -100,7 +106,7 @@ class ElastiganttApp {
       row: {
         height: 16,
         style: 'fill:#FF0000a0',
-        textStyle: 'fill:#ffffff;text-shadow:1px 1px 1px rgba(0,0,0,0.75)',
+        textStyle: 'fill:#ffffff',
         fontFamily:'sans-serif',
         fontSize: '12px'
       },
@@ -176,7 +182,8 @@ class ElastiganttApp {
             }
           }
         },
-      }
+      },
+      defs:[]
     };
   }
 
@@ -208,6 +215,12 @@ class ElastiganttApp {
       task.y = 0;
       task.width = 0;
       task.height = 0;
+      if(typeof task.use === 'undefined'){
+        task.use = {
+          row:'#elastigantt__tree-row',
+          progress:'#elastigantt__tree-row-progress'
+        };
+      }
       return task;
     });
 

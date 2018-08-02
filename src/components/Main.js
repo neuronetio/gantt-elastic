@@ -31,6 +31,9 @@ export function Main(prefix, self) {
       }
       css="<![CDATA[\n"+css+"]]>";
       this.defs = `<style type="text/css">${css}</style>`;
+      this.$root.$data.defs.forEach((def)=>{
+        this.defs+=def;
+      });
     },
     mounted() {
       this.$root.svgElement = this.$refs.svgElement;

@@ -1,31 +1,13 @@
 export function TreeRow(prefix, self) {
   return self.wrapComponent({
     props: ['task', 'index'],
-    template: `<foreignObject :id="task.id" :transform="getGroupTransform" :width="task.width" :height="task.height">
+    template: `<foreignObject :x="task.x" :y="task.y" :width="task.width" :height="task.height" class="elastigantt__tree-row">
       <svg :width="task.width" :height="task.height">
-        <rect class="elastigantt__tree-row"
-          :x="0"
-          :y="0"
-          width="100%"
-          height="100%"
-          :style="getStyle"
-        ></rect>
-        <rect class="elastigantt__tree-row-progress"
-          :x="0"
-          :y="0"
-          :height="this.$root.$data.progress.height"
-          width="100%"
-          :style="getProgressStyle"
-        ></rect>
-        <text
-        :x="2"
-        :y="getTextY"
-        :style="getTextStyle"
-        alignment-baseline="middle"
-        >{{task.label}}</text>
+        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
       </svg>
     </foreignObject>`,
-
     data() {
       return {};
     },
@@ -46,10 +28,7 @@ export function TreeRow(prefix, self) {
         let state = this.$root.$data;
         return state.row.height/2;
       },
-      getTextStyle(){
-        let state = this.$root.$data;
-        return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize}`;
-      }
+
     }
   });
 }

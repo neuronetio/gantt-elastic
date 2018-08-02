@@ -168,6 +168,9 @@ var ElastiganttApp = (function (exports) {
         }
         css="<![CDATA[\n"+css+"]]>";
         this.defs = `<style type="text/css">${css}</style>`;
+        this.$root.$data.defs.forEach((def)=>{
+          this.defs+=def;
+        });
       },
       mounted() {
         this.$root.svgElement = this.$refs.svgElement;
@@ -200,31 +203,13 @@ var ElastiganttApp = (function (exports) {
   function TreeRow(prefix, self) {
     return self.wrapComponent({
       props: ['task', 'index'],
-      template: `<foreignObject :id="task.id" :transform="getGroupTransform" :width="task.width" :height="task.height">
+      template: `<foreignObject :x="task.x" :y="task.y" :width="task.width" :height="task.height" class="elastigantt__tree-row">
       <svg :width="task.width" :height="task.height">
-        <rect class="elastigantt__tree-row"
-          :x="0"
-          :y="0"
-          width="100%"
-          height="100%"
-          :style="getStyle"
-        ></rect>
-        <rect class="elastigantt__tree-row-progress"
-          :x="0"
-          :y="0"
-          :height="this.$root.$data.progress.height"
-          width="100%"
-          :style="getProgressStyle"
-        ></rect>
-        <text
-        :x="2"
-        :y="getTextY"
-        :style="getTextStyle"
-        alignment-baseline="middle"
-        >{{task.label}}</text>
+        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
       </svg>
     </foreignObject>`,
-
       data() {
         return {};
       },
@@ -245,10 +230,49 @@ var ElastiganttApp = (function (exports) {
           let state = this.$root.$data;
           return state.row.height/2;
         },
+
+      }
+    });
+  }
+
+  function TreeText(prefix, self) {
+    return self.wrapComponent({
+      props:['task'],
+      template:`<text x="2" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>`,
+      data(){
+        return {};
+      },
+      computed:{
         getTextStyle(){
           let state = this.$root.$data;
-          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize}`;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize};font-weight:bold;`;
         }
+      }
+    });
+  }
+
+  function TreeBar(prefix, self) {
+    return self.wrapComponent({
+      props:['task'],
+      template:`<rect id="elastigantt__tree-row" x="0" y="0" width="100%" height="100%" style="fill:#FF0000a0"></rect>`,
+      data(){
+        return {};
+      },
+      computed:{
+
+      }
+    });
+  }
+
+  function TreeProgressBar(prefix, self) {
+    return self.wrapComponent({
+      props:['task'],
+      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" width="100%" style="fill:#00ff92a0"></rect>`,
+      data(){
+        return {};
+      },
+      computed:{
+
       }
     });
   }
@@ -642,13 +666,16 @@ var ElastiganttApp = (function (exports) {
       let self = this;
 
       let components = {
-        main: Main(prefix, self),
-        tree: Tree(prefix, self),
-        header: Header(prefix, self),
-        grid: Grid(prefix, self),
+        'main': Main(prefix, self),
+        'tree': Tree(prefix, self),
+        'header': Header(prefix, self),
+        'grid': Grid(prefix, self),
         'grid-header': GridHeader(prefix, self),
         'tree-row': TreeRow(prefix, self),
-        calendar: Calendar(prefix, self),
+        'tree-text': TreeText(prefix, self),
+        'tree-bar': TreeBar(prefix, self),
+        'tree-progress-bar': TreeProgressBar(prefix, self),
+        'calendar': Calendar(prefix, self),
         'calendar-row': CalendarRow(prefix, self),
       };
 
@@ -718,7 +745,7 @@ var ElastiganttApp = (function (exports) {
         row: {
           height: 16,
           style: 'fill:#FF0000a0',
-          textStyle: 'fill:#ffffff;text-shadow:1px 1px 1px rgba(0,0,0,0.75)',
+          textStyle: 'fill:#ffffff',
           fontFamily:'sans-serif',
           fontSize: '12px'
         },
@@ -794,7 +821,8 @@ var ElastiganttApp = (function (exports) {
               }
             }
           },
-        }
+        },
+        defs:[]
       };
     }
 
@@ -826,6 +854,12 @@ var ElastiganttApp = (function (exports) {
         task.y = 0;
         task.width = 0;
         task.height = 0;
+        if(typeof task.use === 'undefined'){
+          task.use = {
+            row:'#elastigantt__tree-row',
+            progress:'#elastigantt__tree-row-progress'
+          };
+        }
         return task;
       });
 
