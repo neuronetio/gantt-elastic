@@ -86,8 +86,8 @@ class ElastiganttApp {
       height: 0,
       svgElement: null,
       scope:{
-        before:10,
-        after:10,
+        before:5,
+        after:5,
       },
       times: {
         timeScale: 60 * 1000,
@@ -104,7 +104,7 @@ class ElastiganttApp {
         steps: 0,
       },
       row: {
-        height: 16,
+        height: 24,
         style: 'fill:#FF0000a0',
         textStyle: 'fill:#ffffff',
         fontFamily:'sans-serif',
@@ -215,12 +215,6 @@ class ElastiganttApp {
       task.y = 0;
       task.width = 0;
       task.height = 0;
-      if(typeof task.use === 'undefined'){
-        task.use = {
-          row:'#elastigantt__tree-row',
-          progress:'#elastigantt__tree-row-progress'
-        };
-      }
       return task;
     });
 
