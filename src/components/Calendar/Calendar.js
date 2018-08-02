@@ -206,13 +206,20 @@ export function Calendar(prefix, self) {
           let days = monthDays[i].days;
           let date = monthDays[i].date;
           let width = state.times.stepPx * days;
+          let format = 'long';
+          if(self.ctx.measureText(state.calendar.month.format[format](date)).width > width){
+            format='medium';
+            if(self.ctx.measureText(state.calendar.month.format[format](date)).width > width){
+              format='short';
+            }
+          };
           months.push({
             key:'m'+i,
             x: currentOffset,
             y: state.calendar.strokeWidth/2,
             width: width,
             height: state.calendar.day.height,
-            label: state.calendar.month.format['long'](date)
+            label: state.calendar.month.format[format](date)
           });
           currentOffset+=width;
         }

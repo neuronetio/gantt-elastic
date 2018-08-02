@@ -159,7 +159,7 @@ class ElastiganttApp {
           fontSize:'12px',
           format:{
             short(date){
-              return dayjs(date).locale('pl').format('Y-MM');
+              return dayjs(date).locale('pl').format('MM');
             },
             medium(date){
               return dayjs(date).locale('pl').format('YY MMM');

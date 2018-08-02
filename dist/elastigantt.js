@@ -430,13 +430,19 @@ var ElastiganttApp = (function (exports) {
             let days = monthDays[i].days;
             let date = monthDays[i].date;
             let width = state.times.stepPx * days;
-            months.push({
+            let format = 'long';
+            if(self.ctx.measureText(state.calendar.month.format[format](date)).width > width){
+              format='medium';
+              if(self.ctx.measureText(state.calendar.month.format[format](date)).width > width){
+                format='short';
+              }
+            }          months.push({
               key:'m'+i,
               x: currentOffset,
               y: state.calendar.strokeWidth/2,
               width: width,
               height: state.calendar.day.height,
-              label: state.calendar.month.format['long'](date)
+              label: state.calendar.month.format[format](date)
             });
             currentOffset+=width;
           }
@@ -740,7 +746,7 @@ var ElastiganttApp = (function (exports) {
             fontSize:'12px',
             format:{
               short(date){
-                return dayjs(date).locale('pl').format('Y-MM');
+                return dayjs(date).locale('pl').format('MM');
               },
               medium(date){
                 return dayjs(date).locale('pl').format('YY MMM');
