@@ -162,10 +162,10 @@ class ElastiganttApp {
               return dayjs(date).locale('pl').format('MM');
             },
             medium(date){
-              return dayjs(date).locale('pl').format('YY MMM');
+              return dayjs(date).locale('pl').format('\'YY MMM');
             },
             long(date){
-              return dayjs(date).locale('pl').format('YYYY MMMM');
+              return dayjs(date).locale('pl').format('YYYY MMMM (MM)');
             }
           }
         },
