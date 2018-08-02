@@ -235,7 +235,6 @@ var ElastiganttApp = (function (exports) {
           return this.task.progressStyle ? this.task.progressStyle : this.$root.$data.progress.style;
         },
         getProgressWidth(){
-          console.log(this.task.width,this.task.progress,this.task.progress/this.task.width*100);
           return this.task.width/100*this.task.progress;
         },
         getTextY(){
@@ -725,13 +724,13 @@ var ElastiganttApp = (function (exports) {
         },
         horizontalGrid: {
           gap: 6,
-          strokeWidth: 2,
-          style: "stroke:#00000050;strokeWidth:2",
+          strokeWidth: 1,
+          style: "stroke:#00000050;strokeWidth:1",
           lines: [],
         },
         verticalGrid: {
-          strokeWidth: 2,
-          style: "stroke:#00000050;strokeWidth:2",
+          strokeWidth: 1,
+          style: "stroke:#00000050;strokeWidth:1",
           lines: [],
         },
         calendar: {
@@ -740,9 +739,9 @@ var ElastiganttApp = (function (exports) {
           months:[],
           gap:6,
           height: 0,
-          strokeWidth:2,
+          strokeWidth:1,
           fontFamily:'sans-serif',
-          style:"fill:#00000020;stroke:#00000000;strokeWidth:2",
+          style:"fill:#00000020;stroke:#00000000;strokeWidth:1",
           hour:{
             height: 20,
             display: true,
@@ -759,7 +758,7 @@ var ElastiganttApp = (function (exports) {
               }
             }
           },
-          day:{
+          day: {
             height: 20,
             display: true,
             fontSize:'12px',

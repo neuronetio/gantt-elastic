@@ -110,13 +110,13 @@ class ElastiganttApp {
       },
       horizontalGrid: {
         gap: 6,
-        strokeWidth: 2,
-        style: "stroke:#00000050;strokeWidth:2",
+        strokeWidth: 1,
+        style: "stroke:#00000050;strokeWidth:1",
         lines: [],
       },
       verticalGrid: {
-        strokeWidth: 2,
-        style: "stroke:#00000050;strokeWidth:2",
+        strokeWidth: 1,
+        style: "stroke:#00000050;strokeWidth:1",
         lines: [],
       },
       calendar: {
@@ -125,9 +125,9 @@ class ElastiganttApp {
         months:[],
         gap:6,
         height: 0,
-        strokeWidth:2,
+        strokeWidth:1,
         fontFamily:'sans-serif',
-        style:"fill:#00000020;stroke:#00000000;strokeWidth:2",
+        style:"fill:#00000020;stroke:#00000000;strokeWidth:1",
         hour:{
           height: 20,
           display: true,
@@ -144,7 +144,7 @@ class ElastiganttApp {
             }
           }
         },
-        day:{
+        day: {
           height: 20,
           display: true,
           fontSize:'12px',

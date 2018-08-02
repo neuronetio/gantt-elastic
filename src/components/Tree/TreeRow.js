@@ -36,7 +36,6 @@ export function TreeRow(prefix, self) {
         return this.task.progressStyle ? this.task.progressStyle : this.$root.$data.progress.style;
       },
       getProgressWidth(){
-        console.log(this.task.width,this.task.progress,this.task.progress/this.task.width*100);
         return this.task.width/100*this.task.progress;
       },
       getTextY(){

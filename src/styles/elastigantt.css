@@ -9,12 +9,12 @@ body {
 }
 .elastigantt__grid-horizontal-line, .elastigantt__grid-vertical-line{
   stroke: #a0a0a0;
-  stroke-width: 2;
+  stroke-width: 1;
 }
 .elastigantt__calendar-row-group rect{
   fill:#ddd;
   stroke:#A0A0A0;
-  stroke-width:2;
+  stroke-width:1;
 }
 .elastigantt__calendar-row-group text{
   fill:#000;
