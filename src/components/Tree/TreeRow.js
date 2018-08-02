@@ -1,34 +1,38 @@
 export function TreeRow(prefix, self) {
   return self.wrapComponent({
     props: ['task', 'index'],
-    template: `<g>
-      <rect class="elastigantt__tree-row"
-        v-bind:id="task.id"
-        v-bind:x="task.x"
-        v-bind:y="task.y"
-        v-bind:width="task.width"
-        v-bind:height="task.height"
-        v-bind:style="getStyle"
-      ></rect>
-      <rect class="elastigantt__tree-row-progress"
-        :x="task.x"
-        :y="task.y"
-        :width="getProgressWidth"
-        :height="this.$root.$data.progress.height"
-        :style="getProgressStyle"
-      ></rect>
-      <text
-      :x="task.x+2"
-      :y="getTextY"
-      :style="getTextStyle"
-      alignment-baseline="middle"
-      >{{task.label}}</text>
-      </g>`,
+    template: `<foreignObject :id="task.id" :transform="getGroupTransform" :width="task.width" :height="task.height">
+      <svg :width="task.width" :height="task.height">
+        <rect class="elastigantt__tree-row"
+          :x="0"
+          :y="0"
+          width="100%"
+          height="100%"
+          :style="getStyle"
+        ></rect>
+        <rect class="elastigantt__tree-row-progress"
+          :x="0"
+          :y="0"
+          :height="this.$root.$data.progress.height"
+          width="100%"
+          :style="getProgressStyle"
+        ></rect>
+        <text
+        :x="2"
+        :y="getTextY"
+        :style="getTextStyle"
+        alignment-baseline="middle"
+        >{{task.label}}</text>
+      </svg>
+    </foreignObject>`,
 
     data() {
       return {};
     },
     computed: {
+      getGroupTransform(){
+        return `translate(${this.task.x} ${this.task.y})`;
+      },
       getStyle() {
         return this.task.style ? this.task.style : this.$root.$data.row.style;
       },
@@ -40,7 +44,7 @@ export function TreeRow(prefix, self) {
       },
       getTextY(){
         let state = this.$root.$data;
-        return this.task.y + state.row.height/2;
+        return state.row.height/2;
       },
       getTextStyle(){
         let state = this.$root.$data;
