@@ -1,6 +1,6 @@
 import { Elastigantt } from './components/Elastigantt.js';
-import { Grid } from './components/Grid.js';
-import { GridHeader } from './components/GridHeader.js';
+import { Grid } from './components/Grid/Grid.js';
+import { GridHeader } from './components/Grid/GridHeader.js';
 import { Header } from './components/Header.js';
 import { Main } from './components/Main.js';
 import { Tree } from './components/Tree.js';
