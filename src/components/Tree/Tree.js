@@ -1,21 +1,24 @@
 export function Tree(prefix, self) {
   return self.wrapComponent({
-    template: `<g>
+    template : `<g>
       <${prefix}-calendar></${prefix}-calendar>
       <${prefix}-grid></${prefix}-grid>
       <${prefix}-tree-row
         v-for="(task, index) in $root.$data.tasks"
-        v-bind:task="task"
-        v-bind:index="index"
-        v-bind:key="task.key"></${prefix}-tree-row>
+        :task="task"
+        :index="index"
+        :key="task.id"
+      ></${prefix}-tree-row>
+      <${prefix}-tree-row-info
+        v-for="task in $root.$data.tasks"
+        :key="task.id"
+        :task="task"
+        v-if="task.mouseOVer"
+      ></${prefix}-tree-row-info>
     </g>`,
-
     data() {
-      return {
-
-      };
+      return {};
     },
-    computed: {
-    }
+    computed : {}
   });
 }

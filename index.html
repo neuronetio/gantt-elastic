@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>elastigantt demo</title>
-  <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="src/styles/elastigantt.css" title="elastigantt__style">
 </head>
 <body>
@@ -18,7 +18,7 @@
   <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
   <!--<script src="https://unpkg.com/vue"></script>-->
   <!--<script src="src/vue.js"></script>-->
-  <script src="src/vue.js"></script>
+  <script src="src/vue.min.js"></script>
   <!--<script src="https://unpkg.com/vuex"></script>-->
   <script src="node_modules/dayjs/dayjs.min.js"></script>
   <script src="dist/elastigantt.js"></script>
@@ -32,7 +32,6 @@
       tasks: [
         {
           id: 1,
-          key: 'T1',
           label: 'row1',
           start: '2018-05-18T12:00:00',
           duration: 1 * 24 * 60 * 60,
@@ -40,7 +39,6 @@
         },
         {
           id: 2,
-          key: 'T2',
           label: 'row 2',
           parent: 1,
           start: '2018-05-19T12:00:00',
@@ -49,7 +47,6 @@
         },
         {
           id: 3,
-          key: 'T3',
           label: 'row3',
           parent: 2,
           start: '2018-05-20T12:00:00',
@@ -58,7 +55,6 @@
         },
         {
           id: 4,
-          key: 'T4',
           label: 'row4',
           start: '2018-05-21T12:00:00',
           duration: 2 * 24 * 60 * 60,
@@ -66,7 +62,6 @@
         },
         {
           id: 5,
-          key: 'T5',
           label: 'row5',
           parent: 1,
           start: '2018-05-19T12:00:00',
@@ -75,7 +70,6 @@
         },
         {
           id: 6,
-          key: 'T6',
           label: 'row6',
           parent: 2,
           start: '2018-05-22T12:00:00',
@@ -84,7 +78,6 @@
         },
         {
           id: 7,
-          key: 'T7',
           label: 'row7',
           parent: 2,
           start: '2018-05-20T08:00:00',

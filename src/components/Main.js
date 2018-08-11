@@ -1,6 +1,6 @@
 export function Main(prefix, self) {
   return self.wrapComponent({
-    template: `
+    template : `
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
       <div class="elastigantt__container">
@@ -14,25 +14,29 @@ export function Main(prefix, self) {
     </div>`,
     data() {
       return {
-        defs:'',
+        defs : '',
       };
     },
-    created(){
+    created() {
       let css = '';
-      for(let i=0,len=document.styleSheets.length;i<len;i++){
-        let styleSheet = document.styleSheets[i];
-        if(styleSheet.title==='elastigantt__style'){
-          for(let r=0,rules=styleSheet.rules.length;r<rules;r++){
-            let rule = styleSheet.rules[r];
-            css+=rule.cssText+"\n";
+      try {
+        for (let i = 0, len = document.styleSheets.length; i < len; i++) {
+          let styleSheet = document.styleSheets[i];
+          if (styleSheet.title === 'elastigantt__style') {
+            for (let r = 0, rules = styleSheet.rules.length; r < rules; r++) {
+              let rule = styleSheet.rules[r];
+              css += rule.cssText + "\n";
+            }
+            break;
           }
-          break;
         }
+        css       = "<![CDATA[\n" + css + "]]>";
+        this.defs = `<style type="text/css">${css}</style>`;
+      } catch (e) {
+        console.log("Cannot add stylesheet to SVG.");
       }
-      css="<![CDATA[\n"+css+"]]>";
-      this.defs = `<style type="text/css">${css}</style>`;
-      this.$root.$data.defs.forEach((def)=>{
-        this.defs+=def;
+      this.$root.$data.defs.forEach((def) => {
+        this.defs += def;
       });
     },
     mounted() {

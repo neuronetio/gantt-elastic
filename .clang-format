@@ -1,0 +1,18 @@
+---
+Language: JavaScript
+ColumnLimit: 120
+AlignConsecutiveAssignments: true
+AllowShortFunctionsOnASingleLine: Empty
+IndentWidth: 2
+JavaScriptWrapImports: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+SpaceAfterCStyleCast: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesBeforeTrailingComments: 1
+SpacesInParentheses: false
+ReflowComments: true
+BreakBeforeBraces: Attach
+---

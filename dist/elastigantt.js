@@ -1,270 +1,6 @@
 var ElastiganttApp = (function (exports) {
   'use strict';
 
-  const Elastigantt = Vue.component("Elastigantt", {
-    template: `<div class="elastigantt">
-    <elastigantt-main></elastigantt-main>
-  </div>`,
-    data() {
-      return window.elastiganttStore.initStore(prefix, 'Elastigantt', {});
-    },
-    methods: {
-
-    }
-  });
-
-  function Grid(prefix, self) {
-    return self.wrapComponent({
-
-      template: `<g>
-        <line
-          class="elastigantt__grid-vertical-line"
-          v-for="(line,index) in horizontalLines"
-          :key="line.key"
-          :x1="line.x1"
-          :y1="line.y1"
-          :x2="line.x2"
-          :y2="line.y2"
-        ></line>
-        <line
-          class="elastigantt__grid-horizontal-line"
-          v-for="(line,index) in verticalLines"
-          :key="line.key"
-          :x1="line.x1"
-          :y1="line.y1"
-          :x2="line.x2"
-          :y2="line.y2"
-        ></line>
-      </g>`,
-
-      data() {
-        return {};
-      },
-      computed: {
-        verticalLines() {
-          let lines = [];
-          for (let step = 0; step <= this.$root.$data.times.steps; step++) {
-            let x = step * this.$root.$data.times.stepPx + this.$root.$data.verticalGrid.strokeWidth/2;
-            lines.push({
-              key: step,
-              x1: x,
-              y1: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap,
-              x2: x,
-              y2: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.strokeWidth,
-            });
-          }
-          return this.$root.$data.verticalGrid.lines = lines;
-        },
-        horizontalLines() {
-          let lines = [];
-          let tasks = this.$root.$data.tasks;
-          for (let index = 0, len = tasks.length; index <= len; index++) {
-            lines.push({
-              key: 'hl' + index,
-              x1: 0,
-              y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap + this.$root.$data.horizontalGrid.strokeWidth/2,
-              x2: this.$root.$data.times.steps*this.$root.$data.times.stepPx+this.$root.$data.verticalGrid.strokeWidth,
-              y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+ this.$root.$data.horizontalGrid.strokeWidth/2,
-            });
-          }
-          return this.$root.$data.horizontalGrid.lines = lines;
-        }
-      }
-    });
-  }
-
-  function GridHeader(prefix, self) {
-    return self.wrapComponent({
-
-      template: `<g></g>`,
-
-      data() {
-        return {};
-      },
-
-      computed: {
-
-      }
-    });
-  }
-
-  function Header(prefix, self) {
-    return self.wrapComponent({
-
-      template: `<div class="elastigantt__header">
-          <input type="range" v-model="scale" max="24" min="2">
-          <input type="range" v-model="height" max="100" min="6">
-          <input type="range" v-model="scope" max="100" min="0">
-      </div>`,
-
-      data() {
-        return {};
-      },
-
-      computed: {
-        scale: {
-          get() {
-            return this.$root.$data.times.timeZoom;
-          },
-          set(value) {
-            this.$root.$data.times.timeZoom = Number(value);
-            this.$root.recalculate();
-          }
-        },
-        height: {
-          get() {
-            return this.$root.$data.row.height;
-          },
-          set(value) {
-            this.$root.$data.row.height = Number(value);
-            this.$root.recalculate();
-          }
-        },
-        scope: {
-          get() {
-            return this.$root.$data.scope.before;
-          },
-          set(value) {
-            this.$root.$data.scope.before = Number(value);
-            this.$root.$data.scope.after = Number(value);
-            this.$root.recalculate();
-          }
-        },
-
-      }
-    });
-  }
-
-  function Main(prefix, self) {
-    return self.wrapComponent({
-      template: `
-    <div class="elastigantt__main">
-      <${prefix}-header></${prefix}-header>
-      <div class="elastigantt__container">
-        <svg ref="svgElement" class="elastigantt__main-svg" xmlns="http://www.w3.org/2000/svg"
-          :width="$root.$data.width"
-          :height="$root.$data.height">
-          <defs v-html="defs"></defs>
-          <${prefix}-tree></${prefix}-tree>
-        </svg>
-      </div>
-    </div>`,
-      data() {
-        return {
-          defs:'',
-        };
-      },
-      created(){
-        let css = '';
-        for(let i=0,len=document.styleSheets.length;i<len;i++){
-          let styleSheet = document.styleSheets[i];
-          if(styleSheet.title==='elastigantt__style'){
-            for(let r=0,rules=styleSheet.rules.length;r<rules;r++){
-              let rule = styleSheet.rules[r];
-              css+=rule.cssText+"\n";
-            }
-            break;
-          }
-        }
-        css="<![CDATA[\n"+css+"]]>";
-        this.defs = `<style type="text/css">${css}</style>`;
-        this.$root.$data.defs.forEach((def)=>{
-          this.defs+=def;
-        });
-      },
-      mounted() {
-        this.$root.svgElement = this.$refs.svgElement;
-      }
-    })
-  }
-
-  function Tree(prefix, self) {
-    return self.wrapComponent({
-      template: `<g>
-      <${prefix}-calendar></${prefix}-calendar>
-      <${prefix}-grid></${prefix}-grid>
-      <${prefix}-tree-row
-        v-for="(task, index) in $root.$data.tasks"
-        v-bind:task="task"
-        v-bind:index="index"
-        v-bind:key="task.key"></${prefix}-tree-row>
-    </g>`,
-
-      data() {
-        return {
-
-        };
-      },
-      computed: {
-      }
-    });
-  }
-
-  function TreeRow(prefix, self) {
-    return self.wrapComponent({
-      props: ['task', 'index'],
-      template: `<foreignObject :x="task.x" :y="task.y" :width="task.width" :height="task.height" class="elastigantt__tree-row">
-      <svg :width="task.width" :height="task.height">
-        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
-        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
-      </svg>
-    </foreignObject>`,
-      data() {
-        return {};
-      },
-      computed: {
-        getGroupTransform(){
-          return `translate(${this.task.x} ${this.task.y})`;
-        },
-      }
-    });
-  }
-
-  function TreeText(prefix, self) {
-    return self.wrapComponent({
-      props:['task'],
-      template:`<text x="2" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>`,
-      data(){
-        return {};
-      },
-      computed:{
-        getTextStyle(){
-          let state = this.$root.$data;
-          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize};font-weight:bold;`;
-        }
-      }
-    });
-  }
-
-  function TreeBar(prefix, self) {
-    return self.wrapComponent({
-      props:['task'],
-      template:`<rect id="elastigantt__tree-row" x="0" y="0" width="100%" height="100%" style="fill:#FF0000a0"></rect>`,
-      data(){
-        return {};
-      },
-      computed:{
-
-      }
-    });
-  }
-
-  function TreeProgressBar(prefix, self) {
-    return self.wrapComponent({
-      props:['task'],
-      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
-      data(){
-        return {};
-      },
-      computed:{
-        getProgressWidth(){
-          return this.task.progress+'%';
-        },
-      }
-    });
-  }
-
   function Calendar(prefix, self) {
     return self.wrapComponent({
       template: `<g class="elastigantt__calendar-group">
@@ -527,6 +263,326 @@ var ElastiganttApp = (function (exports) {
     });
   }
 
+  const Elastigantt = Vue.component("Elastigantt", {
+    template: `<div class="elastigantt">
+    <elastigantt-main></elastigantt-main>
+  </div>`,
+    data() {
+      return window.elastiganttStore.initStore(prefix, 'Elastigantt', {});
+    },
+    methods: {
+
+    }
+  });
+
+  function Grid(prefix, self) {
+    return self.wrapComponent({
+
+      template: `<g>
+        <line
+          class="elastigantt__grid-vertical-line"
+          v-for="(line,index) in horizontalLines"
+          :key="line.key"
+          :x1="line.x1"
+          :y1="line.y1"
+          :x2="line.x2"
+          :y2="line.y2"
+        ></line>
+        <line
+          class="elastigantt__grid-horizontal-line"
+          v-for="(line,index) in verticalLines"
+          :key="line.key"
+          :x1="line.x1"
+          :y1="line.y1"
+          :x2="line.x2"
+          :y2="line.y2"
+        ></line>
+      </g>`,
+
+      data() {
+        return {};
+      },
+      computed: {
+        verticalLines() {
+          let lines = [];
+          for (let step = 0; step <= this.$root.$data.times.steps; step++) {
+            let x = step * this.$root.$data.times.stepPx + this.$root.$data.verticalGrid.strokeWidth/2;
+            lines.push({
+              key: step,
+              x1: x,
+              y1: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap,
+              x2: x,
+              y2: this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+(this.$root.$data.tasks.length*(this.$root.$data.row.height+this.$root.$data.horizontalGrid.gap*2))+this.$root.$data.horizontalGrid.strokeWidth,
+            });
+          }
+          return this.$root.$data.verticalGrid.lines = lines;
+        },
+        horizontalLines() {
+          let lines = [];
+          let tasks = this.$root.$data.tasks;
+          for (let index = 0, len = tasks.length; index <= len; index++) {
+            lines.push({
+              key: 'hl' + index,
+              x1: 0,
+              y1: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap + this.$root.$data.horizontalGrid.strokeWidth/2,
+              x2: this.$root.$data.times.steps*this.$root.$data.times.stepPx+this.$root.$data.verticalGrid.strokeWidth,
+              y2: index * (this.$root.$data.row.height + this.$root.$data.horizontalGrid.gap*2) + this.$root.$data.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap+ this.$root.$data.horizontalGrid.strokeWidth/2,
+            });
+          }
+          return this.$root.$data.horizontalGrid.lines = lines;
+        }
+      }
+    });
+  }
+
+  function GridHeader(prefix, self) {
+    return self.wrapComponent({
+
+      template: `<g></g>`,
+
+      data() {
+        return {};
+      },
+
+      computed: {
+
+      }
+    });
+  }
+
+  function Header(prefix, self) {
+    return self.wrapComponent({
+
+      template: `<div class="elastigantt__header">
+          <input type="range" v-model="scale" max="24" min="2">
+          <input type="range" v-model="height" max="100" min="6">
+          <input type="range" v-model="scope" max="100" min="0">
+      </div>`,
+
+      data() {
+        return {};
+      },
+
+      computed: {
+        scale: {
+          get() {
+            return this.$root.$data.times.timeZoom;
+          },
+          set(value) {
+            this.$root.$data.times.timeZoom = Number(value);
+            this.$root.recalculate();
+          }
+        },
+        height: {
+          get() {
+            return this.$root.$data.row.height;
+          },
+          set(value) {
+            this.$root.$data.row.height = Number(value);
+            this.$root.recalculate();
+          }
+        },
+        scope: {
+          get() {
+            return this.$root.$data.scope.before;
+          },
+          set(value) {
+            this.$root.$data.scope.before = Number(value);
+            this.$root.$data.scope.after = Number(value);
+            this.$root.recalculate();
+          }
+        },
+
+      }
+    });
+  }
+
+  function Main(prefix, self) {
+    return self.wrapComponent({
+      template : `
+    <div class="elastigantt__main">
+      <${prefix}-header></${prefix}-header>
+      <div class="elastigantt__container">
+        <svg ref="svgElement" class="elastigantt__main-svg" xmlns="http://www.w3.org/2000/svg"
+          :width="$root.$data.width"
+          :height="$root.$data.height">
+          <defs v-html="defs"></defs>
+          <${prefix}-tree></${prefix}-tree>
+        </svg>
+      </div>
+    </div>`,
+      data() {
+        return {
+          defs : '',
+        };
+      },
+      created() {
+        let css = '';
+        try {
+          for (let i = 0, len = document.styleSheets.length; i < len; i++) {
+            let styleSheet = document.styleSheets[i];
+            if (styleSheet.title === 'elastigantt__style') {
+              for (let r = 0, rules = styleSheet.rules.length; r < rules; r++) {
+                let rule = styleSheet.rules[r];
+                css += rule.cssText + "\n";
+              }
+              break;
+            }
+          }
+          css       = "<![CDATA[\n" + css + "]]>";
+          this.defs = `<style type="text/css">${css}</style>`;
+        } catch (e) {
+          console.log("Cannot add stylesheet to SVG.");
+        }
+        this.$root.$data.defs.forEach((def) => {
+          this.defs += def;
+        });
+      },
+      mounted() {
+        this.$root.svgElement = this.$refs.svgElement;
+      }
+    })
+  }
+
+  function TreeBar(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task' ],
+      template : `<rect id="elastigantt__tree-row" x="0" y="0" width="100%" height="100%" style="fill:#FF0000a0"></rect>`,
+      data() { return {}; },
+    });
+  }
+
+  function Info(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task' ],
+      template : `<foreignObject
+      class="elastigantt__info"
+      :x="task.x+task.width+10"
+      :y="task.y"
+      :width="getWidth"
+      :height="$root.$data.row.height"
+    >
+      <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
+    </foreignObject>`,
+      data() {
+        return {};
+      },
+      computed : {
+        getWidth() {
+          return self.ctx.measureText(this.task.label).width + 20;
+        },
+        getTextStyle() {
+          let state = this.$root.$data;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${
+            state.row.fontSize};font-weight:bold;`;
+        }
+      }
+    });
+  }
+
+  function TreeProgressBar(prefix, self) {
+    return self.wrapComponent({
+      props:['task'],
+      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
+      data(){
+        return {};
+      },
+      computed:{
+        getProgressWidth(){
+          return this.task.progress+'%';
+        },
+      }
+    });
+  }
+
+  function TreeText(prefix, self) {
+    return self.wrapComponent({
+      props:['task'],
+      template:`<text x="2" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>`,
+      data(){
+        return {};
+      },
+      computed:{
+        getTextStyle(){
+          let state = this.$root.$data;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize};font-weight:bold;`;
+        }
+      }
+    });
+  }
+
+  function Tree(prefix, self) {
+    return self.wrapComponent({
+      template : `<g>
+      <${prefix}-calendar></${prefix}-calendar>
+      <${prefix}-grid></${prefix}-grid>
+      <${prefix}-tree-row
+        v-for="(task, index) in $root.$data.tasks"
+        :task="task"
+        :index="index"
+        :key="task.id"
+      ></${prefix}-tree-row>
+      <${prefix}-tree-row-info
+        v-for="task in $root.$data.tasks"
+        :key="task.id"
+        :task="task"
+        v-if="task.mouseOVer"
+      ></${prefix}-tree-row-info>
+    </g>`,
+      data() {
+        return {};
+      },
+      computed : {}
+    });
+  }
+
+  function TreeRow(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task', 'index' ],
+      template : `<g class="elastigantt__tree-row-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+    <foreignObject
+      class="elastigantt__tree-row"
+      :x="task.x"
+      :y="task.y"
+      :width="task.width"
+      :height="task.height"
+      @click="treeRowClick"
+    >
+      <svg :width="task.width" :height="task.height">
+        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
+      </svg>
+    </foreignObject>
+    <${prefix}-info
+      v-for="task in $root.$data.tasks"
+      :key="task.id"
+      :task="task"
+      v-if="task.mouseOver"
+    ></${prefix}-info>
+    </g>`,
+      data() {
+        return {};
+      },
+      computed : {
+        getGroupTransform() {
+          return `translate(${this.task.x} ${this.task.y})`;
+        },
+      },
+      methods : {
+        treeRowClick() {
+          this.task.tooltip.visible = !this.task.tooltip.visible;
+        },
+        treeRowMouseOver() {
+          this.task.mouseOver = true;
+        },
+        treeRowMouseOut() {
+          this.task.mouseOver = false;
+        },
+      }
+    });
+  }
+
   const elastiganttStore = function elastiganttStore(debug) {
     function stateHandler(fullPath) {
       return {
@@ -639,11 +695,16 @@ var ElastiganttApp = (function (exports) {
     };
   };
 
+  // elastigantt components
+
   class ElastiganttApp {
     toPascalCase(str) {
-      return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) {
-        return g1.toUpperCase() + g2.toLowerCase();
-      }).replace(/\-/g, '');
+      return str
+          .replace(/(\w)(\w*)/g,
+                   function(g0, g1, g2) {
+                     return g1.toUpperCase() + g2.toLowerCase();
+                   })
+          .replace(/\-/g, '');
     }
 
     toKebabCase(str) {
@@ -654,17 +715,18 @@ var ElastiganttApp = (function (exports) {
       let self = this;
 
       let components = {
-        'main': Main(prefix, self),
-        'tree': Tree(prefix, self),
-        'header': Header(prefix, self),
-        'grid': Grid(prefix, self),
-        'grid-header': GridHeader(prefix, self),
-        'tree-row': TreeRow(prefix, self),
-        'tree-text': TreeText(prefix, self),
-        'tree-bar': TreeBar(prefix, self),
-        'tree-progress-bar': TreeProgressBar(prefix, self),
-        'calendar': Calendar(prefix, self),
-        'calendar-row': CalendarRow(prefix, self),
+        'main' : Main(prefix, self),
+        'tree' : Tree(prefix, self),
+        'header' : Header(prefix, self),
+        'grid' : Grid(prefix, self),
+        'grid-header' : GridHeader(prefix, self),
+        'tree-row' : TreeRow(prefix, self),
+        'tree-text' : TreeText(prefix, self),
+        'tree-bar' : TreeBar(prefix, self),
+        'tree-progress-bar' : TreeProgressBar(prefix, self),
+        'info' : Info(prefix, self),
+        'calendar' : Calendar(prefix, self),
+        'calendar-row' : CalendarRow(prefix, self),
       };
 
       let customComponents = {};
@@ -672,19 +734,15 @@ var ElastiganttApp = (function (exports) {
         let component = components[componentName];
         // shallow extend
         if (typeof this.customComponents[componentName] !== 'undefined') {
-          component = {
-            ...component, ...this.customComponents[componentName]
-          };
+          component = {...component, ...this.customComponents[componentName]};
         }
-        customComponents[this.toPascalCase(
-          prefix + '-' + componentName
-        )] = component;
+        customComponents[this.toPascalCase(prefix + '-' + componentName)] = component;
       }
 
       if (kebabCase) {
         let kebabComponents = {};
         for (let name in customComponents) {
-          let value = customComponents[name];
+          let value                               = customComponents[name];
           kebabComponents[this.toKebabCase(name)] = value;
         }
         return kebabComponents;
@@ -696,7 +754,7 @@ var ElastiganttApp = (function (exports) {
     registerComponents() {
       const components = this.getComponents(this.prefix, true);
       for (let componentName in components) {
-        let component = components[componentName];
+        let component                    = components[componentName];
         let currentInstanceComponentName = componentName;
         Vue.component(currentInstanceComponentName, component);
       }
@@ -708,167 +766,166 @@ var ElastiganttApp = (function (exports) {
 
     getDefaultOptions(userOptions) {
       return {
-        debug: false,
-        width: 0,
-        height: 0,
-        svgElement: null,
-        scope:{
-          before:5,
-          after:5,
+        debug : false,
+        width : 0,
+        height : 0,
+        svgElement : null,
+        scope : {
+          before : 5,
+          after : 5,
         },
-        times: {
-          timeScale: 60 * 1000,
-          timeZoom: 18,
-          timePerPixel: 0,
-          fistDate:null,
-          firstTime:null, // firstDate getTime()
-          lastDate:null,
-          lastTime:null, // last date getTime()
-          totalViewDurationMs: 0,
-          totalViewDurationPx: 0,
-          stepMs: 24 * 60 * 60 * 1000,
-          stepPx: 0,
-          steps: 0,
+        times : {
+          timeScale : 60 * 1000,
+          timeZoom : 18,
+          timePerPixel : 0,
+          fistDate : null,
+          firstTime : null, // firstDate getTime()
+          lastDate : null,
+          lastTime : null, // last date getTime()
+          totalViewDurationMs : 0,
+          totalViewDurationPx : 0,
+          stepMs : 24 * 60 * 60 * 1000,
+          stepPx : 0,
+          steps : 0,
         },
-        row: {
-          height: 24,
-          style: 'fill:#FF0000a0',
-          textStyle: 'fill:#ffffff',
-          fontFamily:'sans-serif',
-          fontSize: '12px'
+        row : {
+          height : 24,
+          style : 'fill:#FF0000a0',
+          textStyle : 'fill:#ffffff',
+          fontFamily : 'sans-serif',
+          fontSize : '12px'
         },
-        progress:{
-          height:6,
-          style: 'fill:#00ff92a0',
+        progress : {
+          height : 6,
+          style : 'fill:#00ff92a0',
         },
-        horizontalGrid: {
-          gap: 6,
-          strokeWidth: 1,
-          style: "stroke:#00000050;strokeWidth:1",
-          lines: [],
+        horizontalGrid : {
+          gap : 6,
+          strokeWidth : 1,
+          style : "stroke:#00000050;strokeWidth:1",
+          lines : [],
         },
-        verticalGrid: {
-          strokeWidth: 1,
-          style: "stroke:#00000050;strokeWidth:1",
-          lines: [],
+        verticalGrid : {
+          strokeWidth : 1,
+          style : "stroke:#00000050;strokeWidth:1",
+          lines : [],
         },
-        calendar: {
-          hours:[],
-          days:[],
-          months:[],
-          gap:6,
-          height: 0,
-          strokeWidth:1,
-          fontFamily:'sans-serif',
-          style:"fill:#00000020;stroke:#00000000;strokeWidth:1",
-          hour:{
-            height: 20,
-            display: true,
-            fontSize:'12px',
-            format:{
-              short(date){
+        tooltip : {width : '250px', height : '100px', trigger : 'manual'},
+        calendar : {
+          hours : [],
+          days : [],
+          months : [],
+          gap : 6,
+          height : 0,
+          strokeWidth : 1,
+          fontFamily : 'sans-serif',
+          style : "fill:#00000020;stroke:#00000000;strokeWidth:1",
+          hour : {
+            height : 20,
+            display : true,
+            fontSize : '12px',
+            format : {
+              short(date) {
                 return dayjs(date).locale('pl').format('HH');
               },
-              medium(date){
+              medium(date) {
                 return dayjs(date).locale('pl').format('HH:mm');
               },
-              long(date){
+              long(date) {
                 return dayjs(date).locale('pl').format('HH:mm');
               }
             }
           },
-          day: {
-            height: 20,
-            display: true,
-            fontSize:'12px',
-            format:{
-              short(date){
+          day : {
+            height : 20,
+            display : true,
+            fontSize : '12px',
+            format : {
+              short(date) {
                 return dayjs(date).locale('pl').format('DD');
               },
-              medium(date){
+              medium(date) {
                 return dayjs(date).locale('pl').format('DD ddd');
               },
-              long(date){
+              long(date) {
                 return dayjs(date).locale('pl').format('DD dddd');
               }
             }
           },
-          month:{
-            height: 20,
-            display: true,
-            fontSize:'12px',
-            format:{
-              short(date){
+          month : {
+            height : 20,
+            display : true,
+            fontSize : '12px',
+            format : {
+              short(date) {
                 return dayjs(date).locale('pl').format('MM');
               },
-              medium(date){
+              medium(date) {
                 return dayjs(date).locale('pl').format('\'YY MMM');
               },
-              long(date){
+              long(date) {
                 return dayjs(date).locale('pl').format('YYYY MMMM (MM)');
               }
             }
           },
         },
-        defs:[]
+        defs : []
       };
     }
 
     constructor(prefix, containerId, data, options = {}, customComponents = {}) {
       const self = this;
       if (typeof window.elastiganttStore === 'undefined') {
-        window.elastiganttStore = elastiganttStore(
-          options.debug,
-          options.showStack
-        );
+        window.elastiganttStore = elastiganttStore(options.debug, options.showStack);
       }
 
       if (containerId.substr(0, 1) === '#') {
         containerId = containerId.substr(1);
       }
-      this.containerId = containerId;
+      this.containerId      = containerId;
       this.containerElement = document.getElementById(containerId);
-      this.prefix = prefix.replace(/[^a-z0-9]/gi, '');
-      this.prefixPascal = this.toPascalCase(this.prefix);
+      this.prefix           = prefix.replace(/[^a-z0-9]/gi, '');
+      this.prefixPascal     = this.toPascalCase(this.prefix);
       dayjs.locale(options.locale, null, true);
-
-      this.data = data;
-      this.tasks = data.tasks;
+      this.data    = data;
+      this.tasks   = data.tasks;
       this.options = Object.assign(this.getDefaultOptions(options), options);
 
       // initialize observer
       this.tasks = this.tasks.map((task) => {
-        task.x = 0;
-        task.y = 0;
-        task.width = 0;
-        task.height = 0;
+        task.x         = 0;
+        task.y         = 0;
+        task.width     = 0;
+        task.height    = 0;
+        task.tooltip   = {visible : false};
+        task.mouseOver = false;
         return task;
       });
 
-      const globalState = this.options;
+      const globalState         = this.options;
       globalState.classInstance = this;
-      globalState.data = this.data;
-      globalState.tasks = this.tasks;
-      this.ctx = document.createElement('canvas').getContext('2d');
+      globalState.data          = this.data;
+      globalState.tasks         = this.tasks;
+      this.ctx                  = document.createElement('canvas').getContext('2d');
 
       this.customComponents = customComponents;
       this.registerComponents();
 
       this.app = new Vue({
-        el: '#' + containerId,
-        template: `<div id="${prefix}-elastigantt">
+        el : '#' + containerId,
+        template : `<div id="${prefix}-elastigantt">
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
-        data: globalState,
+        data : globalState,
         created() {
-          let tasks = this.$root.$data.tasks;
+          let tasks         = this.$root.$data.tasks;
           let firstTaskTime = Number.MAX_SAFE_INTEGER;
-          let lastTaskTime = 0;
-          let firstTaskDate,lastTaskDate;
+          let lastTaskTime  = 0;
+          let firstTaskDate, lastTaskDate;
           for (let index = 0, len = this.tasks.length; index < len; index++) {
-            let task = this.tasks[index];
-            task.startDate = new Date(task.start);
-            task.startTime = task.startDate.getTime();
+            let task        = this.tasks[index];
+            task.startDate  = new Date(task.start);
+            task.startTime  = task.startDate.getTime();
             task.durationMs = task.duration * 1000;
             if (task.startTime < firstTaskTime) {
               firstTaskTime = task.startTime;
@@ -880,63 +937,65 @@ var ElastiganttApp = (function (exports) {
             }
           }
           this.times.firstTaskTime = firstTaskTime;
-          this.times.lastTaskTime = lastTaskTime;
+          this.times.lastTaskTime  = lastTaskTime;
           this.times.firstTaskDate = firstTaskDate;
-          this.times.lastTaskDate = lastTaskDate;
+          this.times.lastTaskDate  = lastTaskDate;
           this.recalculate();
         },
-        methods: {
-          calculateCalendarDimensions(){
+        methods : {
+          calculateCalendarDimensions() {
             this.calendar.height = 0;
-            if(this.calendar.hour.display){
-              this.calendar.height+=this.calendar.hour.height;
+            if (this.calendar.hour.display) {
+              this.calendar.height += this.calendar.hour.height;
             }
-            if(this.calendar.day.display){
-              this.calendar.height+=this.calendar.day.height;
+            if (this.calendar.day.display) {
+              this.calendar.height += this.calendar.day.height;
             }
-            if(this.calendar.month.display){
-              this.calendar.height+=this.calendar.month.height;
+            if (this.calendar.month.display) {
+              this.calendar.height += this.calendar.month.height;
             }
           },
           recalculate() {
-            const firstDate = this.times.firstTaskDate.toISOString().split('T')[0]+'T00:00:00';
-            const lastDate = this.times.lastTaskDate.toISOString().split('T')[0]+'T23:59:59.999';
-            this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before,'days').toDate();
-            this.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.scope.after,'days').toDate();
+            const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
+            const lastDate       = this.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
+            this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before, 'days').toDate();
+            this.times.lastDate  = dayjs(lastDate).locale(this.locale).add(this.scope.after, 'days').toDate();
             this.times.firstTime = this.times.firstDate.getTime();
-            this.times.lastTime = this.times.lastDate.getTime();
+            this.times.lastTime  = this.times.lastDate.getTime();
             this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
 
-            let max = this.times.timeScale * 60;
-            let min = this.times.timeScale;
-            let steps = max / min;
-            let percent = (this.times.timeZoom / 100);
-            this.times.timePerPixel = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
+            let max                        = this.times.timeScale * 60;
+            let min                        = this.times.timeScale;
+            let steps                      = max / min;
+            let percent                    = (this.times.timeZoom / 100);
+            this.times.timePerPixel        = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
             this.times.totalViewDurationPx = this.times.totalViewDurationMs / this.times.timePerPixel;
-            this.times.stepPx = this.times.stepMs / this.times.timePerPixel;
-            this.times.steps = Math.ceil(this.times.totalViewDurationPx / this.times.stepPx);
+            this.times.stepPx              = this.times.stepMs / this.times.timePerPixel;
+            this.times.steps               = Math.ceil(this.times.totalViewDurationPx / this.times.stepPx);
 
             let widthMs = this.times.lastTime - this.times.firstTime;
-            let width = 0;
+            let width   = 0;
             if (widthMs) {
               width = widthMs / this.times.timePerPixel;
             }
             this.width = width + this.verticalGrid.strokeWidth;
             this.calculateCalendarDimensions();
-            this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap*2) + this.horizontalGrid.gap + this.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap;
+            this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
+                          this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
             for (let index = 0, len = this.tasks.length; index < len; index++) {
-              let task = this.tasks[index];
+              let task   = this.tasks[index];
               task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
-              if(task.width < 0){
+              if (task.width < 0) {
                 task.width = 0;
               }
               task.height = this.row.height;
-              let x = task.startTime - this.times.firstTime;
+              let x       = task.startTime - this.times.firstTime;
               if (x) {
                 x = x / this.times.timePerPixel;
               }
               task.x = x + this.verticalGrid.strokeWidth;
-              task.y = ((this.row.height + this.horizontalGrid.gap*2) * index) + this.horizontalGrid.gap + this.calendar.height+this.$root.$data.calendar.strokeWidth+ this.$root.$data.calendar.gap;
+              task.y = ((this.row.height + this.horizontalGrid.gap * 2) * index) + this.horizontalGrid.gap +
+                       this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
             }
           },
           getSVG() {
@@ -944,10 +1003,10 @@ var ElastiganttApp = (function (exports) {
           },
           getImage(type = 'image/png') {
             return new Promise((resolve, reject) => {
-              const img = new Image();
+              const img  = new Image();
               img.onload = () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = this.svgElement.clientWidth;
+                const canvas  = document.createElement('canvas');
+                canvas.width  = this.svgElement.clientWidth;
                 canvas.height = this.svgElement.clientHeight;
                 canvas.getContext('2d').drawImage(img, 0, 0);
                 resolve(canvas.toDataURL(type));

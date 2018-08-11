@@ -21,3 +21,31 @@ body {
   font-family: 'Arial';
   font-size: 12px;
 }
+foreignObject body{
+  margin: 0px;
+}
+.elastigantt__tooltip{
+  background: #FFF;
+  position: fixed;
+}
+.elastigantt .p-2{
+  padding: 10rem;
+}
+.elastigantt__tooltip body{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.elastigantt__tooltip-header{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.elastigantt_tooltip-header-title{
+  display: inline-flex;
+}
+.elastigantt__tooltip-close-btn{
+  display: inline-flex;
+  font-weight: bold;
+  cursor: pointer;
+}
