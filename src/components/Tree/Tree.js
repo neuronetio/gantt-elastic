@@ -9,12 +9,6 @@ export function Tree(prefix, self) {
         :index="index"
         :key="task.id"
       ></${prefix}-tree-row>
-      <${prefix}-tree-row-info
-        v-for="task in $root.$data.tasks"
-        :key="task.id"
-        :task="task"
-        v-if="task.mouseOVer"
-      ></${prefix}-tree-row-info>
     </g>`,
     data() {
       return {};

@@ -13,15 +13,10 @@ export function TreeRow(prefix, self) {
       <svg :width="task.width" :height="task.height">
         <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
         <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
     </foreignObject>
-    <${prefix}-info
-      v-for="task in $root.$data.tasks"
-      :key="task.id"
-      :task="task"
-      v-if="task.mouseOver"
-    ></${prefix}-info>
+    <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
     </g>`,
     data() {
       return {};

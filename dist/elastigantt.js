@@ -462,7 +462,10 @@ var ElastiganttApp = (function (exports) {
       :width="getWidth"
       :height="$root.$data.row.height"
     >
-      <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
+      <svg width="100%" height="100%">
+      <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
+        <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
+      </svg>
     </foreignObject>`,
       data() {
         return {};
@@ -473,8 +476,8 @@ var ElastiganttApp = (function (exports) {
         },
         getTextStyle() {
           let state = this.$root.$data;
-          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${
-            state.row.fontSize};font-weight:bold;`;
+          return `${state.info.textStyle};font-family:${state.info.fontFamily};font-size:${
+            state.info.fontSize};font-weight:bold;`;
         }
       }
     });
@@ -522,12 +525,6 @@ var ElastiganttApp = (function (exports) {
         :index="index"
         :key="task.id"
       ></${prefix}-tree-row>
-      <${prefix}-tree-row-info
-        v-for="task in $root.$data.tasks"
-        :key="task.id"
-        :task="task"
-        v-if="task.mouseOVer"
-      ></${prefix}-tree-row-info>
     </g>`,
       data() {
         return {};
@@ -551,15 +548,10 @@ var ElastiganttApp = (function (exports) {
       <svg :width="task.width" :height="task.height">
         <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
         <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task"></${prefix}-tree-text>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
     </foreignObject>
-    <${prefix}-info
-      v-for="task in $root.$data.tasks"
-      :key="task.id"
-      :task="task"
-      v-if="task.mouseOver"
-    ></${prefix}-info>
+    <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
     </g>`,
       data() {
         return {};
@@ -793,7 +785,8 @@ var ElastiganttApp = (function (exports) {
           style : 'fill:#FF0000a0',
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
-          fontSize : '12px'
+          fontSize : '12px',
+          showText : false,
         },
         progress : {
           height : 6,
@@ -810,7 +803,7 @@ var ElastiganttApp = (function (exports) {
           style : "stroke:#00000050;strokeWidth:1",
           lines : [],
         },
-        tooltip : {width : '250px', height : '100px', trigger : 'manual'},
+        info : {style : 'fill:#FFFFFFa0', textStyle : 'fill:#000', fontFamily : 'sans-serif', fontSize : '12px'},
         calendar : {
           hours : [],
           days : [],

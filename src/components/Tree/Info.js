@@ -8,7 +8,10 @@ export function Info(prefix, self) {
       :width="getWidth"
       :height="$root.$data.row.height"
     >
-      <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
+      <svg width="100%" height="100%">
+      <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
+        <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
+      </svg>
     </foreignObject>`,
     data() {
       return {};
@@ -19,8 +22,8 @@ export function Info(prefix, self) {
       },
       getTextStyle() {
         let state = this.$root.$data;
-        return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${
-            state.row.fontSize};font-weight:bold;`;
+        return `${state.info.textStyle};font-family:${state.info.fontFamily};font-size:${
+            state.info.fontSize};font-weight:bold;`;
       }
     }
   });

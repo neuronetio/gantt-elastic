@@ -110,7 +110,8 @@ class ElastiganttApp {
         style : 'fill:#FF0000a0',
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
-        fontSize : '12px'
+        fontSize : '12px',
+        showText : false,
       },
       progress : {
         height : 6,
@@ -127,7 +128,7 @@ class ElastiganttApp {
         style : "stroke:#00000050;strokeWidth:1",
         lines : [],
       },
-      tooltip : {width : '250px', height : '100px', trigger : 'manual'},
+      info : {style : 'fill:#FFFFFFa0', textStyle : 'fill:#000', fontFamily : 'sans-serif', fontSize : '12px'},
       calendar : {
         hours : [],
         days : [],
