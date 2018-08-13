@@ -4,12 +4,21 @@ export function Main(prefix, self) {
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
       <div class="elastigantt__container">
-        <svg ref="svgElement" class="elastigantt__main-svg" xmlns="http://www.w3.org/2000/svg"
-          :width="$root.$data.width"
-          :height="$root.$data.height">
+        <svg ref="svgTaskList" class="elastigantt__task-list-container" xmlns="http://www.w3.org/2000/svg"
+          :width="$root.$data.taskList.width+'%'"
+          :height="$root.$data.height"
+        >
           <defs v-html="defs"></defs>
-          <${prefix}-tree></${prefix}-tree>
+          <${prefix}-task-list></${prefix}-task-list>
         </svg>
+        <div class="elastigantt__main-svg-container" :style="getMainStyle">
+          <svg ref="svgElement" class="elastigantt__main-container" xmlns="http://www.w3.org/2000/svg"
+            :width="$root.$data.width"
+            :height="$root.$data.height">
+            <defs v-html="defs"></defs>
+            <${prefix}-tree></${prefix}-tree>
+          </svg>
+        </div>
       </div>
     </div>`,
     data() {
@@ -41,6 +50,12 @@ export function Main(prefix, self) {
     },
     mounted() {
       this.$root.svgElement = this.$refs.svgElement;
+    },
+    computed : {
+      getMainStyle() {
+        const state = this.$root.$data;
+        return {width : (100 - state.taskList.width) + '%'};
+      }
     }
   })
 }

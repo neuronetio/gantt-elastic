@@ -353,18 +353,19 @@ var ElastiganttApp = (function (exports) {
   function Header(prefix, self) {
     return self.wrapComponent({
 
-      template: `<div class="elastigantt__header">
+      template : `<div class="elastigantt__header">
           <input type="range" v-model="scale" max="24" min="2">
           <input type="range" v-model="height" max="100" min="6">
           <input type="range" v-model="scope" max="100" min="0">
+          <input type="range" v-model="divider" max="100" min="0">
       </div>`,
 
       data() {
         return {};
       },
 
-      computed: {
-        scale: {
+      computed : {
+        scale : {
           get() {
             return this.$root.$data.times.timeZoom;
           },
@@ -373,7 +374,7 @@ var ElastiganttApp = (function (exports) {
             this.$root.recalculate();
           }
         },
-        height: {
+        height : {
           get() {
             return this.$root.$data.row.height;
           },
@@ -382,17 +383,24 @@ var ElastiganttApp = (function (exports) {
             this.$root.recalculate();
           }
         },
-        scope: {
+        scope : {
           get() {
             return this.$root.$data.scope.before;
           },
           set(value) {
             this.$root.$data.scope.before = Number(value);
-            this.$root.$data.scope.after = Number(value);
+            this.$root.$data.scope.after  = Number(value);
             this.$root.recalculate();
           }
         },
-
+        divider : {
+          get() {
+            return this.$root.$data.taskList.width;
+          },
+          set(value) {
+            this.$root.$data.taskList.width = Number(value);
+          }
+        },
       }
     });
   }
@@ -403,12 +411,21 @@ var ElastiganttApp = (function (exports) {
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
       <div class="elastigantt__container">
-        <svg ref="svgElement" class="elastigantt__main-svg" xmlns="http://www.w3.org/2000/svg"
-          :width="$root.$data.width"
-          :height="$root.$data.height">
+        <svg ref="svgTaskList" class="elastigantt__task-list-container" xmlns="http://www.w3.org/2000/svg"
+          :width="$root.$data.taskList.width+'%'"
+          :height="$root.$data.height"
+        >
           <defs v-html="defs"></defs>
-          <${prefix}-tree></${prefix}-tree>
+          <${prefix}-task-list></${prefix}-task-list>
         </svg>
+        <div class="elastigantt__main-svg-container" :style="getMainStyle">
+          <svg ref="svgElement" class="elastigantt__main-container" xmlns="http://www.w3.org/2000/svg"
+            :width="$root.$data.width"
+            :height="$root.$data.height">
+            <defs v-html="defs"></defs>
+            <${prefix}-tree></${prefix}-tree>
+          </svg>
+        </div>
       </div>
     </div>`,
       data() {
@@ -440,8 +457,88 @@ var ElastiganttApp = (function (exports) {
       },
       mounted() {
         this.$root.svgElement = this.$refs.svgElement;
+      },
+      computed : {
+        getMainStyle() {
+          const state = this.$root.$data;
+          return {width : (100 - state.taskList.width) + '%'};
+        }
       }
     })
+  }
+
+  function TaskList(prefix, self) {
+    return self.wrapComponent({
+      template : `<foreignObject class="elastigantt__task-list-object"
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      v-if="$root.$data.taskList.display"
+      >
+      <div  xmlns="http://www.w3.org/1999/xhtml">
+        <${prefix}-task-list-header></${prefix}-task-list-header>
+        <${prefix}-task-list-item
+          v-for="task in $root.$data.tasks"
+          :key="task.id"
+          :task="task"
+        ></${prefix}-task-list-item>
+      </div>
+    </foreignObject>`,
+      data() {
+        return {};
+      },
+    });
+  }
+
+  function TaskListHeader(prefix, self) {
+    return self.wrapComponent({
+      template : `<div class="elastigantt__task-list-header">
+      <div class="elastigantt__task-list-header-column"
+        v-for="column in $root.$data.taskList.columns"
+        :key="column.label"
+        :style="getStyle"
+      >{{column.label}}</div>
+    </div>`,
+      data() {
+        return {};
+      },
+      computed : {
+        getStyle() {
+          const state = this.$root.$data;
+          return {
+            'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
+                'margin-bottom': state.calendar.gap + 'px'
+          }
+        }
+      }
+    });
+  }
+
+  function TaskListItem(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task' ],
+      template : `<div class="elastigantt__task-list-item">
+      <div class="elastigantt__task-list-item-column"
+      v-for="column in $root.$data.taskList.columns"
+      :key="column.label"
+      :style="getStyle"
+      >{{task[column.value]}}</div>
+    </div>`,
+      data() {
+        return {};
+      },
+      computed : {
+        getStyle() {
+          const state = this.$root.$data;
+          let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          return {height : height + 'px', 'line-height' : height + 'px'};
+        },
+        getContent(column) {
+          return this.task[column.value];
+        }
+      }
+    });
   }
 
   function TreeBar(prefix, self) {
@@ -455,18 +552,18 @@ var ElastiganttApp = (function (exports) {
   function Info(prefix, self) {
     return self.wrapComponent({
       props : [ 'task' ],
-      template : `<foreignObject
-      class="elastigantt__info"
-      :x="task.x+task.width+10"
-      :y="task.y"
-      :width="getWidth"
-      :height="$root.$data.row.height"
-    >
-      <svg width="100%" height="100%">
-      <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
+      template : `
+      <svg class="elastigantt__info"
+        :x="task.x+task.width+10"
+        :y="task.y"
+        :width="getWidth"
+        :height="$root.$data.row.height"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
         <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
       </svg>
-    </foreignObject>`,
+    `,
       data() {
         return {};
       },
@@ -516,20 +613,36 @@ var ElastiganttApp = (function (exports) {
 
   function Tree(prefix, self) {
     return self.wrapComponent({
-      template : `<g>
-      <${prefix}-calendar></${prefix}-calendar>
-      <${prefix}-grid></${prefix}-grid>
-      <${prefix}-tree-row
-        v-for="(task, index) in $root.$data.tasks"
-        :task="task"
-        :index="index"
-        :key="task.id"
-      ></${prefix}-tree-row>
-    </g>`,
+      template : `
+      <svg class="elastigantt_tree-object"
+        x="0"
+        y="0"
+        :width="getWidth"
+        :height="getHeight"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <${prefix}-calendar></${prefix}-calendar>
+        <${prefix}-grid></${prefix}-grid>
+        <${prefix}-tree-row
+          v-for="(task, index) in $root.$data.tasks"
+          :task="task"
+          :index="index"
+          :key="task.id"
+        ></${prefix}-tree-row>
+      </svg>`,
       data() {
         return {};
       },
-      computed : {}
+      computed : {
+        getWidth() {
+          const state = this.$root.$data;
+          return state.width;
+        },
+        getHeight() {
+          const state = this.$root.$data;
+          return state.height;
+        }
+      }
     });
   }
 
@@ -537,26 +650,27 @@ var ElastiganttApp = (function (exports) {
     return self.wrapComponent({
       props : [ 'task', 'index' ],
       template : `<g class="elastigantt__tree-row-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-    <foreignObject
-      class="elastigantt__tree-row"
-      :x="task.x"
-      :y="task.y"
-      :width="task.width"
-      :height="task.height"
-      @click="treeRowClick"
-    >
-      <svg :width="task.width" :height="task.height">
+      <svg class="elastigantt__tree-row"
+        :x="task.x"
+        :y="task.y"
+        :width="task.width"
+        :height="task.height"
+        @click="treeRowClick"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
         <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
-    </foreignObject>
-    <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
     </g>`,
       data() {
         return {};
       },
       computed : {
+        getViewBox() {
+          return `0 0 ${this.task.width} ${this.task.height}`;
+        },
         getGroupTransform() {
           return `translate(${this.task.x} ${this.task.y})`;
         },
@@ -707,6 +821,9 @@ var ElastiganttApp = (function (exports) {
       let self = this;
 
       let components = {
+        'task-list-header' : TaskListHeader(prefix, self),
+        'task-list-item' : TaskListItem(prefix, self),
+        'task-list' : TaskList(prefix, self),
         'main' : Main(prefix, self),
         'tree' : Tree(prefix, self),
         'header' : Header(prefix, self),
@@ -803,7 +920,12 @@ var ElastiganttApp = (function (exports) {
           style : "stroke:#00000050;strokeWidth:1",
           lines : [],
         },
-        info : {style : 'fill:#FFFFFFa0', textStyle : 'fill:#000', fontFamily : 'sans-serif', fontSize : '12px'},
+        info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
+        taskList : {
+          display : true,
+          columns : [ {label : 'Zadanie', value : 'label'} ],
+          width : 20,
+        },
         calendar : {
           hours : [],
           days : [],

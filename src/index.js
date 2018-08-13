@@ -6,6 +6,9 @@ import {Grid} from './components/Grid/Grid.js';
 import {GridHeader} from './components/Grid/GridHeader.js';
 import {Header} from './components/Header.js';
 import {Main} from './components/Main.js';
+import {TaskList} from './components/TaskList/TaskList.js';
+import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
+import {TaskListItem} from './components/TaskList/TaskListItem.js';
 import {TreeBar} from './components/Tree/Bar.js';
 import {Info} from './components/Tree/Info.js';
 import {TreeProgressBar} from './components/Tree/ProgressBar.js';
@@ -32,6 +35,9 @@ class ElastiganttApp {
     let self = this;
 
     let components = {
+      'task-list-header' : TaskListHeader(prefix, self),
+      'task-list-item' : TaskListItem(prefix, self),
+      'task-list' : TaskList(prefix, self),
       'main' : Main(prefix, self),
       'tree' : Tree(prefix, self),
       'header' : Header(prefix, self),
@@ -128,7 +134,12 @@ class ElastiganttApp {
         style : "stroke:#00000050;strokeWidth:1",
         lines : [],
       },
-      info : {style : 'fill:#FFFFFFa0', textStyle : 'fill:#000', fontFamily : 'sans-serif', fontSize : '12px'},
+      info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
+      taskList : {
+        display : true,
+        columns : [ {label : 'Zadanie', value : 'label'} ],
+        width : 20,
+      },
       calendar : {
         hours : [],
         days : [],

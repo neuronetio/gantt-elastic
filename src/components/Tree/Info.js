@@ -1,18 +1,18 @@
 export function Info(prefix, self) {
   return self.wrapComponent({
     props : [ 'task' ],
-    template : `<foreignObject
-      class="elastigantt__info"
-      :x="task.x+task.width+10"
-      :y="task.y"
-      :width="getWidth"
-      :height="$root.$data.row.height"
-    >
-      <svg width="100%" height="100%">
-      <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
+    template : `
+      <svg class="elastigantt__info"
+        :x="task.x+task.width+10"
+        :y="task.y"
+        :width="getWidth"
+        :height="$root.$data.row.height"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="4" y="0" width="100%" height="100%" :style="$root.$data.info.style"></rect>
         <text x="10" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>
       </svg>
-    </foreignObject>`,
+    `,
     data() {
       return {};
     },

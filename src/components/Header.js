@@ -1,18 +1,19 @@
 export function Header(prefix, self) {
   return self.wrapComponent({
 
-    template: `<div class="elastigantt__header">
+    template : `<div class="elastigantt__header">
           <input type="range" v-model="scale" max="24" min="2">
           <input type="range" v-model="height" max="100" min="6">
           <input type="range" v-model="scope" max="100" min="0">
+          <input type="range" v-model="divider" max="100" min="0">
       </div>`,
 
     data() {
       return {};
     },
 
-    computed: {
-      scale: {
+    computed : {
+      scale : {
         get() {
           return this.$root.$data.times.timeZoom;
         },
@@ -21,7 +22,7 @@ export function Header(prefix, self) {
           this.$root.recalculate();
         }
       },
-      height: {
+      height : {
         get() {
           return this.$root.$data.row.height;
         },
@@ -30,17 +31,24 @@ export function Header(prefix, self) {
           this.$root.recalculate();
         }
       },
-      scope: {
+      scope : {
         get() {
           return this.$root.$data.scope.before;
         },
         set(value) {
           this.$root.$data.scope.before = Number(value);
-          this.$root.$data.scope.after = Number(value);
+          this.$root.$data.scope.after  = Number(value);
           this.$root.recalculate();
         }
       },
-
+      divider : {
+        get() {
+          return this.$root.$data.taskList.width;
+        },
+        set(value) {
+          this.$root.$data.taskList.width = Number(value);
+        }
+      },
     }
   });
 }
