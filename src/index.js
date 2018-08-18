@@ -139,7 +139,10 @@ class ElastiganttApp {
       info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
       taskList : {
         display : true,
-        columns : [ {label : 'Zadanie', value : 'label', width : 100} ],
+        columns : [
+          {label : 'Zadanie', value : 'label', width : 200},
+          {label : 'Użytkownik', value : 'user', width : 200},
+        ],
         resizerWidth : 0,
         percent : 100,
         width : 0,

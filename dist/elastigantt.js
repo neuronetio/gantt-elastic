@@ -549,7 +549,7 @@ var ElastiganttApp = (function (exports) {
       :key="column.label"
       :style="getStyle"
       >
-        <div class="elastigantt__task-list-item-value" :style="{width:column.finalWidth}">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value" :style="{width: column.finalWidth+'px'}">{{task[column.value]}}</div>
       </div>
     </div>`,
       data() {
@@ -951,7 +951,10 @@ var ElastiganttApp = (function (exports) {
         info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
         taskList : {
           display : true,
-          columns : [ {label : 'Zadanie', value : 'label', width : 100} ],
+          columns : [
+            {label : 'Zadanie', value : 'label', width : 200},
+            {label : 'Użytkownik', value : 'user', width : 200},
+          ],
           resizerWidth : 0,
           percent : 100,
           width : 0,
@@ -1111,7 +1114,6 @@ var ElastiganttApp = (function (exports) {
               column.finalWidth = column.width / 100 * this.taskList.percent;
               final += column.finalWidth;
             });
-            console.log(final);
             this.taskList.finalWidth = final;
           },
           recalculate() {
