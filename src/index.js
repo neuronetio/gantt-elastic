@@ -299,7 +299,6 @@ class ElastiganttApp {
             column.finalWidth = column.width / 100 * this.taskList.percent;
             final += column.finalWidth;
           });
-          console.log(final);
           this.taskList.finalWidth = final;
         },
         recalculate() {
