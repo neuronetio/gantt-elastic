@@ -6,6 +6,7 @@ export function Header(prefix, self) {
           <input type="range" v-model="height" max="100" min="6">
           <input type="range" v-model="scope" max="100" min="0">
           <input type="range" v-model="divider" max="100" min="0">
+          <input type="checkbox" v-model="$root.$data.taskList.display">
       </div>`,
 
     data() {
@@ -43,10 +44,11 @@ export function Header(prefix, self) {
       },
       divider : {
         get() {
-          return this.$root.$data.taskList.width;
+          return this.$root.$data.taskList.percent;
         },
         set(value) {
-          this.$root.$data.taskList.width = Number(value);
+          this.$root.$data.taskList.percent = Number(value);
+          this.$root.recalculate();
         }
       },
     }

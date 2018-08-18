@@ -6,6 +6,7 @@ import {Grid} from './components/Grid/Grid.js';
 import {GridHeader} from './components/Grid/GridHeader.js';
 import {Header} from './components/Header.js';
 import {Main} from './components/Main.js';
+import {TaskListResizer} from './components/TaskList/Resizer.js';
 import {TaskList} from './components/TaskList/TaskList.js';
 import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
 import {TaskListItem} from './components/TaskList/TaskListItem.js';
@@ -35,6 +36,7 @@ class ElastiganttApp {
     let self = this;
 
     let components = {
+      'task-list-resizer' : TaskListResizer(prefix, self),
       'task-list-header' : TaskListHeader(prefix, self),
       'task-list-item' : TaskListItem(prefix, self),
       'task-list' : TaskList(prefix, self),
@@ -137,8 +139,11 @@ class ElastiganttApp {
       info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
       taskList : {
         display : true,
-        columns : [ {label : 'Zadanie', value : 'label'} ],
-        width : 20,
+        columns : [ {label : 'Zadanie', value : 'label', width : 100} ],
+        resizerWidth : 0,
+        percent : 100,
+        width : 0,
+        finalWidth : 0
       },
       calendar : {
         hours : [],
@@ -216,9 +221,13 @@ class ElastiganttApp {
     this.prefix           = prefix.replace(/[^a-z0-9]/gi, '');
     this.prefixPascal     = this.toPascalCase(this.prefix);
     dayjs.locale(options.locale, null, true);
-    this.data    = data;
-    this.tasks   = data.tasks;
-    this.options = Object.assign(this.getDefaultOptions(options), options);
+    this.data                     = data;
+    this.tasks                    = data.tasks;
+    this.options                  = Object.assign(this.getDefaultOptions(options), options);
+    this.options.taskList.columns = this.options.taskList.columns.map(column => {
+      column.finalWidth = column.width / 100 * this.options.taskList.percent;
+      return column;
+    });
 
     // initialize observer
     this.tasks = this.tasks.map((task) => {
@@ -284,6 +293,15 @@ class ElastiganttApp {
             this.calendar.height += this.calendar.month.height;
           }
         },
+        calculateTaskListColumnWidths() {
+          let final = 0;
+          this.taskList.columns.forEach((column) => {
+            column.finalWidth = column.width / 100 * this.taskList.percent;
+            final += column.finalWidth;
+          });
+          console.log(final);
+          this.taskList.finalWidth = final;
+        },
         recalculate() {
           const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
           const lastDate       = this.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
@@ -291,24 +309,26 @@ class ElastiganttApp {
           this.times.lastDate  = dayjs(lastDate).locale(this.locale).add(this.scope.after, 'days').toDate();
           this.times.firstTime = this.times.firstDate.getTime();
           this.times.lastTime  = this.times.lastDate.getTime();
-          this.times.totalViewDurationMs = this.times.lastDate.getTime() - this.times.firstDate.getTime();
-
+          this.times.totalViewDurationMs = this.times.lastTime - this.times.firstTime;
+          this.taskList.width            = this.taskList.columns
+                                    .reduce(
+                                        (prev, current) => {
+                                          return {width : prev.width + current.width};
+                                        },
+                                        {width : 0})
+                                    .width;
           let max                        = this.times.timeScale * 60;
           let min                        = this.times.timeScale;
           let steps                      = max / min;
-          let percent                    = (this.times.timeZoom / 100);
+          let percent                    = this.times.timeZoom / 100;
           this.times.timePerPixel        = this.times.timeScale * steps * percent + Math.pow(2, this.times.timeZoom);
           this.times.totalViewDurationPx = this.times.totalViewDurationMs / this.times.timePerPixel;
           this.times.stepPx              = this.times.stepMs / this.times.timePerPixel;
+          this.width                     = this.times.totalViewDurationPx + this.verticalGrid.strokeWidth;
           this.times.steps               = Math.ceil(this.times.totalViewDurationPx / this.times.stepPx);
 
-          let widthMs = this.times.lastTime - this.times.firstTime;
-          let width   = 0;
-          if (widthMs) {
-            width = widthMs / this.times.timePerPixel;
-          }
-          this.width = width + this.verticalGrid.strokeWidth;
           this.calculateCalendarDimensions();
+          this.calculateTaskListColumnWidths();
           this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
                         this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
           for (let index = 0, len = this.tasks.length; index < len; index++) {

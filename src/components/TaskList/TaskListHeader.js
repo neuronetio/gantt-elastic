@@ -5,7 +5,10 @@ export function TaskListHeader(prefix, self) {
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
         :style="getStyle"
-      >{{column.label}}</div>
+      >
+      <div class="elastigantt__task-list-header-label" :column="column" :style="{width: column.finalWidth+'px'}">{{column.label}}</div>
+      <div class="elastigantt__task-list-header-resizer"></div>
+      </div>
     </div>`,
     data() {
       return {};

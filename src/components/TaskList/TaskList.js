@@ -7,7 +7,8 @@ export function TaskList(prefix, self) {
       height="100%"
       v-if="$root.$data.taskList.display"
       >
-      <div  xmlns="http://www.w3.org/1999/xhtml">
+      <div  xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__task-list-container">
+        <${prefix}-task-list-resizer></${prefix}-task-list-resizer>
         <${prefix}-task-list-header></${prefix}-task-list-header>
         <${prefix}-task-list-item
           v-for="task in $root.$data.tasks"
