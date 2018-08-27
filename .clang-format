@@ -2,7 +2,8 @@
 Language: JavaScript
 ColumnLimit: 120
 AlignConsecutiveAssignments: true
-AllowShortFunctionsOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: true
+AllowShortBlocksOnASingleLine: true
 IndentWidth: 2
 JavaScriptWrapImports: false
 KeepEmptyLinesAtTheStartOfBlocks: false

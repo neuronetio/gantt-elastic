@@ -20,17 +20,11 @@ import {elastiganttStore} from './elastiganttStorage.js';
 
 class ElastiganttApp {
   toPascalCase(str) {
-    return str
-        .replace(/(\w)(\w*)/g,
-                 function(g0, g1, g2) {
-                   return g1.toUpperCase() + g2.toLowerCase();
-                 })
+    return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); })
         .replace(/\-/g, '');
   }
 
-  toKebabCase(str) {
-    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-  }
+  toKebabCase(str) { return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(); }
 
   getComponents(prefix, kebabCase = true) {
     let self = this;
@@ -85,9 +79,7 @@ class ElastiganttApp {
     }
   }
 
-  wrapComponent(props) {
-    return props;
-  }
+  wrapComponent(props) { return props; }
 
   getDefaultOptions(userOptions) {
     return {
@@ -162,15 +154,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) {
-              return dayjs(date).locale('pl').format('HH');
-            },
-            medium(date) {
-              return dayjs(date).locale('pl').format('HH:mm');
-            },
-            long(date) {
-              return dayjs(date).locale('pl').format('HH:mm');
-            }
+            short(date) { return dayjs(date).locale('pl').format('HH'); },
+            medium(date) { return dayjs(date).locale('pl').format('HH:mm'); },
+            long(date) { return dayjs(date).locale('pl').format('HH:mm'); }
           }
         },
         day : {
@@ -178,15 +164,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) {
-              return dayjs(date).locale('pl').format('DD');
-            },
-            medium(date) {
-              return dayjs(date).locale('pl').format('DD ddd');
-            },
-            long(date) {
-              return dayjs(date).locale('pl').format('DD dddd');
-            }
+            short(date) { return dayjs(date).locale('pl').format('DD'); },
+            medium(date) { return dayjs(date).locale('pl').format('DD ddd'); },
+            long(date) { return dayjs(date).locale('pl').format('DD dddd'); }
           }
         },
         month : {
@@ -194,15 +174,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) {
-              return dayjs(date).locale('pl').format('MM');
-            },
-            medium(date) {
-              return dayjs(date).locale('pl').format('\'YY MMM');
-            },
-            long(date) {
-              return dayjs(date).locale('pl').format('YYYY MMMM (MM)');
-            }
+            short(date) { return dayjs(date).locale('pl').format('MM'); },
+            medium(date) { return dayjs(date).locale('pl').format('\'YY MMM'); },
+            long(date) { return dayjs(date).locale('pl').format('YYYY MMMM (MM)'); }
           }
         },
       },
@@ -312,13 +286,10 @@ class ElastiganttApp {
           this.times.firstTime = this.times.firstDate.getTime();
           this.times.lastTime  = this.times.lastDate.getTime();
           this.times.totalViewDurationMs = this.times.lastTime - this.times.firstTime;
-          this.taskList.width            = this.taskList.columns
-                                    .reduce(
-                                        (prev, current) => {
-                                          return {width : prev.width + current.width};
-                                        },
-                                        {width : 0})
-                                    .width;
+          this.taskList.width =
+              this.taskList.columns
+                  .reduce((prev, current) => { return {width : prev.width + current.width}; }, {width : 0})
+                  .width;
           let max                        = this.times.timeScale * 60;
           let min                        = this.times.timeScale;
           let steps                      = max / min;
@@ -349,9 +320,7 @@ class ElastiganttApp {
                      this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
           }
         },
-        getSVG() {
-          return this.svgElement.outerHTML;
-        },
+        getSVG() { return this.svgElement.outerHTML; },
         getImage(type = 'image/png') {
           return new Promise((resolve, reject) => {
             const img  = new Image();
