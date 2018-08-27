@@ -13,9 +13,11 @@ import {TaskListItem} from './components/TaskList/TaskListItem.js';
 import {TreeBar} from './components/Tree/Bar.js';
 import {Info} from './components/Tree/Info.js';
 import {TreeProgressBar} from './components/Tree/ProgressBar.js';
+import {TreeRowMilestone} from './components/Tree/Row/Milestone.js';
+import {TreeRowProject} from './components/Tree/Row/Project.js';
+import {TreeRowTask} from './components/Tree/Row/Task.js';
 import {TreeText} from './components/Tree/Text.js';
 import {Tree} from './components/Tree/Tree.js';
-import {TreeRow} from './components/Tree/TreeRow.js';
 import {elastiganttStore} from './elastiganttStorage.js';
 
 class ElastiganttApp {
@@ -39,7 +41,9 @@ class ElastiganttApp {
       'header' : Header(prefix, self),
       'grid' : Grid(prefix, self),
       'grid-header' : GridHeader(prefix, self),
-      'tree-row' : TreeRow(prefix, self),
+      'tree-row-task' : TreeRowTask(prefix, self),
+      'tree-row-milestone' : TreeRowMilestone(prefix, self),
+      'tree-row-project' : TreeRowProject(prefix, self),
       'tree-text' : TreeText(prefix, self),
       'tree-bar' : TreeBar(prefix, self),
       'tree-progress-bar' : TreeProgressBar(prefix, self),
@@ -111,7 +115,7 @@ class ElastiganttApp {
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
         fontSize : '12px',
-        showText : false,
+        showText : true,
       },
       progress : {
         height : 6,
@@ -132,8 +136,10 @@ class ElastiganttApp {
       taskList : {
         display : true,
         columns : [
-          {label : 'Zadanie', value : 'label', width : 200},
-          {label : 'Użytkownik', value : 'user', width : 200},
+          {label : 'Zadanie', value : 'label', width : 100},
+          {label : 'Użytkownik', value : 'user', width : 100},
+          {label : 'Typ', value : 'type', width : 100},
+          {label : 'Postęp', value : 'progress', width : 50},
         ],
         resizerWidth : 0,
         percent : 100,

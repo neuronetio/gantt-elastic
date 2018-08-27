@@ -10,16 +10,14 @@ export function Tree(prefix, self) {
       >
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
-        <${prefix}-tree-row
-          v-for="(task, index) in $root.$data.tasks"
-          :task="task"
-          :index="index"
-          :key="task.id"
-        ></${prefix}-tree-row>
+        <g v-for="(task, index) in $root.$data.tasks"
+        :task="task"
+        :index="index"
+        :key="task.id">
+          <component :task="task" :index="index" :is="'${prefix}-tree-row-'+task.type"></component>
+        </g>
       </svg>`,
-    data() {
-      return {};
-    },
+    data() { return {}; },
     computed : {
       getWidth() {
         const state = this.$root.$data;

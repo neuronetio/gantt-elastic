@@ -622,6 +622,120 @@ var ElastiganttApp = (function (exports) {
     });
   }
 
+  function TreeRowMilestone(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task', 'index' ],
+      template :
+          `<g class="elastigantt__tree-row-milestone-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+      <svg class="elastigantt__tree-row"
+        :x="task.x"
+        :y="task.y"
+        :width="task.width"
+        :height="task.height"
+        @click="treeRowClick"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
+      </svg>
+      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+    </g>`,
+      data() { return {}; },
+      computed : {
+        getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
+        getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+        getPoints() {
+          const task                               = this.task;
+          const fifty                              = task.height / 2;
+          const fourth                             = task.height / 8;
+          const floor                              = task.height - fourth;
+          const offset                             = 4;
+          return `0,${fifty} 0,0 ${offset},0 ${offset * 2},${fourth} ${task.width - offset * 2},${fourth} ${
+            task.width - offset},0 ${task.width},0 ${task.width},${fifty}  ${task.width},${task.height} ${
+            task.width - offset},${task.height} ${task.width - offset * 2},${floor} ${offset * 2},${floor} ${offset},${
+            task.height} 0,${task.height}`;
+        },
+      },
+      methods : {
+        treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
+        treeRowMouseOver() { this.task.mouseOver   = true; },
+        treeRowMouseOut() { this.task.mouseOver    = false; },
+      }
+    });
+  }
+
+  function TreeRowProject(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task', 'index' ],
+      template :
+          `<g class="elastigantt__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+      <svg class="elastigantt__tree-row-project"
+        :x="task.x"
+        :y="task.y"
+        :width="task.width"
+        :height="task.height"
+        @click="treeRowClick"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
+      </svg>
+      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+    </g>`,
+      data() { return {}; },
+      computed : {
+        getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
+        getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+        getPoints() {
+          const task                               = this.task;
+          const fifty                              = this.task.height - this.task.height / 4;
+          const full                               = this.task.height;
+          const offset                             = 10;
+          return `0,${full} 0,0 ${task.width},0 ${task.width},${full} ${task.width - offset},${fifty} ${offset},${
+            fifty} 0,${full}`;
+        },
+      },
+      methods : {
+        treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
+        treeRowMouseOver() { this.task.mouseOver   = true; },
+        treeRowMouseOut() { this.task.mouseOver    = false; },
+      }
+    });
+  }
+
+  function TreeRowTask(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task', 'index' ],
+      template : `<g class="elastigantt__tree-row-task-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+      <svg class="elastigantt__tree-row"
+        :x="task.x"
+        :y="task.y"
+        :width="task.width"
+        :height="task.height"
+        @click="treeRowClick"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
+        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
+      </svg>
+      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+    </g>`,
+      data() { return {}; },
+      computed : {
+        getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
+        getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+      },
+      methods : {
+        treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
+        treeRowMouseOver() { this.task.mouseOver   = true; },
+        treeRowMouseOut() { this.task.mouseOver    = false; },
+      }
+    });
+  }
+
   function TreeText(prefix, self) {
     return self.wrapComponent({
       props:['task'],
@@ -650,16 +764,14 @@ var ElastiganttApp = (function (exports) {
       >
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
-        <${prefix}-tree-row
-          v-for="(task, index) in $root.$data.tasks"
-          :task="task"
-          :index="index"
-          :key="task.id"
-        ></${prefix}-tree-row>
+        <g v-for="(task, index) in $root.$data.tasks"
+        :task="task"
+        :index="index"
+        :key="task.id">
+          <component :task="task" :index="index" :is="'${prefix}-tree-row-'+task.type"></component>
+        </g>
       </svg>`,
-      data() {
-        return {};
-      },
+      data() { return {}; },
       computed : {
         getWidth() {
           const state = this.$root.$data;
@@ -669,49 +781,6 @@ var ElastiganttApp = (function (exports) {
           const state = this.$root.$data;
           return state.height;
         }
-      }
-    });
-  }
-
-  function TreeRow(prefix, self) {
-    return self.wrapComponent({
-      props : [ 'task', 'index' ],
-      template : `<g class="elastigantt__tree-row-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-      <svg class="elastigantt__tree-row"
-        :x="task.x"
-        :y="task.y"
-        :width="task.width"
-        :height="task.height"
-        @click="treeRowClick"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <${prefix}-tree-bar :task="task"></${prefix}-tree-bar>
-        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      </svg>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
-    </g>`,
-      data() {
-        return {};
-      },
-      computed : {
-        getViewBox() {
-          return `0 0 ${this.task.width} ${this.task.height}`;
-        },
-        getGroupTransform() {
-          return `translate(${this.task.x} ${this.task.y})`;
-        },
-      },
-      methods : {
-        treeRowClick() {
-          this.task.tooltip.visible = !this.task.tooltip.visible;
-        },
-        treeRowMouseOver() {
-          this.task.mouseOver = true;
-        },
-        treeRowMouseOut() {
-          this.task.mouseOver = false;
-        },
       }
     });
   }
@@ -851,7 +920,9 @@ var ElastiganttApp = (function (exports) {
         'header' : Header(prefix, self),
         'grid' : Grid(prefix, self),
         'grid-header' : GridHeader(prefix, self),
-        'tree-row' : TreeRow(prefix, self),
+        'tree-row-task' : TreeRowTask(prefix, self),
+        'tree-row-milestone' : TreeRowMilestone(prefix, self),
+        'tree-row-project' : TreeRowProject(prefix, self),
         'tree-text' : TreeText(prefix, self),
         'tree-bar' : TreeBar(prefix, self),
         'tree-progress-bar' : TreeProgressBar(prefix, self),
@@ -923,7 +994,7 @@ var ElastiganttApp = (function (exports) {
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
           fontSize : '12px',
-          showText : false,
+          showText : true,
         },
         progress : {
           height : 6,
@@ -944,8 +1015,10 @@ var ElastiganttApp = (function (exports) {
         taskList : {
           display : true,
           columns : [
-            {label : 'Zadanie', value : 'label', width : 200},
-            {label : 'Użytkownik', value : 'user', width : 200},
+            {label : 'Zadanie', value : 'label', width : 100},
+            {label : 'Użytkownik', value : 'user', width : 100},
+            {label : 'Typ', value : 'type', width : 100},
+            {label : 'Postęp', value : 'progress', width : 50},
           ],
           resizerWidth : 0,
           percent : 100,
