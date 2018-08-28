@@ -22,14 +22,12 @@ export function Grid(prefix, self) {
         ></line>
       </g>`,
 
-    data() {
-      return {};
-    },
+    data() { return {}; },
     computed : {
       verticalLines() {
         let lines   = [];
         const state = this.$root.$data;
-        for (let step = 0; step <= state.times.steps; step++) {
+        for (let step = 1; step <= state.times.steps; step++) {
           let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
           lines.push({
             key : step,

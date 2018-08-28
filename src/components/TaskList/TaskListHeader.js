@@ -4,21 +4,21 @@ export function TaskListHeader(prefix, self) {
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
-        :style="getStyle"
+        :style="getStyle(column)"
       >
       <div class="elastigantt__task-list-header-label" :column="column" :style="{width: column.finalWidth+'px'}">{{column.label}}</div>
       <div class="elastigantt__task-list-header-resizer"></div>
       </div>
     </div>`,
-    data() {
-      return {};
-    },
+    data() { return {}; },
     computed : {
       getStyle() {
-        const state = this.$root.$data;
-        return {
-          'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
-              'margin-bottom': state.calendar.gap + 'px'
+        return column => {
+          const state = this.$root.$data;
+          return {
+            'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
+                'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
+          }
         }
       }
     }

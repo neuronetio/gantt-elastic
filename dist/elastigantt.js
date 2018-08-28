@@ -291,14 +291,12 @@ var ElastiganttApp = (function (exports) {
         ></line>
       </g>`,
 
-      data() {
-        return {};
-      },
+      data() { return {}; },
       computed : {
         verticalLines() {
           let lines   = [];
           const state = this.$root.$data;
-          for (let step = 0; step <= state.times.steps; step++) {
+          for (let step = 1; step <= state.times.steps; step++) {
             let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
             lines.push({
               key : step,
@@ -511,21 +509,21 @@ var ElastiganttApp = (function (exports) {
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
-        :style="getStyle"
+        :style="getStyle(column)"
       >
       <div class="elastigantt__task-list-header-label" :column="column" :style="{width: column.finalWidth+'px'}">{{column.label}}</div>
       <div class="elastigantt__task-list-header-resizer"></div>
       </div>
     </div>`,
-      data() {
-        return {};
-      },
+      data() { return {}; },
       computed : {
         getStyle() {
-          const state = this.$root.$data;
-          return {
-            'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
-                'margin-bottom': state.calendar.gap + 'px'
+          return column => {
+            const state = this.$root.$data;
+            return {
+              'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
+                  'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
+            }
           }
         }
       }
