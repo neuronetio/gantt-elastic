@@ -11,8 +11,14 @@ export function TreeRowMilestone(prefix, self) {
         @click="treeRowClick"
         xmlns="http://www.w3.org/2000/svg"
       >
+      <defs>
+        <clipPath id="elastigantt__milestone-clip-path">
+          <polygon :points="getPoints"></polygon>
+        </clipPath>
+      </defs>
         <polygon :points="getPoints" fill="#FF0000A0"></polygon>
-        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
+        </${prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>

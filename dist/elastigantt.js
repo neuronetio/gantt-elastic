@@ -609,15 +609,12 @@ var ElastiganttApp = (function (exports) {
 
   function TreeProgressBar(prefix, self) {
     return self.wrapComponent({
-      props:['task'],
-      template:`<rect id="elastigantt__tree-row-progress" x="0" y="0" height="25%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
-      data(){
-        return {};
-      },
-      computed:{
-        getProgressWidth(){
-          return this.task.progress+'%';
-        },
+      props : [ 'task' ],
+      template :
+          `<rect id="elastigantt__tree-row-progress" x="0" y="0" height="30%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
+      data() { return {}; },
+      computed : {
+        getProgressWidth() { return this.task.progress + '%'; },
       }
     });
   }
@@ -635,8 +632,14 @@ var ElastiganttApp = (function (exports) {
         @click="treeRowClick"
         xmlns="http://www.w3.org/2000/svg"
       >
+      <defs>
+        <clipPath id="elastigantt__milestone-clip-path">
+          <polygon :points="getPoints"></polygon>
+        </clipPath>
+      </defs>
         <polygon :points="getPoints" fill="#FF0000A0"></polygon>
-        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
+        </${prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
@@ -678,8 +681,14 @@ var ElastiganttApp = (function (exports) {
         @click="treeRowClick"
         xmlns="http://www.w3.org/2000/svg"
       >
+      <defs>
+        <clipPath id="elastigantt__project-clip-path">
+          <polygon :points="getPoints"></polygon>
+        </clipPath>
+      </defs>
         <polygon :points="getPoints" fill="#FF0000A0"></polygon>
-        <${prefix}-tree-progress-bar :task="task"></${prefix}-tree-progress-bar>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)">
+        </${prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
@@ -693,8 +702,8 @@ var ElastiganttApp = (function (exports) {
           const fifty                              = this.task.height - this.task.height / 4;
           const full                               = this.task.height;
           const offset                             = 10;
-          return `0,${full} 0,0 ${task.width},0 ${task.width},${full} ${task.width - offset},${fifty} ${offset},${
-            fifty} 0,${full}`;
+          return `0,${full} 0,${task.height / 4} ${offset / 2},0 ${task.width - offset / 2},0 ${task.width},${
+            task.height / 4} ${task.width},${full} ${task.width - offset},${fifty} ${offset},${fifty} 0,${full}`;
         },
       },
       methods : {
