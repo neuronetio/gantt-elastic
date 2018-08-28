@@ -5,23 +5,22 @@ export function TaskListItem(prefix, self) {
       <div class="elastigantt__task-list-item-column"
       v-for="column in $root.$data.taskList.columns"
       :key="column.label"
-      :style="getStyle"
+      :style="getStyle(column)"
+      :column="column"
       >
-        <div class="elastigantt__task-list-item-value" :style="{width: column.finalWidth+'px'}">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value">{{task[column.value]}}</div>
       </div>
     </div>`,
-    data() {
-      return {};
-    },
+    data() { return {}; },
     computed : {
       getStyle() {
-        const state = this.$root.$data;
-        let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-        return {'height' : height + 'px', 'line-height' : height + 'px'};
+        const state   = this.$root.$data;
+        return column => {
+          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          return {'height' : height + 'px', 'line-height' : height + 'px', 'width' : column.finalWidth + 'px'};
+        }
       },
-      getContent(column) {
-        return this.task[column.value];
-      }
+      getContent(column) { return this.task[column.value]; }
     }
   });
 }

@@ -42,22 +42,15 @@ export function Main(prefix, self) {
             break;
           }
         }
-        css       = "<![CDATA[\n" + css + "]]>";
+        // css       = "<![CDATA[\n" + css + "]]>";
         this.defs = `<style type="text/css">${css}</style>`;
-      } catch (e) {
-        console.log("Cannot add stylesheet to SVG.");
-      }
-      this.$root.$data.defs.forEach((def) => {
-        this.defs += def;
-      });
+        this.$root.$data.defs.push(this.defs);
+      } catch (e) { console.log("Cannot add stylesheet to SVG."); }
+      // this.$root.$data.defs.forEach((def) => { this.defs += def; });
     },
-    mounted() {
-      this.$root.svgElement = this.$refs.svgElement;
-    },
+    mounted() { this.$root.svgElement = this.$refs.svgElement; },
     computed : {
-      getWidth() {
-        return this.$root.$data.width;
-      },
+      getWidth() { return this.$root.$data.width; },
       getMainStyle() {
         const state = this.$root.$data;
         return {width : state.width + 'px'};

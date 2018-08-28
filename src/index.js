@@ -115,7 +115,7 @@ class ElastiganttApp {
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
         fontSize : '12px',
-        showText : true,
+        showText : false,
       },
       progress : {
         height : 6,

@@ -449,22 +449,15 @@ var ElastiganttApp = (function (exports) {
               break;
             }
           }
-          css       = "<![CDATA[\n" + css + "]]>";
+          // css       = "<![CDATA[\n" + css + "]]>";
           this.defs = `<style type="text/css">${css}</style>`;
-        } catch (e) {
-          console.log("Cannot add stylesheet to SVG.");
-        }
-        this.$root.$data.defs.forEach((def) => {
-          this.defs += def;
-        });
+          this.$root.$data.defs.push(this.defs);
+        } catch (e) { console.log("Cannot add stylesheet to SVG."); }
+        // this.$root.$data.defs.forEach((def) => { this.defs += def; });
       },
-      mounted() {
-        this.$root.svgElement = this.$refs.svgElement;
-      },
+      mounted() { this.$root.svgElement = this.$refs.svgElement; },
       computed : {
-        getWidth() {
-          return this.$root.$data.width;
-        },
+        getWidth() { return this.$root.$data.width; },
         getMainStyle() {
           const state = this.$root.$data;
           return {width : state.width + 'px'};
@@ -498,6 +491,7 @@ var ElastiganttApp = (function (exports) {
       v-if="$root.$data.taskList.display"
       >
       <div  xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__task-list-container">
+      <div v-html="$root.$data.defs.join('')"></div>
         <${prefix}-task-list-resizer></${prefix}-task-list-resizer>
         <${prefix}-task-list-header></${prefix}-task-list-header>
         <${prefix}-task-list-item
@@ -507,9 +501,7 @@ var ElastiganttApp = (function (exports) {
         ></${prefix}-task-list-item>
       </div>
     </foreignObject>`,
-      data() {
-        return {};
-      },
+      data() { return {}; },
     });
   }
 
@@ -547,23 +539,22 @@ var ElastiganttApp = (function (exports) {
       <div class="elastigantt__task-list-item-column"
       v-for="column in $root.$data.taskList.columns"
       :key="column.label"
-      :style="getStyle"
+      :style="getStyle(column)"
+      :column="column"
       >
-        <div class="elastigantt__task-list-item-value" :style="{width: column.finalWidth+'px'}">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value">{{task[column.value]}}</div>
       </div>
     </div>`,
-      data() {
-        return {};
-      },
+      data() { return {}; },
       computed : {
         getStyle() {
-          const state = this.$root.$data;
-          let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-          return {'height' : height + 'px', 'line-height' : height + 'px'};
+          const state   = this.$root.$data;
+          return column => {
+            let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+            return {'height' : height + 'px', 'line-height' : height + 'px', 'width' : column.finalWidth + 'px'};
+          }
         },
-        getContent(column) {
-          return this.task[column.value];
-        }
+        getContent(column) { return this.task[column.value]; }
       }
     });
   }
@@ -1003,7 +994,7 @@ var ElastiganttApp = (function (exports) {
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
           fontSize : '12px',
-          showText : true,
+          showText : false,
         },
         progress : {
           height : 6,
