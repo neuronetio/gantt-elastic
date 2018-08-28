@@ -3,7 +3,7 @@ export function Main(prefix, self) {
     template : `
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
-      <div class="elastigantt__container">
+      <div class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
         <div class="elastigantt__task-list-container">
           <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg"
             :width="$root.$data.taskList.finalWidth+'px'"
@@ -55,6 +55,10 @@ export function Main(prefix, self) {
         const state = this.$root.$data;
         return {width : state.width + 'px'};
       }
+    },
+    methods : {
+      mouseMove(event) { this.$root.$emit('mousemove', event); },
+      mouseUp(event) { this.$root.$emit('mouseup', event); }
     }
   })
 }

@@ -6,11 +6,22 @@ export function TaskListHeader(prefix, self) {
         :key="column.label"
         :style="getStyle(column)"
       >
-      <div class="elastigantt__task-list-header-label" :column="column" :style="{width: column.finalWidth+'px'}">{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer"></div>
+      <div class="elastigantt__task-list-header-label" :column="column"
+        @mouseup="resizerMouseUp($event, column)"
+      >{{column.label}}</div>
+      <div class="elastigantt__task-list-header-resizer" :column="column"
+        @mousedown="resizerMouseDown($event, column)"
+      ></div>
       </div>
     </div>`,
-    data() { return {}; },
+    data() {
+      return {
+        resizer : {
+          moving : false,
+          x : 0,
+        }
+      };
+    },
     computed : {
       getStyle() {
         return column => {
@@ -20,7 +31,27 @@ export function TaskListHeader(prefix, self) {
                 'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
           }
         }
-      }
+      },
+    },
+    methods : {
+      resizerMouseDown(event, column) {
+        if (!this.resizerMoving) {
+          this.resizer.moving       = column;
+          this.resizer.x            = event.clientX;
+          this.resizer.initialWidth = column.width;
+        }
+      },
+      resizerMouseMove(event, column) {
+        if (this.resizer.moving) {
+          this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+          this.$root.calculateTaskListColumnWidths();
+        }
+      },
+      resizerMouseUp(event, column) { this.resizer.moving = false; },
+    },
+    created() {
+      this.$root.$on('mousemove', this.resizerMouseMove);
+      this.$root.$on('mouseup', this.resizerMouseUp);
     }
   });
 }

@@ -408,7 +408,7 @@ var ElastiganttApp = (function (exports) {
       template : `
     <div class="elastigantt__main">
       <${prefix}-header></${prefix}-header>
-      <div class="elastigantt__container">
+      <div class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
         <div class="elastigantt__task-list-container">
           <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg"
             :width="$root.$data.taskList.finalWidth+'px'"
@@ -460,6 +460,10 @@ var ElastiganttApp = (function (exports) {
           const state = this.$root.$data;
           return {width : state.width + 'px'};
         }
+      },
+      methods : {
+        mouseMove(event) { this.$root.$emit('mousemove', event); },
+        mouseUp(event) { this.$root.$emit('mouseup', event); }
       }
     })
   }
@@ -511,11 +515,22 @@ var ElastiganttApp = (function (exports) {
         :key="column.label"
         :style="getStyle(column)"
       >
-      <div class="elastigantt__task-list-header-label" :column="column" :style="{width: column.finalWidth+'px'}">{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer"></div>
+      <div class="elastigantt__task-list-header-label" :column="column"
+        @mouseup="resizerMouseUp($event, column)"
+      >{{column.label}}</div>
+      <div class="elastigantt__task-list-header-resizer" :column="column"
+        @mousedown="resizerMouseDown($event, column)"
+      ></div>
       </div>
     </div>`,
-      data() { return {}; },
+      data() {
+        return {
+          resizer : {
+            moving : false,
+            x : 0,
+          }
+        };
+      },
       computed : {
         getStyle() {
           return column => {
@@ -525,7 +540,27 @@ var ElastiganttApp = (function (exports) {
                   'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
             }
           }
-        }
+        },
+      },
+      methods : {
+        resizerMouseDown(event, column) {
+          if (!this.resizerMoving) {
+            this.resizer.moving       = column;
+            this.resizer.x            = event.clientX;
+            this.resizer.initialWidth = column.width;
+          }
+        },
+        resizerMouseMove(event, column) {
+          if (this.resizer.moving) {
+            this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+            this.$root.calculateTaskListColumnWidths();
+          }
+        },
+        resizerMouseUp(event, column) { this.resizer.moving = false; },
+      },
+      created() {
+        this.$root.$on('mousemove', this.resizerMouseMove);
+        this.$root.$on('mouseup', this.resizerMouseUp);
       }
     });
   }

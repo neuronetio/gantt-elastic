@@ -1,6 +1,3 @@
-body {
-  /*background: #3e3e3e;*/
-}
 .elastigantt__container{
     overflow: auto;
 }
@@ -40,10 +37,12 @@ foreignObject > *{
 .elastigantt__task-list-header{
   background: rgba(0,0,0,0.125);
   display: flex;
+  user-select: none;
 }
 .elastigantt__task-list-header-column{
   border-left: 1px solid #00000050;
   box-sizing: border-box;
+  display: flex;
 }
 .elastigantt__task-list-header-label{
   overflow: hidden;
@@ -52,6 +51,15 @@ foreignObject > *{
   font-size: 12px;
   box-sizing: border-box;
   margin: 6px;
+  display: inline-flex;
+  flex-grow: 1;
+}
+.elastigantt__task-list-header-resizer{
+  background: transparent;
+  height: 100%;
+  width: 4px;
+  cursor: col-resize;
+  display: inline-flex;
 }
 .elastigantt__task-list-item{
   border-top: 1px solid #00000050;
@@ -73,7 +81,4 @@ foreignObject > *{
   word-break: keep-all;
   font-family: Arial;
   font-size: 12px;
-}
-.elastigantt__task-list-resizer{
-  background: #666;
 }
