@@ -92,8 +92,8 @@ class ElastiganttApp {
       height : 0,
       svgElement : null,
       scope : {
-        before : 5,
-        after : 5,
+        before : 1,
+        after : 1,
       },
       times : {
         timeScale : 60 * 1000,
@@ -110,12 +110,12 @@ class ElastiganttApp {
         steps : 0,
       },
       row : {
-        height : 24,
+        height : 30,
         style : 'fill:#FF0000a0',
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
         fontSize : '12px',
-        showText : false,
+        showText : true,
       },
       progress : {
         height : 6,
@@ -139,7 +139,7 @@ class ElastiganttApp {
           {label : 'Zadanie', value : 'label', width : 100},
           {label : 'Użytkownik', value : 'user', width : 100},
           {label : 'Typ', value : 'type', width : 100},
-          {label : 'Postęp', value : 'progress', width : 50},
+          {label : 'Postęp', value : 'progress', width : 60},
         ],
         resizerWidth : 0,
         percent : 100,

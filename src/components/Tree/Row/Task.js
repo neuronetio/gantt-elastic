@@ -30,13 +30,8 @@ export function TreeRowTask(prefix, self) {
         const task  = this.task;
         const fifty = task.height / 2;
         let offset  = fifty;
-        if (task.width - offset < 0) {
-          return `M 0 ${fifty}
-          Q 0 0 ${task.width / 2} 0
-          Q ${task.width} ${fifty} ${task.width / 2} ${task.height}
-          Q 0 ${task.height} 0 ${fifty}
-          Z
-          `;
+        if (task.width / 2 - offset < 0) {
+          offset = task.width / 2;
         }
         return `M ${offset} ${task.height}
         Q 0 ${task.height} 0 ${fifty}

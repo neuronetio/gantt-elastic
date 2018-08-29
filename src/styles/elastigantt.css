@@ -33,16 +33,21 @@ foreignObject > *{
 }
 .elastigantt__main-svg-container{
   overflow: auto;
+  margin-left: -1px;
 }
 .elastigantt__task-list-header{
-  background: rgba(0,0,0,0.125);
   display: flex;
   user-select: none;
 }
 .elastigantt__task-list-header-column{
-  border-left: 1px solid #00000050;
+  border: 1px solid #00000050;
+  border-right:none;
   box-sizing: border-box;
   display: flex;
+  background: rgba(0,0,0,0.125);
+}
+.elastigantt__task-list-header-column:last-of-type{
+  border-right: 1px solid #00000050;
 }
 .elastigantt__task-list-header-label{
   overflow: hidden;

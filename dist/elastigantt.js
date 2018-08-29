@@ -296,7 +296,7 @@ var ElastiganttApp = (function (exports) {
         verticalLines() {
           let lines   = [];
           const state = this.$root.$data;
-          for (let step = 1; step <= state.times.steps; step++) {
+          for (let step = 0; step <= state.times.steps; step++) {
             let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
             lines.push({
               key : step,
@@ -673,13 +673,11 @@ var ElastiganttApp = (function (exports) {
         getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
         getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
         getPoints() {
-          const task   = this.task;
-          const fifty  = task.height / 2;
-          const fourth = task.height / 8;
-          const floor  = task.height - fourth;
-          const offset = 10;
-          if (task.width - offset < 0) {
-            return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`
+          const task  = this.task;
+          const fifty = task.height / 2;
+          let offset  = fifty;
+          if (task.width / 2 - offset < 0) {
+            offset = task.width / 2;
           }
           return `0,${fifty}
         ${offset},0
@@ -773,13 +771,8 @@ var ElastiganttApp = (function (exports) {
           const task  = this.task;
           const fifty = task.height / 2;
           let offset  = fifty;
-          if (task.width - offset < 0) {
-            return `M 0 ${fifty}
-          Q 0 0 ${task.width / 2} 0
-          Q ${task.width} ${fifty} ${task.width / 2} ${task.height}
-          Q 0 ${task.height} 0 ${fifty}
-          Z
-          `;
+          if (task.width / 2 - offset < 0) {
+            offset = task.width / 2;
           }
           return `M ${offset} ${task.height}
         Q 0 ${task.height} 0 ${fifty}
@@ -802,15 +795,15 @@ var ElastiganttApp = (function (exports) {
 
   function TreeText(prefix, self) {
     return self.wrapComponent({
-      props:['task'],
-      template:`<text x="2" y="50%" :style="getTextStyle" alignment-baseline="middle">{{task.label}}</text>`,
-      data(){
-        return {};
-      },
-      computed:{
-        getTextStyle(){
+      props : [ 'task' ],
+      template :
+          `<text x="50%" y="50%" :style="getTextStyle" text-anchor="middle" alignment-baseline="middle">{{task.label}}</text>`,
+      data() { return {}; },
+      computed : {
+        getTextStyle() {
           let state = this.$root.$data;
-          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize};font-weight:bold;`;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${
+            state.row.fontSize};font-weight:bold;`;
         }
       }
     });
@@ -1035,8 +1028,8 @@ var ElastiganttApp = (function (exports) {
         height : 0,
         svgElement : null,
         scope : {
-          before : 5,
-          after : 5,
+          before : 1,
+          after : 1,
         },
         times : {
           timeScale : 60 * 1000,
@@ -1053,12 +1046,12 @@ var ElastiganttApp = (function (exports) {
           steps : 0,
         },
         row : {
-          height : 24,
+          height : 30,
           style : 'fill:#FF0000a0',
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
           fontSize : '12px',
-          showText : false,
+          showText : true,
         },
         progress : {
           height : 6,
@@ -1082,7 +1075,7 @@ var ElastiganttApp = (function (exports) {
             {label : 'Zadanie', value : 'label', width : 100},
             {label : 'Użytkownik', value : 'user', width : 100},
             {label : 'Typ', value : 'type', width : 100},
-            {label : 'Postęp', value : 'progress', width : 50},
+            {label : 'Postęp', value : 'progress', width : 60},
           ],
           resizerWidth : 0,
           percent : 100,

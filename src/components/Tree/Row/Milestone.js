@@ -28,13 +28,11 @@ export function TreeRowMilestone(prefix, self) {
       getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
       getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
       getPoints() {
-        const task   = this.task;
-        const fifty  = task.height / 2;
-        const fourth = task.height / 8;
-        const floor  = task.height - fourth;
-        const offset = 10;
-        if (task.width - offset < 0) {
-          return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`
+        const task  = this.task;
+        const fifty = task.height / 2;
+        let offset  = fifty;
+        if (task.width / 2 - offset < 0) {
+          offset = task.width / 2;
         }
         return `0,${fifty}
         ${offset},0
