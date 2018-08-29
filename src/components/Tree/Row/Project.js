@@ -32,8 +32,7 @@ export function TreeRowProject(prefix, self) {
         const fifty                              = this.task.height - this.task.height / 4;
         const full                               = this.task.height;
         const offset                             = 10;
-        return `0,${full} 0,${task.height / 4} ${offset / 2},0 ${task.width - offset / 2},0 ${task.width},${
-            task.height / 4} ${task.width},${full} ${task.width - offset},${fifty} ${offset},${fifty} 0,${full}`;
+        return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
       },
     },
     methods : {

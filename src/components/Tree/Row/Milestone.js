@@ -28,15 +28,20 @@ export function TreeRowMilestone(prefix, self) {
       getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
       getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
       getPoints() {
-        const task                               = this.task;
-        const fifty                              = task.height / 2;
-        const fourth                             = task.height / 8;
-        const floor                              = task.height - fourth;
-        const offset                             = 4;
-        return `0,${fifty} 0,0 ${offset},0 ${offset * 2},${fourth} ${task.width - offset * 2},${fourth} ${
-            task.width - offset},0 ${task.width},0 ${task.width},${fifty}  ${task.width},${task.height} ${
-            task.width - offset},${task.height} ${task.width - offset * 2},${floor} ${offset * 2},${floor} ${offset},${
-            task.height} 0,${task.height}`;
+        const task   = this.task;
+        const fifty  = task.height / 2;
+        const fourth = task.height / 8;
+        const floor  = task.height - fourth;
+        const offset = 10;
+        if (task.width - offset < 0) {
+          return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`
+        }
+        return `0,${fifty}
+        ${offset},0
+        ${task.width - offset},0
+        ${task.width},${fifty}
+        ${task.width - offset},${task.height}
+        ${offset},${task.height}`;
       },
     },
     methods : {
