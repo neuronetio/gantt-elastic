@@ -11,6 +11,7 @@ import {TaskList} from './components/TaskList/TaskList.js';
 import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
 import {TaskListItem} from './components/TaskList/TaskListItem.js';
 import {TreeBar} from './components/Tree/Bar.js';
+import {TreeDependencyLine} from './components/Tree/DependencyLine.js';
 import {Info} from './components/Tree/Info.js';
 import {TreeProgressBar} from './components/Tree/ProgressBar.js';
 import {TreeRowMilestone} from './components/Tree/Row/Milestone.js';
@@ -46,6 +47,7 @@ class ElastiganttApp {
       'tree-row-project' : TreeRowProject(prefix, self),
       'tree-text' : TreeText(prefix, self),
       'tree-bar' : TreeBar(prefix, self),
+      'tree-dependency-line' : TreeDependencyLine(prefix, self),
       'tree-progress-bar' : TreeProgressBar(prefix, self),
       'info' : Info(prefix, self),
       'calendar' : Calendar(prefix, self),

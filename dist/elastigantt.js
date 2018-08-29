@@ -600,6 +600,20 @@ var ElastiganttApp = (function (exports) {
     });
   }
 
+  function TreeDependencyLine(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task' ],
+      template : ``,
+      data() { return {}; },
+      created(){
+        console.log('dependency lines created',this);
+      },
+      computed : {
+
+      }
+    });
+  }
+
   function Info(prefix, self) {
     return self.wrapComponent({
       props : [ 'task' ],
@@ -982,6 +996,7 @@ var ElastiganttApp = (function (exports) {
         'tree-row-project' : TreeRowProject(prefix, self),
         'tree-text' : TreeText(prefix, self),
         'tree-bar' : TreeBar(prefix, self),
+        'tree-dependency-line' : TreeDependencyLine(prefix, self),
         'tree-progress-bar' : TreeProgressBar(prefix, self),
         'info' : Info(prefix, self),
         'calendar' : Calendar(prefix, self),
