@@ -138,8 +138,8 @@ class ElastiganttApp {
       taskList : {
         display : true,
         columns : [
-          {label : 'Zadanie', value : 'label', width : 100},
-          {label : 'Użytkownik', value : 'user', width : 100},
+          {label : 'Zadanie', value : 'label', width : 250},
+          {label : 'Użytkownik', value : 'user', width : 150},
           {label : 'Typ', value : 'type', width : 100},
           {label : 'Postęp', value : 'progress', width : 60},
         ],

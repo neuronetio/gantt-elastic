@@ -607,7 +607,7 @@ var ElastiganttApp = (function (exports) {
     <g v-for="task in dependencyTasks" :key="task.id" :task="task">
       <path
         v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task"
-        :d="dependencyLine.points" fill="transparent" stroke="#FF000060" stroke-width="2">
+        :d="dependencyLine.points" fill="transparent" stroke="#FFa00090" stroke-width="3">
       </path>
       </g>
     </g>`,
@@ -624,21 +624,24 @@ var ElastiganttApp = (function (exports) {
             const distanceX = stopX - startX;
             const distanceY = stopY - startY;
             const offset = 10;
-            const roundness = 6;
+            const roundness = 4;
             const isBefore = distanceX<=offset+roundness;
             let points = `M ${startX} ${startY}
           L ${startX+offset},${startY} `;
             if(isBefore){
-              points+=`Q ${startX+offset+roundness},${startY} ${startX+offset+roundness},${startY+distanceY/4}
+              points+=`Q ${startX+offset+roundness},${startY} ${startX+offset+roundness},${startY+roundness}
+            L ${startX+offset+roundness},${startY+distanceY/2-roundness}
             Q ${startX+offset+roundness},${startY+distanceY/2} ${startX+offset},${startY+distanceY/2}
             L ${startX-offset+distanceX},${startY+distanceY/2}
-            Q ${startX-offset+distanceX-roundness},${startY+distanceY/2} ${startX-offset+distanceX-roundness},${stopY-distanceY/4}
+            Q ${startX-offset+distanceX-roundness},${startY+distanceY/2} ${startX-offset+distanceX-roundness},${startY+distanceY/2+roundness}
+            L ${startX-offset+distanceX-roundness},${stopY-roundness}
             Q ${startX-offset+distanceX-roundness},${stopY} ${startX-offset+distanceX},${stopY}
             L ${stopX},${stopY}`;
             }else{
               points+=`L ${startX+distanceX/2-roundness},${startY}
-            Q ${startX+distanceX/2},${startY} ${startX+distanceX/2},${startY+distanceY/2}
-            Q ${startX+distanceX/2},${startY+distanceY} ${startX+distanceX/2+roundness},${stopY}
+            Q ${startX+distanceX/2},${startY} ${startX+distanceX/2},${startY+roundness}
+            L ${startX+distanceX/2},${stopY-roundness}
+            Q ${startX+distanceX/2},${stopY} ${startX+distanceX/2+roundness},${stopY}
             L ${stopX},${stopY}`;
             }
             return points;
@@ -879,13 +882,13 @@ var ElastiganttApp = (function (exports) {
       >
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
+        <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
         <g v-for="(task, index) in $root.$data.tasks"
         :task="task"
         :index="index"
         :key="task.id">
           <component :task="task" :index="index" :is="'${prefix}-tree-row-'+task.type"></component>
         </g>
-        <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
       </svg>`,
       data() { return {}; },
       computed : {
@@ -1132,8 +1135,8 @@ var ElastiganttApp = (function (exports) {
         taskList : {
           display : true,
           columns : [
-            {label : 'Zadanie', value : 'label', width : 100},
-            {label : 'Użytkownik', value : 'user', width : 100},
+            {label : 'Zadanie', value : 'label', width : 250},
+            {label : 'Użytkownik', value : 'user', width : 150},
             {label : 'Typ', value : 'type', width : 100},
             {label : 'Postęp', value : 'progress', width : 60},
           ],
