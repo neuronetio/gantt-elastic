@@ -10,6 +10,7 @@ import {TaskListResizer} from './components/TaskList/Resizer.js';
 import {TaskList} from './components/TaskList/TaskList.js';
 import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
 import {TaskListItem} from './components/TaskList/TaskListItem.js';
+import {TaskListExpander} from './components/TaskList/Expander.js';
 import {TreeBar} from './components/Tree/Bar.js';
 import {TreeDependencyLines} from './components/Tree/DependencyLines.js';
 import {Info} from './components/Tree/Info.js';
@@ -34,6 +35,7 @@ class ElastiganttApp {
 
     let components = {
       'task-list-resizer' : TaskListResizer(prefix, self),
+      'task-list-expander' : TaskListExpander(prefix, self),
       'task-list-header' : TaskListHeader(prefix, self),
       'task-list-item' : TaskListItem(prefix, self),
       'task-list' : TaskList(prefix, self),
@@ -112,7 +114,7 @@ class ElastiganttApp {
         steps : 0,
       },
       row : {
-        height : 30,
+        height : 24,
         style : 'fill:#FF0000a0',
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
@@ -146,7 +148,11 @@ class ElastiganttApp {
         resizerWidth : 0,
         percent : 100,
         width : 0,
-        finalWidth : 0
+        finalWidth : 0,
+        expander:{
+          size:16,
+          columnWidth:24
+        }
       },
       calendar : {
         hours : [],
@@ -222,6 +228,13 @@ class ElastiganttApp {
       task.height    = 0;
       task.tooltip   = {visible : false};
       task.mouseOver = false;
+      task.dependencyLines = [];
+      if(typeof task.visible === 'undefined'){
+        task.visible = true;
+      }
+      if(typeof task.collapsed === 'undefined'){
+        task.collapsed = false;
+      }
       return task;
     });
 
@@ -241,10 +254,9 @@ class ElastiganttApp {
       </div>`,
       data : globalState,
       created() {
-        const state = this.$root.$data;
-        state.tasksById = {};
-        state.tasks.forEach(task=>state.tasksById[task.id]=task);
-        let tasks         = state.tasks;
+        this.tasksById = {};
+        this.tasks.forEach(task=>this.tasksById[task.id]=task);
+        let tasks         = this.tasks;
         let firstTaskTime = Number.MAX_SAFE_INTEGER;
         let lastTaskTime  = 0;
         let firstTaskDate, lastTaskDate;
@@ -270,7 +282,13 @@ class ElastiganttApp {
       },
       methods : {
         getTask(taskId){
-          return this.$root.$data.tasksById[taskId];
+          return this.tasksById[taskId];
+        },
+        getChildren(taskId){
+          return this.tasks.filter(task=>task.parent === taskId);
+        },
+        getVisibleTasks(){
+          return this.tasks.filter(task=>task.visible);
         },
         calculateCalendarDimensions() {
           this.calendar.height = 0;
@@ -290,7 +308,7 @@ class ElastiganttApp {
             column.finalWidth = column.width / 100 * this.taskList.percent;
             final += column.finalWidth;
           });
-          this.taskList.finalWidth = final;
+          this.taskList.finalWidth = final+this.taskList.expander.columnWidth;
         },
         recalculate() {
           const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';

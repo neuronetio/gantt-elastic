@@ -15,6 +15,9 @@ export function TreeDependencyLines(prefix, self) {
           const state = this.$root.$data;
           const fromTask = this.$root.getTask(fromTaskId);
           const toTask = this.$root.getTask(toTaskId);
+          if(!toTask.visible || !fromTask.visible){
+            return '';
+          }
           const startX = fromTask.x+fromTask.width;
           const startY = fromTask.y+fromTask.height/2;
           const stopX = toTask.x;

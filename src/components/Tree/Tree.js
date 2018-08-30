@@ -11,7 +11,7 @@ export function Tree(prefix, self) {
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
         <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
-        <g v-for="(task, index) in $root.$data.tasks"
+        <g v-for="(task, index) in $root.getVisibleTasks()"
         :task="task"
         :index="index"
         :key="task.id">

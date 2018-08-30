@@ -1,6 +1,10 @@
 export function TaskListHeader(prefix, self) {
   return self.wrapComponent({
+    props:['expanderStyle'],
     template : `<div class="elastigantt__task-list-header">
+      <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
+        <${prefix}-task-list-expander :tasks="[]"></${prefix}-task-list-expander>
+      </div>
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"

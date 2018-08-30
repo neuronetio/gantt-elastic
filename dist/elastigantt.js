@@ -313,7 +313,7 @@ var ElastiganttApp = (function (exports) {
         horizontalLines() {
           let lines   = [];
           const state = this.$root.$data;
-          let tasks   = state.tasks;
+          let tasks   = this.$root.getVisibleTasks();
           for (let index = 0, len = tasks.length; index <= len; index++) {
             lines.push({
               key : 'hl' + index,
@@ -495,21 +495,44 @@ var ElastiganttApp = (function (exports) {
       <div  xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__task-list-container">
       <div v-html="$root.$data.defs.join('')"></div>
         <${prefix}-task-list-resizer></${prefix}-task-list-resizer>
-        <${prefix}-task-list-header></${prefix}-task-list-header>
+        <${prefix}-task-list-header :expander-style="getHeaderExpanderStyle"></${prefix}-task-list-header>
         <${prefix}-task-list-item
           v-for="task in $root.$data.tasks"
           :key="task.id"
           :task="task"
+          :expander-style="getListExpanderStyle"
         ></${prefix}-task-list-item>
       </div>
     </foreignObject>`,
       data() { return {}; },
+      computed:{
+        getHeaderExpanderStyle(){
+          const state = this.$root.$data;
+          return {
+            'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
+            'height':state.calendar.height+state.calendar.strokeWidth+'px',
+            'margin-bottom': state.calendar.gap + 'px',
+          }
+        },
+        getListExpanderStyle(){
+          const state = this.$root.$data;
+          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          return {
+            'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
+            'height':height+'px',
+          };
+        }
+      }
     });
   }
 
   function TaskListHeader(prefix, self) {
     return self.wrapComponent({
+      props:['expanderStyle'],
       template : `<div class="elastigantt__task-list-header">
+      <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
+        <${prefix}-task-list-expander :tasks="[]"></${prefix}-task-list-expander>
+      </div>
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
@@ -567,8 +590,11 @@ var ElastiganttApp = (function (exports) {
 
   function TaskListItem(prefix, self) {
     return self.wrapComponent({
-      props : [ 'task' ],
+      props : [ 'task' , 'expanderStyle' ],
       template : `<div class="elastigantt__task-list-item">
+      <div class="elastigantt__task-list-item-column elastigantt__task-list-item-column--expander" :style="expanderStyle">
+        <${prefix}-task-list-expander :tasks="[task]"></${prefix}-task-list-expander>
+      </div>
       <div class="elastigantt__task-list-item-column"
       v-for="column in $root.$data.taskList.columns"
       :key="column.label"
@@ -588,6 +614,73 @@ var ElastiganttApp = (function (exports) {
           }
         },
         getContent(column) { return this.task[column.value]; }
+      },
+    });
+  }
+
+  function TaskListExpander(prefix, self) {
+    return self.wrapComponent({
+      props:['tasks'],
+      template : `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
+      <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
+        rx="2"  ry="2" :style="borderStyle" @click="toggle"
+      ></rect>
+      <line
+        :x1="lineOffset"
+        :y1="$root.$data.taskList.expander.size/2"
+        :x2="$root.$data.taskList.expander.size-lineOffset"
+        :y2="$root.$data.taskList.expander.size/2"
+        :style="lineStyle"
+        @click="toggle"
+      ></line>
+      <line v-if="collapsed"
+        :x1="$root.$data.taskList.expander.size/2"
+        :y1="lineOffset"
+        :x2="$root.$data.taskList.expander.size/2"
+        :y2="$root.$data.taskList.expander.size-lineOffset"
+        :style="lineStyle"
+        @click="toggle"
+      ></line>
+    </svg>`,
+      data() {
+        const border = 0.5;
+        return {
+          border,
+          borderStyle:{
+            'fill':'#ffffffa0',
+            'stroke':'#000000',
+            'stroke-width':border,
+          },
+          lineOffset:5,
+          lineStyle:{
+            'fill':'transparent',
+            'stroke':'#000000',
+            'stroke-width':1,
+            'stroke-linecap':'round',
+          }
+        };
+      },
+      computed:{
+        collapsed(){
+          if(this.tasks.length===0){
+            return false;
+          }
+          let collapsed = 0;
+          for(let i=0,len=this.tasks.length;i<len;i++){
+            if(this.tasks[i].collapsed){
+              collapsed++;
+            }
+          }
+          return collapsed===this.tasks.length;
+        }
+      },
+      methods:{
+        toggle(){
+          this.tasks.forEach(task=>{
+            task.collapsed=!task.collapsed;
+            this.$root.getChildren(task.id).forEach(child=>child.visible=!task.collapsed);
+          });
+        }
       }
     });
   }
@@ -617,6 +710,9 @@ var ElastiganttApp = (function (exports) {
             const state = this.$root.$data;
             const fromTask = this.$root.getTask(fromTaskId);
             const toTask = this.$root.getTask(toTaskId);
+            if(!toTask.visible || !fromTask.visible){
+              return '';
+            }
             const startX = fromTask.x+fromTask.width;
             const startY = fromTask.y+fromTask.height/2;
             const stopX = toTask.x;
@@ -883,7 +979,7 @@ var ElastiganttApp = (function (exports) {
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
         <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
-        <g v-for="(task, index) in $root.$data.tasks"
+        <g v-for="(task, index) in $root.getVisibleTasks()"
         :task="task"
         :index="index"
         :key="task.id">
@@ -1031,6 +1127,7 @@ var ElastiganttApp = (function (exports) {
 
       let components = {
         'task-list-resizer' : TaskListResizer(prefix, self),
+        'task-list-expander' : TaskListExpander(prefix, self),
         'task-list-header' : TaskListHeader(prefix, self),
         'task-list-item' : TaskListItem(prefix, self),
         'task-list' : TaskList(prefix, self),
@@ -1109,7 +1206,7 @@ var ElastiganttApp = (function (exports) {
           steps : 0,
         },
         row : {
-          height : 30,
+          height : 24,
           style : 'fill:#FF0000a0',
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
@@ -1143,7 +1240,11 @@ var ElastiganttApp = (function (exports) {
           resizerWidth : 0,
           percent : 100,
           width : 0,
-          finalWidth : 0
+          finalWidth : 0,
+          expander:{
+            size:16,
+            columnWidth:24
+          }
         },
         calendar : {
           hours : [],
@@ -1219,6 +1320,13 @@ var ElastiganttApp = (function (exports) {
         task.height    = 0;
         task.tooltip   = {visible : false};
         task.mouseOver = false;
+        task.dependencyLines = [];
+        if(typeof task.visible === 'undefined'){
+          task.visible = true;
+        }
+        if(typeof task.collapsed === 'undefined'){
+          task.collapsed = false;
+        }
         return task;
       });
 
@@ -1238,10 +1346,9 @@ var ElastiganttApp = (function (exports) {
       </div>`,
         data : globalState,
         created() {
-          const state = this.$root.$data;
-          state.tasksById = {};
-          state.tasks.forEach(task=>state.tasksById[task.id]=task);
-          let tasks         = state.tasks;
+          this.tasksById = {};
+          this.tasks.forEach(task=>this.tasksById[task.id]=task);
+          let tasks         = this.tasks;
           let firstTaskTime = Number.MAX_SAFE_INTEGER;
           let lastTaskTime  = 0;
           let firstTaskDate, lastTaskDate;
@@ -1267,7 +1374,13 @@ var ElastiganttApp = (function (exports) {
         },
         methods : {
           getTask(taskId){
-            return this.$root.$data.tasksById[taskId];
+            return this.tasksById[taskId];
+          },
+          getChildren(taskId){
+            return this.tasks.filter(task=>task.parent === taskId);
+          },
+          getVisibleTasks(){
+            return this.tasks.filter(task=>task.visible);
           },
           calculateCalendarDimensions() {
             this.calendar.height = 0;
@@ -1287,7 +1400,7 @@ var ElastiganttApp = (function (exports) {
               column.finalWidth = column.width / 100 * this.taskList.percent;
               final += column.finalWidth;
             });
-            this.taskList.finalWidth = final;
+            this.taskList.finalWidth = final+this.taskList.expander.columnWidth;
           },
           recalculate() {
             const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';

@@ -44,7 +44,7 @@ export function Grid(prefix, self) {
       horizontalLines() {
         let lines   = [];
         const state = this.$root.$data;
-        let tasks   = state.tasks;
+        let tasks   = this.$root.getVisibleTasks();
         for (let index = 0, len = tasks.length; index <= len; index++) {
           lines.push({
             key : 'hl' + index,
