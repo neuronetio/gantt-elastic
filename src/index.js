@@ -11,7 +11,7 @@ import {TaskList} from './components/TaskList/TaskList.js';
 import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
 import {TaskListItem} from './components/TaskList/TaskListItem.js';
 import {TreeBar} from './components/Tree/Bar.js';
-import {TreeDependencyLine} from './components/Tree/DependencyLine.js';
+import {TreeDependencyLines} from './components/Tree/DependencyLines.js';
 import {Info} from './components/Tree/Info.js';
 import {TreeProgressBar} from './components/Tree/ProgressBar.js';
 import {TreeRowMilestone} from './components/Tree/Row/Milestone.js';
@@ -47,7 +47,7 @@ class ElastiganttApp {
       'tree-row-project' : TreeRowProject(prefix, self),
       'tree-text' : TreeText(prefix, self),
       'tree-bar' : TreeBar(prefix, self),
-      'tree-dependency-line' : TreeDependencyLine(prefix, self),
+      'tree-dependency-lines' : TreeDependencyLines(prefix, self),
       'tree-progress-bar' : TreeProgressBar(prefix, self),
       'info' : Info(prefix, self),
       'calendar' : Calendar(prefix, self),
@@ -241,7 +241,10 @@ class ElastiganttApp {
       </div>`,
       data : globalState,
       created() {
-        let tasks         = this.$root.$data.tasks;
+        const state = this.$root.$data;
+        state.tasksById = {};
+        state.tasks.forEach(task=>state.tasksById[task.id]=task);
+        let tasks         = state.tasks;
         let firstTaskTime = Number.MAX_SAFE_INTEGER;
         let lastTaskTime  = 0;
         let firstTaskDate, lastTaskDate;
@@ -266,6 +269,9 @@ class ElastiganttApp {
         this.recalculate();
       },
       methods : {
+        getTask(taskId){
+          return this.$root.$data.tasksById[taskId];
+        },
         calculateCalendarDimensions() {
           this.calendar.height = 0;
           if (this.calendar.hour.display) {

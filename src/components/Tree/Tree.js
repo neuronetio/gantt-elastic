@@ -16,6 +16,7 @@ export function Tree(prefix, self) {
         :key="task.id">
           <component :task="task" :index="index" :is="'${prefix}-tree-row-'+task.type"></component>
         </g>
+        <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
       </svg>`,
     data() { return {}; },
     computed : {
