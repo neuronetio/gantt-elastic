@@ -3,7 +3,7 @@ export function TaskListHeader(prefix, self) {
     props:['expanderStyle'],
     template : `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
-        <${prefix}-task-list-expander :tasks="[]"></${prefix}-task-list-expander>
+        <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
       </div>
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
@@ -36,6 +36,9 @@ export function TaskListHeader(prefix, self) {
           }
         }
       },
+      collapsible(){
+        return this.$root.$data.tasks.filter(task=>task.children.length>0);
+      }
     },
     methods : {
       resizerMouseDown(event, column) {

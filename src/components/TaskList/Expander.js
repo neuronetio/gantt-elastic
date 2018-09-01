@@ -5,7 +5,7 @@ export function TaskListExpander(prefix, self) {
       <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
         rx="2"  ry="2" :style="borderStyle" @click="toggle"
       ></rect>
-      <line
+      <line v-if="allChildren.length"
         :x1="lineOffset"
         :y1="$root.$data.taskList.expander.size/2"
         :x2="$root.$data.taskList.expander.size-lineOffset"
@@ -41,6 +41,15 @@ export function TaskListExpander(prefix, self) {
       };
     },
     computed:{
+      allChildren(){
+        const children = [];
+        this.tasks.forEach(task=>{
+          task.children.forEach(child=>{
+            children.push(child);
+          });
+        });
+        return children;
+      },
       collapsed(){
         if(this.tasks.length===0){
           return false;
@@ -51,14 +60,19 @@ export function TaskListExpander(prefix, self) {
             collapsed++;
           }
         }
-        return collapsed===this.tasks.length;
+        return collapsed === this.tasks.length;
       }
     },
     methods:{
       toggle(){
+        if(this.allChildren.length === 0){
+          return;
+        }
+        const collapsed = !this.collapsed;
         this.tasks.forEach(task=>{
-          task.collapsed=!task.collapsed;
-          this.$root.getChildren(task.id).forEach(child=>child.visible=!task.collapsed);
+          task.collapsed = collapsed;
+          this.$root.getChildren(task.id).forEach(child=>child.visible=!collapsed);
+          this.$root.recalculate();
         });
       }
     }

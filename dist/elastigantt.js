@@ -497,7 +497,7 @@ var ElastiganttApp = (function (exports) {
         <${prefix}-task-list-resizer></${prefix}-task-list-resizer>
         <${prefix}-task-list-header :expander-style="getHeaderExpanderStyle"></${prefix}-task-list-header>
         <${prefix}-task-list-item
-          v-for="task in $root.$data.tasks"
+          v-for="task in $root.getVisibleTasks()"
           :key="task.id"
           :task="task"
           :expander-style="getListExpanderStyle"
@@ -531,7 +531,7 @@ var ElastiganttApp = (function (exports) {
       props:['expanderStyle'],
       template : `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
-        <${prefix}-task-list-expander :tasks="[]"></${prefix}-task-list-expander>
+        <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
       </div>
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
@@ -564,6 +564,9 @@ var ElastiganttApp = (function (exports) {
             }
           }
         },
+        collapsible(){
+          return this.$root.$data.tasks.filter(task=>task.children.length>0);
+        }
       },
       methods : {
         resizerMouseDown(event, column) {
@@ -625,7 +628,7 @@ var ElastiganttApp = (function (exports) {
       <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
         rx="2"  ry="2" :style="borderStyle" @click="toggle"
       ></rect>
-      <line
+      <line v-if="allChildren.length"
         :x1="lineOffset"
         :y1="$root.$data.taskList.expander.size/2"
         :x2="$root.$data.taskList.expander.size-lineOffset"
@@ -661,6 +664,15 @@ var ElastiganttApp = (function (exports) {
         };
       },
       computed:{
+        allChildren(){
+          const children = [];
+          this.tasks.forEach(task=>{
+            task.children.forEach(child=>{
+              children.push(child);
+            });
+          });
+          return children;
+        },
         collapsed(){
           if(this.tasks.length===0){
             return false;
@@ -671,14 +683,19 @@ var ElastiganttApp = (function (exports) {
               collapsed++;
             }
           }
-          return collapsed===this.tasks.length;
+          return collapsed === this.tasks.length;
         }
       },
       methods:{
         toggle(){
+          if(this.allChildren.length === 0){
+            return;
+          }
+          const collapsed = !this.collapsed;
           this.tasks.forEach(task=>{
-            task.collapsed=!task.collapsed;
-            this.$root.getChildren(task.id).forEach(child=>child.visible=!task.collapsed);
+            task.collapsed = collapsed;
+            this.$root.getChildren(task.id).forEach(child=>child.visible=!collapsed);
+            this.$root.recalculate();
           });
         }
       }
@@ -978,7 +995,7 @@ var ElastiganttApp = (function (exports) {
       >
         <${prefix}-calendar></${prefix}-calendar>
         <${prefix}-grid></${prefix}-grid>
-        <${prefix}-tree-dependency-lines :tasks="$root.$data.tasks"></${prefix}-tree-dependency-lines>
+        <${prefix}-tree-dependency-lines :tasks="$root.getVisibleTasks()"></${prefix}-tree-dependency-lines>
         <g v-for="(task, index) in $root.getVisibleTasks()"
         :task="task"
         :index="index"
@@ -1327,6 +1344,12 @@ var ElastiganttApp = (function (exports) {
         if(typeof task.collapsed === 'undefined'){
           task.collapsed = false;
         }
+        if(typeof task.dependencyLines === 'undefined'){
+          task.dependencyLines = [];
+        }
+        if(typeof task.children === 'undefined'){
+          task.children = [];
+        }
         return task;
       });
 
@@ -1426,10 +1449,14 @@ var ElastiganttApp = (function (exports) {
 
             this.calculateCalendarDimensions();
             this.calculateTaskListColumnWidths();
-            this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
+            this.tasks.forEach(task=>{
+              task.children = this.getChildren(task.id);
+            });
+            const visibleTasks = this.getVisibleTasks();
+            this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
                           this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
-            for (let index = 0, len = this.tasks.length; index < len; index++) {
-              let task   = this.tasks[index];
+            for (let index = 0, len = visibleTasks.length; index < len; index++) {
+              let task   = visibleTasks[index];
               task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
               if (task.width < 0) {
                 task.width = 0;

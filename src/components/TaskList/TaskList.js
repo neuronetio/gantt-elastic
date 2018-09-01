@@ -12,7 +12,7 @@ export function TaskList(prefix, self) {
         <${prefix}-task-list-resizer></${prefix}-task-list-resizer>
         <${prefix}-task-list-header :expander-style="getHeaderExpanderStyle"></${prefix}-task-list-header>
         <${prefix}-task-list-item
-          v-for="task in $root.$data.tasks"
+          v-for="task in $root.getVisibleTasks()"
           :key="task.id"
           :task="task"
           :expander-style="getListExpanderStyle"

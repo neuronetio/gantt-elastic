@@ -235,6 +235,12 @@ class ElastiganttApp {
       if(typeof task.collapsed === 'undefined'){
         task.collapsed = false;
       }
+      if(typeof task.dependencyLines === 'undefined'){
+        task.dependencyLines = [];
+      }
+      if(typeof task.children === 'undefined'){
+        task.children = [];
+      }
       return task;
     });
 
@@ -334,10 +340,14 @@ class ElastiganttApp {
 
           this.calculateCalendarDimensions();
           this.calculateTaskListColumnWidths();
-          this.height = this.tasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
+          this.tasks.forEach(task=>{
+            task.children = this.getChildren(task.id);
+          });
+          const visibleTasks = this.getVisibleTasks();
+          this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
                         this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
-          for (let index = 0, len = this.tasks.length; index < len; index++) {
-            let task   = this.tasks[index];
+          for (let index = 0, len = visibleTasks.length; index < len; index++) {
+            let task   = visibleTasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
             if (task.width < 0) {
               task.width = 0;
