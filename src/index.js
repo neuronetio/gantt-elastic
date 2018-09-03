@@ -136,7 +136,13 @@ class ElastiganttApp {
         style : "stroke:#00000050;strokeWidth:1",
         lines : [],
       },
-      info : {style : 'fill:#000000f0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px'},
+      info : {
+        style : 'fill:#000000a0',
+        textStyle : 'fill:#fff',
+        fontFamily : 'sans-serif',
+        fontSize : '12px',
+        fontWeight : 'bold'
+      },
       taskList : {
         display : true,
         columns : [
