@@ -4,7 +4,7 @@
   "description": "elastic gantt chart",
   "main": "dist/elastigantt.js",
   "dependencies": {
-    "dayjs": "^1.7.4"
+    "dayjs": "^1.7.5"
   },
   "devDependencies": {
     "rollup": "^0.62.0",

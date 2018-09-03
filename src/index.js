@@ -165,9 +165,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) { return dayjs(date).locale('pl').format('HH'); },
-            medium(date) { return dayjs(date).locale('pl').format('HH:mm'); },
-            long(date) { return dayjs(date).locale('pl').format('HH:mm'); }
+            short(date) { return dayjs(date).locale(userOptions.locale.code).format('HH'); },
+            medium(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); },
+            long(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); }
           }
         },
         day : {
@@ -175,9 +175,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) { return dayjs(date).locale('pl').format('DD'); },
-            medium(date) { return dayjs(date).locale('pl').format('DD ddd'); },
-            long(date) { return dayjs(date).locale('pl').format('DD dddd'); }
+            short(date) { return dayjs(date).locale(userOptions.locale.code).format('DD'); },
+            medium(date) { return dayjs(date).locale(userOptions.locale.code).format('DD ddd'); },
+            long(date) { return dayjs(date).locale(userOptions.locale.code).format('DD dddd'); }
           }
         },
         month : {
@@ -185,9 +185,9 @@ class ElastiganttApp {
           display : true,
           fontSize : '12px',
           format : {
-            short(date) { return dayjs(date).locale('pl').format('MM'); },
-            medium(date) { return dayjs(date).locale('pl').format('\'YY MMM'); },
-            long(date) { return dayjs(date).locale('pl').format('YYYY MMMM (MM)'); }
+            short(date) { return dayjs(date).locale(userOptions.locale.code).format('MM'); },
+            medium(date) { return dayjs(date).locale(userOptions.locale.code).format('\'YY MMM'); },
+            long(date) { return dayjs(date).locale(userOptions.locale.code).format('YYYY MMMM (MM)'); }
           }
         },
       },
