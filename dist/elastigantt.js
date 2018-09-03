@@ -1202,7 +1202,7 @@ var ElastiganttApp = (function (exports) {
         },
         times : {
           timeScale : 60 * 1000,
-          timeZoom : 18,
+          timeZoom : 17,
           timePerPixel : 0,
           fistDate : null,
           firstTime : null, // firstDate getTime()
@@ -1241,7 +1241,7 @@ var ElastiganttApp = (function (exports) {
         taskList : {
           display : true,
           columns : [
-            {label : 'Description', value : 'label', width : 250},
+            {label : 'Description', value : 'label', width : 324},
             {label : 'User', value : 'user', width : 150},
             {label : 'Type', value : 'type', width : 100},
             {label : 'Progress', value : 'progress', width : 60},
