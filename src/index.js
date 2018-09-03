@@ -146,10 +146,11 @@ class ElastiganttApp {
       taskList : {
         display : true,
         columns : [
+          {label : 'ID', value : 'id', width : 40},
           {label : 'Description', value : 'label', width : 324},
           {label : 'User', value : 'user', width : 150},
           {label : 'Type', value : 'type', width : 100},
-          {label : 'Progress', value : 'progress', width : 60},
+          {label : 'Progress', value : 'progress', width : 66},
         ],
         resizerWidth : 0,
         percent : 100,
