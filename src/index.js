@@ -6,11 +6,11 @@ import {Grid} from './components/Grid/Grid.js';
 import {GridHeader} from './components/Grid/GridHeader.js';
 import {Header} from './components/Header.js';
 import {Main} from './components/Main.js';
+import {TaskListExpander} from './components/TaskList/Expander.js';
 import {TaskListResizer} from './components/TaskList/Resizer.js';
 import {TaskList} from './components/TaskList/TaskList.js';
 import {TaskListHeader} from './components/TaskList/TaskListHeader.js';
 import {TaskListItem} from './components/TaskList/TaskListItem.js';
-import {TaskListExpander} from './components/TaskList/Expander.js';
 import {TreeBar} from './components/Tree/Bar.js';
 import {TreeDependencyLines} from './components/Tree/DependencyLines.js';
 import {Info} from './components/Tree/Info.js';
@@ -114,7 +114,7 @@ class ElastiganttApp {
         steps : 0,
       },
       row : {
-        height : 24,
+        height : 30,
         style : 'fill:#FF0000a0',
         textStyle : 'fill:#ffffff',
         fontFamily : 'sans-serif',
@@ -140,19 +140,16 @@ class ElastiganttApp {
       taskList : {
         display : true,
         columns : [
-          {label : 'Zadanie', value : 'label', width : 250},
-          {label : 'Użytkownik', value : 'user', width : 150},
-          {label : 'Typ', value : 'type', width : 100},
-          {label : 'Postęp', value : 'progress', width : 60},
+          {label : 'Description', value : 'label', width : 250},
+          {label : 'User', value : 'user', width : 150},
+          {label : 'Type', value : 'type', width : 100},
+          {label : 'Progress', value : 'progress', width : 60},
         ],
         resizerWidth : 0,
         percent : 100,
         width : 0,
         finalWidth : 0,
-        expander:{
-          size:16,
-          columnWidth:24
-        }
+        expander : {size : 16, columnWidth : 24}
       },
       calendar : {
         hours : [],
@@ -222,23 +219,23 @@ class ElastiganttApp {
 
     // initialize observer
     this.tasks = this.tasks.map((task) => {
-      task.x         = 0;
-      task.y         = 0;
-      task.width     = 0;
-      task.height    = 0;
-      task.tooltip   = {visible : false};
-      task.mouseOver = false;
+      task.x               = 0;
+      task.y               = 0;
+      task.width           = 0;
+      task.height          = 0;
+      task.tooltip         = {visible : false};
+      task.mouseOver       = false;
       task.dependencyLines = [];
-      if(typeof task.visible === 'undefined'){
+      if (typeof task.visible === 'undefined') {
         task.visible = true;
       }
-      if(typeof task.collapsed === 'undefined'){
+      if (typeof task.collapsed === 'undefined') {
         task.collapsed = false;
       }
-      if(typeof task.dependencyLines === 'undefined'){
+      if (typeof task.dependencyLines === 'undefined') {
         task.dependencyLines = [];
       }
-      if(typeof task.children === 'undefined'){
+      if (typeof task.children === 'undefined') {
         task.children = [];
       }
       return task;
@@ -261,7 +258,7 @@ class ElastiganttApp {
       data : globalState,
       created() {
         this.tasksById = {};
-        this.tasks.forEach(task=>this.tasksById[task.id]=task);
+        this.tasks.forEach(task => this.tasksById[task.id] = task);
         let tasks         = this.tasks;
         let firstTaskTime = Number.MAX_SAFE_INTEGER;
         let lastTaskTime  = 0;
@@ -287,15 +284,9 @@ class ElastiganttApp {
         this.recalculate();
       },
       methods : {
-        getTask(taskId){
-          return this.tasksById[taskId];
-        },
-        getChildren(taskId){
-          return this.tasks.filter(task=>task.parent === taskId);
-        },
-        getVisibleTasks(){
-          return this.tasks.filter(task=>task.visible);
-        },
+        getTask(taskId) { return this.tasksById[taskId]; },
+        getChildren(taskId) { return this.tasks.filter(task => task.parent === taskId); },
+        getVisibleTasks() { return this.tasks.filter(task => task.visible); },
         calculateCalendarDimensions() {
           this.calendar.height = 0;
           if (this.calendar.hour.display) {
@@ -314,7 +305,7 @@ class ElastiganttApp {
             column.finalWidth = column.width / 100 * this.taskList.percent;
             final += column.finalWidth;
           });
-          this.taskList.finalWidth = final+this.taskList.expander.columnWidth;
+          this.taskList.finalWidth = final + this.taskList.expander.columnWidth;
         },
         recalculate() {
           const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
@@ -340,12 +331,11 @@ class ElastiganttApp {
 
           this.calculateCalendarDimensions();
           this.calculateTaskListColumnWidths();
-          this.tasks.forEach(task=>{
-            task.children = this.getChildren(task.id);
-          });
+          this.tasks.forEach(task => { task.children = this.getChildren(task.id); });
           const visibleTasks = this.getVisibleTasks();
-          this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
-                        this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+          this.height        = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) +
+                        this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth +
+                        this.$root.$data.calendar.gap;
           for (let index = 0, len = visibleTasks.length; index < len; index++) {
             let task   = visibleTasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;

@@ -20,21 +20,21 @@ export function TaskList(prefix, self) {
       </div>
     </foreignObject>`,
     data() { return {}; },
-    computed:{
-      getHeaderExpanderStyle(){
+    computed : {
+      getHeaderExpanderStyle() {
         const state = this.$root.$data;
         return {
-          'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
-          'height':state.calendar.height+state.calendar.strokeWidth+'px',
-          'margin-bottom': state.calendar.gap + 'px',
+          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+              'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+              'margin-bottom': state.calendar.gap + 'px',
         }
       },
-      getListExpanderStyle(){
+      getListExpanderStyle() {
         const state = this.$root.$data;
-        let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+        let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
         return {
-          'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
-          'height':height+'px',
+          'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+          'height' : height + 'px',
         };
       }
     }

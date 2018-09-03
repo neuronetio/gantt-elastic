@@ -468,6 +468,83 @@ var ElastiganttApp = (function (exports) {
     })
   }
 
+  function TaskListExpander(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'tasks' ],
+      template : `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
+      <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
+        rx="2"  ry="2" :style="borderStyle" @click="toggle"
+      ></rect>
+      <line v-if="allChildren.length"
+        :x1="lineOffset"
+        :y1="$root.$data.taskList.expander.size/2"
+        :x2="$root.$data.taskList.expander.size-lineOffset"
+        :y2="$root.$data.taskList.expander.size/2"
+        :style="lineStyle"
+        @click="toggle"
+      ></line>
+      <line v-if="collapsed"
+        :x1="$root.$data.taskList.expander.size/2"
+        :y1="lineOffset"
+        :x2="$root.$data.taskList.expander.size/2"
+        :y2="$root.$data.taskList.expander.size-lineOffset"
+        :style="lineStyle"
+        @click="toggle"
+      ></line>
+    </svg>`,
+      data() {
+        const border = 0.5;
+        return {
+          border,
+          borderStyle : {
+            'fill' : '#ffffffa0',
+            'stroke' : '#000000',
+            'stroke-width' : border,
+          },
+          lineOffset : 5,
+          lineStyle : {
+            'fill' : 'transparent',
+            'stroke' : '#000000',
+            'stroke-width' : 1,
+            'stroke-linecap' : 'round',
+          }
+        };
+      },
+      computed : {
+        allChildren() {
+          const children = [];
+          this.tasks.forEach(task => { task.children.forEach(child => { children.push(child); }); });
+          return children;
+        },
+        collapsed() {
+          if (this.tasks.length === 0) {
+            return false;
+          }
+          let collapsed = 0;
+          for (let i = 0, len = this.tasks.length; i < len; i++) {
+            if (this.tasks[i].collapsed) {
+              collapsed++;
+            }
+          }
+          return collapsed === this.tasks.length;
+        }
+      },
+      methods : {
+        toggle() {
+          if (this.allChildren.length === 0) {
+            return;
+          }
+          const collapsed = !this.collapsed;
+          this.tasks.forEach(task => {
+            task.collapsed = collapsed;
+            this.$root.getChildren(task.id).forEach(child => child.visible = !collapsed);
+            this.$root.recalculate();
+          });
+        }
+      }
+    });
+  }
+
   function TaskListResizer(prefix, self) {
     return self.wrapComponent({
       template : `<div class="elastigantt__task-list-resizer" style="getStyle"></div>`,
@@ -505,21 +582,21 @@ var ElastiganttApp = (function (exports) {
       </div>
     </foreignObject>`,
       data() { return {}; },
-      computed:{
-        getHeaderExpanderStyle(){
+      computed : {
+        getHeaderExpanderStyle() {
           const state = this.$root.$data;
           return {
-            'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
-            'height':state.calendar.height+state.calendar.strokeWidth+'px',
-            'margin-bottom': state.calendar.gap + 'px',
+            'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+                'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+                'margin-bottom': state.calendar.gap + 'px',
           }
         },
-        getListExpanderStyle(){
+        getListExpanderStyle() {
           const state = this.$root.$data;
-          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
           return {
-            'width':state.taskList.expander.columnWidth+state.calendar.strokeWidth+'px',
-            'height':height+'px',
+            'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+            'height' : height + 'px',
           };
         }
       }
@@ -528,7 +605,7 @@ var ElastiganttApp = (function (exports) {
 
   function TaskListHeader(prefix, self) {
     return self.wrapComponent({
-      props:['expanderStyle'],
+      props : [ 'expanderStyle' ],
       template : `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
@@ -564,9 +641,7 @@ var ElastiganttApp = (function (exports) {
             }
           }
         },
-        collapsible(){
-          return this.$root.$data.tasks.filter(task=>task.children.length>0);
-        }
+        collapsible() { return this.$root.$data.tasks.filter(task => task.children.length > 0); }
       },
       methods : {
         resizerMouseDown(event, column) {
@@ -593,7 +668,7 @@ var ElastiganttApp = (function (exports) {
 
   function TaskListItem(prefix, self) {
     return self.wrapComponent({
-      props : [ 'task' , 'expanderStyle' ],
+      props : [ 'task', 'expanderStyle' ],
       template : `<div class="elastigantt__task-list-item">
       <div class="elastigantt__task-list-item-column elastigantt__task-list-item-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="[task]"></${prefix}-task-list-expander>
@@ -621,87 +696,6 @@ var ElastiganttApp = (function (exports) {
     });
   }
 
-  function TaskListExpander(prefix, self) {
-    return self.wrapComponent({
-      props:['tasks'],
-      template : `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
-      <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
-        rx="2"  ry="2" :style="borderStyle" @click="toggle"
-      ></rect>
-      <line v-if="allChildren.length"
-        :x1="lineOffset"
-        :y1="$root.$data.taskList.expander.size/2"
-        :x2="$root.$data.taskList.expander.size-lineOffset"
-        :y2="$root.$data.taskList.expander.size/2"
-        :style="lineStyle"
-        @click="toggle"
-      ></line>
-      <line v-if="collapsed"
-        :x1="$root.$data.taskList.expander.size/2"
-        :y1="lineOffset"
-        :x2="$root.$data.taskList.expander.size/2"
-        :y2="$root.$data.taskList.expander.size-lineOffset"
-        :style="lineStyle"
-        @click="toggle"
-      ></line>
-    </svg>`,
-      data() {
-        const border = 0.5;
-        return {
-          border,
-          borderStyle:{
-            'fill':'#ffffffa0',
-            'stroke':'#000000',
-            'stroke-width':border,
-          },
-          lineOffset:5,
-          lineStyle:{
-            'fill':'transparent',
-            'stroke':'#000000',
-            'stroke-width':1,
-            'stroke-linecap':'round',
-          }
-        };
-      },
-      computed:{
-        allChildren(){
-          const children = [];
-          this.tasks.forEach(task=>{
-            task.children.forEach(child=>{
-              children.push(child);
-            });
-          });
-          return children;
-        },
-        collapsed(){
-          if(this.tasks.length===0){
-            return false;
-          }
-          let collapsed = 0;
-          for(let i=0,len=this.tasks.length;i<len;i++){
-            if(this.tasks[i].collapsed){
-              collapsed++;
-            }
-          }
-          return collapsed === this.tasks.length;
-        }
-      },
-      methods:{
-        toggle(){
-          if(this.allChildren.length === 0){
-            return;
-          }
-          const collapsed = !this.collapsed;
-          this.tasks.forEach(task=>{
-            task.collapsed = collapsed;
-            this.$root.getChildren(task.id).forEach(child=>child.visible=!collapsed);
-            this.$root.recalculate();
-          });
-        }
-      }
-    });
-  }
-
   function TreeBar(prefix, self) {
     return self.wrapComponent({
       props : [ 'task' ],
@@ -722,51 +716,49 @@ var ElastiganttApp = (function (exports) {
       </g>
     </g>`,
       data() { return {}; },
-      methods:{
-        getPoints(fromTaskId, toTaskId){
-            const state = this.$root.$data;
-            const fromTask = this.$root.getTask(fromTaskId);
-            const toTask = this.$root.getTask(toTaskId);
-            if(!toTask.visible || !fromTask.visible){
-              return '';
-            }
-            const startX = fromTask.x+fromTask.width;
-            const startY = fromTask.y+fromTask.height/2;
-            const stopX = toTask.x;
-            const stopY = toTask.y+toTask.height/2;
-            const distanceX = stopX - startX;
-            const distanceY = stopY - startY;
-            const offset = 10;
-            const roundness = 4;
-            const isBefore = distanceX<=offset+roundness;
-            let points = `M ${startX} ${startY}
-          L ${startX+offset},${startY} `;
-            if(isBefore){
-              points+=`Q ${startX+offset+roundness},${startY} ${startX+offset+roundness},${startY+roundness}
-            L ${startX+offset+roundness},${startY+distanceY/2-roundness}
-            Q ${startX+offset+roundness},${startY+distanceY/2} ${startX+offset},${startY+distanceY/2}
-            L ${startX-offset+distanceX},${startY+distanceY/2}
-            Q ${startX-offset+distanceX-roundness},${startY+distanceY/2} ${startX-offset+distanceX-roundness},${startY+distanceY/2+roundness}
-            L ${startX-offset+distanceX-roundness},${stopY-roundness}
-            Q ${startX-offset+distanceX-roundness},${stopY} ${startX-offset+distanceX},${stopY}
+      methods : {
+        getPoints(fromTaskId, toTaskId) {
+          const state    = this.$root.$data;
+          const fromTask = this.$root.getTask(fromTaskId);
+          const toTask   = this.$root.getTask(toTaskId);
+          if (!toTask.visible || !fromTask.visible) {
+            return '';
+          }
+          const startX    = fromTask.x + fromTask.width;
+          const startY    = fromTask.y + fromTask.height / 2;
+          const stopX     = toTask.x;
+          const stopY     = toTask.y + toTask.height / 2;
+          const distanceX = stopX - startX;
+          const distanceY = stopY - startY;
+          const offset    = 10;
+          const roundness = 4;
+          const isBefore  = distanceX <= offset + roundness;
+          let points      = `M ${startX} ${startY}
+          L ${startX + offset},${startY} `;
+          if (isBefore) {
+            points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness}
+            L ${startX + offset + roundness},${startY + distanceY / 2 - roundness}
+            Q ${startX + offset + roundness},${startY + distanceY / 2} ${startX + offset},${startY + distanceY / 2}
+            L ${startX - offset + distanceX},${startY + distanceY / 2}
+            Q ${startX - offset + distanceX - roundness},${startY + distanceY / 2} ${
+              startX - offset + distanceX - roundness},${startY + distanceY / 2 + roundness}
+            L ${startX - offset + distanceX - roundness},${stopY - roundness}
+            Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}
             L ${stopX},${stopY}`;
-            }else{
-              points+=`L ${startX+distanceX/2-roundness},${startY}
-            Q ${startX+distanceX/2},${startY} ${startX+distanceX/2},${startY+roundness}
-            L ${startX+distanceX/2},${stopY-roundness}
-            Q ${startX+distanceX/2},${stopY} ${startX+distanceX/2+roundness},${stopY}
+          } else {
+            points += `L ${startX + distanceX / 2 - roundness},${startY}
+            Q ${startX + distanceX / 2},${startY} ${startX + distanceX / 2},${startY + roundness}
+            L ${startX + distanceX / 2},${stopY - roundness}
+            Q ${startX + distanceX / 2},${stopY} ${startX + distanceX / 2 + roundness},${stopY}
             L ${stopX},${stopY}`;
-            }
-            return points;
+          }
+          return points;
         }
       },
       computed : {
-        dependencyTasks(){
-          return this.tasks.filter(task=>typeof task.dependentOn !== 'undefined')
-          .map(task=>{
-            task.dependencyLines = task.dependentOn.map(id=>{
-              return {points: this.getPoints(id,task.id)};
-            });
+        dependencyTasks() {
+          return this.tasks.filter(task => typeof task.dependentOn !== 'undefined').map(task => {
+            task.dependencyLines = task.dependentOn.map(id => { return {points : this.getPoints(id, task.id)}; });
             return task;
           });
         },
@@ -874,49 +866,6 @@ var ElastiganttApp = (function (exports) {
       props : [ 'task', 'index' ],
       template :
           `<g class="elastigantt__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-      <svg class="elastigantt__tree-row-project"
-        :x="task.x"
-        :y="task.y"
-        :width="task.width"
-        :height="task.height"
-        @click="treeRowClick"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-      <defs>
-        <clipPath id="elastigantt__project-clip-path">
-          <polygon :points="getPoints"></polygon>
-        </clipPath>
-      </defs>
-        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
-        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)">
-        </${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      </svg>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
-    </g>`,
-      data() { return {}; },
-      computed : {
-        getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
-        getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
-        getPoints() {
-          const task                               = this.task;
-          const fifty                              = this.task.height - this.task.height / 4;
-          const full                               = this.task.height;
-          return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
-        },
-      },
-      methods : {
-        treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
-        treeRowMouseOver() { this.task.mouseOver   = true; },
-        treeRowMouseOut() { this.task.mouseOver    = false; },
-      }
-    });
-  }
-
-  function TreeRowTask(prefix, self) {
-    return self.wrapComponent({
-      props : [ 'task', 'index' ],
-      template : `<g class="elastigantt__tree-row-task-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
       <svg class="elastigantt__tree-row"
         :x="task.x"
         :y="task.y"
@@ -926,13 +875,13 @@ var ElastiganttApp = (function (exports) {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-        <clipPath id="elastigantt__task-clip-path">
+        <clipPath id="elastigantt__project-clip-path">
           <path :d="getPoints" :fill="getFill"></path>
         </clipPath>
         </defs>
         <path :d="getPoints" :fill="getFill"></path>
-        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)"></${
-        prefix}-tree-progress-bar>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${
+            prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
@@ -958,6 +907,49 @@ var ElastiganttApp = (function (exports) {
         Z`;
         },
         getFill() { return '#FF0000a0'; }
+      },
+      methods : {
+        treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
+        treeRowMouseOver() { this.task.mouseOver   = true; },
+        treeRowMouseOut() { this.task.mouseOver    = false; },
+      }
+    });
+  }
+
+  function TreeRowTask(prefix, self) {
+    return self.wrapComponent({
+      props : [ 'task', 'index' ],
+      template : `<g class="elastigantt__tree-row-task-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+      <svg class="elastigantt__tree-row-task"
+        :x="task.x"
+        :y="task.y"
+        :width="task.width"
+        :height="task.height"
+        @click="treeRowClick"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      <defs>
+        <clipPath id="elastigantt__task-clip-path">
+          <polygon :points="getPoints"></polygon>
+        </clipPath>
+      </defs>
+        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)">
+        </${prefix}-tree-progress-bar>
+        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
+      </svg>
+      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+    </g>`,
+      data() { return {}; },
+      computed : {
+        getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
+        getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+        getPoints() {
+          const task                               = this.task;
+          const fifty                              = this.task.height - this.task.height / 4;
+          const full                               = this.task.height;
+          return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+        },
       },
       methods : {
         treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
@@ -1223,7 +1215,7 @@ var ElastiganttApp = (function (exports) {
           steps : 0,
         },
         row : {
-          height : 24,
+          height : 30,
           style : 'fill:#FF0000a0',
           textStyle : 'fill:#ffffff',
           fontFamily : 'sans-serif',
@@ -1249,19 +1241,16 @@ var ElastiganttApp = (function (exports) {
         taskList : {
           display : true,
           columns : [
-            {label : 'Zadanie', value : 'label', width : 250},
-            {label : 'Użytkownik', value : 'user', width : 150},
-            {label : 'Typ', value : 'type', width : 100},
-            {label : 'Postęp', value : 'progress', width : 60},
+            {label : 'Description', value : 'label', width : 250},
+            {label : 'User', value : 'user', width : 150},
+            {label : 'Type', value : 'type', width : 100},
+            {label : 'Progress', value : 'progress', width : 60},
           ],
           resizerWidth : 0,
           percent : 100,
           width : 0,
           finalWidth : 0,
-          expander:{
-            size:16,
-            columnWidth:24
-          }
+          expander : {size : 16, columnWidth : 24}
         },
         calendar : {
           hours : [],
@@ -1331,23 +1320,23 @@ var ElastiganttApp = (function (exports) {
 
       // initialize observer
       this.tasks = this.tasks.map((task) => {
-        task.x         = 0;
-        task.y         = 0;
-        task.width     = 0;
-        task.height    = 0;
-        task.tooltip   = {visible : false};
-        task.mouseOver = false;
+        task.x               = 0;
+        task.y               = 0;
+        task.width           = 0;
+        task.height          = 0;
+        task.tooltip         = {visible : false};
+        task.mouseOver       = false;
         task.dependencyLines = [];
-        if(typeof task.visible === 'undefined'){
+        if (typeof task.visible === 'undefined') {
           task.visible = true;
         }
-        if(typeof task.collapsed === 'undefined'){
+        if (typeof task.collapsed === 'undefined') {
           task.collapsed = false;
         }
-        if(typeof task.dependencyLines === 'undefined'){
+        if (typeof task.dependencyLines === 'undefined') {
           task.dependencyLines = [];
         }
-        if(typeof task.children === 'undefined'){
+        if (typeof task.children === 'undefined') {
           task.children = [];
         }
         return task;
@@ -1370,7 +1359,7 @@ var ElastiganttApp = (function (exports) {
         data : globalState,
         created() {
           this.tasksById = {};
-          this.tasks.forEach(task=>this.tasksById[task.id]=task);
+          this.tasks.forEach(task => this.tasksById[task.id] = task);
           let tasks         = this.tasks;
           let firstTaskTime = Number.MAX_SAFE_INTEGER;
           let lastTaskTime  = 0;
@@ -1396,15 +1385,9 @@ var ElastiganttApp = (function (exports) {
           this.recalculate();
         },
         methods : {
-          getTask(taskId){
-            return this.tasksById[taskId];
-          },
-          getChildren(taskId){
-            return this.tasks.filter(task=>task.parent === taskId);
-          },
-          getVisibleTasks(){
-            return this.tasks.filter(task=>task.visible);
-          },
+          getTask(taskId) { return this.tasksById[taskId]; },
+          getChildren(taskId) { return this.tasks.filter(task => task.parent === taskId); },
+          getVisibleTasks() { return this.tasks.filter(task => task.visible); },
           calculateCalendarDimensions() {
             this.calendar.height = 0;
             if (this.calendar.hour.display) {
@@ -1423,7 +1406,7 @@ var ElastiganttApp = (function (exports) {
               column.finalWidth = column.width / 100 * this.taskList.percent;
               final += column.finalWidth;
             });
-            this.taskList.finalWidth = final+this.taskList.expander.columnWidth;
+            this.taskList.finalWidth = final + this.taskList.expander.columnWidth;
           },
           recalculate() {
             const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
@@ -1449,12 +1432,11 @@ var ElastiganttApp = (function (exports) {
 
             this.calculateCalendarDimensions();
             this.calculateTaskListColumnWidths();
-            this.tasks.forEach(task=>{
-              task.children = this.getChildren(task.id);
-            });
+            this.tasks.forEach(task => { task.children = this.getChildren(task.id); });
             const visibleTasks = this.getVisibleTasks();
-            this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap +
-                          this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+            this.height        = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) +
+                          this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth +
+                          this.$root.$data.calendar.gap;
             for (let index = 0, len = visibleTasks.length; index < len; index++) {
               let task   = visibleTasks[index];
               task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;

@@ -2,7 +2,7 @@ export function TreeRowTask(prefix, self) {
   return self.wrapComponent({
     props : [ 'task', 'index' ],
     template : `<g class="elastigantt__tree-row-task-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-      <svg class="elastigantt__tree-row"
+      <svg class="elastigantt__tree-row-task"
         :x="task.x"
         :y="task.y"
         :width="task.width"
@@ -10,14 +10,14 @@ export function TreeRowTask(prefix, self) {
         @click="treeRowClick"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
+      <defs>
         <clipPath id="elastigantt__task-clip-path">
-          <path :d="getPoints" :fill="getFill"></path>
+          <polygon :points="getPoints"></polygon>
         </clipPath>
-        </defs>
-        <path :d="getPoints" :fill="getFill"></path>
-        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)"></${
-        prefix}-tree-progress-bar>
+      </defs>
+        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)">
+        </${prefix}-tree-progress-bar>
         <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
@@ -27,22 +27,12 @@ export function TreeRowTask(prefix, self) {
       getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
       getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
       getPoints() {
-        const task  = this.task;
-        const fifty = task.height / 2;
-        let offset  = fifty;
-        if (task.width / 2 - offset < 0) {
-          offset = task.width / 2;
-        }
-        return `M ${offset} ${task.height}
-        Q 0 ${task.height} 0 ${fifty}
-        Q 0 0 ${offset} 0
-        L ${task.width - offset} 0
-        Q ${task.width} 0 ${task.width} ${fifty}
-        Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
-        L ${offset} ${task.height}
-        Z`;
+        const task                               = this.task;
+        const fifty                              = this.task.height - this.task.height / 4;
+        const full                               = this.task.height;
+        const offset                             = 10;
+        return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
       },
-      getFill() { return '#FF0000a0'; }
     },
     methods : {
       treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },

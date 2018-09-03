@@ -1,6 +1,6 @@
 export function TaskListItem(prefix, self) {
   return self.wrapComponent({
-    props : [ 'task' , 'expanderStyle' ],
+    props : [ 'task', 'expanderStyle' ],
     template : `<div class="elastigantt__task-list-item">
       <div class="elastigantt__task-list-item-column elastigantt__task-list-item-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="[task]"></${prefix}-task-list-expander>

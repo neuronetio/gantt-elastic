@@ -1,6 +1,6 @@
 export function TaskListHeader(prefix, self) {
   return self.wrapComponent({
-    props:['expanderStyle'],
+    props : [ 'expanderStyle' ],
     template : `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
@@ -36,9 +36,7 @@ export function TaskListHeader(prefix, self) {
           }
         }
       },
-      collapsible(){
-        return this.$root.$data.tasks.filter(task=>task.children.length>0);
-      }
+      collapsible() { return this.$root.$data.tasks.filter(task => task.children.length > 0); }
     },
     methods : {
       resizerMouseDown(event, column) {

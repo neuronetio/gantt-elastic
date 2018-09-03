@@ -85,7 +85,7 @@ foreignObject > *{
   margin: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height:1;
+  line-height: 1.2em;
   word-break: keep-all;
   font-family: Arial;
   font-size: 12px;
