@@ -43,7 +43,7 @@ export function TaskListExpander(prefix, self) {
     computed : {
       allChildren() {
         const children = [];
-        this.tasks.forEach(task => { task.children.forEach(child => { children.push(child); }); });
+        this.tasks.forEach(task => { task.allChildren.forEach(child => { children.push(child); }); });
         return children;
       },
       collapsed() {
@@ -67,7 +67,11 @@ export function TaskListExpander(prefix, self) {
         const collapsed = !this.collapsed;
         this.tasks.forEach(task => {
           task.collapsed = collapsed;
-          this.$root.getChildren(task.id).forEach(child => child.visible = !collapsed);
+          task.allChildren.forEach(child => {
+            let parentsNotCollapsed =
+                child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
+            child.visible = !collapsed && parentsNotCollapsed;
+          });
           this.$root.recalculate();
         });
       }

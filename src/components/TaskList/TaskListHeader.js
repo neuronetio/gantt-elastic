@@ -36,7 +36,7 @@ export function TaskListHeader(prefix, self) {
           }
         }
       },
-      collapsible() { return this.$root.$data.tasks.filter(task => task.children.length > 0); }
+      collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }
     },
     methods : {
       resizerMouseDown(event, column) {

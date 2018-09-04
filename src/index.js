@@ -221,6 +221,43 @@ class ElastiganttApp {
                           userOptions);
   }
 
+  resetTaskTree() {
+    this.root.children    = [];
+    this.root.allChildren = [];
+    this.root.parent      = null;
+    this.root.parents     = [];
+    for (let i = 0, len = this.tasks.length; i < len; i++) {
+      let current         = this.tasks[i];
+      current.children    = [];
+      current.allChildren = [];
+      current.parent      = null;
+      current.parents     = [];
+    }
+  }
+
+  makeTaskTree(task) {
+    for (let i = 0, len = this.tasks.length; i < len; i++) {
+      let current = this.tasks[i];
+      if (current.parentId === task.id) {
+        if (task.parents.length) {
+          task.parents.forEach(parent => current.parents.push(parent));
+        }
+        if (task !== this.root) {
+          current.parents.push(task);
+          current.parent = task;
+        } else {
+          current.parents = [];
+          current.parent  = null;
+        }
+        current = this.makeTaskTree(current);
+        task.allChildren.push(current);
+        task.children.push(current);
+        current.allChildren.forEach(child => task.allChildren.push(child));
+      }
+    }
+    return task;
+  }
+
   constructor(prefix, containerId, data, options = {}, customComponents = {}) {
     const self = this;
     if (typeof window.elastiganttStore === 'undefined') {
@@ -244,7 +281,7 @@ class ElastiganttApp {
     });
 
     // initialize observer
-    this.tasks = this.tasks.map((task) => {
+    this.tasks    = this.tasks.map((task) => {
       task.x               = 0;
       task.y               = 0;
       task.width           = 0;
@@ -261,16 +298,23 @@ class ElastiganttApp {
       if (typeof task.dependencyLines === 'undefined') {
         task.dependencyLines = [];
       }
-      if (typeof task.children === 'undefined') {
-        task.children = [];
+      if (typeof task.parentId === 'undefined') {
+        task.parentId = null;
       }
+      task.children    = [];
+      task.allChildren = [];
+      task.parents     = [];
+      task.parent      = null;
       return task;
     });
+    this.root     = {id : null, label : 'root', children : [], allChildren : [], parents : [], parent : null};
+    this.taskTree = this.makeTaskTree(this.root);
 
     const globalState         = this.options;
     globalState.classInstance = this;
     globalState.data          = this.data;
     globalState.tasks         = this.tasks;
+    globalState.rootTask      = this.root;
     this.ctx                  = document.createElement('canvas').getContext('2d');
 
     this.customComponents = customComponents;
@@ -357,7 +401,8 @@ class ElastiganttApp {
 
           this.calculateCalendarDimensions();
           this.calculateTaskListColumnWidths();
-          this.tasks.forEach(task => { task.children = this.getChildren(task.id); });
+          self.resetTaskTree();
+          this.tasks         = self.makeTaskTree(this.rootTask).allChildren;
           const visibleTasks = this.getVisibleTasks();
           this.height        = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) +
                         this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth +
