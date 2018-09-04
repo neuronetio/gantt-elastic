@@ -23,6 +23,26 @@ import {Tree} from './components/Tree/Tree.js';
 import {elastiganttStore} from './elastiganttStorage.js';
 
 class ElastiganttApp {
+  isObject(item) { return (item && typeof item === 'object' && !Array.isArray(item)); }
+
+  mergeDeep(target, ...sources) {
+    if (!sources.length)
+      return target;
+    const source = sources.shift();
+    if (this.isObject(target) && this.isObject(source)) {
+      for (const key in source) {
+        if (this.isObject(source[key])) {
+          if (!target[key])
+            Object.assign(target, {[key] : {}});
+          this.mergeDeep(target[key], source[key]);
+        } else {
+          Object.assign(target, {[key] : source[key]});
+        }
+      }
+    }
+    return this.mergeDeep(target, ...sources);
+  }
+
   toPascalCase(str) {
     return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); })
         .replace(/\-/g, '');
@@ -89,8 +109,8 @@ class ElastiganttApp {
 
   wrapComponent(props) { return props; }
 
-  getDefaultOptions(userOptions) {
-    return {
+  getOptions(userOptions) {
+    return this.mergeDeep({
       debug : false,
       width : 0,
       height : 0,
@@ -199,7 +219,8 @@ class ElastiganttApp {
         },
       },
       defs : []
-    };
+    },
+                          userOptions);
   }
 
   constructor(prefix, containerId, data, options = {}, customComponents = {}) {
@@ -218,7 +239,7 @@ class ElastiganttApp {
     dayjs.locale(options.locale, null, true);
     this.data                     = data;
     this.tasks                    = data.tasks;
-    this.options                  = Object.assign(this.getDefaultOptions(options), options);
+    this.options                  = this.getOptions(options);
     this.options.taskList.columns = this.options.taskList.columns.map(column => {
       column.finalWidth = column.width / 100 * this.options.taskList.percent;
       return column;
