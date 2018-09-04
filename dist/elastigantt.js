@@ -696,14 +696,6 @@ var ElastiganttApp = (function (exports) {
     });
   }
 
-  function TreeBar(prefix, self) {
-    return self.wrapComponent({
-      props : [ 'task' ],
-      template : `<rect id="elastigantt__tree-row" x="0" y="0" width="100%" height="100%" style="fill:#FF0000a0"></rect>`,
-      data() { return {}; },
-    });
-  }
-
   function TreeDependencyLines(prefix, self) {
     return self.wrapComponent({
       props : [ 'tasks' ],
@@ -1171,7 +1163,6 @@ var ElastiganttApp = (function (exports) {
         'tree-row-milestone' : TreeRowMilestone(prefix, self),
         'tree-row-project' : TreeRowProject(prefix, self),
         'tree-text' : TreeText(prefix, self),
-        'tree-bar' : TreeBar(prefix, self),
         'tree-dependency-lines' : TreeDependencyLines(prefix, self),
         'tree-progress-bar' : TreeProgressBar(prefix, self),
         'info' : Info(prefix, self),
