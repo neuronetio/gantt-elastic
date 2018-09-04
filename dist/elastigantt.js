@@ -619,12 +619,8 @@ var ElastiganttApp = (function (exports) {
         :key="column.label"
         :style="getStyle(column)"
       >
-      <div class="elastigantt__task-list-header-label" :column="column"
-        @mouseup="resizerMouseUp($event, column)"
-      >{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer" :column="column"
-        @mousedown="resizerMouseDown($event, column)"
-      ></div>
+      <div class="elastigantt__task-list-header-label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
+      <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
       </div>
     </div>`,
       data() {
@@ -639,10 +635,7 @@ var ElastiganttApp = (function (exports) {
         getStyle() {
           return column => {
             const state = this.$root.$data;
-            return {
-              'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
-                  'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
-            }
+            return { 'height': (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px' }
           }
         },
         collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }
@@ -1149,8 +1142,7 @@ var ElastiganttApp = (function (exports) {
     }
 
     toPascalCase(str) {
-      return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); })
-          .replace(/\-/g, '');
+      return str.replace(/(\w)(\w*)/g, function(g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); }).replace(/\-/g, '');
     }
 
     toKebabCase(str) { return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(); }
@@ -1260,21 +1252,11 @@ var ElastiganttApp = (function (exports) {
           style : "stroke:#00000050;strokeWidth:1",
           lines : [],
         },
-        info : {
-          style : 'fill:#000000a0',
-          textStyle : 'fill:#fff',
-          fontFamily : 'sans-serif',
-          fontSize : '12px',
-          fontWeight : 'bold'
-        },
+        info : {style : 'fill:#000000a0', textStyle : 'fill:#fff', fontFamily : 'sans-serif', fontSize : '12px', fontWeight : 'bold'},
         taskList : {
           display : true,
           columns : [
             {label : 'ID', value : 'id', width : 40},
-            {label : 'Description', value : 'label', width : 324},
-            {label : 'User', value : 'user', width : 150},
-            {label : 'Type', value : 'type', width : 100},
-            {label : 'Progress', value : 'progress', width : 66},
           ],
           resizerWidth : 0,
           percent : 100,
@@ -1291,36 +1273,9 @@ var ElastiganttApp = (function (exports) {
           strokeWidth : 1,
           fontFamily : 'sans-serif',
           style : "fill:#00000020;stroke:#00000000;strokeWidth:1",
-          hour : {
-            height : 20,
-            display : true,
-            fontSize : '12px',
-            format : {
-              short(date) { return dayjs(date).locale(userOptions.locale.code).format('HH'); },
-              medium(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); },
-              long(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); }
-            }
-          },
-          day : {
-            height : 20,
-            display : true,
-            fontSize : '12px',
-            format : {
-              short(date) { return dayjs(date).locale(userOptions.locale.code).format('DD'); },
-              medium(date) { return dayjs(date).locale(userOptions.locale.code).format('DD ddd'); },
-              long(date) { return dayjs(date).locale(userOptions.locale.code).format('DD dddd'); }
-            }
-          },
-          month : {
-            height : 20,
-            display : true,
-            fontSize : '12px',
-            format : {
-              short(date) { return dayjs(date).locale(userOptions.locale.code).format('MM'); },
-              medium(date) { return dayjs(date).locale(userOptions.locale.code).format('\'YY MMM'); },
-              long(date) { return dayjs(date).locale(userOptions.locale.code).format('YYYY MMMM (MM)'); }
-            }
-          },
+          hour : {height : 20, display : true, fontSize : '12px', format : {short(date) { return dayjs(date).locale(userOptions.locale.code).format('HH'); }, medium(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); }, long(date) { return dayjs(date).locale(userOptions.locale.code).format('HH:mm'); }}},
+          day : {height : 20, display : true, fontSize : '12px', format : {short(date) { return dayjs(date).locale(userOptions.locale.code).format('DD'); }, medium(date) { return dayjs(date).locale(userOptions.locale.code).format('DD ddd'); }, long(date) { return dayjs(date).locale(userOptions.locale.code).format('DD dddd'); }}},
+          month : {height : 20, display : true, fontSize : '12px', format : {short(date) { return dayjs(date).locale(userOptions.locale.code).format('MM'); }, medium(date) { return dayjs(date).locale(userOptions.locale.code).format('\'YY MMM'); }, long(date) { return dayjs(date).locale(userOptions.locale.code).format('YYYY MMMM (MM)'); }}},
         },
         defs : []
       },
@@ -1484,17 +1439,14 @@ var ElastiganttApp = (function (exports) {
             this.taskList.finalWidth = final + this.taskList.expander.columnWidth;
           },
           recalculate() {
-            const firstDate      = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
-            const lastDate       = this.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
-            this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before, 'days').toDate();
-            this.times.lastDate  = dayjs(lastDate).locale(this.locale).add(this.scope.after, 'days').toDate();
-            this.times.firstTime = this.times.firstDate.getTime();
-            this.times.lastTime  = this.times.lastDate.getTime();
+            const firstDate                = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
+            const lastDate                 = this.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
+            this.times.firstDate           = dayjs(firstDate).locale(this.locale).subtract(this.scope.before, 'days').toDate();
+            this.times.lastDate            = dayjs(lastDate).locale(this.locale).add(this.scope.after, 'days').toDate();
+            this.times.firstTime           = this.times.firstDate.getTime();
+            this.times.lastTime            = this.times.lastDate.getTime();
             this.times.totalViewDurationMs = this.times.lastTime - this.times.firstTime;
-            this.taskList.width =
-                this.taskList.columns
-                    .reduce((prev, current) => { return {width : prev.width + current.width}; }, {width : 0})
-                    .width;
+            this.taskList.width            = this.taskList.columns.reduce((prev, current) => { return {width : prev.width + current.width}; }, {width : 0}).width;
             let max                        = this.times.timeScale * 60;
             let min                        = this.times.timeScale;
             let steps                      = max / min;
@@ -1510,9 +1462,7 @@ var ElastiganttApp = (function (exports) {
             self.resetTaskTree();
             this.tasks         = self.makeTaskTree(this.rootTask).allChildren;
             const visibleTasks = this.getVisibleTasks();
-            this.height        = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) +
-                          this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth +
-                          this.$root.$data.calendar.gap;
+            this.height        = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
             for (let index = 0, len = visibleTasks.length; index < len; index++) {
               let task   = visibleTasks[index];
               task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
@@ -1525,8 +1475,7 @@ var ElastiganttApp = (function (exports) {
                 x = x / this.times.timePerPixel;
               }
               task.x = x + this.verticalGrid.strokeWidth;
-              task.y = ((this.row.height + this.horizontalGrid.gap * 2) * index) + this.horizontalGrid.gap +
-                       this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+              task.y = ((this.row.height + this.horizontalGrid.gap * 2) * index) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
             }
           },
           getSVG() { return this.svgElement.outerHTML; },

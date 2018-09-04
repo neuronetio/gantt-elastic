@@ -10,12 +10,8 @@ export function TaskListHeader(prefix, self) {
         :key="column.label"
         :style="getStyle(column)"
       >
-      <div class="elastigantt__task-list-header-label" :column="column"
-        @mouseup="resizerMouseUp($event, column)"
-      >{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer" :column="column"
-        @mousedown="resizerMouseDown($event, column)"
-      ></div>
+      <div class="elastigantt__task-list-header-label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
+      <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
       </div>
     </div>`,
     data() {
@@ -30,10 +26,7 @@ export function TaskListHeader(prefix, self) {
       getStyle() {
         return column => {
           const state = this.$root.$data;
-          return {
-            'height': (state.calendar.height + state.calendar.strokeWidth) + 'px',
-                'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px'
-          }
+          return { 'height': (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px' }
         }
       },
       collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }
