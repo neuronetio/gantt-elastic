@@ -24,8 +24,8 @@
     "vue",
     "vue-gantt"
   ],
-  "author": "Rafal Pospiech",
-  "license": "GPL-3.0-only",
+  "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/neuronetio/elastigantt/issues"
   },
