@@ -1,6 +1,6 @@
 ---
 Language: JavaScript
-ColumnLimit: 120
+ColumnLimit: 1200
 AlignConsecutiveAssignments: true
 AllowShortFunctionsOnASingleLine: true
 AllowShortBlocksOnASingleLine: true
