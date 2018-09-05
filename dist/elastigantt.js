@@ -1177,7 +1177,7 @@ var ElastiganttApp = (function (exports) {
         let component = components[componentName];
         // shallow extend
         if (typeof this.customComponents[componentName] !== 'undefined') {
-          component = {...component, ...this.customComponents[componentName]};
+          component = this.customComponents[componentName];
         }
         customComponents[this.toPascalCase(prefix + '-' + componentName)] = component(prefix, self);
       }
