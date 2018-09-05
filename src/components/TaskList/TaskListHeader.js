@@ -26,7 +26,7 @@ export function TaskListHeader(prefix, self) {
       getStyle() {
         return column => {
           const state = this.$root.$data;
-          return { 'height': (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom': state.calendar.gap + 'px', 'width': column.finalWidth + 'px' }
+          return Object.assign({'height' : (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom' : state.calendar.gap + 'px', 'width' : column.finalWidth + 'px'}, this.$root.$data.taskList.styles.header);
         }
       },
       collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }

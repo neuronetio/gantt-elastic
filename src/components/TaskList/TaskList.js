@@ -23,19 +23,12 @@ export function TaskList(prefix, self) {
     computed : {
       getHeaderExpanderStyle() {
         const state = this.$root.$data;
-        return {
-          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
-              'height': state.calendar.height + state.calendar.strokeWidth + 'px',
-              'margin-bottom': state.calendar.gap + 'px',
-        }
+        return { 'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height': state.calendar.height + state.calendar.strokeWidth + 'px', 'margin-bottom': state.calendar.gap + 'px', }
       },
       getListExpanderStyle() {
         const state = this.$root.$data;
         let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-        return {
-          'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
-          'height' : height + 'px',
-        };
+        return {'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height' : height + 'px', 'border-color' : '#00000010'};
       }
     }
   });
