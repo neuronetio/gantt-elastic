@@ -1,8 +1,9 @@
 export function TreeRowProject(prefix, self) {
   return self.wrapComponent({
-    props : [ 'task', 'index' ],
-    template :
-        `<g class="elastigantt__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+    props: [
+      'task', 'index'
+    ],
+    template: `<g class="elastigantt__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
       <svg class="elastigantt__tree-row"
         :x="task.x"
         :y="task.y"
@@ -17,20 +18,25 @@ export function TreeRowProject(prefix, self) {
         </clipPath>
         </defs>
         <path :d="getPoints" :fill="getFill"></path>
-        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${
-            prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
+        <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${prefix}-tree-progress-bar>
       </svg>
+      <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
     </g>`,
-    data() { return {}; },
-    computed : {
-      getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
-      getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+    data() {
+      return {};
+    },
+    computed: {
+      getViewBox() {
+        return `0 0 ${this.task.width} ${this.task.height}`;
+      },
+      getGroupTransform() {
+        return `translate(${this.task.x} ${this.task.y})`;
+      },
       getPoints() {
-        const task  = this.task;
+        const task = this.task;
         const fifty = task.height / 2;
-        let offset  = fifty;
+        let offset = fifty;
         if (task.width / 2 - offset < 0) {
           offset = task.width / 2;
         }
@@ -43,12 +49,20 @@ export function TreeRowProject(prefix, self) {
         L ${offset} ${task.height}
         Z`;
       },
-      getFill() { return '#FF0000a0'; }
+      getFill() {
+        return '#FF0000a0';
+      }
     },
-    methods : {
-      treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
-      treeRowMouseOver() { this.task.mouseOver   = true; },
-      treeRowMouseOut() { this.task.mouseOver    = false; },
+    methods: {
+      treeRowClick() {
+        this.task.tooltip.visible = !this.task.tooltip.visible;
+      },
+      treeRowMouseOver() {
+        this.task.mouseOver = true;
+      },
+      treeRowMouseOut() {
+        this.task.mouseOver = false;
+      }
     }
   });
 }

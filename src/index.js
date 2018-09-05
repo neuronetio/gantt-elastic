@@ -192,6 +192,18 @@ class ElastiganttApp {
         fontSize: '12px',
         showText: true
       },
+      treeText: {
+        offset: 20,
+        styles: {
+          text: {
+            'font-family': 'sans-serif',
+            'font-size': '12px',
+            'font-weight': 'normal',
+            'fill': '#000000a0'
+          }
+        },
+        xPadding: 10
+      },
       dependencyLines: {
         style: {
           'fill': 'transparent',

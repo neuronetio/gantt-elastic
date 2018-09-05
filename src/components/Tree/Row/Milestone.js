@@ -1,8 +1,9 @@
 export function TreeRowMilestone(prefix, self) {
   return self.wrapComponent({
-    props : [ 'task', 'index' ],
-    template :
-        `<g class="elastigantt__tree-row-milestone-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+    props: [
+      'task', 'index'
+    ],
+    template: `<g class="elastigantt__tree-row-milestone-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
       <svg class="elastigantt__tree-row"
         :x="task.x"
         :y="task.y"
@@ -19,18 +20,24 @@ export function TreeRowMilestone(prefix, self) {
         <polygon :points="getPoints" fill="#FF0000A0"></polygon>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
         </${prefix}-tree-progress-bar>
-        <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       </svg>
+      <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
       <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
     </g>`,
-    data() { return {}; },
-    computed : {
-      getViewBox() { return `0 0 ${this.task.width} ${this.task.height}`; },
-      getGroupTransform() { return `translate(${this.task.x} ${this.task.y})`; },
+    data() {
+      return {};
+    },
+    computed: {
+      getViewBox() {
+        return `0 0 ${this.task.width} ${this.task.height}`;
+      },
+      getGroupTransform() {
+        return `translate(${this.task.x} ${this.task.y})`;
+      },
       getPoints() {
-        const task  = this.task;
+        const task = this.task;
         const fifty = task.height / 2;
-        let offset  = fifty;
+        let offset = fifty;
         if (task.width / 2 - offset < 0) {
           offset = task.width / 2;
         }
@@ -40,12 +47,18 @@ export function TreeRowMilestone(prefix, self) {
         ${task.width},${fifty}
         ${task.width - offset},${task.height}
         ${offset},${task.height}`;
-      },
+      }
     },
-    methods : {
-      treeRowClick() { this.task.tooltip.visible = !this.task.tooltip.visible; },
-      treeRowMouseOver() { this.task.mouseOver   = true; },
-      treeRowMouseOut() { this.task.mouseOver    = false; },
+    methods: {
+      treeRowClick() {
+        this.task.tooltip.visible = !this.task.tooltip.visible;
+      },
+      treeRowMouseOver() {
+        this.task.mouseOver = true;
+      },
+      treeRowMouseOut() {
+        this.task.mouseOver = false;
+      }
     }
   });
 }
