@@ -1,6 +1,6 @@
 export function TaskList(prefix, self) {
   return self.wrapComponent({
-    template : `<foreignObject class="elastigantt__task-list-object"
+    template: `<foreignObject class="elastigantt__task-list-object"
       x="0"
       y="0"
       width="100%"
@@ -19,16 +19,26 @@ export function TaskList(prefix, self) {
         ></${prefix}-task-list-item>
       </div>
     </foreignObject>`,
-    data() { return {}; },
-    computed : {
+    data() {
+      return {};
+    },
+    computed: {
       getHeaderExpanderStyle() {
         const state = this.$root.$data;
-        return { 'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height': state.calendar.height + state.calendar.strokeWidth + 'px', 'margin-bottom': state.calendar.gap + 'px', }
+        return Object.assign({
+          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+          'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+          'margin-bottom': state.calendar.gap + 'px'
+        }, this.$root.$data.taskList.styles.header);
       },
       getListExpanderStyle() {
         const state = this.$root.$data;
-        let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-        return {'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height' : height + 'px', 'border-color' : '#00000010'};
+        let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+        return {
+          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+          'height': height + 'px',
+          'border-color': '#00000010'
+        };
       }
     }
   });

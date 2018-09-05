@@ -566,7 +566,7 @@ var ElastiganttApp = (function (exports) {
 
   function TaskList(prefix, self) {
     return self.wrapComponent({
-      template : `<foreignObject class="elastigantt__task-list-object"
+      template: `<foreignObject class="elastigantt__task-list-object"
       x="0"
       y="0"
       width="100%"
@@ -585,16 +585,26 @@ var ElastiganttApp = (function (exports) {
         ></${prefix}-task-list-item>
       </div>
     </foreignObject>`,
-      data() { return {}; },
-      computed : {
+      data() {
+        return {};
+      },
+      computed: {
         getHeaderExpanderStyle() {
           const state = this.$root.$data;
-          return { 'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height': state.calendar.height + state.calendar.strokeWidth + 'px', 'margin-bottom': state.calendar.gap + 'px', }
+          return Object.assign({
+            'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+            'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+            'margin-bottom': state.calendar.gap + 'px'
+          }, this.$root.$data.taskList.styles.header);
         },
         getListExpanderStyle() {
           const state = this.$root.$data;
-          let height  = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-          return {'width' : state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px', 'height' : height + 'px', 'border-color' : '#00000010'};
+          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          return {
+            'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+            'height': height + 'px',
+            'border-color': '#00000010'
+          };
         }
       }
     });
@@ -1125,7 +1135,7 @@ var ElastiganttApp = (function (exports) {
 
   class ElastiganttApp {
     isObject(item) {
-      return item && typeof item === "object" && !Array.isArray(item);
+      return item && typeof item === 'object' && !Array.isArray(item);
     }
 
     mergeDeep(target, ...sources) {
@@ -1149,11 +1159,11 @@ var ElastiganttApp = (function (exports) {
     toPascalCase(str) {
       return str.replace(/(\w)(\w*)/g, function (g0, g1, g2) {
         return g1.toUpperCase() + g2.toLowerCase();
-      }).replace(/\-/g, "");
+      }).replace(/\-/g, '');
     }
 
     toKebabCase(str) {
-      return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+      return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     }
 
     getComponents(prefix, kebabCase = true) {
@@ -1184,7 +1194,7 @@ var ElastiganttApp = (function (exports) {
       let finalComponents = {};
       // copy
       for (let componentName in components) {
-        finalComponents[this.toPascalCase(prefix + "-" + componentName)] = components[componentName](prefix, self);
+        finalComponents[this.toPascalCase(prefix + '-' + componentName)] = components[componentName](prefix, self);
       }
       // override user specified
       for (let customComponentName in this.customComponents) {
@@ -1241,54 +1251,54 @@ var ElastiganttApp = (function (exports) {
           steps: 0
         },
         row: {
-          height: 30,
-          style: "fill:#FF0000a0",
-          textStyle: "fill:#ffffff",
-          fontFamily: "sans-serif",
-          fontSize: "12px",
+          height: 18,
+          style: 'fill:#FF0000a0',
+          textStyle: 'fill:#ffffff',
+          fontFamily: 'sans-serif',
+          fontSize: '12px',
           showText: true
         },
         progress: {
           height: 6,
-          style: "fill:#00ff92a0"
+          style: 'fill:#00ff92a0'
         },
         horizontalGrid: {
           gap: 6,
           strokeWidth: 1,
-          style: "stroke:#00000010;strokeWidth:1",
+          style: 'stroke:#00000010;strokeWidth:1',
           lines: []
         },
         verticalGrid: {
           strokeWidth: 1,
-          style: "stroke:#00000010;strokeWidth:1",
+          style: 'stroke:#00000010;strokeWidth:1',
           lines: []
         },
         info: {
-          style: "fill:#000000a0",
-          textStyle: "fill:#fff",
-          fontFamily: "sans-serif",
-          fontSize: "12px",
-          fontWeight: "bold"
+          style: 'fill:#000000a0',
+          textStyle: 'fill:#fff',
+          fontFamily: 'sans-serif',
+          fontSize: '12px',
+          fontWeight: 'bold'
         },
         taskList: {
           display: true,
           styles: {
             row: {
-              background: "transparent",
-              "border-color": "#00000010"
+              'background': 'transparent',
+              'border-color': '#00000010'
             },
             column: {
-              "border-color": "#00000010"
+              'border-color': '#00000010'
             },
             header: {
-              background: "linear-gradient(to bottom,#fff,#f5f5f5)",
-              "border-color": "#00000010"
+              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+              'border-color': '#00000010'
             }
           },
           columns: [
             {
-              label: "ID",
-              value: "id",
+              label: 'ID',
+              value: 'id',
               width: 40
             }
           ],
@@ -1308,53 +1318,53 @@ var ElastiganttApp = (function (exports) {
           gap: 6,
           height: 0,
           strokeWidth: 1,
-          fontFamily: "sans-serif",
-          style: "fill:#00000020;stroke:#00000000;strokeWidth:1",
+          fontFamily: 'sans-serif',
+          style: 'fill:#00000020;stroke:#00000000;strokeWidth:1',
           hour: {
             height: 20,
             display: true,
-            fontSize: "12px",
+            fontSize: '12px',
             format: {
               short(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("HH");
+                return dayjs(date).locale(userOptions.locale.code).format('HH');
               },
               medium(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("HH:mm");
+                return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
               },
               long(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("HH:mm");
+                return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
               }
             }
           },
           day: {
             height: 20,
             display: true,
-            fontSize: "12px",
+            fontSize: '12px',
             format: {
               short(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("DD");
+                return dayjs(date).locale(userOptions.locale.code).format('DD');
               },
               medium(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("DD ddd");
+                return dayjs(date).locale(userOptions.locale.code).format('DD ddd');
               },
               long(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("DD dddd");
+                return dayjs(date).locale(userOptions.locale.code).format('DD dddd');
               }
             }
           },
           month: {
             height: 20,
             display: true,
-            fontSize: "12px",
+            fontSize: '12px',
             format: {
               short(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("MM");
+                return dayjs(date).locale(userOptions.locale.code).format('MM');
               },
               medium(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("'YY MMM");
+                return dayjs(date).locale(userOptions.locale.code).format('\'YY MMM');
               },
               long(date) {
-                return dayjs(date).locale(userOptions.locale.code).format("YYYY MMMM (MM)");
+                return dayjs(date).locale(userOptions.locale.code).format('YYYY MMMM (MM)');
               }
             }
           }
@@ -1402,16 +1412,16 @@ var ElastiganttApp = (function (exports) {
 
     constructor(prefix, containerId, data, options = {}, customComponents = {}) {
       const self = this;
-      if (typeof window.elastiganttStore === "undefined") {
+      if (typeof window.elastiganttStore === 'undefined') {
         window.elastiganttStore = elastiganttStore(options.debug, options.showStack);
       }
 
-      if (containerId.substr(0, 1) === "#") {
+      if (containerId.substr(0, 1) === '#') {
         containerId = containerId.substr(1);
       }
       this.containerId = containerId;
       this.containerElement = document.getElementById(containerId);
-      this.prefix = prefix.replace(/[^a-z0-9]/gi, "");
+      this.prefix = prefix.replace(/[^a-z0-9]/gi, '');
       this.prefixPascal = this.toPascalCase(this.prefix);
       dayjs.locale(options.locale, null, true);
       this.data = data;
@@ -1433,16 +1443,16 @@ var ElastiganttApp = (function (exports) {
         };
         task.mouseOver = false;
         task.dependencyLines = [];
-        if (typeof task.visible === "undefined") {
+        if (typeof task.visible === 'undefined') {
           task.visible = true;
         }
-        if (typeof task.collapsed === "undefined") {
+        if (typeof task.collapsed === 'undefined') {
           task.collapsed = false;
         }
-        if (typeof task.dependencyLines === "undefined") {
+        if (typeof task.dependencyLines === 'undefined') {
           task.dependencyLines = [];
         }
-        if (typeof task.parentId === "undefined") {
+        if (typeof task.parentId === 'undefined') {
           task.parentId = null;
         }
         task.children = [];
@@ -1453,7 +1463,7 @@ var ElastiganttApp = (function (exports) {
       });
       this.root = {
         id: null,
-        label: "root",
+        label: 'root',
         children: [],
         allChildren: [],
         parents: [],
@@ -1466,14 +1476,14 @@ var ElastiganttApp = (function (exports) {
       globalState.data = this.data;
       globalState.tasks = this.tasks;
       globalState.rootTask = this.root;
-      this.ctx = document.createElement("canvas").getContext("2d");
+      this.ctx = document.createElement('canvas').getContext('2d');
 
       this.customComponents = customComponents;
       this.registerComponents();
 
       this.app = new Vue({
-        el: "#" + containerId,
-        template: `<div id="${prefix}-elastigantt">
+        el: '#' + containerId,
+        template: `<div id='${prefix}-elastigantt'>
         <${self.prefix}-main></${self.prefix}-main>
       </div>`,
         data: globalState,
@@ -1536,10 +1546,10 @@ var ElastiganttApp = (function (exports) {
             this.taskList.finalWidth = final + this.taskList.expander.columnWidth;
           },
           recalculate() {
-            const firstDate = this.times.firstTaskDate.toISOString().split("T")[0] + "T00:00:00";
-            const lastDate = this.times.lastTaskDate.toISOString().split("T")[0] + "T23:59:59.999";
-            this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before, "days").toDate();
-            this.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.scope.after, "days").toDate();
+            const firstDate = this.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
+            const lastDate = this.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
+            this.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.scope.before, 'days').toDate();
+            this.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.scope.after, 'days').toDate();
             this.times.firstTime = this.times.firstDate.getTime();
             this.times.lastTime = this.times.lastDate.getTime();
             this.times.totalViewDurationMs = this.times.lastTime - this.times.firstTime;
@@ -1582,17 +1592,17 @@ var ElastiganttApp = (function (exports) {
           getSVG() {
             return this.svgElement.outerHTML;
           },
-          getImage(type = "image/png") {
+          getImage(type = 'image/png') {
             return new Promise((resolve, reject) => {
               const img = new Image();
               img.onload = () => {
-                const canvas = document.createElement("canvas");
+                const canvas = document.createElement('canvas');
                 canvas.width = this.svgElement.clientWidth;
                 canvas.height = this.svgElement.clientHeight;
-                canvas.getContext("2d").drawImage(img, 0, 0);
+                canvas.getContext('2d').drawImage(img, 0, 0);
                 resolve(canvas.toDataURL(type));
               };
-              img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
+              img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
             });
           }
         }
