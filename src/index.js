@@ -52,25 +52,25 @@ class ElastiganttApp {
     let self = this;
 
     let components = {
-      'task-list-resizer' : TaskListResizer(prefix, self),
-      'task-list-expander' : TaskListExpander(prefix, self),
-      'task-list-header' : TaskListHeader(prefix, self),
-      'task-list-item' : TaskListItem(prefix, self),
-      'task-list' : TaskList(prefix, self),
-      'main' : Main(prefix, self),
-      'tree' : Tree(prefix, self),
-      'header' : Header(prefix, self),
-      'grid' : Grid(prefix, self),
-      'grid-header' : GridHeader(prefix, self),
-      'tree-row-task' : TreeRowTask(prefix, self),
-      'tree-row-milestone' : TreeRowMilestone(prefix, self),
-      'tree-row-project' : TreeRowProject(prefix, self),
-      'tree-text' : TreeText(prefix, self),
-      'tree-dependency-lines' : TreeDependencyLines(prefix, self),
-      'tree-progress-bar' : TreeProgressBar(prefix, self),
-      'info' : Info(prefix, self),
-      'calendar' : Calendar(prefix, self),
-      'calendar-row' : CalendarRow(prefix, self),
+      'task-list-resizer' : TaskListResizer,
+      'task-list-expander' : TaskListExpander,
+      'task-list-header' : TaskListHeader,
+      'task-list-item' : TaskListItem,
+      'task-list' : TaskList,
+      'main' : Main,
+      'tree' : Tree,
+      'header' : Header,
+      'grid' : Grid,
+      'grid-header' : GridHeader,
+      'tree-row-task' : TreeRowTask,
+      'tree-row-milestone' : TreeRowMilestone,
+      'tree-row-project' : TreeRowProject,
+      'tree-text' : TreeText,
+      'tree-dependency-lines' : TreeDependencyLines,
+      'tree-progress-bar' : TreeProgressBar,
+      'info' : Info,
+      'calendar' : Calendar,
+      'calendar-row' : CalendarRow,
     };
 
     let customComponents = {};
@@ -80,7 +80,7 @@ class ElastiganttApp {
       if (typeof this.customComponents[componentName] !== 'undefined') {
         component = {...component, ...this.customComponents[componentName]};
       }
-      customComponents[this.toPascalCase(prefix + '-' + componentName)] = component;
+      customComponents[this.toPascalCase(prefix + '-' + componentName)] = component(prefix, self);
     }
 
     if (kebabCase) {
