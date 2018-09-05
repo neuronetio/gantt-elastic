@@ -2,7 +2,7 @@
   "name": "elastigantt",
   "version": "0.0.26",
   "description": "elastic gantt chart",
-  "main": "dist/elastigantt.js",
+  "main": "src/sourceOfTruth.js",
   "dependencies": {
     "dayjs": "^1.7.5"
   },

@@ -7,18 +7,19 @@ import resolve from 'rollup-plugin-node-resolve';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: 'src/index.js',
+  input: 'src/sourceOfTruth.js',
   output: {
     file: 'dist/elastigantt.js',
     format: 'iife', // immediately-invoked function expression — suitable for <script> tags
     sourcemap: true,
     name: 'ElastiganttApp'
   },
-  plugins:
-      [
-        resolve(), // tells Rollup how to find date-fns in node_modules
-        // commonjs(), // converts date-fns to ES modules
-        // production && uglify() // minify, but only in production
-      ],
-  watch: {include: 'src/**'}
+  plugins: [
+    resolve(), // tells Rollup how to find date-fns in node_modules
+    // commonjs(),  converts date-fns to ES modules
+    // production && uglify()  minify, but only in production
+  ],
+  watch: {
+    include: 'src/**'
+  }
 };
