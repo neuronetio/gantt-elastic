@@ -1,6 +1,6 @@
 {
   "name": "elastigantt",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "elastic gantt chart",
   "main": "dist/elastigantt.js",
   "dependencies": {
