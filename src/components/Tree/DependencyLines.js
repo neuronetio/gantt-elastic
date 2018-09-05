@@ -1,40 +1,42 @@
 export function TreeDependencyLines(prefix, self) {
   return self.wrapComponent({
-    props : [ 'tasks' ],
-    template : `<g class="elastigantt__tree-dependency-lines-container">
+    props: ['tasks'],
+    template: `<g class="elastigantt__tree-dependency-lines-container">
     <g v-for="task in dependencyTasks" :key="task.id" :task="task">
       <path
         v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task"
-        :d="dependencyLine.points" fill="transparent" stroke="#FFa00090" stroke-width="3">
+        :d="dependencyLine.points" :style="$root.$data.dependencyLines.style">
       </path>
       </g>
     </g>`,
-    data() { return {}; },
-    methods : {
+    data() {
+      return {};
+    },
+    methods: {
       getPoints(fromTaskId, toTaskId) {
-        const state    = this.$root.$data;
+        const state = this.$root.$data;
         const fromTask = this.$root.getTask(fromTaskId);
-        const toTask   = this.$root.getTask(toTaskId);
+        const toTask = this.$root.getTask(toTaskId);
         if (!toTask.visible || !fromTask.visible) {
           return '';
         }
-        const startX    = fromTask.x + fromTask.width;
-        const startY    = fromTask.y + fromTask.height / 2;
-        const stopX     = toTask.x;
-        const stopY     = toTask.y + toTask.height / 2;
+        const startX = fromTask.x + fromTask.width;
+        const startY = fromTask.y + fromTask.height / 2;
+        const stopX = toTask.x;
+        const stopY = toTask.y + toTask.height / 2;
         const distanceX = stopX - startX;
         let distanceY;
         let yMultiplier = 1;
         if (stopY >= startY) {
           distanceY = stopY - startY;
         } else {
-          distanceY   = startY - stopY;
+          distanceY = startY - stopY;
           yMultiplier = -1;
         }
-        const offset    = 10;
+        const offset = 10;
         const roundness = 4;
-        const isBefore  = distanceX <= offset + roundness;
-        let points      = `M ${startX} ${startY}
+        const isBefore = distanceX <= offset + roundness;
+        let points = `M ${startX} ${startY}
           L ${startX + offset},${startY} `;
         if (isBefore) {
           points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}
@@ -55,13 +57,17 @@ export function TreeDependencyLines(prefix, self) {
         return points;
       }
     },
-    computed : {
+    computed: {
       dependencyTasks() {
         return this.tasks.filter(task => typeof task.dependentOn !== 'undefined').map(task => {
-          task.dependencyLines = task.dependentOn.map(id => { return {points : this.getPoints(id, task.id)}; });
+          task.dependencyLines = task.dependentOn.map(id => {
+            return {
+              points: this.getPoints(id, task.id)
+            };
+          });
           return task;
         });
-      },
+      }
     }
   });
 }

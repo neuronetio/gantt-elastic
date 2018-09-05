@@ -192,6 +192,13 @@ class ElastiganttApp {
         fontSize: '12px',
         showText: true
       },
+      dependencyLines: {
+        style: {
+          'fill': 'transparent',
+          'stroke': '#FFa00090',
+          'stroke-width': 1
+        }
+      },
       progress: {
         height: 6,
         style: 'fill:#00ff92a0'
