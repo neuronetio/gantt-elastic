@@ -1,7 +1,7 @@
 export function TaskListHeader(prefix, self) {
   return self.wrapComponent({
-    props : [ 'expanderStyle' ],
-    template : `<div class="elastigantt__task-list-header">
+    props: ['expanderStyle'],
+    template: `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
       </div>
@@ -16,26 +16,32 @@ export function TaskListHeader(prefix, self) {
     </div>`,
     data() {
       return {
-        resizer : {
-          moving : false,
-          x : 0,
+        resizer: {
+          moving: false,
+          x: 0
         }
       };
     },
-    computed : {
+    computed: {
       getStyle() {
         return column => {
           const state = this.$root.$data;
-          return Object.assign({'height' : (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom' : state.calendar.gap + 'px', 'width' : column.finalWidth + 'px'}, this.$root.$data.taskList.styles.header);
+          return Object.assign({
+            'height': (state.calendar.height + state.calendar.styles.column['stroke-width']) + 'px',
+            'margin-bottom': state.calendar.gap + 'px',
+            'width': column.finalWidth + 'px'
+          }, this.$root.$data.taskList.styles.header);
         }
       },
-      collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }
+      collapsible() {
+        return this.$root.$data.tasks.filter(task => task.allChildren.length > 0);
+      }
     },
-    methods : {
+    methods: {
       resizerMouseDown(event, column) {
         if (!this.resizerMoving) {
-          this.resizer.moving       = column;
-          this.resizer.x            = event.clientX;
+          this.resizer.moving = column;
+          this.resizer.x = event.clientX;
           this.resizer.initialWidth = column.width;
         }
       },
@@ -45,7 +51,9 @@ export function TaskListHeader(prefix, self) {
           this.$root.calculateTaskListColumnWidths();
         }
       },
-      resizerMouseUp(event, column) { this.resizer.moving = false; },
+      resizerMouseUp(event, column) {
+        this.resizer.moving = false;
+      }
     },
     created() {
       this.$root.$on('mousemove', this.resizerMouseMove);

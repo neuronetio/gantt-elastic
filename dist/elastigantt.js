@@ -3,15 +3,15 @@ var ElastiganttApp = (function (exports) {
 
   function Calendar(prefix, self) {
     return self.wrapComponent({
-      template : `<g class="elastigantt__calendar-group">
-      <rect
-        class="elastigantt__calendar"
+      template: `<g class="elastigantt__calendar-group">
+      <foreignObject
         :x="getX"
         :y="getY"
         :width="getWidth"
         :height="$root.$data.calendar.height"
-        :style="$root.$data.calendar.style"
-      ></rect>
+      >
+        <div class="elastigantt__calendar" :style="$root.$data.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
+      </foreignObject>
       <${prefix}-calendar-row
         v-for="(month,index) in months"
         :key="month.key"
@@ -29,20 +29,24 @@ var ElastiganttApp = (function (exports) {
       ></${prefix}-calendar-row>
     </g>`,
       data() {
-        return {cache : {}};
+        return {cache: {}};
       },
-      methods : {
+      methods: {
         howManyHoursFit(current = 24, currentRecurrection = 1) {
-          let max       = {short : 0, medium : 0, long : 0};
-          const state   = this.$root.$data;
+          let max = {
+            short: 0,
+            medium: 0,
+            long: 0
+          };
+          const state = this.$root.$data;
           self.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
           let firstDate = dayjs(state.times.firstDate);
           for (let i = 0; i < current; i++) {
             let currentDate = firstDate.add(i, 'hours').toDate();
-            let textWidth   = {
-              short : self.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
-              medium : self.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
-              long : self.ctx.measureText(state.calendar.hour.format.long(currentDate)).width,
+            let textWidth = {
+              short: self.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
+              medium: self.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
+              long: self.ctx.measureText(state.calendar.hour.format.long(currentDate)).width
             };
             if (textWidth.short >= max.short) {
               max.short = textWidth.short;
@@ -54,7 +58,7 @@ var ElastiganttApp = (function (exports) {
               max.long = textWidth.long;
             }
           }
-          let cellWidth = state.times.stepPx / current - state.calendar.strokeWidth - 2;
+          let cellWidth = state.times.stepPx / current - state.calendar.styles.column['stroke-width'] - 2;
           if (current > 1) {
             if (max.short > cellWidth) {
               currentRecurrection++;
@@ -63,28 +67,32 @@ var ElastiganttApp = (function (exports) {
           }
           if (currentRecurrection < 3) {
             if (max.long <= cellWidth) {
-              return {count : current, type : 'long'};
+              return {count: current, type: 'long'};
             }
             if (max.medium <= cellWidth) {
-              return {count : current, type : 'medium'};
+              return {count: current, type: 'medium'};
             }
           }
           if (max.short <= cellWidth && current > 1) {
-            return {count : current, type : 'short'};
+            return {count: current, type: 'short'};
           }
-          return {count : 0, type : 'short'};
+          return {count: 0, type: 'short'};
         },
         howManyDaysFit(current = this.$root.$data.times.steps, currentRecurrection = 1) {
-          let max       = {short : 0, medium : 0, long : 0};
-          const state   = this.$root.$data;
+          let max = {
+            short: 0,
+            medium: 0,
+            long: 0
+          };
+          const state = this.$root.$data;
           self.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
           let firstDate = dayjs(state.times.firstDate);
           for (let i = 0; i < current; i++) {
             let currentDate = firstDate.add(i, 'days').toDate();
-            let textWidth   = {
-              short : self.ctx.measureText(state.calendar.day.format.short(currentDate)).width,
-              medium : self.ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
-              long : self.ctx.measureText(state.calendar.day.format.long(currentDate)).width,
+            let textWidth = {
+              short: self.ctx.measureText(state.calendar.day.format.short(currentDate)).width,
+              medium: self.ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
+              long: self.ctx.measureText(state.calendar.day.format.long(currentDate)).width
             };
             if (textWidth.short >= max.short) {
               max.short = textWidth.short;
@@ -96,7 +104,7 @@ var ElastiganttApp = (function (exports) {
               max.long = textWidth.long;
             }
           }
-          let cellWidth = state.times.totalViewDurationPx / current - state.calendar.strokeWidth - 2;
+          let cellWidth = state.times.totalViewDurationPx / current - state.calendar.styles.column['stroke-width'] - 2;
           if (current > 1) {
             if (max.short > cellWidth) {
               currentRecurrection++;
@@ -104,103 +112,107 @@ var ElastiganttApp = (function (exports) {
             }
           }
           if (max.long <= cellWidth) {
-            return {count : current, type : 'long'};
+            return {count: current, type: 'long'};
           }
           if (max.medium <= cellWidth) {
-            return {count : current, type : 'medium'};
+            return {count: current, type: 'medium'};
           }
           if (max.short <= cellWidth && current > 1) {
-            return {count : current, type : 'short'};
+            return {count: current, type: 'short'};
           }
-          return {cunt : 0, type : 'short'};
+          return {cunt: 0, type: 'short'};
         },
         hourTextStyle() {
-          return 'font-family:' + this.$root.$data.calendar.hour.fontFamily +
-                 ';font-size:' + this.$root.$data.calendar.hour.fontSize;
+          return 'font-family:' + this.$root.$data.calendar.hour.fontFamily + ';font-size:' + this.$root.$data.calendar.hour.fontSize;
         },
         dayTextStyle() {
-          return 'font-family:' + this.$root.$data.calendar.day.fontFamily +
-                 ';font-size:' + this.$root.$data.calendar.day.fontSize;
-        },
+          return 'font-family:' + this.$root.$data.calendar.day.fontFamily + ';font-size:' + this.$root.$data.calendar.day.fontSize;
+        }
       },
-      computed : {
+      computed: {
         getX() {
-          return this.$root.$data.calendar.strokeWidth / 2;
+          return this.$root.$data.calendar.styles.column['stroke-width'] / 2;
         },
         getY() {
-          return this.$root.$data.calendar.strokeWidth / 2;
+          return this.$root.$data.calendar.styles.column['stroke-width'] / 2;
         },
         getWidth() {
-          return this.$root.$data.width - this.$root.$data.calendar.strokeWidth;
+          return this.$root.$data.width - this.$root.$data.calendar.styles.column['stroke-width'];
         },
 
         hours() {
-          let hours      = [];
+          let hours = [];
           let hoursCount = this.howManyHoursFit();
-          let hourStep   = 24 / hoursCount.count;
-          let state      = this.$root.$data;
+          let hourStep = 24 / hoursCount.count;
+          let state = this.$root.$data;
           for (let i = 0, len = state.times.steps * hoursCount.count; i < len; i++) {
             const date = new Date(state.times.firstTime + i * hourStep * 60 * 60 * 1000);
             hours.push({
-              key : 'h' + i,
-              x : state.calendar.strokeWidth / 2 + i * state.times.stepPx / hoursCount.count,
-              y : state.calendar.strokeWidth / 2 + state.calendar.day.height + state.calendar.month.height,
-              width : state.times.stepPx / hoursCount.count,
-              height : state.calendar.hour.height,
-              label : state.calendar.hour.format[hoursCount.type](date)
+              key: 'h' + i,
+              x: state.calendar.styles.column['stroke-width'] / 2 + i * state.times.stepPx / hoursCount.count,
+              y: state.calendar.styles.column['stroke-width'] / 2 + state.calendar.day.height + state.calendar.month.height,
+              width: state.times.stepPx / hoursCount.count,
+              height: state.calendar.hour.height,
+              label: state.calendar.hour.format[hoursCount.type](date)
             });
           }
           return state.calendar.hours = hours;
         },
         days() {
-          let state     = this.$root.$data;
-          let days      = [];
+          let state = this.$root.$data;
+          let days = [];
           let daysCount = this.howManyDaysFit();
-          let dayStep   = state.times.steps / daysCount.count;
+          let dayStep = state.times.steps / daysCount.count;
           for (let i = 0, len = daysCount.count; i < len; i++) {
             const date = new Date(state.times.firstTime + i * dayStep * 24 * 60 * 60 * 1000);
             days.push({
-              key : 'd' + i,
-              x : state.calendar.strokeWidth / 2 + i * state.times.totalViewDurationPx / daysCount.count,
-              y : state.calendar.strokeWidth / 2 + state.calendar.month.height,
-              width : state.times.totalViewDurationPx / daysCount.count,
-              height : state.calendar.day.height,
-              label : state.calendar.day.format[daysCount.type](date)
+              key: 'd' + i,
+              x: state.calendar.styles.column['stroke-width'] / 2 + i * state.times.totalViewDurationPx / daysCount.count,
+              y: state.calendar.styles.column['stroke-width'] / 2 + state.calendar.month.height,
+              width: state.times.totalViewDurationPx / daysCount.count,
+              height: state.calendar.day.height,
+              label: state.calendar.day.format[daysCount.type](date)
             });
           }
           return state.calendar.days = days;
         },
         months() {
-          let state          = this.$root.$data;
-          let months         = [];
-          let firstDate      = state.times.firstDate;
-          let lastDate       = state.times.lastDate;
-          let steps          = state.times.steps;
-          let currentDate    = dayjs(state.times.firstDate);
-          let currentMonth   = currentDate.month();
-          let currentDays    = 0;
-          let monthDays      = [];
-          let currentDateObj = {date : currentDate.clone().toDate(), days : 0};
+          let state = this.$root.$data;
+          let months = [];
+          let firstDate = state.times.firstDate;
+          let lastDate = state.times.lastDate;
+          let steps = state.times.steps;
+          let currentDate = dayjs(state.times.firstDate);
+          let currentMonth = currentDate.month();
+          let currentDays = 0;
+          let monthDays = [];
+          let currentDateObj = {
+            date: currentDate.clone().toDate(),
+            days: 0
+          };
           for (let i = 0; i < steps; i++) {
             currentDays++;
             currentDate = currentDate.clone().add(1, 'days');
             if (currentDate.month() !== currentMonth) {
-              currentMonth        = currentDate.month();
+              currentMonth = currentDate.month();
               currentDateObj.days = currentDays;
               monthDays.push(currentDateObj);
-              currentDateObj = {date : currentDate.clone().toDate(), days : 0};
-              currentDays    = 0;
+              currentDateObj = {
+                date: currentDate.clone().toDate(),
+                days: 0
+              };
+              currentDays = 0;
             }
           }
           if (currentDays) {
             currentDateObj.days = currentDays;
             monthDays.push(currentDateObj);
           }
-          let currentOffset = state.calendar.strokeWidth / 2;
+          let currentOffset = state.calendar.styles.column['stroke-width'] / 2;
           for (let i = 0, len = monthDays.length; i < len; i++) {
-            let days   = monthDays[i].days;
-            let date   = monthDays[i].date;
-            let width  = state.times.stepPx * days;
+            let days = monthDays[i].days;
+            let date = monthDays[i].date;
+            let width = state.times.stepPx * days;
             let format = 'long';
             if (self.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
               format = 'medium';
@@ -208,12 +220,12 @@ var ElastiganttApp = (function (exports) {
                 format = 'short';
               }
             }          months.push({
-              key : 'm' + i,
-              x : currentOffset,
-              y : state.calendar.strokeWidth / 2,
-              width : width,
-              height : state.calendar.day.height,
-              label : state.calendar.month.format[format](date)
+              key: 'm' + i,
+              x: currentOffset,
+              y: state.calendar.styles.column['stroke-width'] / 2,
+              width: width,
+              height: state.calendar.day.height,
+              label: state.calendar.month.format[format](date)
             });
             currentOffset += width;
           }
@@ -225,7 +237,7 @@ var ElastiganttApp = (function (exports) {
 
   function CalendarRow(prefix, self) {
     return self.wrapComponent({
-      props:['item'],
+      props: ['item'],
       template: `<g class="elastigantt__calendar-row-group">
     <rect
       class="elastigantt__calendar-row"
@@ -233,24 +245,26 @@ var ElastiganttApp = (function (exports) {
       :y="item.y"
       :width="item.width"
       :height="item.height"
+      :style="$root.$data.calendar.styles.row"
     ></rect>
     <text
       :x="getTextX"
       :y="getTextY"
       alignment-baseline="middle"
       text-anchor="middle"
+      :style="$root.$data.calendar.styles.text"
     >{{item.label}}</text>
     </g>`,
       data() {
         return {};
       },
-      computed:{
-        getTextX(){
-          return this.item.x+this.item.width/2;
+      computed: {
+        getTextX() {
+          return this.item.x + this.item.width / 2;
         },
-        getTextY(){
-          return this.item.y+this.item.height/2;
-        },
+        getTextY() {
+          return this.item.y + this.item.height / 2;
+        }
       }
     });
   }
@@ -270,7 +284,7 @@ var ElastiganttApp = (function (exports) {
   function Grid(prefix, self) {
     return self.wrapComponent({
 
-      template : `<g>
+      template: `<g>
         <line
           class="elastigantt__grid-horizontal-line"
           v-for="(line,index) in horizontalLines"
@@ -293,36 +307,42 @@ var ElastiganttApp = (function (exports) {
         ></line>
       </g>`,
 
-      data() { return {}; },
-      computed : {
-        getVStyle() { return this.$root.$data.verticalGrid.style; },
-        getHStyle() { return this.$root.$data.horizontalGrid.style; },
+      data() {
+        return {};
+      },
+      computed: {
+        getVStyle() {
+          return this.$root.$data.verticalGrid.style;
+        },
+        getHStyle() {
+          return this.$root.$data.horizontalGrid.style;
+        },
         verticalLines() {
-          let lines   = [];
+          let lines = [];
           const state = this.$root.$data;
           for (let step = 0; step <= state.times.steps; step++) {
             let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
             lines.push({
-              key : step,
-              x1 : x,
-              y1 : state.calendar.height + state.calendar.strokeWidth + state.calendar.gap,
-              x2 : x,
-              y2 : state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth,
+              key: step,
+              x1: x,
+              y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
+              x2: x,
+              y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth
             });
           }
           return state.verticalGrid.lines = lines;
         },
         horizontalLines() {
-          let lines   = [];
+          let lines = [];
           const state = this.$root.$data;
-          let tasks   = this.$root.getVisibleTasks();
+          let tasks = this.$root.getVisibleTasks();
           for (let index = 0, len = tasks.length; index <= len; index++) {
             lines.push({
-              key : 'hl' + index,
-              x1 : 0,
-              y1 : index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
-              x2 : state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
-              y2 : index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
+              key: 'hl' + index,
+              x1: 0,
+              y1: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
+              x2: state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
+              y2: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2
             });
           }
           return state.horizontalGrid.lines = lines;
@@ -592,8 +612,8 @@ var ElastiganttApp = (function (exports) {
         getHeaderExpanderStyle() {
           const state = this.$root.$data;
           return Object.assign({
-            'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
-            'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+            'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
+            'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
             'margin-bottom': state.calendar.gap + 'px'
           }, this.$root.$data.taskList.styles.header);
         },
@@ -601,7 +621,7 @@ var ElastiganttApp = (function (exports) {
           const state = this.$root.$data;
           let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
           return {
-            'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+            'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
             'height': height + 'px',
             'border-color': '#00000010'
           };
@@ -612,8 +632,8 @@ var ElastiganttApp = (function (exports) {
 
   function TaskListHeader(prefix, self) {
     return self.wrapComponent({
-      props : [ 'expanderStyle' ],
-      template : `<div class="elastigantt__task-list-header">
+      props: ['expanderStyle'],
+      template: `<div class="elastigantt__task-list-header">
       <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
         <${prefix}-task-list-expander :tasks="collapsible"></${prefix}-task-list-expander>
       </div>
@@ -628,26 +648,32 @@ var ElastiganttApp = (function (exports) {
     </div>`,
       data() {
         return {
-          resizer : {
-            moving : false,
-            x : 0,
+          resizer: {
+            moving: false,
+            x: 0
           }
         };
       },
-      computed : {
+      computed: {
         getStyle() {
           return column => {
             const state = this.$root.$data;
-            return Object.assign({'height' : (state.calendar.height + state.calendar.strokeWidth) + 'px', 'margin-bottom' : state.calendar.gap + 'px', 'width' : column.finalWidth + 'px'}, this.$root.$data.taskList.styles.header);
+            return Object.assign({
+              'height': (state.calendar.height + state.calendar.styles.column['stroke-width']) + 'px',
+              'margin-bottom': state.calendar.gap + 'px',
+              'width': column.finalWidth + 'px'
+            }, this.$root.$data.taskList.styles.header);
           }
         },
-        collapsible() { return this.$root.$data.tasks.filter(task => task.allChildren.length > 0); }
+        collapsible() {
+          return this.$root.$data.tasks.filter(task => task.allChildren.length > 0);
+        }
       },
-      methods : {
+      methods: {
         resizerMouseDown(event, column) {
           if (!this.resizerMoving) {
-            this.resizer.moving       = column;
-            this.resizer.x            = event.clientX;
+            this.resizer.moving = column;
+            this.resizer.x = event.clientX;
             this.resizer.initialWidth = column.width;
           }
         },
@@ -657,7 +683,9 @@ var ElastiganttApp = (function (exports) {
             this.$root.calculateTaskListColumnWidths();
           }
         },
-        resizerMouseUp(event, column) { this.resizer.moving = false; },
+        resizerMouseUp(event, column) {
+          this.resizer.moving = false;
+        }
       },
       created() {
         this.$root.$on('mousemove', this.resizerMouseMove);
@@ -971,15 +999,15 @@ var ElastiganttApp = (function (exports) {
 
   function TreeText(prefix, self) {
     return self.wrapComponent({
-      props : [ 'task' ],
-      template :
-          `<text x="50%" y="50%" :style="getTextStyle" text-anchor="middle" alignment-baseline="middle">{{task.label}}</text>`,
-      data() { return {}; },
-      computed : {
+      props: ['task'],
+      template: `<text x="50%" y="50%" :style="getTextStyle" text-anchor="middle" alignment-baseline="middle">{{task.label}}</text>`,
+      data() {
+        return {};
+      },
+      computed: {
         getTextStyle() {
           let state = this.$root.$data;
-          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${
-            state.row.fontSize};font-weight:bold;`;
+          return `${state.row.textStyle};font-family:${state.row.fontFamily};font-size:${state.row.fontSize};font-weight:bold;`;
         }
       }
     });
@@ -1315,11 +1343,28 @@ var ElastiganttApp = (function (exports) {
           hours: [],
           days: [],
           months: [],
-          gap: 6,
+          gap: 0,
           height: 0,
-          strokeWidth: 1,
-          fontFamily: 'sans-serif',
-          style: 'fill:#00000020;stroke:#00000000;strokeWidth:1',
+          styles: {
+            wrapper: {
+              'width': '100%',
+              'height': '100%',
+              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+              'border-color': '#00000010'
+            },
+            row: {
+              fill: 'transparent',
+              stroke: '#00000010'
+            },
+            column: {
+              'stroke': '#00000010',
+              'stroke-width': 1,
+              'fill': 'transparent'
+            },
+            text: {
+              fontFamily: 'sans-serif'
+            }
+          },
           hour: {
             height: 20,
             display: true,
@@ -1573,7 +1618,7 @@ var ElastiganttApp = (function (exports) {
             self.resetTaskTree();
             this.tasks = self.makeTaskTree(this.rootTask).allChildren;
             const visibleTasks = this.getVisibleTasks();
-            this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+            this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.styles.column['stroke-width'] + this.$root.$data.calendar.gap;
             for (let index = 0, len = visibleTasks.length; index < len; index++) {
               let task = visibleTasks[index];
               task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
@@ -1586,7 +1631,7 @@ var ElastiganttApp = (function (exports) {
                 x = x / this.times.timePerPixel;
               }
               task.x = x + this.verticalGrid.strokeWidth;
-              task.y = (this.row.height + this.horizontalGrid.gap * 2) * index + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+              task.y = (this.row.height + this.horizontalGrid.gap * 2) * index + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.styles.column['stroke-width'] + this.$root.$data.calendar.gap;
             }
           },
           getSVG() {

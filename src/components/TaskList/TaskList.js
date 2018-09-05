@@ -26,8 +26,8 @@ export function TaskList(prefix, self) {
       getHeaderExpanderStyle() {
         const state = this.$root.$data;
         return Object.assign({
-          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
-          'height': state.calendar.height + state.calendar.strokeWidth + 'px',
+          'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
+          'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
           'margin-bottom': state.calendar.gap + 'px'
         }, this.$root.$data.taskList.styles.header);
       },
@@ -35,7 +35,7 @@ export function TaskList(prefix, self) {
         const state = this.$root.$data;
         let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
         return {
-          'width': state.taskList.expander.columnWidth + state.calendar.strokeWidth + 'px',
+          'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
           'height': height + 'px',
           'border-color': '#00000010'
         };

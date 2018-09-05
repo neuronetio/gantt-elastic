@@ -1,7 +1,7 @@
 export function Grid(prefix, self) {
   return self.wrapComponent({
 
-    template : `<g>
+    template: `<g>
         <line
           class="elastigantt__grid-horizontal-line"
           v-for="(line,index) in horizontalLines"
@@ -24,36 +24,42 @@ export function Grid(prefix, self) {
         ></line>
       </g>`,
 
-    data() { return {}; },
-    computed : {
-      getVStyle() { return this.$root.$data.verticalGrid.style; },
-      getHStyle() { return this.$root.$data.horizontalGrid.style; },
+    data() {
+      return {};
+    },
+    computed: {
+      getVStyle() {
+        return this.$root.$data.verticalGrid.style;
+      },
+      getHStyle() {
+        return this.$root.$data.horizontalGrid.style;
+      },
       verticalLines() {
-        let lines   = [];
+        let lines = [];
         const state = this.$root.$data;
         for (let step = 0; step <= state.times.steps; step++) {
           let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
           lines.push({
-            key : step,
-            x1 : x,
-            y1 : state.calendar.height + state.calendar.strokeWidth + state.calendar.gap,
-            x2 : x,
-            y2 : state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth,
+            key: step,
+            x1: x,
+            y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
+            x2: x,
+            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth
           });
         }
         return state.verticalGrid.lines = lines;
       },
       horizontalLines() {
-        let lines   = [];
+        let lines = [];
         const state = this.$root.$data;
-        let tasks   = this.$root.getVisibleTasks();
+        let tasks = this.$root.getVisibleTasks();
         for (let index = 0, len = tasks.length; index <= len; index++) {
           lines.push({
-            key : 'hl' + index,
-            x1 : 0,
-            y1 : index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
-            x2 : state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
-            y2 : index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.strokeWidth + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
+            key: 'hl' + index,
+            x1: 0,
+            y1: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
+            x2: state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
+            y2: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2
           });
         }
         return state.horizontalGrid.lines = lines;

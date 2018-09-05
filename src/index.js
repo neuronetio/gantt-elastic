@@ -249,11 +249,28 @@ class ElastiganttApp {
         hours: [],
         days: [],
         months: [],
-        gap: 6,
+        gap: 0,
         height: 0,
-        strokeWidth: 1,
-        fontFamily: 'sans-serif',
-        style: 'fill:#00000020;stroke:#00000000;strokeWidth:1',
+        styles: {
+          wrapper: {
+            'width': '100%',
+            'height': '100%',
+            'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+            'border-color': '#00000010'
+          },
+          row: {
+            fill: 'transparent',
+            stroke: '#00000010'
+          },
+          column: {
+            'stroke': '#00000010',
+            'stroke-width': 1,
+            'fill': 'transparent'
+          },
+          text: {
+            fontFamily: 'sans-serif'
+          }
+        },
         hour: {
           height: 20,
           display: true,
@@ -507,7 +524,7 @@ class ElastiganttApp {
           self.resetTaskTree();
           this.tasks = self.makeTaskTree(this.rootTask).allChildren;
           const visibleTasks = this.getVisibleTasks();
-          this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+          this.height = visibleTasks.length * (this.row.height + this.horizontalGrid.gap * 2) + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.styles.column['stroke-width'] + this.$root.$data.calendar.gap;
           for (let index = 0, len = visibleTasks.length; index < len; index++) {
             let task = visibleTasks[index];
             task.width = task.durationMs / this.times.timePerPixel - this.verticalGrid.strokeWidth;
@@ -520,7 +537,7 @@ class ElastiganttApp {
               x = x / this.times.timePerPixel;
             }
             task.x = x + this.verticalGrid.strokeWidth;
-            task.y = (this.row.height + this.horizontalGrid.gap * 2) * index + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.strokeWidth + this.$root.$data.calendar.gap;
+            task.y = (this.row.height + this.horizontalGrid.gap * 2) * index + this.horizontalGrid.gap + this.calendar.height + this.$root.$data.calendar.styles.column['stroke-width'] + this.$root.$data.calendar.gap;
           }
         },
         getSVG() {
