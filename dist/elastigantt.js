@@ -1449,7 +1449,7 @@ var ElastiganttApp = (function (exports) {
               'border-color': '#00000010'
             },
             header: {
-              'background': 'linear-gradient(to bottom,#fff,#f0f0f0)',
+              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
               'border-color': '#00000010'
             },
             label: {
@@ -1503,7 +1503,7 @@ var ElastiganttApp = (function (exports) {
             wrapper: {
               'width': '100%',
               'height': '100%',
-              'background': 'linear-gradient(to bottom,#fff,#f0f0f0)',
+              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
               'border-color': '#00000010'
             },
             row: {
