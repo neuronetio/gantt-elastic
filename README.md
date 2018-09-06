@@ -1,7 +1,7 @@
 # Elastic Gantt
 [work in progress]
 
-## If you want the work to go faster leave the star :star: :+1:!
+## If you want the work to go faster leave the star :star: :+1:
 
 If you want to use it now, take a look at index.html how to start, but this lib is in developement stage and will change for sure.
 
