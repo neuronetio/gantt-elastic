@@ -17,7 +17,7 @@ export function TreeRowMilestone(prefix, self) {
           <polygon :points="getPoints"></polygon>
         </clipPath>
       </defs>
-        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <polygon :points="getPoints" :style="$root.$data.row.styles.bar"></polygon>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
         </${prefix}-tree-progress-bar>
       </svg>

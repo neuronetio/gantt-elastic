@@ -14,10 +14,10 @@ export function TreeRowProject(prefix, self) {
       >
         <defs>
         <clipPath id="elastigantt__project-clip-path">
-          <path :d="getPoints" :fill="getFill"></path>
+          <path :d="getPoints" :style="$root.$data.row.styles.bar"></path>
         </clipPath>
         </defs>
-        <path :d="getPoints" :fill="getFill"></path>
+        <path :d="getPoints" :style="$root.$data.row.styles.bar"></path>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
@@ -40,17 +40,29 @@ export function TreeRowProject(prefix, self) {
         if (task.width / 2 - offset < 0) {
           offset = task.width / 2;
         }
-        return `M ${offset} ${task.height}
-        Q 0 ${task.height} 0 ${fifty}
-        Q 0 0 ${offset} 0
-        L ${task.width - offset} 0
-        Q ${task.width} 0 ${task.width} ${fifty}
-        Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
-        L ${offset} ${task.height}
-        Z`;
-      },
-      getFill() {
-        return '#FF0000a0';
+        const bottom = task.height - task.height / 4;
+        const corner = task.height / 6;
+        const smallCorner = task.height / 8;
+        return `M ${smallCorner},0
+                L ${task.width - smallCorner} 0
+                L ${task.width} ${smallCorner}
+                L ${task.width} ${bottom}
+                L ${task.width - corner} ${task.height}
+                L ${task.width - corner * 2} ${bottom}
+                L ${corner * 2} ${bottom}
+                L ${corner} ${task.height}
+                L 0 ${bottom}
+                L 0 ${smallCorner}
+                Z
+        `;
+        // return `M ${offset} ${task.height}
+        // Q 0 ${task.height} 0 ${fifty}
+        // Q 0 0 ${offset} 0
+        // L ${task.width - offset} 0
+        // Q ${task.width} 0 ${task.width} ${fifty}
+        // Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
+        // L ${offset} ${task.height}
+        // Z`;
       }
     },
     methods: {

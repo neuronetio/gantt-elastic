@@ -141,14 +141,22 @@ class ElastiganttApp {
       },
       row: {
         height: 24,
-        style: 'fill:#FF0000a0',
-        textStyle: 'fill:#ffffff',
-        fontFamily: 'sans-serif',
-        fontSize: '12px',
+        styles: {
+          bar: {
+            'fill': '#ff0000a0',
+            'stroke': '#ff0000',
+            'stroke-width': '1'
+          },
+          text: {
+            'fill': '#ffffff',
+            'font-family': 'sans-serif',
+            'font-size': '12px'
+          }
+        },
         showText: true
       },
       treeText: {
-        offset: 20,
+        offset: 0,
         styles: {
           text: {
             'font-family': 'sans-serif',
@@ -170,8 +178,18 @@ class ElastiganttApp {
         }
       },
       progress: {
+        width: 20,
         height: 6,
-        style: 'fill:#00ff92a0'
+        styles: {
+          line: {
+            'stroke': '#ffffff85',
+            'stroke-width': 20
+          },
+          bar: {
+            'fill': "url(#diagonalHatch)",
+            'transform': 'translateY(0.1) scaleY(0.8)'
+          }
+        }
       },
       horizontalGrid: {
         gap: 6,
@@ -203,11 +221,12 @@ class ElastiganttApp {
             'border-color': '#00000010'
           },
           header: {
-            'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+            'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
             'border-color': '#00000010'
           },
           label: {
-            'display': 'inline-block'
+            'display': 'inline-block',
+            'margin': 'auto 6px'
           },
           value: {
             'margin': 'auto 6px',
@@ -249,7 +268,7 @@ class ElastiganttApp {
           wrapper: {
             'width': '100%',
             'height': '100%',
-            'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+            'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
             'border-color': '#00000010'
           },
           row: {

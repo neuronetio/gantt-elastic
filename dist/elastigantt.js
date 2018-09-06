@@ -842,12 +842,34 @@ var ElastiganttApp = (function (exports) {
 
   function TreeProgressBar(prefix, self) {
     return self.wrapComponent({
-      props : [ 'task' ],
-      template :
-          `<rect id="elastigantt__tree-row-progress" x="0" y="0" height="30%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>`,
-      data() { return {}; },
-      computed : {
-        getProgressWidth() { return this.task.progress + '%'; },
+      props: ['task'],
+      template: `<g>
+        <defs>
+          <pattern id="diagonalHatch" :width="$root.$data.progress.width" :height="$root.$data.progress.width" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" :y2="$root.$data.progress.width" :style="$root.$data.progress.styles.line" />
+          </pattern>
+        </defs>
+        <!--<rect id="elastigantt__tree-row-progress" x="0" y="0" height="30%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>-->
+        <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="$root.$data.progress.styles.bar"></rect>
+        <path :d="getLinePoints" :style="getLineStyle"></path>
+      </g>`,
+      data() {
+        return {};
+      },
+      computed: {
+        getProgressWidth() {
+          return this.task.progress + '%';
+        },
+        getLinePoints() {
+          const start = this.task.width / 100 * this.task.progress;
+          return `M ${start} 0 L ${start} ${this.task.height}`;
+        },
+        getLineStyle() {
+          return {
+            stroke: this.$root.$data.row.styles.bar.stroke + 'a0',
+            'stroke-width': this.$root.$data.row.styles.bar['stroke-width'] / 2
+          };
+        }
       }
     });
   }
@@ -871,7 +893,7 @@ var ElastiganttApp = (function (exports) {
           <polygon :points="getPoints"></polygon>
         </clipPath>
       </defs>
-        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <polygon :points="getPoints" :style="$root.$data.row.styles.bar"></polygon>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
         </${prefix}-tree-progress-bar>
       </svg>
@@ -933,10 +955,10 @@ var ElastiganttApp = (function (exports) {
       >
         <defs>
         <clipPath id="elastigantt__project-clip-path">
-          <path :d="getPoints" :fill="getFill"></path>
+          <path :d="getPoints" :style="$root.$data.row.styles.bar"></path>
         </clipPath>
         </defs>
-        <path :d="getPoints" :fill="getFill"></path>
+        <path :d="getPoints" :style="$root.$data.row.styles.bar"></path>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
@@ -959,17 +981,29 @@ var ElastiganttApp = (function (exports) {
           if (task.width / 2 - offset < 0) {
             offset = task.width / 2;
           }
-          return `M ${offset} ${task.height}
-        Q 0 ${task.height} 0 ${fifty}
-        Q 0 0 ${offset} 0
-        L ${task.width - offset} 0
-        Q ${task.width} 0 ${task.width} ${fifty}
-        Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
-        L ${offset} ${task.height}
-        Z`;
-        },
-        getFill() {
-          return '#FF0000a0';
+          const bottom = task.height - task.height / 4;
+          const corner = task.height / 6;
+          const smallCorner = task.height / 8;
+          return `M ${smallCorner},0
+                L ${task.width - smallCorner} 0
+                L ${task.width} ${smallCorner}
+                L ${task.width} ${bottom}
+                L ${task.width - corner} ${task.height}
+                L ${task.width - corner * 2} ${bottom}
+                L ${corner * 2} ${bottom}
+                L ${corner} ${task.height}
+                L 0 ${bottom}
+                L 0 ${smallCorner}
+                Z
+        `;
+          // return `M ${offset} ${task.height}
+          // Q 0 ${task.height} 0 ${fifty}
+          // Q 0 0 ${offset} 0
+          // L ${task.width - offset} 0
+          // Q ${task.width} 0 ${task.width} ${fifty}
+          // Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
+          // L ${offset} ${task.height}
+          // Z`;
         }
       },
       methods: {
@@ -1005,7 +1039,7 @@ var ElastiganttApp = (function (exports) {
           <polygon :points="getPoints"></polygon>
         </clipPath>
       </defs>
-        <polygon :points="getPoints" fill="#FF0000A0"></polygon>
+        <polygon :points="getPoints" :style="$root.$data.row.styles.bar"></polygon>
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)">
         </${prefix}-tree-progress-bar>
       </svg>
@@ -1332,14 +1366,22 @@ var ElastiganttApp = (function (exports) {
         },
         row: {
           height: 24,
-          style: 'fill:#FF0000a0',
-          textStyle: 'fill:#ffffff',
-          fontFamily: 'sans-serif',
-          fontSize: '12px',
+          styles: {
+            bar: {
+              'fill': '#ff0000a0',
+              'stroke': '#ff0000',
+              'stroke-width': '1'
+            },
+            text: {
+              'fill': '#ffffff',
+              'font-family': 'sans-serif',
+              'font-size': '12px'
+            }
+          },
           showText: true
         },
         treeText: {
-          offset: 20,
+          offset: 0,
           styles: {
             text: {
               'font-family': 'sans-serif',
@@ -1361,8 +1403,18 @@ var ElastiganttApp = (function (exports) {
           }
         },
         progress: {
+          width: 20,
           height: 6,
-          style: 'fill:#00ff92a0'
+          styles: {
+            line: {
+              'stroke': '#ffffff85',
+              'stroke-width': 20
+            },
+            bar: {
+              'fill': "url(#diagonalHatch)",
+              'transform': 'translateY(0.1) scaleY(0.8)'
+            }
+          }
         },
         horizontalGrid: {
           gap: 6,
@@ -1394,11 +1446,12 @@ var ElastiganttApp = (function (exports) {
               'border-color': '#00000010'
             },
             header: {
-              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+              'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
               'border-color': '#00000010'
             },
             label: {
-              'display': 'inline-block'
+              'display': 'inline-block',
+              'margin': 'auto 6px'
             },
             value: {
               'margin': 'auto 6px',
@@ -1440,7 +1493,7 @@ var ElastiganttApp = (function (exports) {
             wrapper: {
               'width': '100%',
               'height': '100%',
-              'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+              'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
               'border-color': '#00000010'
             },
             row: {
