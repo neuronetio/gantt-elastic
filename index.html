@@ -24,155 +24,153 @@
   <script src="dist/elastigantt.js"></script>
   <!--<script type="module" src="src/index.js"></script>-->
   <script>
-  //import {ElastiganttApp} from "./src/index.js";
-  let elastigantt = new ElastiganttApp.ElastiganttApp(
-    'app',
-    '#app',
+  const tasks = [
     {
-      tasks: [
-        {
-          id: 1,
-          label: 'Make some noise',
-          user: 'John Doe',
-          start: '2018-05-18T12:00:00',
-          duration: 5 * 24 * 60 * 60,
-          progress: 85,
-          type: 'project',
-        },
-        {
-          id: 2,
-          label: 'With great power comes great responsibility',
-          user: 'Peter Parker',
-          parentId: 1,
-          start: '2018-05-19T12:00:00',
-          duration: 4 * 24 * 60 * 60,
-          progress: 50,
-          type: 'milestone',
-        },
-        {
-          id: 3,
-          label: 'Courage is being scared to death, but saddling up anyway.',
-          user: 'John Wayne',
-          parentId: 2,
-          start: '2018-05-19T12:00:00',
-          duration: 2 * 24 * 60 * 60,
-          progress: 100,
-          type: 'task',
-        },
-        {
-          id: 4,
-          label: 'Put that toy AWAY!',
-          user: 'Clark Kent',
-          start: '2018-05-21T12:00:00',
-          duration: 2 * 24 * 60 * 60,
-          progress: 50,
-          type: 'task',
-          dependentOn: [3]
-        },
-        {
-          id: 5,
-          label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
-          user: 'Austin Powers',
-          parentId: 1,
-          start: '2018-05-19T12:00:00',
-          duration: 2 * 24 * 60 * 60,
-          progress: 10,
-          type: 'milestone',
-        },
-        {
-          id: 6,
-          label: 'Butch Mario and the Luigi Kid',
-          user: 'Mario Bros',
-          parentId: 5,
-          start: '2018-05-20T08:00:00',
-          duration: 1 * 24 * 60 * 60,
-          progress: 0,
-          type: 'task',
-        },
-        {
-          id: 7,
-          label: 'Devon, the old man wanted me, it was his dying request',
-          user: 'Knight Rider',
-          parentId: 2,
-          dependentOn:[6],
-          start: '2018-05-20T12:00:00',
-          duration: 4 * 60 * 60,
-          progress: 20,
-          type: 'task',
-        },
-        {
-          id: 8,
-          label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
-          user: 'Johhny Bravo',
-          parentId: 5,
-          dependentOn:[3],
-          start: '2018-05-20T08:00:00',
-          duration: 1 * 24 * 60 * 60,
-          progress: 0,
-          type: 'task',
-        },
-        {
-          id: 9,
-          label: 'This better be important, woman. You are interrupting my very delicate calculations.',
-          user: 'Dexter\'s Laboratory',
-          parentId: 2,
-          dependentOn:[8,6],
-          start: '2018-05-22T12:00:00',
-          duration: 4 * 60 * 60,
-          progress: 20,
-          type: 'task',
-        },
-      ]
+      id: 1,
+      label: 'Make some noise',
+      user: 'John Doe',
+      start: '2018-05-18T12:00:00',
+      duration: 5 * 24 * 60 * 60,
+      progress: 85,
+      type: 'project',
     },
     {
-      taskList : {
-        columns : [
-          {label : 'ID', value : 'id', width : 40},
-          {label : 'Description', value : 'label', width : 324},
-          {label : 'User', value : 'user', width : 150},
-          {label : 'Type', value : 'type', width : 100},
-          {label : '%', value : 'progress', width : 40, styles:{
-             label: {'text-align':'center','width':'100%'} ,
-             value: {'text-align':'center','width':'100%'}
-           }},
-        ],
-      },
-      locale:{
-        code:'en'
-      },
-      /*locale:{
-        code:'pl'
-        name: 'pl', // name String
-        weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
-        weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
-        weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
-        months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
-        monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
-        ordinal: n => `${n}`, // ordinal Function (number) => return number + output
-        relativeTime: { // relative time format strings, keep %s %d as the same
-          future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
-          past: '%s temu',
-          s: 'kilka sekund',
-          m: 'minutę',
-          mm: '%d minut',
-          h: 'godzinę',
-          hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
-          d: 'dzień',
-          dd: '%d dni',
-          M: 'miesiąc',
-          MM: '%d miesięcy',
-          y: 'rok',
-          yy: '%d lat'
-        }
-      }*/
+      id: 2,
+      label: 'With great power comes great responsibility',
+      user: 'Peter Parker',
+      parentId: 1,
+      start: '2018-05-19T12:00:00',
+      duration: 4 * 24 * 60 * 60,
+      progress: 50,
+      type: 'milestone',
+    },
+    {
+      id: 3,
+      label: 'Courage is being scared to death, but saddling up anyway.',
+      user: 'John Wayne',
+      parentId: 2,
+      start: '2018-05-19T12:00:00',
+      duration: 2 * 24 * 60 * 60,
+      progress: 100,
+      type: 'task',
+    },
+    {
+      id: 4,
+      label: 'Put that toy AWAY!',
+      user: 'Clark Kent',
+      start: '2018-05-21T12:00:00',
+      duration: 2 * 24 * 60 * 60,
+      progress: 50,
+      type: 'task',
+      dependentOn: [3]
+    },
+    {
+      id: 5,
+      label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
+      user: 'Austin Powers',
+      parentId: 1,
+      start: '2018-05-19T12:00:00',
+      duration: 2 * 24 * 60 * 60,
+      progress: 10,
+      type: 'milestone',
+    },
+    {
+      id: 6,
+      label: 'Butch Mario and the Luigi Kid',
+      user: 'Mario Bros',
+      parentId: 5,
+      start: '2018-05-20T08:00:00',
+      duration: 1 * 24 * 60 * 60,
+      progress: 0,
+      type: 'task',
+    },
+    {
+      id: 7,
+      label: 'Devon, the old man wanted me, it was his dying request',
+      user: 'Knight Rider',
+      parentId: 2,
+      dependentOn:[6],
+      start: '2018-05-20T12:00:00',
+      duration: 4 * 60 * 60,
+      progress: 20,
+      type: 'task',
+    },
+    {
+      id: 8,
+      label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
+      user: 'Johhny Bravo',
+      parentId: 5,
+      dependentOn:[3],
+      start: '2018-05-20T08:00:00',
+      duration: 1 * 24 * 60 * 60,
+      progress: 0,
+      type: 'task',
+    },
+    {
+      id: 9,
+      label: 'This better be important, woman. You are interrupting my very delicate calculations.',
+      user: 'Dexter\'s Laboratory',
+      parentId: 2,
+      dependentOn:[8,6],
+      start: '2018-05-22T12:00:00',
+      duration: 4 * 60 * 60,
+      progress: 20,
+      type: 'task',
+    },
+  ];
+
+  const options = {
+    taskList : {
+      columns : [
+        {label : 'ID', value : 'id', width : 40},
+        {label : 'Description', value : 'label', width : 324},
+        {label : 'User', value : 'user', width : 150},
+        {label : 'Type', value : 'type', width : 100},
+        {label : '%', value : 'progress', width : 40, styles:{
+           label: {'text-align':'center','width':'100%'} ,
+           value: {'text-align':'center','width':'100%'}
+         }},
+      ],
+    },
+    locale:{
+      code:'en'
+    },
+    /*locale:{
+      code:'pl'
+      name: 'pl', // name String
+      weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
+      weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
+      weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
+      months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
+      monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
+      ordinal: n => `${n}`, // ordinal Function (number) => return number + output
+      relativeTime: { // relative time format strings, keep %s %d as the same
+        future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
+        past: '%s temu',
+        s: 'kilka sekund',
+        m: 'minutę',
+        mm: '%d minut',
+        h: 'godzinę',
+        hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
+        d: 'dzień',
+        dd: '%d dni',
+        M: 'miesiąc',
+        MM: '%d miesięcy',
+        y: 'rok',
+        yy: '%d lat'
+      }
+    }*/
+  };
+
+  const elastigantt = new Vue({
+    el:'#app',
+    template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
+    data:{
+      tasks,
+      options
     }
-  );
-  function drawCanvas(){
-    elastigantt.app.getImage().then((img)=>{
-      document.getElementById('preview').src=img;
-    });
-  }
-  document.getElementById('getimg').onclick = drawCanvas;
+  });
+  console.log(elastigantt);
   </script>
 </body>
 </html>

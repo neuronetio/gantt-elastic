@@ -13,7 +13,7 @@ export default {
     file: 'dist/elastigantt.js',
     format: 'iife', // immediately-invoked function expression — suitable for <script> tags
     sourcemap: true,
-    name: 'ElastiganttApp'
+    name: 'Elastigantt'
   },
   plugins: [
     resolve(), // tells Rollup how to find date-fns in node_modules
