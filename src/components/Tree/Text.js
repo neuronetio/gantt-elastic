@@ -12,7 +12,6 @@ export function TreeText(prefix, self) {
       getWidth() {
         const textStyle = this.$root.$data.treeText.styles.text;
         self.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
-        console.log(self.ctx.font);
         const textWidth = self.ctx.measureText(this.task.label).width;
         return textWidth + this.$root.$data.treeText.xPadding * 2;
       }
