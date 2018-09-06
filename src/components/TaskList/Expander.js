@@ -1,9 +1,9 @@
 export function TaskListExpander(prefix, self) {
   return self.wrapComponent({
-    props : [ 'tasks' ],
-    template : `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
+    props: ['tasks'],
+    template: `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
       <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
-        rx="2"  ry="2" :style="borderStyle" @click="toggle"
+        rx="2"  ry="2" :style="$root.$data.taskList.styles.expander" @click="toggle"
       ></rect>
       <line v-if="allChildren.length"
         :x1="lineOffset"
@@ -26,24 +26,28 @@ export function TaskListExpander(prefix, self) {
       const border = 0.5;
       return {
         border,
-        borderStyle : {
-          'fill' : '#ffffffa0',
-          'stroke' : '#000000',
-          'stroke-width' : border,
+        borderStyle: {
+          'fill': '#ffffffa0',
+          'stroke': '#000000',
+          'stroke-width': border
         },
-        lineOffset : 5,
-        lineStyle : {
-          'fill' : 'transparent',
-          'stroke' : '#000000',
-          'stroke-width' : 1,
-          'stroke-linecap' : 'round',
+        lineOffset: 5,
+        lineStyle: {
+          'fill': 'transparent',
+          'stroke': '#000000',
+          'stroke-width': 1,
+          'stroke-linecap': 'round'
         }
       };
     },
-    computed : {
+    computed: {
       allChildren() {
         const children = [];
-        this.tasks.forEach(task => { task.allChildren.forEach(child => { children.push(child); }); });
+        this.tasks.forEach(task => {
+          task.allChildren.forEach(child => {
+            children.push(child);
+          });
+        });
         return children;
       },
       collapsed() {
@@ -59,7 +63,7 @@ export function TaskListExpander(prefix, self) {
         return collapsed === this.tasks.length;
       }
     },
-    methods : {
+    methods: {
       toggle() {
         if (this.allChildren.length === 0) {
           return;
@@ -68,8 +72,7 @@ export function TaskListExpander(prefix, self) {
         this.tasks.forEach(task => {
           task.collapsed = collapsed;
           task.allChildren.forEach(child => {
-            let parentsNotCollapsed =
-                child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
+            let parentsNotCollapsed = child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
             child.visible = !collapsed && parentsNotCollapsed;
           });
           this.$root.recalculate();

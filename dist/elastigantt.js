@@ -490,10 +490,10 @@ var ElastiganttApp = (function (exports) {
 
   function TaskListExpander(prefix, self) {
     return self.wrapComponent({
-      props : [ 'tasks' ],
-      template : `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
+      props: ['tasks'],
+      template: `<svg :width="$root.$data.taskList.expander.size" :height="$root.$data.taskList.expander.size">
       <rect :x="border" :y="border" :width="$root.$data.taskList.expander.size-border*2" :height="$root.$data.taskList.expander.size-border*2"
-        rx="2"  ry="2" :style="borderStyle" @click="toggle"
+        rx="2"  ry="2" :style="$root.$data.taskList.styles.expander" @click="toggle"
       ></rect>
       <line v-if="allChildren.length"
         :x1="lineOffset"
@@ -516,24 +516,28 @@ var ElastiganttApp = (function (exports) {
         const border = 0.5;
         return {
           border,
-          borderStyle : {
-            'fill' : '#ffffffa0',
-            'stroke' : '#000000',
-            'stroke-width' : border,
+          borderStyle: {
+            'fill': '#ffffffa0',
+            'stroke': '#000000',
+            'stroke-width': border
           },
-          lineOffset : 5,
-          lineStyle : {
-            'fill' : 'transparent',
-            'stroke' : '#000000',
-            'stroke-width' : 1,
-            'stroke-linecap' : 'round',
+          lineOffset: 5,
+          lineStyle: {
+            'fill': 'transparent',
+            'stroke': '#000000',
+            'stroke-width': 1,
+            'stroke-linecap': 'round'
           }
         };
       },
-      computed : {
+      computed: {
         allChildren() {
           const children = [];
-          this.tasks.forEach(task => { task.allChildren.forEach(child => { children.push(child); }); });
+          this.tasks.forEach(task => {
+            task.allChildren.forEach(child => {
+              children.push(child);
+            });
+          });
           return children;
         },
         collapsed() {
@@ -549,7 +553,7 @@ var ElastiganttApp = (function (exports) {
           return collapsed === this.tasks.length;
         }
       },
-      methods : {
+      methods: {
         toggle() {
           if (this.allChildren.length === 0) {
             return;
@@ -558,8 +562,7 @@ var ElastiganttApp = (function (exports) {
           this.tasks.forEach(task => {
             task.collapsed = collapsed;
             task.allChildren.forEach(child => {
-              let parentsNotCollapsed =
-                  child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
+              let parentsNotCollapsed = child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
               child.visible = !collapsed && parentsNotCollapsed;
             });
             this.$root.recalculate();
@@ -1451,7 +1454,8 @@ var ElastiganttApp = (function (exports) {
             },
             label: {
               'display': 'inline-block',
-              'margin': 'auto 6px'
+              'margin': 'auto 6px',
+              'color': '#404040'
             },
             value: {
               'margin': 'auto 6px',
@@ -1461,7 +1465,13 @@ var ElastiganttApp = (function (exports) {
               'word-break': 'keep-all',
               'font-family': 'sans-serif',
               'font-size': '12px',
-              'white-space': 'nowrap'
+              'white-space': 'nowrap',
+              'color': '#606060'
+            },
+            expander: {
+              stroke: '#909090',
+              strokeWidth: 1,
+              'fill': '#ffffffa0'
             }
           },
           columns: [
@@ -1506,7 +1516,8 @@ var ElastiganttApp = (function (exports) {
               'fill': 'transparent'
             },
             text: {
-              fontFamily: 'sans-serif'
+              fontFamily: 'sans-serif',
+              'fill': '#404040'
             }
           },
           hour: {

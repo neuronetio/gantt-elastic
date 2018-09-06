@@ -226,7 +226,8 @@ class ElastiganttApp {
           },
           label: {
             'display': 'inline-block',
-            'margin': 'auto 6px'
+            'margin': 'auto 6px',
+            'color': '#404040'
           },
           value: {
             'margin': 'auto 6px',
@@ -236,7 +237,13 @@ class ElastiganttApp {
             'word-break': 'keep-all',
             'font-family': 'sans-serif',
             'font-size': '12px',
-            'white-space': 'nowrap'
+            'white-space': 'nowrap',
+            'color': '#606060'
+          },
+          expander: {
+            stroke: '#909090',
+            strokeWidth: 1,
+            'fill': '#ffffffa0'
           }
         },
         columns: [
@@ -281,7 +288,8 @@ class ElastiganttApp {
             'fill': 'transparent'
           },
           text: {
-            fontFamily: 'sans-serif'
+            fontFamily: 'sans-serif',
+            'fill': '#404040'
           }
         },
         hour: {
