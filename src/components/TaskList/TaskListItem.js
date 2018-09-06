@@ -13,7 +13,7 @@ export function TaskListItem(prefix, self) {
         :style="getStyle(column)"
         :column="column"
       >
-        <div class="elastigantt__task-list-item-value">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value" :style="$root.$data.taskList.styles.value">{{task[column.value]}}</div>
       </div>
     </div>`,
     data() {

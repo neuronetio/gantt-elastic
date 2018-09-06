@@ -709,7 +709,7 @@ var ElastiganttApp = (function (exports) {
         :style="getStyle(column)"
         :column="column"
       >
-        <div class="elastigantt__task-list-item-value">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value" :style="$root.$data.taskList.styles.value">{{task[column.value]}}</div>
       </div>
     </div>`,
       data() {
@@ -1397,6 +1397,16 @@ var ElastiganttApp = (function (exports) {
             header: {
               'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
               'border-color': '#00000010'
+            },
+            value: {
+              'margin': 'auto 6px',
+              'overflow': 'hidden',
+              'text-overflow': 'ellipsis',
+              'line-height': '1.2em',
+              'word-break': 'keep-all',
+              'font-family': 'sans-serif',
+              'font-size': '12px',
+              'white-space': 'nowrap'
             }
           },
           columns: [

@@ -204,6 +204,16 @@ class ElastiganttApp {
           header: {
             'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
             'border-color': '#00000010'
+          },
+          value: {
+            'margin': 'auto 6px',
+            'overflow': 'hidden',
+            'text-overflow': 'ellipsis',
+            'line-height': '1.2em',
+            'word-break': 'keep-all',
+            'font-family': 'sans-serif',
+            'font-size': '12px',
+            'white-space': 'nowrap'
           }
         },
         columns: [
