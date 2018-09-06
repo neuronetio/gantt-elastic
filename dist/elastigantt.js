@@ -640,10 +640,9 @@ var ElastiganttApp = (function (exports) {
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
-        :style="getStyle(column)"
-      >
-      <div class="elastigantt__task-list-header-label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
+        :style="getStyle(column)">
+          <div class="elastigantt__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
+          <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
       </div>
     </div>`,
       data() {
@@ -662,7 +661,7 @@ var ElastiganttApp = (function (exports) {
               'height': (state.calendar.height + state.calendar.styles.column['stroke-width']) + 'px',
               'margin-bottom': state.calendar.gap + 'px',
               'width': column.finalWidth + 'px'
-            }, this.$root.$data.taskList.styles.header);
+            }, state.taskList.styles.header);
           }
         },
         collapsible() {
@@ -709,7 +708,7 @@ var ElastiganttApp = (function (exports) {
         :style="getStyle(column)"
         :column="column"
       >
-        <div class="elastigantt__task-list-item-value" :style="$root.$data.taskList.styles.value">{{task[column.value]}}</div>
+        <div class="elastigantt__task-list-item-value" :style="column.styles.value">{{task[column.value]}}</div>
       </div>
     </div>`,
       data() {
@@ -1219,8 +1218,9 @@ var ElastiganttApp = (function (exports) {
     }
 
     mergeDeep(target, ...sources) {
-      if (!sources.length) 
+      if (!sources.length) {
         return target;
+      }
       const source = sources.shift();
       if (this.isObject(target) && this.isObject(source)) {
         for (const key in source) {
@@ -1307,7 +1307,7 @@ var ElastiganttApp = (function (exports) {
     }
 
     getOptions(userOptions) {
-      return this.mergeDeep({
+      return this.mergeDeep({}, {
         debug: false,
         width: 0,
         height: 0,
@@ -1397,6 +1397,9 @@ var ElastiganttApp = (function (exports) {
               'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
               'border-color': '#00000010'
             },
+            label: {
+              'display': 'inline-block'
+            },
             value: {
               'margin': 'auto 6px',
               'overflow': 'hidden',
@@ -1412,7 +1415,10 @@ var ElastiganttApp = (function (exports) {
             {
               label: 'ID',
               value: 'id',
-              width: 40
+              width: 40,
+              styles: {
+                label: {}
+              }
             }
           ],
           resizerWidth: 0,
@@ -1559,6 +1565,10 @@ var ElastiganttApp = (function (exports) {
       this.options = this.getOptions(options);
       this.options.taskList.columns = this.options.taskList.columns.map(column => {
         column.finalWidth = (column.width / 100) * this.options.taskList.percent;
+        if (typeof column.styles === 'undefined') {
+          column.styles = {};
+        }
+        column.styles = this.mergeDeep({}, this.options.taskList.styles, column.styles);
         return column;
       });
 

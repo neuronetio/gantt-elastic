@@ -8,10 +8,9 @@ export function TaskListHeader(prefix, self) {
       <div class="elastigantt__task-list-header-column"
         v-for="column in $root.$data.taskList.columns"
         :key="column.label"
-        :style="getStyle(column)"
-      >
-      <div class="elastigantt__task-list-header-label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
-      <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
+        :style="getStyle(column)">
+          <div class="elastigantt__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
+          <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
       </div>
     </div>`,
     data() {
@@ -30,7 +29,7 @@ export function TaskListHeader(prefix, self) {
             'height': (state.calendar.height + state.calendar.styles.column['stroke-width']) + 'px',
             'margin-bottom': state.calendar.gap + 'px',
             'width': column.finalWidth + 'px'
-          }, this.$root.$data.taskList.styles.header);
+          }, state.taskList.styles.header);
         }
       },
       collapsible() {

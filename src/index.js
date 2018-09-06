@@ -27,8 +27,9 @@ class ElastiganttApp {
   }
 
   mergeDeep(target, ...sources) {
-    if (!sources.length) 
+    if (!sources.length) {
       return target;
+    }
     const source = sources.shift();
     if (this.isObject(target) && this.isObject(source)) {
       for (const key in source) {
@@ -115,7 +116,7 @@ class ElastiganttApp {
   }
 
   getOptions(userOptions) {
-    return this.mergeDeep({
+    return this.mergeDeep({}, {
       debug: false,
       width: 0,
       height: 0,
@@ -205,6 +206,9 @@ class ElastiganttApp {
             'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
             'border-color': '#00000010'
           },
+          label: {
+            'display': 'inline-block'
+          },
           value: {
             'margin': 'auto 6px',
             'overflow': 'hidden',
@@ -220,7 +224,10 @@ class ElastiganttApp {
           {
             label: 'ID',
             value: 'id',
-            width: 40
+            width: 40,
+            styles: {
+              label: {}
+            }
           }
         ],
         resizerWidth: 0,
@@ -367,6 +374,10 @@ class ElastiganttApp {
     this.options = this.getOptions(options);
     this.options.taskList.columns = this.options.taskList.columns.map(column => {
       column.finalWidth = (column.width / 100) * this.options.taskList.percent;
+      if (typeof column.styles === 'undefined') {
+        column.styles = {};
+      }
+      column.styles = this.mergeDeep({}, this.options.taskList.styles, column.styles);
       return column;
     });
 
