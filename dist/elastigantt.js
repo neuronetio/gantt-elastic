@@ -877,7 +877,7 @@ var ElastiganttApp = (function (exports) {
         </${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+      <${prefix}-info :task="task" v-if="$root.$data.info.display && task.mouseOver"></${prefix}-info>
     </g>`,
       data() {
         return {};
@@ -941,7 +941,7 @@ var ElastiganttApp = (function (exports) {
         <${prefix}-tree-progress-bar :task="task" clip-path="url(#elastigantt__project-clip-path)"></${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+      <${prefix}-info :task="task" v-if="$root.$data.info.display && task.mouseOver"></${prefix}-info>
     </g>`,
       data() {
         return {};
@@ -1011,7 +1011,7 @@ var ElastiganttApp = (function (exports) {
         </${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+      <${prefix}-info :task="task" v-if="$root.$data.info.display && task.mouseOver"></${prefix}-info>
     </g>`,
       data() {
         return {};
@@ -1047,8 +1047,9 @@ var ElastiganttApp = (function (exports) {
   function TreeText(prefix, self) {
     return self.wrapComponent({
       props: ['task'],
-      template: `<svg :x="task.x+task.width+$root.$data.treeText.offset" :y="task.y" :width="getWidth" :height="task.height">
-      <text :x="0" y="50%" :style="$root.$data.treeText.styles.text" alignment-baseline="middle">{{task.label}}</text>
+      template: `<svg :x="task.x+task.width + $root.$data.treeText.offset" :y="task.y" :width="getWidth" :height="task.height">
+        <rect x="0" y="0" width="100%" height="100%" :style="$root.$data.treeText.styles.background"></rect>
+        <text :x="$root.$data.treeText.xPadding" y="50%" :style="$root.$data.treeText.styles.text" alignment-baseline="middle">{{task.label}}</text>
       </svg>`,
       data() {
         return {};
@@ -1057,8 +1058,9 @@ var ElastiganttApp = (function (exports) {
         getWidth() {
           const textStyle = this.$root.$data.treeText.styles.text;
           self.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
+          console.log(self.ctx.font);
           const textWidth = self.ctx.measureText(this.task.label).width;
-          return this.task.x + this.task.width + this.$root.$data.treeText.xPadding * 2;
+          return textWidth + this.$root.$data.treeText.xPadding * 2;
         }
       }
     });
@@ -1330,7 +1332,7 @@ var ElastiganttApp = (function (exports) {
           steps: 0
         },
         row: {
-          height: 18,
+          height: 30,
           style: 'fill:#FF0000a0',
           textStyle: 'fill:#ffffff',
           fontFamily: 'sans-serif',
@@ -1345,6 +1347,9 @@ var ElastiganttApp = (function (exports) {
               'font-size': '12px',
               'font-weight': 'normal',
               'fill': '#000000a0'
+            },
+            background: {
+              fill: '#ffffffb0'
             }
           },
           xPadding: 10
@@ -1353,7 +1358,7 @@ var ElastiganttApp = (function (exports) {
           style: {
             'fill': 'transparent',
             'stroke': '#FFa00090',
-            'stroke-width': 1
+            'stroke-width': 2
           }
         },
         progress: {
@@ -1376,7 +1381,8 @@ var ElastiganttApp = (function (exports) {
           textStyle: 'fill:#fff',
           fontFamily: 'sans-serif',
           fontSize: '12px',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          display: false
         },
         taskList: {
           display: true,
@@ -1413,7 +1419,7 @@ var ElastiganttApp = (function (exports) {
           hours: [],
           days: [],
           months: [],
-          gap: 0,
+          gap: 6,
           height: 0,
           styles: {
             wrapper: {

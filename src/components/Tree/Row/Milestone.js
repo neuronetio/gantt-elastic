@@ -22,7 +22,7 @@ export function TreeRowMilestone(prefix, self) {
         </${prefix}-tree-progress-bar>
       </svg>
       <${prefix}-tree-text :task="task" v-if="$root.$data.row.showText"></${prefix}-tree-text>
-      <${prefix}-info :task="task" v-if="task.mouseOver"></${prefix}-info>
+      <${prefix}-info :task="task" v-if="$root.$data.info.display && task.mouseOver"></${prefix}-info>
     </g>`,
     data() {
       return {};

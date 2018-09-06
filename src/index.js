@@ -139,7 +139,7 @@ class ElastiganttApp {
         steps: 0
       },
       row: {
-        height: 18,
+        height: 30,
         style: 'fill:#FF0000a0',
         textStyle: 'fill:#ffffff',
         fontFamily: 'sans-serif',
@@ -154,6 +154,9 @@ class ElastiganttApp {
             'font-size': '12px',
             'font-weight': 'normal',
             'fill': '#000000a0'
+          },
+          background: {
+            fill: '#ffffffb0'
           }
         },
         xPadding: 10
@@ -162,7 +165,7 @@ class ElastiganttApp {
         style: {
           'fill': 'transparent',
           'stroke': '#FFa00090',
-          'stroke-width': 1
+          'stroke-width': 2
         }
       },
       progress: {
@@ -185,7 +188,8 @@ class ElastiganttApp {
         textStyle: 'fill:#fff',
         fontFamily: 'sans-serif',
         fontSize: '12px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        display: false
       },
       taskList: {
         display: true,
@@ -222,7 +226,7 @@ class ElastiganttApp {
         hours: [],
         days: [],
         months: [],
-        gap: 0,
+        gap: 6,
         height: 0,
         styles: {
           wrapper: {
