@@ -221,7 +221,7 @@ class ElastiganttApp {
             'border-color': '#00000010'
           },
           header: {
-            'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
+            'background': 'linear-gradient(to bottom,#fff,#f0f0f0)',
             'border-color': '#00000010'
           },
           label: {
@@ -268,7 +268,7 @@ class ElastiganttApp {
           wrapper: {
             'width': '100%',
             'height': '100%',
-            'background': 'linear-gradient(to bottom,#fff,#eaeaea)',
+            'background': 'linear-gradient(to bottom,#fff,#f0f0f0)',
             'border-color': '#00000010'
           },
           row: {
