@@ -1401,7 +1401,7 @@ var ElastiganttApp = (function (exports) {
               'margin': 'auto 6px',
               'overflow': 'hidden',
               'text-overflow': 'ellipsis',
-              'line-height': '1.2em',
+              'line-height': '1.5em',
               'word-break': 'keep-all',
               'font-family': 'sans-serif',
               'font-size': '12px',

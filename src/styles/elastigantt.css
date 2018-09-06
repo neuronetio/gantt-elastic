@@ -33,7 +33,6 @@ foreignObject > *{
 }
 .elastigantt__main-svg-container{
   overflow: auto;
-  margin-left: -1px;
 }
 .elastigantt__task-list-header{
   display: flex;
