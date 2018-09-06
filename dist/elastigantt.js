@@ -1331,7 +1331,7 @@ var ElastiganttApp = (function (exports) {
           steps: 0
         },
         row: {
-          height: 30,
+          height: 24,
           style: 'fill:#FF0000a0',
           textStyle: 'fill:#ffffff',
           fontFamily: 'sans-serif',
