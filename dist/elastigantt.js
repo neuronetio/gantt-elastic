@@ -1210,7 +1210,7 @@ var ElastiganttApp = (function (exports) {
     };
   };
 
-  // .................',,'',,,;;;;;,'............''...   .. ....   .    .....''''''''''''',,,,,,,,,,,,,,,,,,,,,,,,,,,,,...
+  // elastigantt components
 
   class ElastiganttApp {
     isObject(item) {
