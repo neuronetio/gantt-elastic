@@ -2908,74 +2908,6 @@ var Elastigantt = (function () {
   //
   //
   //
-
-  var script$i = {
-    data() {
-      return {};
-    }
-  };
-
-  /* script */
-              const __vue_script__$i = script$i;
-              
-  /* template */
-  var __vue_render__$i = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("g")
-  };
-  var __vue_staticRenderFns__$i = [];
-  __vue_render__$i._withStripped = true;
-
-    /* style */
-    const __vue_inject_styles__$i = undefined;
-    /* scoped */
-    const __vue_scope_id__$i = undefined;
-    /* module identifier */
-    const __vue_module_identifier__$i = undefined;
-    /* functional template */
-    const __vue_is_functional_template__$i = false;
-    /* component normalizer */
-    function __vue_normalize__$i(
-      template, style, script,
-      scope, functional, moduleIdentifier,
-      createInjector, createInjectorSSR
-    ) {
-      const component = (typeof script === 'function' ? script.options : script) || {};
-
-      // For security concerns, we use only base name in production mode.
-      component.__file = "F:\\elastigantt\\src\\components\\Grid\\GridHeader.vue";
-
-      if (!component.render) {
-        component.render = template.render;
-        component.staticRenderFns = template.staticRenderFns;
-        component._compiled = true;
-
-        if (functional) component.functional = true;
-      }
-
-      component._scopeId = scope;
-
-      return component
-    }
-    /* style inject */
-    
-    /* style inject SSR */
-    
-
-    
-    var GridHeader = __vue_normalize__$i(
-      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-      __vue_inject_styles__$i,
-      __vue_script__$i,
-      __vue_scope_id__$i,
-      __vue_is_functional_template__$i,
-      __vue_module_identifier__$i,
-      undefined,
-      undefined
-    );
-
   //
 
   function getOptions(userOptions) {
@@ -3206,7 +3138,10 @@ var Elastigantt = (function () {
     };
   }
 
-  var script$j = {
+  var script$i = {
+    components: {
+      'elastigantt-main': Main,
+    },
     props: [
       'tasks', 'options'
     ],
@@ -3461,53 +3396,31 @@ var Elastigantt = (function () {
       this.state.times.lastTaskDate = lastTaskDate;
       this.recalculate();
     },
-
-    components: {
-      'task-list-resizer': TaskListResizer,
-      'task-list-expander': TaskListExpander,
-      'task-list-header': TaskListHeader,
-      'task-list-item': TaskListItem,
-      'task-list': TaskList,
-      'elastigantt-main': Main,
-      'tree': Tree,
-      'main-header': Header,
-      'grid': Grid,
-      'grid-header': GridHeader,
-      'tree-row-task': Task,
-      'tree-row-milestone': Milestone,
-      'tree-row-project': Project,
-      'tree-text': TreeText,
-      'tree-dependency-lines': TreeDependencyLines,
-      'tree-progress-bar': ProgressBar,
-      'info': Info,
-      'calendar': Calendar,
-      'calendar-row': CalendarRow
-    }
   };
 
   /* script */
-              const __vue_script__$j = script$j;
+              const __vue_script__$i = script$i;
               
   /* template */
-  var __vue_render__$j = function() {
+  var __vue_render__$i = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("elastigantt-main")
   };
-  var __vue_staticRenderFns__$j = [];
-  __vue_render__$j._withStripped = true;
+  var __vue_staticRenderFns__$i = [];
+  __vue_render__$i._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$j = undefined;
+    const __vue_inject_styles__$i = undefined;
     /* scoped */
-    const __vue_scope_id__$j = undefined;
+    const __vue_scope_id__$i = undefined;
     /* module identifier */
-    const __vue_module_identifier__$j = undefined;
+    const __vue_module_identifier__$i = undefined;
     /* functional template */
-    const __vue_is_functional_template__$j = false;
+    const __vue_is_functional_template__$i = false;
     /* component normalizer */
-    function __vue_normalize__$j(
+    function __vue_normalize__$i(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -3535,13 +3448,13 @@ var Elastigantt = (function () {
     
 
     
-    var Elastigantt = __vue_normalize__$j(
-      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-      __vue_inject_styles__$j,
-      __vue_script__$j,
-      __vue_scope_id__$j,
-      __vue_is_functional_template__$j,
-      __vue_module_identifier__$j,
+    var Elastigantt = __vue_normalize__$i(
+      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+      __vue_inject_styles__$i,
+      __vue_script__$i,
+      __vue_scope_id__$i,
+      __vue_is_functional_template__$i,
+      __vue_module_identifier__$i,
       undefined,
       undefined
     );

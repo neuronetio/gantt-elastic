@@ -3,27 +3,6 @@
 </template>
 
 <script>
-import Main from './components/Main.vue';
-
-import Calendar from './components/Calendar/Calendar.vue';
-import CalendarRow from './components/Calendar/CalendarRow.vue';
-import Grid from './components/Grid/Grid.vue';
-import GridHeader from './components/Grid/GridHeader.vue';
-import Header from './components/Header.vue';
-import TaskListExpander from './components/TaskList/Expander.vue';
-import TaskListResizer from './components/TaskList/Resizer.vue';
-import TaskListHeader from './components/TaskList/TaskListHeader.vue';
-import TaskListItem from './components/TaskList/TaskListItem.vue';
-import TaskList from './components/TaskList/TaskList.vue';
-import TreeDependencyLines from './components/Tree/DependencyLines.vue';
-import Info from './components/Tree/Info.vue';
-import TreeProgressBar from './components/Tree/ProgressBar.vue';
-import TreeRowMilestone from './components/Tree/Row/Milestone.vue';
-import TreeRowProject from './components/Tree/Row/Project.vue';
-import TreeRowTask from './components/Tree/Row/Task.vue';
-import TreeText from './components/Tree/Text.vue';
-import Tree from './components/Tree/Tree.vue';
-
 function getOptions(userOptions) {
   return {
     debug: false,
@@ -252,7 +231,12 @@ function getOptions(userOptions) {
   };
 }
 
+import Main from './components/Main.vue';
+
 export default {
+  components: {
+    'elastigantt-main': Main,
+  },
   props: [
     'tasks', 'options'
   ],
@@ -507,27 +491,5 @@ export default {
     this.state.times.lastTaskDate = lastTaskDate;
     this.recalculate();
   },
-
-  components: {
-    'task-list-resizer': TaskListResizer,
-    'task-list-expander': TaskListExpander,
-    'task-list-header': TaskListHeader,
-    'task-list-item': TaskListItem,
-    'task-list': TaskList,
-    'elastigantt-main': Main,
-    'tree': Tree,
-    'main-header': Header,
-    'grid': Grid,
-    'grid-header': GridHeader,
-    'tree-row-task': TreeRowTask,
-    'tree-row-milestone': TreeRowMilestone,
-    'tree-row-project': TreeRowProject,
-    'tree-text': TreeText,
-    'tree-dependency-lines': TreeDependencyLines,
-    'tree-progress-bar': TreeProgressBar,
-    'info': Info,
-    'calendar': Calendar,
-    'calendar-row': CalendarRow
-  }
 }
 </script>
