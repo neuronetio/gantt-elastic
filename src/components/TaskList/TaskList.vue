@@ -4,7 +4,7 @@
     <div v-html="root.state.defs.join('')"></div>
     <task-list-resizer></task-list-resizer>
     <task-list-header :expander-style="getHeaderExpanderStyle"></task-list-header>
-    <task-list-item v-for="task in root.getVisibleTasks()" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
+    <task-list-item v-for="task in root.getVisibleTasks" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
   </div>
 </foreignObject>
 </template>
@@ -35,8 +35,9 @@ export default {
     getListExpanderStyle() {
       const state = this.root.state;
       let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+      let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'];
       return {
-        'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
+        'width': width + 'px',
         'height': height + 'px',
         'border-color': '#00000010'
       };

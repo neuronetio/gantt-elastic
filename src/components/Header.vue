@@ -20,7 +20,7 @@ export default {
       },
       set(value) {
         this.root.state.times.timeZoom = Number(value);
-        this.root.recalculate();
+        //this.root.recalculate();
       }
     },
     height: {
@@ -29,7 +29,7 @@ export default {
       },
       set(value) {
         this.root.state.row.height = Number(value);
-        this.root.recalculate();
+        //this.root.recalculate();
       }
     },
     scope: {
@@ -39,7 +39,7 @@ export default {
       set(value) {
         this.root.state.scope.before = Number(value);
         this.root.state.scope.after = Number(value);
-        this.root.recalculate();
+        //this.root.recalculate();
       }
     },
     divider: {
@@ -48,7 +48,7 @@ export default {
       },
       set(value) {
         this.root.state.taskList.percent = Number(value);
-        this.root.recalculate();
+        //this.root.recalculate();
       }
     }
   }

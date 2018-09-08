@@ -6,16 +6,15 @@
       :width="task.width"
       :height="task.height"
       @click="treeRowClick"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+      xmlns="http://www.w3.org/2000/svg">
     <defs>
       <clipPath id="elastigantt__task-clip-path">
         <polygon :points="getPoints"></polygon>
       </clipPath>
     </defs>
-      <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
-      <tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)"></tree-progress-bar>
-    </svg>
+    <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
+    <tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)"></tree-progress-bar>
+  </svg>
   <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
   <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
 </g>
@@ -32,9 +31,7 @@ export default {
     'tree-progress-bar': ProgressBar
   },
   inject: ['root'],
-  props: [
-    'task', 'index'
-  ],
+  props: ['task', 'index'],
   data() {
     return {};
   },

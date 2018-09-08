@@ -150,7 +150,8 @@ export default {
       return this.root.state.calendar.styles.column['stroke-width'] / 2;
     },
     getWidth() {
-      return this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+      let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+      return width;
     },
 
     hours() {

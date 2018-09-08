@@ -35,6 +35,7 @@ export default {
     'tree': Tree
   },
   inject: ['root'],
+  props: ['tasks', 'options'],
   data() {
     return {
       defs: ''

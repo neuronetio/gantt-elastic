@@ -22,9 +22,7 @@
 <script>
 export default {
   inject: ['root'],
-  props: [
-    'task', 'index'
-  ],
+  props: ['task', 'index'],
   data() {
     return {};
   },

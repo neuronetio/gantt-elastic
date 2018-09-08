@@ -23,7 +23,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.times.timeZoom = Number(value);
-          this.root.recalculate();
+          //this.root.recalculate();
         }
       },
       height: {
@@ -32,7 +32,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.row.height = Number(value);
-          this.root.recalculate();
+          //this.root.recalculate();
         }
       },
       scope: {
@@ -42,7 +42,7 @@ var Elastigantt = (function () {
         set(value) {
           this.root.state.scope.before = Number(value);
           this.root.state.scope.after = Number(value);
-          this.root.recalculate();
+          //this.root.recalculate();
         }
       },
       divider: {
@@ -51,7 +51,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.taskList.percent = Number(value);
-          this.root.recalculate();
+          //this.root.recalculate();
         }
       }
     }
@@ -842,8 +842,9 @@ var Elastigantt = (function () {
       getListExpanderStyle() {
         const state = this.root.state;
         let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+        let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'];
         return {
-          'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
+          'width': width + 'px',
           'height': height + 'px',
           'border-color': '#00000010'
         };
@@ -884,7 +885,7 @@ var Elastigantt = (function () {
                   attrs: { "expander-style": _vm.getHeaderExpanderStyle }
                 }),
                 _vm._v(" "),
-                _vm._l(_vm.root.getVisibleTasks(), function(task) {
+                _vm._l(_vm.root.getVisibleTasks, function(task) {
                   return _c("task-list-item", {
                     key: task.id,
                     attrs: {
@@ -988,7 +989,7 @@ var Elastigantt = (function () {
       horizontalLines() {
         let lines = [];
         const state = this.root.state;
-        let tasks = this.root.getVisibleTasks();
+        let tasks = this.root.getVisibleTasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
           lines.push({
             key: 'hl' + index,
@@ -1341,7 +1342,8 @@ var Elastigantt = (function () {
         return this.root.state.calendar.styles.column['stroke-width'] / 2;
       },
       getWidth() {
-        return this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+        let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+        return width;
       },
 
       hours() {
@@ -2074,9 +2076,7 @@ var Elastigantt = (function () {
       'tree-progress-bar': ProgressBar
     },
     inject: ['root'],
-    props: [
-      'task', 'index'
-    ],
+    props: ['task', 'index'],
     data() {
       return {};
     },
@@ -2424,9 +2424,7 @@ var Elastigantt = (function () {
 
   var script$f = {
     inject: ['root'],
-    props: [
-      'task', 'index'
-    ],
+    props: ['task', 'index'],
     data() {
       return {};
     },
@@ -2654,17 +2652,23 @@ var Elastigantt = (function () {
         _c("grid"),
         _vm._v(" "),
         _c("tree-dependency-lines", {
-          attrs: { tasks: _vm.root.getVisibleTasks() }
+          attrs: { tasks: _vm.root.getVisibleTasks }
         }),
         _vm._v(" "),
-        _vm._l(_vm.root.getVisibleTasks(), function(task, index) {
+        _vm._l(_vm.root.getVisibleTasks, function(task, index) {
           return _c(
             "g",
             { key: task.id, attrs: { task: task, index: index } },
             [
               _c("tree-row-" + task.type, {
                 tag: "component",
-                attrs: { task: task, index: index }
+                attrs: {
+                  task: task,
+                  index: index,
+                  "display-info": _vm.root.state.info.display,
+                  "style-bar": _vm.root.state.row.styles.bar,
+                  row: _vm.root.state.row
+                }
               })
             ],
             1
@@ -2734,6 +2738,7 @@ var Elastigantt = (function () {
       'tree': Tree
     },
     inject: ['root'],
+    props: ['tasks', 'options'],
     data() {
       return {
         defs: ''
@@ -3184,134 +3189,6 @@ var Elastigantt = (function () {
         }
         return this.mergeDeep(target, ...sources);
       },
-      resetTaskTree() {
-        this.state.rootTask.children = [];
-        this.state.rootTask.allChildren = [];
-        this.state.rootTask.parent = null;
-        this.state.rootTask.parents = [];
-        for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-          let current = this.tasks[i];
-          current.children = [];
-          current.allChildren = [];
-          current.parent = null;
-          current.parents = [];
-        }
-      },
-      makeTaskTree(task) {
-        for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-          let current = this.tasks[i];
-          if (current.parentId === task.id) {
-            if (task.parents.length) {
-              task.parents.forEach(parent => current.parents.push(parent));
-            }
-            if (task !== this.root) {
-              current.parents.push(task);
-              current.parent = task;
-            } else {
-              current.parents = [];
-              current.parent = null;
-            }
-            current = this.makeTaskTree(current);
-            task.allChildren.push(current);
-            task.children.push(current);
-            current.allChildren.forEach(child => task.allChildren.push(child));
-          }
-        }
-        return task;
-      },
-
-      getTask(taskId) {
-        return this.tasksById[taskId];
-      },
-      getChildren(taskId) {
-        return this.state.tasks.filter(task => task.parent === taskId);
-      },
-      getVisibleTasks() {
-        return this.state.tasks.filter(task => task.visible);
-      },
-
-      calculateCalendarDimensions() {
-        this.state.calendar.height = 0;
-        if (this.state.calendar.hour.display) {
-          this.state.calendar.height += this.state.calendar.hour.height;
-        }
-        if (this.state.calendar.day.display) {
-          this.state.calendar.height += this.state.calendar.day.height;
-        }
-        if (this.state.calendar.month.display) {
-          this.state.calendar.height += this.state.calendar.month.height;
-        }
-      },
-      calculateTaskListColumnWidths() {
-        let final = 0;
-        this.state.taskList.columns.forEach(column => {
-          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
-          final += column.finalWidth;
-        });
-        this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
-      },
-      recalculate() {
-        const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
-        const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
-        this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
-        this.state.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.state.scope.after, 'days').toDate();
-        this.state.times.firstTime = this.state.times.firstDate.getTime();
-        this.state.times.lastTime = this.state.times.lastDate.getTime();
-        this.state.times.totalViewDurationMs = this.state.times.lastTime - this.state.times.firstTime;
-        this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-          return {
-            width: prev.width + current.width
-          };
-        }, {
-          width: 0
-        }).width;
-        let max = this.state.times.timeScale * 60;
-        let min = this.state.times.timeScale;
-        let steps = max / min;
-        let percent = this.state.times.timeZoom / 100;
-        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-        this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
-        this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
-        this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
-
-        this.calculateCalendarDimensions();
-        this.calculateTaskListColumnWidths();
-        this.resetTaskTree();
-        this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
-        const visibleTasks = this.getVisibleTasks();
-        this.state.height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-        for (let index = 0, len = visibleTasks.length; index < len; index++) {
-          let task = visibleTasks[index];
-          task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;
-          if (task.width < 0) {
-            task.width = 0;
-          }
-          task.height = this.state.row.height;
-          let x = task.startTime - this.state.times.firstTime;
-          if (x) {
-            x = x / this.state.times.timePerPixel;
-          }
-          task.x = x + this.state.verticalGrid.strokeWidth;
-          task.y = (this.state.row.height + this.state.horizontalGrid.gap * 2) * index + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-        }
-      },
-      getSVG() {
-        return this.svgElement.outerHTML;
-      },
-      getImage(type = 'image/png') {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = this.svgElement.clientWidth;
-            canvas.height = this.svgElement.clientHeight;
-            canvas.getContext('2d').drawImage(img, 0, 0);
-            resolve(canvas.toDataURL(type));
-          };
-          img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
-        });
-      },
       initialize() {
         this.state = this.mergeDeep(getOptions(this.options), this.options, {
           tasks: this.tasks
@@ -3365,8 +3242,137 @@ var Elastigantt = (function () {
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
         this.state.ctx = document.createElement('canvas').getContext('2d');
       },
+      calculateCalendarDimensions() {
+        this.state.calendar.height = 0;
+        if (this.state.calendar.hour.display) {
+          this.state.calendar.height += this.state.calendar.hour.height;
+        }
+        if (this.state.calendar.day.display) {
+          this.state.calendar.height += this.state.calendar.day.height;
+        }
+        if (this.state.calendar.month.display) {
+          this.state.calendar.height += this.state.calendar.month.height;
+        }
+      },
+      calculateTaskListColumnWidths() {
+        let final = 0;
+        this.state.taskList.columns.forEach(column => {
+          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          final += column.finalWidth;
+        });
+        this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
+      },
+      resetTaskTree() {
+        this.state.rootTask.children = [];
+        this.state.rootTask.allChildren = [];
+        this.state.rootTask.parent = null;
+        this.state.rootTask.parents = [];
+        for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+          let current = this.tasks[i];
+          current.children = [];
+          current.allChildren = [];
+          current.parent = null;
+          current.parents = [];
+        }
+      },
+      makeTaskTree(task) {
+        for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+          let current = this.tasks[i];
+          if (current.parentId === task.id) {
+            if (task.parents.length) {
+              task.parents.forEach(parent => current.parents.push(parent));
+            }
+            if (task !== this.root) {
+              current.parents.push(task);
+              current.parent = task;
+            } else {
+              current.parents = [];
+              current.parent = null;
+            }
+            current = this.makeTaskTree(current);
+            task.allChildren.push(current);
+            task.children.push(current);
+            current.allChildren.forEach(child => task.allChildren.push(child));
+          }
+        }
+        return task;
+      },
+      getTask(taskId) {
+        return this.tasksById[taskId];
+      },
+      getChildren(taskId) {
+        return this.state.tasks.filter(task => task.parent === taskId);
+      },
+    },
+    computed: {
+      getVisibleTasks() {
+        const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
+        const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
+        this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
+        this.state.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.state.scope.after, 'days').toDate();
+        this.state.times.firstTime = this.state.times.firstDate.getTime();
+        this.state.times.lastTime = this.state.times.lastDate.getTime();
+        this.state.times.totalViewDurationMs = this.state.times.lastTime - this.state.times.firstTime;
+        this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
+          return {
+            width: prev.width + current.width
+          };
+        }, {
+          width: 0
+        }).width;
+        let max = this.state.times.timeScale * 60;
+        let min = this.state.times.timeScale;
+        let steps = max / min;
+        let percent = this.state.times.timeZoom / 100;
+        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+        this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
+        this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
+        this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
+
+        this.calculateCalendarDimensions();
+        this.calculateTaskListColumnWidths();
+        this.resetTaskTree();
+        this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
+        const visibleTasks = this.state.tasks.filter(task => task.visible);
+        this.state.height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        for (let index = 0, len = visibleTasks.length; index < len; index++) {
+          let task = visibleTasks[index];
+          task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;
+          if (task.width < 0) {
+            task.width = 0;
+          }
+          task.height = this.state.row.height;
+          let x = task.startTime - this.state.times.firstTime;
+          if (x) {
+            x = x / this.state.times.timePerPixel;
+          }
+          task.x = x + this.state.verticalGrid.strokeWidth;
+          task.y = (this.state.row.height + this.state.horizontalGrid.gap * 2) * index + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        }
+        return visibleTasks;
+      },
+      getSVG() {
+        return this.svgElement.outerHTML;
+      },
+      getImage(type = 'image/png') {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.svgElement.clientWidth;
+            canvas.height = this.svgElement.clientHeight;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            resolve(canvas.toDataURL(type));
+          };
+          img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
+        });
+      },
     },
 
+    beforeMount() {
+      this.recalculate;
+    },
     created() {
       this.initialize();
       this.tasksById = {};
@@ -3394,7 +3400,6 @@ var Elastigantt = (function () {
       this.state.times.lastTaskTime = lastTaskTime;
       this.state.times.firstTaskDate = firstTaskDate;
       this.state.times.lastTaskDate = lastTaskDate;
-      this.recalculate();
     },
   };
 
@@ -3406,7 +3411,9 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("elastigantt-main")
+    return _c("elastigantt-main", {
+      attrs: { tasks: _vm.tasks, options: _vm.options }
+    })
   };
   var __vue_staticRenderFns__$i = [];
   __vue_render__$i._withStripped = true;
