@@ -35,7 +35,7 @@ export default {
     horizontalLines() {
       let lines = [];
       const state = this.root.state;
-      let tasks = this.root.getVisibleTasks;
+      let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
         lines.push({
           key: 'hl' + index,

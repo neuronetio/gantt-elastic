@@ -1,5 +1,5 @@
 <template>
-<elastigantt-main :tasks="tasks" :options="options"></elastigantt-main>
+<elastigantt-main :tasks="tasks" :options="options" @calculateTaskListColumnsWidths="calculateTaskListColumnsWidths"></elastigantt-main>
 </template>
 
 <script>
@@ -106,7 +106,10 @@ function getOptions(userOptions) {
           'border-color': '#00000010'
         },
         column: {
-          'border-color': '#00000010'
+          'border-color': '#00000010',
+          'height': null,
+          'width': null,
+          'line-height': null
         },
         header: {
           'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
@@ -135,6 +138,7 @@ function getOptions(userOptions) {
         }
       },
       columns: [{
+        id: 0,
         label: 'ID',
         value: 'id',
         width: 40,
@@ -242,9 +246,10 @@ export default {
   ],
   provide() {
     const provider = {};
+    const self = this;
     Object.defineProperty(provider, 'root', {
       enumerable: true,
-      get: () => this
+      get: () => self
     });
     return provider;
   },
@@ -286,10 +291,15 @@ export default {
       dayjs.locale(options.locale, null, true);
       this.state.taskList.columns = this.state.taskList.columns.map(column => {
         column.finalWidth = (column.width / 100) * this.state.taskList.percent;
-        if (typeof column.styles === 'undefined') {
-          column.styles = {};
-        }
         column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
+        if (typeof column.style === 'undefined') {
+          column.style = {
+            'height': 0 + "px",
+            'line-height': 0 + "px",
+            'width': 0 + "px"
+          };
+        }
+        column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
         return column;
       });
       // initialize observer
@@ -344,13 +354,20 @@ export default {
         this.state.calendar.height += this.state.calendar.month.height;
       }
     },
-    calculateTaskListColumnWidths() {
+    calculateTaskListColumnsWidths() {
+      console.log('calculate')
       let final = 0;
       this.state.taskList.columns.forEach(column => {
         column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         final += column.finalWidth;
+        let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
+        column.style.height = height + "px";
+        column.style['line-height'] = height + "px";
+        column.style.width = column.finalWidth + "px";
+        return column;
       });
       this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
+      console.log(this.state.taskList.columns)
     },
     resetTaskTree() {
       this.state.rootTask.children = [];
@@ -393,9 +410,25 @@ export default {
     getChildren(taskId) {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
+    getSVG() {
+      return this.svgElement.outerHTML;
+    },
+    getImage(type = 'image/png') {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = this.svgElement.clientWidth;
+          canvas.height = this.svgElement.clientHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          resolve(canvas.toDataURL(type));
+        };
+        img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
+      });
+    },
   },
   computed: {
-    getVisibleTasks() {
+    visibleTasks() {
       const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
       const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
       this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
@@ -419,9 +452,8 @@ export default {
       this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
       this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
       this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
-
       this.calculateCalendarDimensions();
-      this.calculateTaskListColumnWidths();
+      this.calculateTaskListColumnsWidths();
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
@@ -442,26 +474,7 @@ export default {
       }
       return visibleTasks;
     },
-    getSVG() {
-      return this.svgElement.outerHTML;
-    },
-    getImage(type = 'image/png') {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = this.svgElement.clientWidth;
-          canvas.height = this.svgElement.clientHeight;
-          canvas.getContext('2d').drawImage(img, 0, 0);
-          resolve(canvas.toDataURL(type));
-        };
-        img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
-      });
-    },
-  },
 
-  beforeMount() {
-    this.recalculate;
   },
   created() {
     this.initialize();

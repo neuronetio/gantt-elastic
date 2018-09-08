@@ -20,9 +20,18 @@
 </g>
 </template>
 <script>
+import TreeText from '../Text.vue';
+import Info from '../Info.vue';
+import ProgressBar from '../ProgressBar.vue';
+
 export default {
+  components: {
+    'tree-text': TreeText,
+    'info': Info,
+    'tree-progress-bar': ProgressBar
+  },
   inject: ['root'],
-  props: ['task', 'index'],
+  props: ['task'],
   data() {
     return {};
   },

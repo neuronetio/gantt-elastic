@@ -3,7 +3,7 @@
   <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
     <task-list-expander :tasks="collapsible"></task-list-expander>
   </div>
-  <div class="elastigantt__task-list-header-column" v-for="column in root.state.taskList.columns" :key="column.label" :style="getStyle(column)">
+  <div class="elastigantt__task-list-header-column" v-for="column in root.state.taskList.columns" :key="column.id" :style="getStyle(column)">
     <div class="elastigantt__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
     <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
   </div>
@@ -50,14 +50,16 @@ export default {
         this.resizer.initialWidth = column.width;
       }
     },
-    resizerMouseMove(event, column) {
+    resizerMouseMove(event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        this.root.calculateTaskListColumnWidths();
       }
     },
-    resizerMouseUp(event, column) {
+    resizerMouseUp(event) {
+      console.log(this.resizer.moving);
       this.resizer.moving = false;
+      this.root.calculateTaskListColumnsWidths();
+      //this.root.$emit('calculateTaskListColumnsWidths');
     }
   },
   created() {

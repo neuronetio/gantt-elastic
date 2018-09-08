@@ -72,7 +72,7 @@ export default {
     getMainStyle() {
       const state = this.root.state;
       return {
-        width: root.state.width + 'px'
+        width: state.width + 'px'
       };
     }
   },

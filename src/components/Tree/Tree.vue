@@ -7,25 +7,16 @@
     xmlns="http://www.w3.org/2000/svg">
   <calendar></calendar>
   <grid></grid>
-  <tree-dependency-lines :tasks="root.getVisibleTasks"></tree-dependency-lines>
-  <g v-for="(task, index) in root.getVisibleTasks"
-      :task="task"
-      :index="index"
-      :key="task.id">
-    <component
-      :task="task"
-      :index="index"
-      :display-info="root.state.info.display"
-      :style-bar="root.state.row.styles.bar"
-      :row="root.state.row"
-      :is="'tree-row-'+task.type"></component>
+  <tree-dependency-lines :tasks="visibleTasks"></tree-dependency-lines>
+  <g v-for="task in root.visibleTasks" :key="task.id">
+    <component :task="task" :is="'tree-row-'+task.type"></component>
   </g>
 </svg>
 </template>
 <script>
 import Grid from '../Grid/Grid.vue';
 import Calendar from '../Calendar/Calendar.vue';
-import TreeDependencyLines from './DependencyLines.vue';
+import DependencyLines from './DependencyLines.vue';
 import Task from './Row/Task.vue';
 import Milestone from './Row/Milestone.vue';
 import Project from './Row/Project.vue';
@@ -33,7 +24,7 @@ import Project from './Row/Project.vue';
 export default {
   components: {
     'grid': Grid,
-    'tree-dependency-lines': TreeDependencyLines,
+    'tree-dependency-lines': DependencyLines,
     'calendar': Calendar,
     'tree-row-task': Task,
     'tree-row-milestone': Milestone,
@@ -44,6 +35,9 @@ export default {
     return {};
   },
   computed: {
+    visibleTasks() {
+      return this.root.visibleTasks;
+    },
     getWidth() {
       const state = this.root.state;
       return state.width;

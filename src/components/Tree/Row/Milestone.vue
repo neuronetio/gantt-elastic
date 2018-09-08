@@ -1,6 +1,6 @@
 <template>
 <g class="elastigantt__tree-row-milestone-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-  <svg class="elastigantt__tree-row"
+  <svg class="elastigantt__tree-row-milestone"
     :x="task.x"
     :y="task.y"
     :width="task.width"
@@ -22,11 +22,18 @@
 </g>
 </template>
 <script>
+import TreeText from '../Text.vue';
+import Info from '../Info.vue';
+import ProgressBar from '../ProgressBar.vue';
+
 export default {
+  components: {
+    'tree-text': TreeText,
+    'info': Info,
+    'tree-progress-bar': ProgressBar
+  },
   inject: ['root'],
-  props: [
-    'task', 'index'
-  ],
+  props: ['task'],
   data() {
     return {};
   },

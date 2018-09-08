@@ -3,6 +3,8 @@
 </template>
 <script>
 export default {
+  inject: ['root'],
+  props: ['column'],
   data() {
     return {};
   },

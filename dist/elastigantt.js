@@ -23,7 +23,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.times.timeZoom = Number(value);
-          //this.root.recalculate();
+          this.root.visibleTasks;
         }
       },
       height: {
@@ -32,7 +32,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.row.height = Number(value);
-          //this.root.recalculate();
+          this.root.visibleTasks;
         }
       },
       scope: {
@@ -42,7 +42,7 @@ var Elastigantt = (function () {
         set(value) {
           this.root.state.scope.before = Number(value);
           this.root.state.scope.after = Number(value);
-          //this.root.recalculate();
+          this.root.visibleTasks;
         }
       },
       divider: {
@@ -51,7 +51,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.taskList.percent = Number(value);
-          //this.root.recalculate();
+          this.root.visibleTasks;
         }
       }
     }
@@ -236,6 +236,8 @@ var Elastigantt = (function () {
   //
 
   var script$1 = {
+    inject: ['root'],
+    props: ['column'],
     data() {
       return {};
     },
@@ -555,14 +557,16 @@ var Elastigantt = (function () {
           this.resizer.initialWidth = column.width;
         }
       },
-      resizerMouseMove(event, column) {
+      resizerMouseMove(event) {
         if (this.resizer.moving) {
           this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-          this.root.calculateTaskListColumnWidths();
         }
       },
-      resizerMouseUp(event, column) {
+      resizerMouseUp(event) {
+        console.log(this.resizer.moving);
         this.resizer.moving = false;
+        this.root.calculateTaskListColumnsWidths();
+        //this.root.$emit('calculateTaskListColumnsWidths');
       }
     },
     created() {
@@ -598,7 +602,7 @@ var Elastigantt = (function () {
           return _c(
             "div",
             {
-              key: column.label,
+              key: column.id,
               staticClass: "elastigantt__task-list-header-column",
               style: _vm.getStyle(column)
             },
@@ -686,32 +690,22 @@ var Elastigantt = (function () {
     );
 
   //
+  //
+  //
+  //
+  //
 
   var script$4 = {
-    components: {
-      'task-list-expander': TaskListExpander,
-    },
     inject: ['root'],
-    props: [
-      "task", "expanderStyle"
-    ],
+    props: ['column', 'task'],
     data() {
       return {};
     },
     computed: {
       getStyle() {
-        const state = this.root.state;
-        return column => {
-          let height = state.row.height + state.horizontalGrid.gap * 2 - state.horizontalGrid.strokeWidth;
-          return Object.assign({
-            'height': height + "px",
-            "line-height": height + "px",
-            'width': column.finalWidth + "px"
-          }, state.taskList.styles.column);
-        };
-      },
-      getContent(column) {
-        return this.task[column.value];
+        console.log(this.column);
+        const visible = this.root.visibleTasks;
+        return this.column.style;
       }
     }
   };
@@ -721,6 +715,97 @@ var Elastigantt = (function () {
               
   /* template */
   var __vue_render__$4 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "div",
+      {
+        staticClass: "elastigantt__task-list-item-column",
+        style: _vm.column.style
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "elastigantt__task-list-item-value",
+            style: _vm.column.styles.value
+          },
+          [_vm._v(_vm._s(_vm.task[_vm.column.value]))]
+        )
+      ]
+    )
+  };
+  var __vue_staticRenderFns__$4 = [];
+  __vue_render__$4._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$4 = undefined;
+    /* scoped */
+    const __vue_scope_id__$4 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$4 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$4 = false;
+    /* component normalizer */
+    function __vue_normalize__$4(
+      template, style, script,
+      scope, functional, moduleIdentifier,
+      createInjector, createInjectorSSR
+    ) {
+      const component = (typeof script === 'function' ? script.options : script) || {};
+
+      // For security concerns, we use only base name in production mode.
+      component.__file = "F:\\elastigantt\\src\\components\\TaskList\\ItemColumn.vue";
+
+      if (!component.render) {
+        component.render = template.render;
+        component.staticRenderFns = template.staticRenderFns;
+        component._compiled = true;
+
+        if (functional) component.functional = true;
+      }
+
+      component._scopeId = scope;
+
+      return component
+    }
+    /* style inject */
+    
+    /* style inject SSR */
+    
+
+    
+    var ItemColumn = __vue_normalize__$4(
+      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+      __vue_inject_styles__$4,
+      __vue_script__$4,
+      __vue_scope_id__$4,
+      __vue_is_functional_template__$4,
+      __vue_module_identifier__$4,
+      undefined,
+      undefined
+    );
+
+  //
+
+  var script$5 = {
+    components: {
+      'task-list-expander': TaskListExpander,
+      'item-column': ItemColumn
+    },
+    inject: ['root'],
+    props: ['task', 'expanderStyle'],
+    data() {
+      return {};
+    },
+  };
+
+  /* script */
+              const __vue_script__$5 = script$5;
+              
+  /* template */
+  var __vue_render__$5 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -743,43 +828,28 @@ var Elastigantt = (function () {
         ),
         _vm._v(" "),
         _vm._l(_vm.root.state.taskList.columns, function(column) {
-          return _c(
-            "div",
-            {
-              key: column.label,
-              staticClass: "elastigantt__task-list-item-column",
-              style: _vm.getStyle(column),
-              attrs: { column: column }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "elastigantt__task-list-item-value",
-                  style: column.styles.value
-                },
-                [_vm._v(_vm._s(_vm.task[column.value]))]
-              )
-            ]
-          )
+          return _c("item-column", {
+            key: column.label,
+            attrs: { column: column, task: _vm.task }
+          })
         })
       ],
       2
     )
   };
-  var __vue_staticRenderFns__$4 = [];
-  __vue_render__$4._withStripped = true;
+  var __vue_staticRenderFns__$5 = [];
+  __vue_render__$5._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$4 = undefined;
+    const __vue_inject_styles__$5 = undefined;
     /* scoped */
-    const __vue_scope_id__$4 = undefined;
+    const __vue_scope_id__$5 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$4 = undefined;
+    const __vue_module_identifier__$5 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$4 = false;
+    const __vue_is_functional_template__$5 = false;
     /* component normalizer */
-    function __vue_normalize__$4(
+    function __vue_normalize__$5(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -807,20 +877,20 @@ var Elastigantt = (function () {
     
 
     
-    var TaskListItem = __vue_normalize__$4(
-      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-      __vue_inject_styles__$4,
-      __vue_script__$4,
-      __vue_scope_id__$4,
-      __vue_is_functional_template__$4,
-      __vue_module_identifier__$4,
+    var TaskListItem = __vue_normalize__$5(
+      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+      __vue_inject_styles__$5,
+      __vue_script__$5,
+      __vue_scope_id__$5,
+      __vue_is_functional_template__$5,
+      __vue_module_identifier__$5,
       undefined,
       undefined
     );
 
   //
 
-  var script$5 = {
+  var script$6 = {
     components: {
       'task-list-resizer': TaskListResizer,
       'task-list-header': TaskListHeader,
@@ -853,10 +923,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$5 = script$5;
+              const __vue_script__$6 = script$6;
               
   /* template */
-  var __vue_render__$5 = function() {
+  var __vue_render__$6 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -885,7 +955,7 @@ var Elastigantt = (function () {
                   attrs: { "expander-style": _vm.getHeaderExpanderStyle }
                 }),
                 _vm._v(" "),
-                _vm._l(_vm.root.getVisibleTasks, function(task) {
+                _vm._l(_vm.root.visibleTasks, function(task) {
                   return _c("task-list-item", {
                     key: task.id,
                     attrs: {
@@ -901,19 +971,19 @@ var Elastigantt = (function () {
         )
       : _vm._e()
   };
-  var __vue_staticRenderFns__$5 = [];
-  __vue_render__$5._withStripped = true;
+  var __vue_staticRenderFns__$6 = [];
+  __vue_render__$6._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$5 = undefined;
+    const __vue_inject_styles__$6 = undefined;
     /* scoped */
-    const __vue_scope_id__$5 = undefined;
+    const __vue_scope_id__$6 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$5 = undefined;
+    const __vue_module_identifier__$6 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$5 = false;
+    const __vue_is_functional_template__$6 = false;
     /* component normalizer */
-    function __vue_normalize__$5(
+    function __vue_normalize__$6(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -941,13 +1011,13 @@ var Elastigantt = (function () {
     
 
     
-    var TaskList = __vue_normalize__$5(
-      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-      __vue_inject_styles__$5,
-      __vue_script__$5,
-      __vue_scope_id__$5,
-      __vue_is_functional_template__$5,
-      __vue_module_identifier__$5,
+    var TaskList = __vue_normalize__$6(
+      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+      __vue_inject_styles__$6,
+      __vue_script__$6,
+      __vue_scope_id__$6,
+      __vue_is_functional_template__$6,
+      __vue_module_identifier__$6,
       undefined,
       undefined
     );
@@ -959,7 +1029,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$6 = {
+  var script$7 = {
     inject: ['root'],
     data() {
       return {};
@@ -989,7 +1059,7 @@ var Elastigantt = (function () {
       horizontalLines() {
         let lines = [];
         const state = this.root.state;
-        let tasks = this.root.getVisibleTasks;
+        let tasks = this.root.visibleTasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
           lines.push({
             key: 'hl' + index,
@@ -1005,10 +1075,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$6 = script$6;
+              const __vue_script__$7 = script$7;
               
   /* template */
-  var __vue_render__$6 = function() {
+  var __vue_render__$7 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1036,19 +1106,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$6 = [];
-  __vue_render__$6._withStripped = true;
+  var __vue_staticRenderFns__$7 = [];
+  __vue_render__$7._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$6 = undefined;
+    const __vue_inject_styles__$7 = undefined;
     /* scoped */
-    const __vue_scope_id__$6 = undefined;
+    const __vue_scope_id__$7 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$6 = undefined;
+    const __vue_module_identifier__$7 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$6 = false;
+    const __vue_is_functional_template__$7 = false;
     /* component normalizer */
-    function __vue_normalize__$6(
+    function __vue_normalize__$7(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1076,13 +1146,13 @@ var Elastigantt = (function () {
     
 
     
-    var Grid = __vue_normalize__$6(
-      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
-      __vue_inject_styles__$6,
-      __vue_script__$6,
-      __vue_scope_id__$6,
-      __vue_is_functional_template__$6,
-      __vue_module_identifier__$6,
+    var Grid = __vue_normalize__$7(
+      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+      __vue_inject_styles__$7,
+      __vue_script__$7,
+      __vue_scope_id__$7,
+      __vue_is_functional_template__$7,
+      __vue_module_identifier__$7,
       undefined,
       undefined
     );
@@ -1099,7 +1169,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$7 = {
+  var script$8 = {
     inject: ['root'],
     props: ['item'],
     data() {
@@ -1116,10 +1186,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$7 = script$7;
+              const __vue_script__$8 = script$8;
               
   /* template */
-  var __vue_render__$7 = function() {
+  var __vue_render__$8 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1150,19 +1220,19 @@ var Elastigantt = (function () {
       )
     ])
   };
-  var __vue_staticRenderFns__$7 = [];
-  __vue_render__$7._withStripped = true;
+  var __vue_staticRenderFns__$8 = [];
+  __vue_render__$8._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$7 = undefined;
+    const __vue_inject_styles__$8 = undefined;
     /* scoped */
-    const __vue_scope_id__$7 = undefined;
+    const __vue_scope_id__$8 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$7 = undefined;
+    const __vue_module_identifier__$8 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$7 = false;
+    const __vue_is_functional_template__$8 = false;
     /* component normalizer */
-    function __vue_normalize__$7(
+    function __vue_normalize__$8(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1190,19 +1260,19 @@ var Elastigantt = (function () {
     
 
     
-    var CalendarRow = __vue_normalize__$7(
-      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-      __vue_inject_styles__$7,
-      __vue_script__$7,
-      __vue_scope_id__$7,
-      __vue_is_functional_template__$7,
-      __vue_module_identifier__$7,
+    var CalendarRow = __vue_normalize__$8(
+      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+      __vue_inject_styles__$8,
+      __vue_script__$8,
+      __vue_scope_id__$8,
+      __vue_is_functional_template__$8,
+      __vue_module_identifier__$8,
       undefined,
       undefined
     );
 
   //
-  var script$8 = {
+  var script$9 = {
     components: {
       'calendar-row': CalendarRow
     },
@@ -1441,10 +1511,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$8 = script$8;
+              const __vue_script__$9 = script$9;
               
   /* template */
-  var __vue_render__$8 = function() {
+  var __vue_render__$9 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1486,19 +1556,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$8 = [];
-  __vue_render__$8._withStripped = true;
+  var __vue_staticRenderFns__$9 = [];
+  __vue_render__$9._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$8 = undefined;
+    const __vue_inject_styles__$9 = undefined;
     /* scoped */
-    const __vue_scope_id__$8 = undefined;
+    const __vue_scope_id__$9 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$8 = undefined;
+    const __vue_module_identifier__$9 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$8 = false;
+    const __vue_is_functional_template__$9 = false;
     /* component normalizer */
-    function __vue_normalize__$8(
+    function __vue_normalize__$9(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1526,13 +1596,13 @@ var Elastigantt = (function () {
     
 
     
-    var Calendar = __vue_normalize__$8(
-      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-      __vue_inject_styles__$8,
-      __vue_script__$8,
-      __vue_scope_id__$8,
-      __vue_is_functional_template__$8,
-      __vue_module_identifier__$8,
+    var Calendar = __vue_normalize__$9(
+      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+      __vue_inject_styles__$9,
+      __vue_script__$9,
+      __vue_scope_id__$9,
+      __vue_is_functional_template__$9,
+      __vue_module_identifier__$9,
       undefined,
       undefined
     );
@@ -1546,7 +1616,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$9 = {
+  var script$a = {
     inject: ['root'],
     props: ['tasks'],
     data() {
@@ -1614,10 +1684,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$9 = script$9;
+              const __vue_script__$a = script$a;
               
   /* template */
-  var __vue_render__$9 = function() {
+  var __vue_render__$a = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1639,19 +1709,19 @@ var Elastigantt = (function () {
       })
     )
   };
-  var __vue_staticRenderFns__$9 = [];
-  __vue_render__$9._withStripped = true;
+  var __vue_staticRenderFns__$a = [];
+  __vue_render__$a._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$9 = undefined;
+    const __vue_inject_styles__$a = undefined;
     /* scoped */
-    const __vue_scope_id__$9 = undefined;
+    const __vue_scope_id__$a = undefined;
     /* module identifier */
-    const __vue_module_identifier__$9 = undefined;
+    const __vue_module_identifier__$a = undefined;
     /* functional template */
-    const __vue_is_functional_template__$9 = false;
+    const __vue_is_functional_template__$a = false;
     /* component normalizer */
-    function __vue_normalize__$9(
+    function __vue_normalize__$a(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1679,13 +1749,13 @@ var Elastigantt = (function () {
     
 
     
-    var TreeDependencyLines = __vue_normalize__$9(
-      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-      __vue_inject_styles__$9,
-      __vue_script__$9,
-      __vue_scope_id__$9,
-      __vue_is_functional_template__$9,
-      __vue_module_identifier__$9,
+    var DependencyLines = __vue_normalize__$a(
+      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+      __vue_inject_styles__$a,
+      __vue_script__$a,
+      __vue_scope_id__$a,
+      __vue_is_functional_template__$a,
+      __vue_module_identifier__$a,
       undefined,
       undefined
     );
@@ -1697,7 +1767,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$a = {
+  var script$b = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -1714,10 +1784,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$a = script$a;
+              const __vue_script__$b = script$b;
               
   /* template */
-  var __vue_render__$a = function() {
+  var __vue_render__$b = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1752,19 +1822,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$a = [];
-  __vue_render__$a._withStripped = true;
+  var __vue_staticRenderFns__$b = [];
+  __vue_render__$b._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$a = undefined;
+    const __vue_inject_styles__$b = undefined;
     /* scoped */
-    const __vue_scope_id__$a = undefined;
+    const __vue_scope_id__$b = undefined;
     /* module identifier */
-    const __vue_module_identifier__$a = undefined;
+    const __vue_module_identifier__$b = undefined;
     /* functional template */
-    const __vue_is_functional_template__$a = false;
+    const __vue_is_functional_template__$b = false;
     /* component normalizer */
-    function __vue_normalize__$a(
+    function __vue_normalize__$b(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1792,13 +1862,13 @@ var Elastigantt = (function () {
     
 
     
-    var TreeText = __vue_normalize__$a(
-      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-      __vue_inject_styles__$a,
-      __vue_script__$a,
-      __vue_scope_id__$a,
-      __vue_is_functional_template__$a,
-      __vue_module_identifier__$a,
+    var TreeText = __vue_normalize__$b(
+      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+      __vue_inject_styles__$b,
+      __vue_script__$b,
+      __vue_scope_id__$b,
+      __vue_is_functional_template__$b,
+      __vue_module_identifier__$b,
       undefined,
       undefined
     );
@@ -1815,7 +1885,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$b = {
+  var script$c = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -1840,10 +1910,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$b = script$b;
+              const __vue_script__$c = script$c;
               
   /* template */
-  var __vue_render__$b = function() {
+  var __vue_render__$c = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1881,19 +1951,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$b = [];
-  __vue_render__$b._withStripped = true;
+  var __vue_staticRenderFns__$c = [];
+  __vue_render__$c._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$b = undefined;
+    const __vue_inject_styles__$c = undefined;
     /* scoped */
-    const __vue_scope_id__$b = undefined;
+    const __vue_scope_id__$c = undefined;
     /* module identifier */
-    const __vue_module_identifier__$b = undefined;
+    const __vue_module_identifier__$c = undefined;
     /* functional template */
-    const __vue_is_functional_template__$b = false;
+    const __vue_is_functional_template__$c = false;
     /* component normalizer */
-    function __vue_normalize__$b(
+    function __vue_normalize__$c(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1921,13 +1991,13 @@ var Elastigantt = (function () {
     
 
     
-    var Info = __vue_normalize__$b(
-      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-      __vue_inject_styles__$b,
-      __vue_script__$b,
-      __vue_scope_id__$b,
-      __vue_is_functional_template__$b,
-      __vue_module_identifier__$b,
+    var Info = __vue_normalize__$c(
+      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+      __vue_inject_styles__$c,
+      __vue_script__$c,
+      __vue_scope_id__$c,
+      __vue_is_functional_template__$c,
+      __vue_module_identifier__$c,
       undefined,
       undefined
     );
@@ -1945,7 +2015,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$c = {
+  var script$d = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -1969,10 +2039,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$c = script$c;
+              const __vue_script__$d = script$d;
               
   /* template */
-  var __vue_render__$c = function() {
+  var __vue_render__$d = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2016,19 +2086,19 @@ var Elastigantt = (function () {
       _c("path", { style: _vm.getLineStyle, attrs: { d: _vm.getLinePoints } })
     ])
   };
-  var __vue_staticRenderFns__$c = [];
-  __vue_render__$c._withStripped = true;
+  var __vue_staticRenderFns__$d = [];
+  __vue_render__$d._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$c = undefined;
+    const __vue_inject_styles__$d = undefined;
     /* scoped */
-    const __vue_scope_id__$c = undefined;
+    const __vue_scope_id__$d = undefined;
     /* module identifier */
-    const __vue_module_identifier__$c = undefined;
+    const __vue_module_identifier__$d = undefined;
     /* functional template */
-    const __vue_is_functional_template__$c = false;
+    const __vue_is_functional_template__$d = false;
     /* component normalizer */
-    function __vue_normalize__$c(
+    function __vue_normalize__$d(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2056,33 +2126,34 @@ var Elastigantt = (function () {
     
 
     
-    var ProgressBar = __vue_normalize__$c(
-      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-      __vue_inject_styles__$c,
-      __vue_script__$c,
-      __vue_scope_id__$c,
-      __vue_is_functional_template__$c,
-      __vue_module_identifier__$c,
+    var ProgressBar = __vue_normalize__$d(
+      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+      __vue_inject_styles__$d,
+      __vue_script__$d,
+      __vue_scope_id__$d,
+      __vue_is_functional_template__$d,
+      __vue_module_identifier__$d,
       undefined,
       undefined
     );
 
   //
 
-  var script$d = {
+  var script$e = {
     components: {
       'tree-text': TreeText,
       'info': Info,
       'tree-progress-bar': ProgressBar
     },
     inject: ['root'],
-    props: ['task', 'index'],
+    props: ['task'],
     data() {
       return {};
     },
     computed: {
       getViewBox() {
-        return `0 0 ${this.task.width} ${this.task.height}`;
+        const task = this.task;
+        return `0 0 ${task.width} ${task.height}`;
       },
       getGroupTransform() {
         return `translate(${this.task.x} ${this.task.y})`;
@@ -2108,10 +2179,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$d = script$d;
+              const __vue_script__$e = script$e;
               
   /* template */
-  var __vue_render__$d = function() {
+  var __vue_render__$e = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2168,19 +2239,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$d = [];
-  __vue_render__$d._withStripped = true;
+  var __vue_staticRenderFns__$e = [];
+  __vue_render__$e._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$d = undefined;
+    const __vue_inject_styles__$e = undefined;
     /* scoped */
-    const __vue_scope_id__$d = undefined;
+    const __vue_scope_id__$e = undefined;
     /* module identifier */
-    const __vue_module_identifier__$d = undefined;
+    const __vue_module_identifier__$e = undefined;
     /* functional template */
-    const __vue_is_functional_template__$d = false;
+    const __vue_is_functional_template__$e = false;
     /* component normalizer */
-    function __vue_normalize__$d(
+    function __vue_normalize__$e(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2208,46 +2279,27 @@ var Elastigantt = (function () {
     
 
     
-    var Task = __vue_normalize__$d(
-      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-      __vue_inject_styles__$d,
-      __vue_script__$d,
-      __vue_scope_id__$d,
-      __vue_is_functional_template__$d,
-      __vue_module_identifier__$d,
+    var Task = __vue_normalize__$e(
+      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+      __vue_inject_styles__$e,
+      __vue_script__$e,
+      __vue_scope_id__$e,
+      __vue_is_functional_template__$e,
+      __vue_module_identifier__$e,
       undefined,
       undefined
     );
 
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
 
-  var script$e = {
+  var script$f = {
+    components: {
+      'tree-text': TreeText,
+      'info': Info,
+      'tree-progress-bar': ProgressBar
+    },
     inject: ['root'],
-    props: [
-      'task', 'index'
-    ],
+    props: ['task'],
     data() {
       return {};
     },
@@ -2287,10 +2339,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$e = script$e;
+              const __vue_script__$f = script$f;
               
   /* template */
-  var __vue_render__$e = function() {
+  var __vue_render__$f = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2304,7 +2356,7 @@ var Elastigantt = (function () {
         _c(
           "svg",
           {
-            staticClass: "elastigantt__tree-row",
+            staticClass: "elastigantt__tree-row-milestone",
             attrs: {
               x: _vm.task.x,
               y: _vm.task.y,
@@ -2349,19 +2401,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$e = [];
-  __vue_render__$e._withStripped = true;
+  var __vue_staticRenderFns__$f = [];
+  __vue_render__$f._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$e = undefined;
+    const __vue_inject_styles__$f = undefined;
     /* scoped */
-    const __vue_scope_id__$e = undefined;
+    const __vue_scope_id__$f = undefined;
     /* module identifier */
-    const __vue_module_identifier__$e = undefined;
+    const __vue_module_identifier__$f = undefined;
     /* functional template */
-    const __vue_is_functional_template__$e = false;
+    const __vue_is_functional_template__$f = false;
     /* component normalizer */
-    function __vue_normalize__$e(
+    function __vue_normalize__$f(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2389,42 +2441,27 @@ var Elastigantt = (function () {
     
 
     
-    var Milestone = __vue_normalize__$e(
-      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-      __vue_inject_styles__$e,
-      __vue_script__$e,
-      __vue_scope_id__$e,
-      __vue_is_functional_template__$e,
-      __vue_module_identifier__$e,
+    var Milestone = __vue_normalize__$f(
+      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+      __vue_inject_styles__$f,
+      __vue_script__$f,
+      __vue_scope_id__$f,
+      __vue_is_functional_template__$f,
+      __vue_module_identifier__$f,
       undefined,
       undefined
     );
 
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
 
-  var script$f = {
+  var script$g = {
+    components: {
+      'tree-text': TreeText,
+      'info': Info,
+      'tree-progress-bar': ProgressBar
+    },
     inject: ['root'],
-    props: ['task', 'index'],
+    props: ['task'],
     data() {
       return {};
     },
@@ -2481,10 +2518,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$f = script$f;
+              const __vue_script__$g = script$g;
               
   /* template */
-  var __vue_render__$f = function() {
+  var __vue_render__$g = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2548,19 +2585,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$f = [];
-  __vue_render__$f._withStripped = true;
+  var __vue_staticRenderFns__$g = [];
+  __vue_render__$g._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$f = undefined;
+    const __vue_inject_styles__$g = undefined;
     /* scoped */
-    const __vue_scope_id__$f = undefined;
+    const __vue_scope_id__$g = undefined;
     /* module identifier */
-    const __vue_module_identifier__$f = undefined;
+    const __vue_module_identifier__$g = undefined;
     /* functional template */
-    const __vue_is_functional_template__$f = false;
+    const __vue_is_functional_template__$g = false;
     /* component normalizer */
-    function __vue_normalize__$f(
+    function __vue_normalize__$g(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2588,23 +2625,23 @@ var Elastigantt = (function () {
     
 
     
-    var Project = __vue_normalize__$f(
-      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-      __vue_inject_styles__$f,
-      __vue_script__$f,
-      __vue_scope_id__$f,
-      __vue_is_functional_template__$f,
-      __vue_module_identifier__$f,
+    var Project = __vue_normalize__$g(
+      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+      __vue_inject_styles__$g,
+      __vue_script__$g,
+      __vue_scope_id__$g,
+      __vue_is_functional_template__$g,
+      __vue_module_identifier__$g,
       undefined,
       undefined
     );
 
   //
 
-  var script$g = {
+  var script$h = {
     components: {
       'grid': Grid,
-      'tree-dependency-lines': TreeDependencyLines,
+      'tree-dependency-lines': DependencyLines,
       'calendar': Calendar,
       'tree-row-task': Task,
       'tree-row-milestone': Milestone,
@@ -2615,6 +2652,9 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      visibleTasks() {
+        return this.root.visibleTasks;
+      },
       getWidth() {
         const state = this.root.state;
         return state.width;
@@ -2627,10 +2667,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$g = script$g;
+              const __vue_script__$h = script$h;
               
   /* template */
-  var __vue_render__$g = function() {
+  var __vue_render__$h = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2651,24 +2691,16 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _c("grid"),
         _vm._v(" "),
-        _c("tree-dependency-lines", {
-          attrs: { tasks: _vm.root.getVisibleTasks }
-        }),
+        _c("tree-dependency-lines", { attrs: { tasks: _vm.visibleTasks } }),
         _vm._v(" "),
-        _vm._l(_vm.root.getVisibleTasks, function(task, index) {
+        _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
-            { key: task.id, attrs: { task: task, index: index } },
+            { key: task.id },
             [
               _c("tree-row-" + task.type, {
                 tag: "component",
-                attrs: {
-                  task: task,
-                  index: index,
-                  "display-info": _vm.root.state.info.display,
-                  "style-bar": _vm.root.state.row.styles.bar,
-                  row: _vm.root.state.row
-                }
+                attrs: { task: task }
               })
             ],
             1
@@ -2678,19 +2710,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$g = [];
-  __vue_render__$g._withStripped = true;
+  var __vue_staticRenderFns__$h = [];
+  __vue_render__$h._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$g = undefined;
+    const __vue_inject_styles__$h = undefined;
     /* scoped */
-    const __vue_scope_id__$g = undefined;
+    const __vue_scope_id__$h = undefined;
     /* module identifier */
-    const __vue_module_identifier__$g = undefined;
+    const __vue_module_identifier__$h = undefined;
     /* functional template */
-    const __vue_is_functional_template__$g = false;
+    const __vue_is_functional_template__$h = false;
     /* component normalizer */
-    function __vue_normalize__$g(
+    function __vue_normalize__$h(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2718,20 +2750,20 @@ var Elastigantt = (function () {
     
 
     
-    var Tree = __vue_normalize__$g(
-      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-      __vue_inject_styles__$g,
-      __vue_script__$g,
-      __vue_scope_id__$g,
-      __vue_is_functional_template__$g,
-      __vue_module_identifier__$g,
+    var Tree = __vue_normalize__$h(
+      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+      __vue_inject_styles__$h,
+      __vue_script__$h,
+      __vue_scope_id__$h,
+      __vue_is_functional_template__$h,
+      __vue_module_identifier__$h,
       undefined,
       undefined
     );
 
   //
 
-  var script$h = {
+  var script$i = {
     components: {
       'main-header': Header,
       'task-list': TaskList,
@@ -2775,7 +2807,7 @@ var Elastigantt = (function () {
       getMainStyle() {
         const state = this.root.state;
         return {
-          width: root.state.width + 'px'
+          width: state.width + 'px'
         };
       }
     },
@@ -2790,10 +2822,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$h = script$h;
+              const __vue_script__$i = script$i;
               
   /* template */
-  var __vue_render__$h = function() {
+  var __vue_render__$i = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2859,19 +2891,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$h = [];
-  __vue_render__$h._withStripped = true;
+  var __vue_staticRenderFns__$i = [];
+  __vue_render__$i._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$h = undefined;
+    const __vue_inject_styles__$i = undefined;
     /* scoped */
-    const __vue_scope_id__$h = undefined;
+    const __vue_scope_id__$i = undefined;
     /* module identifier */
-    const __vue_module_identifier__$h = undefined;
+    const __vue_module_identifier__$i = undefined;
     /* functional template */
-    const __vue_is_functional_template__$h = false;
+    const __vue_is_functional_template__$i = false;
     /* component normalizer */
-    function __vue_normalize__$h(
+    function __vue_normalize__$i(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2899,13 +2931,13 @@ var Elastigantt = (function () {
     
 
     
-    var Main = __vue_normalize__$h(
-      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-      __vue_inject_styles__$h,
-      __vue_script__$h,
-      __vue_scope_id__$h,
-      __vue_is_functional_template__$h,
-      __vue_module_identifier__$h,
+    var Main = __vue_normalize__$i(
+      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+      __vue_inject_styles__$i,
+      __vue_script__$i,
+      __vue_scope_id__$i,
+      __vue_is_functional_template__$i,
+      __vue_module_identifier__$i,
       undefined,
       undefined
     );
@@ -3018,7 +3050,10 @@ var Elastigantt = (function () {
             'border-color': '#00000010'
           },
           column: {
-            'border-color': '#00000010'
+            'border-color': '#00000010',
+            'height': null,
+            'width': null,
+            'line-height': null
           },
           header: {
             'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
@@ -3047,6 +3082,7 @@ var Elastigantt = (function () {
           }
         },
         columns: [{
+          id: 0,
           label: 'ID',
           value: 'id',
           width: 40,
@@ -3143,7 +3179,7 @@ var Elastigantt = (function () {
     };
   }
 
-  var script$i = {
+  var script$j = {
     components: {
       'elastigantt-main': Main,
     },
@@ -3152,9 +3188,10 @@ var Elastigantt = (function () {
     ],
     provide() {
       const provider = {};
+      const self = this;
       Object.defineProperty(provider, 'root', {
         enumerable: true,
-        get: () => this
+        get: () => self
       });
       return provider;
     },
@@ -3196,10 +3233,15 @@ var Elastigantt = (function () {
         dayjs.locale(options.locale, null, true);
         this.state.taskList.columns = this.state.taskList.columns.map(column => {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
-          if (typeof column.styles === 'undefined') {
-            column.styles = {};
-          }
           column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
+          if (typeof column.style === 'undefined') {
+            column.style = {
+              'height': 0 + "px",
+              'line-height': 0 + "px",
+              'width': 0 + "px"
+            };
+          }
+          column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
           return column;
         });
         // initialize observer
@@ -3254,13 +3296,20 @@ var Elastigantt = (function () {
           this.state.calendar.height += this.state.calendar.month.height;
         }
       },
-      calculateTaskListColumnWidths() {
+      calculateTaskListColumnsWidths() {
+        console.log('calculate');
         let final = 0;
         this.state.taskList.columns.forEach(column => {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
           final += column.finalWidth;
+          let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
+          column.style.height = height + "px";
+          column.style['line-height'] = height + "px";
+          column.style.width = column.finalWidth + "px";
+          return column;
         });
         this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
+        console.log(this.state.taskList.columns);
       },
       resetTaskTree() {
         this.state.rootTask.children = [];
@@ -3303,9 +3352,25 @@ var Elastigantt = (function () {
       getChildren(taskId) {
         return this.state.tasks.filter(task => task.parent === taskId);
       },
+      getSVG() {
+        return this.svgElement.outerHTML;
+      },
+      getImage(type = 'image/png') {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.svgElement.clientWidth;
+            canvas.height = this.svgElement.clientHeight;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            resolve(canvas.toDataURL(type));
+          };
+          img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
+        });
+      },
     },
     computed: {
-      getVisibleTasks() {
+      visibleTasks() {
         const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
         const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
         this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
@@ -3329,9 +3394,8 @@ var Elastigantt = (function () {
         this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
         this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
         this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
-
         this.calculateCalendarDimensions();
-        this.calculateTaskListColumnWidths();
+        this.calculateTaskListColumnsWidths();
         this.resetTaskTree();
         this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
         const visibleTasks = this.state.tasks.filter(task => task.visible);
@@ -3352,26 +3416,7 @@ var Elastigantt = (function () {
         }
         return visibleTasks;
       },
-      getSVG() {
-        return this.svgElement.outerHTML;
-      },
-      getImage(type = 'image/png') {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = this.svgElement.clientWidth;
-            canvas.height = this.svgElement.clientHeight;
-            canvas.getContext('2d').drawImage(img, 0, 0);
-            resolve(canvas.toDataURL(type));
-          };
-          img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
-        });
-      },
-    },
 
-    beforeMount() {
-      this.recalculate;
     },
     created() {
       this.initialize();
@@ -3404,30 +3449,31 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$i = script$i;
+              const __vue_script__$j = script$j;
               
   /* template */
-  var __vue_render__$i = function() {
+  var __vue_render__$j = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("elastigantt-main", {
-      attrs: { tasks: _vm.tasks, options: _vm.options }
+      attrs: { tasks: _vm.tasks, options: _vm.options },
+      on: { calculateTaskListColumnsWidths: _vm.calculateTaskListColumnsWidths }
     })
   };
-  var __vue_staticRenderFns__$i = [];
-  __vue_render__$i._withStripped = true;
+  var __vue_staticRenderFns__$j = [];
+  __vue_render__$j._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$i = undefined;
+    const __vue_inject_styles__$j = undefined;
     /* scoped */
-    const __vue_scope_id__$i = undefined;
+    const __vue_scope_id__$j = undefined;
     /* module identifier */
-    const __vue_module_identifier__$i = undefined;
+    const __vue_module_identifier__$j = undefined;
     /* functional template */
-    const __vue_is_functional_template__$i = false;
+    const __vue_is_functional_template__$j = false;
     /* component normalizer */
-    function __vue_normalize__$i(
+    function __vue_normalize__$j(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -3455,13 +3501,13 @@ var Elastigantt = (function () {
     
 
     
-    var Elastigantt = __vue_normalize__$i(
-      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-      __vue_inject_styles__$i,
-      __vue_script__$i,
-      __vue_scope_id__$i,
-      __vue_is_functional_template__$i,
-      __vue_module_identifier__$i,
+    var Elastigantt = __vue_normalize__$j(
+      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+      __vue_inject_styles__$j,
+      __vue_script__$j,
+      __vue_scope_id__$j,
+      __vue_is_functional_template__$j,
+      __vue_module_identifier__$j,
       undefined,
       undefined
     );
@@ -3471,4 +3517,3 @@ var Elastigantt = (function () {
   return Elastigantt;
 
 }());
-//# sourceMappingURL=elastigantt.js.map

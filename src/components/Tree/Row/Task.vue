@@ -31,13 +31,14 @@ export default {
     'tree-progress-bar': ProgressBar
   },
   inject: ['root'],
-  props: ['task', 'index'],
+  props: ['task'],
   data() {
     return {};
   },
   computed: {
     getViewBox() {
-      return `0 0 ${this.task.width} ${this.task.height}`;
+      const task = this.task;
+      return `0 0 ${task.width} ${task.height}`;
     },
     getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;

@@ -4,7 +4,7 @@
     <div v-html="root.state.defs.join('')"></div>
     <task-list-resizer></task-list-resizer>
     <task-list-header :expander-style="getHeaderExpanderStyle"></task-list-header>
-    <task-list-item v-for="task in root.getVisibleTasks" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
+    <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
   </div>
 </foreignObject>
 </template>
