@@ -1,23 +1,23 @@
 <template>
 <g class="elastigantt__tree-dependency-lines-container">
   <g v-for="task in dependencyTasks" :key="task.id" :task="task">
-    <path v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task" :d="dependencyLine.points" :style="state.dependencyLines.style">
+    <path v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task" :d="dependencyLine.points" :style="root.state.dependencyLines.style">
     </path>
   </g>
 </g>
 </template>
 <script>
 export default {
-  inject: ['state'],
+  inject: ['root'],
   props: ['tasks'],
   data() {
     return {};
   },
   methods: {
     getPoints(fromTaskId, toTaskId) {
-      const state = this.state;
-      const fromTask = this.$root.getTask(fromTaskId);
-      const toTask = this.$root.getTask(toTaskId);
+      const state = this.root.state;
+      const fromTask = this.root.getTask(fromTaskId);
+      const toTask = this.root.getTask(toTaskId);
       if (!toTask.visible || !fromTask.visible) {
         return '';
       }

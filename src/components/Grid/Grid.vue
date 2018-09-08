@@ -6,20 +6,20 @@
 </template>
 <script>
 export default {
-  inject: ['state'],
+  inject: ['root'],
   data() {
     return {};
   },
   computed: {
     getVStyle() {
-      return this.state.verticalGrid.style;
+      return this.root.state.verticalGrid.style;
     },
     getHStyle() {
-      return this.state.horizontalGrid.style;
+      return this.root.state.horizontalGrid.style;
     },
     verticalLines() {
       let lines = [];
-      const state = this.state;
+      const state = this.root.state;
       for (let step = 0; step <= state.times.steps; step++) {
         let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
         lines.push({
@@ -34,8 +34,8 @@ export default {
     },
     horizontalLines() {
       let lines = [];
-      const state = this.state;
-      let tasks = this.$root.getVisibleTasks();
+      const state = this.root.state;
+      let tasks = this.root.getVisibleTasks();
       for (let index = 0, len = tasks.length; index <= len; index++) {
         lines.push({
           key: 'hl' + index,

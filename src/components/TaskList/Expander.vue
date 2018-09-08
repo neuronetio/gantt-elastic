@@ -1,28 +1,28 @@
 <template>
-<svg :width="state.taskList.expander.size" :height="state.taskList.expander.size">
+<svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size">
   <rect
     :x="border"
     :y="border"
-    :width="state.taskList.expander.size-border*2"
-    :height="state.taskList.expander.size-border*2"
+    :width="root.state.taskList.expander.size-border*2"
+    :height="root.state.taskList.expander.size-border*2"
     rx="2"
     ry="2"
-    :style="state.taskList.styles.expander"
+    :style="root.state.taskList.styles.expander"
     @click="toggle">
   </rect>
   <line v-if="allChildren.length"
     :x1="lineOffset"
-    :y1="state.taskList.expander.size/2"
-    :x2="state.taskList.expander.size-lineOffset"
-    :y2="state.taskList.expander.size/2"
+    :y1="root.state.taskList.expander.size/2"
+    :x2="root.state.taskList.expander.size-lineOffset"
+    :y2="root.state.taskList.expander.size/2"
     :style="lineStyle"
     @click="toggle">
   </line>
   <line v-if="collapsed"
-    :x1="state.taskList.expander.size/2"
+    :x1="root.state.taskList.expander.size/2"
     :y1="lineOffset"
-    :x2="state.taskList.expander.size/2"
-    :y2="state.taskList.expander.size-lineOffset"
+    :x2="root.state.taskList.expander.size/2"
+    :y2="root.state.taskList.expander.size-lineOffset"
     :style="lineStyle"
     @click="toggle">
   </line>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  inject: ['state'],
+  inject: ['root'],
   props: ['tasks'],
   data() {
     const border = 0.5;

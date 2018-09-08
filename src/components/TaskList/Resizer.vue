@@ -8,10 +8,10 @@ export default {
   },
   computed: {
     getStyle() {
-      const state = this.state;
+      const state = this.root.state;
       return {
         height: '100%',
-        width: state.taskList.resizerWidth + 'px'
+        width: root.state.taskList.resizerWidth + 'px'
       };
     }
   }

@@ -3,7 +3,7 @@
   <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
     <task-list-expander :tasks="collapsible"></task-list-expander>
   </div>
-  <div class="elastigantt__task-list-header-column" v-for="column in state.taskList.columns" :key="column.label" :style="getStyle(column)">
+  <div class="elastigantt__task-list-header-column" v-for="column in root.state.taskList.columns" :key="column.label" :style="getStyle(column)">
     <div class="elastigantt__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
     <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
   </div>
@@ -11,7 +11,13 @@
 </template>
 
 <script>
+import TaskListExpander from './Expander.vue';
+
 export default {
+  components: {
+    'task-list-expander': TaskListExpander,
+  },
+  inject: ['root'],
   props: ['expanderStyle'],
   data() {
     return {
@@ -24,7 +30,7 @@ export default {
   computed: {
     getStyle() {
       return column => {
-        const state = this.state;
+        const state = this.root.state;
         return Object.assign({
           'height': (state.calendar.height + state.calendar.styles.column['stroke-width']) + 'px',
           'margin-bottom': state.calendar.gap + 'px',
@@ -33,7 +39,7 @@ export default {
       }
     },
     collapsible() {
-      return this.state.tasks.filter(task => task.allChildren.length > 0);
+      return this.root.state.tasks.filter(task => task.allChildren.length > 0);
     }
   },
   methods: {
@@ -47,7 +53,7 @@ export default {
     resizerMouseMove(event, column) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        this.$root.calculateTaskListColumnWidths();
+        this.root.calculateTaskListColumnWidths();
       }
     },
     resizerMouseUp(event, column) {
@@ -55,8 +61,8 @@ export default {
     }
   },
   created() {
-    this.$root.$on('mousemove', this.resizerMouseMove);
-    this.$root.$on('mouseup', this.resizerMouseUp);
+    this.root.$on('mousemove', this.resizerMouseMove);
+    this.root.$on('mouseup', this.resizerMouseUp);
   }
 }
 </script>

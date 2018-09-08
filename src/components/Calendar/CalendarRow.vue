@@ -1,17 +1,17 @@
 <template>
 <g class="elastigantt__calendar-row-group">
-  <rect class="elastigantt__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="state.calendar.styles.row"></rect>
+  <rect class="elastigantt__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="root.state.calendar.styles.row"></rect>
   <text
     :x="getTextX"
     :y="getTextY"
     alignment-baseline="middle"
     text-anchor="middle"
-    :style="state.calendar.styles.text">{{item.label}}</text>
+    :style="root.state.calendar.styles.text">{{item.label}}</text>
 </g>
 </template>
 <script>
 export default {
-  inject: ['state'],
+  inject: ['root'],
   props: ['item'],
   data() {
     return {};

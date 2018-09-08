@@ -1,7 +1,7 @@
 <template>
 <g class="elastigantt__calendar-group">
-  <foreignObject :x="getX" :y="getY" :width="getWidth" :height="state.calendar.height">
-    <div class="elastigantt__calendar" :style="state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
+  <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
+    <div class="elastigantt__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
   </foreignObject>
   <calendar-row v-for="(month,index) in months" :key="month.key" :item="month"></calendar-row>
   <calendar-row v-for="(day,index) in days" :key="day.key" :item="day"></calendar-row>
@@ -9,8 +9,12 @@
 </g>
 </template>
 <script>
+import CalendarRow from './CalendarRow.vue';
 export default {
-  inject: ['state'],
+  components: {
+    'calendar-row': CalendarRow
+  },
+  inject: ['root'],
   data() {
     return {
       cache: {}
@@ -23,15 +27,15 @@ export default {
         medium: 0,
         long: 0
       };
-      const state = this.state;
-      this.state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+      const state = this.root.state;
+      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
       let firstDate = dayjs(state.times.firstDate);
       for (let i = 0; i < current; i++) {
         let currentDate = firstDate.add(i, 'hours').toDate();
         let textWidth = {
-          short: this.state.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
-          medium: this.state.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
-          long: this.state.ctx.measureText(state.calendar.hour.format.long(currentDate)).width
+          short: state.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
+          medium: state.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
+          long: state.ctx.measureText(state.calendar.hour.format.long(currentDate)).width
         };
         if (textWidth.short >= max.short) {
           max.short = textWidth.short;
@@ -75,21 +79,21 @@ export default {
         type: 'short'
       };
     },
-    howManyDaysFit(current = this.state.times.steps, currentRecurrection = 1) {
+    howManyDaysFit(current = this.root.state.times.steps, currentRecurrection = 1) {
       let max = {
         short: 0,
         medium: 0,
         long: 0
       };
-      const state = this.state;
-      this.state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+      const state = this.root.state;
+      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
       let firstDate = dayjs(state.times.firstDate);
       for (let i = 0; i < current; i++) {
         let currentDate = firstDate.add(i, 'days').toDate();
         let textWidth = {
-          short: this.state.ctx.measureText(state.calendar.day.format.short(currentDate)).width,
-          medium: this.state.ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
-          long: this.state.ctx.measureText(state.calendar.day.format.long(currentDate)).width
+          short: state.ctx.measureText(state.calendar.day.format.short(currentDate)).width,
+          medium: state.ctx.measureText(state.calendar.day.format.medium(currentDate)).width,
+          long: state.ctx.measureText(state.calendar.day.format.long(currentDate)).width
         };
         if (textWidth.short >= max.short) {
           max.short = textWidth.short;
@@ -132,28 +136,28 @@ export default {
       };
     },
     hourTextStyle() {
-      return 'font-family:' + this.state.calendar.hour.fontFamily + ';font-size:' + this.state.calendar.hour.fontSize;
+      return 'font-family:' + this.root.state.calendar.hour.fontFamily + ';font-size:' + this.root.state.calendar.hour.fontSize;
     },
     dayTextStyle() {
-      return 'font-family:' + this.state.calendar.day.fontFamily + ';font-size:' + this.state.calendar.day.fontSize;
+      return 'font-family:' + this.root.state.calendar.day.fontFamily + ';font-size:' + this.root.state.calendar.day.fontSize;
     }
   },
   computed: {
     getX() {
-      return this.state.calendar.styles.column['stroke-width'] / 2;
+      return this.root.state.calendar.styles.column['stroke-width'] / 2;
     },
     getY() {
-      return this.state.calendar.styles.column['stroke-width'] / 2;
+      return this.root.state.calendar.styles.column['stroke-width'] / 2;
     },
     getWidth() {
-      return this.state.width - this.state.calendar.styles.column['stroke-width'];
+      return this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
     },
 
     hours() {
       let hours = [];
       let hoursCount = this.howManyHoursFit();
       let hourStep = 24 / hoursCount.count;
-      let state = this.state;
+      let state = this.root.state;
       for (let i = 0, len = state.times.steps * hoursCount.count; i < len; i++) {
         const date = new Date(state.times.firstTime + i * hourStep * 60 * 60 * 1000);
         hours.push({
@@ -168,7 +172,7 @@ export default {
       return state.calendar.hours = hours;
     },
     days() {
-      let state = this.state;
+      let state = this.root.state;
       let days = [];
       let daysCount = this.howManyDaysFit();
       let dayStep = state.times.steps / daysCount.count;
@@ -186,7 +190,7 @@ export default {
       return state.calendar.days = days;
     },
     months() {
-      let state = this.state;
+      let state = this.root.state;
       let months = [];
       let firstDate = state.times.firstDate;
       let lastDate = state.times.lastDate;
@@ -223,9 +227,9 @@ export default {
         let date = monthDays[i].date;
         let width = state.times.stepPx * days;
         let format = 'long';
-        if (this.state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
+        if (state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
           format = 'medium';
-          if (this.state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
+          if (state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
             format = 'short';
           }
         };

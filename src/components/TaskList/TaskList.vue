@@ -1,30 +1,39 @@
 <template>
-<foreignObject class="elastigantt__task-list-object" x="0" y="0" width="100%" height="100%" v-if="state.taskList.display">
+<foreignObject class="elastigantt__task-list-object" x="0" y="0" width="100%" height="100%" v-if="root.state.taskList.display">
   <div xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__task-list-container">
-    <div v-html="state.defs.join('')"></div>
+    <div v-html="root.state.defs.join('')"></div>
     <task-list-resizer></task-list-resizer>
     <task-list-header :expander-style="getHeaderExpanderStyle"></task-list-header>
-    <task-list-item v-for="task in $root.getVisibleTasks()" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
+    <task-list-item v-for="task in root.getVisibleTasks()" :key="task.id" :task="task" :expander-style="getListExpanderStyle"></task-list-item>
   </div>
 </foreignObject>
 </template>
 <script>
+import TaskListResizer from './Resizer.vue';
+import TaskListHeader from './TaskListHeader.vue';
+import TaskListItem from './TaskListItem.vue';
+
 export default {
-  inject: ['state'],
+  components: {
+    'task-list-resizer': TaskListResizer,
+    'task-list-header': TaskListHeader,
+    'task-list-item': TaskListItem,
+  },
+  inject: ['root'],
   data() {
     return {};
   },
   computed: {
     getHeaderExpanderStyle() {
-      const state = this.state;
+      const state = this.root.state;
       return Object.assign({
         'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
         'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
         'margin-bottom': state.calendar.gap + 'px'
-      }, this.state.taskList.styles.header);
+      }, state.taskList.styles.header);
     },
     getListExpanderStyle() {
-      const state = this.state;
+      const state = this.root.state;
       let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
       return {
         'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',

@@ -13,17 +13,17 @@
       <polygon :points="getPoints"></polygon>
     </clipPath>
   </defs>
-    <polygon :points="getPoints" :style="state.row.styles.bar"></polygon>
+    <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
     <tree-progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)">
     </tree-progress-bar>
   </svg>
-  <tree-text :task="task" v-if="state.row.showText"></tree-text>
-  <info :task="task" v-if="state.info.display && task.mouseOver"></info>
+  <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
+  <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
 </g>
 </template>
 <script>
 export default {
-  inject: ['state'],
+  inject: ['root'],
   props: [
     'task', 'index'
   ],

@@ -7,8 +7,8 @@
     xmlns="http://www.w3.org/2000/svg">
   <calendar></calendar>
   <grid></grid>
-  <tree-dependency-lines :tasks="$root.getVisibleTasks()"></tree-dependency-lines>
-  <g v-for="(task, index) in $root.getVisibleTasks()"
+  <tree-dependency-lines :tasks="root.getVisibleTasks()"></tree-dependency-lines>
+  <g v-for="(task, index) in root.getVisibleTasks()"
       :task="task"
       :index="index"
       :key="task.id">
@@ -17,18 +17,33 @@
 </svg>
 </template>
 <script>
+import Grid from '../Grid/Grid.vue';
+import Calendar from '../Calendar/Calendar.vue';
+import TreeDependencyLines from './DependencyLines.vue';
+import Task from './Row/Task.vue';
+import Milestone from './Row/Milestone.vue';
+import Project from './Row/Project.vue';
+
 export default {
-  inject: ['state'],
+  components: {
+    'grid': Grid,
+    'tree-dependency-lines': TreeDependencyLines,
+    'calendar': Calendar,
+    'tree-row-task': Task,
+    'tree-row-milestone': Milestone,
+    'tree-row-project': Project
+  },
+  inject: ['root'],
   data() {
     return {};
   },
   computed: {
     getWidth() {
-      const state = this.state;
+      const state = this.root.state;
       return state.width;
     },
     getHeight() {
-      const state = this.state;
+      const state = this.root.state;
       return state.height;
     }
   }

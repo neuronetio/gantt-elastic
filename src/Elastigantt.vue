@@ -3,18 +3,18 @@
 </template>
 
 <script>
-// elastigantt components
+import Main from './components/Main.vue';
+
 import Calendar from './components/Calendar/Calendar.vue';
 import CalendarRow from './components/Calendar/CalendarRow.vue';
 import Grid from './components/Grid/Grid.vue';
 import GridHeader from './components/Grid/GridHeader.vue';
 import Header from './components/Header.vue';
-import Main from './components/Main.vue';
 import TaskListExpander from './components/TaskList/Expander.vue';
 import TaskListResizer from './components/TaskList/Resizer.vue';
-import TaskList from './components/TaskList/TaskList.vue';
 import TaskListHeader from './components/TaskList/TaskListHeader.vue';
 import TaskListItem from './components/TaskList/TaskListItem.vue';
+import TaskList from './components/TaskList/TaskList.vue';
 import TreeDependencyLines from './components/Tree/DependencyLines.vue';
 import Info from './components/Tree/Info.vue';
 import TreeProgressBar from './components/Tree/ProgressBar.vue';
@@ -257,9 +257,12 @@ export default {
     'tasks', 'options'
   ],
   provide() {
-    return {
-      state: this.state
-    }
+    const provider = {};
+    Object.defineProperty(provider, 'root', {
+      enumerable: true,
+      get: () => this
+    });
+    return provider;
   },
   data() {
     return {

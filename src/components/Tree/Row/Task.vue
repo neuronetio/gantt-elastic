@@ -13,16 +13,25 @@
         <polygon :points="getPoints"></polygon>
       </clipPath>
     </defs>
-      <polygon :points="getPoints" :style="state.row.styles.bar"></polygon>
+      <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
       <tree-progress-bar :task="task" clip-path="url(#elastigantt__task-clip-path)"></tree-progress-bar>
     </svg>
-  <tree-text :task="task" v-if="state.row.showText"></tree-text>
-  <info :task="task" v-if="state.info.display && task.mouseOver"></info>
+  <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
+  <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
 </g>
 </template>
 <script>
+import TreeText from '../Text.vue';
+import Info from '../Info.vue';
+import ProgressBar from '../ProgressBar.vue';
+
 export default {
-  inject: ['state'],
+  components: {
+    'tree-text': TreeText,
+    'info': Info,
+    'tree-progress-bar': ProgressBar
+  },
+  inject: ['root'],
   props: [
     'task', 'index'
   ],
