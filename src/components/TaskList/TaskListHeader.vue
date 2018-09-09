@@ -53,6 +53,7 @@ export default {
     resizerMouseMove(event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+        this.root.calculateTaskListColumnsWidths();
       }
     },
     resizerMouseUp(event) {

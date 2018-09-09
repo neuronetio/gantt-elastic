@@ -23,7 +23,6 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.times.timeZoom = Number(value);
-          this.root.visibleTasks;
         }
       },
       height: {
@@ -32,7 +31,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.row.height = Number(value);
-          this.root.visibleTasks;
+          this.root.calculateTaskListColumnsWidths();
         }
       },
       scope: {
@@ -42,7 +41,6 @@ var Elastigantt = (function () {
         set(value) {
           this.root.state.scope.before = Number(value);
           this.root.state.scope.after = Number(value);
-          this.root.visibleTasks;
         }
       },
       divider: {
@@ -51,7 +49,7 @@ var Elastigantt = (function () {
         },
         set(value) {
           this.root.state.taskList.percent = Number(value);
-          this.root.visibleTasks;
+          this.root.calculateTaskListColumnsWidths();
         }
       }
     }
@@ -402,7 +400,7 @@ var Elastigantt = (function () {
           task.collapsed = collapsed;
           task.allChildren.forEach(child => {
             let parentsNotCollapsed = child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
-            child.visible = !collapsed && parentsNotCollapsed;
+            child.visible = !collapsed;
           });
         });
       }
@@ -560,6 +558,7 @@ var Elastigantt = (function () {
       resizerMouseMove(event) {
         if (this.resizer.moving) {
           this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+          this.root.calculateTaskListColumnsWidths();
         }
       },
       resizerMouseUp(event) {
@@ -2645,9 +2644,6 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
-      visibleTasks() {
-        return this.root.visibleTasks;
-      },
       getWidth() {
         const state = this.root.state;
         return state.width;
@@ -2684,7 +2680,7 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _c("grid"),
         _vm._v(" "),
-        _c("tree-dependency-lines", { attrs: { tasks: _vm.visibleTasks } }),
+        _c("tree-dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
@@ -3221,10 +3217,10 @@ var Elastigantt = (function () {
       },
       initialize() {
         this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
-          tasks: this.tasks
+          tasks: this.tasks.map(task => this.mergeDeep({}, task))
         });
         dayjs.locale(options.locale, null, true);
-        this.state.taskList.columns = this.state.taskList.columns.map(column => {
+        this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
           column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
           if (typeof column.style === 'undefined') {
@@ -3235,6 +3231,10 @@ var Elastigantt = (function () {
             };
           }
           column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
+          if (typeof column.height === 'undefined') {
+            column.height = 0;
+          }
+          column._id = `${index}-${column.label}`;
           return this.mergeDeep({}, column);
         });
         // initialize observer
@@ -3257,6 +3257,9 @@ var Elastigantt = (function () {
           if (typeof task.dependencyLines === 'undefined') {
             task.dependencyLines = [];
           }
+          if (typeof task.dependentOn === 'undefined') {
+            task.dependentOn = [];
+          }
           if (typeof task.parentId === 'undefined') {
             task.parentId = null;
           }
@@ -3264,11 +3267,9 @@ var Elastigantt = (function () {
           task.allChildren = [];
           task.parents = [];
           task.parent = null;
+          task.durationMs = 0;
           return this.mergeDeep({}, task);
         });
-        console.log('init', this);
-        //this.$parent.tasks = this.state.tasks;
-        //this.$parent.options = this.state;
         this.state.rootTask = {
           id: null,
           label: 'root',
@@ -3277,7 +3278,9 @@ var Elastigantt = (function () {
           parents: [],
           parent: null
         };
+        this.resetTaskTree();
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+        this.state.tasks = this.state.taskTree.allChildren;
         this.state.ctx = document.createElement('canvas').getContext('2d');
         this.calculateTaskListColumnsWidths();
       },
@@ -3311,7 +3314,7 @@ var Elastigantt = (function () {
         this.state.rootTask.parent = null;
         this.state.rootTask.parents = [];
         for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-          let current = this.tasks[i];
+          let current = this.state.tasks[i];
           current.children = [];
           current.allChildren = [];
           current.parent = null;
@@ -3320,7 +3323,7 @@ var Elastigantt = (function () {
       },
       makeTaskTree(task) {
         for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-          let current = this.tasks[i];
+          let current = this.state.tasks[i];
           if (current.parentId === task.id) {
             if (task.parents.length) {
               task.parents.forEach(parent => current.parents.push(parent));
@@ -3338,7 +3341,7 @@ var Elastigantt = (function () {
             current.allChildren.forEach(child => task.allChildren.push(child));
           }
         }
-        return this.mergeDeep({}, task);
+        return task;
       },
       getTask(taskId) {
         return this.tasksById[taskId];
@@ -3415,13 +3418,13 @@ var Elastigantt = (function () {
       this.initialize();
       this.tasksById = {};
       this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
-      let tasks = this.tasks;
+      let tasks = this.state.tasks;
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
       let firstTaskDate,
         lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
-        let task = this.tasks[index];
+        let task = this.state.tasks[index];
         task.startDate = new Date(task.start);
         task.startTime = task.startDate.getTime();
         task.durationMs = task.duration * 1000;

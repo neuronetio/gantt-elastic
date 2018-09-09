@@ -7,7 +7,7 @@
     xmlns="http://www.w3.org/2000/svg">
   <calendar></calendar>
   <grid></grid>
-  <tree-dependency-lines :tasks="visibleTasks"></tree-dependency-lines>
+  <tree-dependency-lines :tasks="root.visibleTasks"></tree-dependency-lines>
   <g v-for="task in root.visibleTasks"  :task="task">
     <component :task="task" :is="'tree-row-'+task.type"></component>
   </g>
@@ -35,9 +35,6 @@ export default {
     return {};
   },
   computed: {
-    visibleTasks() {
-      return this.root.visibleTasks;
-    },
     getWidth() {
       const state = this.root.state;
       return state.width;

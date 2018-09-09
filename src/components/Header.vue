@@ -20,7 +20,6 @@ export default {
       },
       set(value) {
         this.root.state.times.timeZoom = Number(value);
-        this.root.visibleTasks;
       }
     },
     height: {
@@ -29,7 +28,7 @@ export default {
       },
       set(value) {
         this.root.state.row.height = Number(value);
-        this.root.visibleTasks;
+        this.root.calculateTaskListColumnsWidths();
       }
     },
     scope: {
@@ -39,7 +38,6 @@ export default {
       set(value) {
         this.root.state.scope.before = Number(value);
         this.root.state.scope.after = Number(value);
-        this.root.visibleTasks;
       }
     },
     divider: {
@@ -48,7 +46,7 @@ export default {
       },
       set(value) {
         this.root.state.taskList.percent = Number(value);
-        this.root.visibleTasks;
+        this.root.calculateTaskListColumnsWidths();
       }
     }
   }
