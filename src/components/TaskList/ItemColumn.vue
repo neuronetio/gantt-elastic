@@ -10,12 +10,5 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    getStyle() {
-      console.log(this.column)
-      const visible = this.root.visibleTasks;
-      return this.column.style;
-    }
-  }
 }
 </script>

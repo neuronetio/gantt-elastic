@@ -563,10 +563,10 @@ var Elastigantt = (function () {
         }
       },
       resizerMouseUp(event) {
-        console.log(this.resizer.moving);
-        this.resizer.moving = false;
-        this.root.calculateTaskListColumnsWidths();
-        //this.root.$emit('calculateTaskListColumnsWidths');
+        if (this.resizer.moving) {
+          this.resizer.moving = false;
+          this.root.calculateTaskListColumnsWidths();
+        }
       }
     },
     created() {
@@ -602,7 +602,7 @@ var Elastigantt = (function () {
           return _c(
             "div",
             {
-              key: column.id,
+              key: column._id,
               staticClass: "elastigantt__task-list-header-column",
               style: _vm.getStyle(column)
             },
@@ -701,13 +701,6 @@ var Elastigantt = (function () {
     data() {
       return {};
     },
-    computed: {
-      getStyle() {
-        console.log(this.column);
-        const visible = this.root.visibleTasks;
-        return this.column.style;
-      }
-    }
   };
 
   /* script */
@@ -829,7 +822,7 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _vm._l(_vm.root.state.taskList.columns, function(column) {
           return _c("item-column", {
-            key: column.label,
+            key: column._id,
             attrs: { column: column, task: _vm.task }
           })
         })
@@ -2696,7 +2689,7 @@ var Elastigantt = (function () {
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
-            { key: task.id },
+            { attrs: { task: task } },
             [
               _c("tree-row-" + task.type, {
                 tag: "component",

@@ -8,7 +8,7 @@
   <calendar></calendar>
   <grid></grid>
   <tree-dependency-lines :tasks="visibleTasks"></tree-dependency-lines>
-  <g v-for="task in root.visibleTasks" :key="task.id">
+  <g v-for="task in root.visibleTasks"  :task="task">
     <component :task="task" :is="'tree-row-'+task.type"></component>
   </g>
 </svg>
