@@ -3220,7 +3220,7 @@ var Elastigantt = (function () {
         return this.mergeDeep(target, ...sources);
       },
       initialize() {
-        this.state = this.mergeDeep(getOptions(this.options), this.options, {
+        this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
           tasks: this.tasks
         });
         dayjs.locale(options.locale, null, true);
@@ -3235,7 +3235,7 @@ var Elastigantt = (function () {
             };
           }
           column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
-          return column;
+          return this.mergeDeep({}, column);
         });
         // initialize observer
         this.state.tasks = this.state.tasks.map(task => {
@@ -3264,8 +3264,11 @@ var Elastigantt = (function () {
           task.allChildren = [];
           task.parents = [];
           task.parent = null;
-          return task;
+          return this.mergeDeep({}, task);
         });
+        console.log('init', this);
+        //this.$parent.tasks = this.state.tasks;
+        //this.$parent.options = this.state;
         this.state.rootTask = {
           id: null,
           label: 'root',
@@ -3276,6 +3279,7 @@ var Elastigantt = (function () {
         };
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
         this.state.ctx = document.createElement('canvas').getContext('2d');
+        this.calculateTaskListColumnsWidths();
       },
       calculateCalendarDimensions() {
         this.state.calendar.height = 0;
@@ -3290,7 +3294,6 @@ var Elastigantt = (function () {
         }
       },
       calculateTaskListColumnsWidths() {
-        console.log('calculate');
         let final = 0;
         this.state.taskList.columns.forEach(column => {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
@@ -3299,10 +3302,8 @@ var Elastigantt = (function () {
           column.style.height = height + "px";
           column.style['line-height'] = height + "px";
           column.style.width = column.finalWidth + "px";
-          return column;
         });
         this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
-        console.log(this.state.taskList.columns);
       },
       resetTaskTree() {
         this.state.rootTask.children = [];
@@ -3337,7 +3338,7 @@ var Elastigantt = (function () {
             current.allChildren.forEach(child => task.allChildren.push(child));
           }
         }
-        return task;
+        return this.mergeDeep({}, task);
       },
       getTask(taskId) {
         return this.tasksById[taskId];
@@ -3388,7 +3389,6 @@ var Elastigantt = (function () {
         this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
         this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
         this.calculateCalendarDimensions();
-        this.calculateTaskListColumnsWidths();
         this.resetTaskTree();
         this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
         const visibleTasks = this.state.tasks.filter(task => task.visible);
