@@ -112,7 +112,7 @@ function getOptions(userOptions) {
           'line-height': 0
         },
         header: {
-          'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+          'background': '#f0f0f0',
           'border-color': '#00000010'
         },
         label: {
@@ -171,7 +171,7 @@ function getOptions(userOptions) {
         wrapper: {
           'width': '100%',
           'height': '100%',
-          'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+          'background': '#f0f0f0',
           'border-color': '#00000010'
         },
         row: {
@@ -290,6 +290,21 @@ export default {
       }
       return this.mergeDeep(target, ...sources);
     },
+    getScrollBarWidth() {
+      const outer = document.createElement("div");
+      outer.style.visibility = "hidden";
+      outer.style.width = "100px";
+      outer.style.msOverflowStyle = "scrollbar";
+      document.body.appendChild(outer);
+      var widthNoScroll = outer.offsetWidth;
+      outer.style.overflow = "scroll";
+      var inner = document.createElement("div");
+      inner.style.width = "100%";
+      outer.appendChild(inner);
+      var widthWithScroll = inner.offsetWidth;
+      outer.parentNode.removeChild(outer);
+      return widthNoScroll - widthWithScroll;
+    },
     initialize() {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
         tasks: this.tasks.map(task => this.mergeDeep({}, task))
@@ -358,6 +373,8 @@ export default {
       this.state.tasks = this.state.taskTree.allChildren;
       this.state.ctx = document.createElement('canvas').getContext('2d');
       this.calculateTaskListColumnsWidths();
+      this.state.scrollBarWidth = this.getScrollBarWidth();
+      this.state.outerHeight = this.state.height + this.state.scrollBarWidth;
     },
     calculateCalendarDimensions() {
       this.state.calendar.height = 0;
@@ -456,6 +473,14 @@ export default {
         img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
       });
     },
+    getHeight(visibleTasks, outer = false) {
+      let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+      if (outer) {
+        height += this.state.scrollBarWidth;
+        console.log(this.state.scrollBarWidth);
+      }
+      return height;
+    }
   },
   computed: {
     visibleTasks() {
@@ -486,7 +511,8 @@ export default {
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
-      this.state.height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+      this.state.height = this.getHeight(visibleTasks);
+      this.state.outerHeight = this.getHeight(visibleTasks, true);
       for (let index = 0, len = visibleTasks.length; index < len; index++) {
         let task = visibleTasks[index];
         task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;

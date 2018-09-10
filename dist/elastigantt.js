@@ -917,10 +917,10 @@ var Elastigantt = (function () {
         const state = this.root.state;
         const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
         return Object.assign({}, state.taskList.styles.header, {
-          'width': (state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
+          'width': (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
           'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
           'margin-bottom': state.calendar.gap + 'px',
-          'padding-right': padding + state.taskList.expander.margin + 'px',
+          'padding-right': state.taskList.expander.margin + 'px',
           'padding-left': state.taskList.expander.margin + 'px',
           'margin': 'auto 0px',
           'display': 'inline-flex'
@@ -2866,7 +2866,7 @@ var Elastigantt = (function () {
             staticClass: "elastigantt__svg-container",
             attrs: {
               width: _vm.getWidth,
-              height: _vm.root.state.height,
+              height: _vm.root.state.outerHeight,
               xmlns: "http://www.w3.org/2000/svg"
             }
           },
@@ -2913,32 +2913,27 @@ var Elastigantt = (function () {
                       ]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "elastigantt__main-svg-container" },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            ref: "svgTree",
-                            staticClass: "elastigantt__main-container",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: _vm.root.state.width,
-                              height: _vm.root.state.height
-                            }
-                          },
-                          [
-                            _c("defs", {
-                              domProps: { innerHTML: _vm._s(_vm.defs) }
-                            }),
-                            _vm._v(" "),
-                            _c("tree")
-                          ],
-                          1
-                        )
-                      ]
-                    )
+                    _c("div", { staticClass: "elastigantt__main-container" }, [
+                      _c(
+                        "svg",
+                        {
+                          ref: " svgTree",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: _vm.root.state.width,
+                            height: _vm.root.state.height
+                          }
+                        },
+                        [
+                          _c("defs", {
+                            domProps: { innerHTML: _vm._s(_vm.defs) }
+                          }),
+                          _vm._v(" "),
+                          _c("tree")
+                        ],
+                        1
+                      )
+                    ])
                   ]
                 )
               ]
@@ -3115,7 +3110,7 @@ var Elastigantt = (function () {
             'line-height': 0
           },
           header: {
-            'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+            'background': '#f0f0f0',
             'border-color': '#00000010'
           },
           label: {
@@ -3174,7 +3169,7 @@ var Elastigantt = (function () {
           wrapper: {
             'width': '100%',
             'height': '100%',
-            'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
+            'background': '#f0f0f0',
             'border-color': '#00000010'
           },
           row: {
@@ -3291,6 +3286,21 @@ var Elastigantt = (function () {
         }
         return this.mergeDeep(target, ...sources);
       },
+      getScrollBarWidth() {
+        const outer = document.createElement("div");
+        outer.style.visibility = "hidden";
+        outer.style.width = "100px";
+        outer.style.msOverflowStyle = "scrollbar";
+        document.body.appendChild(outer);
+        var widthNoScroll = outer.offsetWidth;
+        outer.style.overflow = "scroll";
+        var inner = document.createElement("div");
+        inner.style.width = "100%";
+        outer.appendChild(inner);
+        var widthWithScroll = inner.offsetWidth;
+        outer.parentNode.removeChild(outer);
+        return widthNoScroll - widthWithScroll;
+      },
       initialize() {
         this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
           tasks: this.tasks.map(task => this.mergeDeep({}, task))
@@ -3359,6 +3369,8 @@ var Elastigantt = (function () {
         this.state.tasks = this.state.taskTree.allChildren;
         this.state.ctx = document.createElement('canvas').getContext('2d');
         this.calculateTaskListColumnsWidths();
+        this.state.scrollBarWidth = this.getScrollBarWidth();
+        this.state.outerHeight = this.state.height + this.state.scrollBarWidth;
       },
       calculateCalendarDimensions() {
         this.state.calendar.height = 0;
@@ -3457,6 +3469,14 @@ var Elastigantt = (function () {
           img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
         });
       },
+      getHeight(visibleTasks, outer = false) {
+        let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        if (outer) {
+          height += this.state.scrollBarWidth;
+          console.log(this.state.scrollBarWidth);
+        }
+        return height;
+      }
     },
     computed: {
       visibleTasks() {
@@ -3487,7 +3507,8 @@ var Elastigantt = (function () {
         this.resetTaskTree();
         this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
         const visibleTasks = this.state.tasks.filter(task => task.visible);
-        this.state.height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        this.state.height = this.getHeight(visibleTasks);
+        this.state.outerHeight = this.getHeight(visibleTasks, true);
         for (let index = 0, len = visibleTasks.length; index < len; index++) {
           let task = visibleTasks[index];
           task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;

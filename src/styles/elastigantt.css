@@ -1,7 +1,7 @@
-.elastigantt__container{
-    overflow: auto;
+.elastigantt__main,.elastigantt__svg-container{
+  background: #fff;
 }
-.elastigantt__main-container , .elastigantt__container{
+.elastigantt__container,.elastigantt__svg-container{
   max-width: 100%;
 }
 .elastigantt__header{
@@ -31,8 +31,9 @@ foreignObject > *{
   display: flex;
   max-width: 100%;
 }
-.elastigantt__main-svg-container{
+.elastigantt__main-svg-container , .elastigantt__main-container{
   overflow: auto;
+  max-width:100%;
 }
 .elastigantt__task-list-header{
   display: flex;

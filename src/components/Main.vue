@@ -1,7 +1,7 @@
 <template>
 <div class="elastigantt__main">
   <main-header></main-header>
-  <svg :width="getWidth" :height="root.state.height" class="elastigantt__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
+  <svg :width="getWidth" :height="root.state.outerHeight" class="elastigantt__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
     <foreignObject x="0" y="0" width="100%" height="100%">
           <div xmlns="http://www.w3.org/1999/xhtml"  class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
             <div class="elastigantt__task-list-container">
@@ -10,13 +10,11 @@
                 <task-list></task-list>
               </svg>
 </div>
-<div class="elastigantt__main-svg-container">
-  <svg ref="svgTree" class="elastigantt__main-container" xmlns="http://www.w3.org/2000/svg"
-                              :width="root.state.width"
-                              :height="root.state.height">
-                            <defs v-html="defs"></defs>
-                            <tree></tree>
-                          </svg>
+<div class="elastigantt__main-container"">
+  <svg ref=" svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
+  <defs v-html="defs"></defs>
+  <tree></tree>
+  </svg>
 </div>
 </div>
 </foreignObject>

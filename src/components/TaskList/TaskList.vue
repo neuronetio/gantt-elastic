@@ -28,10 +28,10 @@ export default {
       const state = this.root.state;
       const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
       return Object.assign({}, state.taskList.styles.header, {
-        'width': (state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
+        'width': (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
         'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
         'margin-bottom': state.calendar.gap + 'px',
-        'padding-right': padding + state.taskList.expander.margin + 'px',
+        'padding-right': state.taskList.expander.margin + 'px',
         'padding-left': state.taskList.expander.margin + 'px',
         'margin': 'auto 0px',
         'display': 'inline-flex'
