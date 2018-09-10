@@ -107,9 +107,9 @@ function getOptions(userOptions) {
         },
         column: {
           'border-color': '#00000010',
-          'height': null,
-          'width': null,
-          'line-height': null
+          'height': 0,
+          'width': 0,
+          'line-height': 0
         },
         header: {
           'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
@@ -134,7 +134,7 @@ function getOptions(userOptions) {
         expander: {
           stroke: '#909090',
           strokeWidth: 1,
-          'fill': '#ffffffa0'
+          'fill': '#ffffffa0',
         }
       },
       columns: [{
@@ -152,7 +152,9 @@ function getOptions(userOptions) {
       finalWidth: 0,
       expander: {
         size: 16,
-        columnWidth: 24
+        columnWidth: 24,
+        padding: 20,
+        margin: 10
       }
     },
     calendar: {
@@ -365,6 +367,15 @@ export default {
         this.state.calendar.height += this.state.calendar.month.height;
       }
     },
+    getMaximalLevel() {
+      let maximalLevel = 0;
+      this.state.tasks.forEach(task => {
+        if (task.parents.length > maximalLevel) {
+          maximalLevel = task.parents.length;
+        }
+      });
+      return maximalLevel - 1;
+    },
     calculateTaskListColumnsWidths() {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
@@ -375,7 +386,8 @@ export default {
         column.style['line-height'] = height + "px";
         column.style.width = column.finalWidth + "px";
       });
-      this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
+      const expanderMaxPadding = this.getMaximalLevel() * this.state.taskList.expander.padding;
+      this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth + expanderMaxPadding + this.state.taskList.expander.margin * 2;
     },
     resetTaskTree() {
       this.state.rootTask.children = [];

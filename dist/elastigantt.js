@@ -895,21 +895,34 @@ var Elastigantt = (function () {
     computed: {
       getHeaderExpanderStyle() {
         const state = this.root.state;
-        return Object.assign({
-          'width': state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + 'px',
+        const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
+        return Object.assign({}, state.taskList.styles.header, {
+          'width': (state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin * 2) + 'px',
           'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
-          'margin-bottom': state.calendar.gap + 'px'
-        }, state.taskList.styles.header);
+          'margin-bottom': state.calendar.gap + 'px',
+          'padding-right': padding + state.taskList.expander.margin + 'px',
+          'padding-left': state.taskList.expander.margin + 'px',
+          'margin': '0px',
+        });
       },
       getListExpanderStyle() {
-        const state = this.root.state;
-        let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-        let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'];
-        return {
-          'width': width + 'px',
-          'height': height + 'px',
-          'border-color': '#00000010'
-        };
+        return task => {
+          const state = this.root.state;
+          const padding = (task.parents.length - 1) * state.taskList.expander.padding;
+          const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
+          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + fullPadding + state.taskList.expander.margin * 2;
+          const style = {
+            'width': width + 'px',
+            'height': height + 'px',
+            'border-color': '#00000010',
+            'padding-left': padding + state.taskList.expander.margin + 'px',
+            'padding-right': state.taskList.expander.margin + 'px',
+            'margin': 'auto 0px',
+          };
+          //console.log('style', style);
+          return style;
+        }
       }
     }
   };
@@ -952,7 +965,7 @@ var Elastigantt = (function () {
                     key: task.id,
                     attrs: {
                       task: task,
-                      "expander-style": _vm.getListExpanderStyle
+                      "expander-style": _vm.getListExpanderStyle(task)
                     }
                   })
                 })
@@ -3040,9 +3053,9 @@ var Elastigantt = (function () {
           },
           column: {
             'border-color': '#00000010',
-            'height': null,
-            'width': null,
-            'line-height': null
+            'height': 0,
+            'width': 0,
+            'line-height': 0
           },
           header: {
             'background': 'linear-gradient(to bottom,#fff,#f5f5f5)',
@@ -3067,7 +3080,7 @@ var Elastigantt = (function () {
           expander: {
             stroke: '#909090',
             strokeWidth: 1,
-            'fill': '#ffffffa0'
+            'fill': '#ffffffa0',
           }
         },
         columns: [{
@@ -3085,7 +3098,9 @@ var Elastigantt = (function () {
         finalWidth: 0,
         expander: {
           size: 16,
-          columnWidth: 24
+          columnWidth: 24,
+          padding: 20,
+          margin: 10
         }
       },
       calendar: {
@@ -3296,6 +3311,15 @@ var Elastigantt = (function () {
           this.state.calendar.height += this.state.calendar.month.height;
         }
       },
+      getMaximalLevel() {
+        let maximalLevel = 0;
+        this.state.tasks.forEach(task => {
+          if (task.parents.length > maximalLevel) {
+            maximalLevel = task.parents.length;
+          }
+        });
+        return maximalLevel - 1;
+      },
       calculateTaskListColumnsWidths() {
         let final = 0;
         this.state.taskList.columns.forEach(column => {
@@ -3306,7 +3330,8 @@ var Elastigantt = (function () {
           column.style['line-height'] = height + "px";
           column.style.width = column.finalWidth + "px";
         });
-        this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth;
+        const expanderMaxPadding = this.getMaximalLevel() * this.state.taskList.expander.padding;
+        this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth + expanderMaxPadding + this.state.taskList.expander.margin * 2;
       },
       resetTaskTree() {
         this.state.rootTask.children = [];
