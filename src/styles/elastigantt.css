@@ -1,7 +1,7 @@
 .elastigantt__container{
     overflow: auto;
 }
-.elastigantt__main-svg-container{
+.elastigantt__main-container , .elastigantt__container{
   max-width: 100%;
 }
 .elastigantt__header{

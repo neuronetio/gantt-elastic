@@ -10,11 +10,24 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   var script = {
     inject: ['root'],
     data() {
       return {};
+    },
+    methods: {
+      getImage() {
+        const code = this.root.getImage('image/png').then(imgB64 => {
+          const link = document.createElement('a');
+          link.href = imgB64;
+          link.download = 'Elastigantt.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
     },
     computed: {
       scale: {
@@ -175,7 +188,13 @@ var Elastigantt = (function () {
             }
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "elastigantt__btn-img", on: { click: _vm.getImage } },
+        [_vm._v("Get image")]
+      )
     ])
   };
   var __vue_staticRenderFns__ = [];
@@ -2801,11 +2820,13 @@ var Elastigantt = (function () {
       // this.root.state.defs.forEach((def) => { this.defs += def; });
     },
     mounted() {
-      this.root.svgElement = this.$refs.svgElement;
+      this.root.state.svgMain = this.$refs.svgMain;
+      this.root.state.svgTree = this.$refs.svgTree;
+      this.root.state.svgTaskList = this.$refs.svgTaskList;
     },
     computed: {
       getWidth() {
-        return this.root.state.width;
+        return this.root.state.width + this.root.state.taskList.finalWidth;
       },
       getMainStyle() {
         const state = this.root.state;
@@ -2839,56 +2860,91 @@ var Elastigantt = (function () {
         _c("main-header"),
         _vm._v(" "),
         _c(
-          "div",
+          "svg",
           {
-            staticClass: "elastigantt__container",
-            on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+            ref: "svgMain",
+            staticClass: "elastigantt__svg-container",
+            attrs: {
+              width: _vm.getWidth,
+              height: _vm.root.state.height,
+              xmlns: "http://www.w3.org/2000/svg"
+            }
           },
           [
-            _c("div", { staticClass: "elastigantt__task-list-container" }, [
-              _vm.root.state.taskList.display
-                ? _c(
-                    "svg",
-                    {
-                      ref: "svgTaskList",
-                      staticClass: "elastigantt__task-list-svg",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: _vm.root.state.taskList.finalWidth + "px",
-                        height: _vm.root.state.height
-                      }
-                    },
-                    [
-                      _c("defs", { domProps: { innerHTML: _vm._s(_vm.defs) } }),
-                      _vm._v(" "),
-                      _c("task-list")
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "elastigantt__main-svg-container" }, [
-              _c(
-                "svg",
-                {
-                  ref: "svgElement",
-                  staticClass: "elastigantt__main-container",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: _vm.getWidth,
-                    height: _vm.root.state.height
-                  }
-                },
-                [
-                  _c("defs", { domProps: { innerHTML: _vm._s(_vm.defs) } }),
-                  _vm._v(" "),
-                  _c("tree")
-                ],
-                1
-              )
-            ])
-          ]
+            _c(
+              "foreignObject",
+              { attrs: { x: "0", y: "0", width: "100%", height: "100%" } },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "elastigantt__container",
+                    attrs: { xmlns: "http://www.w3.org/1999/xhtml" },
+                    on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "elastigantt__task-list-container" },
+                      [
+                        _vm.root.state.taskList.display
+                          ? _c(
+                              "svg",
+                              {
+                                ref: "svgTaskList",
+                                staticClass: "elastigantt__task-list-svg",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width:
+                                    _vm.root.state.taskList.finalWidth + "px",
+                                  height: _vm.root.state.height
+                                }
+                              },
+                              [
+                                _c("defs", {
+                                  domProps: { innerHTML: _vm._s(_vm.defs) }
+                                }),
+                                _vm._v(" "),
+                                _c("task-list")
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "elastigantt__main-svg-container" },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            ref: "svgTree",
+                            staticClass: "elastigantt__main-container",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: _vm.root.state.width,
+                              height: _vm.root.state.height
+                            }
+                          },
+                          [
+                            _c("defs", {
+                              domProps: { innerHTML: _vm._s(_vm.defs) }
+                            }),
+                            _vm._v(" "),
+                            _c("tree")
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
         )
       ],
       1
@@ -3386,15 +3442,15 @@ var Elastigantt = (function () {
         return this.state.tasks.filter(task => task.parent === taskId);
       },
       getSVG() {
-        return this.svgElement.outerHTML;
+        return this.state.svgMain.outerHTML;
       },
       getImage(type = 'image/png') {
         return new Promise((resolve, reject) => {
           const img = new Image();
           img.onload = () => {
             const canvas = document.createElement('canvas');
-            canvas.width = this.svgElement.clientWidth;
-            canvas.height = this.svgElement.clientHeight;
+            canvas.width = this.state.svgMain.clientWidth;
+            canvas.height = this.state.svgMain.clientHeight;
             canvas.getContext('2d').drawImage(img, 0, 0);
             resolve(canvas.toDataURL(type));
           };

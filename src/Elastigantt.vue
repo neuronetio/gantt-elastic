@@ -441,15 +441,15 @@ export default {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
     getSVG() {
-      return this.svgElement.outerHTML;
+      return this.state.svgMain.outerHTML;
     },
     getImage(type = 'image/png') {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          canvas.width = this.svgElement.clientWidth;
-          canvas.height = this.svgElement.clientHeight;
+          canvas.width = this.state.svgMain.clientWidth;
+          canvas.height = this.state.svgMain.clientHeight;
           canvas.getContext('2d').drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };

@@ -5,6 +5,7 @@
   <input type="range" v-model="scope" max="100" min="0">
   <input type="range" v-model="divider" max="100" min="0">
   <input type="checkbox" v-model="root.state.taskList.display">
+  <button class="elastigantt__btn-img" @click="getImage">Get image</button>
 </div>
 </template>
 <script>
@@ -12,6 +13,18 @@ export default {
   inject: ['root'],
   data() {
     return {};
+  },
+  methods: {
+    getImage() {
+      const code = this.root.getImage('image/png').then(imgB64 => {
+        const link = document.createElement('a');
+        link.href = imgB64;
+        link.download = 'Elastigantt.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
   },
   computed: {
     scale: {
