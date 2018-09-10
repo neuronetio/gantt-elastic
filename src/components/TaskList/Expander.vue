@@ -1,5 +1,6 @@
 <template>
-<svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size">
+<div class="elastigantt__task-list-column-expander">
+  <svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size" :style="root.state.taskList.styles.expanderContent">
   <rect
     :x="border"
     :y="border"
@@ -8,6 +9,7 @@
     rx="2"
     ry="2"
     :style="root.state.taskList.styles.expander"
+    v-if="allChildren.length"
     @click="toggle">
   </rect>
   <line v-if="allChildren.length"
@@ -27,6 +29,7 @@
     @click="toggle">
   </line>
 </svg>
+</div>
 </template>
 
 <script>
@@ -72,7 +75,7 @@ export default {
         }
       }
       return collapsed === this.tasks.length;
-    }
+    },
   },
   methods: {
     toggle() {

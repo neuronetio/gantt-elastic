@@ -345,6 +345,9 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
+  //
 
   var script$2 = {
     inject: ['root'],
@@ -388,7 +391,7 @@ var Elastigantt = (function () {
           }
         }
         return collapsed === this.tasks.length;
-      }
+      },
     },
     methods: {
       toggle() {
@@ -415,55 +418,60 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c(
-      "svg",
-      {
-        attrs: {
-          width: _vm.root.state.taskList.expander.size,
-          height: _vm.root.state.taskList.expander.size
-        }
-      },
-      [
-        _c("rect", {
-          style: _vm.root.state.taskList.styles.expander,
+    return _c("div", { staticClass: "elastigantt__task-list-column-expander" }, [
+      _c(
+        "svg",
+        {
+          style: _vm.root.state.taskList.styles.expanderContent,
           attrs: {
-            x: _vm.border,
-            y: _vm.border,
-            width: _vm.root.state.taskList.expander.size - _vm.border * 2,
-            height: _vm.root.state.taskList.expander.size - _vm.border * 2,
-            rx: "2",
-            ry: "2"
-          },
-          on: { click: _vm.toggle }
-        }),
-        _vm._v(" "),
-        _vm.allChildren.length
-          ? _c("line", {
-              style: _vm.lineStyle,
-              attrs: {
-                x1: _vm.lineOffset,
-                y1: _vm.root.state.taskList.expander.size / 2,
-                x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
-                y2: _vm.root.state.taskList.expander.size / 2
-              },
-              on: { click: _vm.toggle }
-            })
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.collapsed
-          ? _c("line", {
-              style: _vm.lineStyle,
-              attrs: {
-                x1: _vm.root.state.taskList.expander.size / 2,
-                y1: _vm.lineOffset,
-                x2: _vm.root.state.taskList.expander.size / 2,
-                y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
-              },
-              on: { click: _vm.toggle }
-            })
-          : _vm._e()
-      ]
-    )
+            width: _vm.root.state.taskList.expander.size,
+            height: _vm.root.state.taskList.expander.size
+          }
+        },
+        [
+          _vm.allChildren.length
+            ? _c("rect", {
+                style: _vm.root.state.taskList.styles.expander,
+                attrs: {
+                  x: _vm.border,
+                  y: _vm.border,
+                  width: _vm.root.state.taskList.expander.size - _vm.border * 2,
+                  height: _vm.root.state.taskList.expander.size - _vm.border * 2,
+                  rx: "2",
+                  ry: "2"
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.allChildren.length
+            ? _c("line", {
+                style: _vm.lineStyle,
+                attrs: {
+                  x1: _vm.lineOffset,
+                  y1: _vm.root.state.taskList.expander.size / 2,
+                  x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
+                  y2: _vm.root.state.taskList.expander.size / 2
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.collapsed
+            ? _c("line", {
+                style: _vm.lineStyle,
+                attrs: {
+                  x1: _vm.root.state.taskList.expander.size / 2,
+                  y1: _vm.lineOffset,
+                  x2: _vm.root.state.taskList.expander.size / 2,
+                  y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e()
+        ]
+      )
+    ])
   };
   var __vue_staticRenderFns__$2 = [];
   __vue_render__$2._withStripped = true;
@@ -585,56 +593,50 @@ var Elastigantt = (function () {
     return _c(
       "div",
       { staticClass: "elastigantt__task-list-header" },
-      [
-        _c(
+      _vm._l(_vm.root.state.taskList.columns, function(column) {
+        return _c(
           "div",
           {
-            staticClass:
-              "elastigantt__task-list-header-column elastigantt__task-list-header-column--expander",
-            style: _vm.expanderStyle
+            key: column._id,
+            staticClass: "elastigantt__task-list-header-column",
+            style: _vm.getStyle(column)
           },
-          [_c("task-list-expander", { attrs: { tasks: _vm.collapsible } })],
-          1
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.root.state.taskList.columns, function(column) {
-          return _c(
-            "div",
-            {
-              key: column._id,
-              staticClass: "elastigantt__task-list-header-column",
-              style: _vm.getStyle(column)
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "elastigantt__task-list-header-label",
-                  style: column.styles.label,
-                  attrs: { column: column },
-                  on: {
-                    mouseup: function($event) {
-                      _vm.resizerMouseUp($event, column);
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(column.label))]
-              ),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "elastigantt__task-list-header-resizer",
+          [
+            column.expander
+              ? _c("task-list-expander", {
+                  style: _vm.expanderStyle,
+                  attrs: { tasks: _vm.collapsible }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "elastigantt__task-list-header-label",
+                style: column.styles.label,
                 attrs: { column: column },
                 on: {
-                  mousedown: function($event) {
-                    _vm.resizerMouseDown($event, column);
+                  mouseup: function($event) {
+                    _vm.resizerMouseUp($event, column);
                   }
                 }
-              })
-            ]
-          )
-        })
-      ],
-      2
+              },
+              [_vm._v(_vm._s(column.label))]
+            ),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "elastigantt__task-list-header-resizer",
+              attrs: { column: column },
+              on: {
+                mousedown: function($event) {
+                  _vm.resizerMouseDown($event, column);
+                }
+              }
+            })
+          ],
+          1
+        )
+      })
     )
   };
   var __vue_staticRenderFns__$3 = [];
@@ -693,6 +695,7 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   var script$4 = {
     inject: ['root'],
@@ -717,6 +720,8 @@ var Elastigantt = (function () {
         style: _vm.column.style
       },
       [
+        _vm._t("default"),
+        _vm._v(" "),
         _c(
           "div",
           {
@@ -725,7 +730,8 @@ var Elastigantt = (function () {
           },
           [_vm._v(_vm._s(_vm.task[_vm.column.value]))]
         )
-      ]
+      ],
+      2
     )
   };
   var __vue_staticRenderFns__$4 = [];
@@ -807,26 +813,21 @@ var Elastigantt = (function () {
         staticClass: "elastigantt__task-list-item",
         style: _vm.root.state.taskList.styles.row
       },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "elastigantt__task-list-item-column elastigantt__task-list-item-column--expander",
-            style: _vm.expanderStyle
-          },
-          [_c("task-list-expander", { attrs: { tasks: [_vm.task] } })],
+      _vm._l(_vm.root.state.taskList.columns, function(column) {
+        return _c(
+          "item-column",
+          { key: column._id, attrs: { column: column, task: _vm.task } },
+          [
+            column.expander
+              ? _c("task-list-expander", {
+                  style: _vm.expanderStyle,
+                  attrs: { tasks: [_vm.task] }
+                })
+              : _vm._e()
+          ],
           1
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.root.state.taskList.columns, function(column) {
-          return _c("item-column", {
-            key: column._id,
-            attrs: { column: column, task: _vm.task }
-          })
-        })
-      ],
-      2
+        )
+      })
     )
   };
   var __vue_staticRenderFns__$5 = [];
@@ -897,12 +898,13 @@ var Elastigantt = (function () {
         const state = this.root.state;
         const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
         return Object.assign({}, state.taskList.styles.header, {
-          'width': (state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin * 2) + 'px',
+          'width': (state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
           'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
           'margin-bottom': state.calendar.gap + 'px',
           'padding-right': padding + state.taskList.expander.margin + 'px',
           'padding-left': state.taskList.expander.margin + 'px',
-          'margin': '0px',
+          'margin': 'auto 0px',
+          'display': 'inline-flex'
         });
       },
       getListExpanderStyle() {
@@ -911,13 +913,12 @@ var Elastigantt = (function () {
           const padding = (task.parents.length - 1) * state.taskList.expander.padding;
           const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
           let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-          let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + fullPadding + state.taskList.expander.margin * 2;
+          let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
           const style = {
             'width': width + 'px',
             'height': height + 'px',
             'border-color': '#00000010',
             'padding-left': padding + state.taskList.expander.margin + 'px',
-            'padding-right': state.taskList.expander.margin + 'px',
             'margin': 'auto 0px',
           };
           //console.log('style', style);
@@ -3081,6 +3082,10 @@ var Elastigantt = (function () {
             stroke: '#909090',
             strokeWidth: 1,
             'fill': '#ffffffa0',
+          },
+          expanderContent: {
+            display: 'inline-flex',
+            cursor: 'pointer'
           }
         },
         columns: [{
@@ -3099,7 +3104,7 @@ var Elastigantt = (function () {
         expander: {
           size: 16,
           columnWidth: 24,
-          padding: 20,
+          padding: 16,
           margin: 10
         }
       },
@@ -3320,18 +3325,24 @@ var Elastigantt = (function () {
         });
         return maximalLevel - 1;
       },
+      getMaximalExpanderWidth() {
+        return this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin;
+      },
       calculateTaskListColumnsWidths() {
         let final = 0;
         this.state.taskList.columns.forEach(column => {
-          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          if (column.expander) {
+            column.finalWidth = (this.getMaximalExpanderWidth() + column.width) / 100 * this.state.taskList.percent;
+          } else {
+            column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          }
           final += column.finalWidth;
           let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
           column.style.height = height + "px";
           column.style['line-height'] = height + "px";
           column.style.width = column.finalWidth + "px";
         });
-        const expanderMaxPadding = this.getMaximalLevel() * this.state.taskList.expander.padding;
-        this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth + expanderMaxPadding + this.state.taskList.expander.margin * 2;
+        this.state.taskList.finalWidth = final;
       },
       resetTaskTree() {
         this.state.rootTask.children = [];

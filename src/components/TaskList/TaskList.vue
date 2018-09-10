@@ -28,12 +28,13 @@ export default {
       const state = this.root.state;
       const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
       return Object.assign({}, state.taskList.styles.header, {
-        'width': (state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin * 2) + 'px',
+        'width': (state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
         'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
         'margin-bottom': state.calendar.gap + 'px',
         'padding-right': padding + state.taskList.expander.margin + 'px',
         'padding-left': state.taskList.expander.margin + 'px',
-        'margin': '0px',
+        'margin': 'auto 0px',
+        'display': 'inline-flex'
       });
     },
     getListExpanderStyle() {
@@ -42,13 +43,12 @@ export default {
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
         let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
-        let width = state.taskList.expander.columnWidth + state.calendar.styles.column['stroke-width'] + fullPadding + state.taskList.expander.margin * 2;
+        let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
         const style = {
           'width': width + 'px',
           'height': height + 'px',
           'border-color': '#00000010',
           'padding-left': padding + state.taskList.expander.margin + 'px',
-          'padding-right': state.taskList.expander.margin + 'px',
           'margin': 'auto 0px',
         };
         //console.log('style', style);

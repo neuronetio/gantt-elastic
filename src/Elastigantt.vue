@@ -135,6 +135,10 @@ function getOptions(userOptions) {
           stroke: '#909090',
           strokeWidth: 1,
           'fill': '#ffffffa0',
+        },
+        expanderContent: {
+          display: 'inline-flex',
+          cursor: 'pointer'
         }
       },
       columns: [{
@@ -153,7 +157,7 @@ function getOptions(userOptions) {
       expander: {
         size: 16,
         columnWidth: 24,
-        padding: 20,
+        padding: 16,
         margin: 10
       }
     },
@@ -376,18 +380,24 @@ export default {
       });
       return maximalLevel - 1;
     },
+    getMaximalExpanderWidth() {
+      return this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin;
+    },
     calculateTaskListColumnsWidths() {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
-        column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+        if (column.expander) {
+          column.finalWidth = (this.getMaximalExpanderWidth() + column.width) / 100 * this.state.taskList.percent;
+        } else {
+          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+        }
         final += column.finalWidth;
         let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
         column.style.height = height + "px";
         column.style['line-height'] = height + "px";
         column.style.width = column.finalWidth + "px";
       });
-      const expanderMaxPadding = this.getMaximalLevel() * this.state.taskList.expander.padding;
-      this.state.taskList.finalWidth = final + this.state.taskList.expander.columnWidth + expanderMaxPadding + this.state.taskList.expander.margin * 2;
+      this.state.taskList.finalWidth = final;
     },
     resetTaskTree() {
       this.state.rootTask.children = [];

@@ -1,9 +1,7 @@
 <template>
 <div class="elastigantt__task-list-header">
-  <div class="elastigantt__task-list-header-column elastigantt__task-list-header-column--expander" :style="expanderStyle">
-    <task-list-expander :tasks="collapsible"></task-list-expander>
-  </div>
   <div class="elastigantt__task-list-header-column" v-for="column in root.state.taskList.columns" :key="column._id" :style="getStyle(column)">
+    <task-list-expander v-if="column.expander" :style="expanderStyle" :tasks="collapsible"></task-list-expander>
     <div class="elastigantt__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
     <div class="elastigantt__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)"></div>
   </div>

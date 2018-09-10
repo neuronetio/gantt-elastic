@@ -1,9 +1,8 @@
 <template>
 <div class="elastigantt__task-list-item" :style="root.state.taskList.styles.row">
-  <div class="elastigantt__task-list-item-column elastigantt__task-list-item-column--expander" :style="expanderStyle">
-    <task-list-expander :tasks="[task]"></task-list-expander>
-  </div>
-  <item-column v-for="column in root.state.taskList.columns" :key="column._id" :column="column" :task="task"></item-column>
+  <item-column v-for="column in root.state.taskList.columns" :key="column._id" :column="column" :task="task">
+    <task-list-expander v-if="column.expander" :tasks="[task]" :style="expanderStyle"></task-list-expander>
+  </item-column>
 </div>
 </template>
 <script>

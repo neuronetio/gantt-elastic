@@ -45,7 +45,7 @@ foreignObject > *{
   display: flex;
   background: rgba(0,0,0,0.125);
 }
-.elastigantt__task-list-header-column--expander svg, .elastigantt__task-list-item-column--expander svg{
+.elastigantt__task-list-column-expander svg{
   margin: auto 0px;
   user-select: none;
 }
