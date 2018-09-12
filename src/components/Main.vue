@@ -5,16 +5,16 @@
     <foreignObject x="0" y="0" width="100%" height="100%">
           <div xmlns="http://www.w3.org/1999/xhtml"  class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
             <div class="elastigantt__task-list-container">
-              <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth+'px'" :height="root.state.height" v-if="root.state.taskList.display">
+              <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth" :height="root.state.height" v-if="root.state.taskList.display">
                 <defs v-html="defs"></defs>
                 <task-list></task-list>
               </svg>
 </div>
-<div class="elastigantt__main-container"">
-  <svg ref=" svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
-  <defs v-html="defs"></defs>
-  <tree></tree>
-  </svg>
+<div class="elastigantt__main-container">
+  <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
+    <defs v-html="defs"></defs>
+    <tree></tree>
+    </svg>
 </div>
 </div>
 </foreignObject>

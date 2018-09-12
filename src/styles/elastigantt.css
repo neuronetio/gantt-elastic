@@ -1,3 +1,6 @@
+.elastigantt__main svg{
+  display: block;
+}
 .elastigantt__svg-container{
   position: relative;
 }

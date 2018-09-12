@@ -1,5 +1,5 @@
 <template>
-<elastigantt-main :tasks="tasks" :options="options" @calculateTaskListColumnsWidths="calculateTaskListColumnsWidths"></elastigantt-main>
+<elastigantt-main :tasks="tasks" :options="options"></elastigantt-main>
 </template>
 
 <script>
@@ -290,20 +290,20 @@ export default {
       }
       return this.mergeDeep(target, ...sources);
     },
-    getScrollBarWidth() {
+    getScrollBarHeight() {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
-      outer.style.width = "100px";
+      outer.style.height = "100px";
       outer.style.msOverflowStyle = "scrollbar";
       document.body.appendChild(outer);
-      var widthNoScroll = outer.offsetWidth;
+      var noScroll = outer.offsetHeight;
       outer.style.overflow = "scroll";
       var inner = document.createElement("div");
-      inner.style.width = "100%";
+      inner.style.height = "100%";
       outer.appendChild(inner);
-      var widthWithScroll = inner.offsetWidth;
+      var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return widthNoScroll - widthWithScroll;
+      return noScroll - withScroll;
     },
     initialize() {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
@@ -373,8 +373,8 @@ export default {
       this.state.tasks = this.state.taskTree.allChildren;
       this.state.ctx = document.createElement('canvas').getContext('2d');
       this.calculateTaskListColumnsWidths();
-      this.state.scrollBarWidth = this.getScrollBarWidth();
-      this.state.outerHeight = this.state.height + this.state.scrollBarWidth;
+      this.state.scrollBarHeight = this.getScrollBarHeight();
+      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
     },
     calculateCalendarDimensions() {
       this.state.calendar.height = 0;
@@ -476,7 +476,7 @@ export default {
     getHeight(visibleTasks, outer = false) {
       let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
       if (outer) {
-        height += this.state.scrollBarWidth;
+        height += this.state.scrollBarHeight;
         console.log(this.state.scrollBarWidth);
       }
       return height;

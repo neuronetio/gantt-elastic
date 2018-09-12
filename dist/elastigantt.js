@@ -2895,8 +2895,7 @@ var Elastigantt = (function () {
                                 staticClass: "elastigantt__task-list-svg",
                                 attrs: {
                                   xmlns: "http://www.w3.org/2000/svg",
-                                  width:
-                                    _vm.root.state.taskList.finalWidth + "px",
+                                  width: _vm.root.state.taskList.finalWidth,
                                   height: _vm.root.state.height
                                 }
                               },
@@ -2917,7 +2916,7 @@ var Elastigantt = (function () {
                       _c(
                         "svg",
                         {
-                          ref: " svgTree",
+                          ref: "svgTree",
                           attrs: {
                             xmlns: "http://www.w3.org/2000/svg",
                             width: _vm.root.state.width,
@@ -3286,20 +3285,20 @@ var Elastigantt = (function () {
         }
         return this.mergeDeep(target, ...sources);
       },
-      getScrollBarWidth() {
+      getScrollBarHeight() {
         const outer = document.createElement("div");
         outer.style.visibility = "hidden";
-        outer.style.width = "100px";
+        outer.style.height = "100px";
         outer.style.msOverflowStyle = "scrollbar";
         document.body.appendChild(outer);
-        var widthNoScroll = outer.offsetWidth;
+        var noScroll = outer.offsetHeight;
         outer.style.overflow = "scroll";
         var inner = document.createElement("div");
-        inner.style.width = "100%";
+        inner.style.height = "100%";
         outer.appendChild(inner);
-        var widthWithScroll = inner.offsetWidth;
+        var withScroll = inner.offsetHeight;
         outer.parentNode.removeChild(outer);
-        return widthNoScroll - widthWithScroll;
+        return noScroll - withScroll;
       },
       initialize() {
         this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
@@ -3369,8 +3368,8 @@ var Elastigantt = (function () {
         this.state.tasks = this.state.taskTree.allChildren;
         this.state.ctx = document.createElement('canvas').getContext('2d');
         this.calculateTaskListColumnsWidths();
-        this.state.scrollBarWidth = this.getScrollBarWidth();
-        this.state.outerHeight = this.state.height + this.state.scrollBarWidth;
+        this.state.scrollBarHeight = this.getScrollBarHeight();
+        this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
       },
       calculateCalendarDimensions() {
         this.state.calendar.height = 0;
@@ -3472,7 +3471,7 @@ var Elastigantt = (function () {
       getHeight(visibleTasks, outer = false) {
         let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
         if (outer) {
-          height += this.state.scrollBarWidth;
+          height += this.state.scrollBarHeight;
           console.log(this.state.scrollBarWidth);
         }
         return height;
@@ -3566,8 +3565,7 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("elastigantt-main", {
-      attrs: { tasks: _vm.tasks, options: _vm.options },
-      on: { calculateTaskListColumnsWidths: _vm.calculateTaskListColumnsWidths }
+      attrs: { tasks: _vm.tasks, options: _vm.options }
     })
   };
   var __vue_staticRenderFns__$j = [];
