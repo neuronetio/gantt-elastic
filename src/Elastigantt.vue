@@ -137,7 +137,7 @@ function getOptions(userOptions) {
           'fill': '#ffffffa0',
         },
         expanderContent: {
-          display: 'inline-flex',
+          display: 'inline-block',
           cursor: 'pointer'
         }
       },
@@ -474,7 +474,7 @@ export default {
       });
     },
     getHeight(visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
         console.log(this.state.scrollBarWidth);

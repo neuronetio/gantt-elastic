@@ -51,7 +51,6 @@ export default {
           'padding-left': padding + state.taskList.expander.margin + 'px',
           'margin': 'auto 0px',
         };
-        //console.log('style', style);
         return style;
       }
     }

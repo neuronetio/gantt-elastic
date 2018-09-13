@@ -940,7 +940,6 @@ var Elastigantt = (function () {
             'padding-left': padding + state.taskList.expander.margin + 'px',
             'margin': 'auto 0px',
           };
-          //console.log('style', style);
           return style;
         }
       }
@@ -3134,7 +3133,7 @@ var Elastigantt = (function () {
             'fill': '#ffffffa0',
           },
           expanderContent: {
-            display: 'inline-flex',
+            display: 'inline-block',
             cursor: 'pointer'
           }
         },
@@ -3469,7 +3468,7 @@ var Elastigantt = (function () {
         });
       },
       getHeight(visibleTasks, outer = false) {
-        let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
         if (outer) {
           height += this.state.scrollBarHeight;
           console.log(this.state.scrollBarWidth);
