@@ -10,7 +10,7 @@
                 <task-list></task-list>
               </svg>
 </div>
-<div class="elastigantt__main-container">
+<div class="elastigantt__main-container" v-on:scroll="onScroll" v-on:wheel="onWheel">
   <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
     <defs v-html="defs"></defs>
     <tree></tree>
@@ -83,6 +83,12 @@ export default {
     },
     mouseUp(event) {
       this.root.$emit('mouseup', event);
+    },
+    onScroll(ev) {
+      this.root.$emit('scroll.tree', ev);
+    },
+    onWheel(ev) {
+      this.root.$emit('wheel.tree', ev);
     }
   }
 }

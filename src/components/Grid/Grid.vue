@@ -13,12 +13,14 @@ export default {
       timeLine: {
         x: 0,
         y1: '0%',
-        y2: '100%'
+        y2: '100%',
+        dateTime: '',
       },
     };
   },
   created() {
     this.reposition();
+    this.root.$on('recenterPosition', this.recenterPosition);
     /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
       this.reposition();
     }, 1000);*/
@@ -26,10 +28,15 @@ export default {
   methods: {
     reposition() {
       const state = this.root.state;
-      const current = new Date().getTime();
+      const d = new Date();
+      const current = d.getTime();
       const currentOffset = this.root.timeToPixelOffsetX(current);
       this.timeLine.x = currentOffset;
-      console.log('reposition', this, currentOffset);
+      this.timeLine.dateTime = d.toLocaleDateString();
+      console.log(this.timeLine.dateTime);
+    },
+    recenterPosition() {
+
     }
   },
   computed: {

@@ -6,6 +6,8 @@
   <input type="range" v-model="divider" max="100" min="0">
   <input type="checkbox" v-model="root.state.taskList.display">
   <button class="elastigantt__btn-img" @click="getImage">Get image</button>
+  <button class="elastigantt__btn-recenter" @click="recenterPosition">Recenter</button>
+  {{root.state.scroll.tree.dateTime.left}} - {{root.state.scroll.tree.dateTime.right}}
 </div>
 </template>
 <script>
@@ -24,6 +26,9 @@ export default {
         link.click();
         document.body.removeChild(link);
       });
+    },
+    recenterPosition() {
+      this.root.$emit('recenterPosition')
     }
   },
   computed: {

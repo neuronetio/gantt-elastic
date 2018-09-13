@@ -8,6 +8,21 @@ function getOptions(userOptions) {
     debug: false,
     width: 0,
     height: 0,
+    scroll: {
+      taskList: {
+        left: 0,
+        top: 0
+      },
+      tree: {
+        left: 0,
+        top: 0,
+        time: 0,
+        dateTime: {
+          left: '',
+          right: ''
+        }
+      }
+    },
     svgElement: null,
     scope: {
       before: 1,
@@ -503,6 +518,24 @@ export default {
         x = x / this.state.times.timePerPixel;
       }
       return x + this.state.grid.vertical.style.strokeWidth;
+    },
+    pixelOffsetXToTime(pixelOffsetX) {
+      let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
+      return offset * this.state.times.timePerPixel + this.state.times.firstTime;
+    },
+    onScrollTree(ev) {
+      this.state.scroll.tree.left = ev.target.scrollLeft;
+      this.state.scroll.tree.top = ev.target.scrollTop;
+      this.state.scroll.tree.time = this.pixelOffsetXToTime(ev.target.scrollLeft);
+      this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
+      this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(ev.target.scrollLeft + ev.target.clientWidth)).toDateString();
+    },
+    onWheelTree(ev) {
+      this.state.times.timeScale += ev.deltaY * 10;
+    },
+    initializeEvents() {
+      this.$on('scroll.tree', this.onScrollTree);
+      this.$on('wheel.tree', this.onWheelTree);
     }
   },
   computed: {
@@ -552,6 +585,7 @@ export default {
   },
   created() {
     this.initialize();
+    this.initializeEvents();
     this.tasksById = {};
     this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
     let tasks = this.state.tasks;

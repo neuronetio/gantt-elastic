@@ -11,6 +11,8 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
 
   var script = {
     inject: ['root'],
@@ -27,6 +29,9 @@ var Elastigantt = (function () {
           link.click();
           document.body.removeChild(link);
         });
+      },
+      recenterPosition() {
+        this.root.$emit('recenterPosition');
       }
     },
     computed: {
@@ -194,6 +199,22 @@ var Elastigantt = (function () {
         "button",
         { staticClass: "elastigantt__btn-img", on: { click: _vm.getImage } },
         [_vm._v("Get image")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "elastigantt__btn-recenter",
+          on: { click: _vm.recenterPosition }
+        },
+        [_vm._v("Recenter")]
+      ),
+      _vm._v(
+        "\r\n  " +
+          _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
+          " - " +
+          _vm._s(_vm.root.state.scroll.tree.dateTime.right) +
+          "\r\n"
       )
     ])
   };
@@ -1069,12 +1090,14 @@ var Elastigantt = (function () {
         timeLine: {
           x: 0,
           y1: '0%',
-          y2: '100%'
+          y2: '100%',
+          dateTime: '',
         },
       };
     },
     created() {
       this.reposition();
+      this.root.$on('recenterPosition', this.recenterPosition);
       /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
         this.reposition();
       }, 1000);*/
@@ -1082,10 +1105,15 @@ var Elastigantt = (function () {
     methods: {
       reposition() {
         const state = this.root.state;
-        const current = new Date().getTime();
+        const d = new Date();
+        const current = d.getTime();
         const currentOffset = this.root.timeToPixelOffsetX(current);
         this.timeLine.x = currentOffset;
-        console.log('reposition', this, currentOffset);
+        this.timeLine.dateTime = d.toLocaleDateString();
+        console.log(this.timeLine.dateTime);
+      },
+      recenterPosition() {
+
       }
     },
     computed: {
@@ -2881,6 +2909,12 @@ var Elastigantt = (function () {
       },
       mouseUp(event) {
         this.root.$emit('mouseup', event);
+      },
+      onScroll(ev) {
+        this.root.$emit('scroll.tree', ev);
+      },
+      onWheel(ev) {
+        this.root.$emit('wheel.tree', ev);
       }
     }
   };
@@ -2952,27 +2986,34 @@ var Elastigantt = (function () {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "elastigantt__main-container" }, [
-                      _c(
-                        "svg",
-                        {
-                          ref: "svgTree",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: _vm.root.state.width,
-                            height: _vm.root.state.height
-                          }
-                        },
-                        [
-                          _c("defs", {
-                            domProps: { innerHTML: _vm._s(_vm.defs) }
-                          }),
-                          _vm._v(" "),
-                          _c("tree")
-                        ],
-                        1
-                      )
-                    ])
+                    _c(
+                      "div",
+                      {
+                        staticClass: "elastigantt__main-container",
+                        on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            ref: "svgTree",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: _vm.root.state.width,
+                              height: _vm.root.state.height
+                            }
+                          },
+                          [
+                            _c("defs", {
+                              domProps: { innerHTML: _vm._s(_vm.defs) }
+                            }),
+                            _vm._v(" "),
+                            _c("tree")
+                          ],
+                          1
+                        )
+                      ]
+                    )
                   ]
                 )
               ]
@@ -3045,6 +3086,21 @@ var Elastigantt = (function () {
       debug: false,
       width: 0,
       height: 0,
+      scroll: {
+        taskList: {
+          left: 0,
+          top: 0
+        },
+        tree: {
+          left: 0,
+          top: 0,
+          time: 0,
+          dateTime: {
+            left: '',
+            right: ''
+          }
+        }
+      },
       svgElement: null,
       scope: {
         before: 1,
@@ -3538,6 +3594,24 @@ var Elastigantt = (function () {
           x = x / this.state.times.timePerPixel;
         }
         return x + this.state.grid.vertical.style.strokeWidth;
+      },
+      pixelOffsetXToTime(pixelOffsetX) {
+        let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
+        return offset * this.state.times.timePerPixel + this.state.times.firstTime;
+      },
+      onScrollTree(ev) {
+        this.state.scroll.tree.left = ev.target.scrollLeft;
+        this.state.scroll.tree.top = ev.target.scrollTop;
+        this.state.scroll.tree.time = this.pixelOffsetXToTime(ev.target.scrollLeft);
+        this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
+        this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(ev.target.scrollLeft + ev.target.clientWidth)).toDateString();
+      },
+      onWheelTree(ev) {
+        this.state.times.timeScale += ev.deltaY * 10;
+      },
+      initializeEvents() {
+        this.$on('scroll.tree', this.onScrollTree);
+        this.$on('wheel.tree', this.onWheelTree);
       }
     },
     computed: {
@@ -3587,6 +3661,7 @@ var Elastigantt = (function () {
     },
     created() {
       this.initialize();
+      this.initializeEvents();
       this.tasksById = {};
       this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
       let tasks = this.state.tasks;
