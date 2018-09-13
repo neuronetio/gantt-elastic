@@ -2,13 +2,21 @@
 <g>
   <line class="elastigantt__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
   <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle"></line>
+  <line class="elastigantt__grid-time-line" :x1="timeLine.x1" :y1="timeLine.y1" :x2="timeLine.x2" :y2="timeLine.y2" :style="root.state.grid.timeLine.style"></line>
 </g>
 </template>
 <script>
 export default {
   inject: ['root'],
   data() {
-    return {};
+    return {
+      timeLine: {
+        x1: 0,
+        y1: '0%',
+        x2: 0,
+        y2: '100%'
+      }
+    };
   },
   computed: {
     getVStyle() {
