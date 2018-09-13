@@ -86,7 +86,7 @@ function getOptions(userOptions) {
         style: {
           stroke: '#00000010',
           strokeWidth: 1
-        }
+        },
         lines: []
       },
       vertical: {
@@ -94,7 +94,7 @@ function getOptions(userOptions) {
         style: {
           stroke: '#00000010',
           strokeWidth: 1
-        }
+        },
         lines: []
       },
       timeLine: {
@@ -103,7 +103,7 @@ function getOptions(userOptions) {
           strokeWidth: 1
         }
       }
-    }
+    },
     info: {
       style: 'fill:#000000a0',
       textStyle: 'fill:#fff',
@@ -491,7 +491,6 @@ export default {
       let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
-        console.log(this.state.scrollBarWidth);
       }
       return height;
     }

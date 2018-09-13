@@ -931,7 +931,7 @@ var Elastigantt = (function () {
           const state = this.root.state;
           const padding = (task.parents.length - 1) * state.taskList.expander.padding;
           const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
-          let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+          let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.strokeWidth;
           let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
           const style = {
             'width': width + 'px',
@@ -1052,33 +1052,41 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   var script$7 = {
     inject: ['root'],
     data() {
-      return {};
+      return {
+        timeLine: {
+          x1: 0,
+          y1: '0%',
+          x2: 0,
+          y2: '100%'
+        }
+      };
     },
     computed: {
       getVStyle() {
-        return this.root.state.verticalGrid.style;
+        return this.root.state.grid.vertical.style;
       },
       getHStyle() {
-        return this.root.state.horizontalGrid.style;
+        return this.root.state.grid.horizontal.style;
       },
       verticalLines() {
         let lines = [];
         const state = this.root.state;
         for (let step = 0; step <= state.times.steps; step++) {
-          let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
+          let x = step * state.times.stepPx + state.grid.vertical.strokeWidth / 2;
           lines.push({
             key: step,
             x1: x,
             y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
             x2: x,
-            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth
+            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.strokeWidth
           });
         }
-        return state.verticalGrid.lines = lines;
+        return state.grid.vertical.lines = lines;
       },
       horizontalLines() {
         let lines = [];
@@ -1088,12 +1096,12 @@ var Elastigantt = (function () {
           lines.push({
             key: 'hl' + index,
             x1: 0,
-            y1: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
-            x2: state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
-            y2: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2
+            y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2,
+            x2: state.times.steps * state.times.stepPx + state.grid.vertical.strokeWidth,
+            y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2
           });
         }
-        return state.horizontalGrid.lines = lines;
+        return state.grid.horizontal.lines = lines;
       }
     }
   };
@@ -1125,6 +1133,17 @@ var Elastigantt = (function () {
             style: _vm.getVStyle,
             attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
           })
+        }),
+        _vm._v(" "),
+        _c("line", {
+          staticClass: "elastigantt__grid-time-line",
+          style: _vm.root.state.grid.timeLine.style,
+          attrs: {
+            x1: _vm.timeLine.x1,
+            y1: _vm.timeLine.y1,
+            x2: _vm.timeLine.x2,
+            y2: _vm.timeLine.y2
+          }
         })
       ],
       2
@@ -3075,16 +3094,30 @@ var Elastigantt = (function () {
           }
         }
       },
-      horizontalGrid: {
-        gap: 6,
-        strokeWidth: 1,
-        style: 'stroke:#00000010;strokeWidth:1',
-        lines: []
-      },
-      verticalGrid: {
-        strokeWidth: 1,
-        style: 'stroke:#00000010;strokeWidth:1',
-        lines: []
+      grid: {
+        horizontal: {
+          gap: 6,
+          strokeWidth: 1,
+          style: {
+            stroke: '#00000010',
+            strokeWidth: 1
+          },
+          lines: []
+        },
+        vertical: {
+          strokeWidth: 1,
+          style: {
+            stroke: '#00000010',
+            strokeWidth: 1
+          },
+          lines: []
+        },
+        timeLine: {
+          style: {
+            stroke: '#FF0000FF',
+            strokeWidth: 1
+          }
+        }
       },
       info: {
         style: 'fill:#000000a0',
@@ -3403,7 +3436,7 @@ var Elastigantt = (function () {
             column.finalWidth = (column.width / 100) * this.state.taskList.percent;
           }
           final += column.finalWidth;
-          let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
+          let height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
           column.style.height = height + "px";
           column.style['line-height'] = height + "px";
           column.style.width = column.finalWidth + "px";
@@ -3468,10 +3501,9 @@ var Elastigantt = (function () {
         });
       },
       getHeight(visibleTasks, outer = false) {
-        let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
+        let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
         if (outer) {
           height += this.state.scrollBarHeight;
-          console.log(this.state.scrollBarWidth);
         }
         return height;
       }
@@ -3519,7 +3551,7 @@ var Elastigantt = (function () {
             x = x / this.state.times.timePerPixel;
           }
           task.x = x + this.state.verticalGrid.strokeWidth;
-          task.y = (this.state.row.height + this.state.horizontalGrid.gap * 2) * index + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+          task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
         }
         return visibleTasks;
       },
