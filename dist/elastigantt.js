@@ -437,60 +437,68 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "elastigantt__task-list-column-expander" }, [
-      _c(
-        "svg",
-        {
-          style: _vm.root.state.taskList.styles.expanderContent,
-          attrs: {
-            width: _vm.root.state.taskList.expander.size,
-            height: _vm.root.state.taskList.expander.size
-          }
-        },
-        [
-          _vm.allChildren.length
-            ? _c("rect", {
-                style: _vm.root.state.taskList.styles.expander,
-                attrs: {
-                  x: _vm.border,
-                  y: _vm.border,
-                  width: _vm.root.state.taskList.expander.size - _vm.border * 2,
-                  height: _vm.root.state.taskList.expander.size - _vm.border * 2,
-                  rx: "2",
-                  ry: "2"
-                },
-                on: { click: _vm.toggle }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.allChildren.length
-            ? _c("line", {
-                style: _vm.lineStyle,
-                attrs: {
-                  x1: _vm.lineOffset,
-                  y1: _vm.root.state.taskList.expander.size / 2,
-                  x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
-                  y2: _vm.root.state.taskList.expander.size / 2
-                },
-                on: { click: _vm.toggle }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.collapsed
-            ? _c("line", {
-                style: _vm.lineStyle,
-                attrs: {
-                  x1: _vm.root.state.taskList.expander.size / 2,
-                  y1: _vm.lineOffset,
-                  x2: _vm.root.state.taskList.expander.size / 2,
-                  y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
-                },
-                on: { click: _vm.toggle }
-              })
-            : _vm._e()
-        ]
-      )
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "elastigantt__task-list-column-expander",
+        style: _vm.root.state.taskList.styles.expander.wrapper
+      },
+      [
+        _c(
+          "svg",
+          {
+            style: _vm.root.state.taskList.styles.expander.content,
+            attrs: {
+              width: _vm.root.state.taskList.expander.size,
+              height: _vm.root.state.taskList.expander.size
+            }
+          },
+          [
+            _vm.allChildren.length
+              ? _c("rect", {
+                  style: _vm.root.state.taskList.styles.expander,
+                  attrs: {
+                    x: _vm.border,
+                    y: _vm.border,
+                    width: _vm.root.state.taskList.expander.size - _vm.border * 2,
+                    height:
+                      _vm.root.state.taskList.expander.size - _vm.border * 2,
+                    rx: "2",
+                    ry: "2"
+                  },
+                  on: { click: _vm.toggle }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.allChildren.length
+              ? _c("line", {
+                  style: _vm.lineStyle,
+                  attrs: {
+                    x1: _vm.lineOffset,
+                    y1: _vm.root.state.taskList.expander.size / 2,
+                    x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
+                    y2: _vm.root.state.taskList.expander.size / 2
+                  },
+                  on: { click: _vm.toggle }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.collapsed
+              ? _c("line", {
+                  style: _vm.lineStyle,
+                  attrs: {
+                    x1: _vm.root.state.taskList.expander.size / 2,
+                    y1: _vm.lineOffset,
+                    x2: _vm.root.state.taskList.expander.size / 2,
+                    y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
+                  },
+                  on: { click: _vm.toggle }
+                })
+              : _vm._e()
+          ]
+        )
+      ]
+    )
   };
   var __vue_staticRenderFns__$2 = [];
   __vue_render__$2._withStripped = true;
@@ -931,7 +939,7 @@ var Elastigantt = (function () {
           const state = this.root.state;
           const padding = (task.parents.length - 1) * state.taskList.expander.padding;
           const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
-          let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.strokeWidth;
+          let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.style.strokeWidth;
           let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
           const style = {
             'width': width + 'px',
@@ -1059,12 +1067,26 @@ var Elastigantt = (function () {
     data() {
       return {
         timeLine: {
-          x1: 0,
+          x: 0,
           y1: '0%',
-          x2: 0,
           y2: '100%'
-        }
+        },
       };
+    },
+    created() {
+      this.reposition();
+      /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
+        this.reposition();
+      }, 1000);*/
+    },
+    methods: {
+      reposition() {
+        const state = this.root.state;
+        const current = new Date().getTime();
+        const currentOffset = this.root.timeToPixelOffsetX(current);
+        this.timeLine.x = currentOffset;
+        console.log('reposition', this, currentOffset);
+      }
     },
     computed: {
       getVStyle() {
@@ -1077,13 +1099,13 @@ var Elastigantt = (function () {
         let lines = [];
         const state = this.root.state;
         for (let step = 0; step <= state.times.steps; step++) {
-          let x = step * state.times.stepPx + state.grid.vertical.strokeWidth / 2;
+          let x = step * state.times.stepPx + state.grid.vertical.style.strokeWidth / 2;
           lines.push({
             key: step,
             x1: x,
             y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
             x2: x,
-            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.strokeWidth
+            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth
           });
         }
         return state.grid.vertical.lines = lines;
@@ -1096,9 +1118,9 @@ var Elastigantt = (function () {
           lines.push({
             key: 'hl' + index,
             x1: 0,
-            y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2,
-            x2: state.times.steps * state.times.stepPx + state.grid.vertical.strokeWidth,
-            y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2
+            y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
+            x2: state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth,
+            y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
           });
         }
         return state.grid.horizontal.lines = lines;
@@ -1139,9 +1161,9 @@ var Elastigantt = (function () {
           staticClass: "elastigantt__grid-time-line",
           style: _vm.root.state.grid.timeLine.style,
           attrs: {
-            x1: _vm.timeLine.x1,
+            x1: _vm.timeLine.x,
             y1: _vm.timeLine.y1,
-            x2: _vm.timeLine.x2,
+            x2: _vm.timeLine.x,
             y2: _vm.timeLine.y2
           }
         })
@@ -3097,7 +3119,6 @@ var Elastigantt = (function () {
       grid: {
         horizontal: {
           gap: 6,
-          strokeWidth: 1,
           style: {
             stroke: '#00000010',
             strokeWidth: 1
@@ -3145,7 +3166,7 @@ var Elastigantt = (function () {
             'border-color': '#00000010'
           },
           label: {
-            'display': 'inline-block',
+            'display': 'inline-flex',
             'margin': 'auto 6px',
             'color': '#404040'
           },
@@ -3161,13 +3182,17 @@ var Elastigantt = (function () {
             'color': '#606060'
           },
           expander: {
-            stroke: '#909090',
-            strokeWidth: 1,
-            'fill': '#ffffffa0',
-          },
-          expanderContent: {
-            display: 'inline-block',
-            cursor: 'pointer'
+            wrapper: {
+              stroke: '#909090',
+              strokeWidth: 1,
+              fill: '#ffffffa0',
+              display: 'flex'
+            },
+            content: {
+              display: 'inline-flex',
+              cursor: 'pointer',
+              margin: 'auto 0px'
+            }
           }
         },
         columns: [{
@@ -3506,6 +3531,13 @@ var Elastigantt = (function () {
           height += this.state.scrollBarHeight;
         }
         return height;
+      },
+      timeToPixelOffsetX(ms) {
+        let x = ms - this.state.times.firstTime;
+        if (x) {
+          x = x / this.state.times.timePerPixel;
+        }
+        return x + this.state.grid.vertical.style.strokeWidth;
       }
     },
     computed: {
@@ -3531,7 +3563,7 @@ var Elastigantt = (function () {
         this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
         this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
         this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
-        this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
+        this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
         this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
         this.calculateCalendarDimensions();
         this.resetTaskTree();
@@ -3541,16 +3573,12 @@ var Elastigantt = (function () {
         this.state.outerHeight = this.getHeight(visibleTasks, true);
         for (let index = 0, len = visibleTasks.length; index < len; index++) {
           let task = visibleTasks[index];
-          task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;
+          task.width = task.durationMs / this.state.times.timePerPixel - this.state.grid.vertical.style.strokeWidth;
           if (task.width < 0) {
             task.width = 0;
           }
           task.height = this.state.row.height;
-          let x = task.startTime - this.state.times.firstTime;
-          if (x) {
-            x = x / this.state.times.timePerPixel;
-          }
-          task.x = x + this.state.verticalGrid.strokeWidth;
+          task.x = this.timeToPixelOffsetX(task.startTime);
           task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
         }
         return visibleTasks;

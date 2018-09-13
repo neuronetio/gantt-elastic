@@ -1,6 +1,6 @@
 <template>
-<div class="elastigantt__task-list-column-expander">
-  <svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size" :style="root.state.taskList.styles.expanderContent">
+<div class="elastigantt__task-list-column-expander" :style="root.state.taskList.styles.expander.wrapper">
+  <svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size" :style="root.state.taskList.styles.expander.content">
   <rect
     :x="border"
     :y="border"

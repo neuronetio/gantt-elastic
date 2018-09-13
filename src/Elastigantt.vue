@@ -82,7 +82,6 @@ function getOptions(userOptions) {
     grid: {
       horizontal: {
         gap: 6,
-        strokeWidth: 1,
         style: {
           stroke: '#00000010',
           strokeWidth: 1
@@ -130,7 +129,7 @@ function getOptions(userOptions) {
           'border-color': '#00000010'
         },
         label: {
-          'display': 'inline-block',
+          'display': 'inline-flex',
           'margin': 'auto 6px',
           'color': '#404040'
         },
@@ -146,13 +145,17 @@ function getOptions(userOptions) {
           'color': '#606060'
         },
         expander: {
-          stroke: '#909090',
-          strokeWidth: 1,
-          'fill': '#ffffffa0',
-        },
-        expanderContent: {
-          display: 'inline-block',
-          cursor: 'pointer'
+          wrapper: {
+            stroke: '#909090',
+            strokeWidth: 1,
+            fill: '#ffffffa0',
+            display: 'flex'
+          },
+          content: {
+            display: 'inline-flex',
+            cursor: 'pointer',
+            margin: 'auto 0px'
+          }
         }
       },
       columns: [{
@@ -493,6 +496,13 @@ export default {
         height += this.state.scrollBarHeight;
       }
       return height;
+    },
+    timeToPixelOffsetX(ms) {
+      let x = ms - this.state.times.firstTime;
+      if (x) {
+        x = x / this.state.times.timePerPixel;
+      }
+      return x + this.state.grid.vertical.style.strokeWidth;
     }
   },
   computed: {
@@ -518,7 +528,7 @@ export default {
       this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
       this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
       this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
-      this.state.width = this.state.times.totalViewDurationPx + this.state.verticalGrid.strokeWidth;
+      this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
       this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
       this.calculateCalendarDimensions();
       this.resetTaskTree();
@@ -528,16 +538,12 @@ export default {
       this.state.outerHeight = this.getHeight(visibleTasks, true);
       for (let index = 0, len = visibleTasks.length; index < len; index++) {
         let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.state.verticalGrid.strokeWidth;
+        task.width = task.durationMs / this.state.times.timePerPixel - this.state.grid.vertical.style.strokeWidth;
         if (task.width < 0) {
           task.width = 0;
         }
         task.height = this.state.row.height;
-        let x = task.startTime - this.state.times.firstTime;
-        if (x) {
-          x = x / this.state.times.timePerPixel;
-        }
-        task.x = x + this.state.verticalGrid.strokeWidth;
+        task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
       }
       return visibleTasks;

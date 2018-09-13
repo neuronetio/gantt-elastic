@@ -2,7 +2,7 @@
 <g>
   <line class="elastigantt__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
   <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle"></line>
-  <line class="elastigantt__grid-time-line" :x1="timeLine.x1" :y1="timeLine.y1" :x2="timeLine.x2" :y2="timeLine.y2" :style="root.state.grid.timeLine.style"></line>
+  <line class="elastigantt__grid-time-line" :x1="timeLine.x" :y1="timeLine.y1" :x2="timeLine.x" :y2="timeLine.y2" :style="root.state.grid.timeLine.style"></line>
 </g>
 </template>
 <script>
@@ -11,12 +11,26 @@ export default {
   data() {
     return {
       timeLine: {
-        x1: 0,
+        x: 0,
         y1: '0%',
-        x2: 0,
         y2: '100%'
-      }
+      },
     };
+  },
+  created() {
+    this.reposition();
+    /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
+      this.reposition();
+    }, 1000);*/
+  },
+  methods: {
+    reposition() {
+      const state = this.root.state;
+      const current = new Date().getTime();
+      const currentOffset = this.root.timeToPixelOffsetX(current);
+      this.timeLine.x = currentOffset;
+      console.log('reposition', this, currentOffset);
+    }
   },
   computed: {
     getVStyle() {
@@ -29,13 +43,13 @@ export default {
       let lines = [];
       const state = this.root.state;
       for (let step = 0; step <= state.times.steps; step++) {
-        let x = step * state.times.stepPx + state.grid.vertical.strokeWidth / 2;
+        let x = step * state.times.stepPx + state.grid.vertical.style.strokeWidth / 2;
         lines.push({
           key: step,
           x1: x,
           y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
           x2: x,
-          y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.strokeWidth
+          y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth
         });
       }
       return state.grid.vertical.lines = lines;
@@ -48,9 +62,9 @@ export default {
         lines.push({
           key: 'hl' + index,
           x1: 0,
-          y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2,
-          x2: state.times.steps * state.times.stepPx + state.grid.vertical.strokeWidth,
-          y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2
+          y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
+          x2: state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth,
+          y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
         });
       }
       return state.grid.horizontal.lines = lines;
