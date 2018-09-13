@@ -12,25 +12,25 @@ export default {
   },
   computed: {
     getVStyle() {
-      return this.root.state.verticalGrid.style;
+      return this.root.state.grid.vertical.style;
     },
     getHStyle() {
-      return this.root.state.horizontalGrid.style;
+      return this.root.state.grid.horizontal.style;
     },
     verticalLines() {
       let lines = [];
       const state = this.root.state;
       for (let step = 0; step <= state.times.steps; step++) {
-        let x = step * state.times.stepPx + state.verticalGrid.strokeWidth / 2;
+        let x = step * state.times.stepPx + state.grid.vertical.strokeWidth / 2;
         lines.push({
           key: step,
           x1: x,
           y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
           x2: x,
-          y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.horizontalGrid.gap * 2)) + state.horizontalGrid.strokeWidth
+          y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.strokeWidth
         });
       }
-      return state.verticalGrid.lines = lines;
+      return state.grid.vertical.lines = lines;
     },
     horizontalLines() {
       let lines = [];
@@ -40,12 +40,12 @@ export default {
         lines.push({
           key: 'hl' + index,
           x1: 0,
-          y1: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2,
-          x2: state.times.steps * state.times.stepPx + state.verticalGrid.strokeWidth,
-          y2: index * (state.row.height + state.horizontalGrid.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.horizontalGrid.strokeWidth / 2
+          y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2,
+          x2: state.times.steps * state.times.stepPx + state.grid.vertical.strokeWidth,
+          y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.strokeWidth / 2
         });
       }
-      return state.horizontalGrid.lines = lines;
+      return state.grid.horizontal.lines = lines;
     }
   }
 }

@@ -79,17 +79,31 @@ function getOptions(userOptions) {
         }
       }
     },
-    horizontalGrid: {
-      gap: 6,
-      strokeWidth: 1,
-      style: 'stroke:#00000010;strokeWidth:1',
-      lines: []
-    },
-    verticalGrid: {
-      strokeWidth: 1,
-      style: 'stroke:#00000010;strokeWidth:1',
-      lines: []
-    },
+    grid: {
+      horizontal: {
+        gap: 6,
+        strokeWidth: 1,
+        style: {
+          stroke: '#00000010',
+          strokeWidth: 1
+        }
+        lines: []
+      },
+      vertical: {
+        strokeWidth: 1,
+        style: {
+          stroke: '#00000010',
+          strokeWidth: 1
+        }
+        lines: []
+      },
+      timeLine: {
+        style: {
+          stroke: '#FF0000FF',
+          strokeWidth: 1
+        }
+      }
+    }
     info: {
       style: 'fill:#000000a0',
       textStyle: 'fill:#fff',
@@ -409,7 +423,7 @@ export default {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         }
         final += column.finalWidth;
-        let height = this.state.row.height + this.state.horizontalGrid.gap * 2 - this.state.horizontalGrid.strokeWidth;
+        let height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
         column.style.height = height + "px";
         column.style['line-height'] = height + "px";
         column.style.width = column.finalWidth + "px";
@@ -474,7 +488,7 @@ export default {
       });
     },
     getHeight(visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.horizontalGrid.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
         console.log(this.state.scrollBarWidth);
@@ -525,7 +539,7 @@ export default {
           x = x / this.state.times.timePerPixel;
         }
         task.x = x + this.state.verticalGrid.strokeWidth;
-        task.y = (this.state.row.height + this.state.horizontalGrid.gap * 2) * index + this.state.horizontalGrid.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
       }
       return visibleTasks;
     },

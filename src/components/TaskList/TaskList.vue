@@ -42,7 +42,7 @@ export default {
         const state = this.root.state;
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
-        let height = state.row.height + (state.horizontalGrid.gap * 2) - state.horizontalGrid.strokeWidth;
+        let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.strokeWidth;
         let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
         const style = {
           'width': width + 'px',
