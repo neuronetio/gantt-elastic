@@ -27,7 +27,7 @@ export default {
       const currentOffset = this.root.timeToPixelOffsetX(current);
       const timeLine = {
         x: 0,
-        y1: '0%',
+        y1: state.calendar.height + state.calendar.gap,
         y2: '100%',
         dateTime: '',
         time: current
