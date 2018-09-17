@@ -113,7 +113,7 @@ function getOptions(userOptions) {
       },
       timeLine: {
         style: {
-          stroke: '#FF0000FF',
+          stroke: '#FF000080',
           strokeWidth: 1
         }
       }

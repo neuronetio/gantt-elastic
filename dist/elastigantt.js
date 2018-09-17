@@ -3191,7 +3191,7 @@ var Elastigantt = (function () {
         },
         timeLine: {
           style: {
-            stroke: '#FF0000FF',
+            stroke: '#FF000080',
             strokeWidth: 1
           }
         }
