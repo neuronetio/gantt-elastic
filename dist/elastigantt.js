@@ -1086,37 +1086,33 @@ var Elastigantt = (function () {
   var script$7 = {
     inject: ['root'],
     data() {
-      return {
-        timeLine: {
-          x: 0,
-          y1: '0%',
-          y2: '100%',
-          dateTime: '',
-        },
-      };
+      return {};
     },
     created() {
-      this.reposition();
       this.root.$on('recenterPosition', this.recenterPosition);
-      /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
-        this.reposition();
-      }, 1000);*/
     },
     methods: {
-      reposition() {
-        const state = this.root.state;
-        const d = new Date();
-        const current = d.getTime();
-        const currentOffset = this.root.timeToPixelOffsetX(current);
-        this.timeLine.x = currentOffset;
-        this.timeLine.dateTime = d.toLocaleDateString();
-        console.log(this.timeLine.dateTime);
-      },
       recenterPosition() {
+        this.state.width / 2;
 
       }
     },
     computed: {
+      timeLinePosition() {
+        const state = this.root.state;
+        const d = new Date();
+        const current = d.getTime();
+        const currentOffset = this.root.timeToPixelOffsetX(current);
+        const timeLine = {
+          x: 0,
+          y1: '0%',
+          y2: '100%',
+          dateTime: '',
+        };
+        timeLine.x = currentOffset;
+        timeLine.dateTime = d.toLocaleDateString();
+        return timeLine;
+      },
       getVStyle() {
         return this.root.state.grid.vertical.style;
       },
@@ -1189,10 +1185,10 @@ var Elastigantt = (function () {
           staticClass: "elastigantt__grid-time-line",
           style: _vm.root.state.grid.timeLine.style,
           attrs: {
-            x1: _vm.timeLine.x,
-            y1: _vm.timeLine.y1,
-            x2: _vm.timeLine.x,
-            y2: _vm.timeLine.y2
+            x1: _vm.timeLinePosition.x,
+            y1: _vm.timeLinePosition.y1,
+            x2: _vm.timeLinePosition.x,
+            y2: _vm.timeLinePosition.y2
           }
         })
       ],
@@ -3593,21 +3589,28 @@ var Elastigantt = (function () {
         if (x) {
           x = x / this.state.times.timePerPixel;
         }
-        return x + this.state.grid.vertical.style.strokeWidth;
+        return x;
       },
       pixelOffsetXToTime(pixelOffsetX) {
         let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
         return offset * this.state.times.timePerPixel + this.state.times.firstTime;
       },
       onScrollTree(ev) {
-        this.state.scroll.tree.left = ev.target.scrollLeft;
-        this.state.scroll.tree.top = ev.target.scrollTop;
-        this.state.scroll.tree.time = this.pixelOffsetXToTime(ev.target.scrollLeft);
+        this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
+      },
+      _onScrollTree(left, top) {
+        this.state.scroll.tree.left = left;
+        this.state.scroll.tree.top = top;
+        this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
         this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
-        this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(ev.target.scrollLeft + ev.target.clientWidth)).toDateString();
+        this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+      },
+      scrollToTime(time) {
+        let pos = this.timeToPixelOffsetX(time);
+
       },
       onWheelTree(ev) {
-        this.state.times.timeScale += ev.deltaY * 10;
+        //this.state.times.timeScale += ev.deltaY * 10;
       },
       initializeEvents() {
         this.$on('scroll.tree', this.onScrollTree);

@@ -517,21 +517,28 @@ export default {
       if (x) {
         x = x / this.state.times.timePerPixel;
       }
-      return x + this.state.grid.vertical.style.strokeWidth;
+      return x;
     },
     pixelOffsetXToTime(pixelOffsetX) {
       let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
       return offset * this.state.times.timePerPixel + this.state.times.firstTime;
     },
     onScrollTree(ev) {
-      this.state.scroll.tree.left = ev.target.scrollLeft;
-      this.state.scroll.tree.top = ev.target.scrollTop;
-      this.state.scroll.tree.time = this.pixelOffsetXToTime(ev.target.scrollLeft);
+      this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
+    },
+    _onScrollTree(left, top) {
+      this.state.scroll.tree.left = left;
+      this.state.scroll.tree.top = top;
+      this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
-      this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(ev.target.scrollLeft + ev.target.clientWidth)).toDateString();
+      this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+    },
+    scrollToTime(time) {
+      let pos = this.timeToPixelOffsetX(time);
+
     },
     onWheelTree(ev) {
-      this.state.times.timeScale += ev.deltaY * 10;
+      //this.state.times.timeScale += ev.deltaY * 10;
     },
     initializeEvents() {
       this.$on('scroll.tree', this.onScrollTree);

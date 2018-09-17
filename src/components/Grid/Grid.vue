@@ -2,44 +2,40 @@
 <g>
   <line class="elastigantt__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
   <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle"></line>
-  <line class="elastigantt__grid-time-line" :x1="timeLine.x" :y1="timeLine.y1" :x2="timeLine.x" :y2="timeLine.y2" :style="root.state.grid.timeLine.style"></line>
+  <line class="elastigantt__grid-time-line" :x1="timeLinePosition.x" :y1="timeLinePosition.y1" :x2="timeLinePosition.x" :y2="timeLinePosition.y2" :style="root.state.grid.timeLine.style"></line>
 </g>
 </template>
 <script>
 export default {
   inject: ['root'],
   data() {
-    return {
-      timeLine: {
-        x: 0,
-        y1: '0%',
-        y2: '100%',
-        dateTime: '',
-      },
-    };
+    return {};
   },
   created() {
-    this.reposition();
     this.root.$on('recenterPosition', this.recenterPosition);
-    /*this.root.state.grid.timeLine.intervalHandler = setInterval(() => {
-      this.reposition();
-    }, 1000);*/
   },
   methods: {
-    reposition() {
-      const state = this.root.state;
-      const d = new Date();
-      const current = d.getTime();
-      const currentOffset = this.root.timeToPixelOffsetX(current);
-      this.timeLine.x = currentOffset;
-      this.timeLine.dateTime = d.toLocaleDateString();
-      console.log(this.timeLine.dateTime);
-    },
     recenterPosition() {
+      this.state.width / 2;
 
     }
   },
   computed: {
+    timeLinePosition() {
+      const state = this.root.state;
+      const d = new Date();
+      const current = d.getTime();
+      const currentOffset = this.root.timeToPixelOffsetX(current);
+      const timeLine = {
+        x: 0,
+        y1: '0%',
+        y2: '100%',
+        dateTime: '',
+      };
+      timeLine.x = currentOffset;
+      timeLine.dateTime = d.toLocaleDateString();
+      return timeLine;
+    },
     getVStyle() {
       return this.root.state.grid.vertical.style;
     },
