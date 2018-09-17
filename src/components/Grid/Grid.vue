@@ -16,8 +16,7 @@ export default {
   },
   methods: {
     recenterPosition() {
-      this.state.width / 2;
-
+      this.root.scrollToTime(this.timeLinePosition.time);
     }
   },
   computed: {
@@ -31,6 +30,7 @@ export default {
         y1: '0%',
         y2: '100%',
         dateTime: '',
+        time: current
       };
       timeLine.x = currentOffset;
       timeLine.dateTime = d.toLocaleDateString();

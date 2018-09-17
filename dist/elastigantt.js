@@ -214,7 +214,9 @@ var Elastigantt = (function () {
           _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
           " - " +
           _vm._s(_vm.root.state.scroll.tree.dateTime.right) +
-          "\r\n"
+          " (" +
+          _vm._s(_vm.root.state.scroll.tree.left) +
+          ")\r\n"
       )
     ])
   };
@@ -1093,8 +1095,7 @@ var Elastigantt = (function () {
     },
     methods: {
       recenterPosition() {
-        this.state.width / 2;
-
+        this.root.scrollToTime(this.timeLinePosition.time);
       }
     },
     computed: {
@@ -1108,6 +1109,7 @@ var Elastigantt = (function () {
           y1: '0%',
           y2: '100%',
           dateTime: '',
+          time: current
         };
         timeLine.x = currentOffset;
         timeLine.dateTime = d.toLocaleDateString();
@@ -2886,6 +2888,7 @@ var Elastigantt = (function () {
     mounted() {
       this.root.state.svgMain = this.$refs.svgMain;
       this.root.state.svgTree = this.$refs.svgTree;
+      this.root.state.svgTreeContainer = this.$refs.svgTreeContainer;
       this.root.state.svgTaskList = this.$refs.svgTaskList;
     },
     computed: {
@@ -2985,6 +2988,7 @@ var Elastigantt = (function () {
                     _c(
                       "div",
                       {
+                        ref: "svgTreeContainer",
                         staticClass: "elastigantt__main-container",
                         on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
                       },
@@ -3607,7 +3611,12 @@ var Elastigantt = (function () {
       },
       scrollToTime(time) {
         let pos = this.timeToPixelOffsetX(time);
-
+        const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
+        pos = pos - (treeContainerWidth / 2);
+        if (pos > this.state.width) {
+          pos = this.state.width - treeContainerWidth;
+        }
+        this.state.svgTreeContainer.scrollLeft = pos;
       },
       onWheelTree(ev) {
         //this.state.times.timeScale += ev.deltaY * 10;
@@ -3691,6 +3700,11 @@ var Elastigantt = (function () {
       this.state.times.firstTaskDate = firstTaskDate;
       this.state.times.lastTaskDate = lastTaskDate;
     },
+    mounted() {
+      this.$nextTick(() => {
+        this.$emit('recenterPosition');
+      });
+    }
   };
 
   /* script */

@@ -535,7 +535,12 @@ export default {
     },
     scrollToTime(time) {
       let pos = this.timeToPixelOffsetX(time);
-
+      const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
+      pos = pos - (treeContainerWidth / 2);
+      if (pos > this.state.width) {
+        pos = this.state.width - treeContainerWidth;
+      }
+      this.state.svgTreeContainer.scrollLeft = pos;
     },
     onWheelTree(ev) {
       //this.state.times.timeScale += ev.deltaY * 10;
@@ -619,5 +624,10 @@ export default {
     this.state.times.firstTaskDate = firstTaskDate;
     this.state.times.lastTaskDate = lastTaskDate;
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.$emit('recenterPosition');
+    })
+  }
 }
 </script>

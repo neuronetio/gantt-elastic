@@ -7,7 +7,7 @@
   <input type="checkbox" v-model="root.state.taskList.display">
   <button class="elastigantt__btn-img" @click="getImage">Get image</button>
   <button class="elastigantt__btn-recenter" @click="recenterPosition">Recenter</button>
-  {{root.state.scroll.tree.dateTime.left}} - {{root.state.scroll.tree.dateTime.right}}
+  {{root.state.scroll.tree.dateTime.left}} - {{root.state.scroll.tree.dateTime.right}} ({{root.state.scroll.tree.left}})
 </div>
 </template>
 <script>
