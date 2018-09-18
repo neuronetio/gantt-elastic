@@ -1,5 +1,5 @@
 <template>
-<g class="elastigantt__calendar-row-group" v-show="inViewPort">
+<g class="elastigantt__calendar-row-group">
   <rect class="elastigantt__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="root.state.calendar.styles.row"></rect>
   <text
     :x="getTextX"

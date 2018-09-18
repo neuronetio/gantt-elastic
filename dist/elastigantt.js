@@ -82,124 +82,116 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "elastigantt__header" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.scale,
-            expression: "scale"
-          }
-        ],
-        attrs: { type: "range", max: "24", min: "2" },
-        domProps: { value: _vm.scale },
-        on: {
-          __r: function($event) {
-            _vm.scale = $event.target.value;
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.height,
-            expression: "height"
-          }
-        ],
-        attrs: { type: "range", max: "100", min: "6" },
-        domProps: { value: _vm.height },
-        on: {
-          __r: function($event) {
-            _vm.height = $event.target.value;
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.scope,
-            expression: "scope"
-          }
-        ],
-        attrs: { type: "range", max: "100", min: "0" },
-        domProps: { value: _vm.scope },
-        on: {
-          __r: function($event) {
-            _vm.scope = $event.target.value;
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.divider,
-            expression: "divider"
-          }
-        ],
-        attrs: { type: "range", max: "100", min: "0" },
-        domProps: { value: _vm.divider },
-        on: {
-          __r: function($event) {
-            _vm.divider = $event.target.value;
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.root.state.taskList.display,
-            expression: "root.state.taskList.display"
-          }
-        ],
-        attrs: { type: "checkbox" },
-        domProps: {
-          checked: Array.isArray(_vm.root.state.taskList.display)
-            ? _vm._i(_vm.root.state.taskList.display, null) > -1
-            : _vm.root.state.taskList.display
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.root.state.taskList.display,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false;
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v);
-              if ($$el.checked) {
-                $$i < 0 &&
-                  _vm.$set(_vm.root.state.taskList, "display", $$a.concat([$$v]));
-              } else {
-                $$i > -1 &&
-                  _vm.$set(
-                    _vm.root.state.taskList,
-                    "display",
-                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                  );
-              }
-            } else {
-              _vm.$set(_vm.root.state.taskList, "display", $$c);
+      _c("label", [
+        _vm._v("X scale:"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.scale,
+              expression: "scale"
+            }
+          ],
+          attrs: { type: "range", max: "24", min: "2" },
+          domProps: { value: _vm.scale },
+          on: {
+            __r: function($event) {
+              _vm.scale = $event.target.value;
             }
           }
-        }
-      }),
+        })
+      ]),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "elastigantt__btn-img", on: { click: _vm.getImage } },
-        [_vm._v("Get image")]
-      ),
+      _c("label", [
+        _vm._v("Y scale:"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.height,
+              expression: "height"
+            }
+          ],
+          attrs: { type: "range", max: "100", min: "6" },
+          domProps: { value: _vm.height },
+          on: {
+            __r: function($event) {
+              _vm.height = $event.target.value;
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("label", [
+        _vm._v("Task list width:"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.divider,
+              expression: "divider"
+            }
+          ],
+          attrs: { type: "range", max: "100", min: "0" },
+          domProps: { value: _vm.divider },
+          on: {
+            __r: function($event) {
+              _vm.divider = $event.target.value;
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("label", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.root.state.taskList.display,
+              expression: "root.state.taskList.display"
+            }
+          ],
+          attrs: { type: "checkbox" },
+          domProps: {
+            checked: Array.isArray(_vm.root.state.taskList.display)
+              ? _vm._i(_vm.root.state.taskList.display, null) > -1
+              : _vm.root.state.taskList.display
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.root.state.taskList.display,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false;
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v);
+                if ($$el.checked) {
+                  $$i < 0 &&
+                    _vm.$set(
+                      _vm.root.state.taskList,
+                      "display",
+                      $$a.concat([$$v])
+                    );
+                } else {
+                  $$i > -1 &&
+                    _vm.$set(
+                      _vm.root.state.taskList,
+                      "display",
+                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                    );
+                }
+              } else {
+                _vm.$set(_vm.root.state.taskList, "display", $$c);
+              }
+            }
+          }
+        }),
+        _vm._v("Display task list")
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -214,9 +206,7 @@ var Elastigantt = (function () {
           _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
           " - " +
           _vm._s(_vm.root.state.scroll.tree.dateTime.right) +
-          " (" +
-          _vm._s(_vm.root.state.scroll.tree.left) +
-          ")\r\n"
+          "\r\n"
       )
     ])
   };
@@ -1148,12 +1138,12 @@ var Elastigantt = (function () {
         let tasks = this.root.visibleTasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
           let x2 = state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth;
-          if (x2 > state.scroll.tree.right) {
+          /*if (x2 > state.scroll.tree.right) {
             x2 = state.scroll.tree.right;
-          }
+          }*/
           lines.push({
             key: 'hl' + index,
-            x1: state.scroll.tree.left,
+            x1: 0,
             y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
             x2: x2,
             y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
@@ -1186,14 +1176,6 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _vm._l(_vm.verticalLines, function(line, index) {
           return _c("line", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.inViewPort(line),
-                expression: "inViewPort(line)"
-              }
-            ],
             key: line.key,
             staticClass: "elastigantt__grid-vertical-line",
             style: _vm.getVStyle,
@@ -1308,46 +1290,32 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c(
-      "g",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.inViewPort,
-            expression: "inViewPort"
-          }
-        ],
-        staticClass: "elastigantt__calendar-row-group"
-      },
-      [
-        _c("rect", {
-          staticClass: "elastigantt__calendar-row",
-          style: _vm.root.state.calendar.styles.row,
+    return _c("g", { staticClass: "elastigantt__calendar-row-group" }, [
+      _c("rect", {
+        staticClass: "elastigantt__calendar-row",
+        style: _vm.root.state.calendar.styles.row,
+        attrs: {
+          x: _vm.item.x,
+          y: _vm.item.y,
+          width: _vm.item.width,
+          height: _vm.item.height
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "text",
+        {
+          style: _vm.root.state.calendar.styles.text,
           attrs: {
-            x: _vm.item.x,
-            y: _vm.item.y,
-            width: _vm.item.width,
-            height: _vm.item.height
+            x: _vm.getTextX,
+            y: _vm.getTextY,
+            "alignment-baseline": "middle",
+            "text-anchor": "middle"
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "text",
-          {
-            style: _vm.root.state.calendar.styles.text,
-            attrs: {
-              x: _vm.getTextX,
-              y: _vm.getTextY,
-              "alignment-baseline": "middle",
-              "text-anchor": "middle"
-            }
-          },
-          [_vm._v(_vm._s(_vm.item.label))]
-        )
-      ]
-    )
+        },
+        [_vm._v(_vm._s(_vm.item.label))]
+      )
+    ])
   };
   var __vue_staticRenderFns__$8 = [];
   __vue_render__$8._withStripped = true;
@@ -2822,17 +2790,7 @@ var Elastigantt = (function () {
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: task.inViewPort,
-                  expression: "task.inViewPort"
-                }
-              ],
-              attrs: { task: task }
-            },
+            { attrs: { task: task } },
             [
               _c("tree-row-" + task.type, {
                 tag: "component",

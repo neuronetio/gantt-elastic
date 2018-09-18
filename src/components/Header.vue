@@ -1,13 +1,13 @@
 <template>
 <div class="elastigantt__header">
-  <input type="range" v-model="scale" max="24" min="2">
-  <input type="range" v-model="height" max="100" min="6">
-  <input type="range" v-model="scope" max="100" min="0">
-  <input type="range" v-model="divider" max="100" min="0">
-  <input type="checkbox" v-model="root.state.taskList.display">
-  <button class="elastigantt__btn-img" @click="getImage">Get image</button>
+  <label>X scale:<input type="range" v-model="scale" max="24" min="2"></label>
+  <label>Y scale:<input type="range" v-model="height" max="100" min="6"></label>
+  <!--<input type="range" v-model="scope" max="100" min="0">-->
+  <label>Task list width:<input type="range" v-model="divider" max="100" min="0"></label>
+  <label><input type="checkbox" v-model="root.state.taskList.display">Display task list</label>
+  <!--<button class="elastigantt__btn-img" @click="getImage">Get image</button>-->
   <button class="elastigantt__btn-recenter" @click="recenterPosition">Recenter</button>
-  {{root.state.scroll.tree.dateTime.left}} - {{root.state.scroll.tree.dateTime.right}} ({{root.state.scroll.tree.left}})
+  {{root.state.scroll.tree.dateTime.left}} - {{root.state.scroll.tree.dateTime.right}}
 </div>
 </template>
 <script>
