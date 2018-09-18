@@ -1099,6 +1099,12 @@ var Elastigantt = (function () {
       }
     },
     computed: {
+      inViewPort() {
+        return (line) => {
+          const state = this.root.state;
+          return line.x1 >= state.scroll.tree.left && line.x1 <= state.scroll.tree.right;
+        }
+      },
       timeLinePosition() {
         const state = this.root.state;
         const d = new Date();
@@ -1141,11 +1147,15 @@ var Elastigantt = (function () {
         const state = this.root.state;
         let tasks = this.root.visibleTasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
+          let x2 = state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth;
+          if (x2 > state.scroll.tree.right) {
+            x2 = state.scroll.tree.right;
+          }
           lines.push({
             key: 'hl' + index,
-            x1: 0,
+            x1: state.scroll.tree.left,
             y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-            x2: state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth,
+            x2: x2,
             y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
           });
         }
@@ -1176,6 +1186,14 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _vm._l(_vm.verticalLines, function(line, index) {
           return _c("line", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.inViewPort(line),
+                expression: "inViewPort(line)"
+              }
+            ],
             key: line.key,
             staticClass: "elastigantt__grid-vertical-line",
             style: _vm.getVStyle,
@@ -1267,6 +1285,12 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      inViewPort() {
+        const state = this.root.state;
+        const item = this.item;
+        return (item.x <= state.scroll.tree.right && item.x + item.width >= state.scroll.tree.left) ||
+          (item.x <= state.scroll.tree.left && item.x + item.width >= state.scroll.tree.right);
+      },
       getTextX() {
         return this.item.x + this.item.width / 2;
       },
@@ -1284,32 +1308,46 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("g", { staticClass: "elastigantt__calendar-row-group" }, [
-      _c("rect", {
-        staticClass: "elastigantt__calendar-row",
-        style: _vm.root.state.calendar.styles.row,
-        attrs: {
-          x: _vm.item.x,
-          y: _vm.item.y,
-          width: _vm.item.width,
-          height: _vm.item.height
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "text",
-        {
-          style: _vm.root.state.calendar.styles.text,
-          attrs: {
-            x: _vm.getTextX,
-            y: _vm.getTextY,
-            "alignment-baseline": "middle",
-            "text-anchor": "middle"
+    return _c(
+      "g",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.inViewPort,
+            expression: "inViewPort"
           }
-        },
-        [_vm._v(_vm._s(_vm.item.label))]
-      )
-    ])
+        ],
+        staticClass: "elastigantt__calendar-row-group"
+      },
+      [
+        _c("rect", {
+          staticClass: "elastigantt__calendar-row",
+          style: _vm.root.state.calendar.styles.row,
+          attrs: {
+            x: _vm.item.x,
+            y: _vm.item.y,
+            width: _vm.item.width,
+            height: _vm.item.height
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "text",
+          {
+            style: _vm.root.state.calendar.styles.text,
+            attrs: {
+              x: _vm.getTextX,
+              y: _vm.getTextY,
+              "alignment-baseline": "middle",
+              "text-anchor": "middle"
+            }
+          },
+          [_vm._v(_vm._s(_vm.item.label))]
+        )
+      ]
+    )
   };
   var __vue_staticRenderFns__$8 = [];
   __vue_render__$8._withStripped = true;
@@ -2784,7 +2822,17 @@ var Elastigantt = (function () {
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
-            { attrs: { task: task } },
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: task.inViewPort,
+                  expression: "task.inViewPort"
+                }
+              ],
+              attrs: { task: task }
+            },
             [
               _c("tree-row-" + task.type, {
                 tag: "component",
@@ -3089,11 +3137,15 @@ var Elastigantt = (function () {
       scroll: {
         taskList: {
           left: 0,
-          top: 0
+          right: 0,
+          top: 0,
+          bottom: 0
         },
         tree: {
           left: 0,
+          right: 0,
           top: 0,
+          bottom: 0,
           time: 0,
           dateTime: {
             left: '',
@@ -3603,7 +3655,9 @@ var Elastigantt = (function () {
         this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
       },
       _onScrollTree(left, top) {
+        const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
         this.state.scroll.tree.left = left;
+        this.state.scroll.tree.right = left + treeContainerWidth;
         this.state.scroll.tree.top = top;
         this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
         this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
@@ -3666,6 +3720,7 @@ var Elastigantt = (function () {
           task.height = this.state.row.height;
           task.x = this.timeToPixelOffsetX(task.startTime);
           task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+          task.inViewPort = (task.x + task.width >= this.state.scroll.tree.left && task.x <= this.state.scroll.tree.right) || (task.x <= this.state.scroll.tree.left && task.x + task.width >= this.state.scroll.tree.right);
         }
         return visibleTasks;
       },

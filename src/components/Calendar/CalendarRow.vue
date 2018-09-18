@@ -1,5 +1,5 @@
 <template>
-<g class="elastigantt__calendar-row-group">
+<g class="elastigantt__calendar-row-group" v-show="inViewPort">
   <rect class="elastigantt__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="root.state.calendar.styles.row"></rect>
   <text
     :x="getTextX"
@@ -17,6 +17,12 @@ export default {
     return {};
   },
   computed: {
+    inViewPort() {
+      const state = this.root.state;
+      const item = this.item;
+      return (item.x <= state.scroll.tree.right && item.x + item.width >= state.scroll.tree.left) ||
+        (item.x <= state.scroll.tree.left && item.x + item.width >= state.scroll.tree.right);
+    },
     getTextX() {
       return this.item.x + this.item.width / 2;
     },

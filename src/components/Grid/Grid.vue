@@ -1,7 +1,7 @@
 <template>
 <g>
   <line class="elastigantt__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
-  <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle"></line>
+  <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" v-show="inViewPort(line)" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle"></line>
   <line class="elastigantt__grid-time-line" :x1="timeLinePosition.x" :y1="timeLinePosition.y1" :x2="timeLinePosition.x" :y2="timeLinePosition.y2" :style="root.state.grid.timeLine.style"></line>
 </g>
 </template>
@@ -20,6 +20,12 @@ export default {
     }
   },
   computed: {
+    inViewPort() {
+      return (line) => {
+        const state = this.root.state;
+        return line.x1 >= state.scroll.tree.left && line.x1 <= state.scroll.tree.right;
+      }
+    },
     timeLinePosition() {
       const state = this.root.state;
       const d = new Date();
@@ -62,11 +68,15 @@ export default {
       const state = this.root.state;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
+        let x2 = state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth;
+        if (x2 > state.scroll.tree.right) {
+          x2 = state.scroll.tree.right;
+        }
         lines.push({
           key: 'hl' + index,
-          x1: 0,
+          x1: state.scroll.tree.left,
           y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-          x2: state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth,
+          x2: x2,
           y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
         });
       }

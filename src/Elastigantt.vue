@@ -11,11 +11,15 @@ function getOptions(userOptions) {
     scroll: {
       taskList: {
         left: 0,
-        top: 0
+        right: 0,
+        top: 0,
+        bottom: 0
       },
       tree: {
         left: 0,
+        right: 0,
         top: 0,
+        bottom: 0,
         time: 0,
         dateTime: {
           left: '',
@@ -527,7 +531,9 @@ export default {
       this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
     },
     _onScrollTree(left, top) {
+      const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
       this.state.scroll.tree.left = left;
+      this.state.scroll.tree.right = left + treeContainerWidth;
       this.state.scroll.tree.top = top;
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
@@ -590,6 +596,7 @@ export default {
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        task.inViewPort = (task.x + task.width >= this.state.scroll.tree.left && task.x <= this.state.scroll.tree.right) || (task.x <= this.state.scroll.tree.left && task.x + task.width >= this.state.scroll.tree.right);
       }
       return visibleTasks;
     },
