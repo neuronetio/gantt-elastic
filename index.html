@@ -175,6 +175,14 @@
       }
     }*/
   };
+  
+  // overriding components?
+  let mainComponents = Elastigantt.components['elastigantt-main'].components;
+  mainComponents['tree'] = Object.assign({},mainComponents['tree'],{
+    created(){
+      console.log('tree created! whoaaa!');
+    }
+  });
 
   const elastigantt = new Vue({
     el:'#app',
