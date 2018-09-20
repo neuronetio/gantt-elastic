@@ -5,9 +5,11 @@
       <line x1="0" y1="0" x2="0" :y2="root.state.progress.width" :style="root.state.progress.styles.line" />
     </pattern>
   </defs>
-  <!--<rect id="elastigantt__tree-row-progress" x="0" y="0" height="30%" :width="getProgressWidth" style="fill:#00ff92a0"></rect>-->
-  <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="root.state.progress.styles.bar"></rect>
-  <path :d="getLinePoints" :style="getLineStyle"></path>
+  <rect v-if="!root.state.progress.pattern" id="elastigantt__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="root.state.progress.styles.bar.solid"></rect>
+  <g v-if="root.state.progress.pattern">
+    <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="root.state.progress.styles.bar.pattern"></rect>
+    <path :d="getLinePoints" :style="getLineStyle"></path>
+  </g>
 </g>
 </template>
 <script>

@@ -87,14 +87,21 @@ function getOptions(userOptions) {
     progress: {
       width: 20,
       height: 6,
+      pattern: true,
       styles: {
         line: {
-          'stroke': '#ffffff85',
+          'stroke': '#ffffff65',
           'stroke-width': 20
         },
         bar: {
-          'fill': "url(#diagonalHatch)",
-          'transform': 'translateY(0.1) scaleY(0.8)'
+          pattern: {
+            'fill': "url(#diagonalHatch)",
+            'transform': 'translateY(0.1) scaleY(0.8)'
+          },
+          solid: {
+            fill: '#00ff92a0',
+            height: '20%'
+          }
         }
       }
     },

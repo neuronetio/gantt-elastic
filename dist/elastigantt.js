@@ -2129,6 +2129,8 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
 
   var script$d = {
     inject: ['root'],
@@ -2188,17 +2190,36 @@ var Elastigantt = (function () {
         )
       ]),
       _vm._v(" "),
-      _c("rect", {
-        style: _vm.root.state.progress.styles.bar,
-        attrs: {
-          x: _vm.getProgressWidth,
-          y: "0",
-          width: 100 - _vm.task.progress + "%",
-          height: "100%"
-        }
-      }),
+      !_vm.root.state.progress.pattern
+        ? _c("rect", {
+            style: _vm.root.state.progress.styles.bar.solid,
+            attrs: {
+              id: "elastigantt__tree-row-progress",
+              x: "0",
+              y: "0",
+              width: _vm.getProgressWidth
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
-      _c("path", { style: _vm.getLineStyle, attrs: { d: _vm.getLinePoints } })
+      _vm.root.state.progress.pattern
+        ? _c("g", [
+            _c("rect", {
+              style: _vm.root.state.progress.styles.bar.pattern,
+              attrs: {
+                x: _vm.getProgressWidth,
+                y: "0",
+                width: 100 - _vm.task.progress + "%",
+                height: "100%"
+              }
+            }),
+            _vm._v(" "),
+            _c("path", {
+              style: _vm.getLineStyle,
+              attrs: { d: _vm.getLinePoints }
+            })
+          ])
+        : _vm._e()
     ])
   };
   var __vue_staticRenderFns__$d = [];
@@ -3211,14 +3232,21 @@ var Elastigantt = (function () {
       progress: {
         width: 20,
         height: 6,
+        pattern: true,
         styles: {
           line: {
-            'stroke': '#ffffff85',
+            'stroke': '#ffffff65',
             'stroke-width': 20
           },
           bar: {
-            'fill': "url(#diagonalHatch)",
-            'transform': 'translateY(0.1) scaleY(0.8)'
+            pattern: {
+              'fill': "url(#diagonalHatch)",
+              'transform': 'translateY(0.1) scaleY(0.8)'
+            },
+            solid: {
+              fill: '#00ff92a0',
+              height: '20%'
+            }
           }
         }
       },
