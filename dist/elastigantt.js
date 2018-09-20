@@ -742,6 +742,8 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
 
   var script$4 = {
     inject: ['root'],
@@ -766,18 +768,24 @@ var Elastigantt = (function () {
         style: _vm.column.style
       },
       [
-        _vm._t("default"),
-        _vm._v(" "),
         _c(
           "div",
-          {
-            staticClass: "elastigantt__task-list-item-value",
-            style: _vm.column.styles.value
-          },
-          [_vm._v(_vm._s(_vm.task[_vm.column.value]))]
+          { staticClass: "elastigantt__task-list-item-value--wrapper" },
+          [
+            _vm._t("default"),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "elastigantt__task-list-item-value",
+                style: _vm.column.styles.value
+              },
+              [_vm._v(_vm._s(_vm.task[_vm.column.value]))]
+            )
+          ],
+          2
         )
-      ],
-      2
+      ]
     )
   };
   var __vue_staticRenderFns__$4 = [];
@@ -959,7 +967,8 @@ var Elastigantt = (function () {
           const padding = (task.parents.length - 1) * state.taskList.expander.padding;
           const fullPadding = this.root.getMaximalLevel() * state.taskList.expander.padding;
           let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.style.strokeWidth;
-          let width = (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
+          let width = (state.taskList.expander.size + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
+          console.log(width);
           const style = {
             'width': width + 'px',
             'height': height + 'px',
@@ -3280,7 +3289,8 @@ var Elastigantt = (function () {
               stroke: '#909090',
               strokeWidth: 1,
               fill: '#ffffffa0',
-              display: 'flex'
+              display: 'inline-flex',
+              'flex-shrink': 0,
             },
             content: {
               display: 'inline-flex',

@@ -168,7 +168,8 @@ function getOptions(userOptions) {
             stroke: '#909090',
             strokeWidth: 1,
             fill: '#ffffffa0',
-            display: 'flex'
+            display: 'inline-flex',
+            'flex-shrink': 0,
           },
           content: {
             display: 'inline-flex',
