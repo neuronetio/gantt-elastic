@@ -96,14 +96,14 @@ var Elastigantt = (function () {
         _c(
           "button",
           {
-            staticClass: "elastigantt__btn-recenter btn btn-primary",
+            staticClass: "elastigantt__btn-recenter btn btn-primary mr-4",
             on: { click: _vm.recenterPosition }
           },
-          [_vm._v("Recenter")]
+          [_vm._v(_vm._s(_vm.root.state.locale.Now))]
         ),
         _vm._v(" "),
-        _c("label", [
-          _vm._v("X scale:"),
+        _c("label", { staticClass: "mr-2" }, [
+          _vm._v(_vm._s(_vm.root.state.locale["X-Scale"])),
           _c("input", {
             directives: [
               {
@@ -123,8 +123,8 @@ var Elastigantt = (function () {
           })
         ]),
         _vm._v(" "),
-        _c("label", [
-          _vm._v("Y scale:"),
+        _c("label", { staticClass: "mr-2" }, [
+          _vm._v(_vm._s(_vm.root.state.locale["Y-Scale"])),
           _c("input", {
             directives: [
               {
@@ -144,8 +144,8 @@ var Elastigantt = (function () {
           })
         ]),
         _vm._v(" "),
-        _c("label", [
-          _vm._v("Task list width:"),
+        _c("label", { staticClass: "mr-2" }, [
+          _vm._v(_vm._s(_vm.root.state.locale["Task list width"])),
           _c("input", {
             directives: [
               {
@@ -165,7 +165,7 @@ var Elastigantt = (function () {
           })
         ]),
         _vm._v(" "),
-        _c("label", [
+        _c("label", { staticClass: "mr-2" }, [
           _c("input", {
             directives: [
               {
@@ -175,6 +175,7 @@ var Elastigantt = (function () {
                 expression: "root.state.taskList.display"
               }
             ],
+            staticClass: "mr-1",
             attrs: { type: "checkbox" },
             domProps: {
               checked: Array.isArray(_vm.root.state.taskList.display)
@@ -210,7 +211,7 @@ var Elastigantt = (function () {
               }
             }
           }),
-          _vm._v("Display task list")
+          _vm._v(_vm._s(_vm.root.state.locale["Display task list"]))
         ])
       ])
     ])

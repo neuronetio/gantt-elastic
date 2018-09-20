@@ -12,9 +12,8 @@
 }
 .elastigantt__header{
   margin:0 auto;
-  background: #00000010;
+  background: #00000006;
   border: 1px solid #00000010;
-  border-bottom: 0px;
   padding:10px;
   overflow: hidden;
   clear: both;
@@ -66,6 +65,7 @@ foreignObject > *{
 }
 .elastigantt__task-list-header-column{
   border: 1px solid #00000050;
+  border-top:none;
   border-right:none;
   box-sizing: border-box;
   display: flex;
