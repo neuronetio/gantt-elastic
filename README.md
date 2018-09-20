@@ -4,10 +4,10 @@
 ![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
 
 
-Elastigantt is a vue component but it could be used in other frameworks or even with jQuery because vue is kind of elastic and lightweight framework.
+#### Elastigantt is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
 
-### usage (more info soon - for now take a look at [index.html](https://github.com/neuronetio/elastigantt/blob/master/index.html))
+#### usage (more info soon - for now take a look at [index.html](https://github.com/neuronetio/elastigantt/blob/master/index.html))
 ```html
 <div id="gantt"></div>
 ```
