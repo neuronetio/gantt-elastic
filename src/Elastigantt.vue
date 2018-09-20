@@ -195,7 +195,8 @@ function getOptions(userOptions) {
         size: 16,
         columnWidth: 24,
         padding: 16,
-        margin: 10
+        margin: 10,
+        straight: true
       }
     },
     calendar: {
