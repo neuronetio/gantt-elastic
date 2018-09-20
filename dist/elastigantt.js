@@ -2896,6 +2896,7 @@ var Elastigantt = (function () {
       this.root.state.svgTree = this.$refs.svgTree;
       this.root.state.svgTreeContainer = this.$refs.svgTreeContainer;
       this.root.state.svgTaskList = this.$refs.svgTaskList;
+      this.root.state.treeScrollContainer = this.$refs.treeScrollContainer;
     },
     computed: {
       getWidth() {
@@ -2945,7 +2946,7 @@ var Elastigantt = (function () {
             staticClass: "elastigantt__svg-container",
             attrs: {
               width: _vm.getWidth,
-              height: _vm.root.state.outerHeight,
+              height: _vm.root.state.height,
               xmlns: "http://www.w3.org/2000/svg"
             }
           },
@@ -2995,8 +2996,7 @@ var Elastigantt = (function () {
                       "div",
                       {
                         ref: "svgTreeContainer",
-                        staticClass: "elastigantt__main-container",
-                        on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
+                        staticClass: "elastigantt__main-container"
                       },
                       [
                         _c(
@@ -3026,6 +3026,22 @@ var Elastigantt = (function () {
             )
           ],
           1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            ref: "treeScrollContainer",
+            staticClass: "elastigantt__tree-scroll-container",
+            style: { marginLeft: _vm.root.state.taskList.finalWidth + "px" },
+            on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
+          },
+          [
+            _c("div", {
+              staticClass: "elastigantt__tree-scroll",
+              style: { height: "1px", width: _vm.root.state.width + "px" }
+            })
+          ]
         )
       ],
       1
@@ -3620,6 +3636,7 @@ var Elastigantt = (function () {
         this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
         this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
         this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+        this.state.svgTreeContainer.scrollLeft = left;
       },
       scrollToTime(time) {
         let pos = this.timeToPixelOffsetX(time);
@@ -3629,6 +3646,7 @@ var Elastigantt = (function () {
           pos = this.state.width - treeContainerWidth;
         }
         this.state.svgTreeContainer.scrollLeft = pos;
+        this.state.treeScrollContainer.scrollLeft = pos;
       },
       onWheelTree(ev) {
         //this.state.times.timeScale += ev.deltaY * 10;
@@ -3788,4 +3806,3 @@ var Elastigantt = (function () {
   return Elastigantt;
 
 }());
-//# sourceMappingURL=elastigantt.js.map

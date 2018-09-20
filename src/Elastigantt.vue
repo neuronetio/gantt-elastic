@@ -538,6 +538,7 @@ export default {
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
       this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+      this.state.svgTreeContainer.scrollLeft = left;
     },
     scrollToTime(time) {
       let pos = this.timeToPixelOffsetX(time);
@@ -547,6 +548,7 @@ export default {
         pos = this.state.width - treeContainerWidth;
       }
       this.state.svgTreeContainer.scrollLeft = pos;
+      this.state.treeScrollContainer.scrollLeft = pos;
     },
     onWheelTree(ev) {
       //this.state.times.timeScale += ev.deltaY * 10;

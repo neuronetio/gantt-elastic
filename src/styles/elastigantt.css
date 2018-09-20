@@ -40,7 +40,7 @@ foreignObject > *{
   height: 100%;
 }
 .elastigantt__main-svg-container , .elastigantt__main-container{
-  overflow: auto;
+  overflow: hidden;
   max-width:100%;
 }
 .elastigantt__task-list-header{
@@ -101,4 +101,8 @@ foreignObject > *{
   word-break: keep-all;
   font-family: Arial;
   font-size: 12px;
+}
+.elastigantt__tree-scroll-container{
+  overflow:auto;
+  max-width:100%;
 }
