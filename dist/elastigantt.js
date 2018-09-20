@@ -13,6 +13,8 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
 
   var script = {
     inject: ['root'],
@@ -82,132 +84,135 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "elastigantt__header" }, [
-      _c("label", [
-        _vm._v("X scale:"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.scale,
-              expression: "scale"
-            }
-          ],
-          attrs: { type: "range", max: "24", min: "2" },
-          domProps: { value: _vm.scale },
-          on: {
-            __r: function($event) {
-              _vm.scale = $event.target.value;
-            }
-          }
-        })
+      _c("div", { staticClass: "elastigantt__header-dates" }, [
+        _vm._v(
+          _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
+            " - " +
+            _vm._s(_vm.root.state.scroll.tree.dateTime.right)
+        )
       ]),
       _vm._v(" "),
-      _c("label", [
-        _vm._v("Y scale:"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.height,
-              expression: "height"
-            }
-          ],
-          attrs: { type: "range", max: "100", min: "6" },
-          domProps: { value: _vm.height },
-          on: {
-            __r: function($event) {
-              _vm.height = $event.target.value;
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("label", [
-        _vm._v("Task list width:"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.divider,
-              expression: "divider"
-            }
-          ],
-          attrs: { type: "range", max: "100", min: "0" },
-          domProps: { value: _vm.divider },
-          on: {
-            __r: function($event) {
-              _vm.divider = $event.target.value;
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("label", [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.root.state.taskList.display,
-              expression: "root.state.taskList.display"
-            }
-          ],
-          attrs: { type: "checkbox" },
-          domProps: {
-            checked: Array.isArray(_vm.root.state.taskList.display)
-              ? _vm._i(_vm.root.state.taskList.display, null) > -1
-              : _vm.root.state.taskList.display
+      _c("div", { staticClass: "elastigantt__header-options" }, [
+        _c(
+          "button",
+          {
+            staticClass: "elastigantt__btn-recenter btn btn-primary",
+            on: { click: _vm.recenterPosition }
           },
-          on: {
-            change: function($event) {
-              var $$a = _vm.root.state.taskList.display,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false;
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v);
-                if ($$el.checked) {
-                  $$i < 0 &&
-                    _vm.$set(
-                      _vm.root.state.taskList,
-                      "display",
-                      $$a.concat([$$v])
-                    );
-                } else {
-                  $$i > -1 &&
-                    _vm.$set(
-                      _vm.root.state.taskList,
-                      "display",
-                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                    );
-                }
-              } else {
-                _vm.$set(_vm.root.state.taskList, "display", $$c);
+          [_vm._v("Recenter")]
+        ),
+        _vm._v(" "),
+        _c("label", [
+          _vm._v("X scale:"),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.scale,
+                expression: "scale"
+              }
+            ],
+            attrs: { type: "range", max: "24", min: "2" },
+            domProps: { value: _vm.scale },
+            on: {
+              __r: function($event) {
+                _vm.scale = $event.target.value;
               }
             }
-          }
-        }),
-        _vm._v("Display task list")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "elastigantt__btn-recenter",
-          on: { click: _vm.recenterPosition }
-        },
-        [_vm._v("Recenter")]
-      ),
-      _vm._v(
-        "\r\n  " +
-          _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
-          " - " +
-          _vm._s(_vm.root.state.scroll.tree.dateTime.right) +
-          "\r\n"
-      )
+          })
+        ]),
+        _vm._v(" "),
+        _c("label", [
+          _vm._v("Y scale:"),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.height,
+                expression: "height"
+              }
+            ],
+            attrs: { type: "range", max: "100", min: "6" },
+            domProps: { value: _vm.height },
+            on: {
+              __r: function($event) {
+                _vm.height = $event.target.value;
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("label", [
+          _vm._v("Task list width:"),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.divider,
+                expression: "divider"
+              }
+            ],
+            attrs: { type: "range", max: "100", min: "0" },
+            domProps: { value: _vm.divider },
+            on: {
+              __r: function($event) {
+                _vm.divider = $event.target.value;
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("label", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.root.state.taskList.display,
+                expression: "root.state.taskList.display"
+              }
+            ],
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.root.state.taskList.display)
+                ? _vm._i(_vm.root.state.taskList.display, null) > -1
+                : _vm.root.state.taskList.display
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.root.state.taskList.display,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false;
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v);
+                  if ($$el.checked) {
+                    $$i < 0 &&
+                      _vm.$set(
+                        _vm.root.state.taskList,
+                        "display",
+                        $$a.concat([$$v])
+                      );
+                  } else {
+                    $$i > -1 &&
+                      _vm.$set(
+                        _vm.root.state.taskList,
+                        "display",
+                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                      );
+                  }
+                } else {
+                  _vm.$set(_vm.root.state.taskList, "display", $$c);
+                }
+              }
+            }
+          }),
+          _vm._v("Display task list")
+        ])
+      ])
     ])
   };
   var __vue_staticRenderFns__ = [];
@@ -2907,6 +2912,12 @@ var Elastigantt = (function () {
         return {
           width: state.width + 'px'
         };
+      },
+      getMarginLeft() {
+        if (!this.root.state.taskList.display) {
+          return '0px';
+        }
+        return this.root.state.taskList.finalWidth + 'px';
       }
     },
     methods: {
@@ -3033,7 +3044,7 @@ var Elastigantt = (function () {
           {
             ref: "treeScrollContainer",
             staticClass: "elastigantt__tree-scroll-container",
-            style: { marginLeft: _vm.root.state.taskList.finalWidth + "px" },
+            style: { marginLeft: _vm.getMarginLeft },
             on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
           },
           [

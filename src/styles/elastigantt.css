@@ -12,7 +12,24 @@
 }
 .elastigantt__header{
   margin:0 auto;
+  background: #00000010;
+  border: 1px solid #00000010;
+  border-bottom: 0px;
+  padding:10px;
+  overflow: hidden;
+  clear: both;
 }
+.elastigantt__header input[type="range"]{
+  vertical-align: text-bottom;
+  margin: 0px 4px;
+}
+.elastigantt__header-dates{
+  float: left;
+}
+.elastigantt__header-options{
+  float: right;
+}
+
 .elastigantt__grid-horizontal-line, .elastigantt__grid-vertical-line{
   stroke: #a0a0a0;
   stroke-width: 1;

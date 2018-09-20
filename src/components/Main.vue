@@ -19,7 +19,7 @@
 </div>
 </foreignObject>
 </svg>
-<div class="elastigantt__tree-scroll-container" :style="{marginLeft:root.state.taskList.finalWidth+'px'}" v-on:scroll="onScroll" v-on:wheel="onWheel" ref="treeScrollContainer">
+<div class="elastigantt__tree-scroll-container" :style="{marginLeft:getMarginLeft}" v-on:scroll="onScroll" v-on:wheel="onWheel" ref="treeScrollContainer">
   <div class="elastigantt__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
 </div>
 </div>
@@ -80,6 +80,12 @@ export default {
       return {
         width: state.width + 'px'
       };
+    },
+    getMarginLeft() {
+      if (!this.root.state.taskList.display) {
+        return '0px';
+      }
+      return this.root.state.taskList.finalWidth + 'px';
     }
   },
   methods: {
