@@ -1,5 +1,7 @@
 # Elastigantt - Elastic Javascript Gantt
 
+Keywords: [ gantt, javascript gantt, gantt chart, js gantt, project manager, gantt project manager ]
+
 ![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
 ![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
 
@@ -7,7 +9,9 @@
 #### Elastigantt is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
 
-#### usage (more info soon - for now take a look at [index.html](https://github.com/neuronetio/elastigantt/blob/master/index.html))
+##### :star2: Give it a star if you want more activity in this repo, thanks!
+
+### usage (more info / documentation soon - for now take a look at [index.html](https://github.com/neuronetio/elastigantt/blob/master/index.html))
 ```html
 <div id="gantt"></div>
 ```
@@ -78,3 +82,5 @@ const elastigantt = new Vue({
   }
 });
 ```
+
+License: MIT
