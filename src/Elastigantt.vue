@@ -282,7 +282,16 @@ function getOptions(userOptions) {
         }
       }
     },
-    defs: []
+    defs: [],
+    locale: {
+      code: 'en',
+      'Now': 'Now',
+      'X-Scale': 'X-Scale',
+      'Y-Scale': 'Y-Scale',
+      'Task list width': 'Task list width',
+      'Display task list': 'Show task list',
+      'Before/After': 'Before/After'
+    }
   };
 }
 

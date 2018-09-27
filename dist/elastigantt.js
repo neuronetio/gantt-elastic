@@ -145,6 +145,27 @@ var Elastigantt = (function () {
         ]),
         _vm._v(" "),
         _c("label", { staticClass: "mr-2" }, [
+          _vm._v(_vm._s(_vm.root.state.locale["Before/After"])),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.scope,
+                expression: "scope"
+              }
+            ],
+            attrs: { type: "range", max: "100", min: "0" },
+            domProps: { value: _vm.scope },
+            on: {
+              __r: function($event) {
+                _vm.scope = $event.target.value;
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("label", { staticClass: "mr-2" }, [
           _vm._v(_vm._s(_vm.root.state.locale["Task list width"])),
           _c("input", {
             directives: [
@@ -3427,7 +3448,16 @@ var Elastigantt = (function () {
           }
         }
       },
-      defs: []
+      defs: [],
+      locale: {
+        code: 'en',
+        'Now': 'Now',
+        'X-Scale': 'X-Scale',
+        'Y-Scale': 'Y-Scale',
+        'Task list width': 'Task list width',
+        'Display task list': 'Show task list',
+        'Before/After': 'Before/After'
+      }
     };
   }
 
