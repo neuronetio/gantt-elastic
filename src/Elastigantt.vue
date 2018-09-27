@@ -42,9 +42,8 @@ function getOptions(userOptions) {
       lastTime: null, // last date getTime()
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
-      stepMs: 24 * 60 * 60 * 1000,
-      stepPx: 0,
-      steps: 0
+      stepDuration: 'day', // hour, month
+      steps: []
     },
     row: {
       height: 24,
@@ -574,17 +573,61 @@ export default {
     initializeEvents() {
       this.$on('scroll.tree', this.onScrollTree);
       this.$on('wheel.tree', this.onWheelTree);
+    },
+    initTimes() {
+      let max = this.state.times.timeScale * 60;
+      let min = this.state.times.timeScale;
+      let steps = max / min;
+      let percent = this.state.times.timeZoom / 100;
+      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = dayjs(this.state.times.lastDate).diff(this.state.times.firstTime, 'milisecods');
+      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+    },
+    calculateSteps() {
+      const steps = [];
+      const lastMs = dayjs(this.state.times.lastDate).valueOf();
+      const step = this.state.times.stepDuration;
+      const currentDate = dayjs(this.state.times.firstDate);
+      steps.push({
+        date: currentDate,
+        offset: {
+          ms: 0,
+          px: 0,
+        }
+      });
+      for (let currentDate = dayjs(this.state.times.firstDate).add(1, step).startOf('day'); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf('day')) {
+        const offsetMs = currentDate.diff(this.state.times.firstDate, 'milisecods');
+        const offsetPx = offsetMs / this.state.times.timePerPixel;
+        const step = {
+          date: currentDate,
+          offset: {
+            ms: offsetMs,
+            px: offsetPx,
+          },
+        };
+        const previousStep = steps[steps.length - 1];
+        previousStep.width = {
+          ms: offsetMs - previousStep.offset.ms,
+          px: offsetPx - previousStep.offset.px,
+        };
+        steps.push(step);
+      }
+      const lastStep = steps[steps.length - 1];
+      lastStep.width = {
+        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
+        px: this.state.times.totalViewDurationPx - lastStep.offset.px,
+      };
+      this.state.times.steps = steps;
     }
   },
   computed: {
     visibleTasks() {
       const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
       const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
-      this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
-      this.state.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.state.scope.after, 'days').toDate();
-      this.state.times.firstTime = this.state.times.firstDate.getTime();
-      this.state.times.lastTime = this.state.times.lastDate.getTime();
-      this.state.times.totalViewDurationMs = this.state.times.lastTime - this.state.times.firstTime;
+      this.state.times.firstDate = dayjs(firstDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
+      this.state.times.lastDate = dayjs(lastDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
+      this.state.times.firstTime = this.state.times.firstDate.valueOf();
+      this.state.times.lastTime = this.state.times.lastDate.valueOf();
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
         return {
           width: prev.width + current.width
@@ -592,15 +635,9 @@ export default {
       }, {
         width: 0
       }).width;
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
-      let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-      this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
+      this.initTimes();
+      this.calculateSteps();
       this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
-      this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
       this.calculateCalendarDimensions();
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
@@ -630,8 +667,7 @@ export default {
     let tasks = this.state.tasks;
     let firstTaskTime = Number.MAX_SAFE_INTEGER;
     let lastTaskTime = 0;
-    let firstTaskDate,
-      lastTaskDate;
+    let firstTaskDate, lastTaskDate;
     for (let index = 0, len = this.state.tasks.length; index < len; index++) {
       let task = this.state.tasks[index];
       task.startDate = new Date(task.start);
@@ -650,6 +686,8 @@ export default {
     this.state.times.lastTaskTime = lastTaskTime;
     this.state.times.firstTaskDate = firstTaskDate;
     this.state.times.lastTaskDate = lastTaskDate;
+    this.initTimes();
+    this.calculateSteps();
   },
   mounted() {
     this.$nextTick(() => {

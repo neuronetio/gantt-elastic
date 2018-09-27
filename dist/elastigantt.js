@@ -1159,16 +1159,15 @@ var Elastigantt = (function () {
       verticalLines() {
         let lines = [];
         const state = this.root.state;
-        for (let step = 0; step <= state.times.steps; step++) {
-          let x = step * state.times.stepPx + state.grid.vertical.style.strokeWidth / 2;
+        state.times.steps.forEach((step) => {
           lines.push({
-            key: step,
-            x1: x,
+            key: step.date.valueOf(),
+            x1: step.offset.px,
             y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
-            x2: x,
+            x2: step.offset.px,
             y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth
           });
-        }
+        });
         return state.grid.vertical.lines = lines;
       },
       horizontalLines() {
@@ -1176,15 +1175,11 @@ var Elastigantt = (function () {
         const state = this.root.state;
         let tasks = this.root.visibleTasks;
         for (let index = 0, len = tasks.length; index <= len; index++) {
-          let x2 = state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth;
-          /*if (x2 > state.scroll.tree.right) {
-            x2 = state.scroll.tree.right;
-          }*/
           lines.push({
             key: 'hl' + index,
             x1: 0,
             y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-            x2: x2,
+            x2: '100%',
             y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
           });
         }
@@ -1419,7 +1414,7 @@ var Elastigantt = (function () {
       };
     },
     methods: {
-      howManyHoursFit(current = 24, currentRecurrection = 1) {
+      howManyHoursFit(dayIndex, current = 24, currentRecurrection = 1) {
         let max = {
           short: 0,
           medium: 0,
@@ -1427,9 +1422,9 @@ var Elastigantt = (function () {
         };
         const state = this.root.state;
         state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
-        let firstDate = dayjs(state.times.firstDate);
+        let firstDate = dayjs(state.times.steps[dayIndex].date);
         for (let i = 0; i < current; i++) {
-          let currentDate = firstDate.add(i, 'hours').toDate();
+          let currentDate = firstDate.add(i, 'hour');
           let textWidth = {
             short: state.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
             medium: state.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
@@ -1445,11 +1440,11 @@ var Elastigantt = (function () {
             max.long = textWidth.long;
           }
         }
-        let cellWidth = state.times.stepPx / current - state.calendar.styles.column['stroke-width'] - 2;
+        let cellWidth = state.times.steps[dayIndex].width.px / current - state.calendar.styles.column['stroke-width'] - 2;
         if (current > 1) {
           if (max.short > cellWidth) {
             currentRecurrection++;
-            return this.howManyHoursFit(Math.ceil(current / currentRecurrection), currentRecurrection);
+            return this.howManyHoursFit(dayIndex, Math.ceil(current / currentRecurrection), currentRecurrection);
           }
         }
         if (currentRecurrection < 3) {
@@ -1554,19 +1549,22 @@ var Elastigantt = (function () {
 
       hours() {
         let hours = [];
-        let hoursCount = this.howManyHoursFit();
-        let hourStep = 24 / hoursCount.count;
         let state = this.root.state;
-        for (let i = 0, len = state.times.steps * hoursCount.count; i < len; i++) {
-          const date = new Date(state.times.firstTime + i * hourStep * 60 * 60 * 1000);
-          hours.push({
-            key: 'h' + i,
-            x: state.calendar.styles.column['stroke-width'] / 2 + i * state.times.stepPx / hoursCount.count,
-            y: state.calendar.styles.column['stroke-width'] / 2 + state.calendar.day.height + state.calendar.month.height,
-            width: state.times.stepPx / hoursCount.count,
-            height: state.calendar.hour.height,
-            label: state.calendar.hour.format[hoursCount.type](date)
-          });
+        for (let dayIndex = 0, len = state.times.steps.length; dayIndex < len; dayIndex++) {
+          const hoursCount = this.howManyHoursFit(dayIndex);
+          const hourStep = 24 / hoursCount.count;
+          const hourWidthPx = state.times.steps[dayIndex].width.px / hoursCount.count;
+          for (let i = 0, len = hoursCount.count; i < len; i++) {
+            const date = dayjs(state.times.steps[dayIndex].date).add(i * hourStep, 'hour');
+            hours.push({
+              key: state.times.steps[dayIndex].date.valueOf() + 'h' + i,
+              x: state.calendar.styles.column['stroke-width'] / 2 + state.times.steps[dayIndex].offset.px + hourWidthPx * i,
+              y: state.calendar.styles.column['stroke-width'] / 2 + state.calendar.day.height + state.calendar.month.height,
+              width: hourWidthPx,
+              height: state.calendar.hour.height,
+              label: state.calendar.hour.format[hoursCount.type](date)
+            });
+          }
         }
         return state.calendar.hours = hours;
       },
@@ -3208,9 +3206,8 @@ var Elastigantt = (function () {
         lastTime: null, // last date getTime()
         totalViewDurationMs: 0,
         totalViewDurationPx: 0,
-        stepMs: 24 * 60 * 60 * 1000,
-        stepPx: 0,
-        steps: 0
+        stepDuration: 'day', // hour, month
+        steps: []
       },
       row: {
         height: 24,
@@ -3738,17 +3735,61 @@ var Elastigantt = (function () {
       initializeEvents() {
         this.$on('scroll.tree', this.onScrollTree);
         this.$on('wheel.tree', this.onWheelTree);
+      },
+      initTimes() {
+        let max = this.state.times.timeScale * 60;
+        let min = this.state.times.timeScale;
+        let steps = max / min;
+        let percent = this.state.times.timeZoom / 100;
+        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+        this.state.times.totalViewDurationMs = dayjs(this.state.times.lastDate).diff(this.state.times.firstTime, 'milisecods');
+        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      },
+      calculateSteps() {
+        const steps = [];
+        const lastMs = dayjs(this.state.times.lastDate).valueOf();
+        const step = this.state.times.stepDuration;
+        const currentDate = dayjs(this.state.times.firstDate);
+        steps.push({
+          date: currentDate,
+          offset: {
+            ms: 0,
+            px: 0,
+          }
+        });
+        for (let currentDate = dayjs(this.state.times.firstDate).add(1, step).startOf('day'); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf('day')) {
+          const offsetMs = currentDate.diff(this.state.times.firstDate, 'milisecods');
+          const offsetPx = offsetMs / this.state.times.timePerPixel;
+          const step = {
+            date: currentDate,
+            offset: {
+              ms: offsetMs,
+              px: offsetPx,
+            },
+          };
+          const previousStep = steps[steps.length - 1];
+          previousStep.width = {
+            ms: offsetMs - previousStep.offset.ms,
+            px: offsetPx - previousStep.offset.px,
+          };
+          steps.push(step);
+        }
+        const lastStep = steps[steps.length - 1];
+        lastStep.width = {
+          ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
+          px: this.state.times.totalViewDurationPx - lastStep.offset.px,
+        };
+        this.state.times.steps = steps;
       }
     },
     computed: {
       visibleTasks() {
         const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
         const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
-        this.state.times.firstDate = dayjs(firstDate).locale(this.locale).subtract(this.state.scope.before, 'days').toDate();
-        this.state.times.lastDate = dayjs(lastDate).locale(this.locale).add(this.state.scope.after, 'days').toDate();
-        this.state.times.firstTime = this.state.times.firstDate.getTime();
-        this.state.times.lastTime = this.state.times.lastDate.getTime();
-        this.state.times.totalViewDurationMs = this.state.times.lastTime - this.state.times.firstTime;
+        this.state.times.firstDate = dayjs(firstDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
+        this.state.times.lastDate = dayjs(lastDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
+        this.state.times.firstTime = this.state.times.firstDate.valueOf();
+        this.state.times.lastTime = this.state.times.lastDate.valueOf();
         this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
           return {
             width: prev.width + current.width
@@ -3756,15 +3797,9 @@ var Elastigantt = (function () {
         }, {
           width: 0
         }).width;
-        let max = this.state.times.timeScale * 60;
-        let min = this.state.times.timeScale;
-        let steps = max / min;
-        let percent = this.state.times.timeZoom / 100;
-        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-        this.state.times.stepPx = this.state.times.stepMs / this.state.times.timePerPixel;
+        this.initTimes();
+        this.calculateSteps();
         this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
-        this.state.times.steps = Math.ceil(this.state.times.totalViewDurationPx / this.state.times.stepPx);
         this.calculateCalendarDimensions();
         this.resetTaskTree();
         this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
@@ -3794,8 +3829,7 @@ var Elastigantt = (function () {
       let tasks = this.state.tasks;
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
-      let firstTaskDate,
-        lastTaskDate;
+      let firstTaskDate, lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
         task.startDate = new Date(task.start);
@@ -3814,6 +3848,8 @@ var Elastigantt = (function () {
       this.state.times.lastTaskTime = lastTaskTime;
       this.state.times.firstTaskDate = firstTaskDate;
       this.state.times.lastTaskDate = lastTaskDate;
+      this.initTimes();
+      this.calculateSteps();
     },
     mounted() {
       this.$nextTick(() => {

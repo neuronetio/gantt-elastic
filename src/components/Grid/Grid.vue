@@ -51,16 +51,15 @@ export default {
     verticalLines() {
       let lines = [];
       const state = this.root.state;
-      for (let step = 0; step <= state.times.steps; step++) {
-        let x = step * state.times.stepPx + state.grid.vertical.style.strokeWidth / 2;
+      state.times.steps.forEach((step) => {
         lines.push({
-          key: step,
-          x1: x,
+          key: step.date.valueOf(),
+          x1: step.offset.px,
           y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
-          x2: x,
+          x2: step.offset.px,
           y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth
         });
-      }
+      });
       return state.grid.vertical.lines = lines;
     },
     horizontalLines() {
@@ -68,15 +67,11 @@ export default {
       const state = this.root.state;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        let x2 = state.times.steps * state.times.stepPx + state.grid.vertical.style.strokeWidth;
-        /*if (x2 > state.scroll.tree.right) {
-          x2 = state.scroll.tree.right;
-        }*/
         lines.push({
           key: 'hl' + index,
           x1: 0,
           y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-          x2: x2,
+          x2: '100%',
           y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
         });
       }
