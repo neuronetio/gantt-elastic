@@ -21,62 +21,24 @@ export default {
     };
   },
   methods: {
-    howManyHoursFit(dayIndex, current = 24, currentRecurrection = 1) {
-      let max = {
-        short: 0,
-        medium: 0,
-        long: 0
-      };
-      const state = this.root.state;
-      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
-      let firstDate = dayjs(state.times.steps[dayIndex].date);
-      for (let i = 0; i < current; i++) {
-        let currentDate = firstDate.add(i, 'hour');
-        let textWidth = {
-          short: state.ctx.measureText(state.calendar.hour.format.short(currentDate)).width,
-          medium: state.ctx.measureText(state.calendar.hour.format.medium(currentDate)).width,
-          long: state.ctx.measureText(state.calendar.hour.format.long(currentDate)).width
-        };
-        if (textWidth.short >= max.short) {
-          max.short = textWidth.short;
+    howManyHoursFit(dayIndex) {
+      let firstDate = dayjs(this.root.state.times.steps[dayIndex].date);
+      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 6;
+      let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
+      let formatNames = Object.keys(this.root.state.calendar.hour.format);
+      for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
+        for (let formatName of formatNames) {
+          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+            return {
+              count: hours,
+              type: formatName
+            };
+          }
         }
-        if (textWidth.medium >= max.medium) {
-          max.medium = textWidth.medium;
-        }
-        if (textWidth.long >= max.long) {
-          max.long = textWidth.long;
-        }
-      }
-      let cellWidth = state.times.steps[dayIndex].width.px / current - state.calendar.styles.column['stroke-width'] - 2;
-      if (current > 1) {
-        if (max.short > cellWidth) {
-          currentRecurrection++;
-          return this.howManyHoursFit(dayIndex, Math.ceil(current / currentRecurrection), currentRecurrection);
-        }
-      }
-      if (currentRecurrection < 3) {
-        if (max.long <= cellWidth) {
-          return {
-            count: current,
-            type: 'long'
-          };
-        }
-        if (max.medium <= cellWidth) {
-          return {
-            count: current,
-            type: 'medium'
-          };
-        }
-      }
-      if (max.short <= cellWidth && current > 1) {
-        return {
-          count: current,
-          type: 'short'
-        };
       }
       return {
         count: 0,
-        type: 'short'
+        type: ''
       };
     },
     howManyDaysFit(current = this.root.state.times.steps, currentRecurrection = 1) {
@@ -156,24 +118,23 @@ export default {
 
     hours() {
       let hours = [];
-      let state = this.root.state;
-      for (let dayIndex = 0, len = state.times.steps.length; dayIndex < len; dayIndex++) {
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex++) {
         const hoursCount = this.howManyHoursFit(dayIndex);
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = state.times.steps[dayIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs(state.times.steps[dayIndex].date).add(i * hourStep, 'hour');
+          const date = dayjs(this.root.state.times.steps[dayIndex].date).add(i * hourStep, 'hour');
           hours.push({
-            key: state.times.steps[dayIndex].date.valueOf() + 'h' + i,
-            x: state.calendar.styles.column['stroke-width'] / 2 + state.times.steps[dayIndex].offset.px + hourWidthPx * i,
-            y: state.calendar.styles.column['stroke-width'] / 2 + state.calendar.day.height + state.calendar.month.height,
+            key: this.root.state.times.steps[dayIndex].date.valueOf() + 'h' + i,
+            x: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.times.steps[dayIndex].offset.px + hourWidthPx * i,
+            y: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
-            height: state.calendar.hour.height,
-            label: state.calendar.hour.format[hoursCount.type](date)
+            height: this.root.state.calendar.hour.height,
+            label: this.root.state.calendar.hour.format[hoursCount.type](date)
           });
         }
       }
-      return state.calendar.hours = hours;
+      return this.root.state.calendar.hours = hours;
     },
     days() {
       let state = this.root.state;

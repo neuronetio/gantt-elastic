@@ -236,22 +236,26 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         fontSize: '12px',
+        widths: [],
+        maxWidths: {},
         format: {
-          short(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('HH');
+          long(date) {
+            return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
           },
           medium(date) {
             return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
           },
-          long(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
-          }
+          short(date) {
+            return dayjs(date).locale(userOptions.locale.code).format('HH');
+          },
         }
       },
       day: {
         height: 20,
         display: true,
         fontSize: '12px',
+        widths: [],
+        maxWidths: {},
         format: {
           short(date) {
             return dayjs(date).locale(userOptions.locale.code).format('DD');
@@ -268,6 +272,8 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         fontSize: '12px',
+        widths: [],
+        maxWidths: {},
         format: {
           short(date) {
             return dayjs(date).locale(userOptions.locale.code).format('MM');
@@ -618,6 +624,39 @@ export default {
         px: this.state.times.totalViewDurationPx - lastStep.offset.px,
       };
       this.state.times.steps = steps;
+    },
+    computeCalendarWidths() {
+      this.computeHourWidths();
+    },
+    computeHourWidths() {
+      const state = this.state;
+      state.ctx.font = state.calendar.hour.fontSize + ' ' + state.calendar.fontFamily;
+      let currentDate = dayjs('2018-01-01T00:00:00');
+      let maxWidths = {};
+      Object.keys(state.calendar.hour.format).forEach((formatName) => {
+        maxWidths[formatName] = 0;
+      });
+      for (let hour = 0; hour < 24; hour++) {
+        const widths = {
+          hour
+        };
+        Object.keys(state.calendar.hour.format).forEach((formatName) => {
+          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.hour.widths.push(widths);
+        Object.keys(state.calendar.hour.format).forEach((formatName) => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, 'hour');
+      }
+      state.calendar.hour.maxWidths = maxWidths;
+    },
+    computeDayWidths() {
+      const state = this.state;
+      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+
     }
   },
   computed: {
@@ -688,6 +727,7 @@ export default {
     this.state.times.lastTaskDate = lastTaskDate;
     this.initTimes();
     this.calculateSteps();
+    this.computeCalendarWidths();
   },
   mounted() {
     this.$nextTick(() => {
