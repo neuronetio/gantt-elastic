@@ -257,15 +257,15 @@ function getOptions(userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          short(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('DD');
+          long(date) {
+            return dayjs(date).locale(userOptions.locale.code).format('DD dddd');
           },
           medium(date) {
             return dayjs(date).locale(userOptions.locale.code).format('DD ddd');
           },
-          long(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('DD dddd');
-          }
+          short(date) {
+            return dayjs(date).locale(userOptions.locale.code).format('DD');
+          },
         }
       },
       month: {
@@ -626,6 +626,7 @@ export default {
       this.state.times.steps = steps;
     },
     computeCalendarWidths() {
+      this.computeDayWidths();
       this.computeHourWidths();
     },
     computeHourWidths() {
@@ -656,7 +657,27 @@ export default {
     computeDayWidths() {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
-
+      let currentDate = dayjs(state.times.steps[0].date);
+      let maxWidths = {};
+      Object.keys(state.calendar.day.format).forEach((formatName) => {
+        maxWidths[formatName] = 0;
+      });
+      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+        const widths = {
+          day
+        };
+        Object.keys(state.calendar.day.format).forEach((formatName) => {
+          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.day.widths.push(widths);
+        Object.keys(state.calendar.day.format).forEach((formatName) => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, 'day');
+      }
+      state.calendar.day.maxWidths = maxWidths;
     }
   },
   computed: {
