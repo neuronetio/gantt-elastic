@@ -40,6 +40,10 @@ function getOptions(userOptions) {
       firstTime: null, // firstDate getTime()
       lastDate: null,
       lastTime: null, // last date getTime()
+      firstTaskDate: null,
+      firstTaskTime: 0,
+      lastTaskDate: null,
+      lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
       stepDuration: 'day', // hour, month
@@ -746,6 +750,8 @@ export default {
     this.state.times.lastTaskTime = lastTaskTime;
     this.state.times.firstTaskDate = firstTaskDate;
     this.state.times.lastTaskDate = lastTaskDate;
+    this.state.times.firstDate = dayjs(firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
+    this.state.times.lastDate = dayjs(lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
     this.initTimes();
     this.calculateSteps();
     this.computeCalendarWidths();
