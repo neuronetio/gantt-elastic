@@ -23,7 +23,7 @@ export default {
   methods: {
     howManyHoursFit(dayIndex) {
       let firstDate = dayjs(this.root.state.times.steps[dayIndex].date);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 6;
+      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
@@ -63,7 +63,7 @@ export default {
     },
     howManyMonthsFit() {
       let firstDate = dayjs(this.root.state.times.firstDate);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 6;
+      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
       const monthsCount = Math.ceil(this.root.state.times.lastDate.diff(this.root.state.times.firstDate, 'months', true));
