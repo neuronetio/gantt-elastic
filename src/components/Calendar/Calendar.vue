@@ -43,7 +43,7 @@ export default {
     },
     howManyDaysFit() {
       let firstDate = dayjs(this.root.state.times.steps[0].date);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 6;
+      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
       for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
@@ -51,6 +51,27 @@ export default {
           if ((this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
             return {
               count: days,
+              type: formatName
+            };
+          }
+        }
+      }
+      return {
+        count: 0,
+        type: ''
+      };
+    },
+    howManyMonthsFit() {
+      let firstDate = dayjs(this.root.state.times.firstDate);
+      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 6;
+      let fullWidth = this.root.state.width;
+      let formatNames = Object.keys(this.root.state.calendar.day.format);
+      const monthsCount = Math.ceil(this.root.state.times.lastDate.diff(this.root.state.times.firstDate, 'months', true));
+      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
+        for (let formatName of formatNames) {
+          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+            return {
+              count: months,
               type: formatName
             };
           }
@@ -125,61 +146,44 @@ export default {
       return this.root.state.calendar.days = days;
     },
     months() {
-      let state = this.root.state;
       let months = [];
-      let firstDate = state.times.firstDate;
-      let lastDate = state.times.lastDate;
-      let steps = state.times.steps;
-      let currentDate = dayjs(state.times.firstDate);
-      let currentMonth = currentDate.month();
+      const monthsCount = this.howManyMonthsFit();
+      let currentDate = dayjs(this.root.state.times.firstDate);
+      let startOfMonth = 0;
       let currentDays = 0;
-      let monthDays = [];
-      let currentDateObj = {
-        date: currentDate.clone().toDate(),
-        days: 0
-      };
-      for (let i = 0; i < steps; i++) {
-        currentDays++;
-        currentDate = currentDate.clone().add(1, 'days');
-        if (currentDate.month() !== currentMonth) {
-          currentMonth = currentDate.month();
-          currentDateObj.days = currentDays;
-          monthDays.push(currentDateObj);
-          currentDateObj = {
-            date: currentDate.clone().toDate(),
-            days: 0
-          };
-          currentDays = 0;
+      for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
+        let monthWidth = 0;
+        let monthOffset = Number.MAX_SAFE_INTEGER;
+        let finalDate = dayjs(currentDate).add(1, 'month').startOf('month');
+        if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
+          finalDate = dayjs(this.root.state.times.lastDate);
+        }
+        // we must find first and last step to get the offsets / widths
+        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
+          let currentStep = this.root.state.times.steps[step];
+          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
+            monthWidth += currentStep.width.px;
+            if (currentStep.offset.px < monthOffset) {
+              monthOffset = currentStep.offset.px;
+            }
+          }
+        }
+        months.push({
+          key: monthIndex + 'm',
+          x: this.root.state.calendar.styles.column['stroke-width'] / 2 + monthOffset,
+          y: this.root.state.calendar.styles.column['stroke-width'] / 2,
+          width: monthWidth,
+          height: this.root.state.calendar.month.height,
+          label: this.root.state.calendar.month.format[monthsCount.type](currentDate)
+        });
+
+        currentDate = currentDate.add(1, 'month').startOf('month');
+        if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
+          currentDate = dayjs(this.root.state.times.lastDate);
         }
       }
-      if (currentDays) {
-        currentDateObj.days = currentDays;
-        monthDays.push(currentDateObj);
-      }
-      let currentOffset = state.calendar.styles.column['stroke-width'] / 2;
-      for (let i = 0, len = monthDays.length; i < len; i++) {
-        let days = monthDays[i].days;
-        let date = monthDays[i].date;
-        let width = state.times.stepPx * days;
-        let format = 'long';
-        if (state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
-          format = 'medium';
-          if (state.ctx.measureText(state.calendar.month.format[format](date)).width > width) {
-            format = 'short';
-          }
-        };
-        months.push({
-          key: 'm' + i,
-          x: currentOffset,
-          y: state.calendar.styles.column['stroke-width'] / 2,
-          width: width,
-          height: state.calendar.day.height,
-          label: state.calendar.month.format[format](date)
-        });
-        currentOffset += width;
-      }
-      return state.calendar.months = months;
-    }
+      return this.root.state.calendar.months = months;
+    },
   }
 }
 </script>

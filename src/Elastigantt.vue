@@ -632,6 +632,7 @@ export default {
     computeCalendarWidths() {
       this.computeDayWidths();
       this.computeHourWidths();
+      this.computeMonthWidths();
     },
     computeHourWidths() {
       const state = this.state;
@@ -682,6 +683,32 @@ export default {
         currentDate = currentDate.add(1, 'day');
       }
       state.calendar.day.maxWidths = maxWidths;
+    },
+    computeMonthWidths() {
+      const state = this.state;
+      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+      let maxWidths = {};
+      Object.keys(state.calendar.day.format).forEach((formatName) => {
+        maxWidths[formatName] = 0;
+      });
+      let currentDate = dayjs(this.state.times.firstDate);
+      const monthsCount = this.state.times.lastDate.diff(this.state.times.firstDate, 'months');
+      for (let month = 0; month < monthsCount; month++) {
+        const widths = {
+          month
+        };
+        Object.keys(state.calendar.day.format).forEach((formatName) => {
+          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.month.widths.push(widths);
+        Object.keys(state.calendar.month.format).forEach((formatName) => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, 'month');
+      }
+      state.calendar.month.maxWidths = maxWidths;
     }
   },
   computed: {
