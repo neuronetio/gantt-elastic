@@ -563,8 +563,8 @@ export default {
       this.state.scroll.tree.right = left + treeContainerWidth;
       this.state.scroll.tree.top = top;
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
-      this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+      this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
+      this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
       this.state.svgTreeContainer.scrollLeft = left;
     },
     scrollToTime(time) {

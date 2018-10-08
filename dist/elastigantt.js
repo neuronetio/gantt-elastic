@@ -15,6 +15,8 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
+  //
 
   var script = {
     inject: ['root'],
@@ -83,14 +85,6 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "elastigantt__header" }, [
-      _c("div", { staticClass: "elastigantt__header-dates" }, [
-        _vm._v(
-          _vm._s(_vm.root.state.scroll.tree.dateTime.left) +
-            " - " +
-            _vm._s(_vm.root.state.scroll.tree.dateTime.right)
-        )
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "elastigantt__header-options" }, [
         _c(
           "button",
@@ -3666,8 +3660,8 @@ var Elastigantt = (function () {
         this.state.scroll.tree.right = left + treeContainerWidth;
         this.state.scroll.tree.top = top;
         this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-        this.state.scroll.tree.dateTime.left = new Date(this.state.scroll.tree.time).toDateString();
-        this.state.scroll.tree.dateTime.right = new Date(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)).toDateString();
+        this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
+        this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
         this.state.svgTreeContainer.scrollLeft = left;
       },
       scrollToTime(time) {
