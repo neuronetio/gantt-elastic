@@ -3,25 +3,25 @@
   <main-header></main-header>
   <svg :width="getWidth" :height="root.state.height" class="elastigantt__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
     <foreignObject x="0" y="0" width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml"  class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
-            <div class="elastigantt__task-list-container">
-              <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth" :height="root.state.height" v-if="root.state.taskList.display">
-                <defs v-html="defs"></defs>
-                <task-list></task-list>
-              </svg>
-</div>
-<div class="elastigantt__main-container" ref="svgTreeContainer">
-  <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
-    <defs v-html="defs"></defs>
-    <tree></tree>
-    </svg>
-</div>
-</div>
-</foreignObject>
-</svg>
-<div class="elastigantt__tree-scroll-container" :style="{marginLeft:getMarginLeft}" v-on:scroll="onScroll" v-on:wheel="onWheel" ref="treeScrollContainer">
-  <div class="elastigantt__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
-</div>
+      <div xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
+        <div class="elastigantt__task-list-container">
+          <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth" :height="root.state.height" v-if="root.state.taskList.display">
+            <defs v-html="defs"></defs>
+            <task-list></task-list>
+          </svg>
+        </div>
+        <div class="elastigantt__main-container" ref="svgTreeContainer">
+          <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
+            <defs v-html="defs"></defs>
+            <tree v-on:wheel="onWheel"></tree>
+          </svg>
+        </div>
+      </div>
+    </foreignObject>
+  </svg>
+  <div class="elastigantt__tree-scroll-container" :style="{marginLeft:getMarginLeft}" v-on:scroll="onScroll" ref="treeScrollContainer">
+    <div class="elastigantt__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
+  </div>
 </div>
 </template>
 
@@ -90,16 +90,16 @@ export default {
   },
   methods: {
     mouseMove(event) {
-      this.root.$emit('mousemove', event);
+      this.root.$emit('elastigantt.main.mousemove', event);
     },
     mouseUp(event) {
-      this.root.$emit('mouseup', event);
+      this.root.$emit('elastigantt.main.mouseup', event);
     },
     onScroll(ev) {
-      this.root.$emit('scroll.tree', ev);
+      this.root.$emit('elastigantt.tree.scroll', ev);
     },
     onWheel(ev) {
-      this.root.$emit('wheel.tree', ev);
+      this.root.$emit('elastigantt.tree.wheel', ev);
     }
   }
 }

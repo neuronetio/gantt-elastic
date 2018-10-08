@@ -2,7 +2,7 @@
 <div class="elastigantt__task-list-item-column" :style="column.style">
   <div class="elastigantt__task-list-item-value--wrapper">
     <slot></slot>
-    <div class="elastigantt__task-list-item-value" :style="column.styles.value">{{task[column.value]}}</div>
+    <div class="elastigantt__task-list-item-value" :style="column.styles.value">{{value}}</div>
   </div>
 </div>
 </template>
@@ -13,5 +13,13 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    value() {
+      if (typeof this.column.value === 'function') {
+        return this.column.value(this.task);
+      }
+      return this.task[this.column.value];
+    }
+  }
 }
 </script>

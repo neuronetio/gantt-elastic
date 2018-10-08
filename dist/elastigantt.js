@@ -33,7 +33,7 @@ var Elastigantt = (function () {
         });
       },
       recenterPosition() {
-        this.root.$emit('recenterPosition');
+        this.root.$emit('elastigantt.recenterPosition');
       }
     },
     computed: {
@@ -42,7 +42,7 @@ var Elastigantt = (function () {
           return this.root.state.times.timeZoom;
         },
         set(value) {
-          this.$root.$emit('elastigantt.times.timeZoom.change', Number(value));
+          this.root.$emit('elastigantt.times.timeZoom.change', Number(value));
         }
       },
       height: {
@@ -50,8 +50,7 @@ var Elastigantt = (function () {
           return this.root.state.row.height;
         },
         set(value) {
-          this.root.state.row.height = Number(value);
-          this.root.calculateTaskListColumnsWidths();
+          this.root.$emit('elastigantt.row.height.change', Number(value));
         }
       },
       scope: {
@@ -59,8 +58,9 @@ var Elastigantt = (function () {
           return this.root.state.scope.before;
         },
         set(value) {
-          this.root.state.scope.before = Number(value);
-          this.root.state.scope.after = Number(value);
+          this.root.$emit('elastigantt.scope.change', Number(value));
+          this.root.$emit('elastigantt.scope.before.change', Number(value));
+          this.root.$emit('elastigantt.scope.after.change', Number(value));
         }
       },
       divider: {
@@ -68,8 +68,7 @@ var Elastigantt = (function () {
           return this.root.state.taskList.percent;
         },
         set(value) {
-          this.root.state.taskList.percent = Number(value);
-          this.root.calculateTaskListColumnsWidths();
+          this.root.$emit('elastigantt.taskList.width.change', Number(value));
         }
       }
     }
@@ -628,24 +627,26 @@ var Elastigantt = (function () {
           this.resizer.moving = column;
           this.resizer.x = event.clientX;
           this.resizer.initialWidth = column.width;
+          this.root.$emit('elastigantt.taskList.column.width.change.start', this.resizer.moving.width);
         }
       },
       resizerMouseMove(event) {
         if (this.resizer.moving) {
           this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-          this.root.calculateTaskListColumnsWidths();
+          this.root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
         }
       },
       resizerMouseUp(event) {
         if (this.resizer.moving) {
+          this.root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
+          this.root.$emit('elastigantt.taskList.column.width.change.stop', this.resizer.moving.width);
           this.resizer.moving = false;
-          this.root.calculateTaskListColumnsWidths();
         }
       }
     },
     created() {
-      this.root.$on('mousemove', this.resizerMouseMove);
-      this.root.$on('mouseup', this.resizerMouseUp);
+      this.root.$on('elastigantt.main.mousemove', this.resizerMouseMove);
+      this.root.$on('elastigantt.main.mouseup', this.resizerMouseUp);
     }
   };
 
@@ -772,6 +773,14 @@ var Elastigantt = (function () {
     data() {
       return {};
     },
+    computed: {
+      value() {
+        if (typeof this.column.value === 'function') {
+          return this.column.value(this.task);
+        }
+        return this.task[this.column.value];
+      }
+    }
   };
 
   /* script */
@@ -801,7 +810,7 @@ var Elastigantt = (function () {
                 staticClass: "elastigantt__task-list-item-value",
                 style: _vm.column.styles.value
               },
-              [_vm._v(_vm._s(_vm.task[_vm.column.value]))]
+              [_vm._v(_vm._s(_vm.value))]
             )
           ],
           2
@@ -1120,7 +1129,7 @@ var Elastigantt = (function () {
       return {};
     },
     created() {
-      this.root.$on('recenterPosition', this.recenterPosition);
+      this.root.$on('elastigantt.recenterPosition', this.recenterPosition);
     },
     methods: {
       recenterPosition() {
@@ -2907,16 +2916,16 @@ var Elastigantt = (function () {
     },
     methods: {
       mouseMove(event) {
-        this.root.$emit('mousemove', event);
+        this.root.$emit('elastigantt.main.mousemove', event);
       },
       mouseUp(event) {
-        this.root.$emit('mouseup', event);
+        this.root.$emit('elastigantt.main.mouseup', event);
       },
       onScroll(ev) {
-        this.root.$emit('scroll.tree', ev);
+        this.root.$emit('elastigantt.tree.scroll', ev);
       },
       onWheel(ev) {
-        this.root.$emit('wheel.tree', ev);
+        this.root.$emit('elastigantt.tree.wheel', ev);
       }
     }
   };
@@ -3010,7 +3019,7 @@ var Elastigantt = (function () {
                               domProps: { innerHTML: _vm._s(_vm.defs) }
                             }),
                             _vm._v(" "),
-                            _c("tree")
+                            _c("tree", { on: { wheel: _vm.onWheel } })
                           ],
                           1
                         )
@@ -3030,7 +3039,7 @@ var Elastigantt = (function () {
             ref: "treeScrollContainer",
             staticClass: "elastigantt__tree-scroll-container",
             style: { marginLeft: _vm.getMarginLeft },
-            on: { scroll: _vm.onScroll, wheel: _vm.onWheel }
+            on: { scroll: _vm.onScroll }
           },
           [
             _c("div", {
@@ -3680,24 +3689,46 @@ var Elastigantt = (function () {
         this.calculateSteps();
         this.calculateCalendarDimensions();
       },
+      onRowHeightChange(height) {
+        this.state.row.height = height;
+        this.calculateTaskListColumnsWidths();
+      },
+      onScopeChange(value) {
+        this.state.scope.before = value;
+        this.state.scope.after = value;
+        this.initTimes();
+        this.calculateSteps();
+        this.computeCalendarWidths();
+      },
+      onTaskListWidthChange(value) {
+        this.state.taskList.percent = value;
+        this.calculateTaskListColumnsWidths();
+      },
+      onTaskListColumnWidthChange(value) {
+        this.calculateTaskListColumnsWidths();
+      },
       initializeEvents() {
-        this.$on('scroll.tree', this.onScrollTree);
-        this.$on('wheel.tree', this.onWheelTree);
-        this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+        this.$on('elastigantt.tree.scroll', this.onScrollTree);
+        this.$on('elastigantt.tree.wheel', this.onWheelTree);
+        this.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+        this.$on('elastigantt.row.height.change', this.onRowHeightChange);
+        this.$on('elastigantt.scope.change', this.onScopeChange);
+        this.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
+        this.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
       },
       initTimes() {
         let max = this.state.times.timeScale * 60;
         let min = this.state.times.timeScale;
         let steps = max / min;
         let percent = this.state.times.timeZoom / 100;
-        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-        this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-
         this.state.times.firstDate = dayjs(this.state.times.firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
         this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
         this.state.times.firstTime = this.state.times.firstDate.valueOf();
         this.state.times.lastTime = this.state.times.lastDate.valueOf();
+
+        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+        this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
+        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
       },
       calculateSteps() {
         const steps = [];
@@ -3743,7 +3774,7 @@ var Elastigantt = (function () {
       computeHourWidths() {
         const state = this.state;
         state.ctx.font = state.calendar.hour.fontSize + ' ' + state.calendar.fontFamily;
-        let currentDate = dayjs('2018-01-01T00:00:00');
+        let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
         let maxWidths = {};
         Object.keys(state.calendar.hour.format).forEach((formatName) => {
           maxWidths[formatName] = 0;
@@ -3858,8 +3889,8 @@ var Elastigantt = (function () {
       let firstTaskDate, lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
-        task.startDate = new Date(task.start);
-        task.startTime = task.startDate.getTime();
+        task.startDate = dayjs(task.start);
+        task.startTime = task.startDate.valueOf();
         task.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
@@ -3867,7 +3898,7 @@ var Elastigantt = (function () {
         }
         if (task.startTime + task.durationMs > lastTaskTime) {
           lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = new Date(task.startTime + task.durationMs);
+          lastTaskDate = dayjs(task.startTime + task.durationMs);
         }
       }
       this.state.times.firstTaskTime = firstTaskTime;
@@ -3883,7 +3914,7 @@ var Elastigantt = (function () {
     },
     mounted() {
       this.$nextTick(() => {
-        this.$emit('recenterPosition');
+        this.$emit('elastigantt.recenterPosition');
       });
     }
   };

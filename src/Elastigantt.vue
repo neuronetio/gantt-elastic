@@ -586,24 +586,46 @@ export default {
       this.calculateSteps();
       this.calculateCalendarDimensions();
     },
+    onRowHeightChange(height) {
+      this.state.row.height = height;
+      this.calculateTaskListColumnsWidths();
+    },
+    onScopeChange(value) {
+      this.state.scope.before = value;
+      this.state.scope.after = value;
+      this.initTimes();
+      this.calculateSteps();
+      this.computeCalendarWidths();
+    },
+    onTaskListWidthChange(value) {
+      this.state.taskList.percent = value;
+      this.calculateTaskListColumnsWidths();
+    },
+    onTaskListColumnWidthChange(value) {
+      this.calculateTaskListColumnsWidths();
+    },
     initializeEvents() {
-      this.$on('scroll.tree', this.onScrollTree);
-      this.$on('wheel.tree', this.onWheelTree);
-      this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+      this.$on('elastigantt.tree.scroll', this.onScrollTree);
+      this.$on('elastigantt.tree.wheel', this.onWheelTree);
+      this.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+      this.$on('elastigantt.row.height.change', this.onRowHeightChange);
+      this.$on('elastigantt.scope.change', this.onScopeChange);
+      this.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
+      this.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
     },
     initTimes() {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
       let steps = max / min;
       let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-
       this.state.times.firstDate = dayjs(this.state.times.firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
       this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
       this.state.times.firstTime = this.state.times.firstDate.valueOf();
       this.state.times.lastTime = this.state.times.lastDate.valueOf();
+
+      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
+      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
     },
     calculateSteps() {
       const steps = [];
@@ -649,7 +671,7 @@ export default {
     computeHourWidths() {
       const state = this.state;
       state.ctx.font = state.calendar.hour.fontSize + ' ' + state.calendar.fontFamily;
-      let currentDate = dayjs('2018-01-01T00:00:00');
+      let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
       let maxWidths = {};
       Object.keys(state.calendar.hour.format).forEach((formatName) => {
         maxWidths[formatName] = 0;
@@ -764,8 +786,8 @@ export default {
     let firstTaskDate, lastTaskDate;
     for (let index = 0, len = this.state.tasks.length; index < len; index++) {
       let task = this.state.tasks[index];
-      task.startDate = new Date(task.start);
-      task.startTime = task.startDate.getTime();
+      task.startDate = dayjs(task.start);
+      task.startTime = task.startDate.valueOf();
       task.durationMs = task.duration * 1000;
       if (task.startTime < firstTaskTime) {
         firstTaskTime = task.startTime;
@@ -773,7 +795,7 @@ export default {
       }
       if (task.startTime + task.durationMs > lastTaskTime) {
         lastTaskTime = task.startTime + task.durationMs;
-        lastTaskDate = new Date(task.startTime + task.durationMs);
+        lastTaskDate = dayjs(task.startTime + task.durationMs);
       }
     }
     this.state.times.firstTaskTime = firstTaskTime;
@@ -789,7 +811,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$emit('recenterPosition');
+      this.$emit('elastigantt.recenterPosition');
     })
   }
 }
