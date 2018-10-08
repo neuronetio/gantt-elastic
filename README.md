@@ -8,8 +8,12 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, project manager, gan
 
 #### Elastigantt is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
+##### Elastigantt is not fully finished yet and may change (but if you really wan't you can fork this repo or download current version - do not use npm right now)
 
 ##### :star2: Give it a star if you want more activity in this repo, thanks!
+
+### install
+`npm install --save elastigantt` or download zip from github
 
 ### usage (more info / documentation soon - for now take a look at [index.html](https://github.com/neuronetio/elastigantt/blob/master/index.html))
 ```html
@@ -21,7 +25,7 @@ const options = {
     columns : [
       {id:1, label : 'ID', value : 'id', width : 40},
       {id:2, label : 'Description', value : 'label', width : 250, expander:true},
-      {id:3, label: 'Start',value:'start',width:100},
+      {id:3, label: 'Start', value:(task)=>task.startDate.format('YYYY-MM-DD'), width:100},
       {id:3, label : 'User', value : 'user', width : 120},
       {id:4, label : 'Type', value : 'type', width : 60},
       {id:5, label : '%', value : 'progress', width : 35, styles:{
