@@ -39,7 +39,7 @@ export default {
         return this.root.state.times.timeZoom;
       },
       set(value) {
-        this.root.state.times.timeZoom = Number(value);
+        this.$root.$emit('elastigantt.times.timeZoom.change', Number(value));
       }
     },
     height: {

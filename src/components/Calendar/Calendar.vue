@@ -16,9 +16,7 @@ export default {
   },
   inject: ['root'],
   data() {
-    return {
-      cache: {}
-    };
+    return {};
   },
   methods: {
     howManyHoursFit(dayIndex) {

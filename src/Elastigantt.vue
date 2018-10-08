@@ -580,9 +580,16 @@ export default {
     onWheelTree(ev) {
       //this.state.times.timeScale += ev.deltaY * 10;
     },
+    onTimeZoomChange(timeZoom) {
+      this.state.times.timeZoom = timeZoom;
+      this.initTimes();
+      this.calculateSteps();
+      this.calculateCalendarDimensions();
+    },
     initializeEvents() {
       this.$on('scroll.tree', this.onScrollTree);
       this.$on('wheel.tree', this.onWheelTree);
+      this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
     },
     initTimes() {
       let max = this.state.times.timeScale * 60;
@@ -590,8 +597,13 @@ export default {
       let steps = max / min;
       let percent = this.state.times.timeZoom / 100;
       this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = dayjs(this.state.times.lastDate).diff(this.state.times.firstTime, 'milisecods');
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
       this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+
+      this.state.times.firstDate = dayjs(this.state.times.firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
+      this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
+      this.state.times.firstTime = this.state.times.firstDate.valueOf();
+      this.state.times.lastTime = this.state.times.lastDate.valueOf();
     },
     calculateSteps() {
       const steps = [];
@@ -688,16 +700,16 @@ export default {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
       let maxWidths = {};
-      Object.keys(state.calendar.day.format).forEach((formatName) => {
+      Object.keys(state.calendar.month.format).forEach((formatName) => {
         maxWidths[formatName] = 0;
       });
       let currentDate = dayjs(this.state.times.firstDate);
-      const monthsCount = this.state.times.lastDate.diff(this.state.times.firstDate, 'months');
+      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, 'months', true));
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
         };
-        Object.keys(state.calendar.day.format).forEach((formatName) => {
+        Object.keys(state.calendar.month.format).forEach((formatName) => {
           widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
         });
         state.calendar.month.widths.push(widths);
@@ -713,12 +725,6 @@ export default {
   },
   computed: {
     visibleTasks() {
-      const firstDate = this.state.times.firstTaskDate.toISOString().split('T')[0] + 'T00:00:00';
-      const lastDate = this.state.times.lastTaskDate.toISOString().split('T')[0] + 'T23:59:59.999';
-      this.state.times.firstDate = dayjs(firstDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
-      this.state.times.lastDate = dayjs(lastDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
-      this.state.times.firstTime = this.state.times.firstDate.valueOf();
-      this.state.times.lastTime = this.state.times.lastDate.valueOf();
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
         return {
           width: prev.width + current.width
@@ -726,10 +732,7 @@ export default {
       }, {
         width: 0
       }).width;
-      this.initTimes();
-      this.calculateSteps();
       this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
-      this.calculateCalendarDimensions();
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
@@ -782,6 +785,7 @@ export default {
     this.initTimes();
     this.calculateSteps();
     this.computeCalendarWidths();
+    this.calculateCalendarDimensions();
   },
   mounted() {
     this.$nextTick(() => {
