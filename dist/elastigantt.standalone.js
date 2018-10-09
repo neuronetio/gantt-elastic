@@ -4024,7 +4024,8 @@ var Elastigantt = (function () {
       undefined
     );
 
-  function init(el, tasks, options) {
+  function init(config) {
+    let {el, tasks, options} = config;
     const elastigantt = Object.assign({}, Elastigantt$1);
     elastigantt.data = Object.assign({}, elastigantt.data);
     elastigantt.el = el;

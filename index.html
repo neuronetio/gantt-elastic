@@ -180,7 +180,7 @@
     }*/
   };
 
-  const elastigantt = Elastigantt('#app',tasks,options);
+  const elastigantt = Elastigantt({el:'#app',tasks,options});
 
   // listen to events
   elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
