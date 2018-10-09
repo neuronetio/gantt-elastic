@@ -1,6 +1,7 @@
 # Elastigantt - Elastic Javascript Gantt
+## Javascript Gantt Chart
 
-Keywords: [ gantt, javascript gantt, gantt chart, js gantt, project manager, gantt project manager ]
+Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
 ![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
 ![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
