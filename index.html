@@ -13,7 +13,7 @@
   <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
   <script src="src/vue.js"></script>
   <script src="node_modules/dayjs/dayjs.min.js"></script>
-  <script src="dist/elastigantt.js"></script>
+  <script src="dist/elastigantt.standalone.js"></script>
   <!--<script type="module" src="src/index.js"></script>-->
   <script>
   let currentDate = dayjs(new Date()).locale('en');
@@ -180,22 +180,7 @@
     }*/
   };
 
-  // overriding components?
-  let mainComponents = Elastigantt.components['elastigantt-main'].components;
-  mainComponents['tree'] = Object.assign({},mainComponents['tree'],{
-    created(){
-      console.log('tree created! whoaaa!');
-    }
-  });
-
-  const elastigantt = new Vue({
-    el:'#app',
-    template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
-    data:{
-      tasks,
-      options
-    }
-  });
+  const elastigantt = Elastigantt('#app',tasks,options);
 
   // listen to events
   elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
