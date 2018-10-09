@@ -32,7 +32,7 @@ export default {
       });
     },
     recenterPosition() {
-      this.root.$emit('elastigantt.recenterPosition');
+      this.$root.$emit('elastigantt.recenterPosition');
     }
   },
   computed: {
@@ -41,7 +41,7 @@ export default {
         return this.root.state.times.timeZoom;
       },
       set(value) {
-        this.root.$emit('elastigantt.times.timeZoom.change', Number(value));
+        this.$root.$emit('elastigantt.times.timeZoom.change', Number(value));
       }
     },
     height: {
@@ -49,7 +49,7 @@ export default {
         return this.root.state.row.height;
       },
       set(value) {
-        this.root.$emit('elastigantt.row.height.change', Number(value))
+        this.$root.$emit('elastigantt.row.height.change', Number(value))
       }
     },
     scope: {
@@ -57,9 +57,9 @@ export default {
         return this.root.state.scope.before;
       },
       set(value) {
-        this.root.$emit('elastigantt.scope.change', Number(value));
-        this.root.$emit('elastigantt.scope.before.change', Number(value));
-        this.root.$emit('elastigantt.scope.after.change', Number(value));
+        this.$root.$emit('elastigantt.scope.change', Number(value));
+        this.$root.$emit('elastigantt.scope.before.change', Number(value));
+        this.$root.$emit('elastigantt.scope.after.change', Number(value));
       }
     },
     divider: {
@@ -67,7 +67,7 @@ export default {
         return this.root.state.taskList.percent;
       },
       set(value) {
-        this.root.$emit('elastigantt.taskList.width.change', Number(value));
+        this.$root.$emit('elastigantt.taskList.width.change', Number(value));
       }
     }
   }

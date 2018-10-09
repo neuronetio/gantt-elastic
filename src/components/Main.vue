@@ -90,16 +90,16 @@ export default {
   },
   methods: {
     mouseMove(event) {
-      this.root.$emit('elastigantt.main.mousemove', event);
+      this.$root.$emit('elastigantt.main.mousemove', event);
     },
     mouseUp(event) {
-      this.root.$emit('elastigantt.main.mouseup', event);
+      this.$root.$emit('elastigantt.main.mouseup', event);
     },
     onScroll(ev) {
-      this.root.$emit('elastigantt.tree.scroll', ev);
+      this.$root.$emit('elastigantt.tree.scroll', ev);
     },
     onWheel(ev) {
-      this.root.$emit('elastigantt.tree.wheel', ev);
+      this.$root.$emit('elastigantt.tree.wheel', ev);
     }
   }
 }

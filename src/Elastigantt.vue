@@ -300,7 +300,7 @@ function getOptions(userOptions) {
       'Task list width': 'Task list width',
       'Display task list': 'Show task list',
       'Before/After': 'Before/After'
-    }
+    },
   };
 }
 
@@ -605,13 +605,13 @@ export default {
       this.calculateTaskListColumnsWidths();
     },
     initializeEvents() {
-      this.$on('elastigantt.tree.scroll', this.onScrollTree);
-      this.$on('elastigantt.tree.wheel', this.onWheelTree);
-      this.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
-      this.$on('elastigantt.row.height.change', this.onRowHeightChange);
-      this.$on('elastigantt.scope.change', this.onScopeChange);
-      this.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
-      this.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
+      this.$root.$on('elastigantt.tree.scroll', this.onScrollTree);
+      this.$root.$on('elastigantt.tree.wheel', this.onWheelTree);
+      this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+      this.$root.$on('elastigantt.row.height.change', this.onRowHeightChange);
+      this.$root.$on('elastigantt.scope.change', this.onScopeChange);
+      this.$root.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
+      this.$root.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
     },
     initTimes() {
       let max = this.state.times.timeScale * 60;
@@ -811,7 +811,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$emit('elastigantt.recenterPosition');
+      this.$root.$emit('elastigantt.recenterPosition');
     })
   }
 }

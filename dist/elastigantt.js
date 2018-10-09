@@ -35,7 +35,7 @@ var Elastigantt = (function () {
         });
       },
       recenterPosition() {
-        this.root.$emit('elastigantt.recenterPosition');
+        this.$root.$emit('elastigantt.recenterPosition');
       }
     },
     computed: {
@@ -44,7 +44,7 @@ var Elastigantt = (function () {
           return this.root.state.times.timeZoom;
         },
         set(value) {
-          this.root.$emit('elastigantt.times.timeZoom.change', Number(value));
+          this.$root.$emit('elastigantt.times.timeZoom.change', Number(value));
         }
       },
       height: {
@@ -52,7 +52,7 @@ var Elastigantt = (function () {
           return this.root.state.row.height;
         },
         set(value) {
-          this.root.$emit('elastigantt.row.height.change', Number(value));
+          this.$root.$emit('elastigantt.row.height.change', Number(value));
         }
       },
       scope: {
@@ -60,9 +60,9 @@ var Elastigantt = (function () {
           return this.root.state.scope.before;
         },
         set(value) {
-          this.root.$emit('elastigantt.scope.change', Number(value));
-          this.root.$emit('elastigantt.scope.before.change', Number(value));
-          this.root.$emit('elastigantt.scope.after.change', Number(value));
+          this.$root.$emit('elastigantt.scope.change', Number(value));
+          this.$root.$emit('elastigantt.scope.before.change', Number(value));
+          this.$root.$emit('elastigantt.scope.after.change', Number(value));
         }
       },
       divider: {
@@ -70,7 +70,7 @@ var Elastigantt = (function () {
           return this.root.state.taskList.percent;
         },
         set(value) {
-          this.root.$emit('elastigantt.taskList.width.change', Number(value));
+          this.$root.$emit('elastigantt.taskList.width.change', Number(value));
         }
       }
     }
@@ -621,26 +621,26 @@ var Elastigantt = (function () {
           this.resizer.moving = column;
           this.resizer.x = event.clientX;
           this.resizer.initialWidth = column.width;
-          this.root.$emit('elastigantt.taskList.column.width.change.start', this.resizer.moving.width);
+          this.$root.$emit('elastigantt.taskList.column.width.change.start', this.resizer.moving.width);
         }
       },
       resizerMouseMove(event) {
         if (this.resizer.moving) {
           this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-          this.root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
+          this.$root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
         }
       },
       resizerMouseUp(event) {
         if (this.resizer.moving) {
-          this.root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
-          this.root.$emit('elastigantt.taskList.column.width.change.stop', this.resizer.moving.width);
+          this.$root.$emit('elastigantt.taskList.column.width.change', this.resizer.moving.width);
+          this.$root.$emit('elastigantt.taskList.column.width.change.stop', this.resizer.moving.width);
           this.resizer.moving = false;
         }
       }
     },
     created() {
-      this.root.$on('elastigantt.main.mousemove', this.resizerMouseMove);
-      this.root.$on('elastigantt.main.mouseup', this.resizerMouseUp);
+      this.$root.$on('elastigantt.main.mousemove', this.resizerMouseMove);
+      this.$root.$on('elastigantt.main.mouseup', this.resizerMouseUp);
     }
   };
 
@@ -1123,7 +1123,7 @@ var Elastigantt = (function () {
       return {};
     },
     created() {
-      this.root.$on('elastigantt.recenterPosition', this.recenterPosition);
+      this.$root.$on('elastigantt.recenterPosition', this.recenterPosition);
     },
     methods: {
       recenterPosition() {
@@ -2910,16 +2910,16 @@ var Elastigantt = (function () {
     },
     methods: {
       mouseMove(event) {
-        this.root.$emit('elastigantt.main.mousemove', event);
+        this.$root.$emit('elastigantt.main.mousemove', event);
       },
       mouseUp(event) {
-        this.root.$emit('elastigantt.main.mouseup', event);
+        this.$root.$emit('elastigantt.main.mouseup', event);
       },
       onScroll(ev) {
-        this.root.$emit('elastigantt.tree.scroll', ev);
+        this.$root.$emit('elastigantt.tree.scroll', ev);
       },
       onWheel(ev) {
-        this.root.$emit('elastigantt.tree.wheel', ev);
+        this.$root.$emit('elastigantt.tree.wheel', ev);
       }
     }
   };
@@ -3399,7 +3399,7 @@ var Elastigantt = (function () {
         'Task list width': 'Task list width',
         'Display task list': 'Show task list',
         'Before/After': 'Before/After'
-      }
+      },
     };
   }
 
@@ -3702,13 +3702,13 @@ var Elastigantt = (function () {
         this.calculateTaskListColumnsWidths();
       },
       initializeEvents() {
-        this.$on('elastigantt.tree.scroll', this.onScrollTree);
-        this.$on('elastigantt.tree.wheel', this.onWheelTree);
-        this.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
-        this.$on('elastigantt.row.height.change', this.onRowHeightChange);
-        this.$on('elastigantt.scope.change', this.onScopeChange);
-        this.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
-        this.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
+        this.$root.$on('elastigantt.tree.scroll', this.onScrollTree);
+        this.$root.$on('elastigantt.tree.wheel', this.onWheelTree);
+        this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
+        this.$root.$on('elastigantt.row.height.change', this.onRowHeightChange);
+        this.$root.$on('elastigantt.scope.change', this.onScopeChange);
+        this.$root.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
+        this.$root.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
       },
       initTimes() {
         let max = this.state.times.timeScale * 60;
@@ -3908,7 +3908,7 @@ var Elastigantt = (function () {
     },
     mounted() {
       this.$nextTick(() => {
-        this.$emit('elastigantt.recenterPosition');
+        this.$root.$emit('elastigantt.recenterPosition');
       });
     }
   };

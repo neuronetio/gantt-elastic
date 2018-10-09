@@ -196,6 +196,12 @@
       options
     }
   });
+
+  // listen to events
+  elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
+    console.log('scroll');
+  });
+
   </script>
 </body>
 </html>

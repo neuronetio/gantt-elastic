@@ -12,7 +12,7 @@ export default {
     return {};
   },
   created() {
-    this.root.$on('elastigantt.recenterPosition', this.recenterPosition);
+    this.$root.$on('elastigantt.recenterPosition', this.recenterPosition);
   },
   methods: {
     recenterPosition() {
