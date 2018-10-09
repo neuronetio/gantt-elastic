@@ -1,5 +1,7 @@
-# Elastigantt - Elastic Javascript Gantt
-## Javascript Gantt Chart
+# Elastigantt - Elastic Javascript Gantt Chart
+
+
+### Javascript Gantt Chart
 
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
@@ -78,14 +80,35 @@ const tasks = [
   /* ... */
 ];
 
-const elastigantt = new Vue({
-  el:'#gantt',// <- your container
-  template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
-  data:{
-    tasks,
-    options
-  }
+// override components - copy component from src directory change it to object or compile *.vue to *.js
+// more info about components you can find here : https://vuejs.org/v2/guide/index.html
+// You can change anything! You have full control of components templates, events, data ... and so on!
+Elastigantt.component.components.EgMain.components.TopHeader = CustomHeader;
+
+const elastigantt = Elastigantt.mount({
+  el: '#app', // <- your container id
+  tasks: tasks,
+  options: options
+});
+
+// listen to events
+elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
+  console.log('scrolled!');
 });
 ```
+#### as Vue component
+```javascript
+const Elastigantt = require('elastigantt');
+//import Elastigantt from './node_modules/elastigantt/index.js';
 
+export default {
+  template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
+  data(){
+    return {
+      tasks:[/* ... */],
+      options:{/* ... */}
+    }
+  }
+}
+```
 License: MIT
