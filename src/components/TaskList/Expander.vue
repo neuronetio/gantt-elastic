@@ -1,34 +1,10 @@
 <template>
 <div class="elastigantt__task-list-column-expander" :style="root.state.taskList.styles.expander.wrapper">
   <svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size" :style="root.state.taskList.styles.expander.content">
-  <rect
-    :x="border"
-    :y="border"
-    :width="root.state.taskList.expander.size-border*2"
-    :height="root.state.taskList.expander.size-border*2"
-    rx="2"
-    ry="2"
-    :style="root.state.taskList.styles.expander"
-    v-if="allChildren.length"
-    @click="toggle">
-  </rect>
-  <line v-if="allChildren.length"
-    :x1="lineOffset"
-    :y1="root.state.taskList.expander.size/2"
-    :x2="root.state.taskList.expander.size-lineOffset"
-    :y2="root.state.taskList.expander.size/2"
-    :style="lineStyle"
-    @click="toggle">
-  </line>
-  <line v-if="collapsed"
-    :x1="root.state.taskList.expander.size/2"
-    :y1="lineOffset"
-    :x2="root.state.taskList.expander.size/2"
-    :y2="root.state.taskList.expander.size-lineOffset"
-    :style="lineStyle"
-    @click="toggle">
-  </line>
-</svg>
+    <rect :x="border" :y="border" :width="root.state.taskList.expander.size-border*2" :height="root.state.taskList.expander.size-border*2" rx="2" ry="2" :style="root.state.taskList.styles.expander" v-if="allChildren.length" @click="toggle"></rect>
+    <line v-if="allChildren.length" :x1="lineOffset" :y1="root.state.taskList.expander.size/2" :x2="root.state.taskList.expander.size-lineOffset" :y2="root.state.taskList.expander.size/2" :style="lineStyle" @click="toggle"></line>
+    <line v-if="collapsed" :x1="root.state.taskList.expander.size/2" :y1="lineOffset" :x2="root.state.taskList.expander.size/2" :y2="root.state.taskList.expander.size-lineOffset" :style="lineStyle" @click="toggle"></line>
+  </svg>
 </div>
 </template>
 
@@ -86,8 +62,7 @@ export default {
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
         task.allChildren.forEach(child => {
-          let parentsNotCollapsed = child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
-          child.visible = !collapsed;
+          child.visible = !collapsed && !child.parent.collapsed;
         });
       });
     }

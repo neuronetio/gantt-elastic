@@ -376,30 +376,6 @@ var Elastigantt = (function () {
   //
   //
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
 
   var script$2 = {
     inject: ['root'],
@@ -454,8 +430,7 @@ var Elastigantt = (function () {
         this.tasks.forEach(task => {
           task.collapsed = collapsed;
           task.allChildren.forEach(child => {
-            let parentsNotCollapsed = child.parents.filter(parent => parent.collapsed === false).length === child.parents.length;
-            child.visible = !collapsed;
+            child.visible = !collapsed && !child.parent.collapsed;
           });
         });
       }
