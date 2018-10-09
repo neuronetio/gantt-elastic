@@ -4,7 +4,78 @@ var Elastigantt = (function () {
   //
   //
   //
-  //
+
+  var script = {
+    el: '#elastigantt',
+    data: {
+      tasks: [],
+      options: {}
+    }
+  };
+
+  /* script */
+              const __vue_script__ = script;
+              
+  /* template */
+  var __vue_render__ = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("elastigantt", {
+      attrs: { tasks: _vm.tasks, options: _vm.options }
+    })
+  };
+  var __vue_staticRenderFns__ = [];
+  __vue_render__._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__ = undefined;
+    /* scoped */
+    const __vue_scope_id__ = undefined;
+    /* module identifier */
+    const __vue_module_identifier__ = undefined;
+    /* functional template */
+    const __vue_is_functional_template__ = false;
+    /* component normalizer */
+    function __vue_normalize__(
+      template, style, script$$1,
+      scope, functional, moduleIdentifier,
+      createInjector, createInjectorSSR
+    ) {
+      const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
+
+      // For security concerns, we use only base name in production mode.
+      component.__file = "F:\\elastigantt\\src\\Elastigantt.standalone.vue";
+
+      if (!component.render) {
+        component.render = template.render;
+        component.staticRenderFns = template.staticRenderFns;
+        component._compiled = true;
+
+        if (functional) component.functional = true;
+      }
+
+      component._scopeId = scope;
+
+      return component
+    }
+    /* style inject */
+    
+    /* style inject SSR */
+    
+
+    
+    var ElastiganttStandalone = __vue_normalize__(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__,
+      __vue_script__,
+      __vue_scope_id__,
+      __vue_is_functional_template__,
+      __vue_module_identifier__,
+      undefined,
+      undefined
+    );
+
   //
   //
   //
@@ -18,7 +89,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script = {
+  var script$1 = {
     inject: ['root'],
     data() {
       return {};
@@ -77,10 +148,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__ = script;
+              const __vue_script__$1 = script$1;
               
   /* template */
-  var __vue_render__ = function() {
+  var __vue_render__$1 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -230,24 +301,24 @@ var Elastigantt = (function () {
       ])
     ])
   };
-  var __vue_staticRenderFns__ = [];
-  __vue_render__._withStripped = true;
+  var __vue_staticRenderFns__$1 = [];
+  __vue_render__$1._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__ = undefined;
+    const __vue_inject_styles__$1 = undefined;
     /* scoped */
-    const __vue_scope_id__ = undefined;
+    const __vue_scope_id__$1 = undefined;
     /* module identifier */
-    const __vue_module_identifier__ = undefined;
+    const __vue_module_identifier__$1 = undefined;
     /* functional template */
-    const __vue_is_functional_template__ = false;
+    const __vue_is_functional_template__$1 = false;
     /* component normalizer */
-    function __vue_normalize__(
-      template, style, script$$1,
+    function __vue_normalize__$1(
+      template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
     ) {
-      const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
+      const component = (typeof script === 'function' ? script.options : script) || {};
 
       // For security concerns, we use only base name in production mode.
       component.__file = "F:\\elastigantt\\src\\components\\Header.vue";
@@ -270,13 +341,13 @@ var Elastigantt = (function () {
     
 
     
-    var Header = __vue_normalize__(
-      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-      __vue_inject_styles__,
-      __vue_script__,
-      __vue_scope_id__,
-      __vue_is_functional_template__,
-      __vue_module_identifier__,
+    var Header = __vue_normalize__$1(
+      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+      __vue_inject_styles__$1,
+      __vue_script__$1,
+      __vue_scope_id__$1,
+      __vue_is_functional_template__$1,
+      __vue_module_identifier__$1,
       undefined,
       undefined
     );
@@ -285,7 +356,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$1 = {
+  var script$2 = {
     inject: ['root'],
     props: ['column'],
     data() {
@@ -303,10 +374,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$1 = script$1;
+              const __vue_script__$2 = script$2;
               
   /* template */
-  var __vue_render__$1 = function() {
+  var __vue_render__$2 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -315,19 +386,19 @@ var Elastigantt = (function () {
       staticStyle: {}
     })
   };
-  var __vue_staticRenderFns__$1 = [];
-  __vue_render__$1._withStripped = true;
+  var __vue_staticRenderFns__$2 = [];
+  __vue_render__$2._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$1 = undefined;
+    const __vue_inject_styles__$2 = undefined;
     /* scoped */
-    const __vue_scope_id__$1 = undefined;
+    const __vue_scope_id__$2 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$1 = undefined;
+    const __vue_module_identifier__$2 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$1 = false;
+    const __vue_is_functional_template__$2 = false;
     /* component normalizer */
-    function __vue_normalize__$1(
+    function __vue_normalize__$2(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -355,13 +426,13 @@ var Elastigantt = (function () {
     
 
     
-    var TaskListResizer = __vue_normalize__$1(
-      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-      __vue_inject_styles__$1,
-      __vue_script__$1,
-      __vue_scope_id__$1,
-      __vue_is_functional_template__$1,
-      __vue_module_identifier__$1,
+    var TaskListResizer = __vue_normalize__$2(
+      { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+      __vue_inject_styles__$2,
+      __vue_script__$2,
+      __vue_scope_id__$2,
+      __vue_is_functional_template__$2,
+      __vue_module_identifier__$2,
       undefined,
       undefined
     );
@@ -377,7 +448,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$2 = {
+  var script$3 = {
     inject: ['root'],
     props: ['tasks'],
     data() {
@@ -438,10 +509,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$2 = script$2;
+              const __vue_script__$3 = script$3;
               
   /* template */
-  var __vue_render__$2 = function() {
+  var __vue_render__$3 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -508,19 +579,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$2 = [];
-  __vue_render__$2._withStripped = true;
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$2 = undefined;
+    const __vue_inject_styles__$3 = undefined;
     /* scoped */
-    const __vue_scope_id__$2 = undefined;
+    const __vue_scope_id__$3 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$2 = undefined;
+    const __vue_module_identifier__$3 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$2 = false;
+    const __vue_is_functional_template__$3 = false;
     /* component normalizer */
-    function __vue_normalize__$2(
+    function __vue_normalize__$3(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -548,22 +619,22 @@ var Elastigantt = (function () {
     
 
     
-    var TaskListExpander = __vue_normalize__$2(
-      { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-      __vue_inject_styles__$2,
-      __vue_script__$2,
-      __vue_scope_id__$2,
-      __vue_is_functional_template__$2,
-      __vue_module_identifier__$2,
+    var TaskListExpander = __vue_normalize__$3(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
       undefined,
       undefined
     );
 
   //
 
-  var script$3 = {
+  var script$4 = {
     components: {
-      'task-list-expander': TaskListExpander,
+      TaskListExpander,
     },
     inject: ['root'],
     props: ['expanderStyle'],
@@ -620,10 +691,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$3 = script$3;
+              const __vue_script__$4 = script$4;
               
   /* template */
-  var __vue_render__$3 = function() {
+  var __vue_render__$4 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -676,19 +747,19 @@ var Elastigantt = (function () {
       })
     )
   };
-  var __vue_staticRenderFns__$3 = [];
-  __vue_render__$3._withStripped = true;
+  var __vue_staticRenderFns__$4 = [];
+  __vue_render__$4._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$3 = undefined;
+    const __vue_inject_styles__$4 = undefined;
     /* scoped */
-    const __vue_scope_id__$3 = undefined;
+    const __vue_scope_id__$4 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$3 = undefined;
+    const __vue_module_identifier__$4 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$3 = false;
+    const __vue_is_functional_template__$4 = false;
     /* component normalizer */
-    function __vue_normalize__$3(
+    function __vue_normalize__$4(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -716,13 +787,13 @@ var Elastigantt = (function () {
     
 
     
-    var TaskListHeader = __vue_normalize__$3(
-      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-      __vue_inject_styles__$3,
-      __vue_script__$3,
-      __vue_scope_id__$3,
-      __vue_is_functional_template__$3,
-      __vue_module_identifier__$3,
+    var TaskListHeader = __vue_normalize__$4(
+      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+      __vue_inject_styles__$4,
+      __vue_script__$4,
+      __vue_scope_id__$4,
+      __vue_is_functional_template__$4,
+      __vue_module_identifier__$4,
       undefined,
       undefined
     );
@@ -736,7 +807,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$4 = {
+  var script$5 = {
     inject: ['root'],
     props: ['column', 'task'],
     data() {
@@ -753,10 +824,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$4 = script$4;
+              const __vue_script__$5 = script$5;
               
   /* template */
-  var __vue_render__$4 = function() {
+  var __vue_render__$5 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -787,19 +858,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$4 = [];
-  __vue_render__$4._withStripped = true;
+  var __vue_staticRenderFns__$5 = [];
+  __vue_render__$5._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$4 = undefined;
+    const __vue_inject_styles__$5 = undefined;
     /* scoped */
-    const __vue_scope_id__$4 = undefined;
+    const __vue_scope_id__$5 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$4 = undefined;
+    const __vue_module_identifier__$5 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$4 = false;
+    const __vue_is_functional_template__$5 = false;
     /* component normalizer */
-    function __vue_normalize__$4(
+    function __vue_normalize__$5(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -827,23 +898,23 @@ var Elastigantt = (function () {
     
 
     
-    var ItemColumn = __vue_normalize__$4(
-      { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-      __vue_inject_styles__$4,
-      __vue_script__$4,
-      __vue_scope_id__$4,
-      __vue_is_functional_template__$4,
-      __vue_module_identifier__$4,
+    var ItemColumn = __vue_normalize__$5(
+      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+      __vue_inject_styles__$5,
+      __vue_script__$5,
+      __vue_scope_id__$5,
+      __vue_is_functional_template__$5,
+      __vue_module_identifier__$5,
       undefined,
       undefined
     );
 
   //
 
-  var script$5 = {
+  var script$6 = {
     components: {
-      'task-list-expander': TaskListExpander,
-      'item-column': ItemColumn
+      TaskListExpander,
+      ItemColumn
     },
     inject: ['root'],
     props: ['task', 'expanderStyle'],
@@ -853,10 +924,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$5 = script$5;
+              const __vue_script__$6 = script$6;
               
   /* template */
-  var __vue_render__$5 = function() {
+  var __vue_render__$6 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -883,19 +954,19 @@ var Elastigantt = (function () {
       })
     )
   };
-  var __vue_staticRenderFns__$5 = [];
-  __vue_render__$5._withStripped = true;
+  var __vue_staticRenderFns__$6 = [];
+  __vue_render__$6._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$5 = undefined;
+    const __vue_inject_styles__$6 = undefined;
     /* scoped */
-    const __vue_scope_id__$5 = undefined;
+    const __vue_scope_id__$6 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$5 = undefined;
+    const __vue_module_identifier__$6 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$5 = false;
+    const __vue_is_functional_template__$6 = false;
     /* component normalizer */
-    function __vue_normalize__$5(
+    function __vue_normalize__$6(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -923,24 +994,24 @@ var Elastigantt = (function () {
     
 
     
-    var TaskListItem = __vue_normalize__$5(
-      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-      __vue_inject_styles__$5,
-      __vue_script__$5,
-      __vue_scope_id__$5,
-      __vue_is_functional_template__$5,
-      __vue_module_identifier__$5,
+    var TaskListItem = __vue_normalize__$6(
+      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+      __vue_inject_styles__$6,
+      __vue_script__$6,
+      __vue_scope_id__$6,
+      __vue_is_functional_template__$6,
+      __vue_module_identifier__$6,
       undefined,
       undefined
     );
 
   //
 
-  var script$6 = {
+  var script$7 = {
     components: {
-      'task-list-resizer': TaskListResizer,
-      'task-list-header': TaskListHeader,
-      'task-list-item': TaskListItem,
+      TaskListResizer,
+      TaskListHeader,
+      TaskListItem,
     },
     inject: ['root'],
     data() {
@@ -985,10 +1056,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$6 = script$6;
+              const __vue_script__$7 = script$7;
               
   /* template */
-  var __vue_render__$6 = function() {
+  var __vue_render__$7 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1033,19 +1104,19 @@ var Elastigantt = (function () {
         )
       : _vm._e()
   };
-  var __vue_staticRenderFns__$6 = [];
-  __vue_render__$6._withStripped = true;
+  var __vue_staticRenderFns__$7 = [];
+  __vue_render__$7._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$6 = undefined;
+    const __vue_inject_styles__$7 = undefined;
     /* scoped */
-    const __vue_scope_id__$6 = undefined;
+    const __vue_scope_id__$7 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$6 = undefined;
+    const __vue_module_identifier__$7 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$6 = false;
+    const __vue_is_functional_template__$7 = false;
     /* component normalizer */
-    function __vue_normalize__$6(
+    function __vue_normalize__$7(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1073,13 +1144,13 @@ var Elastigantt = (function () {
     
 
     
-    var TaskList = __vue_normalize__$6(
-      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
-      __vue_inject_styles__$6,
-      __vue_script__$6,
-      __vue_scope_id__$6,
-      __vue_is_functional_template__$6,
-      __vue_module_identifier__$6,
+    var TaskList = __vue_normalize__$7(
+      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+      __vue_inject_styles__$7,
+      __vue_script__$7,
+      __vue_scope_id__$7,
+      __vue_is_functional_template__$7,
+      __vue_module_identifier__$7,
       undefined,
       undefined
     );
@@ -1092,7 +1163,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$7 = {
+  var script$8 = {
     inject: ['root'],
     data() {
       return {};
@@ -1167,10 +1238,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$7 = script$7;
+              const __vue_script__$8 = script$8;
               
   /* template */
-  var __vue_render__$7 = function() {
+  var __vue_render__$8 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1209,19 +1280,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$7 = [];
-  __vue_render__$7._withStripped = true;
+  var __vue_staticRenderFns__$8 = [];
+  __vue_render__$8._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$7 = undefined;
+    const __vue_inject_styles__$8 = undefined;
     /* scoped */
-    const __vue_scope_id__$7 = undefined;
+    const __vue_scope_id__$8 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$7 = undefined;
+    const __vue_module_identifier__$8 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$7 = false;
+    const __vue_is_functional_template__$8 = false;
     /* component normalizer */
-    function __vue_normalize__$7(
+    function __vue_normalize__$8(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1249,13 +1320,13 @@ var Elastigantt = (function () {
     
 
     
-    var Grid = __vue_normalize__$7(
-      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-      __vue_inject_styles__$7,
-      __vue_script__$7,
-      __vue_scope_id__$7,
-      __vue_is_functional_template__$7,
-      __vue_module_identifier__$7,
+    var Grid = __vue_normalize__$8(
+      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+      __vue_inject_styles__$8,
+      __vue_script__$8,
+      __vue_scope_id__$8,
+      __vue_is_functional_template__$8,
+      __vue_module_identifier__$8,
       undefined,
       undefined
     );
@@ -1272,7 +1343,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$8 = {
+  var script$9 = {
     inject: ['root'],
     props: ['item'],
     data() {
@@ -1295,10 +1366,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$8 = script$8;
+              const __vue_script__$9 = script$9;
               
   /* template */
-  var __vue_render__$8 = function() {
+  var __vue_render__$9 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1329,19 +1400,19 @@ var Elastigantt = (function () {
       )
     ])
   };
-  var __vue_staticRenderFns__$8 = [];
-  __vue_render__$8._withStripped = true;
+  var __vue_staticRenderFns__$9 = [];
+  __vue_render__$9._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$8 = undefined;
+    const __vue_inject_styles__$9 = undefined;
     /* scoped */
-    const __vue_scope_id__$8 = undefined;
+    const __vue_scope_id__$9 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$8 = undefined;
+    const __vue_module_identifier__$9 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$8 = false;
+    const __vue_is_functional_template__$9 = false;
     /* component normalizer */
-    function __vue_normalize__$8(
+    function __vue_normalize__$9(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1369,21 +1440,21 @@ var Elastigantt = (function () {
     
 
     
-    var CalendarRow = __vue_normalize__$8(
-      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-      __vue_inject_styles__$8,
-      __vue_script__$8,
-      __vue_scope_id__$8,
-      __vue_is_functional_template__$8,
-      __vue_module_identifier__$8,
+    var CalendarRow = __vue_normalize__$9(
+      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+      __vue_inject_styles__$9,
+      __vue_script__$9,
+      __vue_scope_id__$9,
+      __vue_is_functional_template__$9,
+      __vue_module_identifier__$9,
       undefined,
       undefined
     );
 
   //
-  var script$9 = {
+  var script$a = {
     components: {
-      'calendar-row': CalendarRow
+      CalendarRow
     },
     inject: ['root'],
     data() {
@@ -1555,10 +1626,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$9 = script$9;
+              const __vue_script__$a = script$a;
               
   /* template */
-  var __vue_render__$9 = function() {
+  var __vue_render__$a = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1600,19 +1671,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$9 = [];
-  __vue_render__$9._withStripped = true;
+  var __vue_staticRenderFns__$a = [];
+  __vue_render__$a._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$9 = undefined;
+    const __vue_inject_styles__$a = undefined;
     /* scoped */
-    const __vue_scope_id__$9 = undefined;
+    const __vue_scope_id__$a = undefined;
     /* module identifier */
-    const __vue_module_identifier__$9 = undefined;
+    const __vue_module_identifier__$a = undefined;
     /* functional template */
-    const __vue_is_functional_template__$9 = false;
+    const __vue_is_functional_template__$a = false;
     /* component normalizer */
-    function __vue_normalize__$9(
+    function __vue_normalize__$a(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1640,13 +1711,13 @@ var Elastigantt = (function () {
     
 
     
-    var Calendar = __vue_normalize__$9(
-      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-      __vue_inject_styles__$9,
-      __vue_script__$9,
-      __vue_scope_id__$9,
-      __vue_is_functional_template__$9,
-      __vue_module_identifier__$9,
+    var Calendar = __vue_normalize__$a(
+      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+      __vue_inject_styles__$a,
+      __vue_script__$a,
+      __vue_scope_id__$a,
+      __vue_is_functional_template__$a,
+      __vue_module_identifier__$a,
       undefined,
       undefined
     );
@@ -1660,7 +1731,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$a = {
+  var script$b = {
     inject: ['root'],
     props: ['tasks'],
     data() {
@@ -1728,10 +1799,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$a = script$a;
+              const __vue_script__$b = script$b;
               
   /* template */
-  var __vue_render__$a = function() {
+  var __vue_render__$b = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1753,19 +1824,19 @@ var Elastigantt = (function () {
       })
     )
   };
-  var __vue_staticRenderFns__$a = [];
-  __vue_render__$a._withStripped = true;
+  var __vue_staticRenderFns__$b = [];
+  __vue_render__$b._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$a = undefined;
+    const __vue_inject_styles__$b = undefined;
     /* scoped */
-    const __vue_scope_id__$a = undefined;
+    const __vue_scope_id__$b = undefined;
     /* module identifier */
-    const __vue_module_identifier__$a = undefined;
+    const __vue_module_identifier__$b = undefined;
     /* functional template */
-    const __vue_is_functional_template__$a = false;
+    const __vue_is_functional_template__$b = false;
     /* component normalizer */
-    function __vue_normalize__$a(
+    function __vue_normalize__$b(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1793,13 +1864,13 @@ var Elastigantt = (function () {
     
 
     
-    var DependencyLines = __vue_normalize__$a(
-      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-      __vue_inject_styles__$a,
-      __vue_script__$a,
-      __vue_scope_id__$a,
-      __vue_is_functional_template__$a,
-      __vue_module_identifier__$a,
+    var DependencyLines = __vue_normalize__$b(
+      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+      __vue_inject_styles__$b,
+      __vue_script__$b,
+      __vue_scope_id__$b,
+      __vue_is_functional_template__$b,
+      __vue_module_identifier__$b,
       undefined,
       undefined
     );
@@ -1811,7 +1882,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$b = {
+  var script$c = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -1828,10 +1899,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$b = script$b;
+              const __vue_script__$c = script$c;
               
   /* template */
-  var __vue_render__$b = function() {
+  var __vue_render__$c = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1866,19 +1937,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$b = [];
-  __vue_render__$b._withStripped = true;
+  var __vue_staticRenderFns__$c = [];
+  __vue_render__$c._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$b = undefined;
+    const __vue_inject_styles__$c = undefined;
     /* scoped */
-    const __vue_scope_id__$b = undefined;
+    const __vue_scope_id__$c = undefined;
     /* module identifier */
-    const __vue_module_identifier__$b = undefined;
+    const __vue_module_identifier__$c = undefined;
     /* functional template */
-    const __vue_is_functional_template__$b = false;
+    const __vue_is_functional_template__$c = false;
     /* component normalizer */
-    function __vue_normalize__$b(
+    function __vue_normalize__$c(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -1906,13 +1977,13 @@ var Elastigantt = (function () {
     
 
     
-    var TreeText = __vue_normalize__$b(
-      { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-      __vue_inject_styles__$b,
-      __vue_script__$b,
-      __vue_scope_id__$b,
-      __vue_is_functional_template__$b,
-      __vue_module_identifier__$b,
+    var TreeText = __vue_normalize__$c(
+      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+      __vue_inject_styles__$c,
+      __vue_script__$c,
+      __vue_scope_id__$c,
+      __vue_is_functional_template__$c,
+      __vue_module_identifier__$c,
       undefined,
       undefined
     );
@@ -1929,7 +2000,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$c = {
+  var script$d = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -1954,10 +2025,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$c = script$c;
+              const __vue_script__$d = script$d;
               
   /* template */
-  var __vue_render__$c = function() {
+  var __vue_render__$d = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -1995,19 +2066,19 @@ var Elastigantt = (function () {
       ]
     )
   };
-  var __vue_staticRenderFns__$c = [];
-  __vue_render__$c._withStripped = true;
+  var __vue_staticRenderFns__$d = [];
+  __vue_render__$d._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$c = undefined;
+    const __vue_inject_styles__$d = undefined;
     /* scoped */
-    const __vue_scope_id__$c = undefined;
+    const __vue_scope_id__$d = undefined;
     /* module identifier */
-    const __vue_module_identifier__$c = undefined;
+    const __vue_module_identifier__$d = undefined;
     /* functional template */
-    const __vue_is_functional_template__$c = false;
+    const __vue_is_functional_template__$d = false;
     /* component normalizer */
-    function __vue_normalize__$c(
+    function __vue_normalize__$d(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2035,13 +2106,13 @@ var Elastigantt = (function () {
     
 
     
-    var Info = __vue_normalize__$c(
-      { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-      __vue_inject_styles__$c,
-      __vue_script__$c,
-      __vue_scope_id__$c,
-      __vue_is_functional_template__$c,
-      __vue_module_identifier__$c,
+    var Info = __vue_normalize__$d(
+      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+      __vue_inject_styles__$d,
+      __vue_script__$d,
+      __vue_scope_id__$d,
+      __vue_is_functional_template__$d,
+      __vue_module_identifier__$d,
       undefined,
       undefined
     );
@@ -2061,7 +2132,7 @@ var Elastigantt = (function () {
   //
   //
 
-  var script$d = {
+  var script$e = {
     inject: ['root'],
     props: ['task'],
     data() {
@@ -2085,10 +2156,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$d = script$d;
+              const __vue_script__$e = script$e;
               
   /* template */
-  var __vue_render__$d = function() {
+  var __vue_render__$e = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2151,19 +2222,19 @@ var Elastigantt = (function () {
         : _vm._e()
     ])
   };
-  var __vue_staticRenderFns__$d = [];
-  __vue_render__$d._withStripped = true;
+  var __vue_staticRenderFns__$e = [];
+  __vue_render__$e._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$d = undefined;
+    const __vue_inject_styles__$e = undefined;
     /* scoped */
-    const __vue_scope_id__$d = undefined;
+    const __vue_scope_id__$e = undefined;
     /* module identifier */
-    const __vue_module_identifier__$d = undefined;
+    const __vue_module_identifier__$e = undefined;
     /* functional template */
-    const __vue_is_functional_template__$d = false;
+    const __vue_is_functional_template__$e = false;
     /* component normalizer */
-    function __vue_normalize__$d(
+    function __vue_normalize__$e(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2191,24 +2262,24 @@ var Elastigantt = (function () {
     
 
     
-    var ProgressBar = __vue_normalize__$d(
-      { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-      __vue_inject_styles__$d,
-      __vue_script__$d,
-      __vue_scope_id__$d,
-      __vue_is_functional_template__$d,
-      __vue_module_identifier__$d,
+    var ProgressBar = __vue_normalize__$e(
+      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+      __vue_inject_styles__$e,
+      __vue_script__$e,
+      __vue_scope_id__$e,
+      __vue_is_functional_template__$e,
+      __vue_module_identifier__$e,
       undefined,
       undefined
     );
 
   //
 
-  var script$e = {
+  var script$f = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2244,10 +2315,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$e = script$e;
+              const __vue_script__$f = script$f;
               
   /* template */
-  var __vue_render__$e = function() {
+  var __vue_render__$f = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2283,7 +2354,7 @@ var Elastigantt = (function () {
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__task-clip-path)"
@@ -2304,19 +2375,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$e = [];
-  __vue_render__$e._withStripped = true;
+  var __vue_staticRenderFns__$f = [];
+  __vue_render__$f._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$e = undefined;
+    const __vue_inject_styles__$f = undefined;
     /* scoped */
-    const __vue_scope_id__$e = undefined;
+    const __vue_scope_id__$f = undefined;
     /* module identifier */
-    const __vue_module_identifier__$e = undefined;
+    const __vue_module_identifier__$f = undefined;
     /* functional template */
-    const __vue_is_functional_template__$e = false;
+    const __vue_is_functional_template__$f = false;
     /* component normalizer */
-    function __vue_normalize__$e(
+    function __vue_normalize__$f(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2344,24 +2415,24 @@ var Elastigantt = (function () {
     
 
     
-    var Task = __vue_normalize__$e(
-      { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-      __vue_inject_styles__$e,
-      __vue_script__$e,
-      __vue_scope_id__$e,
-      __vue_is_functional_template__$e,
-      __vue_module_identifier__$e,
+    var Task = __vue_normalize__$f(
+      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+      __vue_inject_styles__$f,
+      __vue_script__$f,
+      __vue_scope_id__$f,
+      __vue_is_functional_template__$f,
+      __vue_module_identifier__$f,
       undefined,
       undefined
     );
 
   //
 
-  var script$f = {
+  var script$g = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2404,10 +2475,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$f = script$f;
+              const __vue_script__$g = script$g;
               
   /* template */
-  var __vue_render__$f = function() {
+  var __vue_render__$g = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2445,7 +2516,7 @@ var Elastigantt = (function () {
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__milestone-clip-path)"
@@ -2466,19 +2537,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$f = [];
-  __vue_render__$f._withStripped = true;
+  var __vue_staticRenderFns__$g = [];
+  __vue_render__$g._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$f = undefined;
+    const __vue_inject_styles__$g = undefined;
     /* scoped */
-    const __vue_scope_id__$f = undefined;
+    const __vue_scope_id__$g = undefined;
     /* module identifier */
-    const __vue_module_identifier__$f = undefined;
+    const __vue_module_identifier__$g = undefined;
     /* functional template */
-    const __vue_is_functional_template__$f = false;
+    const __vue_is_functional_template__$g = false;
     /* component normalizer */
-    function __vue_normalize__$f(
+    function __vue_normalize__$g(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2506,24 +2577,24 @@ var Elastigantt = (function () {
     
 
     
-    var Milestone = __vue_normalize__$f(
-      { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-      __vue_inject_styles__$f,
-      __vue_script__$f,
-      __vue_scope_id__$f,
-      __vue_is_functional_template__$f,
-      __vue_module_identifier__$f,
+    var Milestone = __vue_normalize__$g(
+      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+      __vue_inject_styles__$g,
+      __vue_script__$g,
+      __vue_scope_id__$g,
+      __vue_is_functional_template__$g,
+      __vue_module_identifier__$g,
       undefined,
       undefined
     );
 
   //
 
-  var script$g = {
+  var script$h = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2583,10 +2654,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$g = script$g;
+              const __vue_script__$h = script$h;
               
   /* template */
-  var __vue_render__$g = function() {
+  var __vue_render__$h = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2629,7 +2700,7 @@ var Elastigantt = (function () {
               attrs: { d: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__project-clip-path)"
@@ -2650,19 +2721,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$g = [];
-  __vue_render__$g._withStripped = true;
+  var __vue_staticRenderFns__$h = [];
+  __vue_render__$h._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$g = undefined;
+    const __vue_inject_styles__$h = undefined;
     /* scoped */
-    const __vue_scope_id__$g = undefined;
+    const __vue_scope_id__$h = undefined;
     /* module identifier */
-    const __vue_module_identifier__$g = undefined;
+    const __vue_module_identifier__$h = undefined;
     /* functional template */
-    const __vue_is_functional_template__$g = false;
+    const __vue_is_functional_template__$h = false;
     /* component normalizer */
-    function __vue_normalize__$g(
+    function __vue_normalize__$h(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2690,27 +2761,27 @@ var Elastigantt = (function () {
     
 
     
-    var Project = __vue_normalize__$g(
-      { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-      __vue_inject_styles__$g,
-      __vue_script__$g,
-      __vue_scope_id__$g,
-      __vue_is_functional_template__$g,
-      __vue_module_identifier__$g,
+    var Project = __vue_normalize__$h(
+      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+      __vue_inject_styles__$h,
+      __vue_script__$h,
+      __vue_scope_id__$h,
+      __vue_is_functional_template__$h,
+      __vue_module_identifier__$h,
       undefined,
       undefined
     );
 
   //
 
-  var script$h = {
+  var script$i = {
     components: {
-      'grid': Grid,
-      'tree-dependency-lines': DependencyLines,
-      'calendar': Calendar,
-      'tree-row-task': Task,
-      'tree-row-milestone': Milestone,
-      'tree-row-project': Project
+      Grid,
+      DependencyLines,
+      Calendar,
+      Task,
+      Milestone,
+      Project
     },
     inject: ['root'],
     data() {
@@ -2729,10 +2800,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$h = script$h;
+              const __vue_script__$i = script$i;
               
   /* template */
-  var __vue_render__$h = function() {
+  var __vue_render__$i = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2753,18 +2824,13 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _c("grid"),
         _vm._v(" "),
-        _c("tree-dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
+        _c("dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
             { attrs: { task: task } },
-            [
-              _c("tree-row-" + task.type, {
-                tag: "component",
-                attrs: { task: task }
-              })
-            ],
+            [_c(task.type, { tag: "component", attrs: { task: task } })],
             1
           )
         })
@@ -2772,19 +2838,19 @@ var Elastigantt = (function () {
       2
     )
   };
-  var __vue_staticRenderFns__$h = [];
-  __vue_render__$h._withStripped = true;
+  var __vue_staticRenderFns__$i = [];
+  __vue_render__$i._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$h = undefined;
+    const __vue_inject_styles__$i = undefined;
     /* scoped */
-    const __vue_scope_id__$h = undefined;
+    const __vue_scope_id__$i = undefined;
     /* module identifier */
-    const __vue_module_identifier__$h = undefined;
+    const __vue_module_identifier__$i = undefined;
     /* functional template */
-    const __vue_is_functional_template__$h = false;
+    const __vue_is_functional_template__$i = false;
     /* component normalizer */
-    function __vue_normalize__$h(
+    function __vue_normalize__$i(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -2812,24 +2878,24 @@ var Elastigantt = (function () {
     
 
     
-    var Tree = __vue_normalize__$h(
-      { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-      __vue_inject_styles__$h,
-      __vue_script__$h,
-      __vue_scope_id__$h,
-      __vue_is_functional_template__$h,
-      __vue_module_identifier__$h,
+    var Tree = __vue_normalize__$i(
+      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+      __vue_inject_styles__$i,
+      __vue_script__$i,
+      __vue_scope_id__$i,
+      __vue_is_functional_template__$i,
+      __vue_module_identifier__$i,
       undefined,
       undefined
     );
 
   //
 
-  var script$i = {
+  var script$j = {
     components: {
-      'main-header': Header,
-      'task-list': TaskList,
-      'tree': Tree
+      'TopHeader': Header,
+      'TaskList': TaskList,
+      'Tree': Tree
     },
     inject: ['root'],
     props: ['tasks', 'options'],
@@ -2900,10 +2966,10 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$i = script$i;
+              const __vue_script__$j = script$j;
               
   /* template */
-  var __vue_render__$i = function() {
+  var __vue_render__$j = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -2911,7 +2977,7 @@ var Elastigantt = (function () {
       "div",
       { staticClass: "elastigantt__main" },
       [
-        _c("main-header"),
+        _c("top-header"),
         _vm._v(" "),
         _c(
           "svg",
@@ -3021,19 +3087,19 @@ var Elastigantt = (function () {
       1
     )
   };
-  var __vue_staticRenderFns__$i = [];
-  __vue_render__$i._withStripped = true;
+  var __vue_staticRenderFns__$j = [];
+  __vue_render__$j._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$i = undefined;
+    const __vue_inject_styles__$j = undefined;
     /* scoped */
-    const __vue_scope_id__$i = undefined;
+    const __vue_scope_id__$j = undefined;
     /* module identifier */
-    const __vue_module_identifier__$i = undefined;
+    const __vue_module_identifier__$j = undefined;
     /* functional template */
-    const __vue_is_functional_template__$i = false;
+    const __vue_is_functional_template__$j = false;
     /* component normalizer */
-    function __vue_normalize__$i(
+    function __vue_normalize__$j(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -3061,13 +3127,13 @@ var Elastigantt = (function () {
     
 
     
-    var Main = __vue_normalize__$i(
-      { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-      __vue_inject_styles__$i,
-      __vue_script__$i,
-      __vue_scope_id__$i,
-      __vue_is_functional_template__$i,
-      __vue_module_identifier__$i,
+    var Main = __vue_normalize__$j(
+      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+      __vue_inject_styles__$j,
+      __vue_script__$j,
+      __vue_scope_id__$j,
+      __vue_is_functional_template__$j,
+      __vue_module_identifier__$j,
       undefined,
       undefined
     );
@@ -3378,9 +3444,9 @@ var Elastigantt = (function () {
     };
   }
 
-  var script$j = {
+  var script$k = {
     components: {
-      'elastigantt-main': Main,
+      'EgMain': Main,
     },
     props: [
       'tasks', 'options'
@@ -3889,30 +3955,28 @@ var Elastigantt = (function () {
   };
 
   /* script */
-              const __vue_script__$j = script$j;
+              const __vue_script__$k = script$k;
               
   /* template */
-  var __vue_render__$j = function() {
+  var __vue_render__$k = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("elastigantt-main", {
-      attrs: { tasks: _vm.tasks, options: _vm.options }
-    })
+    return _c("eg-main", { attrs: { tasks: _vm.tasks, options: _vm.options } })
   };
-  var __vue_staticRenderFns__$j = [];
-  __vue_render__$j._withStripped = true;
+  var __vue_staticRenderFns__$k = [];
+  __vue_render__$k._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$j = undefined;
+    const __vue_inject_styles__$k = undefined;
     /* scoped */
-    const __vue_scope_id__$j = undefined;
+    const __vue_scope_id__$k = undefined;
     /* module identifier */
-    const __vue_module_identifier__$j = undefined;
+    const __vue_module_identifier__$k = undefined;
     /* functional template */
-    const __vue_is_functional_template__$j = false;
+    const __vue_is_functional_template__$k = false;
     /* component normalizer */
-    function __vue_normalize__$j(
+    function __vue_normalize__$k(
       template, style, script,
       scope, functional, moduleIdentifier,
       createInjector, createInjectorSSR
@@ -3940,80 +4004,7 @@ var Elastigantt = (function () {
     
 
     
-    var Elastigantt = __vue_normalize__$j(
-      { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-      __vue_inject_styles__$j,
-      __vue_script__$j,
-      __vue_scope_id__$j,
-      __vue_is_functional_template__$j,
-      __vue_module_identifier__$j,
-      undefined,
-      undefined
-    );
-
-  //
-  Vue.component('elastigantt', Elastigantt);
-  var script$k = {
-    el: '#elastigantt',
-    data: {
-      tasks: [],
-      options: {}
-    }
-  };
-
-  /* script */
-              const __vue_script__$k = script$k;
-              
-  /* template */
-  var __vue_render__$k = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("elastigantt", {
-      attrs: { tasks: _vm.tasks, options: _vm.options }
-    })
-  };
-  var __vue_staticRenderFns__$k = [];
-  __vue_render__$k._withStripped = true;
-
-    /* style */
-    const __vue_inject_styles__$k = undefined;
-    /* scoped */
-    const __vue_scope_id__$k = undefined;
-    /* module identifier */
-    const __vue_module_identifier__$k = undefined;
-    /* functional template */
-    const __vue_is_functional_template__$k = false;
-    /* component normalizer */
-    function __vue_normalize__$k(
-      template, style, script,
-      scope, functional, moduleIdentifier,
-      createInjector, createInjectorSSR
-    ) {
-      const component = (typeof script === 'function' ? script.options : script) || {};
-
-      // For security concerns, we use only base name in production mode.
-      component.__file = "F:\\elastigantt\\src\\Elastigantt.standalone.vue";
-
-      if (!component.render) {
-        component.render = template.render;
-        component.staticRenderFns = template.staticRenderFns;
-        component._compiled = true;
-
-        if (functional) component.functional = true;
-      }
-
-      component._scopeId = scope;
-
-      return component
-    }
-    /* style inject */
-    
-    /* style inject SSR */
-    
-
-    
-    var Elastigantt$1 = __vue_normalize__$k(
+    var Elastigantt = __vue_normalize__$k(
       { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
       __vue_inject_styles__$k,
       __vue_script__$k,
@@ -4024,19 +4015,23 @@ var Elastigantt = (function () {
       undefined
     );
 
-  function init(config) {
-    let {el, tasks, options} = config;
-    const elastigantt = Object.assign({}, Elastigantt$1);
-    elastigantt.data = Object.assign({}, elastigantt.data);
-    elastigantt.el = el;
-    elastigantt.data = {
-      tasks,
-      options
-    };
-    return new Vue(elastigantt);
-  }
+  var standalone = {
+    component: Elastigantt,
+    mount(config) {
+      let {el, tasks, options} = config;
+      const elastigantt = Object.assign({}, ElastiganttStandalone);
+      elastigantt.data = Object.assign({}, elastigantt.data);
+      elastigantt.el = el;
+      elastigantt.data = {
+        tasks,
+        options
+      };
+      Vue.component('elastigantt', Elastigantt);
+      return new Vue(elastigantt);
+    }
+  };
 
-  return init;
+  return standalone;
 
 }());
 //# sourceMappingURL=elastigantt.standalone.js.map

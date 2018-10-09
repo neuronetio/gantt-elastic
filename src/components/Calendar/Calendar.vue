@@ -12,7 +12,7 @@
 import CalendarRow from './CalendarRow.vue';
 export default {
   components: {
-    'calendar-row': CalendarRow
+    CalendarRow
   },
   inject: ['root'],
   data() {

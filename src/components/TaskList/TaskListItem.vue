@@ -11,8 +11,8 @@ import ItemColumn from './ItemColumn.vue';
 
 export default {
   components: {
-    'task-list-expander': TaskListExpander,
-    'item-column': ItemColumn
+    TaskListExpander,
+    ItemColumn
   },
   inject: ['root'],
   props: ['task', 'expanderStyle'],

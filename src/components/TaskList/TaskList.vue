@@ -15,9 +15,9 @@ import TaskListItem from './TaskListItem.vue';
 
 export default {
   components: {
-    'task-list-resizer': TaskListResizer,
-    'task-list-header': TaskListHeader,
-    'task-list-item': TaskListItem,
+    TaskListResizer,
+    TaskListHeader,
+    TaskListItem,
   },
   inject: ['root'],
   data() {

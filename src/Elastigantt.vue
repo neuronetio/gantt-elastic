@@ -1,5 +1,5 @@
 <template>
-<elastigantt-main :tasks="tasks" :options="options"></elastigantt-main>
+<eg-main :tasks="tasks" :options="options"></eg-main>
 </template>
 
 <script>
@@ -308,7 +308,7 @@ import Main from './components/Main.vue';
 
 export default {
   components: {
-    'elastigantt-main': Main,
+    'EgMain': Main,
   },
   props: [
     'tasks', 'options'

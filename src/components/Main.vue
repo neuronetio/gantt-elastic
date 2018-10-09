@@ -1,6 +1,6 @@
 <template>
 <div class="elastigantt__main">
-  <main-header></main-header>
+  <top-header></top-header>
   <svg :width="getWidth" :height="root.state.height" class="elastigantt__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
     <foreignObject x="0" y="0" width="100%" height="100%">
       <div xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
@@ -32,9 +32,9 @@ import Tree from './Tree/Tree.vue';
 
 export default {
   components: {
-    'main-header': Header,
-    'task-list': TaskList,
-    'tree': Tree
+    'TopHeader': Header,
+    'TaskList': TaskList,
+    'Tree': Tree
   },
   inject: ['root'],
   props: ['tasks', 'options'],

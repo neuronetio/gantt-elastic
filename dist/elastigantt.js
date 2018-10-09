@@ -13,10 +13,6 @@ var Elastigantt = (function () {
   //
   //
   //
-  //
-  //
-  //
-  //
 
   var script = {
     inject: ['root'],
@@ -563,7 +559,7 @@ var Elastigantt = (function () {
 
   var script$3 = {
     components: {
-      'task-list-expander': TaskListExpander,
+      TaskListExpander,
     },
     inject: ['root'],
     props: ['expanderStyle'],
@@ -842,8 +838,8 @@ var Elastigantt = (function () {
 
   var script$5 = {
     components: {
-      'task-list-expander': TaskListExpander,
-      'item-column': ItemColumn
+      TaskListExpander,
+      ItemColumn
     },
     inject: ['root'],
     props: ['task', 'expanderStyle'],
@@ -938,9 +934,9 @@ var Elastigantt = (function () {
 
   var script$6 = {
     components: {
-      'task-list-resizer': TaskListResizer,
-      'task-list-header': TaskListHeader,
-      'task-list-item': TaskListItem,
+      TaskListResizer,
+      TaskListHeader,
+      TaskListItem,
     },
     inject: ['root'],
     data() {
@@ -1383,7 +1379,7 @@ var Elastigantt = (function () {
   //
   var script$9 = {
     components: {
-      'calendar-row': CalendarRow
+      CalendarRow
     },
     inject: ['root'],
     data() {
@@ -2206,9 +2202,9 @@ var Elastigantt = (function () {
 
   var script$e = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2283,7 +2279,7 @@ var Elastigantt = (function () {
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__task-clip-path)"
@@ -2359,9 +2355,9 @@ var Elastigantt = (function () {
 
   var script$f = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2445,7 +2441,7 @@ var Elastigantt = (function () {
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__milestone-clip-path)"
@@ -2521,9 +2517,9 @@ var Elastigantt = (function () {
 
   var script$g = {
     components: {
-      'tree-text': TreeText,
-      'info': Info,
-      'tree-progress-bar': ProgressBar
+      TreeText,
+      Info,
+      ProgressBar
     },
     inject: ['root'],
     props: ['task'],
@@ -2629,7 +2625,7 @@ var Elastigantt = (function () {
               attrs: { d: _vm.getPoints }
             }),
             _vm._v(" "),
-            _c("tree-progress-bar", {
+            _c("progress-bar", {
               attrs: {
                 task: _vm.task,
                 "clip-path": "url(#elastigantt__project-clip-path)"
@@ -2705,12 +2701,12 @@ var Elastigantt = (function () {
 
   var script$h = {
     components: {
-      'grid': Grid,
-      'tree-dependency-lines': DependencyLines,
-      'calendar': Calendar,
-      'tree-row-task': Task,
-      'tree-row-milestone': Milestone,
-      'tree-row-project': Project
+      Grid,
+      DependencyLines,
+      Calendar,
+      Task,
+      Milestone,
+      Project
     },
     inject: ['root'],
     data() {
@@ -2753,18 +2749,13 @@ var Elastigantt = (function () {
         _vm._v(" "),
         _c("grid"),
         _vm._v(" "),
-        _c("tree-dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
+        _c("dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
           return _c(
             "g",
             { attrs: { task: task } },
-            [
-              _c("tree-row-" + task.type, {
-                tag: "component",
-                attrs: { task: task }
-              })
-            ],
+            [_c(task.type, { tag: "component", attrs: { task: task } })],
             1
           )
         })
@@ -2827,9 +2818,9 @@ var Elastigantt = (function () {
 
   var script$i = {
     components: {
-      'main-header': Header,
-      'task-list': TaskList,
-      'tree': Tree
+      'TopHeader': Header,
+      'TaskList': TaskList,
+      'Tree': Tree
     },
     inject: ['root'],
     props: ['tasks', 'options'],
@@ -2911,7 +2902,7 @@ var Elastigantt = (function () {
       "div",
       { staticClass: "elastigantt__main" },
       [
-        _c("main-header"),
+        _c("top-header"),
         _vm._v(" "),
         _c(
           "svg",
@@ -3380,7 +3371,7 @@ var Elastigantt = (function () {
 
   var script$j = {
     components: {
-      'elastigantt-main': Main,
+      'EgMain': Main,
     },
     props: [
       'tasks', 'options'
@@ -3896,9 +3887,7 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("elastigantt-main", {
-      attrs: { tasks: _vm.tasks, options: _vm.options }
-    })
+    return _c("eg-main", { attrs: { tasks: _vm.tasks, options: _vm.options } })
   };
   var __vue_staticRenderFns__$j = [];
   __vue_render__$j._withStripped = true;

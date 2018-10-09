@@ -1,8 +1,5 @@
 <template>
 <div class="elastigantt__header">
-  <!--<div class="elastigantt__header-dates" v-if="root.state.scroll.tree.dateTime.left && root.state.scroll.tree.dateTime.right">
-    {{root.state.scroll.tree.dateTime.left.format('YYYY-MM-DD')}} - {{root.state.scroll.tree.dateTime.right.format('YYYY-MM-DD')}}
-  </div>-->
   <div class="elastigantt__header-options">
     <button class="elastigantt__btn-recenter btn btn-primary mr-4" @click="recenterPosition">{{root.state.locale.Now}}</button>
     <label class="mr-2">{{root.state.locale['X-Scale']}}<input type="range" v-model="scale" max="24" min="2"></label>
@@ -10,7 +7,6 @@
     <label class="mr-2">{{root.state.locale['Before/After']}}<input type="range" v-model="scope" max="100" min="0"></label>
     <label class="mr-2">{{root.state.locale['Task list width']}}<input type="range" v-model="divider" max="100" min="0"></label>
     <label class="mr-2"><input type="checkbox" class="mr-1" v-model="root.state.taskList.display">{{root.state.locale['Display task list']}}</label>
-    <!--<button class="elastigantt__btn-img" @click="getImage">Get image</button>-->
   </div>
 </div>
 </template>

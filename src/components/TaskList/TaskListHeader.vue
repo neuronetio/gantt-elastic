@@ -13,7 +13,7 @@ import TaskListExpander from './Expander.vue';
 
 export default {
   components: {
-    'task-list-expander': TaskListExpander,
+    TaskListExpander,
   },
   inject: ['root'],
   props: ['expanderStyle'],

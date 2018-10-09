@@ -14,6 +14,7 @@
   <script src="src/vue.js"></script>
   <script src="node_modules/dayjs/dayjs.min.js"></script>
   <script src="dist/elastigantt.standalone.min.js"></script>
+  <script src="CustomHeader.js"></script>
   <!--<script type="module" src="src/index.js"></script>-->
   <script>
   let currentDate = dayjs(new Date()).locale('en');
@@ -180,7 +181,16 @@
     }*/
   };
 
-  const elastigantt = Elastigantt({el:'#app',tasks,options});
+  // override components - copy component from src directory change it to object or compile *.vue to *.js
+  // more info about components you can find here : https://vuejs.org/v2/guide/index.html
+  // You can change anything! You have full control of components templates, events, data ... and so on!
+  Elastigantt.component.components.EgMain.components.TopHeader = CustomHeader;
+
+  const elastigantt = Elastigantt.mount({
+    el: '#app', // <- your container id
+    tasks: tasks,
+    options: options
+  });
 
   // listen to events
   elastigantt.$on('elastigantt.tree.scroll',(ev)=>{

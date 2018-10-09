@@ -1,15 +1,10 @@
 <template>
-<svg class="elastigantt_tree-object"
-    x="0"
-    y="0"
-    :width="getWidth"
-    :height="getHeight"
-    xmlns="http://www.w3.org/2000/svg">
+<svg class="elastigantt_tree-object" x="0" y="0" :width="getWidth" :height="getHeight" xmlns="http://www.w3.org/2000/svg">
   <calendar></calendar>
   <grid></grid>
-  <tree-dependency-lines :tasks="root.visibleTasks"></tree-dependency-lines>
+  <dependency-lines :tasks="root.visibleTasks"></dependency-lines>
   <g v-for="task in root.visibleTasks" :task="task">
-    <component :task="task" :is="'tree-row-'+task.type"></component>
+    <component :task="task" :is="task.type"></component>
   </g>
 </svg>
 </template>
@@ -23,12 +18,12 @@ import Project from './Row/Project.vue';
 
 export default {
   components: {
-    'grid': Grid,
-    'tree-dependency-lines': DependencyLines,
-    'calendar': Calendar,
-    'tree-row-task': Task,
-    'tree-row-milestone': Milestone,
-    'tree-row-project': Project
+    Grid,
+    DependencyLines,
+    Calendar,
+    Task,
+    Milestone,
+    Project
   },
   inject: ['root'],
   data() {
