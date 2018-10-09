@@ -4063,3 +4063,4 @@ var Elastigantt = (function () {
   return init;
 
 }());
+//# sourceMappingURL=elastigantt.standalone.js.map

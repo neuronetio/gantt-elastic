@@ -13,7 +13,7 @@ export default[
     output: {
       file: 'dist/elastigantt.js',
       format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-      sourcemap: false,
+      sourcemap: true,
       name: 'Elastigantt'
     },
     plugins: [
@@ -29,7 +29,7 @@ export default[
     output: {
       file: 'dist/elastigantt.min.js',
       format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-      sourcemap: false,
+      sourcemap: true,
       name: 'Elastigantt'
     },
     plugins: [
@@ -43,7 +43,7 @@ export default[
     output: {
       file: 'dist/elastigantt.standalone.js',
       format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-      sourcemap: false,
+      sourcemap: true,
       name: 'Elastigantt'
     },
     plugins: [
@@ -59,7 +59,7 @@ export default[
     output: {
       file: 'dist/elastigantt.standalone.min.js',
       format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-      sourcemap: false,
+      sourcemap: true,
       name: 'Elastigantt'
     },
     plugins: [
