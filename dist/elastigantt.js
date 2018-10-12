@@ -14,10 +14,16 @@ var Elastigantt = (function () {
   //
   //
 
+  let scaleTimeoutId = null;
   var script = {
     inject: ['root'],
     data() {
-      return {};
+      return {
+        localScale: 0,
+      };
+    },
+    created() {
+      this.localScale = this.root.state.times.timeZoom;
     },
     methods: {
       getImage() {
@@ -32,15 +38,27 @@ var Elastigantt = (function () {
       },
       recenterPosition() {
         this.$root.$emit('elastigantt.recenterPosition');
-      }
+      },
+      setScale(value) {
+        if (scaleTimeoutId !== null) {
+          clearTimeout(scaleTimeoutId);
+          scaleTimeoutId = null;
+        }
+        // debouncing
+        scaleTimeoutId = setTimeout(() => {
+          this.$root.$emit('elastigantt.times.timeZoom.change', value);
+          scaleTimeoutId = null;
+        }, 75);
+      },
     },
     computed: {
       scale: {
         get() {
-          return this.root.state.times.timeZoom;
+          return this.localScale;
         },
         set(value) {
-          this.$root.$emit('elastigantt.times.timeZoom.change', Number(value));
+          this.localScale = Number(value);
+          this.setScale(this.localScale);
         }
       },
       height: {
@@ -144,7 +162,7 @@ var Elastigantt = (function () {
                 expression: "scope"
               }
             ],
-            attrs: { type: "range", max: "100", min: "0" },
+            attrs: { type: "range", max: "31", min: "0" },
             domProps: { value: _vm.scope },
             on: {
               __r: function($event) {
@@ -1091,14 +1109,58 @@ var Elastigantt = (function () {
   var script$7 = {
     inject: ['root'],
     data() {
-      return {};
+      return {
+        verticalLines: [],
+        horizontalLines: [],
+      };
     },
     created() {
       this.$root.$on('elastigantt.recenterPosition', this.recenterPosition);
+      this.$root.$on('elastigantt.scope.change', this.regenerate);
+      this.$root.$on('elastigantt.times.timeZoom.change', this.regenerate);
+      this.$root.$on('elastigantt.row.height.change', this.regenerate);
+      this.$root.$on('elastigantt.tree.scroll', this.regenerate);
+      this.regenerate();
     },
     methods: {
       recenterPosition() {
         this.root.scrollToTime(this.timeLinePosition.time);
+      },
+      generateVerticalLines() {
+        let lines = [];
+        const state = this.root.state;
+        state.times.steps.forEach((step) => {
+          lines.push({
+            key: step.date.valueOf(),
+            x1: step.offset.px,
+            y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
+            x2: step.offset.px,
+            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth,
+            inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
+          });
+        });
+        return this.verticalLines = lines;
+      },
+      generateHorizontalLines() {
+        let lines = [];
+        const state = this.root.state;
+        let tasks = this.root.visibleTasks;
+        for (let index = 0, len = tasks.length; index <= len; index++) {
+          lines.push({
+            key: 'hl' + index,
+            x1: 0,
+            y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
+            x2: '100%',
+            y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
+          });
+        }
+        return this.horizontalLines = lines;
+      },
+      regenerate() {
+        this.$nextTick(() => {
+          this.generateVerticalLines();
+          this.generateHorizontalLines();
+        });
       }
     },
     computed: {
@@ -1130,35 +1192,6 @@ var Elastigantt = (function () {
       getHStyle() {
         return this.root.state.grid.horizontal.style;
       },
-      verticalLines() {
-        let lines = [];
-        const state = this.root.state;
-        state.times.steps.forEach((step) => {
-          lines.push({
-            key: step.date.valueOf(),
-            x1: step.offset.px,
-            y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
-            x2: step.offset.px,
-            y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth
-          });
-        });
-        return state.grid.vertical.lines = lines;
-      },
-      horizontalLines() {
-        let lines = [];
-        const state = this.root.state;
-        let tasks = this.root.visibleTasks;
-        for (let index = 0, len = tasks.length; index <= len; index++) {
-          lines.push({
-            key: 'hl' + index,
-            x1: 0,
-            y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-            x2: '100%',
-            y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
-          });
-        }
-        return state.grid.horizontal.lines = lines;
-      }
     }
   };
 
@@ -1183,12 +1216,14 @@ var Elastigantt = (function () {
         }),
         _vm._v(" "),
         _vm._l(_vm.verticalLines, function(line, index) {
-          return _c("line", {
-            key: line.key,
-            staticClass: "elastigantt__grid-vertical-line",
-            style: _vm.getVStyle,
-            attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
-          })
+          return line.inViewPort
+            ? _c("line", {
+                key: line.key,
+                staticClass: "elastigantt__grid-vertical-line",
+                style: _vm.getVStyle,
+                attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+              })
+            : _vm._e()
         }),
         _vm._v(" "),
         _c("line", {
@@ -2763,7 +2798,7 @@ var Elastigantt = (function () {
         _c("dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
-          return task.inViewPort
+          return _vm.root.isInsideViewPort(task.x, task.width)
             ? _c(
                 "g",
                 { attrs: { task: task } },
@@ -3848,7 +3883,6 @@ var Elastigantt = (function () {
           task.height = this.state.row.height;
           task.x = this.timeToPixelOffsetX(task.startTime);
           task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-          task.inViewPort = this.isInsideViewPort(task.x, task.width);
         }
         return visibleTasks;
       },

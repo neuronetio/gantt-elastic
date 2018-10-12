@@ -772,7 +772,6 @@ export default {
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-        task.inViewPort = this.isInsideViewPort(task.x, task.width);
       }
       return visibleTasks;
     },
