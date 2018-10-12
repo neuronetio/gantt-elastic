@@ -1447,7 +1447,16 @@ var Elastigantt = (function () {
     },
     inject: ['root'],
     data() {
-      return {};
+      return {
+        hours: [],
+        days: [],
+        months: [],
+      };
+    },
+    created() {
+      this.$root.$on('elastigantt.scope.change', this.regenerate);
+      this.$root.$on('elastigantt.times.timeZoom.change', this.regenerate);
+      this.regenerate();
     },
     methods: {
       howManyHoursFit(dayIndex) {
@@ -1516,21 +1525,8 @@ var Elastigantt = (function () {
       },
       dayTextStyle() {
         return 'font-family:' + this.root.state.calendar.day.fontFamily + ';font-size:' + this.root.state.calendar.day.fontSize;
-      }
-    },
-    computed: {
-      getX() {
-        return this.root.state.calendar.styles.column['stroke-width'] / 2;
       },
-      getY() {
-        return this.root.state.calendar.styles.column['stroke-width'] / 2;
-      },
-      getWidth() {
-        let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
-        return width;
-      },
-
-      hours() {
+      generateHours() {
         let hours = [];
         for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex++) {
           const hoursCount = this.howManyHoursFit(dayIndex);
@@ -1548,9 +1544,9 @@ var Elastigantt = (function () {
             });
           }
         }
-        return this.root.state.calendar.hours = hours;
+        return this.hours = hours;
       },
-      days() {
+      generateDays() {
         let days = [];
         const daysCount = this.howManyDaysFit();
         const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
@@ -1572,9 +1568,9 @@ var Elastigantt = (function () {
             label: this.root.state.calendar.day.format[daysCount.type](date)
           });
         }
-        return this.root.state.calendar.days = days;
+        return this.days = days;
       },
-      months() {
+      generateMonths() {
         let months = [];
         const monthsCount = this.howManyMonthsFit();
         let currentDate = dayjs(this.root.state.times.firstDate);
@@ -1609,7 +1605,24 @@ var Elastigantt = (function () {
             currentDate = dayjs(this.root.state.times.lastDate);
           }
         }
-        return this.root.state.calendar.months = months;
+        return this.months = months;
+      },
+      regenerate() {
+        this.generateHours();
+        this.generateDays();
+        this.generateMonths();
+      }
+    },
+    computed: {
+      getX() {
+        return this.root.state.calendar.styles.column['stroke-width'] / 2;
+      },
+      getY() {
+        return this.root.state.calendar.styles.column['stroke-width'] / 2;
+      },
+      getWidth() {
+        let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+        return width;
       },
     }
   };
