@@ -1608,9 +1608,11 @@ var Elastigantt = (function () {
         return this.months = months;
       },
       regenerate() {
-        this.generateHours();
-        this.generateDays();
-        this.generateMonths();
+        this.$nextTick(() => {
+          this.generateHours();
+          this.generateDays();
+          this.generateMonths();
+        });
       }
     },
     computed: {
@@ -2169,7 +2171,7 @@ var Elastigantt = (function () {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("g", [
+    return _c("g", { staticClass: "elastigantt__tree-row-progress-bar" }, [
       _c("defs", [
         _c(
           "pattern",
@@ -2350,9 +2352,11 @@ var Elastigantt = (function () {
           },
           [
             _c("defs", [
-              _c("clipPath", { attrs: { id: "elastigantt__task-clip-path" } }, [
-                _c("polygon", { attrs: { points: _vm.getPoints } })
-              ])
+              _c(
+                "clipPath",
+                { attrs: { id: "'elastigantt__task-clip-path-'+task.id" } },
+                [_c("polygon", { attrs: { points: _vm.getPoints } })]
+              )
             ]),
             _vm._v(" "),
             _c("polygon", {
@@ -2363,7 +2367,7 @@ var Elastigantt = (function () {
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path": "url(#elastigantt__task-clip-path)"
+                "clip-path": "'url(#elastigantt__task-clip-path-'+task.id+')'"
               }
             })
           ],
@@ -2512,7 +2516,7 @@ var Elastigantt = (function () {
             _c("defs", [
               _c(
                 "clipPath",
-                { attrs: { id: "elastigantt__milestone-clip-path" } },
+                { attrs: { id: "'elastigantt__milestone-clip-path-'+task.id" } },
                 [_c("polygon", { attrs: { points: _vm.getPoints } })]
               )
             ]),
@@ -2525,7 +2529,8 @@ var Elastigantt = (function () {
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path": "url(#elastigantt__milestone-clip-path)"
+                "clip-path":
+                  "'url(#elastigantt__milestone-clip-path-'+task.id+')'"
               }
             })
           ],
@@ -2691,7 +2696,7 @@ var Elastigantt = (function () {
             _c("defs", [
               _c(
                 "clipPath",
-                { attrs: { id: "elastigantt__project-clip-path" } },
+                { attrs: { id: "'elastigantt__project-clip-path-'+task.id" } },
                 [
                   _c("path", {
                     style: _vm.root.state.row.styles.bar,
@@ -2709,7 +2714,7 @@ var Elastigantt = (function () {
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path": "url(#elastigantt__project-clip-path)"
+                "clip-path": "'url(#elastigantt__project-clip-path-'+task.id+')'"
               }
             })
           ],
@@ -3700,7 +3705,7 @@ var Elastigantt = (function () {
         let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
         return offset * this.state.times.timePerPixel + this.state.times.firstTime;
       },
-      isInsideViewPort(x, width, buffer = 5000) {
+      isInsideViewPort(x, width, buffer = 3000) {
         return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
       },
       onScrollTree(ev) {

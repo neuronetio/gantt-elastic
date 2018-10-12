@@ -554,7 +554,7 @@ export default {
       let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
       return offset * this.state.times.timePerPixel + this.state.times.firstTime;
     },
-    isInsideViewPort(x, width, buffer = 5000) {
+    isInsideViewPort(x, width, buffer = 3000) {
       return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
     },
     onScrollTree(ev) {

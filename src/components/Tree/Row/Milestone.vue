@@ -2,12 +2,12 @@
 <g class="elastigantt__tree-row-milestone-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
   <svg class="elastigantt__tree-row-milestone" :x="task.x" :y="task.y" :width="task.width" :height="task.height" @click="treeRowClick" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <clipPath id="elastigantt__milestone-clip-path">
+      <clipPath id="'elastigantt__milestone-clip-path-'+task.id">
         <polygon :points="getPoints"></polygon>
       </clipPath>
     </defs>
     <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
-    <progress-bar :task="task" clip-path="url(#elastigantt__milestone-clip-path)"></progress-bar>
+    <progress-bar :task="task" clip-path="'url(#elastigantt__milestone-clip-path-'+task.id+')'"></progress-bar>
   </svg>
   <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
   <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>

@@ -1,5 +1,5 @@
 <template>
-<g>
+<g class="elastigantt__tree-row-progress-bar">
   <defs>
     <pattern id="diagonalHatch" :width="root.state.progress.width" :height="root.state.progress.width" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="0" :y2="root.state.progress.width" :style="root.state.progress.styles.line" />

@@ -179,9 +179,11 @@ export default {
       return this.months = months;
     },
     regenerate() {
-      this.generateHours();
-      this.generateDays();
-      this.generateMonths();
+      this.$nextTick(() => {
+        this.generateHours();
+        this.generateDays();
+        this.generateMonths();
+      });
     }
   },
   computed: {
