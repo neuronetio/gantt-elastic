@@ -18,6 +18,8 @@ function getOptions(userOptions) {
       tree: {
         left: 0,
         right: 0,
+        percent: 0,
+        timePercent: 0,
         top: 0,
         bottom: 0,
         time: 0,
@@ -564,6 +566,7 @@ export default {
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
       this.state.scroll.tree.left = left;
       this.state.scroll.tree.right = left + treeContainerWidth;
+      this.state.scroll.tree.percent = left / this.state.times.totalViewDurationPx * 100;
       this.state.scroll.tree.top = top;
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
@@ -577,17 +580,28 @@ export default {
       if (pos > this.state.width) {
         pos = this.state.width - treeContainerWidth;
       }
+      this.scrollTo(pos);
+    },
+    scrollTo(pos) {
       this.state.svgTreeContainer.scrollLeft = pos;
       this.state.treeScrollContainer.scrollLeft = pos;
+    },
+    fixScrollPos() {
+      this.$nextTick(() => {
+        const oldPercent = this.state.scroll.tree.percent;
+        const currentOffset = this.state.times.totalViewDurationPx / 100 * oldPercent;
+        this.scrollTo(currentOffset);
+      });
     },
     onWheelTree(ev) {
       //this.state.times.timeScale += ev.deltaY * 10;
     },
     onTimeZoomChange(timeZoom) {
       this.state.times.timeZoom = timeZoom;
-      this.initTimes();
+      this.recalculateTimes();
       this.calculateSteps();
       this.calculateCalendarDimensions();
+      this.fixScrollPos();
     },
     onRowHeightChange(height) {
       this.state.row.height = height;
@@ -599,13 +613,16 @@ export default {
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
+      this.fixScrollPos();
     },
     onTaskListWidthChange(value) {
       this.state.taskList.percent = value;
       this.calculateTaskListColumnsWidths();
+      this.fixScrollPos();
     },
     onTaskListColumnWidthChange(value) {
       this.calculateTaskListColumnsWidths();
+      this.fixScrollPos();
     },
     initializeEvents() {
       this.$root.$on('elastigantt.tree.scroll', this.onScrollTree);
@@ -616,6 +633,15 @@ export default {
       this.$root.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
       this.$root.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
     },
+    recalculateTimes() {
+      let max = this.state.times.timeScale * 60;
+      let min = this.state.times.timeScale;
+      let steps = max / min;
+      let percent = this.state.times.timeZoom / 100;
+      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
+      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+    },
     initTimes() {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
@@ -625,10 +651,7 @@ export default {
       this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
       this.state.times.firstTime = this.state.times.firstDate.valueOf();
       this.state.times.lastTime = this.state.times.lastDate.valueOf();
-
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      this.recalculateTimes()
     },
     calculateSteps() {
       const steps = [];

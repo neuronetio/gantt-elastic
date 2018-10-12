@@ -3,7 +3,7 @@
   <calendar></calendar>
   <grid></grid>
   <dependency-lines :tasks="root.visibleTasks"></dependency-lines>
-  <g v-for="task in root.visibleTasks" :task="task" v-if="root.isInsideViewPort(task.x, task.width)">
+  <g v-for="task in root.visibleTasks" :task="task">
     <component :task="task" :is="task.type"></component>
   </g>
 </svg>

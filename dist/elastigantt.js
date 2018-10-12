@@ -2798,14 +2798,12 @@ var Elastigantt = (function () {
         _c("dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
-          return _vm.root.isInsideViewPort(task.x, task.width)
-            ? _c(
-                "g",
-                { attrs: { task: task } },
-                [_c(task.type, { tag: "component", attrs: { task: task } })],
-                1
-              )
-            : _vm._e()
+          return _c(
+            "g",
+            { attrs: { task: task } },
+            [_c(task.type, { tag: "component", attrs: { task: task } })],
+            1
+          )
         })
       ],
       2
@@ -3131,6 +3129,8 @@ var Elastigantt = (function () {
         tree: {
           left: 0,
           right: 0,
+          percent: 0,
+          timePercent: 0,
           top: 0,
           bottom: 0,
           time: 0,
@@ -3675,6 +3675,7 @@ var Elastigantt = (function () {
         const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
         this.state.scroll.tree.left = left;
         this.state.scroll.tree.right = left + treeContainerWidth;
+        this.state.scroll.tree.percent = left / this.state.times.totalViewDurationPx * 100;
         this.state.scroll.tree.top = top;
         this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
         this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
@@ -3688,17 +3689,28 @@ var Elastigantt = (function () {
         if (pos > this.state.width) {
           pos = this.state.width - treeContainerWidth;
         }
+        this.scrollTo(pos);
+      },
+      scrollTo(pos) {
         this.state.svgTreeContainer.scrollLeft = pos;
         this.state.treeScrollContainer.scrollLeft = pos;
+      },
+      fixScrollPos() {
+        this.$nextTick(() => {
+          const oldPercent = this.state.scroll.tree.percent;
+          const currentOffset = this.state.times.totalViewDurationPx / 100 * oldPercent;
+          this.scrollTo(currentOffset);
+        });
       },
       onWheelTree(ev) {
         //this.state.times.timeScale += ev.deltaY * 10;
       },
       onTimeZoomChange(timeZoom) {
         this.state.times.timeZoom = timeZoom;
-        this.initTimes();
+        this.recalculateTimes();
         this.calculateSteps();
         this.calculateCalendarDimensions();
+        this.fixScrollPos();
       },
       onRowHeightChange(height) {
         this.state.row.height = height;
@@ -3710,13 +3722,16 @@ var Elastigantt = (function () {
         this.initTimes();
         this.calculateSteps();
         this.computeCalendarWidths();
+        this.fixScrollPos();
       },
       onTaskListWidthChange(value) {
         this.state.taskList.percent = value;
         this.calculateTaskListColumnsWidths();
+        this.fixScrollPos();
       },
       onTaskListColumnWidthChange(value) {
         this.calculateTaskListColumnsWidths();
+        this.fixScrollPos();
       },
       initializeEvents() {
         this.$root.$on('elastigantt.tree.scroll', this.onScrollTree);
@@ -3727,19 +3742,24 @@ var Elastigantt = (function () {
         this.$root.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
         this.$root.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
       },
-      initTimes() {
+      recalculateTimes() {
         let max = this.state.times.timeScale * 60;
         let min = this.state.times.timeScale;
         let steps = max / min;
+        let percent = this.state.times.timeZoom / 100;
+        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+        this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
+        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      },
+      initTimes() {
+        let max = this.state.times.timeScale * 60;
+        let min = this.state.times.timeScale;
         let percent = this.state.times.timeZoom / 100;
         this.state.times.firstDate = dayjs(this.state.times.firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
         this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
         this.state.times.firstTime = this.state.times.firstDate.valueOf();
         this.state.times.lastTime = this.state.times.lastDate.valueOf();
-
-        this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-        this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-        this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+        this.recalculateTimes();
       },
       calculateSteps() {
         const steps = [];
