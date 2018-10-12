@@ -4,8 +4,8 @@
     <div class="elastigantt__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
   </foreignObject>
   <calendar-row v-for="(month,index) in months" :key="month.key" :item="month"></calendar-row>
-  <calendar-row v-for="(day,index) in days" :key="day.key" :item="day"></calendar-row>
-  <calendar-row v-for="(hour,index) in hours" :key="hour.key" :item="hour"></calendar-row>
+  <calendar-row v-for="(day,index) in days" :key="day.key" :item="day" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
+  <calendar-row v-for="(hour,index) in hours" :key="hour.key" :item="hour" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
 </g>
 </template>
 <script>

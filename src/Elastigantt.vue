@@ -554,6 +554,9 @@ export default {
       let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
       return offset * this.state.times.timePerPixel + this.state.times.firstTime;
     },
+    isInsideViewPort(x, width, buffer = 5000) {
+      return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
+    },
     onScrollTree(ev) {
       this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
     },
@@ -769,7 +772,7 @@ export default {
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-        task.inViewPort = (task.x + task.width >= this.state.scroll.tree.left && task.x <= this.state.scroll.tree.right) || (task.x <= this.state.scroll.tree.left && task.x + task.width >= this.state.scroll.tree.right);
+        task.inViewPort = this.isInsideViewPort(task.x, task.width);
       }
       return visibleTasks;
     },

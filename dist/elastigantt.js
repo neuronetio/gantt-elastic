@@ -1262,11 +1262,6 @@ var Elastigantt = (function () {
   //
   //
   //
-  //
-  //
-  //
-  //
-  //
 
   var script$8 = {
     inject: ['root'],
@@ -1275,12 +1270,6 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
-      inViewPort() {
-        const state = this.root.state;
-        const item = this.item;
-        return (item.x <= state.scroll.tree.right && item.x + item.width >= state.scroll.tree.left) ||
-          (item.x <= state.scroll.tree.left && item.x + item.width >= state.scroll.tree.right);
-      },
       getTextX() {
         return this.item.x + this.item.width / 2;
       },
@@ -1586,11 +1575,15 @@ var Elastigantt = (function () {
         }),
         _vm._v(" "),
         _vm._l(_vm.days, function(day, index) {
-          return _c("calendar-row", { key: day.key, attrs: { item: day } })
+          return _vm.root.isInsideViewPort(day.x, day.width)
+            ? _c("calendar-row", { key: day.key, attrs: { item: day } })
+            : _vm._e()
         }),
         _vm._v(" "),
         _vm._l(_vm.hours, function(hour, index) {
-          return _c("calendar-row", { key: hour.key, attrs: { item: hour } })
+          return _vm.root.isInsideViewPort(hour.x, hour.width)
+            ? _c("calendar-row", { key: hour.key, attrs: { item: hour } })
+            : _vm._e()
         })
       ],
       2
@@ -2752,12 +2745,14 @@ var Elastigantt = (function () {
         _c("dependency-lines", { attrs: { tasks: _vm.root.visibleTasks } }),
         _vm._v(" "),
         _vm._l(_vm.root.visibleTasks, function(task) {
-          return _c(
-            "g",
-            { attrs: { task: task } },
-            [_c(task.type, { tag: "component", attrs: { task: task } })],
-            1
-          )
+          return task.inViewPort
+            ? _c(
+                "g",
+                { attrs: { task: task } },
+                [_c(task.type, { tag: "component", attrs: { task: task } })],
+                1
+              )
+            : _vm._e()
         })
       ],
       2
@@ -3617,6 +3612,9 @@ var Elastigantt = (function () {
         let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
         return offset * this.state.times.timePerPixel + this.state.times.firstTime;
       },
+      isInsideViewPort(x, width, buffer = 5000) {
+        return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
+      },
       onScrollTree(ev) {
         this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
       },
@@ -3832,7 +3830,7 @@ var Elastigantt = (function () {
           task.height = this.state.row.height;
           task.x = this.timeToPixelOffsetX(task.startTime);
           task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
-          task.inViewPort = (task.x + task.width >= this.state.scroll.tree.left && task.x <= this.state.scroll.tree.right) || (task.x <= this.state.scroll.tree.left && task.x + task.width >= this.state.scroll.tree.right);
+          task.inViewPort = this.isInsideViewPort(task.x, task.width);
         }
         return visibleTasks;
       },
