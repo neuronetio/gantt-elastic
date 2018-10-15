@@ -824,6 +824,7 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   var script$5 = {
     inject: ['root'],
@@ -832,6 +833,12 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      html() {
+        if (typeof this.column.html !== 'undefined' && this.column.html === true) {
+          return true;
+        }
+        return false;
+      },
       value() {
         if (typeof this.column.value === 'function') {
           return this.column.value(this.task);
@@ -862,14 +869,24 @@ var Elastigantt = (function () {
           [
             _vm._t("default"),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "elastigantt__task-list-item-value",
-                style: _vm.column.styles.value
-              },
-              [_vm._v(_vm._s(_vm.value))]
-            )
+            !_vm.html
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "elastigantt__task-list-item-value",
+                    style: _vm.column.styles.value
+                  },
+                  [_vm._v(_vm._s(_vm.value))]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.html
+              ? _c("div", {
+                  staticClass: "elastigantt__task-list-item-value",
+                  style: _vm.column.styles.value,
+                  domProps: { innerHTML: _vm._s(_vm.value) }
+                })
+              : _vm._e()
           ],
           2
         )

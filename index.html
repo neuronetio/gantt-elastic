@@ -23,7 +23,7 @@
     {
       id: 1,
       label: 'Make some noise',
-      user: 'John Doe',
+      user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank">John Doe</a>',
       start: currentDate.clone().subtract(12,'day').format('YYYY-MM-DD'),
       duration: 5 * 24 * 60 * 60,
       progress: 85,
@@ -32,7 +32,7 @@
     {
       id: 2,
       label: 'With great power comes great responsibility',
-      user: 'Peter Parker',
+      user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank">Peter Parker</a>',
       parentId: 1,
       start:currentDate.clone().subtract(11,'day').format('YYYY-MM-DD'),
       duration: 4 * 24 * 60 * 60,
@@ -42,7 +42,7 @@
     {
       id: 3,
       label: 'Courage is being scared to death, but saddling up anyway.',
-      user: 'John Wayne',
+      user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank">John Wayne</a>',
       parentId: 2,
       start: currentDate.clone().subtract(10,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
@@ -52,7 +52,7 @@
     {
       id: 4,
       label: 'Put that toy AWAY!',
-      user: 'Clark Kent',
+      user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank">Clark Kent</a>',
       start: currentDate.clone().subtract(4,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
       progress: 50,
@@ -62,7 +62,7 @@
     {
       id: 5,
       label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
-      user: 'Austin Powers',
+      user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank">Austin Powers</a>',
       parentId: 4,
       start: currentDate.clone().subtract(2,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
@@ -72,7 +72,7 @@
     {
       id: 6,
       label: 'Butch Mario and the Luigi Kid',
-      user: 'Mario Bros',
+      user: '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank">Mario Bros</a>',
       parentId: 5,
       start: currentDate.clone().add(1,'day').format('YYYY-MM-DD'),
       duration: 1 * 24 * 60 * 60,
@@ -82,7 +82,7 @@
     {
       id: 7,
       label: 'Devon, the old man wanted me, it was his dying request',
-      user: 'Knight Rider',
+      user: '<a href="https://www.google.com/search?q=Knight+Rider" target="_blank">Knight Rider</a>',
       parentId: 2,
       dependentOn:[6],
       start: currentDate.clone().add(4,'day').format('YYYY-MM-DD'),
@@ -93,7 +93,7 @@
     {
       id: 8,
       label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
-      user: 'Johhny Bravo',
+      user: '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank">Johhny Bravo</a>',
       parentId: 7,
       dependentOn:[7],
       start: currentDate.clone().add(6,'days').format('YYYY-MM-DD'),
@@ -104,7 +104,7 @@
     {
       id: 9,
       label: 'This better be important, woman. You are interrupting my very delicate calculations.',
-      user: 'Dexter\'s Laboratory',
+      user: '<a href="https://www.google.com/search?q=Dexter\'s+Laboratory" target="_blank">Dexter\'s Laboratory</a>',
       parentId: 8,
       dependentOn:[8,7],
       start: currentDate.clone().add(8,'days').format('YYYY-MM-DD'),
@@ -115,21 +115,12 @@
     {
       id:10,
       label:'current task',
-      user:'Johnattan Owens',
+      user:'<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank">Johnattan Owens</a>',
       start:currentDate.clone().add(8,'days').format('YYYY-MM-DD'),
       duration:24*60*60,
       progress:0,
       type:'task'
     },
-    {
-      id:11,
-      label:'current task2',
-      user:'Johnattan Owens',
-      start:currentDate.clone().add(6,'hours').format('YYYY-MM-DD'),
-      duration:24*60*60,
-      progress:0,
-      type:'task'
-    }
   ];
 
   const options = {
@@ -138,7 +129,7 @@
         {id:1, label : 'ID', value : 'id', width : 40},
         {id:2, label : 'Description', value : 'label', width : 250, expander:true},
         {id:3, label: 'Start', value:(task)=>task.startDate.format('YYYY-MM-DD') ,width:78},
-        {id:3, label : 'User', value : 'user', width : 120},
+        {id:3, label : 'User', value : 'user', width : 120, html:true},
         {id:4, label : 'Type', value : 'type', width : 68},
         {id:5, label : '%', value : 'progress', width : 35, styles:{
            label: {'text-align':'center','width':'100%'} ,
