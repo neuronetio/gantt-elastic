@@ -1464,7 +1464,18 @@ var Elastigantt = (function () {
         const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
         let fullWidth = this.root.state.width;
         let formatNames = Object.keys(this.root.state.calendar.day.format);
-        const monthsCount = Math.ceil(this.root.state.times.lastDate.diff(this.root.state.times.firstDate, 'months', true));
+        const startMonth = this.root.state.times.firstDate.month();
+        let currentMonth = dayjs(this.root.state.times.firstDate);
+        let previousMonth = currentMonth.clone();
+        const lastTime = this.root.state.times.lastTime;
+        let monthsCount = 1;
+        while (currentMonth.valueOf() <= lastTime) {
+          currentMonth = currentMonth.add(1, 'day');
+          if (previousMonth.month() != currentMonth.month()) {
+            monthsCount++;
+          }
+          previousMonth = currentMonth.clone();
+        }
         for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
           for (let formatName of formatNames) {
             if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
