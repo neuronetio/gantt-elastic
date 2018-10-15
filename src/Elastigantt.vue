@@ -5,6 +5,7 @@
 <script>
 function getOptions(userOptions) {
   return {
+    title: 'Elastigantt',
     debug: false,
     width: 0,
     height: 0,
@@ -93,10 +94,11 @@ function getOptions(userOptions) {
       width: 20,
       height: 6,
       pattern: true,
+      bar: true,
       styles: {
         line: {
-          'stroke': '#ffffff65',
-          'stroke-width': 20
+          'stroke': '#ffffff25',
+          'stroke-width': 10
         },
         bar: {
           pattern: {

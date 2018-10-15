@@ -13,6 +13,7 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   let scaleTimeoutId = null;
   var script = {
@@ -99,6 +100,18 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "elastigantt__header" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            float: "left",
+            "font-size": "22px",
+            "letter-spacing": "1px"
+          }
+        },
+        [_vm._v(_vm._s(_vm.root.state.title))]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "elastigantt__header-options" }, [
         _c(
           "button",
@@ -2193,7 +2206,7 @@ var Elastigantt = (function () {
         )
       ]),
       _vm._v(" "),
-      !_vm.root.state.progress.pattern
+      _vm.root.state.progress.bar
         ? _c("rect", {
             style: _vm.root.state.progress.styles.bar.solid,
             attrs: {
@@ -3149,6 +3162,7 @@ var Elastigantt = (function () {
 
   function getOptions(userOptions) {
     return {
+      title: 'Elastigantt',
       debug: false,
       width: 0,
       height: 0,
@@ -3237,10 +3251,11 @@ var Elastigantt = (function () {
         width: 20,
         height: 6,
         pattern: true,
+        bar: true,
         styles: {
           line: {
-            'stroke': '#ffffff65',
-            'stroke-width': 20
+            'stroke': '#ffffff25',
+            'stroke-width': 10
           },
           bar: {
             pattern: {

@@ -126,6 +126,7 @@ foreignObject > *{
   word-break: keep-all;
   font-family: Arial;
   font-size: 12px;
+  width: 100%;
 }
 .elastigantt__tree-scroll-container{
   overflow:auto;
