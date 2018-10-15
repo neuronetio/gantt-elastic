@@ -72,7 +72,7 @@ export default {
       let firstDate = dayjs(this.root.state.times.firstDate);
       const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
       let fullWidth = this.root.state.width;
-      let formatNames = Object.keys(this.root.state.calendar.day.format);
+      let formatNames = Object.keys(this.root.state.calendar.month.format);
       const startMonth = this.root.state.times.firstDate.month();
       let currentMonth = dayjs(this.root.state.times.firstDate);
       let previousMonth = currentMonth.clone();
@@ -153,7 +153,7 @@ export default {
     generateMonths() {
       let months = [];
       const monthsCount = this.howManyMonthsFit();
-      console.log(monthsCount)
+      let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentDate = dayjs(this.root.state.times.firstDate);
       let startOfMonth = 0;
       let currentDays = 0;
@@ -174,13 +174,19 @@ export default {
             }
           }
         }
+        let label = '';
+        for (let formatName of formatNames) {
+          if ((this.root.state.calendar.month.maxWidths[formatName] + 2) <= monthWidth) {
+            label = this.root.state.calendar.month.format[formatName](currentDate);
+          }
+        }
         months.push({
           key: monthIndex + 'm',
           x: this.root.state.calendar.styles.column['stroke-width'] / 2 + monthOffset,
           y: this.root.state.calendar.styles.column['stroke-width'] / 2,
           width: monthWidth,
           height: this.root.state.calendar.month.height,
-          label: this.root.state.calendar.month.format[monthsCount.type](currentDate)
+          label: label
         });
 
         currentDate = currentDate.add(1, 'month').startOf('month');
