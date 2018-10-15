@@ -1476,8 +1476,8 @@ var Elastigantt = (function () {
           }
         }
         return {
-          count: 0,
-          type: ''
+          count: 1,
+          type: formatNames[0]
         };
       },
       hourTextStyle() {
@@ -1533,6 +1533,7 @@ var Elastigantt = (function () {
       generateMonths() {
         let months = [];
         const monthsCount = this.howManyMonthsFit();
+        console.log(monthsCount);
         let currentDate = dayjs(this.root.state.times.firstDate);
         for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
           let monthWidth = 0;
@@ -3665,7 +3666,7 @@ var Elastigantt = (function () {
         let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
         return offset * this.state.times.timePerPixel + this.state.times.firstTime;
       },
-      isInsideViewPort(x, width, buffer = 3000) {
+      isInsideViewPort(x, width, buffer = 5000) {
         return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
       },
       onScrollTree(ev) {
@@ -4015,4 +4016,3 @@ var Elastigantt = (function () {
   return Elastigantt;
 
 }());
-//# sourceMappingURL=elastigantt.js.map

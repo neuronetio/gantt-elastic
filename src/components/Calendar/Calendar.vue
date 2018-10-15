@@ -85,8 +85,8 @@ export default {
         }
       }
       return {
-        count: 0,
-        type: ''
+        count: 1,
+        type: formatNames[0]
       };
     },
     hourTextStyle() {
@@ -142,6 +142,7 @@ export default {
     generateMonths() {
       let months = [];
       const monthsCount = this.howManyMonthsFit();
+      console.log(monthsCount)
       let currentDate = dayjs(this.root.state.times.firstDate);
       let startOfMonth = 0;
       let currentDays = 0;
