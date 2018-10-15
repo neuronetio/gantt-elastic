@@ -15,7 +15,9 @@
     "vue-template-compiler": "^2.5.17"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"rollup -c -w",
+    "build":"rollup -c"
   },
   "repository": {
     "type": "git",
