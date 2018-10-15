@@ -2162,6 +2162,9 @@ var Elastigantt = (function () {
         const start = this.task.width / 100 * this.task.progress;
         return `M ${start} 0 L ${start} ${this.task.height}`;
       },
+      getSolidStyle() {
+        return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      },
       getLineStyle() {
         return Object.assign({}, {
           stroke: this.root.state.row.styles.bar.stroke + 'a0',
@@ -2208,7 +2211,7 @@ var Elastigantt = (function () {
       _vm._v(" "),
       _vm.root.state.progress.bar
         ? _c("rect", {
-            style: _vm.root.state.progress.styles.bar.solid,
+            style: _vm.getSolidStyle,
             attrs: {
               id: "elastigantt__tree-row-progress",
               x: "0",
@@ -3255,7 +3258,7 @@ var Elastigantt = (function () {
         styles: {
           line: {
             'stroke': '#ffffff25',
-            'stroke-width': 10
+            'stroke-width': 20
           },
           bar: {
             pattern: {
@@ -3577,6 +3580,9 @@ var Elastigantt = (function () {
           }
           if (typeof task.style === 'undefined') {
             task.style = {};
+          }
+          if (typeof task.progressBarStyle === 'undefined') {
+            task.progressBarStyle = this.mergeDeep({}, this.state.progress.styles);
           }
           task.children = [];
           task.allChildren = [];

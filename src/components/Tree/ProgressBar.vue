@@ -5,7 +5,7 @@
       <line x1="0" y1="0" x2="0" :y2="root.state.progress.width" :style="root.state.progress.styles.line" />
     </pattern>
   </defs>
-  <rect v-if="root.state.progress.bar" id="elastigantt__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="root.state.progress.styles.bar.solid"></rect>
+  <rect v-if="root.state.progress.bar" id="elastigantt__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="getSolidStyle"></rect>
   <g v-if="root.state.progress.pattern">
     <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="root.state.progress.styles.bar.pattern"></rect>
     <path :d="getLinePoints" :style="getLineStyle"></path>
@@ -26,6 +26,9 @@ export default {
     getLinePoints() {
       const start = this.task.width / 100 * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
+    },
+    getSolidStyle() {
+      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
     getLineStyle() {
       return Object.assign({}, {

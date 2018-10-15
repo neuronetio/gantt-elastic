@@ -98,7 +98,7 @@ function getOptions(userOptions) {
       styles: {
         line: {
           'stroke': '#ffffff25',
-          'stroke-width': 10
+          'stroke-width': 20
         },
         bar: {
           pattern: {
@@ -422,6 +422,9 @@ export default {
         }
         if (typeof task.style === 'undefined') {
           task.style = {};
+        }
+        if (typeof task.progressBarStyle === 'undefined') {
+          task.progressBarStyle = this.mergeDeep({}, this.state.progress.styles);
         }
         task.children = [];
         task.allChildren = [];
