@@ -2666,6 +2666,9 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      clipPathId() {
+        return 'elastigantt__project-clip-path-' + this.task.id;
+      },
       getViewBox() {
         return `0 0 ${this.task.width} ${this.task.height}`;
       },
@@ -2747,16 +2750,12 @@ var Elastigantt = (function () {
           },
           [
             _c("defs", [
-              _c(
-                "clipPath",
-                { attrs: { id: "'elastigantt__project-clip-path-'+task.id" } },
-                [
-                  _c("path", {
-                    style: _vm.root.state.row.styles.bar,
-                    attrs: { d: _vm.getPoints }
-                  })
-                ]
-              )
+              _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+                _c("path", {
+                  style: _vm.root.state.row.styles.bar,
+                  attrs: { d: _vm.getPoints }
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("path", {
@@ -2767,7 +2766,7 @@ var Elastigantt = (function () {
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path": "'url(#elastigantt__project-clip-path-'+task.id+')'"
+                "clip-path": "url(#" + _vm.clipPathId + ")"
               }
             })
           ],
@@ -4122,4 +4121,3 @@ var Elastigantt = (function () {
   return standalone;
 
 }());
-//# sourceMappingURL=elastigantt.standalone.js.map
