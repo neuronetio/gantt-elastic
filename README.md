@@ -29,7 +29,7 @@ const options = {
       {id:1, label : 'ID', value : 'id', width : 40},
       {id:2, label : 'Description', value : 'label', width : 250, expander:true},
       {id:3, label: 'Start', value:(task)=>task.startDate.format('YYYY-MM-DD'), width:100},
-      {id:3, label : 'User', value : 'user', width : 120},
+      {id:3, label : 'User', value : 'user', width : 120, html:true},
       {id:4, label : 'Type', value : 'type', width : 60},
       {id:5, label : '%', value : 'progress', width : 35, styles:{
          label: {'text-align':'center','width':'100%'} ,
@@ -51,11 +51,15 @@ const tasks = [
   {
     id: 1,
     label: 'Make some noise',
-    user: 'John Doe',
+    user: '<a href="https://www.google.com/search?q=John+Doe">John Doe</a>',
     start: '2018-05-18T12:00:00',
     duration: 5 * 24 * 60 * 60,
     progress: 85,
     type: 'project',
+    style:{
+      fill:'#795548',
+      stroke:'#795548'
+    }
   },
   {
     id: 2,

@@ -68,6 +68,10 @@
       duration: 2 * 24 * 60 * 60,
       progress: 10,
       type: 'milestone',
+      style:{
+        fill:'#FF9800',
+        stroke:'#FF9800'
+      }
     },
     {
       id: 6,
@@ -100,6 +104,10 @@
       duration: 1 * 24 * 60 * 60,
       progress: 0,
       type: 'task',
+      style:{
+        fill:'#00BCD4',
+        stroke:'#00BCD4'
+      }
     },
     {
       id: 9,
@@ -111,6 +119,10 @@
       duration: 4 * 60 * 60,
       progress: 20,
       type: 'task',
+      style:{
+        fill:'#3F51B5',
+        stroke:'#3F51B5'
+      }
     },
     {
       id:10,
@@ -119,7 +131,11 @@
       start:currentDate.clone().add(8,'days').format('YYYY-MM-DD'),
       duration:24*60*60,
       progress:0,
-      type:'task'
+      type:'task',
+      style:{
+        fill:'#795548',
+        stroke:'#795548'
+      }
     },
   ];
 

@@ -28,10 +28,10 @@ export default {
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
     getLineStyle() {
-      return {
+      return Object.assign({}, {
         stroke: this.root.state.row.styles.bar.stroke + 'a0',
         'stroke-width': this.root.state.row.styles.bar['stroke-width'] / 2
-      };
+      }, this.task.style);
     }
   }
 }

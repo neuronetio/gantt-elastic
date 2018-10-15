@@ -2225,10 +2225,10 @@ var Elastigantt = (function () {
         return `M ${start} 0 L ${start} ${this.task.height}`;
       },
       getLineStyle() {
-        return {
+        return Object.assign({}, {
           stroke: this.root.state.row.styles.bar.stroke + 'a0',
           'stroke-width': this.root.state.row.styles.bar['stroke-width'] / 2
-        };
+        }, this.task.style);
       }
     }
   };
@@ -2365,6 +2365,9 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      clipPathId() {
+        return 'elastigantt__task-clip-path-' + this.task.id;
+      },
       getViewBox() {
         const task = this.task;
         return `0 0 ${task.width} ${task.height}`;
@@ -2377,6 +2380,9 @@ var Elastigantt = (function () {
         const fifty = this.task.height - this.task.height / 4;
         const full = this.task.height;
         return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+      },
+      getStyle() {
+        return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
       }
     },
     methods: {
@@ -2422,22 +2428,20 @@ var Elastigantt = (function () {
           },
           [
             _c("defs", [
-              _c(
-                "clipPath",
-                { attrs: { id: "'elastigantt__task-clip-path-'+task.id" } },
-                [_c("polygon", { attrs: { points: _vm.getPoints } })]
-              )
+              _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+                _c("polygon", { attrs: { points: _vm.getPoints } })
+              ])
             ]),
             _vm._v(" "),
             _c("polygon", {
-              style: _vm.root.state.row.styles.bar,
+              style: _vm.getStyle,
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path": "'url(#elastigantt__task-clip-path-'+task.id+')'"
+                "clip-path": "url(#" + _vm.clipPathId + ")"
               }
             })
           ],
@@ -2520,6 +2524,9 @@ var Elastigantt = (function () {
       return {};
     },
     computed: {
+      clipPathId() {
+        return 'elastigantt__milestone-clip-path-' + this.task.id;
+      },
       getViewBox() {
         return `0 0 ${this.task.width} ${this.task.height}`;
       },
@@ -2539,6 +2546,9 @@ var Elastigantt = (function () {
         ${task.width},${fifty}
         ${task.width - offset},${task.height}
         ${offset},${task.height}`;
+      },
+      getStyle() {
+        return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
       }
     },
     methods: {
@@ -2584,23 +2594,20 @@ var Elastigantt = (function () {
           },
           [
             _c("defs", [
-              _c(
-                "clipPath",
-                { attrs: { id: "'elastigantt__milestone-clip-path-'+task.id" } },
-                [_c("polygon", { attrs: { points: _vm.getPoints } })]
-              )
+              _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+                _c("polygon", { attrs: { points: _vm.getPoints } })
+              ])
             ]),
             _vm._v(" "),
             _c("polygon", {
-              style: _vm.root.state.row.styles.bar,
+              style: _vm.getStyle,
               attrs: { points: _vm.getPoints }
             }),
             _vm._v(" "),
             _c("progress-bar", {
               attrs: {
                 task: _vm.task,
-                "clip-path":
-                  "'url(#elastigantt__milestone-clip-path-'+task.id+')'"
+                "clip-path": "url(#" + _vm.clipPathId + ")"
               }
             })
           ],
@@ -2714,14 +2721,9 @@ var Elastigantt = (function () {
                 L 0 ${smallCorner}
                 Z
         `;
-        // return `M ${offset} ${task.height}
-        // Q 0 ${task.height} 0 ${fifty}
-        // Q 0 0 ${offset} 0
-        // L ${task.width - offset} 0
-        // Q ${task.width} 0 ${task.width} ${fifty}
-        // Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
-        // L ${offset} ${task.height}
-        // Z`;
+      },
+      getStyle() {
+        return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
       }
     },
     methods: {
@@ -2775,10 +2777,7 @@ var Elastigantt = (function () {
               ])
             ]),
             _vm._v(" "),
-            _c("path", {
-              style: _vm.root.state.row.styles.bar,
-              attrs: { d: _vm.getPoints }
-            }),
+            _c("path", { style: _vm.getStyle, attrs: { d: _vm.getPoints } }),
             _vm._v(" "),
             _c("progress-bar", {
               attrs: {
@@ -3635,6 +3634,9 @@ var Elastigantt = (function () {
           }
           if (typeof task.parentId === 'undefined') {
             task.parentId = null;
+          }
+          if (typeof task.style === 'undefined') {
+            task.style = {};
           }
           task.children = [];
           task.allChildren = [];

@@ -418,6 +418,9 @@ export default {
         if (typeof task.parentId === 'undefined') {
           task.parentId = null;
         }
+        if (typeof task.style === 'undefined') {
+          task.style = {};
+        }
         task.children = [];
         task.allChildren = [];
         task.parents = [];

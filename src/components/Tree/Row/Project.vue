@@ -6,7 +6,7 @@
         <path :d="getPoints" :style="root.state.row.styles.bar"></path>
       </clipPath>
     </defs>
-    <path :d="getPoints" :style="root.state.row.styles.bar"></path>
+    <path :d="getPoints" :style="getStyle"></path>
     <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
   </svg>
   <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
@@ -61,14 +61,9 @@ export default {
                 L 0 ${smallCorner}
                 Z
         `;
-      // return `M ${offset} ${task.height}
-      // Q 0 ${task.height} 0 ${fifty}
-      // Q 0 0 ${offset} 0
-      // L ${task.width - offset} 0
-      // Q ${task.width} 0 ${task.width} ${fifty}
-      // Q ${task.width} ${task.height} ${task.width - offset} ${task.height}
-      // L ${offset} ${task.height}
-      // Z`;
+    },
+    getStyle() {
+      return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
     }
   },
   methods: {

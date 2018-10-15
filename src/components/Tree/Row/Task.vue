@@ -2,12 +2,12 @@
 <g class="elastigantt__tree-row-task-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
   <svg class="elastigantt__tree-row-task" :x="task.x" :y="task.y" :width="task.width" :height="task.height" @click="treeRowClick" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <clipPath id="'elastigantt__task-clip-path-'+task.id">
+      <clipPath :id="clipPathId">
         <polygon :points="getPoints"></polygon>
       </clipPath>
     </defs>
-    <polygon :points="getPoints" :style="root.state.row.styles.bar"></polygon>
-    <progress-bar :task="task" clip-path="'url(#elastigantt__task-clip-path-'+task.id+')'"></progress-bar>
+    <polygon :points="getPoints" :style="getStyle"></polygon>
+    <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
   </svg>
   <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
   <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
@@ -30,6 +30,9 @@ export default {
     return {};
   },
   computed: {
+    clipPathId() {
+      return 'elastigantt__task-clip-path-' + this.task.id;
+    },
     getViewBox() {
       const task = this.task;
       return `0 0 ${task.width} ${task.height}`;
@@ -43,6 +46,9 @@ export default {
       const full = this.task.height;
       const offset = 10;
       return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+    },
+    getStyle() {
+      return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
     }
   },
   methods: {
