@@ -23,7 +23,7 @@
     {
       id: 1,
       label: 'Make some noise',
-      user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#505050;">John Doe</a>',
+      user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#039BE5;">John Doe</a>',
       start: currentDate.clone().subtract(5,'day').format('YYYY-MM-DD'),
       duration: 5 * 24 * 60 * 60,
       progress: 85,
@@ -32,26 +32,26 @@
     {
       id: 2,
       label: 'With great power comes great responsibility',
-      user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#505050;">Peter Parker</a>',
+      user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#039BE5;">Peter Parker</a>',
       parentId: 1,
       start:currentDate.clone().subtract(4,'day').format('YYYY-MM-DD'),
       duration: 4 * 24 * 60 * 60,
       progress: 50,
       type: 'milestone',
       style:{
-        fill:'#e74c3c',
-        stroke:'#c0392b'
+        fill:'#ef5350',
+        stroke:'#e53935'
       },
       progressBarStyle:{
         bar:{
-          fill:'#c0392b'
+          fill:'#e53935'
         }
       }
     },
     {
       id: 3,
       label: 'Courage is being scared to death, but saddling up anyway.',
-      user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#505050;">John Wayne</a>',
+      user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#039BE5;">John Wayne</a>',
       parentId: 2,
       start: currentDate.clone().subtract(3,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
@@ -61,7 +61,7 @@
     {
       id: 4,
       label: 'Put that toy AWAY!',
-      user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#505050;">Clark Kent</a>',
+      user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#039BE5;">Clark Kent</a>',
       start: currentDate.clone().subtract(2,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
       progress: 50,
@@ -71,26 +71,26 @@
     {
       id: 5,
       label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
-      user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#505050;">Austin Powers</a>',
+      user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#039BE5;">Austin Powers</a>',
       parentId: 4,
       start: currentDate.clone().subtract(1,'day').format('YYYY-MM-DD'),
       duration: 2 * 24 * 60 * 60,
       progress: 10,
       type: 'milestone',
       style:{
-        fill:'#1abc9cf0',
-        stroke:'#1abc9c'
+        fill:'#66BB6A',
+        stroke:'#43A047'
       },
       progressBarStyle:{
         bar:{
-          fill:'#16a085'
+          fill:'#43A047'
         }
       }
     },
     {
       id: 6,
       label: 'Butch Mario and the Luigi Kid',
-      user: '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank" style="color:#505050;">Mario Bros</a>',
+      user: '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank" style="color:#039BE5;">Mario Bros</a>',
       parentId: 5,
       start: currentDate.clone().add(1,'day').format('YYYY-MM-DD'),
       duration: 1 * 24 * 60 * 60,
@@ -100,7 +100,7 @@
     {
       id: 7,
       label: 'Devon, the old man wanted me, it was his dying request',
-      user: '<a href="https://www.google.com/search?q=Knight+Rider" target="_blank" style="color:#505050;">Knight Rider</a>',
+      user: '<a href="https://www.google.com/search?q=Knight+Rider" target="_blank" style="color:#039BE5;">Knight Rider</a>',
       parentId: 2,
       dependentOn:[6],
       start: currentDate.clone().add(2,'day').format('YYYY-MM-DD'),
@@ -111,7 +111,7 @@
     {
       id: 8,
       label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
-      user: '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank" style="color:#505050;">Johhny Bravo</a>',
+      user: '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank" style="color:#039BE5;">Johhny Bravo</a>',
       parentId: 7,
       dependentOn:[7],
       start: currentDate.clone().add(3,'days').format('YYYY-MM-DD'),
@@ -122,7 +122,7 @@
     {
       id: 9,
       label: 'This better be important, woman. You are interrupting my very delicate calculations.',
-      user: '<a href="https://www.google.com/search?q=Dexter\'s+Laboratory" target="_blank" style="color:#505050;">Dexter\'s Laboratory</a>',
+      user: '<a href="https://www.google.com/search?q=Dexter\'s+Laboratory" target="_blank" style="color:#039BE5;">Dexter\'s Laboratory</a>',
       parentId: 8,
       dependentOn:[8,7],
       start: currentDate.clone().add(4,'days').format('YYYY-MM-DD'),
@@ -130,14 +130,19 @@
       progress: 20,
       type: 'task',
       style:{
-        fill:'#2ecc71',
-        stroke:'#2ecc71'
+        fill:'#ef5350',
+        stroke:'#d32f2f'
+      },
+      progressBarStyle:{
+        bar:{
+          fill:'#d32f2f'
+        }
       }
     },
     {
       id:10,
       label:'current task',
-      user:'<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#505050;">Johnattan Owens</a>',
+      user:'<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#039BE5;">Johnattan Owens</a>',
       start:currentDate.clone().add(5,'days').format('YYYY-MM-DD'),
       duration:24*60*60,
       progress:0,
@@ -154,15 +159,16 @@
         'vertical-align': 'middle',
         'font-weight': '600',
         'line-height': '35px',
-        'padding-left': '22px'
+        'padding-left': '22px',
+        'letter-spacing':'0px'
       }
     },
     taskList : {
       columns : [
         {id:1, label : 'ID', value : 'id', width : 40},
         {id:2, label : 'Description', value : 'label', width : 200, expander:true},
-        {id:3, label: 'Start', value:(task)=>task.startDate.format('YYYY-MM-DD') ,width:78},
         {id:3, label : 'User', value : 'user', width : 130, html:true},
+        {id:3, label: 'Start', value:(task)=>task.startDate.format('YYYY-MM-DD') ,width:78},
         {id:4, label : 'Type', value : 'type', width : 68},
         {id:5, label : '%', value : 'progress', width : 35, styles:{
            label: {'text-align':'center','width':'100%'} ,
@@ -170,14 +176,14 @@
          }},
       ],
     },
-    locale:{
-      code:'en',
-      'Now':'Now',
-      'X-Scale':'X-Scale',
-      'Y-Scale':'Y-Scale',
-      'Task list width':'Task list width',
-      'Display task list':'Show task list',
-      'Before/After':'Before/After'
+    locale: {
+      code: 'en',
+      'Now': 'Now',
+      'X-Scale': 'Zoom-X',
+      'Y-Scale': 'Zoom-Y',
+      'Task list width': 'Task list',
+      'Before/After': 'Expand',
+      'Display task list': 'Show task list',
     },
     /*locale:{
       code:'pl'

@@ -1,32 +1,86 @@
 <template>
 <div class="elastigantt__header">
-  <div :style="root.state.title.style" v-if="!root.state.title.html">{{root.state.title.label}}</div>
-  <div :style="root.state.title.style" v-if="root.state.title.html" v-html="root.state.title.label"></div>
+  <div class="elastigantt__header-title">
+    <div :style="root.state.title.style" v-if="!root.state.title.html">{{root.state.title.label}}</div>
+    <div :style="root.state.title.style" v-if="root.state.title.html" v-html="root.state.title.label"></div>
+  </div>
   <div class="elastigantt__header-options">
-    <button class="elastigantt__btn-recenter btn btn-primary mr-4" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
-    <label class="mr-2">{{root.state.locale['X-Scale']}}<input type="range" v-model="scale" max="24" min="2"></label>
-    <label class="mr-2">{{root.state.locale['Y-Scale']}}<input type="range" v-model="height" max="100" min="6"></label>
-    <label class="mr-2">{{root.state.locale['Before/After']}}<input type="range" v-model="scope" max="31" min="0"></label>
-    <label class="mr-2">{{root.state.locale['Task list width']}}<input type="range" v-model="divider" max="100" min="0"></label>
-    <label class="mr-2"><input type="checkbox" class="mr-1" v-model="root.state.taskList.display">{{root.state.locale['Display task list']}}</label>
+    <button class="elastigantt__btn-recenter" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
+    <label>{{root.state.locale['X-Scale']}}
+      <div :style="sliderWrapperStyle">
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scale" max="24" min="2" width="100px"></vue-slider>
+      </div>
+    </label>
+    <label>{{root.state.locale['Y-Scale']}}
+      <div :style="sliderWrapperStyle">
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="height" max="100" min="6" width="100px"></vue-slider>
+      </div>
+    </label>
+    <label>{{root.state.locale['Before/After']}}
+      <div :style="sliderWrapperStyle">
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scope" max="31" min="0" width="100px"></vue-slider>
+      </div>
+    </label>
+    <label>{{root.state.locale['Task list width']}}
+      <div :style="sliderWrapperStyle">
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="divider" max="100" min="0" width="100px"></vue-slider>
+      </div>
+    </label>
+    <label class="elastigantt__header-task-list-switch" :style="taskListSwitchStyle">
+      <switches class="mr-1" v-model="root.state.taskList.display"></switches> {{root.state.locale['Display task list']}}
+    </label>
   </div>
 </div>
 </template>
 <script>
+import vueSlider from 'vue-slider-component/src/vue2-slider.vue';
+import Switches from 'vue-switches';
 let scaleTimeoutId = null;
 export default {
+  components: {
+    vueSlider,
+    Switches
+  },
   inject: ['root'],
   data() {
     return {
-      localScale: 0,
+      localScale: this.root.state.times.timeZoom,
+      localHeight: this.root.state.row.height,
+      localBefore: this.root.state.scope.before,
+      localPercent: this.root.state.taskList.percent,
       buttonStyle: {
-        background: '#3498db',
-        'border-color': '#2980b9'
+        background: '#78909C',
+        border: 'none',
+        outline: 'none',
+        cursor: 'pointer',
+        color: 'white',
+        'border-radius': '6px',
+        'margin-right': '27px',
+        'font-size': '16px',
+        'padding': '6px 12px'
+      },
+      sliderStyle: {},
+      processStyle: {
+        background: '#039be5'
+      },
+      sliderWrapperStyle: {
+        'display': 'inline-block',
+        'vertical-align': 'bottom'
+      },
+      taskListSwitchStyle: {
+        'margin-left': '15px',
       }
     };
   },
   created() {
     this.localScale = this.root.state.times.timeZoom;
+    this.localHeight = this.root.state.row.height;
+    this.localBefore = this.root.state.scope.before;
+    this.localPercent = this.root.state.taskList.percent;
+    // slider bugfix
+    setTimeout(() => {
+      this.recenterPosition();
+    }, 75 * 3);
   },
   methods: {
     getImage() {
@@ -66,17 +120,19 @@ export default {
     },
     height: {
       get() {
-        return this.root.state.row.height;
+        return this.localHeight;
       },
       set(value) {
+        this.localHeight = Number(value);
         this.$root.$emit('elastigantt.row.height.change', Number(value))
       }
     },
     scope: {
       get() {
-        return this.root.state.scope.before;
+        return this.localBefore;
       },
       set(value) {
+        this.localBefore = Number(value);
         this.$root.$emit('elastigantt.scope.change', Number(value));
         this.$root.$emit('elastigantt.scope.before.change', Number(value));
         this.$root.$emit('elastigantt.scope.after.change', Number(value));
@@ -84,12 +140,13 @@ export default {
     },
     divider: {
       get() {
-        return this.root.state.taskList.percent;
+        return this.localPercent;
       },
       set(value) {
+        this.localPercent = Number(value);
         this.$root.$emit('elastigantt.taskList.width.change', Number(value));
       }
     }
-  }
+  },
 }
 </script>

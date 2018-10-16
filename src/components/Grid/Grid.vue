@@ -92,6 +92,6 @@ export default {
     getHStyle() {
       return this.root.state.grid.horizontal.style;
     },
-  }
+  },
 }
 </script>

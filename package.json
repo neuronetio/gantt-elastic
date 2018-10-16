@@ -4,7 +4,9 @@
   "description": "elastic gantt chart",
   "main": "src/index.js",
   "dependencies": {
-    "dayjs": "^1.7.7"
+    "dayjs": "^1.7.7",
+    "vue-slider-component": "^2.7.11",
+    "vue-switches": "^2.0.1"
   },
   "devDependencies": {
     "rollup": "^0.62.0",

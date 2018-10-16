@@ -66,8 +66,8 @@ function getOptions(userOptions) {
       height: 24,
       styles: {
         bar: {
-          'fill': '#3498db',
-          'stroke': '#2980b9',
+          'fill': '#039BE5',
+          'stroke': '#0288D1',
           'stroke-width': '1'
         },
         text: {
@@ -116,7 +116,7 @@ function getOptions(userOptions) {
             'transform': 'translateY(0.1) scaleY(0.8)'
           },
           solid: {
-            fill: '#2980b9',
+            fill: '#0288D1',
             height: '20%'
           }
         }
@@ -309,11 +309,11 @@ function getOptions(userOptions) {
     locale: {
       code: 'en',
       'Now': 'Now',
-      'X-Scale': 'X-Scale',
-      'Y-Scale': 'Y-Scale',
-      'Task list width': 'Task list width',
+      'X-Scale': 'Zoom-X',
+      'Y-Scale': 'Zoom-Y',
+      'Task list width': 'Task list',
+      'Before/After': 'Expand',
       'Display task list': 'Show task list',
-      'Before/After': 'Before/After'
     },
   };
 }
@@ -855,7 +855,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.$root.$emit('elastigantt.recenterPosition');
-    })
+    });
   }
 }
 </script>
