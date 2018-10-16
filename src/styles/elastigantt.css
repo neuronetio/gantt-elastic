@@ -17,6 +17,8 @@
   padding:10px;
   overflow: hidden;
   clear: both;
+  display:flex;
+  justify-content: space-between;
 }
 .elastigantt__header input[type="range"]{
   vertical-align: text-bottom;

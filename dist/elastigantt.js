@@ -14,6 +14,7 @@ var Elastigantt = (function () {
   //
   //
   //
+  //
 
   let scaleTimeoutId = null;
   var script = {
@@ -21,6 +22,10 @@ var Elastigantt = (function () {
     data() {
       return {
         localScale: 0,
+        buttonStyle: {
+          background: '#3498db',
+          'border-color': '#2980b9'
+        }
       };
     },
     created() {
@@ -100,23 +105,25 @@ var Elastigantt = (function () {
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "elastigantt__header" }, [
-      _c(
-        "div",
-        {
-          staticStyle: {
-            float: "left",
-            "font-size": "22px",
-            "letter-spacing": "1px"
-          }
-        },
-        [_vm._v(_vm._s(_vm.root.state.title))]
-      ),
+      !_vm.root.state.title.html
+        ? _c("div", { style: _vm.root.state.title.style }, [
+            _vm._v(_vm._s(_vm.root.state.title.label))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.root.state.title.html
+        ? _c("div", {
+            style: _vm.root.state.title.style,
+            domProps: { innerHTML: _vm._s(_vm.root.state.title.label) }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "elastigantt__header-options" }, [
         _c(
           "button",
           {
             staticClass: "elastigantt__btn-recenter btn btn-primary mr-4",
+            style: _vm.buttonStyle,
             on: { click: _vm.recenterPosition }
           },
           [_vm._v(_vm._s(_vm.root.state.locale.Now))]
@@ -3165,7 +3172,17 @@ var Elastigantt = (function () {
 
   function getOptions(userOptions) {
     return {
-      title: 'Elastigantt',
+      title: {
+        label: 'Elastigantt',
+        html: false,
+        style: {
+          'font-size': '18px',
+          'vertical-align': 'middle',
+          'font-weight': '600',
+          'line-height': '35px',
+          'padding-left': '22px',
+        }
+      },
       debug: false,
       width: 0,
       height: 0,
@@ -3216,8 +3233,8 @@ var Elastigantt = (function () {
         height: 24,
         styles: {
           bar: {
-            'fill': '#ff0000a0',
-            'stroke': '#ff0000',
+            'fill': '#3498db',
+            'stroke': '#2980b9',
             'stroke-width': '1'
           },
           text: {
@@ -3266,7 +3283,7 @@ var Elastigantt = (function () {
               'transform': 'translateY(0.1) scaleY(0.8)'
             },
             solid: {
-              fill: '#00ff92a0',
+              fill: '#2980b9',
               height: '20%'
             }
           }

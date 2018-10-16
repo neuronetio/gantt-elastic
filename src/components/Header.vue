@@ -1,8 +1,9 @@
 <template>
 <div class="elastigantt__header">
-  <div style="float:left;font-size:22px;letter-spacing:1px;">{{root.state.title}}</div>
+  <div :style="root.state.title.style" v-if="!root.state.title.html">{{root.state.title.label}}</div>
+  <div :style="root.state.title.style" v-if="root.state.title.html" v-html="root.state.title.label"></div>
   <div class="elastigantt__header-options">
-    <button class="elastigantt__btn-recenter btn btn-primary mr-4" @click="recenterPosition">{{root.state.locale.Now}}</button>
+    <button class="elastigantt__btn-recenter btn btn-primary mr-4" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
     <label class="mr-2">{{root.state.locale['X-Scale']}}<input type="range" v-model="scale" max="24" min="2"></label>
     <label class="mr-2">{{root.state.locale['Y-Scale']}}<input type="range" v-model="height" max="100" min="6"></label>
     <label class="mr-2">{{root.state.locale['Before/After']}}<input type="range" v-model="scope" max="31" min="0"></label>
@@ -18,6 +19,10 @@ export default {
   data() {
     return {
       localScale: 0,
+      buttonStyle: {
+        background: '#3498db',
+        'border-color': '#2980b9'
+      }
     };
   },
   created() {

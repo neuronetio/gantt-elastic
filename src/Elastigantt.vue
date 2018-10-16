@@ -5,7 +5,17 @@
 <script>
 function getOptions(userOptions) {
   return {
-    title: 'Elastigantt',
+    title: {
+      label: 'Elastigantt',
+      html: false,
+      style: {
+        'font-size': '18px',
+        'vertical-align': 'middle',
+        'font-weight': '600',
+        'line-height': '35px',
+        'padding-left': '22px',
+      }
+    },
     debug: false,
     width: 0,
     height: 0,
@@ -56,8 +66,8 @@ function getOptions(userOptions) {
       height: 24,
       styles: {
         bar: {
-          'fill': '#ff0000a0',
-          'stroke': '#ff0000',
+          'fill': '#3498db',
+          'stroke': '#2980b9',
           'stroke-width': '1'
         },
         text: {
@@ -106,7 +116,7 @@ function getOptions(userOptions) {
             'transform': 'translateY(0.1) scaleY(0.8)'
           },
           solid: {
-            fill: '#00ff92a0',
+            fill: '#2980b9',
             height: '20%'
           }
         }

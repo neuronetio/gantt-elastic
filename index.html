@@ -38,6 +38,15 @@
       duration: 4 * 24 * 60 * 60,
       progress: 50,
       type: 'milestone',
+      style:{
+        fill:'#e74c3c',
+        stroke:'#c0392b'
+      },
+      progressBarStyle:{
+        bar:{
+          fill:'#c0392b'
+        }
+      }
     },
     {
       id: 3,
@@ -69,12 +78,12 @@
       progress: 10,
       type: 'milestone',
       style:{
-        fill:'#e67e22f0',
-        stroke:'#e67e22'
+        fill:'#1abc9cf0',
+        stroke:'#1abc9c'
       },
       progressBarStyle:{
         bar:{
-          fill:'#e74c3c'
+          fill:'#16a085'
         }
       }
     },
@@ -137,7 +146,17 @@
   ];
 
   const options = {
-    title:'Your title',
+    title:{
+      label:'Your project title as html (link or whatever...)',
+      html: false,
+      style: {
+        'font-size': '18px',
+        'vertical-align': 'middle',
+        'font-weight': '600',
+        'line-height': '35px',
+        'padding-left': '22px'
+      }
+    },
     taskList : {
       columns : [
         {id:1, label : 'ID', value : 'id', width : 40},
