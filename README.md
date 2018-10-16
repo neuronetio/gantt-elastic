@@ -6,7 +6,6 @@
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
 ![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
-![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt-2.jpg)
 ![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
 
 
