@@ -37,7 +37,7 @@
     "gantt component"
   ],
   "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/neuronetio/elastigantt/issues"
   },
