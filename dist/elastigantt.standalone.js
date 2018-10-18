@@ -2023,7 +2023,7 @@ var Elastigantt = (function () {
         localBefore: this.root.state.scope.before,
         localPercent: this.root.state.taskList.percent,
         buttonStyle: {
-          background: '#78909C',
+          background: '#909090',
           border: 'none',
           outline: 'none',
           cursor: 'pointer',
@@ -2035,7 +2035,7 @@ var Elastigantt = (function () {
         },
         sliderStyle: {},
         processStyle: {
-          background: '#039be5'
+          background: '#ccc'
         },
         sliderWrapperStyle: {
           'display': 'inline-block',
@@ -5215,11 +5215,12 @@ var Elastigantt = (function () {
         label: 'Elastigantt',
         html: false,
         style: {
-          'font-size': '18px',
+          'font-size': '20px',
           'vertical-align': 'middle',
-          'font-weight': '600',
+          'font-weight': '400',
           'line-height': '35px',
           'padding-left': '22px',
+          'letter-spacing': '1px',
         }
       },
       debug: false,
@@ -5272,8 +5273,8 @@ var Elastigantt = (function () {
         height: 24,
         styles: {
           bar: {
-            'fill': '#039BE5',
-            'stroke': '#0288D1',
+            'fill': '#F75C4C',
+            'stroke': '#E74C3C',
             'stroke-width': '1'
           },
           text: {
@@ -5322,7 +5323,7 @@ var Elastigantt = (function () {
               'transform': 'translateY(0.1) scaleY(0.8)'
             },
             solid: {
-              fill: '#0288D1',
+              fill: '#E74C3C',
               height: '20%'
             }
           }
@@ -6142,4 +6143,3 @@ var Elastigantt = (function () {
   return standalone;
 
 }());
-//# sourceMappingURL=elastigantt.standalone.js.map

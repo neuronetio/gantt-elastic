@@ -49,7 +49,7 @@ export default {
       localBefore: this.root.state.scope.before,
       localPercent: this.root.state.taskList.percent,
       buttonStyle: {
-        background: '#78909C',
+        background: '#909090',
         border: 'none',
         outline: 'none',
         cursor: 'pointer',
@@ -61,7 +61,7 @@ export default {
       },
       sliderStyle: {},
       processStyle: {
-        background: '#039be5'
+        background: '#ccc'
       },
       sliderWrapperStyle: {
         'display': 'inline-block',
