@@ -5181,6 +5181,7 @@ var Elastigantt = (function () {
           top: 0,
           bottom: 0,
           time: 0,
+          timeCenter: 0,
           dateTime: {
             left: '',
             right: ''
@@ -5732,9 +5733,10 @@ var Elastigantt = (function () {
         this.state.scroll.tree.percent = left / this.state.times.totalViewDurationPx * 100;
         this.state.scroll.tree.top = top;
         this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
+        this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
         this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
         this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
-        this.state.svgTreeContainer.scrollLeft = left;
+        this.scrollTo(left);
       },
       scrollToTime(time) {
         let pos = this.timeToPixelOffsetX(time);
@@ -5751,9 +5753,7 @@ var Elastigantt = (function () {
       },
       fixScrollPos() {
         this.$nextTick(() => {
-          const oldPercent = this.state.scroll.tree.percent;
-          const currentOffset = this.state.times.totalViewDurationPx / 100 * oldPercent;
-          this.scrollTo(currentOffset);
+          this.scrollToTime(this.state.scroll.tree.timeCenter);
         });
       },
       onWheelTree(ev) {
