@@ -573,7 +573,7 @@ export default {
       return x;
     },
     pixelOffsetXToTime(pixelOffsetX) {
-      let offset = pixelOffsetX - this.state.grid.vertical.style.strokeWidth;
+      let offset = pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
       return offset * this.state.times.timePerPixel + this.state.times.firstTime;
     },
     isInsideViewPort(x, width, buffer = 5000) {
