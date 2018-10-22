@@ -853,10 +853,5 @@ export default {
     this.computeCalendarWidths();
     this.calculateCalendarDimensions();
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.$root.$emit('elastigantt.recenterPosition');
-    });
-  }
 }
 </script>

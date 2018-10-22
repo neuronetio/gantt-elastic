@@ -1934,7 +1934,6 @@ var Elastigantt = (function () {
     );
 
   //
-  let scaleTimeoutId = null;
   var script$2 = {
     components: {
       vueSlider,
@@ -1943,6 +1942,8 @@ var Elastigantt = (function () {
     inject: ['root'],
     data() {
       return {
+        scaleTimeoutId: null,
+        firstScale: false,
         localScale: this.root.state.times.timeZoom,
         localHeight: this.root.state.row.height,
         localBefore: this.root.state.scope.before,
@@ -1962,6 +1963,12 @@ var Elastigantt = (function () {
         processStyle: {
           background: '#ccc'
         },
+        sliderOptions: {
+          xScale: {
+            value: this.root.state.times.timeZoom
+          },
+
+        },
         sliderWrapperStyle: {
           'display': 'inline-block',
           'vertical-align': 'bottom'
@@ -1976,10 +1983,6 @@ var Elastigantt = (function () {
       this.localHeight = this.root.state.row.height;
       this.localBefore = this.root.state.scope.before;
       this.localPercent = this.root.state.taskList.percent;
-      // slider bugfix
-      setTimeout(() => {
-        this.recenterPosition();
-      }, 75 * 3);
     },
     methods: {
       getImage() {
@@ -1993,18 +1996,24 @@ var Elastigantt = (function () {
         });
       },
       recenterPosition() {
+        console.log('recenter', this);
         this.$root.$emit('elastigantt.recenterPosition');
       },
       setScale(value) {
-        if (scaleTimeoutId !== null) {
-          clearTimeout(scaleTimeoutId);
-          scaleTimeoutId = null;
+        if (this.scaleTimeoutId !== null) {
+          clearTimeout(this.scaleTimeoutId);
+          this.scaleTimeoutId = null;
         }
         // debouncing
-        scaleTimeoutId = setTimeout(() => {
+        if (this.firstScale) {
+          this.scaleTimeoutId = setTimeout(() => {
+            this.$root.$emit('elastigantt.times.timeZoom.change', value);
+            this.scaleTimeoutId = null;
+          }, 75);
+        } else {
           this.$root.$emit('elastigantt.times.timeZoom.change', value);
-          scaleTimeoutId = null;
-        }, 75);
+          this.firstScale = true;
+        }
       },
     },
     computed: {
@@ -3122,6 +3131,13 @@ var Elastigantt = (function () {
       this.$root.$on('elastigantt.row.height.change', this.regenerate);
       this.$root.$on('elastigantt.tree.scroll', this.regenerate);
       this.regenerate();
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.$nextTick(() => { // because of slider
+          this.root.scrollToTime(this.timeLinePosition.time);
+        });
+      });
     },
     methods: {
       recenterPosition() {
@@ -5981,11 +5997,6 @@ var Elastigantt = (function () {
       this.computeCalendarWidths();
       this.calculateCalendarDimensions();
     },
-    mounted() {
-      this.$nextTick(() => {
-        this.$root.$emit('elastigantt.recenterPosition');
-      });
-    }
   };
 
   /* script */

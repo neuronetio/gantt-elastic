@@ -35,7 +35,6 @@
 <script>
 import vueSlider from 'vue-slider-component/src/vue2-slider.vue';
 import Switches from 'vue-switches';
-let scaleTimeoutId = null;
 export default {
   components: {
     vueSlider,
@@ -44,6 +43,8 @@ export default {
   inject: ['root'],
   data() {
     return {
+      scaleTimeoutId: null,
+      firstScale: false,
       localScale: this.root.state.times.timeZoom,
       localHeight: this.root.state.row.height,
       localBefore: this.root.state.scope.before,
@@ -63,6 +64,12 @@ export default {
       processStyle: {
         background: '#ccc'
       },
+      sliderOptions: {
+        xScale: {
+          value: this.root.state.times.timeZoom
+        },
+
+      },
       sliderWrapperStyle: {
         'display': 'inline-block',
         'vertical-align': 'bottom'
@@ -77,10 +84,6 @@ export default {
     this.localHeight = this.root.state.row.height;
     this.localBefore = this.root.state.scope.before;
     this.localPercent = this.root.state.taskList.percent;
-    // slider bugfix
-    setTimeout(() => {
-      this.recenterPosition();
-    }, 75 * 3);
   },
   methods: {
     getImage() {
@@ -94,18 +97,24 @@ export default {
       });
     },
     recenterPosition() {
+      console.log('recenter', this)
       this.$root.$emit('elastigantt.recenterPosition');
     },
     setScale(value) {
-      if (scaleTimeoutId !== null) {
-        clearTimeout(scaleTimeoutId);
-        scaleTimeoutId = null;
+      if (this.scaleTimeoutId !== null) {
+        clearTimeout(this.scaleTimeoutId);
+        this.scaleTimeoutId = null;
       }
       // debouncing
-      scaleTimeoutId = setTimeout(() => {
+      if (this.firstScale) {
+        this.scaleTimeoutId = setTimeout(() => {
+          this.$root.$emit('elastigantt.times.timeZoom.change', value);
+          this.scaleTimeoutId = null;
+        }, 75);
+      } else {
         this.$root.$emit('elastigantt.times.timeZoom.change', value);
-        scaleTimeoutId = null;
-      }, 75);
+        this.firstScale = true;
+      }
     },
   },
   computed: {

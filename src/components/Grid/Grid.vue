@@ -22,6 +22,13 @@ export default {
     this.$root.$on('elastigantt.tree.scroll', this.regenerate);
     this.regenerate();
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nextTick(() => { // because of slider
+        this.root.scrollToTime(this.timeLinePosition.time);
+      });
+    });
+  },
   methods: {
     recenterPosition() {
       this.root.scrollToTime(this.timeLinePosition.time);
