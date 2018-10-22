@@ -1,7 +1,7 @@
 {
   "name": "elastigantt",
   "version": "0.0.55",
-  "description": "elastic gantt chart",
+  "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
   "main": "src/index.js",
   "dependencies": {
     "dayjs": "^1.7.7",
@@ -26,15 +26,18 @@
     "url": "git+https://github.com/neuronetio/elastigantt.git"
   },
   "keywords": [
-    "elastigantt",
     "gantt",
+    "gantt chart",
+    "javascript gantt chart",
+    "jQuery gantt",
+    "vue gantt",
     "gantt-chart",
     "vue",
     "vue-gantt",
     "javascript gantt",
     "gantt chart",
-    "vue gantt",
-    "gantt component"
+    "gantt component",
+    "javascript gantt"
   ],
   "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
   "license": "GPL-3.0-only",
