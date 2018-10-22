@@ -160,17 +160,17 @@ function getOptions(userOptions) {
       styles: {
         row: {
           'background': 'transparent',
-          'border-color': '#00000010'
+          'border-color': '#ECF0F1'
         },
         column: {
-          'border-color': '#00000010',
+          'border-color': '#ECF0F1',
           'height': 0,
           'width': 0,
           'line-height': 0
         },
         header: {
-          'background': '#f0f0f0',
-          'border-color': '#00000010'
+          'background': '#ECF0F1',
+          'border-color': '#ECF0F1'
         },
         label: {
           'display': 'inline-flex',
@@ -234,15 +234,15 @@ function getOptions(userOptions) {
         wrapper: {
           'width': '100%',
           'height': '100%',
-          'background': '#f0f0f0',
-          'border-color': '#00000010'
+          'background': '#ECF0F1',
+          'border-color': '#ECF0F1'
         },
         row: {
           fill: 'transparent',
-          stroke: '#00000010'
+          stroke: '#ECF0F1'
         },
         column: {
-          'stroke': '#00000010',
+          'stroke': '#ECF0F1',
           'stroke-width': 1,
           'fill': 'transparent'
         },

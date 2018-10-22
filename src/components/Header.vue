@@ -49,7 +49,7 @@ export default {
       localBefore: this.root.state.scope.before,
       localPercent: this.root.state.taskList.percent,
       buttonStyle: {
-        background: '#909090',
+        background: '#95A5A6',
         border: 'none',
         outline: 'none',
         cursor: 'pointer',
