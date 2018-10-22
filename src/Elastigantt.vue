@@ -240,7 +240,9 @@ function getOptions(userOptions) {
         },
         row: {
           fill: 'transparent',
-          stroke: '#ECF0F1'
+          //stroke: '#ECF0F1'
+          stroke: '#BDC3C7',
+          'stroke-width': 0.5,
         },
         column: {
           'stroke': '#ECF0F1',
@@ -256,6 +258,10 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         fontSize: '12px',
+        style: {
+          stroke: '#BDC3C7',
+          'stroke-width': 0.5,
+        },
         widths: [],
         maxWidths: {},
         format: {
@@ -274,6 +280,7 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         fontSize: '12px',
+        style: {},
         widths: [],
         maxWidths: {},
         format: {
@@ -292,6 +299,7 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         fontSize: '12px',
+        style: {},
         widths: [],
         maxWidths: {},
         format: {

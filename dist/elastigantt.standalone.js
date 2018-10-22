@@ -3391,7 +3391,7 @@ var Elastigantt = (function () {
 
   var script$b = {
     inject: ['root'],
-    props: ['item'],
+    props: ['item', 'rowStyle'],
     data() {
       return {};
     },
@@ -3416,7 +3416,7 @@ var Elastigantt = (function () {
     return _c("g", { staticClass: "elastigantt__calendar-row-group" }, [
       _c("rect", {
         staticClass: "elastigantt__calendar-row",
-        style: _vm.root.state.calendar.styles.row,
+        style: _vm.rowStyle,
         attrs: {
           x: _vm.item.x,
           y: _vm.item.y,
@@ -3695,6 +3695,15 @@ var Elastigantt = (function () {
         let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
         return width;
       },
+      monthsStyle() {
+        return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+      },
+      daysStyle() {
+        return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+      },
+      hoursStyle() {
+        return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
+      },
     }
   };
 
@@ -3730,18 +3739,27 @@ var Elastigantt = (function () {
         ),
         _vm._v(" "),
         _vm._l(_vm.months, function(month, index) {
-          return _c("calendar-row", { key: month.key, attrs: { item: month } })
+          return _c("calendar-row", {
+            key: month.key,
+            attrs: { item: month, rowStyle: _vm.monthsStyle }
+          })
         }),
         _vm._v(" "),
         _vm._l(_vm.days, function(day, index) {
           return _vm.root.isInsideViewPort(day.x, day.width)
-            ? _c("calendar-row", { key: day.key, attrs: { item: day } })
+            ? _c("calendar-row", {
+                key: day.key,
+                attrs: { item: day, rowStyle: _vm.daysStyle }
+              })
             : _vm._e()
         }),
         _vm._v(" "),
         _vm._l(_vm.hours, function(hour, index) {
           return _vm.root.isInsideViewPort(hour.x, hour.width)
-            ? _c("calendar-row", { key: hour.key, attrs: { item: hour } })
+            ? _c("calendar-row", {
+                key: hour.key,
+                attrs: { item: hour, rowStyle: _vm.hoursStyle }
+              })
             : _vm._e()
         })
       ],
@@ -3988,9 +4006,9 @@ var Elastigantt = (function () {
       {
         attrs: {
           x: _vm.task.x + _vm.task.width + _vm.root.state.treeText.offset,
-          y: _vm.task.y,
+          y: _vm.task.y - _vm.root.state.grid.horizontal.gap,
           width: _vm.getWidth,
-          height: _vm.task.height
+          height: _vm.task.height + _vm.root.state.grid.horizontal.gap * 2
         }
       },
       [
@@ -4071,11 +4089,6 @@ var Elastigantt = (function () {
   //
   //
   //
-  //
-  //
-  //
-  //
-  //
 
   var script$f = {
     inject: ['root'],
@@ -4117,7 +4130,7 @@ var Elastigantt = (function () {
           x: _vm.getX,
           y: _vm.task.y,
           width: _vm.getWidth,
-          height: _vm.root.state.row.height,
+          height: _vm.root.state.row.height + _vm.root.state.grid.gap * 2,
           xmlns: "http://www.w3.org/2000/svg"
         }
       },
@@ -5461,7 +5474,9 @@ var Elastigantt = (function () {
           },
           row: {
             fill: 'transparent',
-            stroke: '#ECF0F1'
+            //stroke: '#ECF0F1'
+            stroke: '#BDC3C7',
+            'stroke-width': 0.5,
           },
           column: {
             'stroke': '#ECF0F1',
@@ -5477,6 +5492,10 @@ var Elastigantt = (function () {
           height: 20,
           display: true,
           fontSize: '12px',
+          style: {
+            stroke: '#BDC3C7',
+            'stroke-width': 0.5,
+          },
           widths: [],
           maxWidths: {},
           format: {
@@ -5495,6 +5514,7 @@ var Elastigantt = (function () {
           height: 20,
           display: true,
           fontSize: '12px',
+          style: {},
           widths: [],
           maxWidths: {},
           format: {
@@ -5513,6 +5533,7 @@ var Elastigantt = (function () {
           height: 20,
           display: true,
           fontSize: '12px',
+          style: {},
           widths: [],
           maxWidths: {},
           format: {
@@ -6153,4 +6174,3 @@ var Elastigantt = (function () {
   return standalone;
 
 }());
-//# sourceMappingURL=elastigantt.standalone.js.map

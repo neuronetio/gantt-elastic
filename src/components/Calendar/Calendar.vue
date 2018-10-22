@@ -3,9 +3,9 @@
   <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
     <div class="elastigantt__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
   </foreignObject>
-  <calendar-row v-for="(month,index) in months" :key="month.key" :item="month"></calendar-row>
-  <calendar-row v-for="(day,index) in days" :key="day.key" :item="day" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
-  <calendar-row v-for="(hour,index) in hours" :key="hour.key" :item="hour" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
+  <calendar-row v-for="(month,index) in months" :key="month.key" :item="month" :rowStyle="monthsStyle"></calendar-row>
+  <calendar-row v-for="(day,index) in days" :key="day.key" :item="day" :rowStyle="daysStyle" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
+  <calendar-row v-for="(hour,index) in hours" :key="hour.key" :item="hour" :rowStyle="hoursStyle" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
 </g>
 </template>
 <script>
@@ -214,6 +214,15 @@ export default {
     getWidth() {
       let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
       return width;
+    },
+    monthsStyle() {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+    },
+    daysStyle() {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+    },
+    hoursStyle() {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
     },
   }
 }
