@@ -2071,7 +2071,6 @@ var Elastigantt = (function () {
         });
       },
       recenterPosition() {
-        console.log('recenter', this);
         this.$root.$emit('elastigantt.recenterPosition');
       },
       setScale(value) {
@@ -6154,4 +6153,3 @@ var Elastigantt = (function () {
   return standalone;
 
 }());
-//# sourceMappingURL=elastigantt.standalone.js.map

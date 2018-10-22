@@ -97,7 +97,6 @@ export default {
       });
     },
     recenterPosition() {
-      console.log('recenter', this)
       this.$root.$emit('elastigantt.recenterPosition');
     },
     setScale(value) {
