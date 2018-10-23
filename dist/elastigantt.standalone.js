@@ -5340,7 +5340,7 @@ var Elastigantt = (function () {
         width: 20,
         height: 6,
         pattern: true,
-        bar: true,
+        bar: false,
         styles: {
           line: {
             'stroke': '#ffffff25',
@@ -5395,17 +5395,17 @@ var Elastigantt = (function () {
         styles: {
           row: {
             'background': 'transparent',
-            'border-color': '#ECF0F1'
+            'border-color': '#eee'
           },
           column: {
-            'border-color': '#ECF0F1',
+            'border-color': '#eee',
             'height': 0,
             'width': 0,
             'line-height': 0
           },
           header: {
-            'background': '#ECF0F1',
-            'border-color': '#ECF0F1'
+            'background': '#f3f5f7',
+            'border-color': 'transparent',
           },
           label: {
             'display': 'inline-flex',
@@ -5469,23 +5469,23 @@ var Elastigantt = (function () {
           wrapper: {
             'width': '100%',
             'height': '100%',
-            'background': '#ECF0F1',
-            'border-color': '#ECF0F1'
+            'background': '#f3f5f7',
+            'border-color': '#f3f5f7'
           },
           row: {
             fill: 'transparent',
             //stroke: '#ECF0F1'
-            stroke: '#BDC3C7',
+            stroke: '#dadada',
             'stroke-width': 0.5,
           },
           column: {
-            'stroke': '#ECF0F1',
+            'stroke': '#dadada',
             'stroke-width': 1,
             'fill': 'transparent'
           },
           text: {
-            fontFamily: 'sans-serif',
-            'fill': '#404040'
+            fontFamily: 'Arial',
+            'fill': '#606060'
           }
         },
         hour: {
@@ -5493,7 +5493,7 @@ var Elastigantt = (function () {
           display: true,
           fontSize: '12px',
           style: {
-            stroke: '#BDC3C7',
+            stroke: '#dadada',
             'stroke-width': 0.5,
           },
           widths: [],
@@ -6174,3 +6174,4 @@ var Elastigantt = (function () {
   return standalone;
 
 }());
+//# sourceMappingURL=elastigantt.standalone.js.map
