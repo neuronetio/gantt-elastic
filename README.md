@@ -3,6 +3,10 @@
 
 ### Javascript Gantt Chart
 
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
 ![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
