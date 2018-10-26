@@ -9,7 +9,7 @@
     "vue-switches": "^2.0.1"
   },
   "devDependencies": {
-    "rollup": "^0.62.0",
+    "rollup": "^0.66.6",
     "rollup-plugin-minify-es": "^1.1.1",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-vue": "^4.3.2",
