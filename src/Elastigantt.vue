@@ -398,7 +398,9 @@ const Elastigantt = {
     },
     initialize() {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
-        tasks: this.tasks.map(task => this.mergeDeep({}, task))
+        tasks: this.tasks.map(task => this.mergeDeep({}, task, {
+          start: dayjs(task.start).format('YYYY-MM-DD HH:mm:ss')
+        }))
       });
       dayjs.locale(this.options.locale, null, true);
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
