@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
 import Vue from 'vue';
+import dayjs from 'dayjs';
 import Main from './components/Main.vue';
 
 function getOptions(userOptions) {
@@ -332,7 +332,7 @@ function getOptions(userOptions) {
   };
 }
 
-function mergeDeep(target, ...sources) {
+export function mergeDeep(target, ...sources) {
   const isObject = function isObject(item) {
     return item && typeof item === 'object' && !Array.isArray(item);
   };

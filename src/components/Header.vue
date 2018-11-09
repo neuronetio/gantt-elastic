@@ -8,22 +8,22 @@
     <button class="elastigantt__btn-recenter" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
     <label>{{root.state.locale['X-Scale']}}
       <div :style="sliderWrapperStyle">
-        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scale" max="24" min="2" width="100px"></vue-slider>
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scale" :max="24" :min="2" width="100px"></vue-slider>
       </div>
     </label>
     <label>{{root.state.locale['Y-Scale']}}
       <div :style="sliderWrapperStyle">
-        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="height" max="100" min="6" width="100px"></vue-slider>
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="height" :max="100" :min="6" width="100px"></vue-slider>
       </div>
     </label>
     <label>{{root.state.locale['Before/After']}}
       <div :style="sliderWrapperStyle">
-        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scope" max="31" min="0" width="100px"></vue-slider>
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scope" :max="31" :min="0" width="100px"></vue-slider>
       </div>
     </label>
     <label>{{root.state.locale['Task list width']}}
       <div :style="sliderWrapperStyle">
-        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="divider" max="100" min="0" width="100px"></vue-slider>
+        <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="divider" :max="100" :min="0" width="100px"></vue-slider>
       </div>
     </label>
     <label class="elastigantt__header-task-list-switch" :style="taskListSwitchStyle">
