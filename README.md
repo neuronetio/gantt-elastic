@@ -3,6 +3,11 @@
 
 ### Javascript Gantt Chart
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/elastigantt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/elastigantt&amp;utm_campaign=Badge_Grade)
+[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/elastigantt/badge.svg)](https://snyk.io/test/github/{username}/{repo})
+![NpmLicense](https://img.shields.io/npm/l/elastigantt.svg)
+![npm](https://img.shields.io/npm/dm/elastigantt.svg)
+
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
 ![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
