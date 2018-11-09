@@ -3,6 +3,10 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
+import Vue from 'vue';
+import Main from './components/Main.vue';
+
 function getOptions(userOptions) {
   return {
     title: {
@@ -328,9 +332,33 @@ function getOptions(userOptions) {
   };
 }
 
-import Main from './components/Main.vue';
+function mergeDeep(target, ...sources) {
+  const isObject = function isObject(item) {
+    return item && typeof item === 'object' && !Array.isArray(item);
+  };
+  if (!sources.length) {
+    return target;
+  }
+  const source = sources.shift();
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key])
+          Object.assign(target, {
+            [key]: {}
+          });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, {
+          [key]: source[key]
+        });
+      }
+    }
+  }
+  return mergeDeep(target, ...sources);
+}
 
-export default {
+const Elastigantt = {
   components: {
     'EgMain': Main,
   },
@@ -352,31 +380,7 @@ export default {
     };
   },
   methods: {
-    isObject(item) {
-      return item && typeof item === 'object' && !Array.isArray(item);
-    },
-    mergeDeep(target, ...sources) {
-      if (!sources.length) {
-        return target;
-      }
-      const source = sources.shift();
-      if (this.isObject(target) && this.isObject(source)) {
-        for (const key in source) {
-          if (this.isObject(source[key])) {
-            if (!target[key])
-              Object.assign(target, {
-                [key]: {}
-              });
-            this.mergeDeep(target[key], source[key]);
-          } else {
-            Object.assign(target, {
-              [key]: source[key]
-            });
-          }
-        }
-      }
-      return this.mergeDeep(target, ...sources);
-    },
+    mergeDeep: mergeDeep,
     getScrollBarHeight() {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
@@ -396,7 +400,7 @@ export default {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
         tasks: this.tasks.map(task => this.mergeDeep({}, task))
       });
-      dayjs.locale(options.locale, null, true);
+      dayjs.locale(this.options.locale, null, true);
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
         column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
@@ -862,4 +866,6 @@ export default {
     this.calculateCalendarDimensions();
   },
 }
+//Vue.component('elastigantt', Elastigantt);
+export default Elastigantt;
 </script>

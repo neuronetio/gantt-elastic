@@ -2,24 +2,30 @@
   "name": "elastigantt",
   "version": "0.0.57",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
-  "main": "src/index.js",
+  "main": "src/Elastigantt.vue",
   "dependencies": {
     "dayjs": "^1.7.7",
     "vue-slider-component": "^2.7.11",
     "vue-switches": "^2.0.1"
   },
   "devDependencies": {
+    "css-loader": "^1.0.1",
     "rollup": "^0.62.0",
     "rollup-plugin-minify-es": "^1.1.1",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-vue": "^4.3.2",
     "vue": "^2.5.17",
-    "vue-template-compiler": "^2.5.17"
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "build-webpack": "webpack --config webpack.config.js",
+    "dev-webpack": "webpack --watch  --mode development"
   },
   "repository": {
     "type": "git",
