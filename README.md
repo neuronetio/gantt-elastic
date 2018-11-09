@@ -207,18 +207,35 @@ elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
 });
 ```
 
-#### as Vue component
+#### as Vue app / component
 ```javascript
-const Elastigantt = require('elastigantt');
-// import Elastigantt from 'elastigantt';
+import Elastigantt from 'elastigantt';
+// const Elastigantt = require('elastigantt');
+let gantt = new Vue({
+  components: {
+    elastigantt: Elastigantt
+  },
+  el: '#gantt',
+  template: `<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
+  data: {
+    tasks,
+    options
+  }
+});
+```
+
+```javascript
+import Elastigantt from 'elastigantt';
+// const Elastigantt = require('elastigantt');
 
 export default {
+  components:{
+    elastigantt:Elastigantt
+  },
+  props:['tasks','options'],
   template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
   data(){
-    return {
-      tasks:[/* ... */],
-      options:{/* ... */}
-    }
+    return {};
   }
 }
 ```
