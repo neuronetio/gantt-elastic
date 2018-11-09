@@ -871,3 +871,7 @@ const Elastigantt = {
 //Vue.component('elastigantt', Elastigantt);
 export default Elastigantt;
 </script>
+
+<style>
+@import 'styles/elastigantt.css';
+</style>
