@@ -14,9 +14,9 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
 
 
-#### Elastigantt is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
+#### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
-##### Elastigantt is not fully finished yet and may change (but if you really wan't you can fork this repo or download current version - do not use npm right now)
+##### Gantt-elastic is not fully finished yet and may change (but if you really wan't you can fork this repo or download current version - do not use npm right now)
 
 ##### :star2: Give it a star if you want more activity in this repo, thanks!
 
