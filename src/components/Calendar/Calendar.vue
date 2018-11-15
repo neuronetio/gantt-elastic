@@ -1,7 +1,7 @@
 <template>
-<g class="elastigantt__calendar-group">
+<g class="gantt-elastic__calendar-group">
   <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
-    <div class="elastigantt__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
+    <div class="gantt-elastic__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
   </foreignObject>
   <calendar-row v-for="(month,index) in months" :key="month.key" :item="month" :rowStyle="monthsStyle"></calendar-row>
   <calendar-row v-for="(day,index) in days" :key="day.key" :item="day" :rowStyle="daysStyle" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
@@ -24,8 +24,8 @@ export default {
     };
   },
   created() {
-    this.$root.$on('elastigantt.scope.change', this.regenerate);
-    this.$root.$on('elastigantt.times.timeZoom.change', this.regenerate);
+    this.$root.$on('gantt-elastic.scope.change', this.regenerate);
+    this.$root.$on('gantt-elastic.times.timeZoom.change', this.regenerate);
     this.regenerate();
   },
   methods: {

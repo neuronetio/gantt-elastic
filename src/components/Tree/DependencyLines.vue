@@ -1,5 +1,5 @@
 <template>
-<g class="elastigantt__tree-dependency-lines-container">
+<g class="gantt-elastic__tree-dependency-lines-container">
   <g v-for="task in dependencyTasks" :key="task.id" :task="task">
     <path v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task" :d="dependencyLine.points" :style="root.state.dependencyLines.style">
     </path>

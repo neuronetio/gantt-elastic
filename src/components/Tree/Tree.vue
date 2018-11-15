@@ -1,5 +1,5 @@
 <template>
-<svg class="elastigantt_tree-object" x="0" y="0" :width="getWidth" :height="getHeight" xmlns="http://www.w3.org/2000/svg">
+<svg class="gantt-elastic_tree-object" x="0" y="0" :width="getWidth" :height="getHeight" xmlns="http://www.w3.org/2000/svg">
   <calendar></calendar>
   <grid></grid>
   <dependency-lines :tasks="root.visibleTasks"></dependency-lines>

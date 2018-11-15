@@ -1,5 +1,5 @@
 <template>
-<div class="elastigantt__task-list-resizer" style="getStyle"></div>
+<div class="gantt-elastic__task-list-resizer" style="getStyle"></div>
 </template>
 <script>
 export default {

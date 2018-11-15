@@ -1,16 +1,16 @@
 import Vue from 'vue';
-import {mergeDeep} from './Elastigantt.vue';
-import Elastigantt from './Elastigantt.standalone.vue';
-window.Elastigantt = {
-  component: Elastigantt,
+import {mergeDeep} from './GanttElastic.vue';
+import GanttElastic from './GanttElastic.standalone.vue';
+window.GanttElastic = {
+  component: GanttElastic,
   mount(config) {
     let {el, tasks, options} = config;
-    const elastigantt = mergeDeep({}, Elastigantt);
-    elastigantt.data = mergeDeep({}, elastigantt.data);
-    elastigantt.el = el;
-    elastigantt.data.tasks = tasks;
-    elastigantt.data.options = options;
-    return new Vue(elastigantt);
+    const ganttElastic = mergeDeep({}, GanttElastic);
+    ganttElastic.data = mergeDeep({}, ganttElastic.data);
+    ganttElastic.el = el;
+    ganttElastic.data.tasks = tasks;
+    ganttElastic.data.options = options;
+    return new Vue(ganttElastic);
   }
 }
-export default Elastigantt;
+export default GanttElastic;

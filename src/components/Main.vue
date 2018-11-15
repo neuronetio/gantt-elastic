@@ -1,16 +1,16 @@
 <template>
-<div class="elastigantt__main">
+<div class="gantt-elastic__main">
   <top-header></top-header>
-  <svg :width="getWidth" :height="root.state.height" class="elastigantt__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
+  <svg :width="getWidth" :height="root.state.height" class="gantt-elastic__svg-container" ref="svgMain" xmlns="http://www.w3.org/2000/svg">
     <foreignObject x="0" y="0" width="100%" height="100%">
-      <div xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__container" @mousemove="mouseMove" @mouseup="mouseUp">
-        <div class="elastigantt__task-list-container">
-          <svg ref="svgTaskList" class="elastigantt__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth" :height="root.state.height" v-if="root.state.taskList.display">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="gantt-elastic__container" @mousemove="mouseMove" @mouseup="mouseUp">
+        <div class="gantt-elastic__task-list-container">
+          <svg ref="svgTaskList" class="gantt-elastic__task-list-svg" xmlns="http://www.w3.org/2000/svg" :width="root.state.taskList.finalWidth" :height="root.state.height" v-if="root.state.taskList.display">
             <defs v-html="defs"></defs>
             <task-list></task-list>
           </svg>
         </div>
-        <div class="elastigantt__main-container" ref="svgTreeContainer">
+        <div class="gantt-elastic__main-container" ref="svgTreeContainer">
           <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
             <defs v-html="defs"></defs>
             <tree v-on:wheel="onWheel"></tree>
@@ -19,8 +19,8 @@
       </div>
     </foreignObject>
   </svg>
-  <div class="elastigantt__tree-scroll-container" :style="{marginLeft:getMarginLeft}" v-on:scroll="onScroll" ref="treeScrollContainer">
-    <div class="elastigantt__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
+  <div class="gantt-elastic__tree-scroll-container" :style="{marginLeft:getMarginLeft}" v-on:scroll="onScroll" ref="treeScrollContainer">
+    <div class="gantt-elastic__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
   </div>
 </div>
 </template>
@@ -48,7 +48,7 @@ export default {
     try {
       for (let i = 0, len = document.styleSheets.length; i < len; i++) {
         let styleSheet = document.styleSheets[i];
-        if (styleSheet.title === 'elastigantt__style') {
+        if (styleSheet.title === 'gantt-elastic__style') {
           for (let r = 0, rules = styleSheet.rules.length; r < rules; r++) {
             let rule = styleSheet.rules[r];
             css += rule.cssText + "\n";
@@ -90,16 +90,16 @@ export default {
   },
   methods: {
     mouseMove(event) {
-      this.$root.$emit('elastigantt.main.mousemove', event);
+      this.$root.$emit('gantt-elastic.main.mousemove', event);
     },
     mouseUp(event) {
-      this.$root.$emit('elastigantt.main.mouseup', event);
+      this.$root.$emit('gantt-elastic.main.mouseup', event);
     },
     onScroll(ev) {
-      this.$root.$emit('elastigantt.tree.scroll', ev);
+      this.$root.$emit('gantt-elastic.tree.scroll', ev);
     },
     onWheel(ev) {
-      this.$root.$emit('elastigantt.tree.wheel', ev);
+      this.$root.$emit('gantt-elastic.tree.wheel', ev);
     }
   }
 }

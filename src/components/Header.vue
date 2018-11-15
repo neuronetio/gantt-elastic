@@ -1,11 +1,11 @@
 <template>
-<div class="elastigantt__header">
-  <div class="elastigantt__header-title">
+<div class="gantt-elastic__header">
+  <div class="gantt-elastic__header-title">
     <div :style="root.state.title.style" v-if="!root.state.title.html">{{root.state.title.label}}</div>
     <div :style="root.state.title.style" v-if="root.state.title.html" v-html="root.state.title.label"></div>
   </div>
-  <div class="elastigantt__header-options">
-    <button class="elastigantt__btn-recenter" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
+  <div class="gantt-elastic__header-options">
+    <button class="gantt-elastic__btn-recenter" :style="buttonStyle" @click="recenterPosition">{{root.state.locale.Now}}</button>
     <label>{{root.state.locale['X-Scale']}}
       <div :style="sliderWrapperStyle">
         <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="scale" :max="24" :min="2" width="100px"></vue-slider>
@@ -26,7 +26,7 @@
         <vue-slider tooltip="false" tooltip-dir="right" :process-style="processStyle" :slider-style="sliderStyle" v-model="divider" :max="100" :min="0" width="100px"></vue-slider>
       </div>
     </label>
-    <label class="elastigantt__header-task-list-switch" :style="taskListSwitchStyle">
+    <label class="gantt-elastic__header-task-list-switch" :style="taskListSwitchStyle">
       <switches class="mr-1" v-model="root.state.taskList.display"></switches> {{root.state.locale['Display task list']}}
     </label>
   </div>
@@ -90,14 +90,14 @@ export default {
       const code = this.root.getImage('image/png').then(imgB64 => {
         const link = document.createElement('a');
         link.href = imgB64;
-        link.download = 'Elastigantt.png';
+        link.download = 'gantt-elastic.png';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       });
     },
     recenterPosition() {
-      this.$root.$emit('elastigantt.recenterPosition');
+      this.$root.$emit('gantt-elastic.recenterPosition');
     },
     setScale(value) {
       if (this.scaleTimeoutId !== null) {
@@ -107,11 +107,11 @@ export default {
       // debouncing
       if (this.firstScale) {
         this.scaleTimeoutId = setTimeout(() => {
-          this.$root.$emit('elastigantt.times.timeZoom.change', value);
+          this.$root.$emit('gantt-elastic.times.timeZoom.change', value);
           this.scaleTimeoutId = null;
         }, 75);
       } else {
-        this.$root.$emit('elastigantt.times.timeZoom.change', value);
+        this.$root.$emit('gantt-elastic.times.timeZoom.change', value);
         this.firstScale = true;
       }
     },
@@ -132,7 +132,7 @@ export default {
       },
       set(value) {
         this.localHeight = Number(value);
-        this.$root.$emit('elastigantt.row.height.change', Number(value))
+        this.$root.$emit('gantt-elastic.row.height.change', Number(value))
       }
     },
     scope: {
@@ -141,9 +141,9 @@ export default {
       },
       set(value) {
         this.localBefore = Number(value);
-        this.$root.$emit('elastigantt.scope.change', Number(value));
-        this.$root.$emit('elastigantt.scope.before.change', Number(value));
-        this.$root.$emit('elastigantt.scope.after.change', Number(value));
+        this.$root.$emit('gantt-elastic.scope.change', Number(value));
+        this.$root.$emit('gantt-elastic.scope.before.change', Number(value));
+        this.$root.$emit('gantt-elastic.scope.after.change', Number(value));
       }
     },
     divider: {
@@ -152,7 +152,7 @@ export default {
       },
       set(value) {
         this.localPercent = Number(value);
-        this.$root.$emit('elastigantt.taskList.width.change', Number(value));
+        this.$root.$emit('gantt-elastic.taskList.width.change', Number(value));
       }
     }
   },

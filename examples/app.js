@@ -242,14 +242,14 @@ const options = {
   }*/
 };
 
-const elastigantt = Elastigantt.mount({
+const gantt = GanttElastic.mount({
   el: '#app', // <- your container id
   tasks: tasks,
   options: options
 });
 // listen to events
 /*
-elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
+gantt.$on('elastigantt.tree.scroll',(ev)=>{
   console.log('scroll');
 });
 */

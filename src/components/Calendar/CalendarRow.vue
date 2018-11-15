@@ -1,6 +1,6 @@
 <template>
-<g class="elastigantt__calendar-row-group">
-  <rect class="elastigantt__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="rowStyle"></rect>
+<g class="gantt-elastic__calendar-row-group">
+  <rect class="gantt-elastic__calendar-row" :x="item.x" :y="item.y" :width="item.width" :height="item.height" :style="rowStyle"></rect>
   <text :x="getTextX" :y="getTextY" alignment-baseline="middle" text-anchor="middle" :style="root.state.calendar.styles.text">{{item.label}}</text>
 </g>
 </template>

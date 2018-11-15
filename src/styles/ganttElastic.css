@@ -1,16 +1,16 @@
-.elastigantt__main svg{
+.gantt-elastic__main svg{
   display: block;
 }
-.elastigantt__svg-container{
+.gantt-elastic__svg-container{
   position: relative;
 }
-.elastigantt__main,.elastigantt__svg-container{
+.gantt-elastic__main,.gantt-elastic__svg-container{
   background: #fff;
 }
-.elastigantt__container,.elastigantt__svg-container{
+.gantt-elastic__container,.gantt-elastic__svg-container{
   max-width: 100%;
 }
-.elastigantt__header{
+.gantt-elastic__header{
   margin:0 auto;
   background: #f3f5f747;
   padding:10px;
@@ -19,22 +19,22 @@
   display:flex;
   justify-content: space-between;
 }
-.elastigantt__header-title{
+.gantt-elastic__header-title{
   float:left;
 }
-.elastigantt__header-options{
+.gantt-elastic__header-options{
   float: right;
 }
-.elastigantt__grid-horizontal-line, .elastigantt__grid-vertical-line{
+.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{
   stroke: #a0a0a0;
   stroke-width: 1;
 }
-.elastigantt__calendar-row-group rect{
+.gantt-elastic__calendar-row-group rect{
   fill:#ddd;
   stroke:#A0A0A0;
   stroke-width:1;
 }
-.elastigantt__calendar-row-group text{
+.gantt-elastic__calendar-row-group text{
   fill:#000;
   font-family: 'Arial';
   font-size: 12px;
@@ -42,24 +42,24 @@
 foreignObject > *{
   margin: 0px;
 }
-.elastigantt .p-2{
+.gantt-elastic .p-2{
   padding: 10rem;
 }
-.elastigantt__container{
+.gantt-elastic__container{
   display: flex;
   max-width: 100%;
   position: absolute;
   height: 100%;
 }
-.elastigantt__main-svg-container , .elastigantt__main-container{
+.gantt-elastic__main-svg-container , .gantt-elastic__main-container{
   overflow: hidden;
   max-width:100%;
 }
-.elastigantt__task-list-header{
+.gantt-elastic__task-list-header{
   display: flex;
   user-select: none;
 }
-.elastigantt__task-list-header-column{
+.gantt-elastic__task-list-header-column{
   border: 1px solid #00000050;
   border-top:none;
   border-right:none;
@@ -67,14 +67,14 @@ foreignObject > *{
   display: flex;
   background: rgba(0,0,0,0.125);
 }
-.elastigantt__task-list-column-expander svg{
+.gantt-elastic__task-list-column-expander svg{
   margin: auto 0px;
   user-select: none;
 }
-.elastigantt__task-list-header-column:last-of-type{
+.gantt-elastic__task-list-header-column:last-of-type{
   border-right: 1px solid #00000050;
 }
-.elastigantt__task-list-header-label{
+.gantt-elastic__task-list-header-label{
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: Arial;
@@ -84,35 +84,35 @@ foreignObject > *{
   display: inline-flex;
   flex-grow: 1;
 }
-.elastigantt__task-list-header-resizer{
+.gantt-elastic__task-list-header-resizer{
   background: transparent;
   height: 100%;
   width: 4px;
   cursor: col-resize;
   display: inline-flex;
 }
-.elastigantt__task-list-item{
+.gantt-elastic__task-list-item{
   border-top: 1px solid #00000050;
   border-right: 1px solid #00000050;
   box-sizing: border-box;
   display: flex;
   background: rgba(0,0,0,0.125);
 }
-.elastigantt__task-list-item:last-of-type{
+.gantt-elastic__task-list-item:last-of-type{
   border-bottom:1px solid #00000050;
 }
-.elastigantt__task-list-item-column{
+.gantt-elastic__task-list-item-column{
   display: inline-flex;
   flex-shrink: 0;
   border-left: 1px solid #00000050;
   box-sizing: border-box;
 }
-.elastigantt__task-list-item-value--wrapper{
+.gantt-elastic__task-list-item-value--wrapper{
   overflow: hidden;
   display: flex;
   width: 100%;
 }
-.elastigantt__task-list-item-value{
+.gantt-elastic__task-list-item-value{
   margin: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -124,7 +124,7 @@ foreignObject > *{
   font-size: 12px;
   width: 100%;
 }
-.elastigantt__tree-scroll-container{
+.gantt-elastic__tree-scroll-container{
   overflow:auto;
   max-width:100%;
 }

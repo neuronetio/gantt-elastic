@@ -1,9 +1,9 @@
 <template>
-<div class="elastigantt__task-list-item-column" :style="column.style">
-  <div class="elastigantt__task-list-item-value--wrapper">
+<div class="gantt-elastic__task-list-item-column" :style="column.style">
+  <div class="gantt-elastic__task-list-item-value--wrapper">
     <slot></slot>
-    <div v-if="!html" class="elastigantt__task-list-item-value" :style="column.styles.value">{{value}}</div>
-    <div v-if="html" class="elastigantt__task-list-item-value" :style="column.styles.value" v-html="value"></div>
+    <div v-if="!html" class="gantt-elastic__task-list-item-value" :style="column.styles.value">{{value}}</div>
+    <div v-if="html" class="gantt-elastic__task-list-item-value" :style="column.styles.value" v-html="value"></div>
   </div>
 </div>
 </template>

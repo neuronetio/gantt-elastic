@@ -10,7 +10,7 @@ import Main from './components/Main.vue';
 function getOptions(userOptions) {
   return {
     title: {
-      label: 'Elastigantt',
+      label: 'gantt-elastic',
       html: false,
       style: {
         'font-size': '20px',
@@ -358,7 +358,7 @@ export function mergeDeep(target, ...sources) {
   return mergeDeep(target, ...sources);
 }
 
-const Elastigantt = {
+const GanttElastic = {
   components: {
     'EgMain': Main,
   },
@@ -658,13 +658,13 @@ const Elastigantt = {
       this.fixScrollPos();
     },
     initializeEvents() {
-      this.$root.$on('elastigantt.tree.scroll', this.onScrollTree);
-      this.$root.$on('elastigantt.tree.wheel', this.onWheelTree);
-      this.$root.$on('elastigantt.times.timeZoom.change', this.onTimeZoomChange);
-      this.$root.$on('elastigantt.row.height.change', this.onRowHeightChange);
-      this.$root.$on('elastigantt.scope.change', this.onScopeChange);
-      this.$root.$on('elastigantt.taskList.width.change', this.onTaskListWidthChange);
-      this.$root.$on('elastigantt.taskList.column.width.change', this.onTaskListColumnWidthChange);
+      this.$root.$on('gantt-elastic.tree.scroll', this.onScrollTree);
+      this.$root.$on('gantt-elastic.tree.wheel', this.onWheelTree);
+      this.$root.$on('gantt-elastic.times.timeZoom.change', this.onTimeZoomChange);
+      this.$root.$on('gantt-elastic.row.height.change', this.onRowHeightChange);
+      this.$root.$on('gantt-elastic.scope.change', this.onScopeChange);
+      this.$root.$on('gantt-elastic.taskList.width.change', this.onTaskListWidthChange);
+      this.$root.$on('gantt-elastic.taskList.column.width.change', this.onTaskListColumnWidthChange);
     },
     recalculateTimes() {
       let max = this.state.times.timeScale * 60;
@@ -868,10 +868,9 @@ const Elastigantt = {
     this.calculateCalendarDimensions();
   },
 }
-//Vue.component('elastigantt', Elastigantt);
-export default Elastigantt;
+export default GanttElastic;
 </script>
 
 <style>
-@import 'styles/elastigantt.css';
+@import 'styles/ganttElastic.css';
 </style>

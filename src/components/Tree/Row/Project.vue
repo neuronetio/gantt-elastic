@@ -1,6 +1,6 @@
 <template>
-<g class="elastigantt__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-  <svg class="elastigantt__tree-row" :x="task.x" :y="task.y" :width="task.width" :height="task.height" @click="treeRowClick" xmlns="http://www.w3.org/2000/svg">
+<g class="gantt-elastic__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
+  <svg class="gantt-elastic__tree-row" :x="task.x" :y="task.y" :width="task.width" :height="task.height" @click="treeRowClick" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <clipPath :id="clipPathId">
         <path :d="getPoints" :style="root.state.row.styles.bar"></path>
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     clipPathId() {
-      return 'elastigantt__project-clip-path-' + this.task.id;
+      return 'gantt-elastic__project-clip-path-' + this.task.id;
     },
     getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;

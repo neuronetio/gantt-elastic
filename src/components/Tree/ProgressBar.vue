@@ -1,11 +1,11 @@
 <template>
-<g class="elastigantt__tree-row-progress-bar">
+<g class="gantt-elastic__tree-row-progress-bar">
   <defs>
     <pattern id="diagonalHatch" :width="root.state.progress.width" :height="root.state.progress.width" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="0" :y2="root.state.progress.width" :style="root.state.progress.styles.line" />
     </pattern>
   </defs>
-  <rect v-if="root.state.progress.bar" id="elastigantt__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="getSolidStyle"></rect>
+  <rect v-if="root.state.progress.bar" id="gantt-elastic__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="getSolidStyle"></rect>
   <g v-if="root.state.progress.pattern">
     <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="root.state.progress.styles.bar.pattern"></rect>
     <path :d="getLinePoints" :style="getLineStyle"></path>

@@ -1,8 +1,8 @@
 <template>
 <g>
-  <line class="elastigantt__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
-  <line class="elastigantt__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle" v-if="line.inViewPort"></line>
-  <line class="elastigantt__grid-time-line" :x1="timeLinePosition.x" :y1="timeLinePosition.y1" :x2="timeLinePosition.x" :y2="timeLinePosition.y2" :style="root.state.grid.timeLine.style"></line>
+  <line class="gantt-elastic__grid-horizontal-line" v-for="(line,index) in horizontalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getHStyle"></line>
+  <line class="gantt-elastic__grid-vertical-line" v-for="(line,index) in verticalLines" :key="line.key" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" :style="getVStyle" v-if="line.inViewPort"></line>
+  <line class="gantt-elastic__grid-time-line" :x1="timeLinePosition.x" :y1="timeLinePosition.y1" :x2="timeLinePosition.x" :y2="timeLinePosition.y2" :style="root.state.grid.timeLine.style"></line>
 </g>
 </template>
 <script>
@@ -15,11 +15,11 @@ export default {
     };
   },
   created() {
-    this.$root.$on('elastigantt.recenterPosition', this.recenterPosition);
-    this.$root.$on('elastigantt.scope.change', this.regenerate);
-    this.$root.$on('elastigantt.times.timeZoom.change', this.regenerate);
-    this.$root.$on('elastigantt.row.height.change', this.regenerate);
-    this.$root.$on('elastigantt.tree.scroll', this.regenerate);
+    this.$root.$on('gantt-elastic.recenterPosition', this.recenterPosition);
+    this.$root.$on('gantt-elastic.scope.change', this.regenerate);
+    this.$root.$on('gantt-elastic.times.timeZoom.change', this.regenerate);
+    this.$root.$on('gantt-elastic.row.height.change', this.regenerate);
+    this.$root.$on('gantt-elastic.tree.scroll', this.regenerate);
     this.regenerate();
   },
   mounted() {

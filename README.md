@@ -195,7 +195,7 @@ const options = {
   }*/
 };
 
-const elastigantt = Elastigantt.mount({
+const elastigantt = GanttElastic.mount({
   el: '#app', // <- your container id
   tasks: tasks,
   options: options

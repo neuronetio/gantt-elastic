@@ -1,6 +1,6 @@
 <template>
-<foreignObject class="elastigantt__task-list-object" x="0" y="0" width="100%" height="100%" v-if="root.state.taskList.display">
-  <div xmlns="http://www.w3.org/1999/xhtml" class="elastigantt__task-list-container">
+<foreignObject class="gantt-elastic__task-list-object" x="0" y="0" width="100%" height="100%" v-if="root.state.taskList.display">
+  <div xmlns="http://www.w3.org/1999/xhtml" class="gantt-elastic__task-list-container">
     <div v-html="root.state.defs.join('')"></div>
     <task-list-resizer></task-list-resizer>
     <task-list-header :expander-style="getHeaderExpanderStyle"></task-list-header>
