@@ -1,6 +1,6 @@
 {
-  "name": "elastigantt",
-  "version": "0.0.59",
+  "name": "gantt-elastic",
+  "version": "0.0.60",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
   "main": "src/Elastigantt.vue",
   "dependencies": {
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neuronetio/elastigantt.git"
+    "url": "git+https://github.com/neuronetio/gantt-elastic.git"
   },
   "keywords": [
     "gantt",
@@ -48,7 +48,7 @@
   "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/neuronetio/elastigantt/issues"
+    "url": "https://github.com/neuronetio/gantt-elastic/issues"
   },
-  "homepage": "https://github.com/neuronetio/elastigantt#readme"
+  "homepage": "https://github.com/neuronetio/gantt-elastic#readme"
 }
