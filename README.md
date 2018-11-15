@@ -1,4 +1,4 @@
-# Elastigantt - Elastic Javascript Gantt Chart
+# Gantt-elastic - Javascript Gantt Chart
 
 
 ### Javascript Gantt Chart
