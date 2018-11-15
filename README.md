@@ -21,7 +21,7 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ##### :star2: Give it a star if you want more activity in this repo, thanks!
 
 ### install
-`npm install --save elastigantt` or download zip from github
+`npm install --save gantt-elastic` or download zip from github
 
 ### standalone usage (more info / documentation soon)
 
@@ -31,8 +31,7 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 <html charset="utf-8">
 <head>
   <meta charset="UTF-8">
-  <title>elastigantt demo</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <title>gantt-elastic demo</title>
 </head>
 <body>
   <div class="container-fluid">
@@ -209,14 +208,14 @@ elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
 
 #### as Vue app / component
 ```javascript
-import Elastigantt from 'elastigantt';
-// const Elastigantt = require('elastigantt');
+import GanttElastic from 'gantt-elastic';
+
 let gantt = new Vue({
   components: {
-    elastigantt: Elastigantt
+    ganttElastic: GanttElastic
   },
   el: '#gantt',
-  template: `<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
+  template: `<gantt-ellastic :tasks="tasks" :options="options"></gantt-elastic>`,
   data: {
     tasks,
     options
@@ -225,15 +224,14 @@ let gantt = new Vue({
 ```
 
 ```javascript
-import Elastigantt from 'elastigantt';
-// const Elastigantt = require('elastigantt');
+import GanttElastic from 'gantt-elastic';
 
 export default {
   components:{
-    elastigantt:Elastigantt
+    ganttElastic: GanttElastic
   },
   props:['tasks','options'],
-  template:`<elastigantt :tasks="tasks" :options="options"></elastigantt>`,
+  template:`<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
   data(){
     return {};
   }
