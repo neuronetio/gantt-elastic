@@ -2,7 +2,7 @@
   "name": "gantt-elastic",
   "version": "0.0.62",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
-  "main": "src/Elastigantt.vue",
+  "main": "src/GanttElastic.vue",
   "dependencies": {
     "dayjs": "^1.7.7",
     "vue-slider-component": "^2.7.11",
