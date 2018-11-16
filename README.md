@@ -3,15 +3,15 @@
 
 ### Javascript Gantt Chart
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/elastigantt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/elastigantt&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/elastigantt/badge.svg)](https://snyk.io/test/github/{username}/{repo})
-![NpmLicense](https://img.shields.io/npm/l/elastigantt.svg)
-![npm](https://img.shields.io/npm/dm/elastigantt.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/ganttElastic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/ganttElastic&amp;utm_campaign=Badge_Grade)
+[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/ganttElastic/badge.svg)](https://snyk.io/test/github/{username}/{repo})
+![NpmLicense](https://img.shields.io/npm/l/ganttElastic.svg)
+![npm](https://img.shields.io/npm/dm/ganttElastic.svg)
 
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
-![preview img](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.jpg)
-![preview gif](https://github.com/neuronetio/elastigantt/raw/master/elastigantt.gif)
+![preview img](https://github.com/neuronetio/ganttElastic/raw/master/ganttElastic.jpg)
+![preview gif](https://github.com/neuronetio/ganttElastic/raw/master/ganttElastic.gif)
 
 
 #### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
@@ -23,7 +23,13 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ### install
 `npm install --save gantt-elastic` or download zip from github
 
-### standalone usage (more info / documentation soon)
+### more info / documentation soon!
+
+### webpack usage
+
+take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack
+
+### standalone usage 
 
 #### index.html
 ```html
@@ -195,19 +201,20 @@ const options = {
   }*/
 };
 
-const elastigantt = GanttElastic.mount({
+const ganttElastic = GanttElastic.mount({
   el: '#app', // <- your container id
   tasks: tasks,
   options: options
 });
 // listen to events
-elastigantt.$on('elastigantt.tree.scroll',(ev)=>{
+ganttElastic.$on('gantt-elastic.tree.scroll',(ev)=>{
   console.log('scroll');
 });
 ```
 
 #### as Vue app / component
 ```javascript
+import Vue from 'vue';
 import GanttElastic from 'gantt-elastic';
 
 let gantt = new Vue({
@@ -215,7 +222,7 @@ let gantt = new Vue({
     ganttElastic: GanttElastic
   },
   el: '#gantt',
-  template: `<gantt-ellastic :tasks="tasks" :options="options"></gantt-elastic>`,
+  template: `<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
   data: {
     tasks,
     options
@@ -224,16 +231,11 @@ let gantt = new Vue({
 ```
 
 ```javascript
-import GanttElastic from 'gantt-elastic';
+import Vue from 'vue';
+import App from './App.vue';
 
-export default {
-  components:{
-    ganttElastic: GanttElastic
-  },
-  props:['tasks','options'],
-  template:`<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
-  data(){
-    return {};
-  }
-}
+new Vue({
+  el: '#app',
+  render: h => h(App),
+});
 ```
