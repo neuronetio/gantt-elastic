@@ -3,15 +3,15 @@
 
 ### Javascript Gantt Chart
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/ganttElastic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/ganttElastic&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/ganttElastic/badge.svg)](https://snyk.io/test/github/{username}/{repo})
-![NpmLicense](https://img.shields.io/npm/l/ganttElastic.svg)
-![npm](https://img.shields.io/npm/dm/ganttElastic.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/gantt-elastic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/gantt-elastic&amp;utm_campaign=Badge_Grade)
+[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg)](https://snyk.io/test/github/{username}/{repo})
+![NpmLicense](https://img.shields.io/npm/l/gantt-elastic.svg)
+![npm](https://img.shields.io/npm/dm/gantt-elastic.svg)
 
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
-![preview img](https://github.com/neuronetio/ganttElastic/raw/master/ganttElastic.jpg)
-![preview gif](https://github.com/neuronetio/ganttElastic/raw/master/ganttElastic.gif)
+![preview img](https://github.com/neuronetio/ganttElastic/raw/master/gantt-lastic.jpg)
+![preview gif](https://github.com/neuronetio/ganttElastic/raw/master/gantt-elastic.gif)
 
 
 #### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
