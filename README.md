@@ -10,8 +10,8 @@
 
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
-![preview img](https://github.com/neuronetio/ganttElastic/raw/master/gantt-lastic.jpg)
-![preview gif](https://github.com/neuronetio/ganttElastic/raw/master/gantt-elastic.gif)
+![preview img](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.jpg)
+![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
 
 
 #### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
