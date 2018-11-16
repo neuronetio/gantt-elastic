@@ -10,10 +10,6 @@
   },
   "devDependencies": {
     "css-loader": "^1.0.1",
-    "rollup": "^0.62.0",
-    "rollup-plugin-minify-es": "^1.1.1",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-vue": "^4.3.2",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
@@ -22,10 +18,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup -c -w",
-    "build": "rollup -c",
-    "build-webpack": "webpack --config webpack.config.js",
-    "dev-webpack": "webpack --watch  --mode development"
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --watch  --mode development"
   },
   "repository": {
     "type": "git",
