@@ -542,7 +542,7 @@ export default {
   components: {
     ganttElastic: GanttElastic
   },
-  template:'<gantt-elastic :tasks="tasks` :options="options"></gantt-elastic>',
+  template:'<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>',
   data() {
     return {
       tasks: tasks,
