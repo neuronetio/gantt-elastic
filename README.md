@@ -18,18 +18,18 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 
 ##### Gantt-elastic is not fully finished yet and may change (but if you really wan't you can fork this repo or download current version - do not use npm right now)
 
-##### :star2: Give it a star if you want more activity in this repo, thanks!
+### :star2: Give it a star if you want more activity in this repo, thanks! :star2:
 
 ### install
 `npm install --save gantt-elastic` or download zip from github
 
 ### more info / documentation soon!
 
-### webpack usage
+### for webpack usage (pure javascript, inside other frameworks or Vue App/Component)
 
 take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack
 
-### standalone usage 
+### standalone usage
 
 #### index.html
 ```html
@@ -50,10 +50,10 @@ take a look at this demo project: https://github.com/neuronetio/gantt-elastic-we
 ```
 #### app.js
 ```javascript
-// override components - copy component from src directory change it to object or compile *.vue to *.js
-// more info about components you can find here : https://vuejs.org/v2/guide/index.html
+// override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
+// more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
 // You can change anything! You have full control of components templates, events, data ... and so on!
-//Elastigantt.component.components.EgMain.components.TopHeader = CustomHeader;
+// GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
 
 // just helper to get current dates
 function getDate(hours) {
@@ -120,39 +120,12 @@ const options = {
   },
   taskList: {
     columns: [
-      {
-        id: 1,
-        label: 'ID',
-        value: 'id',
-        width: 40
-      }, {
-        id: 2,
-        label: 'Description',
-        value: 'label',
-        width: 200,
-        expander: true
-      }, {
-        id: 3,
-        label: 'Assigned to',
-        value: 'user',
-        width: 130,
-        html: true
-      }, {
-        id: 3,
-        label: 'Start',
-        value: (task) => task.startDate.format('YYYY-MM-DD'),
-        width: 78
-      }, {
-        id: 4,
-        label: 'Type',
-        value: 'type',
-        width: 68
-      }, {
-        id: 5,
-        label: '%',
-        value: 'progress',
-        width: 35,
-        styles: {
+      { id: 1, label: 'ID', value: 'id', width: 40 },
+      { id: 2, label: 'Description', value: 'label', width: 200, expander: true },
+      { id: 3, label: 'Assigned to', value: 'user', width: 130, html: true },
+      { id: 3, label: 'Start', value: (task) => task.startDate.format('YYYY-MM-DD'), width: 78 },
+      { id: 4, label: 'Type', value: 'type', width: 68 },
+      { id: 5, label: '%', value: 'progress', width: 35, styles: {
           label: {
             'text-align': 'center',
             'width': '100%'
@@ -173,32 +146,8 @@ const options = {
     'Task list width': 'Task list',
     'Before/After': 'Expand',
     'Display task list': 'Task list'
+    // from now on locale settings are same as those from dayjs - https://github.com/iamkun/dayjs/blob/master/docs/en/I18n.md
   },
-  /*locale:{
-    code:'pl'
-    name: 'pl', // name String
-    weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
-    weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
-    weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
-    months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
-    monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
-    ordinal: n => `${n}`, // ordinal Function (number) => return number + output
-    relativeTime: { // relative time format strings, keep %s %d as the same
-      future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
-      past: '%s temu',
-      s: 'kilka sekund',
-      m: 'minutę',
-      mm: '%d minut',
-      h: 'godzinę',
-      hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
-      d: 'dzień',
-      dd: '%d dni',
-      M: 'miesiąc',
-      MM: '%d miesięcy',
-      y: 'rok',
-      yy: '%d lat'
-    }
-  }*/
 };
 
 const ganttElastic = GanttElastic.mount({
@@ -209,357 +158,5 @@ const ganttElastic = GanttElastic.mount({
 // listen to events
 ganttElastic.$on('gantt-elastic.tree.scroll',(ev)=>{
   console.log('scroll');
-});
-```
-
-#### as Vue app / component
-
-`App.vue`
-
-```javascript
-<template>
-<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
-</template>
-
-<script>
-import GanttElastic from "gantt-elastic";
-
-
-// just helper to get current dates
-function getDate(hours) {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDate();
-  const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-  return new Date(timeStamp + hours * 60 * 60 * 1000);
-}
-
-const tasks = [
-  {
-    id: 1,
-    label: 'Make some noise',
-    user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
-    start: getDate(-24 * 5),
-    duration: 5 * 24 * 60 * 60,
-    progress: 85,
-    type: 'project'
-  }, {
-    id: 2,
-    label: 'With great power comes great responsibility',
-    user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
-    parentId: 1,
-    start: getDate(-24 * 4),
-    duration: 4 * 24 * 60 * 60,
-    progress: 50,
-    type: 'milestone',
-    style: {
-      fill: '#1EBC61',
-      stroke: '#0EAC51'
-    },
-    progressBarStyle: {
-      bar: {
-        fill: '#0EAC51'
-      }
-    }
-  }, {
-    id: 3,
-    label: 'Courage is being scared to death, but saddling up anyway.',
-    user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
-    parentId: 2,
-    start: getDate(-24 * 3),
-    duration: 2 * 24 * 60 * 60,
-    progress: 100,
-    type: 'task'
-  }, {
-    id: 4,
-    label: 'Put that toy AWAY!',
-    user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
-    start: getDate(-24 * 2),
-    duration: 2 * 24 * 60 * 60,
-    progress: 50,
-    type: 'task',
-    dependentOn: [3]
-  }, {
-    id: 5,
-    label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
-    user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#0077c0;">Austin Powers</a>',
-    parentId: 4,
-    start: getDate(0),
-    duration: 2 * 24 * 60 * 60,
-    progress: 10,
-    type: 'milestone',
-    style: {
-      fill: '#0287D0',
-      stroke: '#0077C0'
-    },
-    progressBarStyle: {
-      bar: {
-        fill: '#0077C0'
-      }
-    }
-  }, 
-];
-
-const options = {
-  title: {
-    label: 'Your project title as html (link or whatever...)',
-    html: false,
-    style: {
-      'font-size': '20px',
-      'vertical-align': 'middle',
-      'font-weight': '400',
-      'line-height': '35px',
-      'padding-left': '22px',
-      'letter-spacing': '1px'
-    }
-  },
-  taskList: {
-    columns: [
-      {
-        id: 1,
-        label: 'ID',
-        value: 'id',
-        width: 40
-      }, {
-        id: 2,
-        label: 'Description',
-        value: 'label',
-        width: 200,
-        expander: true
-      }, {
-        id: 3,
-        label: 'Assigned to',
-        value: 'user',
-        width: 130,
-        html: true
-      }, {
-        id: 3,
-        label: 'Start',
-        value: (task) => task.startDate.format('YYYY-MM-DD'),
-        width: 78
-      }, {
-        id: 4,
-        label: 'Type',
-        value: 'type',
-        width: 68
-      }, {
-        id: 5,
-        label: '%',
-        value: 'progress',
-        width: 35,
-        styles: {
-          label: {
-            'text-align': 'center',
-            'width': '100%'
-          },
-          value: {
-            'text-align': 'center',
-            'width': '100%'
-          }
-        }
-      }
-    ]
-  },
-  locale: {
-    code: 'en',
-    'Now': 'Now',
-    'X-Scale': 'Zoom-X',
-    'Y-Scale': 'Zoom-Y',
-    'Task list width': 'Task list',
-    'Before/After': 'Expand',
-    'Display task list': 'Task list'
-  },
-};
-
-export default {
-  components: {
-    ganttElastic: GanttElastic
-  },
-  data() {
-    return {
-      tasks: tasks,
-      options: options
-    };
-  }
-};
-</script>
-```
-or `App.js`
-
-```javascript
-import GanttElastic from "gantt-elastic";
-
-
-// just helper to get current dates
-function getDate(hours) {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDate();
-  const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-  return new Date(timeStamp + hours * 60 * 60 * 1000);
-}
-
-const tasks = [
-  {
-    id: 1,
-    label: 'Make some noise',
-    user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
-    start: getDate(-24 * 5),
-    duration: 5 * 24 * 60 * 60,
-    progress: 85,
-    type: 'project'
-  }, {
-    id: 2,
-    label: 'With great power comes great responsibility',
-    user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
-    parentId: 1,
-    start: getDate(-24 * 4),
-    duration: 4 * 24 * 60 * 60,
-    progress: 50,
-    type: 'milestone',
-    style: {
-      fill: '#1EBC61',
-      stroke: '#0EAC51'
-    },
-    progressBarStyle: {
-      bar: {
-        fill: '#0EAC51'
-      }
-    }
-  }, {
-    id: 3,
-    label: 'Courage is being scared to death, but saddling up anyway.',
-    user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
-    parentId: 2,
-    start: getDate(-24 * 3),
-    duration: 2 * 24 * 60 * 60,
-    progress: 100,
-    type: 'task'
-  }, {
-    id: 4,
-    label: 'Put that toy AWAY!',
-    user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
-    start: getDate(-24 * 2),
-    duration: 2 * 24 * 60 * 60,
-    progress: 50,
-    type: 'task',
-    dependentOn: [3]
-  }, {
-    id: 5,
-    label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
-    user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#0077c0;">Austin Powers</a>',
-    parentId: 4,
-    start: getDate(0),
-    duration: 2 * 24 * 60 * 60,
-    progress: 10,
-    type: 'milestone',
-    style: {
-      fill: '#0287D0',
-      stroke: '#0077C0'
-    },
-    progressBarStyle: {
-      bar: {
-        fill: '#0077C0'
-      }
-    }
-  }, 
-];
-
-const options = {
-  title: {
-    label: 'Your project title as html (link or whatever...)',
-    html: false,
-    style: {
-      'font-size': '20px',
-      'vertical-align': 'middle',
-      'font-weight': '400',
-      'line-height': '35px',
-      'padding-left': '22px',
-      'letter-spacing': '1px'
-    }
-  },
-  taskList: {
-    columns: [
-      {
-        id: 1,
-        label: 'ID',
-        value: 'id',
-        width: 40
-      }, {
-        id: 2,
-        label: 'Description',
-        value: 'label',
-        width: 200,
-        expander: true
-      }, {
-        id: 3,
-        label: 'Assigned to',
-        value: 'user',
-        width: 130,
-        html: true
-      }, {
-        id: 3,
-        label: 'Start',
-        value: (task) => task.startDate.format('YYYY-MM-DD'),
-        width: 78
-      }, {
-        id: 4,
-        label: 'Type',
-        value: 'type',
-        width: 68
-      }, {
-        id: 5,
-        label: '%',
-        value: 'progress',
-        width: 35,
-        styles: {
-          label: {
-            'text-align': 'center',
-            'width': '100%'
-          },
-          value: {
-            'text-align': 'center',
-            'width': '100%'
-          }
-        }
-      }
-    ]
-  },
-  locale: {
-    code: 'en',
-    'Now': 'Now',
-    'X-Scale': 'Zoom-X',
-    'Y-Scale': 'Zoom-Y',
-    'Task list width': 'Task list',
-    'Before/After': 'Expand',
-    'Display task list': 'Task list'
-  },
-};
-
-export default {
-  components: {
-    ganttElastic: GanttElastic
-  },
-  template:'<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>',
-  data() {
-    return {
-      tasks: tasks,
-      options: options
-    };
-  }
-};
-```
-
-`app.js` <- main entry point for your app
-
-```javascript
-import Vue from 'vue';
-import App from './App.vue';
-
-new Vue({
-  el: '#app',
-  render: h => h(App),
 });
 ```
