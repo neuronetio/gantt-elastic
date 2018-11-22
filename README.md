@@ -21,7 +21,7 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ### install
 `npm install --save gantt-elastic` or download zip from github / clone repo
 
-### full documentation soon!
+### full documentation soon
 
 ### standalone usage
 
@@ -158,6 +158,7 @@ ganttElastic.$on('gantt-elastic.tree.scroll',(ev)=>{
 #### as vue component
 
 ```javascript
+import Vue from 'vue';
 import GanttElastic from "gantt-elastic";
 new Vue({
   el:'#gantt',
