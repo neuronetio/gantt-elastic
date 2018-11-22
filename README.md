@@ -16,18 +16,12 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 
 #### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
-##### Gantt-elastic is not fully finished yet and may change (but if you really wan't you can fork this repo or download current version - do not use npm right now)
-
-### :star2: Give it a star if you want more activity in this repo, thanks! :star2:
+#### :star2: Give it a star if you want more activity in this repo, thanks!
 
 ### install
-`npm install --save gantt-elastic` or download zip from github
+`npm install --save gantt-elastic` or download zip from github / clone repo
 
-### more info / documentation soon!
-
-### for webpack usage (pure javascript, inside other frameworks or Vue App/Component)
-
-take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack
+### full documentation soon!
 
 ### standalone usage
 
@@ -160,3 +154,26 @@ ganttElastic.$on('gantt-elastic.tree.scroll',(ev)=>{
   console.log('scroll');
 });
 ```
+
+#### as vue component
+
+```javascript
+import GanttElastic from "gantt-elastic";
+new Vue({
+  el:'#gantt',
+  template:`<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
+  components: {
+    ganttElastic: GanttElastic
+  },
+  data() {
+    return {
+      tasks: tasks,
+      options: options
+    };
+  }
+});
+```
+
+#### for webpack usage (pure javascript, inside other frameworks or Vue App/Component)
+
+take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack
