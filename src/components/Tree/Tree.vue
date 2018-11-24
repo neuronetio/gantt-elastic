@@ -3,18 +3,18 @@
   <calendar></calendar>
   <grid></grid>
   <dependency-lines :tasks="root.visibleTasks"></dependency-lines>
-  <g v-for="task in root.visibleTasks" :task="task">
+  <g v-for="task in root.visibleTasks" :task="task" :key="task.id">
     <component :task="task" :is="task.type"></component>
   </g>
 </svg>
 </template>
 <script>
-import Grid from '../Grid/Grid.vue';
-import Calendar from '../Calendar/Calendar.vue';
-import DependencyLines from './DependencyLines.vue';
-import Task from './Row/Task.vue';
-import Milestone from './Row/Milestone.vue';
-import Project from './Row/Project.vue';
+import Grid from "../Grid/Grid.vue";
+import Calendar from "../Calendar/Calendar.vue";
+import DependencyLines from "./DependencyLines.vue";
+import Task from "./Row/Task.vue";
+import Milestone from "./Row/Milestone.vue";
+import Project from "./Row/Project.vue";
 
 export default {
   components: {
@@ -25,7 +25,7 @@ export default {
     Milestone,
     Project
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {};
   },
@@ -39,5 +39,5 @@ export default {
       return state.height;
     }
   }
-}
+};
 </script>

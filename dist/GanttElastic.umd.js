@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vue"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["GanttElastic"] = factory(require("vue"));
+		exports["GanttElastic"] = factory();
 	else
-		root["GanttElastic"] = factory(root["Vue"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__8bbf__) {
+		root["GanttElastic"] = factory();
+})((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -536,13 +536,6 @@ exports.push([module.i, "\n.vue-switcher{position:relative;display:inline-block\
 
 /***/ }),
 
-/***/ "8bbf":
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
-
-/***/ }),
-
 /***/ "a62b":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -584,15 +577,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=69e8ddfa&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=418ff0ac&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=69e8ddfa&
-
-// EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
-var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=418ff0ac&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -605,12 +595,12 @@ var Mainvue_type_template_id_7ca127bc_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/Main.vue?vue&type=template&id=7ca127bc&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Header.vue?vue&type=template&id=25eb6f10&
-var Headervue_type_template_id_25eb6f10_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__header"},[_c('div',{staticClass:"gantt-elastic__header-title"},[(!_vm.root.state.title.html)?_c('div',{style:(_vm.root.state.title.style)},[_vm._v(_vm._s(_vm.root.state.title.label))]):_vm._e(),(_vm.root.state.title.html)?_c('div',{style:(_vm.root.state.title.style),domProps:{"innerHTML":_vm._s(_vm.root.state.title.label)}}):_vm._e()]),_c('div',{staticClass:"gantt-elastic__header-options"},[_c('button',{staticClass:"gantt-elastic__btn-recenter",style:(_vm.buttonStyle),on:{"click":_vm.recenterPosition}},[_vm._v(_vm._s(_vm.root.state.locale.Now))]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['X-Scale'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":24,"min":2,"width":"100px"},model:{value:(_vm.scale),callback:function ($$v) {_vm.scale=$$v},expression:"scale"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Y-Scale'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":100,"min":6,"width":"100px"},model:{value:(_vm.height),callback:function ($$v) {_vm.height=$$v},expression:"height"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Before/After'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":31,"min":0,"width":"100px"},model:{value:(_vm.scope),callback:function ($$v) {_vm.scope=$$v},expression:"scope"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Task list width'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":100,"min":0,"width":"100px"},model:{value:(_vm.divider),callback:function ($$v) {_vm.divider=$$v},expression:"divider"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-task-list-switch",style:(_vm.taskListSwitchStyle)},[_c('switches',{staticClass:"mr-1",model:{value:(_vm.root.state.taskList.display),callback:function ($$v) {_vm.$set(_vm.root.state.taskList, "display", $$v)},expression:"root.state.taskList.display"}}),_vm._v(" "+_vm._s(_vm.root.state.locale['Display task list'])+"\n    ")],1)])])}
-var Headervue_type_template_id_25eb6f10_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Header.vue?vue&type=template&id=9ece9936&
+var Headervue_type_template_id_9ece9936_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__header"},[_c('div',{staticClass:"gantt-elastic__header-title"},[(!_vm.root.state.title.html)?_c('div',{style:(_vm.root.state.title.style)},[_vm._v(_vm._s(_vm.root.state.title.label))]):_vm._e(),(_vm.root.state.title.html)?_c('div',{style:(_vm.root.state.title.style),domProps:{"innerHTML":_vm._s(_vm.root.state.title.label)}}):_vm._e()]),_c('div',{staticClass:"gantt-elastic__header-options"},[_c('button',{staticClass:"gantt-elastic__btn-recenter",style:(_vm.buttonStyle),on:{"click":_vm.recenterPosition}},[_vm._v(_vm._s(_vm.root.state.locale.Now))]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['X-Scale'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":24,"min":2,"width":"100px"},model:{value:(_vm.scale),callback:function ($$v) {_vm.scale=$$v},expression:"scale"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Y-Scale'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":100,"min":6,"width":"100px"},model:{value:(_vm.height),callback:function ($$v) {_vm.height=$$v},expression:"height"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Before/After'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":31,"min":0,"width":"100px"},model:{value:(_vm.scope),callback:function ($$v) {_vm.scope=$$v},expression:"scope"}})],1)]),_c('label',[_vm._v(_vm._s(_vm.root.state.locale['Task list width'])+"\n      "),_c('div',{style:(_vm.sliderWrapperStyle)},[_c('vue-slider',{attrs:{"tooltip":"false","tooltip-dir":"right","process-style":_vm.processStyle,"slider-style":_vm.sliderStyle,"max":100,"min":0,"width":"100px"},model:{value:(_vm.divider),callback:function ($$v) {_vm.divider=$$v},expression:"divider"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-task-list-switch",style:(_vm.taskListSwitchStyle)},[_c('switches',{staticClass:"mr-1",model:{value:(_vm.root.state.taskList.display),callback:function ($$v) {_vm.$set(_vm.root.state.taskList, "display", $$v)},expression:"root.state.taskList.display"}}),_vm._v(" "+_vm._s(_vm.root.state.locale['Display task list'])+"\n    ")],1)])])}
+var Headervue_type_template_id_9ece9936_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Header.vue?vue&type=template&id=25eb6f10&
+// CONCATENATED MODULE: ./src/components/Header.vue?vue&type=template&id=9ece9936&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-slider-component/src/vue2-slider.vue?vue&type=template&id=7dcc57df&
 var vue2_slidervue_type_template_id_7dcc57df_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.show),expression:"show"}],ref:"wrap",class:['vue-slider-component', _vm.flowDirection, _vm.disabledClass, _vm.stateClass, { 'vue-slider-has-label': _vm.piecewiseLabel }],style:([_vm.wrapStyles, _vm.boolDisabled ? _vm.disabledStyle : null]),on:{"click":_vm.wrapClick}},[_c('div',{ref:"elem",staticClass:"vue-slider",style:([_vm.elemStyles, _vm.bgStyle]),attrs:{"aria-hidden":"true"}},[(_vm.isRange)?[_c('div',{key:"dot0",ref:"dot0",class:[
@@ -2121,7 +2111,7 @@ switches_component.options.__file = "switches.vue"
   },
   methods: {
     getImage() {
-      const code = this.root.getImage("image/png").then(imgB64 => {
+      this.root.getImage("image/png").then(imgB64 => {
         const link = document.createElement("a");
         link.href = imgB64;
         link.download = "gantt-elastic.png";
@@ -2204,8 +2194,8 @@ switches_component.options.__file = "switches.vue"
 
 var Header_component = normalizeComponent(
   components_Headervue_type_script_lang_js_,
-  Headervue_type_template_id_25eb6f10_render,
-  Headervue_type_template_id_25eb6f10_staticRenderFns,
+  Headervue_type_template_id_9ece9936_render,
+  Headervue_type_template_id_9ece9936_staticRenderFns,
   false,
   null,
   null,
@@ -2215,19 +2205,19 @@ var Header_component = normalizeComponent(
 
 Header_component.options.__file = "Header.vue"
 /* harmony default export */ var Header = (Header_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=c8b384fe&
-var TaskListvue_type_template_id_c8b384fe_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.root.state.taskList.display)?_c('foreignObject',{staticClass:"gantt-elastic__task-list-object",attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__task-list-container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('div',{domProps:{"innerHTML":_vm._s(_vm.root.state.defs.join(''))}}),_c('task-list-resizer'),_c('task-list-header',{attrs:{"expander-style":_vm.getHeaderExpanderStyle}}),_vm._l((_vm.root.visibleTasks),function(task){return _c('task-list-item',{key:task.id,attrs:{"task":task,"expander-style":_vm.getListExpanderStyle(task)}})})],2)]):_vm._e()}
-var TaskListvue_type_template_id_c8b384fe_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=cdecffd8&
+var TaskListvue_type_template_id_cdecffd8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.root.state.taskList.display)?_c('foreignObject',{staticClass:"gantt-elastic__task-list-object",attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__task-list-container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('div',{domProps:{"innerHTML":_vm._s(_vm.root.state.defs.join(''))}}),_c('task-list-resizer'),_c('task-list-header',{attrs:{"expander-style":_vm.getHeaderExpanderStyle}}),_vm._l((_vm.root.visibleTasks),function(task){return _c('task-list-item',{key:task.id,attrs:{"task":task,"expander-style":_vm.getListExpanderStyle(task)}})})],2)]):_vm._e()}
+var TaskListvue_type_template_id_cdecffd8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=template&id=c8b384fe&
+// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=template&id=cdecffd8&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Resizer.vue?vue&type=template&id=3ba39d50&
-var Resizervue_type_template_id_3ba39d50_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__task-list-resizer",staticStyle:{}})}
-var Resizervue_type_template_id_3ba39d50_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Resizer.vue?vue&type=template&id=118c5a3b&
+var Resizervue_type_template_id_118c5a3b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__task-list-resizer",staticStyle:{}})}
+var Resizervue_type_template_id_118c5a3b_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TaskList/Resizer.vue?vue&type=template&id=3ba39d50&
+// CONCATENATED MODULE: ./src/components/TaskList/Resizer.vue?vue&type=template&id=118c5a3b&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Resizer.vue?vue&type=script&lang=js&
 //
@@ -2235,17 +2225,16 @@ var Resizervue_type_template_id_3ba39d50_staticRenderFns = []
 //
 
 /* harmony default export */ var Resizervue_type_script_lang_js_ = ({
-  inject: ['root'],
-  props: ['column'],
+  inject: ["root"],
+  props: ["column"],
   data() {
     return {};
   },
   computed: {
     getStyle() {
-      const state = this.root.state;
       return {
-        height: '100%',
-        width: root.state.taskList.resizerWidth + 'px'
+        height: "100%",
+        width: this.root.state.taskList.resizerWidth + "px"
       };
     }
   }
@@ -2263,8 +2252,8 @@ var Resizervue_type_template_id_3ba39d50_staticRenderFns = []
 
 var Resizer_component = normalizeComponent(
   TaskList_Resizervue_type_script_lang_js_,
-  Resizervue_type_template_id_3ba39d50_render,
-  Resizervue_type_template_id_3ba39d50_staticRenderFns,
+  Resizervue_type_template_id_118c5a3b_render,
+  Resizervue_type_template_id_118c5a3b_staticRenderFns,
   false,
   null,
   null,
@@ -2615,46 +2604,65 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
   components: {
     TaskListResizer: Resizer,
     TaskListHeader: TaskListHeader,
-    TaskListItem: TaskListItem,
+    TaskListItem: TaskListItem
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {};
   },
   computed: {
     getHeaderExpanderStyle() {
       const state = this.root.state;
-      const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
       return Object.assign({}, state.taskList.styles.header, {
-        'width': (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
-        'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
-        'margin-bottom': state.calendar.gap + 'px',
-        'padding-right': state.taskList.expander.margin + 'px',
-        'padding-left': state.taskList.expander.margin + 'px',
-        'margin': 'auto 0px',
-        'display': 'inline-flex'
+        width:
+          ((state.taskList.expander.width +
+            state.calendar.styles.column["stroke-width"] +
+            state.taskList.expander.margin) /
+            100) *
+            state.taskList.percent +
+          "px",
+        height:
+          state.calendar.height +
+          state.calendar.styles.column["stroke-width"] +
+          "px",
+        "margin-bottom": state.calendar.gap + "px",
+        "padding-right": state.taskList.expander.margin + "px",
+        "padding-left": state.taskList.expander.margin + "px",
+        margin: "auto 0px",
+        display: "inline-flex"
       });
     },
     getListExpanderStyle() {
       return task => {
         const state = this.root.state;
-        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
+        const padding =
+          (task.parents.length - 1) * state.taskList.expander.padding;
         const maxLevel = this.root.getMaximalLevel();
-        const fullPadding = maxLevel * state.taskList.expander.padding;
-        let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.style.strokeWidth;
-        let width = (state.taskList.expander.size + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
+        let height =
+          state.row.height +
+          state.grid.horizontal.gap * 2 -
+          state.grid.horizontal.style.strokeWidth;
+        let width =
+          ((state.taskList.expander.size +
+            state.calendar.styles.column["stroke-width"] +
+            padding +
+            state.taskList.expander.margin) /
+            100) *
+          state.taskList.percent;
         if (state.taskList.expander.straight) {
-          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
+          width =
+            (maxLevel - 1) * state.taskList.expander.size +
+            state.taskList.expander.padding * 2;
         }
         const style = {
-          'width': width + 'px',
-          'height': height + 'px',
-          'border-color': '#00000010',
-          'padding-left': padding + state.taskList.expander.margin + 'px',
-          'margin': 'auto 0px',
+          width: width + "px",
+          height: height + "px",
+          "border-color": "#00000010",
+          "padding-left": padding + state.taskList.expander.margin + "px",
+          margin: "auto 0px"
         };
         return style;
-      }
+      };
     }
   }
 });
@@ -2671,8 +2679,8 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
 
 var TaskList_component = normalizeComponent(
   TaskList_TaskListvue_type_script_lang_js_,
-  TaskListvue_type_template_id_c8b384fe_render,
-  TaskListvue_type_template_id_c8b384fe_staticRenderFns,
+  TaskListvue_type_template_id_cdecffd8_render,
+  TaskListvue_type_template_id_cdecffd8_staticRenderFns,
   false,
   null,
   null,
@@ -2682,19 +2690,19 @@ var TaskList_component = normalizeComponent(
 
 TaskList_component.options.__file = "TaskList.vue"
 /* harmony default export */ var TaskList = (TaskList_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Tree.vue?vue&type=template&id=3cf7f573&
-var Treevue_type_template_id_3cf7f573_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic_tree-object",attrs:{"x":"0","y":"0","width":_vm.getWidth,"height":_vm.getHeight,"xmlns":"http://www.w3.org/2000/svg"}},[_c('calendar'),_c('grid'),_c('dependency-lines',{attrs:{"tasks":_vm.root.visibleTasks}}),_vm._l((_vm.root.visibleTasks),function(task){return _c('g',{attrs:{"task":task}},[_c(task.type,{tag:"component",attrs:{"task":task}})],1)})],2)}
-var Treevue_type_template_id_3cf7f573_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Tree.vue?vue&type=template&id=496f5a68&
+var Treevue_type_template_id_496f5a68_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic_tree-object",attrs:{"x":"0","y":"0","width":_vm.getWidth,"height":_vm.getHeight,"xmlns":"http://www.w3.org/2000/svg"}},[_c('calendar'),_c('grid'),_c('dependency-lines',{attrs:{"tasks":_vm.root.visibleTasks}}),_vm._l((_vm.root.visibleTasks),function(task){return _c('g',{key:task.id,attrs:{"task":task}},[_c(task.type,{tag:"component",attrs:{"task":task}})],1)})],2)}
+var Treevue_type_template_id_496f5a68_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Tree.vue?vue&type=template&id=3cf7f573&
+// CONCATENATED MODULE: ./src/components/Tree/Tree.vue?vue&type=template&id=496f5a68&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=template&id=3514dbda&
-var Gridvue_type_template_id_3514dbda_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',[_vm._l((_vm.horizontalLines),function(line,index){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-horizontal-line",style:(_vm.getHStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line,index){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-vertical-line",style:(_vm.getVStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-time-line",style:(_vm.root.state.grid.timeLine.style),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)}
-var Gridvue_type_template_id_3514dbda_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=template&id=b5ef509c&
+var Gridvue_type_template_id_b5ef509c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',[_vm._l((_vm.horizontalLines),function(line){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-horizontal-line",style:(_vm.getHStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-vertical-line",style:(_vm.getVStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-time-line",style:(_vm.root.state.grid.timeLine.style),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)}
+var Gridvue_type_template_id_b5ef509c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Grid/Grid.vue?vue&type=template&id=3514dbda&
+// CONCATENATED MODULE: ./src/components/Grid/Grid.vue?vue&type=template&id=b5ef509c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=script&lang=js&
 //
@@ -2706,24 +2714,25 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
 //
 
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {
       verticalLines: [],
-      horizontalLines: [],
+      horizontalLines: []
     };
   },
   created() {
-    this.$root.$on('gantt-elastic.recenterPosition', this.recenterPosition);
-    this.$root.$on('gantt-elastic.scope.change', this.regenerate);
-    this.$root.$on('gantt-elastic.times.timeZoom.change', this.regenerate);
-    this.$root.$on('gantt-elastic.row.height.change', this.regenerate);
-    this.$root.$on('gantt-elastic.tree.scroll', this.regenerate);
+    this.$root.$on("gantt-elastic.recenterPosition", this.recenterPosition);
+    this.$root.$on("gantt-elastic.scope.change", this.regenerate);
+    this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
+    this.$root.$on("gantt-elastic.row.height.change", this.regenerate);
+    this.$root.$on("gantt-elastic.tree.scroll", this.regenerate);
     this.regenerate();
   },
   mounted() {
     this.$nextTick(() => {
-      this.$nextTick(() => { // because of slider
+      this.$nextTick(() => {
+        // because of slider
         this.root.scrollToTime(this.timeLinePosition.time);
       });
     });
@@ -2735,17 +2744,26 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
     generateVerticalLines() {
       let lines = [];
       const state = this.root.state;
-      state.times.steps.forEach((step) => {
+      state.times.steps.forEach(step => {
         lines.push({
           key: step.date.valueOf(),
           x1: step.offset.px,
-          y1: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap,
+          y1:
+            state.calendar.height +
+            state.calendar.styles.column["stroke-width"] +
+            state.calendar.gap,
           x2: step.offset.px,
-          y2: state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + (state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2)) + state.grid.horizontal.style.strokeWidth,
+          y2:
+            state.calendar.height +
+            state.calendar.styles.column["stroke-width"] +
+            state.calendar.gap +
+            state.tasks.length *
+              (state.row.height + state.grid.horizontal.gap * 2) +
+            state.grid.horizontal.style.strokeWidth,
           inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
         });
       });
-      return this.verticalLines = lines;
+      return (this.verticalLines = lines);
     },
     generateHorizontalLines() {
       let lines = [];
@@ -2753,14 +2771,24 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
         lines.push({
-          key: 'hl' + index,
+          key: "hl" + index,
           x1: 0,
-          y1: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2,
-          x2: '100%',
-          y2: index * (state.row.height + state.grid.horizontal.gap * 2) + state.calendar.height + state.calendar.styles.column['stroke-width'] + state.calendar.gap + state.grid.horizontal.style.strokeWidth / 2
+          y1:
+            index * (state.row.height + state.grid.horizontal.gap * 2) +
+            state.calendar.height +
+            state.calendar.styles.column["stroke-width"] +
+            state.calendar.gap +
+            state.grid.horizontal.style.strokeWidth / 2,
+          x2: "100%",
+          y2:
+            index * (state.row.height + state.grid.horizontal.gap * 2) +
+            state.calendar.height +
+            state.calendar.styles.column["stroke-width"] +
+            state.calendar.gap +
+            state.grid.horizontal.style.strokeWidth / 2
         });
       }
-      return this.horizontalLines = lines;
+      return (this.horizontalLines = lines);
     },
     regenerate() {
       this.$nextTick(() => {
@@ -2771,10 +2799,13 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
   },
   computed: {
     inViewPort() {
-      return (line) => {
+      return line => {
         const state = this.root.state;
-        return line.x1 >= state.scroll.tree.left && line.x1 <= state.scroll.tree.right;
-      }
+        return (
+          line.x1 >= state.scroll.tree.left &&
+          line.x1 <= state.scroll.tree.right
+        );
+      };
     },
     timeLinePosition() {
       const state = this.root.state;
@@ -2784,8 +2815,8 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
       const timeLine = {
         x: 0,
         y1: state.calendar.height + state.calendar.gap,
-        y2: '100%',
-        dateTime: '',
+        y2: "100%",
+        dateTime: "",
         time: current
       };
       timeLine.x = currentOffset;
@@ -2797,8 +2828,8 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
     },
     getHStyle() {
       return this.root.state.grid.horizontal.style;
-    },
-  },
+    }
+  }
 });
 
 // CONCATENATED MODULE: ./src/components/Grid/Grid.vue?vue&type=script&lang=js&
@@ -2813,8 +2844,8 @@ var Gridvue_type_template_id_3514dbda_staticRenderFns = []
 
 var Grid_component = normalizeComponent(
   Grid_Gridvue_type_script_lang_js_,
-  Gridvue_type_template_id_3514dbda_render,
-  Gridvue_type_template_id_3514dbda_staticRenderFns,
+  Gridvue_type_template_id_b5ef509c_render,
+  Gridvue_type_template_id_b5ef509c_staticRenderFns,
   false,
   null,
   null,
@@ -2824,12 +2855,12 @@ var Grid_component = normalizeComponent(
 
 Grid_component.options.__file = "Grid.vue"
 /* harmony default export */ var Grid = (Grid_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=9d39095c&
-var Calendarvue_type_template_id_9d39095c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-group"},[_c('foreignObject',{attrs:{"x":_vm.getX,"y":_vm.getY,"width":_vm.getWidth,"height":_vm.root.state.calendar.height}},[_c('div',{staticClass:"gantt-elastic__calendar",style:(_vm.root.state.calendar.styles.wrapper),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}})]),_vm._l((_vm.months),function(month,index){return _c('calendar-row',{key:month.key,attrs:{"item":month,"rowStyle":_vm.monthsStyle}})}),_vm._l((_vm.days),function(day,index){return (_vm.root.isInsideViewPort(day.x,day.width))?_c('calendar-row',{key:day.key,attrs:{"item":day,"rowStyle":_vm.daysStyle}}):_vm._e()}),_vm._l((_vm.hours),function(hour,index){return (_vm.root.isInsideViewPort(hour.x,hour.width))?_c('calendar-row',{key:hour.key,attrs:{"item":hour,"rowStyle":_vm.hoursStyle}}):_vm._e()})],2)}
-var Calendarvue_type_template_id_9d39095c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=d1816fe2&
+var Calendarvue_type_template_id_d1816fe2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-group"},[_c('foreignObject',{attrs:{"x":_vm.getX,"y":_vm.getY,"width":_vm.getWidth,"height":_vm.root.state.calendar.height}},[_c('div',{staticClass:"gantt-elastic__calendar",style:(_vm.root.state.calendar.styles.wrapper),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}})]),_vm._l((_vm.months),function(month){return _c('calendar-row',{key:month.key,attrs:{"item":month,"rowStyle":_vm.monthsStyle}})}),_vm._l((_vm.days),function(day){return (_vm.root.isInsideViewPort(day.x,day.width))?_c('calendar-row',{key:day.key,attrs:{"item":day,"rowStyle":_vm.daysStyle}}):_vm._e()}),_vm._l((_vm.hours),function(hour){return (_vm.root.isInsideViewPort(hour.x,hour.width))?_c('calendar-row',{key:hour.key,attrs:{"item":hour,"rowStyle":_vm.hoursStyle}}):_vm._e()})],2)}
+var Calendarvue_type_template_id_d1816fe2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=template&id=9d39095c&
+// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=template&id=d1816fe2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=659dcb0f&
 var CalendarRowvue_type_template_id_659dcb0f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-row-group"},[_c('rect',{staticClass:"gantt-elastic__calendar-row",style:(_vm.rowStyle),attrs:{"x":_vm.item.x,"y":_vm.item.y,"width":_vm.item.width,"height":_vm.item.height}}),_c('text',{style:(_vm.root.state.calendar.styles.text),attrs:{"x":_vm.getTextX,"y":_vm.getTextY,"alignment-baseline":"middle","text-anchor":"middle"}},[_vm._v(_vm._s(_vm.item.label))])])}
@@ -2903,28 +2934,34 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
   components: {
     CalendarRow: CalendarRow
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {
       hours: [],
       days: [],
-      months: [],
+      months: []
     };
   },
   created() {
-    this.$root.$on('gantt-elastic.scope.change', this.regenerate);
-    this.$root.$on('gantt-elastic.times.timeZoom.change', this.regenerate);
+    this.$root.$on("gantt-elastic.scope.change", this.regenerate);
+    this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
     this.regenerate();
   },
   methods: {
     howManyHoursFit(dayIndex) {
-      let firstDate = dayjs_min_default()(this.root.state.times.steps[dayIndex].date);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
+      const additionalSpace =
+        this.root.state.calendar.styles.column["stroke-width"] + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+          if (
+            (this.root.state.calendar.hour.maxWidths[formatName] +
+              additionalSpace) *
+              hours <=
+              fullCellWidth &&
+            hours > 1
+          ) {
             return {
               count: hours,
               type: formatName
@@ -2934,17 +2971,27 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ''
+        type: ""
       };
     },
     howManyDaysFit() {
-      let firstDate = dayjs_min_default()(this.root.state.times.steps[0].date);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
+      const additionalSpace =
+        this.root.state.calendar.styles.column["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
-      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
+      for (
+        let days = this.root.state.times.steps.length;
+        days > 1;
+        days = Math.ceil(days / 2)
+      ) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
+          if (
+            (this.root.state.calendar.day.maxWidths[formatName] +
+              additionalSpace) *
+              days <=
+              fullWidth &&
+            days > 1
+          ) {
             return {
               count: days,
               type: formatName
@@ -2954,29 +3001,38 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ''
+        type: ""
       };
     },
     howManyMonthsFit() {
-      let firstDate = dayjs_min_default()(this.root.state.times.firstDate);
-      const additionalSpace = this.root.state.calendar.styles.column['stroke-width'] + 2;
+      const additionalSpace =
+        this.root.state.calendar.styles.column["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
-      const startMonth = this.root.state.times.firstDate.month();
       let currentMonth = dayjs_min_default()(this.root.state.times.firstDate);
       let previousMonth = currentMonth.clone();
       const lastTime = this.root.state.times.lastTime;
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
-        currentMonth = currentMonth.add(1, 'day');
+        currentMonth = currentMonth.add(1, "day");
         if (previousMonth.month() != currentMonth.month()) {
           monthsCount++;
         }
         previousMonth = currentMonth.clone();
       }
-      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
+      for (
+        let months = monthsCount;
+        months > 1;
+        months = Math.ceil(months / 2)
+      ) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+          if (
+            (this.root.state.calendar.month.maxWidths[formatName] +
+              additionalSpace) *
+              months <=
+              fullWidth &&
+            months > 1
+          ) {
             return {
               count: months,
               type: formatName
@@ -2990,100 +3046,152 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
       };
     },
     hourTextStyle() {
-      return 'font-family:' + this.root.state.calendar.hour.fontFamily + ';font-size:' + this.root.state.calendar.hour.fontSize;
+      return (
+        "font-family:" +
+        this.root.state.calendar.hour.fontFamily +
+        ";font-size:" +
+        this.root.state.calendar.hour.fontSize
+      );
     },
     dayTextStyle() {
-      return 'font-family:' + this.root.state.calendar.day.fontFamily + ';font-size:' + this.root.state.calendar.day.fontSize;
+      return (
+        "font-family:" +
+        this.root.state.calendar.day.fontFamily +
+        ";font-size:" +
+        this.root.state.calendar.day.fontSize
+      );
     },
     generateHours() {
       let hours = [];
-      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex++) {
+      for (
+        let dayIndex = 0, len = this.root.state.times.steps.length;
+        dayIndex < len;
+        dayIndex++
+      ) {
         const hoursCount = this.howManyHoursFit(dayIndex);
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
+        const hourWidthPx =
+          this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date).add(i * hourStep, 'hour');
+          const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date).add(
+            i * hourStep,
+            "hour"
+          );
           hours.push({
-            key: this.root.state.times.steps[dayIndex].date.valueOf() + 'h' + i,
-            x: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.times.steps[dayIndex].offset.px + hourWidthPx * i,
-            y: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            key: this.root.state.times.steps[dayIndex].date.valueOf() + "h" + i,
+            x:
+              this.root.state.calendar.styles.column["stroke-width"] / 2 +
+              this.root.state.times.steps[dayIndex].offset.px +
+              hourWidthPx * i,
+            y:
+              this.root.state.calendar.styles.column["stroke-width"] / 2 +
+              this.root.state.calendar.day.height +
+              this.root.state.calendar.month.height,
             width: hourWidthPx,
             height: this.root.state.calendar.hour.height,
             label: this.root.state.calendar.hour.format[hoursCount.type](date)
           });
         }
       }
-      return this.hours = hours;
+      return (this.hours = hours);
     },
     generateDays() {
       let days = [];
       const daysCount = this.howManyDaysFit();
-      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      const dayStep = Math.ceil(
+        this.root.state.times.steps.length / daysCount.count
+      );
+      for (
+        let dayIndex = 0, len = this.root.state.times.steps.length;
+        dayIndex < len;
+        dayIndex += dayStep
+      ) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== 'undefined') {
-            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
+          if (
+            typeof this.root.state.times.steps[dayIndex + currentStep] !==
+            "undefined"
+          ) {
+            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep]
+              .width.px;
           }
         }
         const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date);
         days.push({
-          key: this.root.state.times.steps[dayIndex].date.valueOf() + 'd',
-          x: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.times.steps[dayIndex].offset.px,
-          y: this.root.state.calendar.styles.column['stroke-width'] / 2 + this.root.state.calendar.month.height,
+          key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
+          x:
+            this.root.state.calendar.styles.column["stroke-width"] / 2 +
+            this.root.state.times.steps[dayIndex].offset.px,
+          y:
+            this.root.state.calendar.styles.column["stroke-width"] / 2 +
+            this.root.state.calendar.month.height,
           width: dayWidthPx,
           height: this.root.state.calendar.day.height,
           label: this.root.state.calendar.day.format[daysCount.type](date)
         });
       }
-      return this.days = days;
+      return (this.days = days);
     },
     generateMonths() {
       let months = [];
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentDate = dayjs_min_default()(this.root.state.times.firstDate);
-      let startOfMonth = 0;
-      let currentDays = 0;
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
-        let finalDate = dayjs_min_default()(currentDate).add(1, 'month').startOf('month');
+        let finalDate = dayjs_min_default()(currentDate)
+          .add(1, "month")
+          .startOf("month");
         if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
           finalDate = dayjs_min_default()(this.root.state.times.lastDate);
         }
         // we must find first and last step to get the offsets / widths
-        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
+        for (
+          let step = 0, len = this.root.state.times.steps.length;
+          step < len;
+          step++
+        ) {
           let currentStep = this.root.state.times.steps[step];
-          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
+          if (
+            currentStep.date.valueOf() >= currentDate.valueOf() &&
+            currentStep.date.valueOf() < finalDate.valueOf()
+          ) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
               monthOffset = currentStep.offset.px;
             }
           }
         }
-        let label = '';
+        let label = "";
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.month.maxWidths[formatName] + 2) <= monthWidth) {
-            label = this.root.state.calendar.month.format[formatName](currentDate);
+          if (
+            this.root.state.calendar.month.maxWidths[formatName] + 2 <=
+            monthWidth
+          ) {
+            label = this.root.state.calendar.month.format[formatName](
+              currentDate
+            );
           }
         }
         months.push({
-          key: monthIndex + 'm',
-          x: this.root.state.calendar.styles.column['stroke-width'] / 2 + monthOffset,
-          y: this.root.state.calendar.styles.column['stroke-width'] / 2,
+          key: monthIndex + "m",
+          x:
+            this.root.state.calendar.styles.column["stroke-width"] / 2 +
+            monthOffset,
+          y: this.root.state.calendar.styles.column["stroke-width"] / 2,
           width: monthWidth,
           height: this.root.state.calendar.month.height,
           label: label
         });
 
-        currentDate = currentDate.add(1, 'month').startOf('month');
+        currentDate = currentDate.add(1, "month").startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
           currentDate = dayjs_min_default()(this.root.state.times.lastDate);
         }
       }
-      return this.months = months;
+      return (this.months = months);
     },
     regenerate() {
       this.$nextTick(() => {
@@ -3095,24 +3203,38 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
   },
   computed: {
     getX() {
-      return this.root.state.calendar.styles.column['stroke-width'] / 2;
+      return this.root.state.calendar.styles.column["stroke-width"] / 2;
     },
     getY() {
-      return this.root.state.calendar.styles.column['stroke-width'] / 2;
+      return this.root.state.calendar.styles.column["stroke-width"] / 2;
     },
     getWidth() {
-      let width = this.root.state.width - this.root.state.calendar.styles.column['stroke-width'];
+      let width =
+        this.root.state.width -
+        this.root.state.calendar.styles.column["stroke-width"];
       return width;
     },
     monthsStyle() {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+      return this.root.mergeDeep(
+        {},
+        this.root.state.calendar.styles.row,
+        this.root.state.calendar.month.style
+      );
     },
     daysStyle() {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+      return this.root.mergeDeep(
+        {},
+        this.root.state.calendar.styles.row,
+        this.root.state.calendar.day.style
+      );
     },
     hoursStyle() {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
-    },
+      return this.root.mergeDeep(
+        {},
+        this.root.state.calendar.styles.row,
+        this.root.state.calendar.hour.style
+      );
+    }
   }
 });
 
@@ -3128,8 +3250,8 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
 
 var Calendar_component = normalizeComponent(
   Calendar_Calendarvue_type_script_lang_js_,
-  Calendarvue_type_template_id_9d39095c_render,
-  Calendarvue_type_template_id_9d39095c_staticRenderFns,
+  Calendarvue_type_template_id_d1816fe2_render,
+  Calendarvue_type_template_id_d1816fe2_staticRenderFns,
   false,
   null,
   null,
@@ -3139,12 +3261,12 @@ var Calendar_component = normalizeComponent(
 
 Calendar_component.options.__file = "Calendar.vue"
 /* harmony default export */ var Calendar = (Calendar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/DependencyLines.vue?vue&type=template&id=7d5f33b8&
-var DependencyLinesvue_type_template_id_7d5f33b8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-dependency-lines-container"},_vm._l((_vm.dependencyTasks),function(task){return _c('g',{key:task.id,attrs:{"task":task}},_vm._l((task.dependencyLines),function(dependencyLine){return _c('path',{key:dependencyLine.id,style:(_vm.root.state.dependencyLines.style),attrs:{"task":task,"d":dependencyLine.points}})}))}))}
-var DependencyLinesvue_type_template_id_7d5f33b8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/DependencyLines.vue?vue&type=template&id=7f8bacaf&
+var DependencyLinesvue_type_template_id_7f8bacaf_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-dependency-lines-container"},_vm._l((_vm.dependencyTasks),function(task){return _c('g',{key:task.id,attrs:{"task":task}},_vm._l((task.dependencyLines),function(dependencyLine){return _c('path',{key:dependencyLine.id,style:(_vm.root.state.dependencyLines.style),attrs:{"task":task,"d":dependencyLine.points}})}))}))}
+var DependencyLinesvue_type_template_id_7f8bacaf_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/DependencyLines.vue?vue&type=template&id=7d5f33b8&
+// CONCATENATED MODULE: ./src/components/Tree/DependencyLines.vue?vue&type=template&id=7f8bacaf&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/DependencyLines.vue?vue&type=script&lang=js&
 //
@@ -3164,7 +3286,6 @@ var DependencyLinesvue_type_template_id_7d5f33b8_staticRenderFns = []
   },
   methods: {
     getPoints(fromTaskId, toTaskId) {
-      const state = this.root.state;
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
       if (!toTask.visible || !fromTask.visible) {
@@ -3254,8 +3375,8 @@ var DependencyLinesvue_type_template_id_7d5f33b8_staticRenderFns = []
 
 var DependencyLines_component = normalizeComponent(
   Tree_DependencyLinesvue_type_script_lang_js_,
-  DependencyLinesvue_type_template_id_7d5f33b8_render,
-  DependencyLinesvue_type_template_id_7d5f33b8_staticRenderFns,
+  DependencyLinesvue_type_template_id_7f8bacaf_render,
+  DependencyLinesvue_type_template_id_7f8bacaf_staticRenderFns,
   false,
   null,
   null,
@@ -3326,12 +3447,12 @@ var Text_component = normalizeComponent(
 
 Text_component.options.__file = "Text.vue"
 /* harmony default export */ var Text = (Text_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Info.vue?vue&type=template&id=ec01986e&
-var Infovue_type_template_id_ec01986e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__info",attrs:{"x":_vm.getX,"y":_vm.task.y,"width":_vm.getWidth,"height":_vm.root.state.row.height+_vm.root.state.grid.gap*2,"xmlns":"http://www.w3.org/2000/svg"}},[_c('rect',{style:(_vm.root.state.info.style),attrs:{"x":"0","y":"0","width":"100%","height":"100%"}}),_c('text',{style:(_vm.getTextStyle),attrs:{"x":"50%","y":"50%","text-anchor":"middle","alignment-baseline":"middle"}},[_vm._v(_vm._s(_vm.task.label))])])}
-var Infovue_type_template_id_ec01986e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Info.vue?vue&type=template&id=528dec94&
+var Infovue_type_template_id_528dec94_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__info",attrs:{"x":_vm.getX,"y":_vm.task.y,"width":_vm.getWidth,"height":_vm.root.state.row.height+_vm.root.state.grid.gap*2,"xmlns":"http://www.w3.org/2000/svg"}},[_c('rect',{style:(_vm.root.state.info.style),attrs:{"x":"0","y":"0","width":"100%","height":"100%"}}),_c('text',{style:(_vm.getTextStyle),attrs:{"x":"50%","y":"50%","text-anchor":"middle","alignment-baseline":"middle"}},[_vm._v(_vm._s(_vm.task.label))])])}
+var Infovue_type_template_id_528dec94_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Info.vue?vue&type=template&id=ec01986e&
+// CONCATENATED MODULE: ./src/components/Tree/Info.vue?vue&type=template&id=528dec94&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Info.vue?vue&type=script&lang=js&
 //
@@ -3342,25 +3463,29 @@ var Infovue_type_template_id_ec01986e_staticRenderFns = []
 //
 
 /* harmony default export */ var Infovue_type_script_lang_js_ = ({
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     getX() {
-      const state = this.root.state;
-      this.root.state.ctx.font = `${root.state.info.fontWeight} ${root.state.info.fontSize} ${root.state.info.fontFamily}`;
-      const textWidth = this.root.state.ctx.measureText(this.task.label).width / 2 + 10;
+      this.root.state.ctx.font = `${root.state.info.fontWeight} ${
+        root.state.info.fontSize
+      } ${root.state.info.fontFamily}`;
+      const textWidth =
+        this.root.state.ctx.measureText(this.task.label).width / 2 + 10;
       return this.task.x + this.task.width / 2 - textWidth;
     },
     getWidth() {
       return this.root.state.ctx.measureText(this.task.label).width + 20;
     },
     getTextStyle() {
-      let state = this.root.state;
-      return `${root.state.info.textStyle};font-family:${root.state.info.fontFamily};font-size:${
-            root.state.info.fontSize};font-weight:${root.state.info.fontWeight};`;
+      return `${root.state.info.textStyle};font-family:${
+        this.root.state.info.fontFamily
+      };font-size:${root.state.info.fontSize};font-weight:${
+        this.root.state.info.fontWeight
+      };`;
     }
   }
 });
@@ -3377,8 +3502,8 @@ var Infovue_type_template_id_ec01986e_staticRenderFns = []
 
 var Info_component = normalizeComponent(
   Tree_Infovue_type_script_lang_js_,
-  Infovue_type_template_id_ec01986e_render,
-  Infovue_type_template_id_ec01986e_staticRenderFns,
+  Infovue_type_template_id_528dec94_render,
+  Infovue_type_template_id_528dec94_staticRenderFns,
   false,
   null,
   null,
@@ -3793,7 +3918,7 @@ Project_component.options.__file = "Project.vue"
     Milestone: Milestone,
     Project: Project
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {};
   },
@@ -3821,8 +3946,8 @@ Project_component.options.__file = "Project.vue"
 
 var Tree_component = normalizeComponent(
   Tree_Treevue_type_script_lang_js_,
-  Treevue_type_template_id_3cf7f573_render,
-  Treevue_type_template_id_3cf7f573_staticRenderFns,
+  Treevue_type_template_id_496f5a68_render,
+  Treevue_type_template_id_496f5a68_staticRenderFns,
   false,
   null,
   null,
@@ -3967,7 +4092,6 @@ Main_component.options.__file = "Main.vue"
 //
 //
 //
-
 
 
 
@@ -4719,10 +4843,6 @@ const GanttElastic = {
         this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
     },
     initTimes() {
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
-      let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
       this.state.times.firstDate = dayjs_min_default()(this.state.times.firstTaskDate)
         .locale(this.locale)
         .startOf("day")
@@ -4928,7 +5048,6 @@ const GanttElastic = {
     this.initializeEvents();
     this.tasksById = {};
     this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
-    let tasks = this.state.tasks;
     let firstTaskTime = Number.MAX_SAFE_INTEGER;
     let lastTaskTime = 0;
     let firstTaskDate, lastTaskDate;

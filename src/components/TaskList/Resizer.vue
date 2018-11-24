@@ -3,19 +3,18 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['column'],
+  inject: ["root"],
+  props: ["column"],
   data() {
     return {};
   },
   computed: {
     getStyle() {
-      const state = this.root.state;
       return {
-        height: '100%',
-        width: root.state.taskList.resizerWidth + 'px'
+        height: "100%",
+        width: this.root.state.taskList.resizerWidth + "px"
       };
     }
   }
-}
+};
 </script>

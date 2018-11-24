@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import dayjs from "dayjs";
 import Main from "./components/Main.vue";
 
@@ -754,10 +753,6 @@ const GanttElastic = {
         this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
     },
     initTimes() {
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
-      let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
       this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
         .locale(this.locale)
         .startOf("day")
@@ -963,7 +958,6 @@ const GanttElastic = {
     this.initializeEvents();
     this.tasksById = {};
     this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
-    let tasks = this.state.tasks;
     let firstTaskTime = Number.MAX_SAFE_INTEGER;
     let lastTaskTime = 0;
     let firstTaskDate, lastTaskDate;

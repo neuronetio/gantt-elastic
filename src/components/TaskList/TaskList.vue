@@ -9,55 +9,74 @@
 </foreignObject>
 </template>
 <script>
-import TaskListResizer from './Resizer.vue';
-import TaskListHeader from './TaskListHeader.vue';
-import TaskListItem from './TaskListItem.vue';
+import TaskListResizer from "./Resizer.vue";
+import TaskListHeader from "./TaskListHeader.vue";
+import TaskListItem from "./TaskListItem.vue";
 
 export default {
   components: {
     TaskListResizer,
     TaskListHeader,
-    TaskListItem,
+    TaskListItem
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {};
   },
   computed: {
     getHeaderExpanderStyle() {
       const state = this.root.state;
-      const padding = this.root.getMaximalLevel() * state.taskList.expander.padding;
       return Object.assign({}, state.taskList.styles.header, {
-        'width': (state.taskList.expander.width + state.calendar.styles.column['stroke-width'] + state.taskList.expander.margin) / 100 * state.taskList.percent + 'px',
-        'height': state.calendar.height + state.calendar.styles.column['stroke-width'] + 'px',
-        'margin-bottom': state.calendar.gap + 'px',
-        'padding-right': state.taskList.expander.margin + 'px',
-        'padding-left': state.taskList.expander.margin + 'px',
-        'margin': 'auto 0px',
-        'display': 'inline-flex'
+        width:
+          ((state.taskList.expander.width +
+            state.calendar.styles.column["stroke-width"] +
+            state.taskList.expander.margin) /
+            100) *
+            state.taskList.percent +
+          "px",
+        height:
+          state.calendar.height +
+          state.calendar.styles.column["stroke-width"] +
+          "px",
+        "margin-bottom": state.calendar.gap + "px",
+        "padding-right": state.taskList.expander.margin + "px",
+        "padding-left": state.taskList.expander.margin + "px",
+        margin: "auto 0px",
+        display: "inline-flex"
       });
     },
     getListExpanderStyle() {
       return task => {
         const state = this.root.state;
-        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
+        const padding =
+          (task.parents.length - 1) * state.taskList.expander.padding;
         const maxLevel = this.root.getMaximalLevel();
-        const fullPadding = maxLevel * state.taskList.expander.padding;
-        let height = state.row.height + (state.grid.horizontal.gap * 2) - state.grid.horizontal.style.strokeWidth;
-        let width = (state.taskList.expander.size + state.calendar.styles.column['stroke-width'] + padding + state.taskList.expander.margin) / 100 * state.taskList.percent;
+        let height =
+          state.row.height +
+          state.grid.horizontal.gap * 2 -
+          state.grid.horizontal.style.strokeWidth;
+        let width =
+          ((state.taskList.expander.size +
+            state.calendar.styles.column["stroke-width"] +
+            padding +
+            state.taskList.expander.margin) /
+            100) *
+          state.taskList.percent;
         if (state.taskList.expander.straight) {
-          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
+          width =
+            (maxLevel - 1) * state.taskList.expander.size +
+            state.taskList.expander.padding * 2;
         }
         const style = {
-          'width': width + 'px',
-          'height': height + 'px',
-          'border-color': '#00000010',
-          'padding-left': padding + state.taskList.expander.margin + 'px',
-          'margin': 'auto 0px',
+          width: width + "px",
+          height: height + "px",
+          "border-color": "#00000010",
+          "padding-left": padding + state.taskList.expander.margin + "px",
+          margin: "auto 0px"
         };
         return style;
-      }
+      };
     }
   }
-}
+};
 </script>

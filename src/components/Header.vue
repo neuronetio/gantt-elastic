@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     getImage() {
-      const code = this.root.getImage("image/png").then(imgB64 => {
+      this.root.getImage("image/png").then(imgB64 => {
         const link = document.createElement("a");
         link.href = imgB64;
         link.download = "gantt-elastic.png";

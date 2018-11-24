@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     getPoints(fromTaskId, toTaskId) {
-      const state = this.root.state;
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
       if (!toTask.visible || !fromTask.visible) {

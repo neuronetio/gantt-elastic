@@ -6,26 +6,30 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     getX() {
-      const state = this.root.state;
-      this.root.state.ctx.font = `${root.state.info.fontWeight} ${root.state.info.fontSize} ${root.state.info.fontFamily}`;
-      const textWidth = this.root.state.ctx.measureText(this.task.label).width / 2 + 10;
+      this.root.state.ctx.font = `${root.state.info.fontWeight} ${
+        root.state.info.fontSize
+      } ${root.state.info.fontFamily}`;
+      const textWidth =
+        this.root.state.ctx.measureText(this.task.label).width / 2 + 10;
       return this.task.x + this.task.width / 2 - textWidth;
     },
     getWidth() {
       return this.root.state.ctx.measureText(this.task.label).width + 20;
     },
     getTextStyle() {
-      let state = this.root.state;
-      return `${root.state.info.textStyle};font-family:${root.state.info.fontFamily};font-size:${
-            root.state.info.fontSize};font-weight:${root.state.info.fontWeight};`;
+      return `${root.state.info.textStyle};font-family:${
+        this.root.state.info.fontFamily
+      };font-size:${root.state.info.fontSize};font-weight:${
+        this.root.state.info.fontWeight
+      };`;
     }
   }
-}
+};
 </script>
