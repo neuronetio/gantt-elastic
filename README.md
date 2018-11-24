@@ -191,3 +191,7 @@ import GanttElastic from 'gant-elastic/dist/GantElastic.umd.js';
 import GanttElastic from 'gant-elastic/dist/GantElastic.common.js';// same as import GanttElastic from 'gantt-elastic';
 const GanttElastic = require('gant-elastic/dist/GantElastic.common.js');
 ```
+
+#### uglifyjs
+
+if you are using uglifyjs in your project be sure to have es6 compatible version like [uglify-es](https://www.npmjs.com/package/uglify-es)
