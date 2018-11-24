@@ -5,8 +5,9 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/gantt-elastic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/gantt-elastic&amp;utm_campaign=Badge_Grade)
 [![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg)](https://snyk.io/test/github/{username}/{repo})
-![NpmLicense](https://img.shields.io/npm/l/gantt-elastic.svg)
+![gzipped](https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped)
 ![npm](https://img.shields.io/npm/dm/gantt-elastic.svg)
+![NpmLicense](https://img.shields.io/npm/l/gantt-elastic.svg)
 
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 
@@ -182,3 +183,11 @@ new Vue({
 #### for webpack usage (pure javascript, inside other frameworks or Vue App/Component)
 
 take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack
+
+for other bundlers use umd or commonjs from dist folder
+
+```javascript
+import GanttElastic from 'gant-elastic/dist/GantElastic.umd.js';
+import GanttElastic from 'gant-elastic/dist/GantElastic.common.js';// same as import GanttElastic from 'gantt-elastic';
+const GanttElastic = require('gant-elastic/dist/GantElastic.common.js');
+```
