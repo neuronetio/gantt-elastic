@@ -5,20 +5,14 @@
 <script>
 import dayjs from "dayjs";
 import Main from "./components/Main.vue";
+import style from "./style.js";
 
 function getOptions(userOptions) {
   return {
+    style,
     title: {
       label: "gantt-elastic",
-      html: false,
-      style: {
-        "font-size": "20px",
-        "vertical-align": "middle",
-        "font-weight": "400",
-        "line-height": "35px",
-        "padding-left": "22px",
-        "letter-spacing": "1px"
-      }
+      html: false
     },
     debug: false,
     width: 0,
@@ -415,6 +409,21 @@ const GanttElastic = {
       outer.parentNode.removeChild(outer);
       return noScroll - withScroll;
     },
+    /**
+     * Get style for specified class
+     * @param {string} className
+     * @param {object} mergeWith - if we need to merge custom item specific style with default ones
+     * @returns {object}
+     */
+    style(className, mergeWith = null) {
+      if (mergeWith === null) {
+        return this.state.style[className];
+      }
+      return this.mergeDeep({}, this.state.style[className], mergeWith);
+    },
+    /**
+     * Initialize component
+     */
     initialize() {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
         tasks: this.tasks.map(task =>

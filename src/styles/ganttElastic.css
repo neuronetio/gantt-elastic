@@ -10,21 +10,6 @@
 .gantt-elastic__container,.gantt-elastic__svg-container{
   max-width: 100%;
 }
-.gantt-elastic__header{
-  margin:0 auto;
-  background: #f3f5f747;
-  padding:10px;
-  overflow: hidden;
-  clear: both;
-  display:flex;
-  justify-content: space-between;
-}
-.gantt-elastic__header-title{
-  float:left;
-}
-.gantt-elastic__header-options{
-  float: right;
-}
 .gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{
   stroke: #a0a0a0;
   stroke-width: 1;

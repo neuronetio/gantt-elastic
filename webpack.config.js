@@ -1,5 +1,5 @@
-const path = require('path');
-const {VueLoaderPlugin} = require('vue-loader');
+const path = require( 'path' );
+const { VueLoaderPlugin } = require( 'vue-loader' );
 
 module.exports = [
   {
@@ -8,7 +8,7 @@ module.exports = [
       bundle: './src/bundle.js'
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve( __dirname, 'dist' ),
       filename: '[name].js'
     },
     /*resolve: {
@@ -23,10 +23,10 @@ module.exports = [
           use: 'vue-loader'
         }, {
           test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader']
+          use: [ 'vue-style-loader', 'css-loader' ]
         }
       ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [ new VueLoaderPlugin() ]
   }
 ];

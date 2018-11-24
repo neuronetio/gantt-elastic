@@ -14,28 +14,36 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     getProgressWidth() {
-      return this.task.progress + '%';
+      return this.task.progress + "%";
     },
     getLinePoints() {
-      const start = this.task.width / 100 * this.task.progress;
+      const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
     getSolidStyle() {
-      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      return Object.assign(
+        {},
+        this.root.state.progress.styles.bar.solid,
+        this.task.progressBarStyle.bar
+      );
     },
     getLineStyle() {
-      return Object.assign({}, {
-        stroke: this.root.state.row.styles.bar.stroke + 'a0',
-        'stroke-width': this.root.state.row.styles.bar['stroke-width'] / 2
-      }, this.task.style);
+      return Object.assign(
+        {},
+        {
+          stroke: this.root.state.row.styles.bar.stroke + "a0",
+          "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
+        },
+        this.task.style
+      );
     }
   }
-}
+};
 </script>

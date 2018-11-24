@@ -14,9 +14,9 @@
 </g>
 </template>
 <script>
-import TreeText from '../Text.vue';
-import Info from '../Info.vue';
-import ProgressBar from '../ProgressBar.vue';
+import TreeText from "../Text.vue";
+import Info from "../Info.vue";
+import ProgressBar from "../ProgressBar.vue";
 
 export default {
   components: {
@@ -24,14 +24,14 @@ export default {
     Info,
     ProgressBar
   },
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     clipPathId() {
-      return 'gantt-elastic__milestone-clip-path-' + this.task.id;
+      return "gantt-elastic__milestone-clip-path-" + this.task.id;
     },
     getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
@@ -68,5 +68,5 @@ export default {
       this.task.mouseOver = false;
     }
   }
-}
+};
 </script>

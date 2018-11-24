@@ -6,18 +6,20 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     getWidth() {
       const textStyle = this.root.state.treeText.styles.text;
-      this.root.state.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
+      this.root.state.ctx.font = `${textStyle["font-weight"]} ${
+        textStyle["font-size"]
+      } ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.treeText.xPadding * 2;
     }
   }
-}
+};
 </script>

@@ -10,23 +10,23 @@
 
 <script>
 export default {
-  inject: ['root'],
-  props: ['tasks'],
+  inject: ["root"],
+  props: ["tasks"],
   data() {
     const border = 0.5;
     return {
       border,
       borderStyle: {
-        'fill': '#ffffffa0',
-        'stroke': '#000000',
-        'stroke-width': border
+        fill: "#ffffffa0",
+        stroke: "#000000",
+        "stroke-width": border
       },
       lineOffset: 5,
       lineStyle: {
-        'fill': 'transparent',
-        'stroke': '#000000',
-        'stroke-width': 1,
-        'stroke-linecap': 'round'
+        fill: "transparent",
+        stroke: "#000000",
+        "stroke-width": 1,
+        "stroke-linecap": "round"
       }
     };
   },
@@ -51,7 +51,7 @@ export default {
         }
       }
       return collapsed === this.tasks.length;
-    },
+    }
   },
   methods: {
     toggle() {
@@ -67,5 +67,5 @@ export default {
       });
     }
   }
-}
+};
 </script>

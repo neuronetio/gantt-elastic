@@ -26,29 +26,29 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import TaskList from './TaskList/TaskList.vue';
-import Tree from './Tree/Tree.vue';
+import Header from "./Header.vue";
+import TaskList from "./TaskList/TaskList.vue";
+import Tree from "./Tree/Tree.vue";
 
 export default {
   components: {
-    'TopHeader': Header,
-    'TaskList': TaskList,
-    'Tree': Tree
+    TopHeader: Header,
+    TaskList: TaskList,
+    Tree: Tree
   },
-  inject: ['root'],
-  props: ['tasks', 'options'],
+  inject: ["root"],
+  props: ["tasks", "options"],
   data() {
     return {
-      defs: ''
+      defs: ""
     };
   },
   created() {
-    let css = '';
+    let css = "";
     try {
       for (let i = 0, len = document.styleSheets.length; i < len; i++) {
         let styleSheet = document.styleSheets[i];
-        if (styleSheet.title === 'gantt-elastic__style') {
+        if (styleSheet.title === "gantt-elastic__style") {
           for (let r = 0, rules = styleSheet.rules.length; r < rules; r++) {
             let rule = styleSheet.rules[r];
             css += rule.cssText + "\n";
@@ -60,7 +60,9 @@ export default {
       this.defs = `<style type="text/css">${css}</style>`;
       this.root.state.defs.push(this.defs);
     } catch (e) {
-      console.log("Cannot add stylesheet to SVG. You must run this app from server.");
+      console.log(
+        "Cannot add stylesheet to SVG. You must run this app from server."
+      );
     }
     // this.root.state.defs.forEach((def) => { this.defs += def; });
   },
@@ -78,29 +80,29 @@ export default {
     getMainStyle() {
       const state = this.root.state;
       return {
-        width: state.width + 'px'
+        width: state.width + "px"
       };
     },
     getMarginLeft() {
       if (!this.root.state.taskList.display) {
-        return '0px';
+        return "0px";
       }
-      return this.root.state.taskList.finalWidth + 'px';
+      return this.root.state.taskList.finalWidth + "px";
     }
   },
   methods: {
     mouseMove(event) {
-      this.$root.$emit('gantt-elastic.main.mousemove', event);
+      this.$root.$emit("gantt-elastic.main.mousemove", event);
     },
     mouseUp(event) {
-      this.$root.$emit('gantt-elastic.main.mouseup', event);
+      this.$root.$emit("gantt-elastic.main.mouseup", event);
     },
     onScroll(ev) {
-      this.$root.$emit('gantt-elastic.tree.scroll', ev);
+      this.$root.$emit("gantt-elastic.tree.scroll", ev);
     },
     onWheel(ev) {
-      this.$root.$emit('gantt-elastic.tree.wheel', ev);
+      this.$root.$emit("gantt-elastic.tree.wheel", ev);
     }
   }
-}
+};
 </script>

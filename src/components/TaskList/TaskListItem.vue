@@ -6,18 +6,18 @@
 </div>
 </template>
 <script>
-import TaskListExpander from './Expander.vue';
-import ItemColumn from './ItemColumn.vue';
+import TaskListExpander from "./Expander.vue";
+import ItemColumn from "./ItemColumn.vue";
 
 export default {
   components: {
     TaskListExpander,
     ItemColumn
   },
-  inject: ['root'],
-  props: ['task', 'expanderStyle'],
+  inject: ["root"],
+  props: ["task", "expanderStyle"],
   data() {
     return {};
-  },
-}
+  }
+};
 </script>

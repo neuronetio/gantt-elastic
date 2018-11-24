@@ -14,9 +14,9 @@
 </g>
 </template>
 <script>
-import TreeText from '../Text.vue';
-import Info from '../Info.vue';
-import ProgressBar from '../ProgressBar.vue';
+import TreeText from "../Text.vue";
+import Info from "../Info.vue";
+import ProgressBar from "../ProgressBar.vue";
 
 export default {
   components: {
@@ -24,14 +24,14 @@ export default {
     Info,
     ProgressBar
   },
-  inject: ['root'],
-  props: ['task'],
+  inject: ["root"],
+  props: ["task"],
   data() {
     return {};
   },
   computed: {
     clipPathId() {
-      return 'gantt-elastic__task-clip-path-' + this.task.id;
+      return "gantt-elastic__task-clip-path-" + this.task.id;
     },
     getViewBox() {
       const task = this.task;
@@ -45,7 +45,9 @@ export default {
       const fifty = this.task.height - this.task.height / 4;
       const full = this.task.height;
       const offset = 10;
-      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${
+        task.height
+      }`;
     },
     getStyle() {
       return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
@@ -62,5 +64,5 @@ export default {
       this.task.mouseOver = false;
     }
   }
-}
+};
 </script>

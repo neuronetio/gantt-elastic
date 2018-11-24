@@ -6,8 +6,8 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['item', 'rowStyle'],
+  inject: ["root"],
+  props: ["item", "rowStyle"],
   data() {
     return {};
   },
@@ -19,5 +19,5 @@ export default {
       return this.item.y + this.item.height / 2;
     }
   }
-}
+};
 </script>

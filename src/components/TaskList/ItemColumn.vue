@@ -9,24 +9,27 @@
 </template>
 <script>
 export default {
-  inject: ['root'],
-  props: ['column', 'task'],
+  inject: ["root"],
+  props: ["column", "task"],
   data() {
     return {};
   },
   computed: {
     html() {
-      if (typeof this.column.html !== 'undefined' && this.column.html === true) {
+      if (
+        typeof this.column.html !== "undefined" &&
+        this.column.html === true
+      ) {
         return true;
       }
       return false;
     },
     value() {
-      if (typeof this.column.value === 'function') {
+      if (typeof this.column.value === "function") {
         return this.column.value(this.task);
       }
       return this.task[this.column.value];
     }
   }
-}
+};
 </script>
