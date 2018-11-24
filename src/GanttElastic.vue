@@ -166,10 +166,6 @@ function getOptions(userOptions) {
           width: 0,
           "line-height": 0
         },
-        header: {
-          background: "#f3f5f7",
-          "border-color": "transparent"
-        },
         label: {
           display: "inline-flex",
           margin: "auto 6px",
@@ -185,22 +181,6 @@ function getOptions(userOptions) {
           "font-size": "12px",
           "white-space": "nowrap",
           color: "#606060"
-        },
-        expander: {
-          wrapper: {
-            stroke: "#909090",
-            strokeWidth: 1,
-            fill: "#ffffffa0",
-            display: "inline-flex",
-            flexShrink: 0,
-            boxSizing: "border-box"
-          },
-          content: {
-            display: "inline-flex",
-            cursor: "pointer",
-            margin: "auto 0px",
-            boxSizing: "border-box"
-          }
         }
       },
       columns: [

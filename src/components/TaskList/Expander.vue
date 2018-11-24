@@ -1,9 +1,9 @@
 <template>
-<div class="gantt-elastic__task-list-column-expander" :style="root.state.taskList.styles.expander.wrapper">
-  <svg :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size" :style="root.state.taskList.styles.expander.content">
-    <rect :x="border" :y="border" :width="root.state.taskList.expander.size-border*2" :height="root.state.taskList.expander.size-border*2" rx="2" ry="2" :style="root.state.taskList.styles.expander" v-if="allChildren.length" @click="toggle"></rect>
-    <line v-if="allChildren.length" :x1="lineOffset" :y1="root.state.taskList.expander.size/2" :x2="root.state.taskList.expander.size-lineOffset" :y2="root.state.taskList.expander.size/2" :style="lineStyle" @click="toggle"></line>
-    <line v-if="collapsed" :x1="root.state.taskList.expander.size/2" :y1="lineOffset" :x2="root.state.taskList.expander.size/2" :y2="root.state.taskList.expander.size-lineOffset" :style="lineStyle" @click="toggle"></line>
+<div class="gantt-elastic__task-list-column-expander-wrapper" :style="root.style('task-list-column-expander-wrapper')">
+  <svg class="gantt-elastic__task-list-column-expander-content" :style="root.style('task-list-column-expander-content')" :width="root.state.taskList.expander.size" :height="root.state.taskList.expander.size">
+    <rect class="gantt-elastic__task-list-column-expander-border" :style="root.style('task-list-column-expander-border',borderStyle)" :x="border" :y="border" :width="root.state.taskList.expander.size-border*2" :height="root.state.taskList.expander.size-border*2" rx="2" ry="2" v-if="allChildren.length" @click="toggle"></rect>
+    <line class="gantt-elastic__task-list-column-expander-line" :style="root.style('task-list-column-expander-line')" v-if="allChildren.length" :x1="lineOffset" :y1="root.state.taskList.expander.size/2" :x2="root.state.taskList.expander.size-lineOffset" :y2="root.state.taskList.expander.size/2" @click="toggle"></line>
+    <line class="gantt-elastic__task-list-column-expander-line" :style="root.style('task-list-column-expander-line')" v-if="collapsed" :x1="root.state.taskList.expander.size/2" :y1="lineOffset" :x2="root.state.taskList.expander.size/2" :y2="root.state.taskList.expander.size-lineOffset" @click="toggle"></line>
   </svg>
 </div>
 </template>
@@ -17,17 +17,9 @@ export default {
     return {
       border,
       borderStyle: {
-        fill: "#ffffffa0",
-        stroke: "#000000",
         "stroke-width": border
       },
-      lineOffset: 5,
-      lineStyle: {
-        fill: "transparent",
-        stroke: "#000000",
-        "stroke-width": 1,
-        "stroke-linecap": "round"
-      }
+      lineOffset: 5
     };
   },
   computed: {

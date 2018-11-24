@@ -1,12 +1,14 @@
 <template>
-<div class="gantt-elastic__task-list-header">
-  <div class="gantt-elastic__task-list-header-column" v-for="column in root.state.taskList.columns" :key="column._id" :style="getStyle(column)">
-    <task-list-expander v-if="column.expander" :style="expanderStyle" :tasks="collapsible"></task-list-expander>
-    <div class="gantt-elastic__task-list-header-label" :style="column.styles.label" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
-    <div class="gantt-elastic__task-list-header-resizer" :column="column" @mousedown="resizerMouseDown($event, column)">
-      <div class="gantt-elastic__task-list-header-resizer--dot" :style="getResizerDotStyle"></div>
-      <div class="gantt-elastic__task-list-header-resizer--dot" :style="getResizerDotStyle"></div>
-      <div class="gantt-elastic__task-list-header-resizer--dot" :style="getResizerDotStyle"></div>
+<div class="gantt-elastic__task-list-header" :style="root.style('task-list-header')">
+  <div class="gantt-elastic__task-list-header-column" :style="root.style('task-list-header-column',getStyle(column))" v-for="column in root.state.taskList.columns" :key="column._id">
+    <task-list-expander v-if="column.expander" :tasks="collapsible"></task-list-expander>
+    <div class="gantt-elastic__task-list-header-label" :style="root.style('task-list-header-label',column.style.label)" :column="column" @mouseup="resizerMouseUp($event, column)">{{column.label}}</div>
+    <div class="gantt-elastic__task-list-header-resizer-wrapper" :style="root.style('task-list-header-resizer-wrapper')" :column="column" @mousedown="resizerMouseDown($event, column)">
+      <div class="gantt-elastic__task-list-header-resizer" :style="root.style('task-list-header-resizer')">
+        <div class="gantt-elastic__task-list-header-resizer-dot" :style="root.style('task-list-header-resizer-dot')"></div>
+        <div class="gantt-elastic__task-list-header-resizer-dot" :style="root.style('task-list-header-resizer-dot')"></div>
+        <div class="gantt-elastic__task-list-header-resizer-dot" :style="root.style('task-list-header-resizer-dot')"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -20,7 +22,6 @@ export default {
     TaskListExpander
   },
   inject: ["root"],
-  props: ["expanderStyle"],
   data() {
     return {
       resizer: {
@@ -33,17 +34,14 @@ export default {
     getStyle() {
       return column => {
         const state = this.root.state;
-        return Object.assign(
-          {
-            height:
-              state.calendar.height +
-              state.calendar.styles.column["stroke-width"] +
-              "px",
-            "margin-bottom": state.calendar.gap + "px",
-            width: column.finalWidth + "px"
-          },
-          state.taskList.styles.header
-        );
+        return {
+          height:
+            state.calendar.height +
+            state.calendar.styles.column["stroke-width"] +
+            "px",
+          "margin-bottom": state.calendar.gap + "px",
+          width: column.finalWidth + "px"
+        };
       };
     },
     collapsible() {

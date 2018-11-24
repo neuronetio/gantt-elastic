@@ -9,8 +9,8 @@ export default {
     "display": "flex",
     "justify-content": "space-between"
   },
-  "header-title": { float: "left" },
-  "header-options": { float: "right" },
+  "header-title": { "float": "left" },
+  "header-options": { "float": "right" },
   "header-title--text": {
     "font-size": "20px",
     "vertical-align": "middle",
@@ -50,5 +50,73 @@ export default {
     "margin": "0px 15px",
     "vertical-align": "middle"
   },
-  "header-label": {}
+  "header-label": {},
+  "task-list-header": {
+    "display": "flex",
+    "user-select": "none",
+    "vertical-align": "middle"
+  },
+  "task-list-header-column": {
+    "border": "1px solid #00000050",
+    "border-top": "none",
+    "border-right": "none",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "background": "#f3f5f7",
+    "border-color": "transparent"
+  },
+  "task-list-column-expander-wrapper": {
+    "stroke": "#909090",
+    "stroke-width": "1",
+    "fill": "#ffffffa0",
+    "display": "inline-flex",
+    "flex-shrink": "0",
+    "box-sizing": "border-box"
+  },
+  "task-list-column-expander-content": {
+    "display": "inline-flex",
+    "cursor": "pointer",
+    "margin": "auto 0px",
+    "box-sizing": "border-box",
+    "user-select": "none"
+  },
+  "task-list-column-expander-line": {
+    "fill": "transparent",
+    "stroke": "#000000",
+    "stroke-width": "1",
+    "stroke-linecap": "round"
+  },
+  "task-list-column-expander-border": {
+    "fill": "#ffffffa0",
+    "stroke": "#000000",
+  },
+  "task-list-header-label": {
+    "overflow": "hidden",
+    "text-overflow": "ellipsis",
+    "font-family": "Arial",
+    "font-size": "12px",
+    "box-sizing": "border-box",
+    "margin": "auto 6px",
+    "display": "inline-flex",
+    "flex-grow": "1",
+    "vertical-align": "middle"
+  },
+  "task-list-header-resizer-wrapper": {
+    "background": "transparent",
+    "height": "100%",
+    "width": "3px",
+    "cursor": "col-resize",
+    "display": "inline-flex",
+    "vertical-align": "center"
+  },
+  "task-list-header-resizer": {
+    "margin": "auto 0px"
+  },
+  "task-list-header-resizer-dot": {
+    "width": "3px",
+    "height": "3px",
+    "background": "#ddd",
+    "border-radius": "100%",
+    "margin": "4px 0px",
+  }
 }

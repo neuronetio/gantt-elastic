@@ -4,13 +4,13 @@
 // GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
 
 // just helper to get current dates
-function getDate(hours) {
+function getDate ( hours ) {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1;
   const currentDay = currentDate.getDate();
-  const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-  return new Date(timeStamp + hours * 60 * 60 * 1000);
+  const timeStamp = new Date( `${currentYear}-${currentMonth}-${currentDay} 00:00:00` ).getTime();
+  return new Date( timeStamp + hours * 60 * 60 * 1000 );
 }
 
 const tasks = [
@@ -18,7 +18,7 @@ const tasks = [
     id: 1,
     label: 'Make some noise',
     user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
-    start: getDate(-24 * 5),
+    start: getDate( -24 * 5 ),
     duration: 5 * 24 * 60 * 60,
     progress: 85,
     type: 'project'
@@ -27,7 +27,7 @@ const tasks = [
     label: 'With great power comes great responsibility',
     user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
     parentId: 1,
-    start: getDate(-24 * 4),
+    start: getDate( -24 * 4 ),
     duration: 4 * 24 * 60 * 60,
     progress: 50,
     type: 'milestone',
@@ -45,7 +45,7 @@ const tasks = [
     label: 'Courage is being scared to death, but saddling up anyway.',
     user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
     parentId: 2,
-    start: getDate(-24 * 3),
+    start: getDate( -24 * 3 ),
     duration: 2 * 24 * 60 * 60,
     progress: 100,
     type: 'task'
@@ -53,17 +53,17 @@ const tasks = [
     id: 4,
     label: 'Put that toy AWAY!',
     user: '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
-    start: getDate(-24 * 2),
+    start: getDate( -24 * 2 ),
     duration: 2 * 24 * 60 * 60,
     progress: 50,
     type: 'task',
-    dependentOn: [3]
+    dependentOn: [ 3 ]
   }, {
     id: 5,
     label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
     user: '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#0077c0;">Austin Powers</a>',
     parentId: 4,
-    start: getDate(0),
+    start: getDate( 0 ),
     duration: 2 * 24 * 60 * 60,
     progress: 10,
     type: 'milestone',
@@ -81,7 +81,7 @@ const tasks = [
     label: 'Butch Mario and the Luigi Kid',
     user: '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank" style="color:#0077c0;">Mario Bros</a>',
     parentId: 5,
-    start: getDate(24),
+    start: getDate( 24 ),
     duration: 1 * 24 * 60 * 60,
     progress: 0,
     type: 'task',
@@ -99,8 +99,8 @@ const tasks = [
     label: 'Devon, the old man wanted me, it was his dying request',
     user: '<a href="https://www.google.com/search?q=Knight+Rider" target="_blank" style="color:#0077c0;">Knight Rider</a>',
     parentId: 2,
-    dependentOn: [6],
-    start: getDate(24 * 2),
+    dependentOn: [ 6 ],
+    start: getDate( 24 * 2 ),
     duration: 4 * 60 * 60,
     progress: 20,
     type: 'task'
@@ -109,8 +109,8 @@ const tasks = [
     label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
     user: '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank" style="color:#0077c0;">Johhny Bravo</a>',
     parentId: 7,
-    dependentOn: [7],
-    start: getDate(24 * 3),
+    dependentOn: [ 7 ],
+    start: getDate( 24 * 3 ),
     duration: 1 * 24 * 60 * 60,
     progress: 0,
     type: 'task'
@@ -122,7 +122,7 @@ const tasks = [
     dependentOn: [
       8, 7
     ],
-    start: getDate(24 * 4),
+    start: getDate( 24 * 4 ),
     duration: 4 * 60 * 60,
     progress: 20,
     type: 'task',
@@ -139,7 +139,7 @@ const tasks = [
     id: 10,
     label: 'current task',
     user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
-    start: getDate(24 * 5),
+    start: getDate( 24 * 5 ),
     duration: 24 * 60 * 60,
     progress: 0,
     type: 'task'
@@ -150,14 +150,6 @@ const options = {
   title: {
     label: 'Your project title as html (link or whatever...)',
     html: false,
-    style: {
-      'font-size': '20px',
-      'vertical-align': 'middle',
-      'font-weight': '400',
-      'line-height': '35px',
-      'padding-left': '22px',
-      'letter-spacing': '1px'
-    }
   },
   taskList: {
     columns: [
@@ -181,7 +173,7 @@ const options = {
       }, {
         id: 3,
         label: 'Start',
-        value: (task) => task.startDate.format('YYYY-MM-DD'),
+        value: ( task ) => task.startDate.format( 'YYYY-MM-DD' ),
         width: 78
       }, {
         id: 4,
@@ -193,7 +185,7 @@ const options = {
         label: '%',
         value: 'progress',
         width: 35,
-        styles: {
+        style: {
           label: {
             'text-align': 'center',
             'width': '100%'
@@ -242,11 +234,11 @@ const options = {
   }*/
 };
 
-const gantt = GanttElastic.mount({
+const gantt = GanttElastic.mount( {
   el: '#app', // <- your container id
   tasks: tasks,
   options: options
-});
+} );
 // listen to events
 /*
 gantt.$on('gantt-elastic.tree.scroll',(ev)=>{
