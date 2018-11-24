@@ -3,22 +3,22 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import dayjs from 'dayjs';
-import Main from './components/Main.vue';
+import Vue from "vue";
+import dayjs from "dayjs";
+import Main from "./components/Main.vue";
 
 function getOptions(userOptions) {
   return {
     title: {
-      label: 'gantt-elastic',
+      label: "gantt-elastic",
       html: false,
       style: {
-        'font-size': '20px',
-        'vertical-align': 'middle',
-        'font-weight': '400',
-        'line-height': '35px',
-        'padding-left': '22px',
-        'letter-spacing': '1px',
+        "font-size": "20px",
+        "vertical-align": "middle",
+        "font-weight": "400",
+        "line-height": "35px",
+        "padding-left": "22px",
+        "letter-spacing": "1px"
       }
     },
     debug: false,
@@ -41,8 +41,8 @@ function getOptions(userOptions) {
         time: 0,
         timeCenter: 0,
         dateTime: {
-          left: '',
-          right: ''
+          left: "",
+          right: ""
         }
       }
     },
@@ -65,21 +65,21 @@ function getOptions(userOptions) {
       lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
-      stepDuration: 'day', // hour, month
+      stepDuration: "day", // hour, month
       steps: []
     },
     row: {
       height: 24,
       styles: {
         bar: {
-          'fill': '#F75C4C',
-          'stroke': '#E74C3C',
-          'stroke-width': '1'
+          fill: "#F75C4C",
+          stroke: "#E74C3C",
+          "stroke-width": "1"
         },
         text: {
-          'fill': '#ffffff',
-          'font-family': 'sans-serif',
-          'font-size': '12px'
+          fill: "#ffffff",
+          "font-family": "sans-serif",
+          "font-size": "12px"
         }
       },
       showText: true
@@ -88,22 +88,22 @@ function getOptions(userOptions) {
       offset: 0,
       styles: {
         text: {
-          'font-family': 'sans-serif',
-          'font-size': '12px',
-          'font-weight': 'normal',
-          'fill': '#000000a0'
+          "font-family": "sans-serif",
+          "font-size": "12px",
+          "font-weight": "normal",
+          fill: "#000000a0"
         },
         background: {
-          fill: '#ffffffb0'
+          fill: "#ffffffb0"
         }
       },
       xPadding: 10
     },
     dependencyLines: {
       style: {
-        'fill': 'transparent',
-        'stroke': '#FFa00090',
-        'stroke-width': 2
+        fill: "transparent",
+        stroke: "#FFa00090",
+        "stroke-width": 2
       }
     },
     progress: {
@@ -113,17 +113,17 @@ function getOptions(userOptions) {
       bar: false,
       styles: {
         line: {
-          'stroke': '#ffffff25',
-          'stroke-width': 20
+          stroke: "#ffffff25",
+          "stroke-width": 20
         },
         bar: {
           pattern: {
-            'fill': "url(#diagonalHatch)",
-            'transform': 'translateY(0.1) scaleY(0.8)'
+            fill: "url(#diagonalHatch)",
+            transform: "translateY(0.1) scaleY(0.8)"
           },
           solid: {
-            fill: '#E74C3C',
-            height: '20%'
+            fill: "#E74C3C",
+            height: "20%"
           }
         }
       }
@@ -132,7 +132,7 @@ function getOptions(userOptions) {
       horizontal: {
         gap: 6,
         style: {
-          stroke: '#00000010',
+          stroke: "#00000010",
           strokeWidth: 1
         },
         lines: []
@@ -140,83 +140,87 @@ function getOptions(userOptions) {
       vertical: {
         strokeWidth: 1,
         style: {
-          stroke: '#00000010',
+          stroke: "#00000010",
           strokeWidth: 1
         },
         lines: []
       },
       timeLine: {
         style: {
-          stroke: '#FF000080',
+          stroke: "#FF000080",
           strokeWidth: 1
         }
       }
     },
     info: {
-      style: 'fill:#000000a0',
-      textStyle: 'fill:#fff',
-      fontFamily: 'sans-serif',
-      fontSize: '12px',
-      fontWeight: 'bold',
+      style: "fill:#000000a0",
+      textStyle: "fill:#fff",
+      fontFamily: "sans-serif",
+      fontSize: "12px",
+      fontWeight: "bold",
       display: false
     },
     taskList: {
       display: true,
       styles: {
         row: {
-          'background': 'transparent',
-          'border-color': '#eee'
+          background: "transparent",
+          "border-color": "#eee"
         },
         column: {
-          'border-color': '#eee',
-          'height': 0,
-          'width': 0,
-          'line-height': 0
+          "border-color": "#eee",
+          height: 0,
+          width: 0,
+          "line-height": 0
         },
         header: {
-          'background': '#f3f5f7',
-          'border-color': 'transparent',
+          background: "#f3f5f7",
+          "border-color": "transparent"
         },
         label: {
-          'display': 'inline-flex',
-          'margin': 'auto 6px',
-          'color': '#404040'
+          display: "inline-flex",
+          margin: "auto 6px",
+          color: "#404040"
         },
         value: {
-          'margin': 'auto 6px',
-          'overflow': 'hidden',
-          'text-overflow': 'ellipsis',
-          'line-height': '1.5em',
-          'word-break': 'keep-all',
-          'font-family': 'sans-serif',
-          'font-size': '12px',
-          'white-space': 'nowrap',
-          'color': '#606060'
+          margin: "auto 6px",
+          overflow: "hidden",
+          "text-overflow": "ellipsis",
+          "line-height": "1.5em",
+          "word-break": "keep-all",
+          "font-family": "sans-serif",
+          "font-size": "12px",
+          "white-space": "nowrap",
+          color: "#606060"
         },
         expander: {
           wrapper: {
-            stroke: '#909090',
+            stroke: "#909090",
             strokeWidth: 1,
-            fill: '#ffffffa0',
-            display: 'inline-flex',
-            'flex-shrink': 0,
+            fill: "#ffffffa0",
+            display: "inline-flex",
+            flexShrink: 0,
+            boxSizing: "border-box"
           },
           content: {
-            display: 'inline-flex',
-            cursor: 'pointer',
-            margin: 'auto 0px'
+            display: "inline-flex",
+            cursor: "pointer",
+            margin: "auto 0px",
+            boxSizing: "border-box"
           }
         }
       },
-      columns: [{
-        id: 0,
-        label: 'ID',
-        value: 'id',
-        width: 40,
-        styles: {
-          label: {}
+      columns: [
+        {
+          id: 0,
+          label: "ID",
+          value: "id",
+          width: 40,
+          styles: {
+            label: {}
+          }
         }
-      }],
+      ],
       resizerWidth: 0,
       percent: 100,
       width: 0,
@@ -237,104 +241,122 @@ function getOptions(userOptions) {
       height: 0,
       styles: {
         wrapper: {
-          'width': '100%',
-          'height': '100%',
-          'background': '#f3f5f7',
-          'border-color': '#f3f5f7'
+          width: "100%",
+          height: "100%",
+          background: "#f3f5f7",
+          "border-color": "#f3f5f7"
         },
         row: {
-          fill: 'transparent',
+          fill: "transparent",
           //stroke: '#ECF0F1'
-          stroke: '#dadada',
-          'stroke-width': 0.5,
+          stroke: "#dadada",
+          "stroke-width": 0.5
         },
         column: {
-          'stroke': '#dadada',
-          'stroke-width': 1,
-          'fill': 'transparent'
+          stroke: "#dadada",
+          "stroke-width": 1,
+          fill: "transparent"
         },
         text: {
-          fontFamily: 'Arial',
-          'fill': '#606060'
+          fontFamily: "Arial",
+          fill: "#606060"
         }
       },
       hour: {
         height: 20,
         display: true,
-        fontSize: '12px',
+        fontSize: "12px",
         style: {
-          stroke: '#dadada',
-          'stroke-width': 0.5,
+          stroke: "#dadada",
+          "stroke-width": 0.5
         },
         widths: [],
         maxWidths: {},
         format: {
           long(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("HH:mm");
           },
           medium(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('HH:mm');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("HH:mm");
           },
           short(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('HH');
-          },
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("HH");
+          }
         }
       },
       day: {
         height: 20,
         display: true,
-        fontSize: '12px',
+        fontSize: "12px",
         style: {},
         widths: [],
         maxWidths: {},
         format: {
           long(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('DD dddd');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("DD dddd");
           },
           medium(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('DD ddd');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("DD ddd");
           },
           short(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('DD');
-          },
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("DD");
+          }
         }
       },
       month: {
         height: 20,
         display: true,
-        fontSize: '12px',
+        fontSize: "12px",
         style: {},
         widths: [],
         maxWidths: {},
         format: {
           short(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('MM');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("MM");
           },
           medium(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('\'YY MMM');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("'YY MMM");
           },
           long(date) {
-            return dayjs(date).locale(userOptions.locale.code).format('YYYY MMMM (MM)');
+            return dayjs(date)
+              .locale(userOptions.locale.code)
+              .format("YYYY MMMM (MM)");
           }
         }
       }
     },
     defs: [],
     locale: {
-      code: 'en',
-      'Now': 'Now',
-      'X-Scale': 'Zoom-X',
-      'Y-Scale': 'Zoom-Y',
-      'Task list width': 'Task list',
-      'Before/After': 'Expand',
-      'Display task list': 'Show task list',
-    },
+      code: "en",
+      Now: "Now",
+      "X-Scale": "Zoom-X",
+      "Y-Scale": "Zoom-Y",
+      "Task list width": "Task list",
+      "Before/After": "Expand",
+      "Display task list": "Show task list"
+    }
   };
 }
 
 export function mergeDeep(target, ...sources) {
   const isObject = function isObject(item) {
-    return item && typeof item === 'object' && !Array.isArray(item);
+    return item && typeof item === "object" && !Array.isArray(item);
   };
   if (!sources.length) {
     return target;
@@ -360,15 +382,13 @@ export function mergeDeep(target, ...sources) {
 
 const GanttElastic = {
   components: {
-    'EgMain': Main,
+    EgMain: Main
   },
-  props: [
-    'tasks', 'options'
-  ],
+  props: ["tasks", "options"],
   provide() {
     const provider = {};
     const self = this;
-    Object.defineProperty(provider, 'root', {
+    Object.defineProperty(provider, "root", {
       enumerable: true,
       get: () => self
     });
@@ -398,28 +418,41 @@ const GanttElastic = {
     },
     initialize() {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
-        tasks: this.tasks.map(task => this.mergeDeep({}, task, {
-          start: dayjs(task.start).format('YYYY-MM-DD HH:mm:ss')
-        }))
+        tasks: this.tasks.map(task =>
+          this.mergeDeep({}, task, {
+            start: dayjs(task.start).format("YYYY-MM-DD HH:mm:ss")
+          })
+        )
       });
       dayjs.locale(this.options.locale, null, true);
-      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        column.finalWidth = (column.width / 100) * this.state.taskList.percent;
-        column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
-        if (typeof column.style === 'undefined') {
-          column.style = {
-            'height': 0 + "px",
-            'line-height': 0 + "px",
-            'width': 0 + "px"
-          };
+      this.state.taskList.columns = this.state.taskList.columns.map(
+        (column, index) => {
+          column.finalWidth =
+            (column.width / 100) * this.state.taskList.percent;
+          column.styles = this.mergeDeep(
+            {},
+            this.state.taskList.styles,
+            column.styles
+          );
+          if (typeof column.style === "undefined") {
+            column.style = {
+              height: 0 + "px",
+              "line-height": 0 + "px",
+              width: 0 + "px"
+            };
+          }
+          column.style = this.mergeDeep(
+            {},
+            this.state.taskList.styles.column,
+            column.style
+          );
+          if (typeof column.height === "undefined") {
+            column.height = 0;
+          }
+          column._id = `${index}-${column.label}`;
+          return this.mergeDeep({}, column);
         }
-        column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
-        if (typeof column.height === 'undefined') {
-          column.height = 0;
-        }
-        column._id = `${index}-${column.label}`;
-        return this.mergeDeep({}, column);
-      });
+      );
       // initialize observer
       this.state.tasks = this.state.tasks.map(task => {
         task.x = 0;
@@ -431,26 +464,29 @@ const GanttElastic = {
         };
         task.mouseOver = false;
         task.dependencyLines = [];
-        if (typeof task.visible === 'undefined') {
+        if (typeof task.visible === "undefined") {
           task.visible = true;
         }
-        if (typeof task.collapsed === 'undefined') {
+        if (typeof task.collapsed === "undefined") {
           task.collapsed = false;
         }
-        if (typeof task.dependencyLines === 'undefined') {
+        if (typeof task.dependencyLines === "undefined") {
           task.dependencyLines = [];
         }
-        if (typeof task.dependentOn === 'undefined') {
+        if (typeof task.dependentOn === "undefined") {
           task.dependentOn = [];
         }
-        if (typeof task.parentId === 'undefined') {
+        if (typeof task.parentId === "undefined") {
           task.parentId = null;
         }
-        if (typeof task.style === 'undefined') {
+        if (typeof task.style === "undefined") {
           task.style = {};
         }
-        if (typeof task.progressBarStyle === 'undefined') {
-          task.progressBarStyle = this.mergeDeep({}, this.state.progress.styles);
+        if (typeof task.progressBarStyle === "undefined") {
+          task.progressBarStyle = this.mergeDeep(
+            {},
+            this.state.progress.styles
+          );
         }
         task.children = [];
         task.allChildren = [];
@@ -461,7 +497,7 @@ const GanttElastic = {
       });
       this.state.rootTask = {
         id: null,
-        label: 'root',
+        label: "root",
         children: [],
         allChildren: [],
         parents: [],
@@ -470,7 +506,7 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      this.state.ctx = document.createElement('canvas').getContext('2d');
+      this.state.ctx = document.createElement("canvas").getContext("2d");
       this.calculateTaskListColumnsWidths();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
@@ -497,20 +533,29 @@ const GanttElastic = {
       return maximalLevel - 1;
     },
     getMaximalExpanderWidth() {
-      return this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin;
+      return (
+        this.getMaximalLevel() * this.state.taskList.expander.padding +
+        this.state.taskList.expander.margin
+      );
     },
     calculateTaskListColumnsWidths() {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.finalWidth = (this.getMaximalExpanderWidth() + column.width) / 100 * this.state.taskList.percent;
+          column.finalWidth =
+            ((this.getMaximalExpanderWidth() + column.width) / 100) *
+            this.state.taskList.percent;
         } else {
-          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          column.finalWidth =
+            (column.width / 100) * this.state.taskList.percent;
         }
         final += column.finalWidth;
-        let height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
+        let height =
+          this.state.row.height +
+          this.state.grid.horizontal.gap * 2 -
+          this.state.grid.horizontal.strokeWidth;
         column.style.height = height + "px";
-        column.style['line-height'] = height + "px";
+        column.style["line-height"] = height + "px";
         column.style.width = column.finalWidth + "px";
       });
       this.state.taskList.finalWidth = final;
@@ -559,21 +604,26 @@ const GanttElastic = {
     getSVG() {
       return this.state.svgMain.outerHTML;
     },
-    getImage(type = 'image/png') {
+    getImage(type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
-          const canvas = document.createElement('canvas');
+          const canvas = document.createElement("canvas");
           canvas.width = this.state.svgMain.clientWidth;
           canvas.height = this.state.svgMain.clientHeight;
-          canvas.getContext('2d').drawImage(img, 0, 0);
+          canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
-        img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG());
+        img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
       });
     },
     getHeight(visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] * 2 + this.state.calendar.gap;
+      let height =
+        visibleTasks.length *
+          (this.state.row.height + this.state.grid.horizontal.gap * 2) +
+        this.state.calendar.height +
+        this.state.calendar.styles.column["stroke-width"] * 2 +
+        this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
@@ -587,11 +637,19 @@ const GanttElastic = {
       return x;
     },
     pixelOffsetXToTime(pixelOffsetX) {
-      let offset = pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
-      return offset * this.state.times.timePerPixel + this.state.times.firstTime;
+      let offset =
+        pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
+      return (
+        offset * this.state.times.timePerPixel + this.state.times.firstTime
+      );
     },
     isInsideViewPort(x, width, buffer = 5000) {
-      return (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right);
+      return (
+        (x + width + buffer >= this.state.scroll.tree.left &&
+          x - buffer <= this.state.scroll.tree.right) ||
+        (x - buffer <= this.state.scroll.tree.left &&
+          x + width + buffer >= this.state.scroll.tree.right)
+      );
     },
     onScrollTree(ev) {
       this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
@@ -600,18 +658,23 @@ const GanttElastic = {
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
       this.state.scroll.tree.left = left;
       this.state.scroll.tree.right = left + treeContainerWidth;
-      this.state.scroll.tree.percent = left / this.state.times.totalViewDurationPx * 100;
+      this.state.scroll.tree.percent =
+        (left / this.state.times.totalViewDurationPx) * 100;
       this.state.scroll.tree.top = top;
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
+      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(
+        left + treeContainerWidth / 2
+      );
       this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
-      this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
+      this.state.scroll.tree.dateTime.right = dayjs(
+        this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)
+      );
       this.scrollTo(left);
     },
     scrollToTime(time) {
       let pos = this.timeToPixelOffsetX(time);
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
-      pos = pos - (treeContainerWidth / 2);
+      pos = pos - treeContainerWidth / 2;
       if (pos > this.state.width) {
         pos = this.state.width - treeContainerWidth;
       }
@@ -658,33 +721,56 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents() {
-      this.$root.$on('gantt-elastic.tree.scroll', this.onScrollTree);
-      this.$root.$on('gantt-elastic.tree.wheel', this.onWheelTree);
-      this.$root.$on('gantt-elastic.times.timeZoom.change', this.onTimeZoomChange);
-      this.$root.$on('gantt-elastic.row.height.change', this.onRowHeightChange);
-      this.$root.$on('gantt-elastic.scope.change', this.onScopeChange);
-      this.$root.$on('gantt-elastic.taskList.width.change', this.onTaskListWidthChange);
-      this.$root.$on('gantt-elastic.taskList.column.width.change', this.onTaskListColumnWidthChange);
+      this.$root.$on("gantt-elastic.tree.scroll", this.onScrollTree);
+      this.$root.$on("gantt-elastic.tree.wheel", this.onWheelTree);
+      this.$root.$on(
+        "gantt-elastic.times.timeZoom.change",
+        this.onTimeZoomChange
+      );
+      this.$root.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
+      this.$root.$on("gantt-elastic.scope.change", this.onScopeChange);
+      this.$root.$on(
+        "gantt-elastic.taskList.width.change",
+        this.onTaskListWidthChange
+      );
+      this.$root.$on(
+        "gantt-elastic.taskList.column.width.change",
+        this.onTaskListColumnWidthChange
+      );
     },
     recalculateTimes() {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
       let steps = max / min;
       let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      this.state.times.timePerPixel =
+        this.state.times.timeScale * steps * percent +
+        Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(
+        this.state.times.firstDate,
+        "milisecods"
+      );
+      this.state.times.totalViewDurationPx =
+        this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
     },
     initTimes() {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
       let steps = max / min;
       let percent = this.state.times.timeZoom / 100;
-      this.state.times.firstDate = dayjs(this.state.times.firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
-      this.state.times.lastDate = dayjs(this.state.times.lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
+      this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
+        .locale(this.locale)
+        .startOf("day")
+        .subtract(this.state.scope.before, "days")
+        .startOf("day");
+      this.state.times.lastDate = dayjs(this.state.times.lastTaskDate)
+        .locale(this.locale)
+        .endOf("day")
+        .add(this.state.scope.after, "days")
+        .endOf("day");
       this.state.times.firstTime = this.state.times.firstDate.valueOf();
       this.state.times.lastTime = this.state.times.lastDate.valueOf();
-      this.recalculateTimes()
+      this.recalculateTimes();
     },
     calculateSteps() {
       const steps = [];
@@ -695,30 +781,39 @@ const GanttElastic = {
         date: currentDate,
         offset: {
           ms: 0,
-          px: 0,
+          px: 0
         }
       });
-      for (let currentDate = dayjs(this.state.times.firstDate).add(1, step).startOf('day'); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf('day')) {
-        const offsetMs = currentDate.diff(this.state.times.firstDate, 'milisecods');
+      for (
+        let currentDate = dayjs(this.state.times.firstDate)
+          .add(1, step)
+          .startOf("day");
+        currentDate.valueOf() <= lastMs;
+        currentDate = currentDate.add(1, step).startOf("day")
+      ) {
+        const offsetMs = currentDate.diff(
+          this.state.times.firstDate,
+          "milisecods"
+        );
         const offsetPx = offsetMs / this.state.times.timePerPixel;
         const step = {
           date: currentDate,
           offset: {
             ms: offsetMs,
-            px: offsetPx,
-          },
+            px: offsetPx
+          }
         };
         const previousStep = steps[steps.length - 1];
         previousStep.width = {
           ms: offsetMs - previousStep.offset.ms,
-          px: offsetPx - previousStep.offset.px,
+          px: offsetPx - previousStep.offset.px
         };
         steps.push(step);
       }
       const lastStep = steps[steps.length - 1];
       lastStep.width = {
         ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
-        px: this.state.times.totalViewDurationPx - lastStep.offset.px,
+        px: this.state.times.totalViewDurationPx - lastStep.offset.px
       };
       this.state.times.steps = steps;
     },
@@ -729,91 +824,115 @@ const GanttElastic = {
     },
     computeHourWidths() {
       const state = this.state;
-      state.ctx.font = state.calendar.hour.fontSize + ' ' + state.calendar.fontFamily;
-      let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
+      state.ctx.font =
+        state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
+      let currentDate = dayjs("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
-      Object.keys(state.calendar.hour.format).forEach((formatName) => {
+      Object.keys(state.calendar.hour.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
         };
-        Object.keys(state.calendar.hour.format).forEach((formatName) => {
-          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(
+            state.calendar.hour.format[formatName](currentDate.toDate())
+          ).width;
         });
         state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format).forEach((formatName) => {
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
-        currentDate = currentDate.add(1, 'hour');
+        currentDate = currentDate.add(1, "hour");
       }
       state.calendar.hour.maxWidths = maxWidths;
     },
     computeDayWidths() {
       const state = this.state;
-      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+      state.ctx.font =
+        state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs(state.times.steps[0].date);
       let maxWidths = {};
-      Object.keys(state.calendar.day.format).forEach((formatName) => {
+      Object.keys(state.calendar.day.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+      for (
+        let day = 0, daysLen = state.times.steps.length;
+        day < daysLen;
+        day++
+      ) {
         const widths = {
           day
         };
-        Object.keys(state.calendar.day.format).forEach((formatName) => {
-          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
+        Object.keys(state.calendar.day.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(
+            state.calendar.day.format[formatName](currentDate.toDate())
+          ).width;
         });
         state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format).forEach((formatName) => {
+        Object.keys(state.calendar.day.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
-        currentDate = currentDate.add(1, 'day');
+        currentDate = currentDate.add(1, "day");
       }
       state.calendar.day.maxWidths = maxWidths;
     },
     computeMonthWidths() {
       const state = this.state;
-      state.ctx.font = state.calendar.day.fontSize + ' ' + state.calendar.fontFamily;
+      state.ctx.font =
+        state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let maxWidths = {};
-      Object.keys(state.calendar.month.format).forEach((formatName) => {
+      Object.keys(state.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
       let currentDate = dayjs(this.state.times.firstDate);
-      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, 'months', true));
+      const monthsCount = Math.ceil(
+        this.state.times.lastDate.diff(
+          this.state.times.firstDate,
+          "months",
+          true
+        )
+      );
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
         };
-        Object.keys(state.calendar.month.format).forEach((formatName) => {
-          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(
+            state.calendar.month.format[formatName](currentDate.toDate())
+          ).width;
         });
         state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format).forEach((formatName) => {
+        Object.keys(state.calendar.month.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
-        currentDate = currentDate.add(1, 'month');
+        currentDate = currentDate.add(1, "month");
       }
       state.calendar.month.maxWidths = maxWidths;
     }
   },
   computed: {
     visibleTasks() {
-      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-        return {
-          width: prev.width + current.width
-        };
-      }, {
-        width: 0
-      }).width;
-      this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
+      this.state.taskList.width = this.state.taskList.columns.reduce(
+        (prev, current) => {
+          return {
+            width: prev.width + current.width
+          };
+        },
+        {
+          width: 0
+        }
+      ).width;
+      this.state.width =
+        this.state.times.totalViewDurationPx +
+        this.state.grid.vertical.style.strokeWidth;
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
@@ -821,17 +940,23 @@ const GanttElastic = {
       this.state.outerHeight = this.getHeight(visibleTasks, true);
       for (let index = 0, len = visibleTasks.length; index < len; index++) {
         let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.state.grid.vertical.style.strokeWidth;
+        task.width =
+          task.durationMs / this.state.times.timePerPixel -
+          this.state.grid.vertical.style.strokeWidth;
         if (task.width < 0) {
           task.width = 0;
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.state.calendar.styles.column['stroke-width'] + this.state.calendar.gap;
+        task.y =
+          (this.state.row.height + this.state.grid.horizontal.gap * 2) * index +
+          this.state.grid.horizontal.gap +
+          this.state.calendar.height +
+          this.state.calendar.styles.column["stroke-width"] +
+          this.state.calendar.gap;
       }
       return visibleTasks;
-    },
-
+    }
   },
   created() {
     this.initialize();
@@ -860,17 +985,25 @@ const GanttElastic = {
     this.state.times.lastTaskTime = lastTaskTime;
     this.state.times.firstTaskDate = firstTaskDate;
     this.state.times.lastTaskDate = lastTaskDate;
-    this.state.times.firstDate = dayjs(firstTaskDate).locale(this.locale).startOf('day').subtract(this.state.scope.before, 'days').startOf('day');
-    this.state.times.lastDate = dayjs(lastTaskDate).locale(this.locale).endOf('day').add(this.state.scope.after, 'days').endOf('day');
+    this.state.times.firstDate = dayjs(firstTaskDate)
+      .locale(this.locale)
+      .startOf("day")
+      .subtract(this.state.scope.before, "days")
+      .startOf("day");
+    this.state.times.lastDate = dayjs(lastTaskDate)
+      .locale(this.locale)
+      .endOf("day")
+      .add(this.state.scope.after, "days")
+      .endOf("day");
     this.initTimes();
     this.calculateSteps();
     this.computeCalendarWidths();
     this.calculateCalendarDimensions();
-  },
-}
+  }
+};
 export default GanttElastic;
 </script>
 
 <style>
-@import 'styles/ganttElastic.css';
+@import "styles/ganttElastic.css";
 </style>

@@ -9,7 +9,9 @@
     "vue-switches": "^2.0.1"
   },
   "devDependencies": {
+    "@vue/cli-service": "^3.1.4",
     "css-loader": "^1.0.1",
+    "gulp-vueify2": "0.0.3",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
@@ -18,8 +20,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "dev": "webpack --watch  --mode development"
+    "build": "vue-cli-service build --report --target lib --name GanttElastic ./src/GanttElastic.vue & webpack",
+    "dev": "vue-cli-service build --watch --mode development --target lib --name GanttElastic ./src/GanttElastic.vue"
   },
   "repository": {
     "type": "git",

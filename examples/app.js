@@ -1,7 +1,7 @@
 // override components - copy component from src directory change it to object or compile *.vue to *.js
 // more info about components you can find here : https://vuejs.org/v2/guide/index.html
 // You can change anything! You have full control of components templates, events, data ... and so on!
-//Elastigantt.component.components.EgMain.components.TopHeader = CustomHeader;
+// GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
 
 // just helper to get current dates
 function getDate(hours) {
@@ -249,7 +249,7 @@ const gantt = GanttElastic.mount({
 });
 // listen to events
 /*
-gantt.$on('elastigantt.tree.scroll',(ev)=>{
+gantt.$on('gantt-elastic.tree.scroll',(ev)=>{
   console.log('scroll');
 });
 */

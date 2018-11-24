@@ -33,14 +33,14 @@
 </div>
 </template>
 <script>
-import vueSlider from 'vue-slider-component/src/vue2-slider.vue';
-import Switches from 'vue-switches';
+import vueSlider from "vue-slider-component/src/vue2-slider.vue";
+import Switches from "vue-switches";
 export default {
   components: {
     vueSlider,
     Switches
   },
-  inject: ['root'],
+  inject: ["root"],
   data() {
     return {
       scaleTimeoutId: null,
@@ -50,32 +50,31 @@ export default {
       localBefore: this.root.state.scope.before,
       localPercent: this.root.state.taskList.percent,
       buttonStyle: {
-        background: '#95A5A6',
-        border: 'none',
-        outline: 'none',
-        cursor: 'pointer',
-        color: 'white',
-        'border-radius': '6px',
-        'margin-right': '27px',
-        'font-size': '16px',
-        'padding': '6px 12px'
+        background: "#95A5A6",
+        border: "none",
+        outline: "none",
+        cursor: "pointer",
+        color: "white",
+        "border-radius": "6px",
+        "margin-right": "27px",
+        "font-size": "16px",
+        padding: "6px 12px"
       },
       sliderStyle: {},
       processStyle: {
-        background: '#ccc'
+        background: "#ccc"
       },
       sliderOptions: {
         xScale: {
           value: this.root.state.times.timeZoom
-        },
-
+        }
       },
       sliderWrapperStyle: {
-        'display': 'inline-block',
-        'vertical-align': 'bottom'
+        display: "inline-block",
+        "vertical-align": "middle"
       },
       taskListSwitchStyle: {
-        'margin-left': '15px',
+        "margin-left": "15px"
       }
     };
   },
@@ -87,17 +86,17 @@ export default {
   },
   methods: {
     getImage() {
-      const code = this.root.getImage('image/png').then(imgB64 => {
-        const link = document.createElement('a');
+      const code = this.root.getImage("image/png").then(imgB64 => {
+        const link = document.createElement("a");
         link.href = imgB64;
-        link.download = 'gantt-elastic.png';
+        link.download = "gantt-elastic.png";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       });
     },
     recenterPosition() {
-      this.$root.$emit('gantt-elastic.recenterPosition');
+      this.$root.$emit("gantt-elastic.recenterPosition");
     },
     setScale(value) {
       if (this.scaleTimeoutId !== null) {
@@ -107,14 +106,14 @@ export default {
       // debouncing
       if (this.firstScale) {
         this.scaleTimeoutId = setTimeout(() => {
-          this.$root.$emit('gantt-elastic.times.timeZoom.change', value);
+          this.$root.$emit("gantt-elastic.times.timeZoom.change", value);
           this.scaleTimeoutId = null;
         }, 75);
       } else {
-        this.$root.$emit('gantt-elastic.times.timeZoom.change', value);
+        this.$root.$emit("gantt-elastic.times.timeZoom.change", value);
         this.firstScale = true;
       }
-    },
+    }
   },
   computed: {
     scale: {
@@ -132,7 +131,7 @@ export default {
       },
       set(value) {
         this.localHeight = Number(value);
-        this.$root.$emit('gantt-elastic.row.height.change', Number(value))
+        this.$root.$emit("gantt-elastic.row.height.change", Number(value));
       }
     },
     scope: {
@@ -141,9 +140,9 @@ export default {
       },
       set(value) {
         this.localBefore = Number(value);
-        this.$root.$emit('gantt-elastic.scope.change', Number(value));
-        this.$root.$emit('gantt-elastic.scope.before.change', Number(value));
-        this.$root.$emit('gantt-elastic.scope.after.change', Number(value));
+        this.$root.$emit("gantt-elastic.scope.change", Number(value));
+        this.$root.$emit("gantt-elastic.scope.before.change", Number(value));
+        this.$root.$emit("gantt-elastic.scope.after.change", Number(value));
       }
     },
     divider: {
@@ -152,9 +151,9 @@ export default {
       },
       set(value) {
         this.localPercent = Number(value);
-        this.$root.$emit('gantt-elastic.taskList.width.change', Number(value));
+        this.$root.$emit("gantt-elastic.taskList.width.change", Number(value));
       }
     }
-  },
-}
+  }
+};
 </script>
