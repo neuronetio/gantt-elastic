@@ -2,7 +2,7 @@
   "name": "gantt-elastic",
   "version": "0.0.69",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
-  "main": "src/GanttElastic.vue",
+  "main": "dist/GanttElastic.common.js",
   "dependencies": {
     "dayjs": "^1.7.7",
     "vue-slider-component": "^2.7.11",
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vue-cli-service build --report --target lib --name GanttElastic ./src/GanttElastic.vue & webpack",
+    "build": "vue-cli-service build --target lib --name GanttElastic ./src/GanttElastic.vue & webpack",
     "dev": "vue-cli-service build --watch --mode development --target lib --name GanttElastic ./src/GanttElastic.vue"
   },
   "repository": {

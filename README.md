@@ -157,9 +157,13 @@ ganttElastic.$on('gantt-elastic.tree.scroll',(ev)=>{
 
 #### as vue component
 
+take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples)  file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
+
+You can also import gantt-elastic as compiled js component in commonjs or umd format ([examples](https://github.com/neuronetio/gantt-elastic/tree/master/examples) folder) or just grab GanttElastic.vue from src directory and add to your existing vue project.
+
 ```javascript
 import Vue from 'vue';
-import GanttElastic from "gantt-elastic";
+import GanttElastic from "gantt-elastic/src/GanttElastic.vue";
 new Vue({
   el:'#gantt',
   template:`<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
