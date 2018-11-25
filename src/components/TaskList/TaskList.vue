@@ -1,8 +1,21 @@
 <template>
-  <foreignObject class="gantt-elastic__task-list-object" x="0" y="0" width="100%" height="100%" v-if="root.state.taskList.display">
-    <div xmlns="http://www.w3.org/1999/xhtml" class="gantt-elastic__task-list-container">
+  <foreignObject
+    class="gantt-elastic__task-list-wrapper"
+    :style="root.style('task-list-wrapper')"
+    x="0"
+    y="0"
+    width="100%"
+    height="100%"
+    v-if="root.state.taskList.display"
+  >
+    <div xmlns="http://www.w3.org/1999/xhtml" class="gantt-elastic__task-list" :style="root.style('task-list')">
       <task-list-header></task-list-header>
-      <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task" :expander-style="getListExpanderStyle(task)"></task-list-item>
+      <task-list-item
+        v-for="task in root.visibleTasks"
+        :key="task.id"
+        :task="task"
+        :expander-style="getListExpanderStyle(task)"
+      ></task-list-item>
     </div>
   </foreignObject>
 </template>
@@ -20,18 +33,6 @@ export default {
     return {};
   },
   computed: {
-    getHeaderExpanderStyle () {
-      const state = this.root.state;
-      return Object.assign({}, state.taskList.styles.header, {
-        width: ((state.taskList.expander.width + this.root.style("calendar-row")["stroke-width"] + state.taskList.expander.margin) / 100) * state.taskList.percent + "px",
-        height: state.calendar.height + this.root.style("calendar-row")["stroke-width"] + "px",
-        "margin-bottom": state.calendar.gap + "px",
-        "padding-right": state.taskList.expander.margin + "px",
-        "padding-left": state.taskList.expander.margin + "px",
-        margin: "auto 0px",
-        display: "inline-flex"
-      });
-    },
     getListExpanderStyle () {
       return task => {
         const state = this.root.state;

@@ -14,16 +14,6 @@
   stroke: #a0a0a0;
   stroke-width: 1;
 }
-.gantt-elastic__calendar-row-group rect{
-  fill:#ddd;
-  stroke:#A0A0A0;
-  stroke-width:1;
-}
-.gantt-elastic__calendar-row-group text{
-  fill:#000;
-  font-family: 'Arial';
-  font-size: 12px;
-}
 foreignObject > *{
   margin: 0px;
 }
@@ -43,38 +33,8 @@ foreignObject > *{
 .gantt-elastic__task-list-header-column:last-of-type{
   border-right: 1px solid #00000050;
 }
-.gantt-elastic__task-list-item{
-  border-top: 1px solid #00000050;
-  border-right: 1px solid #00000050;
-  box-sizing: border-box;
-  display: flex;
-  background: rgba(0,0,0,0.125);
-}
 .gantt-elastic__task-list-item:last-of-type{
   border-bottom:1px solid #00000050;
-}
-.gantt-elastic__task-list-item-column{
-  display: inline-flex;
-  flex-shrink: 0;
-  border-left: 1px solid #00000050;
-  box-sizing: border-box;
-}
-.gantt-elastic__task-list-item-value--wrapper{
-  overflow: hidden;
-  display: flex;
-  width: 100%;
-}
-.gantt-elastic__task-list-item-value{
-  margin: 6px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2em;
-  display: block;
-  flex-shrink: 100;
-  word-break: keep-all;
-  font-family: Arial;
-  font-size: 12px;
-  width: 100%;
 }
 .gantt-elastic__tree-scroll-container{
   overflow:auto;

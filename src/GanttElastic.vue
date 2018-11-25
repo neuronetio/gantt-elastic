@@ -156,10 +156,6 @@ function getOptions (userOptions) {
     taskList: {
       display: true,
       styles: {
-        row: {
-          background: "transparent",
-          "border-color": "#eee"
-        },
         column: {
           "border-color": "#eee",
           height: 0,
@@ -213,7 +209,6 @@ function getOptions (userOptions) {
       hour: {
         height: 20,
         display: true,
-        fontSize: "12px",
         widths: [],
         maxWidths: {},
         format: {
@@ -237,8 +232,6 @@ function getOptions (userOptions) {
       day: {
         height: 20,
         display: true,
-        fontSize: "12px",
-        style: {},
         widths: [],
         maxWidths: {},
         format: {
@@ -262,8 +255,6 @@ function getOptions (userOptions) {
       month: {
         height: 20,
         display: true,
-        fontSize: "12px",
-        style: {},
         widths: [],
         maxWidths: {},
         format: {
@@ -363,11 +354,15 @@ const GanttElastic = {
      * @param {object} mergeWith - if we need to merge custom item specific style with default ones
      * @returns {object}
      */
-    style (className, mergeWith = null) {
+    style (className, ...mergeWith) {
       if (mergeWith === null) {
         return this.state.style[className];
       }
-      return Object.assign({}, this.state.style[className], mergeWith);
+      let merged = Object.assign({}, this.state.style[className]);
+      mergeWith.forEach(obj => {
+        merged = Object.assign({}, merged, obj);
+      })
+      return merged;
     },
     /**
      * Initialize component
@@ -382,17 +377,11 @@ const GanttElastic = {
       dayjs.locale(this.options.locale, null, true);
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
         column.finalWidth = (column.width / 100) * this.state.taskList.percent;
-        column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
-        if (typeof column.style === "undefined") {
-          column.style = {
-            height: 0 + "px",
-            "line-height": 0 + "px",
-            width: 0 + "px"
-          };
-        }
-        column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
         if (typeof column.height === "undefined") {
           column.height = 0;
+        }
+        if (typeof column.style === "undefined") {
+          column.style = {};
         }
         column._id = `${index}-${column.label}`;
         return this.mergeDeep({}, column);
@@ -486,10 +475,7 @@ const GanttElastic = {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         }
         final += column.finalWidth;
-        let height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
-        column.style.height = height + "px";
-        column.style["line-height"] = height + "px";
-        column.style.width = column.finalWidth + "px";
+        column.height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
       });
       this.state.taskList.finalWidth = final;
     },
@@ -672,7 +658,8 @@ const GanttElastic = {
     },
     calculateSteps () {
       const steps = [];
-      const lastMs = dayjs(this.state.times.lastDate).valueOf();
+      const lastMs = dayjs(this.state.times.lastDate)
+        .valueOf();
       const step = this.state.times.stepDuration;
       const currentDate = dayjs(this.state.times.firstDate);
       steps.push({

@@ -47,6 +47,20 @@ export default {
   "header-task-list-switch--label": {},
   "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
   "header-label": {},
+  "calendar-wrapper": {},
+  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
+  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar-row--month": {},
+  "calendar-row--day": {},
+  "calendar-row--hour": {},
+  "calendar-row-rect--month": {},
+  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--day": {},
+  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--hour": {},
+  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "task-list-wrapper": {},
+  "task-list": { "background": "transparent", "border-color": "#eee" },
   "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
   "task-list-header-column": {
     "border": "1px solid #00000050",
@@ -63,7 +77,8 @@ export default {
     "fill": "#ffffffa0",
     "display": "inline-flex",
     "flex-shrink": "0",
-    "box-sizing": "border-box"
+    "box-sizing": "border-box",
+    "margin": "0 10px"
   },
   "task-list-column-expander-content": {
     "display": "inline-flex",
@@ -72,8 +87,12 @@ export default {
     "box-sizing": "border-box",
     "user-select": "none"
   },
-  "task-list-column-expander-line":
-    { "fill": "transparent", "stroke": "#000000", "stroke-width": "1", "stroke-linecap": "round" },
+  "task-list-column-expander-line": {
+    "fill": "transparent",
+    "stroke": "#000000",
+    "stroke-width": "1",
+    "stroke-linecap": "round"
+  },
   "task-list-column-expander-border": {
     "fill": "#ffffffa0",
     "stroke": "#000000",
@@ -85,14 +104,13 @@ export default {
     "font-size": fontSize,
     "box-sizing": "border-box",
     "margin": "auto 6px",
-    "display": "inline-flex",
     "flex-grow": "1",
     "vertical-align": "middle"
   },
   "task-list-header-resizer-wrapper": {
     "background": "transparent",
     "height": "100%",
-    "width": "3px",
+    "width": "6px",
     "cursor": "col-resize",
     "display": "inline-flex",
     "vertical-align": "center"
@@ -105,16 +123,37 @@ export default {
     "border-radius": "100%",
     "margin": "4px 0px",
   },
-  "calendar-wrapper": {},
-  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
-  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
-  "calendar-row--month": {},
-  "calendar-row--day": {},
-  "calendar-row--hour": {},
-  "calendar-row-rect--month": {},
-  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
-  "calendar-row-rect--day": {},
-  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
-  "calendar-row-rect--hour": {},
-  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "task-list-item": {
+    "border-top": "1px solid #eee",
+    "border-right": "1px solid #eee",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "background": "transparent",
+  },
+  "task-list-item-column": {
+    "display": "inline-flex",
+    "flex-shrink": "0",
+    "border-left": "1px solid #00000050",
+    "box-sizing": "border-box",
+    "border-color": "#eee",
+  },
+  "task-list-item-value-wrapper": {
+    "overflow": "hidden",
+    "display": "flex",
+    "width": "100%",
+  },
+  "task-list-item-value": {
+    "display": "block",
+    "flex-shrink": "100",
+    "font-family": fontFamily,
+    "font-size": fontSize,
+    "width": "100%",
+    "margin": "auto 6px",
+    "overflow": "hidden",
+    "text-overflow": "ellipsis",
+    "line-height": "1.5em",
+    "word-break": "keep-all",
+    "white-space": "nowrap",
+    "color": "#606060"
+  }
 }
