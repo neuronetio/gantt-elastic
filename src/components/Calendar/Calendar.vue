@@ -1,13 +1,14 @@
 <template>
-<g class="gantt-elastic__calendar-group">
-  <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
-    <div class="gantt-elastic__calendar" :style="root.state.calendar.styles.wrapper" xmlns="http://www.w3.org/1999/xhtml"></div>
-  </foreignObject>
-  <calendar-row v-for="month in months" :key="month.key" :item="month" :rowStyle="monthsStyle"></calendar-row>
-  <calendar-row v-for="day in days" :key="day.key" :item="day" :rowStyle="daysStyle" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
-  <calendar-row v-for="hour in hours" :key="hour.key" :item="hour" :rowStyle="hoursStyle" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
-</g>
+  <g class="gantt-elastic__calendar-wrapper" :style="root.style('calendar-wrapper')">
+    <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
+      <div class="gantt-elastic__calendar" :style="root.style('calendar')" xmlns="http://www.w3.org/1999/xhtml"></div>
+    </foreignObject>
+    <calendar-row class="gantt-elastic__calendar-row--month" v-for="month in months" :key="month.key" :item="month" which="month"></calendar-row>
+    <calendar-row class="gantt-elastic__calendar-row--day" v-for="day in days" :key="day.key" :item="day" which="day" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
+    <calendar-row class="gantt-elastic__calendar-row--hour" v-for="hour in hours" :key="hour.key" :item="hour" which="hour" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
+  </g>
 </template>
+
 <script>
 import dayjs from "dayjs";
 import CalendarRow from "./CalendarRow.vue";
@@ -16,33 +17,26 @@ export default {
     CalendarRow
   },
   inject: ["root"],
-  data() {
+  data () {
     return {
       hours: [],
       days: [],
       months: []
     };
   },
-  created() {
+  created () {
     this.$root.$on("gantt-elastic.scope.change", this.regenerate);
     this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
     this.regenerate();
   },
   methods: {
-    howManyHoursFit(dayIndex) {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyHoursFit (dayIndex) {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if (
-            (this.root.state.calendar.hour.maxWidths[formatName] +
-              additionalSpace) *
-              hours <=
-              fullCellWidth &&
-            hours > 1
-          ) {
+          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
             return {
               count: hours,
               type: formatName
@@ -55,24 +49,14 @@ export default {
         type: ""
       };
     },
-    howManyDaysFit() {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyDaysFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
-      for (
-        let days = this.root.state.times.steps.length;
-        days > 1;
-        days = Math.ceil(days / 2)
-      ) {
+      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.root.state.calendar.day.maxWidths[formatName] +
-              additionalSpace) *
-              days <=
-              fullWidth &&
-            days > 1
-          ) {
+            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
             return {
               count: days,
               type: formatName
@@ -85,9 +69,8 @@ export default {
         type: ""
       };
     },
-    howManyMonthsFit() {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyMonthsFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentMonth = dayjs(this.root.state.times.firstDate);
@@ -101,19 +84,9 @@ export default {
         }
         previousMonth = currentMonth.clone();
       }
-      for (
-        let months = monthsCount;
-        months > 1;
-        months = Math.ceil(months / 2)
-      ) {
+      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
-          if (
-            (this.root.state.calendar.month.maxWidths[formatName] +
-              additionalSpace) *
-              months <=
-              fullWidth &&
-            months > 1
-          ) {
+          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
             return {
               count: months,
               type: formatName
@@ -126,48 +99,25 @@ export default {
         type: formatNames[0]
       };
     },
-    hourTextStyle() {
-      return (
-        "font-family:" +
-        this.root.state.calendar.hour.fontFamily +
-        ";font-size:" +
-        this.root.state.calendar.hour.fontSize
-      );
+    hourTextStyle () {
+      return ("font-family:" + this.root.state.calendar.hour.fontFamily + ";font-size:" + this.root.state.calendar.hour.fontSize);
     },
-    dayTextStyle() {
-      return (
-        "font-family:" +
-        this.root.state.calendar.day.fontFamily +
-        ";font-size:" +
-        this.root.state.calendar.day.fontSize
-      );
+    dayTextStyle () {
+      return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
     },
-    generateHours() {
+    generateHours () {
       let hours = [];
-      for (
-        let dayIndex = 0, len = this.root.state.times.steps.length;
-        dayIndex < len;
-        dayIndex++
-      ) {
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex++) {
         const hoursCount = this.howManyHoursFit(dayIndex);
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx =
-          this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs(this.root.state.times.steps[dayIndex].date).add(
-            i * hourStep,
-            "hour"
-          );
+          const date = dayjs(this.root.state.times.steps[dayIndex].date)
+            .add(i * hourStep, "hour");
           hours.push({
             key: this.root.state.times.steps[dayIndex].date.valueOf() + "h" + i,
-            x:
-              this.root.state.calendar.styles.column["stroke-width"] / 2 +
-              this.root.state.times.steps[dayIndex].offset.px +
-              hourWidthPx * i,
-            y:
-              this.root.state.calendar.styles.column["stroke-width"] / 2 +
-              this.root.state.calendar.day.height +
-              this.root.state.calendar.month.height,
+            x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px + hourWidthPx * i,
+            y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
             height: this.root.state.calendar.hour.height,
             label: this.root.state.calendar.hour.format[hoursCount.type](date)
@@ -176,37 +126,23 @@ export default {
       }
       return (this.hours = hours);
     },
-    generateDays() {
+    generateDays () {
       let days = [];
       const daysCount = this.howManyDaysFit();
-      const dayStep = Math.ceil(
-        this.root.state.times.steps.length / daysCount.count
-      );
-      for (
-        let dayIndex = 0, len = this.root.state.times.steps.length;
-        dayIndex < len;
-        dayIndex += dayStep
-      ) {
+      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (
-            typeof this.root.state.times.steps[dayIndex + currentStep] !==
-            "undefined"
-          ) {
-            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep]
-              .width.px;
+          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== "undefined") {
+            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
           }
         }
         const date = dayjs(this.root.state.times.steps[dayIndex].date);
         days.push({
           key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
-          x:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            this.root.state.times.steps[dayIndex].offset.px,
-          y:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            this.root.state.calendar.month.height,
+          x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px,
+          y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
           width: dayWidthPx,
           height: this.root.state.calendar.day.height,
           label: this.root.state.calendar.day.format[daysCount.type](date)
@@ -214,7 +150,7 @@ export default {
       }
       return (this.days = days);
     },
-    generateMonths() {
+    generateMonths () {
       let months = [];
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
@@ -229,16 +165,9 @@ export default {
           finalDate = dayjs(this.root.state.times.lastDate);
         }
         // we must find first and last step to get the offsets / widths
-        for (
-          let step = 0, len = this.root.state.times.steps.length;
-          step < len;
-          step++
-        ) {
+        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
           let currentStep = this.root.state.times.steps[step];
-          if (
-            currentStep.date.valueOf() >= currentDate.valueOf() &&
-            currentStep.date.valueOf() < finalDate.valueOf()
-          ) {
+          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
               monthOffset = currentStep.offset.px;
@@ -247,34 +176,27 @@ export default {
         }
         let label = "";
         for (let formatName of formatNames) {
-          if (
-            this.root.state.calendar.month.maxWidths[formatName] + 2 <=
-            monthWidth
-          ) {
-            label = this.root.state.calendar.month.format[formatName](
-              currentDate
-            );
+          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.root.state.calendar.month.format[formatName](currentDate);
           }
         }
         months.push({
           key: monthIndex + "m",
-          x:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            monthOffset,
-          y: this.root.state.calendar.styles.column["stroke-width"] / 2,
+          x: this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset,
+          y: this.root.style('calendar-row')["stroke-width"] / 2,
           width: monthWidth,
           height: this.root.state.calendar.month.height,
           label: label
         });
-
-        currentDate = currentDate.add(1, "month").startOf("month");
+        currentDate = currentDate.add(1, "month")
+          .startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
           currentDate = dayjs(this.root.state.times.lastDate);
         }
       }
       return (this.months = months);
     },
-    regenerate() {
+    regenerate () {
       this.$nextTick(() => {
         this.generateHours();
         this.generateDays();
@@ -283,38 +205,24 @@ export default {
     }
   },
   computed: {
-    getX() {
-      return this.root.state.calendar.styles.column["stroke-width"] / 2;
+    getX () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
     },
-    getY() {
-      return this.root.state.calendar.styles.column["stroke-width"] / 2;
+    getY () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
     },
-    getWidth() {
-      let width =
-        this.root.state.width -
-        this.root.state.calendar.styles.column["stroke-width"];
+    getWidth () {
+      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
       return width;
     },
-    monthsStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.month.style
-      );
+    monthsStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
     },
-    daysStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.day.style
-      );
+    daysStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
     },
-    hoursStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.hour.style
-      );
+    hoursStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
     }
   }
 };

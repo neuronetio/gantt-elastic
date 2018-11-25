@@ -1,6 +1,8 @@
+const fontSize = '12px';
+const fontFamily = 'Arial, sans-serif';
 export default {
   "header": {
-    "font-family": "Arial,sans-serif",
+    "font-family": fontFamily,
     "margin": "0 auto",
     "background": "#f3f5f747",
     "padding": "10px",
@@ -39,23 +41,13 @@ export default {
     "padding": "8px 12px"
   },
   "header-slider": {},
-  "header-slider-wrapper": {
-    "display": "inline-block",
-    "vertical-align": "middle"
-  },
+  "header-slider-wrapper": { "display": "inline-block", "vertical-align": "middle" },
   "header-slider--slider": {},
   "header-slider--process": { "background": "#ccc" },
   "header-task-list-switch--label": {},
-  "header-task-list-switch": {
-    "margin": "0px 15px",
-    "vertical-align": "middle"
-  },
+  "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
   "header-label": {},
-  "task-list-header": {
-    "display": "flex",
-    "user-select": "none",
-    "vertical-align": "middle"
-  },
+  "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
   "task-list-header-column": {
     "border": "1px solid #00000050",
     "border-top": "none",
@@ -80,12 +72,8 @@ export default {
     "box-sizing": "border-box",
     "user-select": "none"
   },
-  "task-list-column-expander-line": {
-    "fill": "transparent",
-    "stroke": "#000000",
-    "stroke-width": "1",
-    "stroke-linecap": "round"
-  },
+  "task-list-column-expander-line":
+    { "fill": "transparent", "stroke": "#000000", "stroke-width": "1", "stroke-linecap": "round" },
   "task-list-column-expander-border": {
     "fill": "#ffffffa0",
     "stroke": "#000000",
@@ -93,8 +81,8 @@ export default {
   "task-list-header-label": {
     "overflow": "hidden",
     "text-overflow": "ellipsis",
-    "font-family": "Arial",
-    "font-size": "12px",
+    "font-family": fontFamily,
+    "font-size": fontSize,
     "box-sizing": "border-box",
     "margin": "auto 6px",
     "display": "inline-flex",
@@ -109,14 +97,24 @@ export default {
     "display": "inline-flex",
     "vertical-align": "center"
   },
-  "task-list-header-resizer": {
-    "margin": "auto 0px"
-  },
+  "task-list-header-resizer": { "margin": "auto 0px" },
   "task-list-header-resizer-dot": {
     "width": "3px",
     "height": "3px",
     "background": "#ddd",
     "border-radius": "100%",
     "margin": "4px 0px",
-  }
+  },
+  "calendar-wrapper": {},
+  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
+  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar-row--month": {},
+  "calendar-row--day": {},
+  "calendar-row--hour": {},
+  "calendar-row-rect--month": {},
+  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--day": {},
+  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--hour": {},
+  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
 }

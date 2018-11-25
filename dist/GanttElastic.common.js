@@ -568,12 +568,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=c91d303a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=abc77d22&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=c91d303a&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=abc77d22&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -2174,19 +2174,19 @@ var Header_component = normalizeComponent(
 
 Header_component.options.__file = "Header.vue"
 /* harmony default export */ var Header = (Header_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=0d6e573e&
-var TaskListvue_type_template_id_0d6e573e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.root.state.taskList.display)?_c('foreignObject',{staticClass:"gantt-elastic__task-list-object",attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__task-list-container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('task-list-header'),_vm._l((_vm.root.visibleTasks),function(task){return _c('task-list-item',{key:task.id,attrs:{"task":task,"expander-style":_vm.getListExpanderStyle(task)}})})],2)]):_vm._e()}
-var TaskListvue_type_template_id_0d6e573e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=36eeb1cd&
+var TaskListvue_type_template_id_36eeb1cd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.root.state.taskList.display)?_c('foreignObject',{staticClass:"gantt-elastic__task-list-object",attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__task-list-container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('task-list-header'),_vm._l((_vm.root.visibleTasks),function(task){return _c('task-list-item',{key:task.id,attrs:{"task":task,"expander-style":_vm.getListExpanderStyle(task)}})})],2)]):_vm._e()}
+var TaskListvue_type_template_id_36eeb1cd_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=template&id=0d6e573e&
+// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=template&id=36eeb1cd&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=3b84103c&
-var TaskListHeadervue_type_template_id_3b84103c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__task-list-header",style:(_vm.root.style('task-list-header'))},_vm._l((_vm.root.state.taskList.columns),function(column){return _c('div',{key:column._id,staticClass:"gantt-elastic__task-list-header-column",style:(_vm.root.style('task-list-header-column',_vm.getStyle(column)))},[(column.expander)?_c('task-list-expander',{attrs:{"tasks":_vm.collapsible}}):_vm._e(),_c('div',{staticClass:"gantt-elastic__task-list-header-label",style:(_vm.root.style('task-list-header-label',column.style.label)),attrs:{"column":column},on:{"mouseup":function($event){_vm.resizerMouseUp($event, column)}}},[_vm._v(_vm._s(column.label))]),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-wrapper",style:(_vm.root.style('task-list-header-resizer-wrapper')),attrs:{"column":column},on:{"mousedown":function($event){_vm.resizerMouseDown($event, column)}}},[_c('div',{staticClass:"gantt-elastic__task-list-header-resizer",style:(_vm.root.style('task-list-header-resizer'))},[_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))}),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))}),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))})])])],1)}))}
-var TaskListHeadervue_type_template_id_3b84103c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=0fc94745&
+var TaskListHeadervue_type_template_id_0fc94745_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__task-list-header",style:(_vm.root.style('task-list-header'))},_vm._l((_vm.root.state.taskList.columns),function(column){return _c('div',{key:column._id,staticClass:"gantt-elastic__task-list-header-column",style:(_vm.root.style('task-list-header-column',_vm.getStyle(column)))},[(column.expander)?_c('task-list-expander',{attrs:{"tasks":_vm.collapsible}}):_vm._e(),_c('div',{staticClass:"gantt-elastic__task-list-header-label",style:(_vm.root.style('task-list-header-label',column.style.label)),attrs:{"column":column},on:{"mouseup":function($event){_vm.resizerMouseUp($event, column)}}},[_vm._v(_vm._s(column.label))]),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-wrapper",style:(_vm.root.style('task-list-header-resizer-wrapper')),attrs:{"column":column},on:{"mousedown":function($event){_vm.resizerMouseDown($event, column)}}},[_c('div',{staticClass:"gantt-elastic__task-list-header-resizer",style:(_vm.root.style('task-list-header-resizer'))},[_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))}),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))}),_c('div',{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:(_vm.root.style('task-list-header-resizer-dot'))})])])],1)}))}
+var TaskListHeadervue_type_template_id_0fc94745_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=3b84103c&
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=0fc94745&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=template&id=09df9296&
 var Expandervue_type_template_id_09df9296_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__task-list-column-expander-wrapper",style:(_vm.root.style('task-list-column-expander-wrapper'))},[_c('svg',{staticClass:"gantt-elastic__task-list-column-expander-content",style:(_vm.root.style('task-list-column-expander-content')),attrs:{"width":_vm.root.state.taskList.expander.size,"height":_vm.root.state.taskList.expander.size}},[(_vm.allChildren.length)?_c('rect',{staticClass:"gantt-elastic__task-list-column-expander-border",style:(_vm.root.style('task-list-column-expander-border',_vm.borderStyle)),attrs:{"x":_vm.border,"y":_vm.border,"width":_vm.root.state.taskList.expander.size-_vm.border*2,"height":_vm.root.state.taskList.expander.size-_vm.border*2,"rx":"2","ry":"2"},on:{"click":_vm.toggle}}):_vm._e(),(_vm.allChildren.length)?_c('line',{staticClass:"gantt-elastic__task-list-column-expander-line",style:(_vm.root.style('task-list-column-expander-line')),attrs:{"x1":_vm.lineOffset,"y1":_vm.root.state.taskList.expander.size/2,"x2":_vm.root.state.taskList.expander.size-_vm.lineOffset,"y2":_vm.root.state.taskList.expander.size/2},on:{"click":_vm.toggle}}):_vm._e(),(_vm.collapsed)?_c('line',{staticClass:"gantt-elastic__task-list-column-expander-line",style:(_vm.root.style('task-list-column-expander-line')),attrs:{"x1":_vm.root.state.taskList.expander.size/2,"y1":_vm.lineOffset,"x2":_vm.root.state.taskList.expander.size/2,"y2":_vm.root.state.taskList.expander.size-_vm.lineOffset},on:{"click":_vm.toggle}}):_vm._e()])])}
@@ -2301,13 +2301,12 @@ Expander_component.options.__file = "Expander.vue"
 //
 
 
-
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
   components: {
     TaskListExpander: Expander
   },
   inject: ["root"],
-  data() {
+  data () {
     return {
       resizer: {
         moving: false,
@@ -2316,64 +2315,44 @@ Expander_component.options.__file = "Expander.vue"
     };
   },
   computed: {
-    getStyle() {
+    getStyle () {
       return column => {
         const state = this.root.state;
         return {
-          height:
-            state.calendar.height +
-            state.calendar.styles.column["stroke-width"] +
-            "px",
+          "height": state.calendar.height + this.root.style('calendar-row')['stroke-width'] + "px",
           "margin-bottom": state.calendar.gap + "px",
-          width: column.finalWidth + "px"
+          "width": column.finalWidth + "px"
         };
       };
     },
-    collapsible() {
+    collapsible () {
       return this.root.state.tasks.filter(task => task.allChildren.length > 0);
     },
-    getResizerDotStyle() {
-      let state = this.root.state;
-      return {};
-    }
   },
   methods: {
-    resizerMouseDown(event, column) {
+    resizerMouseDown (event, column) {
       if (!this.resizerMoving) {
         this.resizer.moving = column;
         this.resizer.x = event.clientX;
         this.resizer.initialWidth = column.width;
-        this.$root.$emit(
-          "gantt-elastic.taskList.column.width.change.start",
-          this.resizer.moving.width
-        );
+        this.$root.$emit("gantt-elastic.taskList.column.width.change.start", this.resizer.moving.width);
       }
     },
-    resizerMouseMove(event) {
+    resizerMouseMove (event) {
       if (this.resizer.moving) {
-        this.resizer.moving.width =
-          this.resizer.initialWidth + event.clientX - this.resizer.x;
-        this.$root.$emit(
-          "gantt-elastic.taskList.column.width.change",
-          this.resizer.moving.width
-        );
+        this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+        this.$root.$emit("gantt-elastic.taskList.column.width.change", this.resizer.moving.width);
       }
     },
-    resizerMouseUp(event) {
+    resizerMouseUp (event) {
       if (this.resizer.moving) {
-        this.$root.$emit(
-          "gantt-elastic.taskList.column.width.change",
-          this.resizer.moving.width
-        );
-        this.$root.$emit(
-          "gantt-elastic.taskList.column.width.change.stop",
-          this.resizer.moving.width
-        );
+        this.$root.$emit("gantt-elastic.taskList.column.width.change", this.resizer.moving.width);
+        this.$root.$emit("gantt-elastic.taskList.column.width.change.stop", this.resizer.moving.width);
         this.resizer.moving = false;
       }
     }
   },
-  created() {
+  created () {
     this.$root.$on("gantt-elastic.main.mousemove", this.resizerMouseMove);
     this.$root.$on("gantt-elastic.main.mouseup", this.resizerMouseUp);
   }
@@ -2391,8 +2370,8 @@ Expander_component.options.__file = "Expander.vue"
 
 var TaskListHeader_component = normalizeComponent(
   TaskList_TaskListHeadervue_type_script_lang_js_,
-  TaskListHeadervue_type_template_id_3b84103c_render,
-  TaskListHeadervue_type_template_id_3b84103c_staticRenderFns,
+  TaskListHeadervue_type_template_id_0fc94745_render,
+  TaskListHeadervue_type_template_id_0fc94745_staticRenderFns,
   false,
   null,
   null,
@@ -2531,7 +2510,7 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
 //
 //
 //
-
+//
 
 
 
@@ -2541,24 +2520,15 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
     TaskListItem: TaskListItem
   },
   inject: ["root"],
-  data() {
+  data () {
     return {};
   },
   computed: {
-    getHeaderExpanderStyle() {
+    getHeaderExpanderStyle () {
       const state = this.root.state;
       return Object.assign({}, state.taskList.styles.header, {
-        width:
-          ((state.taskList.expander.width +
-            state.calendar.styles.column["stroke-width"] +
-            state.taskList.expander.margin) /
-            100) *
-            state.taskList.percent +
-          "px",
-        height:
-          state.calendar.height +
-          state.calendar.styles.column["stroke-width"] +
-          "px",
+        width: ((state.taskList.expander.width + this.root.style("calendar-row")["stroke-width"] + state.taskList.expander.margin) / 100) * state.taskList.percent + "px",
+        height: state.calendar.height + this.root.style("calendar-row")["stroke-width"] + "px",
         "margin-bottom": state.calendar.gap + "px",
         "padding-right": state.taskList.expander.margin + "px",
         "padding-left": state.taskList.expander.margin + "px",
@@ -2566,27 +2536,15 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
         display: "inline-flex"
       });
     },
-    getListExpanderStyle() {
+    getListExpanderStyle () {
       return task => {
         const state = this.root.state;
-        const padding =
-          (task.parents.length - 1) * state.taskList.expander.padding;
+        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const maxLevel = this.root.getMaximalLevel();
-        let height =
-          state.row.height +
-          state.grid.horizontal.gap * 2 -
-          state.grid.horizontal.style.strokeWidth;
-        let width =
-          ((state.taskList.expander.size +
-            state.calendar.styles.column["stroke-width"] +
-            padding +
-            state.taskList.expander.margin) /
-            100) *
-          state.taskList.percent;
+        let height = state.row.height + state.grid.horizontal.gap * 2 - state.grid.horizontal.style.strokeWidth;
+        let width = ((state.taskList.expander.size + this.root.style("calendar-row")["stroke-width"] + padding + state.taskList.expander.margin) / 100) * state.taskList.percent;
         if (state.taskList.expander.straight) {
-          width =
-            (maxLevel - 1) * state.taskList.expander.size +
-            state.taskList.expander.padding * 2;
+          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
         }
         const style = {
           width: width + "px",
@@ -2613,8 +2571,8 @@ TaskListItem_component.options.__file = "TaskListItem.vue"
 
 var TaskList_component = normalizeComponent(
   TaskList_TaskListvue_type_script_lang_js_,
-  TaskListvue_type_template_id_0d6e573e_render,
-  TaskListvue_type_template_id_0d6e573e_staticRenderFns,
+  TaskListvue_type_template_id_36eeb1cd_render,
+  TaskListvue_type_template_id_36eeb1cd_staticRenderFns,
   false,
   null,
   null,
@@ -2631,12 +2589,12 @@ var Treevue_type_template_id_99e71f0a_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/Tree/Tree.vue?vue&type=template&id=99e71f0a&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=template&id=19cf1dae&
-var Gridvue_type_template_id_19cf1dae_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',[_vm._l((_vm.horizontalLines),function(line){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-horizontal-line",style:(_vm.getHStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-vertical-line",style:(_vm.getVStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-time-line",style:(_vm.root.state.grid.timeLine.style),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)}
-var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=template&id=0b08c1c2&
+var Gridvue_type_template_id_0b08c1c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',[_vm._l((_vm.horizontalLines),function(line){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-horizontal-line",style:(_vm.getHStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-vertical-line",style:(_vm.getVStyle),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-time-line",style:(_vm.root.state.grid.timeLine.style),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)}
+var Gridvue_type_template_id_0b08c1c2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Grid/Grid.vue?vue&type=template&id=19cf1dae&
+// CONCATENATED MODULE: ./src/components/Grid/Grid.vue?vue&type=template&id=0b08c1c2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid/Grid.vue?vue&type=script&lang=js&
 //
@@ -2649,13 +2607,13 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
 
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
   inject: ["root"],
-  data() {
+  data () {
     return {
       verticalLines: [],
       horizontalLines: []
     };
   },
-  created() {
+  created () {
     this.$root.$on("gantt-elastic.recenterPosition", this.recenterPosition);
     this.$root.$on("gantt-elastic.scope.change", this.regenerate);
     this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
@@ -2663,7 +2621,7 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
     this.$root.$on("gantt-elastic.tree.scroll", this.regenerate);
     this.regenerate();
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       this.$nextTick(() => {
         // because of slider
@@ -2672,10 +2630,10 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
     });
   },
   methods: {
-    recenterPosition() {
+    recenterPosition () {
       this.root.scrollToTime(this.timeLinePosition.time);
     },
-    generateVerticalLines() {
+    generateVerticalLines () {
       let lines = [];
       const state = this.root.state;
       state.times.steps.forEach(step => {
@@ -2684,22 +2642,22 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
           x1: step.offset.px,
           y1:
             state.calendar.height +
-            state.calendar.styles.column["stroke-width"] +
+            this.root.style('calendar-row')["stroke-width"] +
             state.calendar.gap,
           x2: step.offset.px,
           y2:
             state.calendar.height +
-            state.calendar.styles.column["stroke-width"] +
+            this.root.style('calendar-row')["stroke-width"] +
             state.calendar.gap +
             state.tasks.length *
-              (state.row.height + state.grid.horizontal.gap * 2) +
+            (state.row.height + state.grid.horizontal.gap * 2) +
             state.grid.horizontal.style.strokeWidth,
           inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
         });
       });
       return (this.verticalLines = lines);
     },
-    generateHorizontalLines() {
+    generateHorizontalLines () {
       let lines = [];
       const state = this.root.state;
       let tasks = this.root.visibleTasks;
@@ -2710,21 +2668,21 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
           y1:
             index * (state.row.height + state.grid.horizontal.gap * 2) +
             state.calendar.height +
-            state.calendar.styles.column["stroke-width"] +
+            this.root.style('calendar-row')["stroke-width"] +
             state.calendar.gap +
             state.grid.horizontal.style.strokeWidth / 2,
           x2: "100%",
           y2:
             index * (state.row.height + state.grid.horizontal.gap * 2) +
             state.calendar.height +
-            state.calendar.styles.column["stroke-width"] +
+            this.root.style('calendar-row')["stroke-width"] +
             state.calendar.gap +
             state.grid.horizontal.style.strokeWidth / 2
         });
       }
       return (this.horizontalLines = lines);
     },
-    regenerate() {
+    regenerate () {
       this.$nextTick(() => {
         this.generateVerticalLines();
         this.generateHorizontalLines();
@@ -2732,7 +2690,7 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
     }
   },
   computed: {
-    inViewPort() {
+    inViewPort () {
       return line => {
         const state = this.root.state;
         return (
@@ -2741,7 +2699,7 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
         );
       };
     },
-    timeLinePosition() {
+    timeLinePosition () {
       const state = this.root.state;
       const d = new Date();
       const current = d.getTime();
@@ -2757,10 +2715,10 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
       timeLine.dateTime = d.toLocaleDateString();
       return timeLine;
     },
-    getVStyle() {
+    getVStyle () {
       return this.root.state.grid.vertical.style;
     },
-    getHStyle() {
+    getHStyle () {
       return this.root.state.grid.horizontal.style;
     }
   }
@@ -2778,8 +2736,8 @@ var Gridvue_type_template_id_19cf1dae_staticRenderFns = []
 
 var Grid_component = normalizeComponent(
   Grid_Gridvue_type_script_lang_js_,
-  Gridvue_type_template_id_19cf1dae_render,
-  Gridvue_type_template_id_19cf1dae_staticRenderFns,
+  Gridvue_type_template_id_0b08c1c2_render,
+  Gridvue_type_template_id_0b08c1c2_staticRenderFns,
   false,
   null,
   null,
@@ -2789,21 +2747,22 @@ var Grid_component = normalizeComponent(
 
 Grid_component.options.__file = "Grid.vue"
 /* harmony default export */ var Grid = (Grid_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=ae951cb8&
-var Calendarvue_type_template_id_ae951cb8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-group"},[_c('foreignObject',{attrs:{"x":_vm.getX,"y":_vm.getY,"width":_vm.getWidth,"height":_vm.root.state.calendar.height}},[_c('div',{staticClass:"gantt-elastic__calendar",style:(_vm.root.state.calendar.styles.wrapper),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}})]),_vm._l((_vm.months),function(month){return _c('calendar-row',{key:month.key,attrs:{"item":month,"rowStyle":_vm.monthsStyle}})}),_vm._l((_vm.days),function(day){return (_vm.root.isInsideViewPort(day.x,day.width))?_c('calendar-row',{key:day.key,attrs:{"item":day,"rowStyle":_vm.daysStyle}}):_vm._e()}),_vm._l((_vm.hours),function(hour){return (_vm.root.isInsideViewPort(hour.x,hour.width))?_c('calendar-row',{key:hour.key,attrs:{"item":hour,"rowStyle":_vm.hoursStyle}}):_vm._e()})],2)}
-var Calendarvue_type_template_id_ae951cb8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=4eeb32e3&
+var Calendarvue_type_template_id_4eeb32e3_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-wrapper",style:(_vm.root.style('calendar-wrapper'))},[_c('foreignObject',{attrs:{"x":_vm.getX,"y":_vm.getY,"width":_vm.getWidth,"height":_vm.root.state.calendar.height}},[_c('div',{staticClass:"gantt-elastic__calendar",style:(_vm.root.style('calendar')),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}})]),_vm._l((_vm.months),function(month){return _c('calendar-row',{key:month.key,staticClass:"gantt-elastic__calendar-row--month",attrs:{"item":month,"which":"month"}})}),_vm._l((_vm.days),function(day){return (_vm.root.isInsideViewPort(day.x,day.width))?_c('calendar-row',{key:day.key,staticClass:"gantt-elastic__calendar-row--day",attrs:{"item":day,"which":"day"}}):_vm._e()}),_vm._l((_vm.hours),function(hour){return (_vm.root.isInsideViewPort(hour.x,hour.width))?_c('calendar-row',{key:hour.key,staticClass:"gantt-elastic__calendar-row--hour",attrs:{"item":hour,"which":"hour"}}):_vm._e()})],2)}
+var Calendarvue_type_template_id_4eeb32e3_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=template&id=ae951cb8&
+// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=template&id=4eeb32e3&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=357080de&
-var CalendarRowvue_type_template_id_357080de_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-row-group"},[_c('rect',{staticClass:"gantt-elastic__calendar-row",style:(_vm.rowStyle),attrs:{"x":_vm.item.x,"y":_vm.item.y,"width":_vm.item.width,"height":_vm.item.height}}),_c('text',{style:(_vm.root.state.calendar.styles.text),attrs:{"x":_vm.getTextX,"y":_vm.getTextY,"alignment-baseline":"middle","text-anchor":"middle"}},[_vm._v(_vm._s(_vm.item.label))])])}
-var CalendarRowvue_type_template_id_357080de_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0aef1511&
+var CalendarRowvue_type_template_id_0aef1511_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__calendar-row",style:(_vm.root.style('calendar-row'))},[_c('rect',{class:'gantt-elastic__calendar-row-rect--'+_vm.which,style:(_vm.root.style('calendar-row-rect--'+_vm.which)),attrs:{"x":_vm.item.x,"y":_vm.item.y,"width":_vm.item.width,"height":_vm.item.height}}),_c('text',{class:'gantt-elastic__calendar-row-text--'+_vm.which,style:(_vm.root.style('calendar-row-text--'+_vm.which)),attrs:{"x":_vm.getTextX,"y":_vm.getTextY,"alignment-baseline":"middle","text-anchor":"middle"}},[_vm._v(_vm._s(_vm.item.label))])])}
+var CalendarRowvue_type_template_id_0aef1511_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=357080de&
+// CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0aef1511&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -2813,15 +2772,15 @@ var CalendarRowvue_type_template_id_357080de_staticRenderFns = []
 
 /* harmony default export */ var CalendarRowvue_type_script_lang_js_ = ({
   inject: ["root"],
-  props: ["item", "rowStyle"],
-  data() {
+  props: ["item", "which"],
+  data () {
     return {};
   },
   computed: {
-    getTextX() {
+    getTextX () {
       return this.item.x + this.item.width / 2;
     },
-    getTextY() {
+    getTextY () {
       return this.item.y + this.item.height / 2;
     }
   }
@@ -2839,8 +2798,8 @@ var CalendarRowvue_type_template_id_357080de_staticRenderFns = []
 
 var CalendarRow_component = normalizeComponent(
   Calendar_CalendarRowvue_type_script_lang_js_,
-  CalendarRowvue_type_template_id_357080de_render,
-  CalendarRowvue_type_template_id_357080de_staticRenderFns,
+  CalendarRowvue_type_template_id_0aef1511_render,
+  CalendarRowvue_type_template_id_0aef1511_staticRenderFns,
   false,
   null,
   null,
@@ -2861,6 +2820,7 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
 //
 //
 //
+//
 
 
 
@@ -2869,33 +2829,26 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
     CalendarRow: CalendarRow
   },
   inject: ["root"],
-  data() {
+  data () {
     return {
       hours: [],
       days: [],
       months: []
     };
   },
-  created() {
+  created () {
     this.$root.$on("gantt-elastic.scope.change", this.regenerate);
     this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
     this.regenerate();
   },
   methods: {
-    howManyHoursFit(dayIndex) {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyHoursFit (dayIndex) {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if (
-            (this.root.state.calendar.hour.maxWidths[formatName] +
-              additionalSpace) *
-              hours <=
-              fullCellWidth &&
-            hours > 1
-          ) {
+          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
             return {
               count: hours,
               type: formatName
@@ -2908,24 +2861,14 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
         type: ""
       };
     },
-    howManyDaysFit() {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyDaysFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
-      for (
-        let days = this.root.state.times.steps.length;
-        days > 1;
-        days = Math.ceil(days / 2)
-      ) {
+      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.root.state.calendar.day.maxWidths[formatName] +
-              additionalSpace) *
-              days <=
-              fullWidth &&
-            days > 1
-          ) {
+            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
             return {
               count: days,
               type: formatName
@@ -2938,9 +2881,8 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
         type: ""
       };
     },
-    howManyMonthsFit() {
-      const additionalSpace =
-        this.root.state.calendar.styles.column["stroke-width"] + 2;
+    howManyMonthsFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentMonth = dayjs_min_default()(this.root.state.times.firstDate);
@@ -2954,19 +2896,9 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
         }
         previousMonth = currentMonth.clone();
       }
-      for (
-        let months = monthsCount;
-        months > 1;
-        months = Math.ceil(months / 2)
-      ) {
+      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
-          if (
-            (this.root.state.calendar.month.maxWidths[formatName] +
-              additionalSpace) *
-              months <=
-              fullWidth &&
-            months > 1
-          ) {
+          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
             return {
               count: months,
               type: formatName
@@ -2979,48 +2911,25 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
         type: formatNames[0]
       };
     },
-    hourTextStyle() {
-      return (
-        "font-family:" +
-        this.root.state.calendar.hour.fontFamily +
-        ";font-size:" +
-        this.root.state.calendar.hour.fontSize
-      );
+    hourTextStyle () {
+      return ("font-family:" + this.root.state.calendar.hour.fontFamily + ";font-size:" + this.root.state.calendar.hour.fontSize);
     },
-    dayTextStyle() {
-      return (
-        "font-family:" +
-        this.root.state.calendar.day.fontFamily +
-        ";font-size:" +
-        this.root.state.calendar.day.fontSize
-      );
+    dayTextStyle () {
+      return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
     },
-    generateHours() {
+    generateHours () {
       let hours = [];
-      for (
-        let dayIndex = 0, len = this.root.state.times.steps.length;
-        dayIndex < len;
-        dayIndex++
-      ) {
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex++) {
         const hoursCount = this.howManyHoursFit(dayIndex);
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx =
-          this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.root.state.times.steps[dayIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date).add(
-            i * hourStep,
-            "hour"
-          );
+          const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date)
+            .add(i * hourStep, "hour");
           hours.push({
             key: this.root.state.times.steps[dayIndex].date.valueOf() + "h" + i,
-            x:
-              this.root.state.calendar.styles.column["stroke-width"] / 2 +
-              this.root.state.times.steps[dayIndex].offset.px +
-              hourWidthPx * i,
-            y:
-              this.root.state.calendar.styles.column["stroke-width"] / 2 +
-              this.root.state.calendar.day.height +
-              this.root.state.calendar.month.height,
+            x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px + hourWidthPx * i,
+            y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
             height: this.root.state.calendar.hour.height,
             label: this.root.state.calendar.hour.format[hoursCount.type](date)
@@ -3029,37 +2938,23 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
       }
       return (this.hours = hours);
     },
-    generateDays() {
+    generateDays () {
       let days = [];
       const daysCount = this.howManyDaysFit();
-      const dayStep = Math.ceil(
-        this.root.state.times.steps.length / daysCount.count
-      );
-      for (
-        let dayIndex = 0, len = this.root.state.times.steps.length;
-        dayIndex < len;
-        dayIndex += dayStep
-      ) {
+      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (
-            typeof this.root.state.times.steps[dayIndex + currentStep] !==
-            "undefined"
-          ) {
-            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep]
-              .width.px;
+          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== "undefined") {
+            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
           }
         }
         const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date);
         days.push({
           key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
-          x:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            this.root.state.times.steps[dayIndex].offset.px,
-          y:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            this.root.state.calendar.month.height,
+          x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px,
+          y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
           width: dayWidthPx,
           height: this.root.state.calendar.day.height,
           label: this.root.state.calendar.day.format[daysCount.type](date)
@@ -3067,7 +2962,7 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
       }
       return (this.days = days);
     },
-    generateMonths() {
+    generateMonths () {
       let months = [];
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
@@ -3082,16 +2977,9 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
           finalDate = dayjs_min_default()(this.root.state.times.lastDate);
         }
         // we must find first and last step to get the offsets / widths
-        for (
-          let step = 0, len = this.root.state.times.steps.length;
-          step < len;
-          step++
-        ) {
+        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
           let currentStep = this.root.state.times.steps[step];
-          if (
-            currentStep.date.valueOf() >= currentDate.valueOf() &&
-            currentStep.date.valueOf() < finalDate.valueOf()
-          ) {
+          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
               monthOffset = currentStep.offset.px;
@@ -3100,34 +2988,27 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
         }
         let label = "";
         for (let formatName of formatNames) {
-          if (
-            this.root.state.calendar.month.maxWidths[formatName] + 2 <=
-            monthWidth
-          ) {
-            label = this.root.state.calendar.month.format[formatName](
-              currentDate
-            );
+          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.root.state.calendar.month.format[formatName](currentDate);
           }
         }
         months.push({
           key: monthIndex + "m",
-          x:
-            this.root.state.calendar.styles.column["stroke-width"] / 2 +
-            monthOffset,
-          y: this.root.state.calendar.styles.column["stroke-width"] / 2,
+          x: this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset,
+          y: this.root.style('calendar-row')["stroke-width"] / 2,
           width: monthWidth,
           height: this.root.state.calendar.month.height,
           label: label
         });
-
-        currentDate = currentDate.add(1, "month").startOf("month");
+        currentDate = currentDate.add(1, "month")
+          .startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
           currentDate = dayjs_min_default()(this.root.state.times.lastDate);
         }
       }
       return (this.months = months);
     },
-    regenerate() {
+    regenerate () {
       this.$nextTick(() => {
         this.generateHours();
         this.generateDays();
@@ -3136,38 +3017,24 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
     }
   },
   computed: {
-    getX() {
-      return this.root.state.calendar.styles.column["stroke-width"] / 2;
+    getX () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
     },
-    getY() {
-      return this.root.state.calendar.styles.column["stroke-width"] / 2;
+    getY () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
     },
-    getWidth() {
-      let width =
-        this.root.state.width -
-        this.root.state.calendar.styles.column["stroke-width"];
+    getWidth () {
+      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
       return width;
     },
-    monthsStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.month.style
-      );
+    monthsStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
     },
-    daysStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.day.style
-      );
+    daysStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
     },
-    hoursStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.root.state.calendar.styles.row,
-        this.root.state.calendar.hour.style
-      );
+    hoursStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
     }
   }
 });
@@ -3184,8 +3051,8 @@ CalendarRow_component.options.__file = "CalendarRow.vue"
 
 var Calendar_component = normalizeComponent(
   Calendar_Calendarvue_type_script_lang_js_,
-  Calendarvue_type_template_id_ae951cb8_render,
-  Calendarvue_type_template_id_ae951cb8_staticRenderFns,
+  Calendarvue_type_template_id_4eeb32e3_render,
+  Calendarvue_type_template_id_4eeb32e3_staticRenderFns,
   false,
   null,
   null,
@@ -4036,9 +3903,11 @@ var Main_component = normalizeComponent(
 Main_component.options.__file = "Main.vue"
 /* harmony default export */ var Main = (Main_component.exports);
 // CONCATENATED MODULE: ./src/style.js
+const fontSize = '12px';
+const fontFamily = 'Arial, sans-serif';
 /* harmony default export */ var style = ({
   "header": {
-    "font-family": "Arial,sans-serif",
+    "font-family": fontFamily,
     "margin": "0 auto",
     "background": "#f3f5f747",
     "padding": "10px",
@@ -4077,23 +3946,13 @@ Main_component.options.__file = "Main.vue"
     "padding": "8px 12px"
   },
   "header-slider": {},
-  "header-slider-wrapper": {
-    "display": "inline-block",
-    "vertical-align": "middle"
-  },
+  "header-slider-wrapper": { "display": "inline-block", "vertical-align": "middle" },
   "header-slider--slider": {},
   "header-slider--process": { "background": "#ccc" },
   "header-task-list-switch--label": {},
-  "header-task-list-switch": {
-    "margin": "0px 15px",
-    "vertical-align": "middle"
-  },
+  "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
   "header-label": {},
-  "task-list-header": {
-    "display": "flex",
-    "user-select": "none",
-    "vertical-align": "middle"
-  },
+  "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
   "task-list-header-column": {
     "border": "1px solid #00000050",
     "border-top": "none",
@@ -4118,12 +3977,8 @@ Main_component.options.__file = "Main.vue"
     "box-sizing": "border-box",
     "user-select": "none"
   },
-  "task-list-column-expander-line": {
-    "fill": "transparent",
-    "stroke": "#000000",
-    "stroke-width": "1",
-    "stroke-linecap": "round"
-  },
+  "task-list-column-expander-line":
+    { "fill": "transparent", "stroke": "#000000", "stroke-width": "1", "stroke-linecap": "round" },
   "task-list-column-expander-border": {
     "fill": "#ffffffa0",
     "stroke": "#000000",
@@ -4131,8 +3986,8 @@ Main_component.options.__file = "Main.vue"
   "task-list-header-label": {
     "overflow": "hidden",
     "text-overflow": "ellipsis",
-    "font-family": "Arial",
-    "font-size": "12px",
+    "font-family": fontFamily,
+    "font-size": fontSize,
     "box-sizing": "border-box",
     "margin": "auto 6px",
     "display": "inline-flex",
@@ -4147,16 +4002,26 @@ Main_component.options.__file = "Main.vue"
     "display": "inline-flex",
     "vertical-align": "center"
   },
-  "task-list-header-resizer": {
-    "margin": "auto 0px"
-  },
+  "task-list-header-resizer": { "margin": "auto 0px" },
   "task-list-header-resizer-dot": {
     "width": "3px",
     "height": "3px",
     "background": "#ddd",
     "border-radius": "100%",
     "margin": "4px 0px",
-  }
+  },
+  "calendar-wrapper": {},
+  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
+  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar-row--month": {},
+  "calendar-row--day": {},
+  "calendar-row--hour": {},
+  "calendar-row-rect--month": {},
+  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--day": {},
+  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--hour": {},
+  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
 });
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js&
@@ -4169,7 +4034,7 @@ Main_component.options.__file = "Main.vue"
 
 
 
-function getOptions(userOptions) {
+function getOptions (userOptions) {
   return {
     style: style,
     title: {
@@ -4345,17 +4210,15 @@ function getOptions(userOptions) {
           color: "#606060"
         }
       },
-      columns: [
-        {
-          id: 0,
-          label: "ID",
-          value: "id",
-          width: 40,
-          styles: {
-            label: {}
-          }
+      columns: [{
+        id: 0,
+        label: "ID",
+        value: "id",
+        width: 40,
+        styles: {
+          label: {}
         }
-      ],
+      }],
       resizerWidth: 0,
       percent: 100,
       width: 0,
@@ -4374,51 +4237,24 @@ function getOptions(userOptions) {
       months: [],
       gap: 6,
       height: 0,
-      styles: {
-        wrapper: {
-          width: "100%",
-          height: "100%",
-          background: "#f3f5f7",
-          "border-color": "#f3f5f7"
-        },
-        row: {
-          fill: "transparent",
-          //stroke: '#ECF0F1'
-          stroke: "#dadada",
-          "stroke-width": 0.5
-        },
-        column: {
-          stroke: "#dadada",
-          "stroke-width": 1,
-          fill: "transparent"
-        },
-        text: {
-          fontFamily: "Arial",
-          fill: "#606060"
-        }
-      },
       hour: {
         height: 20,
         display: true,
         fontSize: "12px",
-        style: {
-          stroke: "#dadada",
-          "stroke-width": 0.5
-        },
         widths: [],
         maxWidths: {},
         format: {
-          long(date) {
+          long (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
-          medium(date) {
+          medium (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
-          short(date) {
+          short (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("HH");
@@ -4433,17 +4269,17 @@ function getOptions(userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          long(date) {
+          long (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("DD dddd");
           },
-          medium(date) {
+          medium (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("DD ddd");
           },
-          short(date) {
+          short (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("DD");
@@ -4458,17 +4294,17 @@ function getOptions(userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          short(date) {
+          short (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("MM");
           },
-          medium(date) {
+          medium (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("'YY MMM");
           },
-          long(date) {
+          long (date) {
             return dayjs_min_default()(date)
               .locale(userOptions.locale.code)
               .format("YYYY MMMM (MM)");
@@ -4488,9 +4324,8 @@ function getOptions(userOptions) {
     }
   };
 }
-
-function mergeDeep(target, ...sources) {
-  const isObject = function isObject(item) {
+function mergeDeep (target, ...sources) {
+  const isObject = function isObject (item) {
     return item && typeof item === "object" && !Array.isArray(item);
   };
   if (!sources.length) {
@@ -4500,10 +4335,9 @@ function mergeDeep(target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key])
-          Object.assign(target, {
-            [key]: {}
-          });
+        if (!target[key]) Object.assign(target, {
+          [key]: {}
+        });
         mergeDeep(target[key], source[key]);
       } else {
         Object.assign(target, {
@@ -4514,13 +4348,12 @@ function mergeDeep(target, ...sources) {
   }
   return mergeDeep(target, ...sources);
 }
-
 const GanttElastic = {
   components: {
     EgMain: Main
   },
   props: ["tasks", "options"],
-  provide() {
+  provide () {
     const provider = {};
     const self = this;
     Object.defineProperty(provider, "root", {
@@ -4529,14 +4362,14 @@ const GanttElastic = {
     });
     return provider;
   },
-  data() {
+  data () {
     return {
       state: {}
     };
   },
   methods: {
     mergeDeep: mergeDeep,
-    getScrollBarHeight() {
+    getScrollBarHeight () {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
       outer.style.height = "100px";
@@ -4557,52 +4390,40 @@ const GanttElastic = {
      * @param {object} mergeWith - if we need to merge custom item specific style with default ones
      * @returns {object}
      */
-    style(className, mergeWith = null) {
+    style (className, mergeWith = null) {
       if (mergeWith === null) {
         return this.state.style[className];
       }
-      return this.mergeDeep({}, this.state.style[className], mergeWith);
+      return Object.assign({}, this.state.style[className], mergeWith);
     },
     /**
      * Initialize component
      */
-    initialize() {
+    initialize () {
       this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
-        tasks: this.tasks.map(task =>
-          this.mergeDeep({}, task, {
-            start: dayjs_min_default()(task.start).format("YYYY-MM-DD HH:mm:ss")
-          })
-        )
+        tasks: this.tasks.map(task => this.mergeDeep({}, task, {
+          start: dayjs_min_default()(task.start)
+            .format("YYYY-MM-DD HH:mm:ss")
+        }))
       });
       dayjs_min_default.a.locale(this.options.locale, null, true);
-      this.state.taskList.columns = this.state.taskList.columns.map(
-        (column, index) => {
-          column.finalWidth =
-            (column.width / 100) * this.state.taskList.percent;
-          column.styles = this.mergeDeep(
-            {},
-            this.state.taskList.styles,
-            column.styles
-          );
-          if (typeof column.style === "undefined") {
-            column.style = {
-              height: 0 + "px",
-              "line-height": 0 + "px",
-              width: 0 + "px"
-            };
-          }
-          column.style = this.mergeDeep(
-            {},
-            this.state.taskList.styles.column,
-            column.style
-          );
-          if (typeof column.height === "undefined") {
-            column.height = 0;
-          }
-          column._id = `${index}-${column.label}`;
-          return this.mergeDeep({}, column);
+      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
+        column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+        column.styles = this.mergeDeep({}, this.state.taskList.styles, column.styles);
+        if (typeof column.style === "undefined") {
+          column.style = {
+            height: 0 + "px",
+            "line-height": 0 + "px",
+            width: 0 + "px"
+          };
         }
-      );
+        column.style = this.mergeDeep({}, this.state.taskList.styles.column, column.style);
+        if (typeof column.height === "undefined") {
+          column.height = 0;
+        }
+        column._id = `${index}-${column.label}`;
+        return this.mergeDeep({}, column);
+      });
       // initialize observer
       this.state.tasks = this.state.tasks.map(task => {
         task.x = 0;
@@ -4633,10 +4454,7 @@ const GanttElastic = {
           task.style = {};
         }
         if (typeof task.progressBarStyle === "undefined") {
-          task.progressBarStyle = this.mergeDeep(
-            {},
-            this.state.progress.styles
-          );
+          task.progressBarStyle = this.mergeDeep({}, this.state.progress.styles);
         }
         task.children = [];
         task.allChildren = [];
@@ -4656,12 +4474,13 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      this.state.ctx = document.createElement("canvas").getContext("2d");
+      this.state.ctx = document.createElement("canvas")
+        .getContext("2d");
       this.calculateTaskListColumnsWidths();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
     },
-    calculateCalendarDimensions() {
+    calculateCalendarDimensions () {
       this.state.calendar.height = 0;
       if (this.state.calendar.hour.display) {
         this.state.calendar.height += this.state.calendar.hour.height;
@@ -4673,7 +4492,7 @@ const GanttElastic = {
         this.state.calendar.height += this.state.calendar.month.height;
       }
     },
-    getMaximalLevel() {
+    getMaximalLevel () {
       let maximalLevel = 0;
       this.state.tasks.forEach(task => {
         if (task.parents.length > maximalLevel) {
@@ -4682,35 +4501,26 @@ const GanttElastic = {
       });
       return maximalLevel - 1;
     },
-    getMaximalExpanderWidth() {
-      return (
-        this.getMaximalLevel() * this.state.taskList.expander.padding +
-        this.state.taskList.expander.margin
-      );
+    getMaximalExpanderWidth () {
+      return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
     },
-    calculateTaskListColumnsWidths() {
+    calculateTaskListColumnsWidths () {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.finalWidth =
-            ((this.getMaximalExpanderWidth() + column.width) / 100) *
-            this.state.taskList.percent;
+          column.finalWidth = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
         } else {
-          column.finalWidth =
-            (column.width / 100) * this.state.taskList.percent;
+          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         }
         final += column.finalWidth;
-        let height =
-          this.state.row.height +
-          this.state.grid.horizontal.gap * 2 -
-          this.state.grid.horizontal.strokeWidth;
+        let height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
         column.style.height = height + "px";
         column.style["line-height"] = height + "px";
         column.style.width = column.finalWidth + "px";
       });
       this.state.taskList.finalWidth = final;
     },
-    resetTaskTree() {
+    resetTaskTree () {
       this.state.rootTask.children = [];
       this.state.rootTask.allChildren = [];
       this.state.rootTask.parent = null;
@@ -4723,7 +4533,7 @@ const GanttElastic = {
         current.parents = [];
       }
     },
-    makeTaskTree(task) {
+    makeTaskTree (task) {
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         if (current.parentId === task.id) {
@@ -4745,83 +4555,67 @@ const GanttElastic = {
       }
       return task;
     },
-    getTask(taskId) {
+    getTask (taskId) {
       return this.tasksById[taskId];
     },
-    getChildren(taskId) {
+    getChildren (taskId) {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
-    getSVG() {
+    getSVG () {
       return this.state.svgMain.outerHTML;
     },
-    getImage(type = "image/png") {
+    getImage (type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
           canvas.width = this.state.svgMain.clientWidth;
           canvas.height = this.state.svgMain.clientHeight;
-          canvas.getContext("2d").drawImage(img, 0, 0);
+          canvas.getContext("2d")
+            .drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
         img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
       });
     },
-    getHeight(visibleTasks, outer = false) {
-      let height =
-        visibleTasks.length *
-          (this.state.row.height + this.state.grid.horizontal.gap * 2) +
-        this.state.calendar.height +
-        this.state.calendar.styles.column["stroke-width"] * 2 +
-        this.state.calendar.gap;
+    getHeight (visibleTasks, outer = false) {
+      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
       return height;
     },
-    timeToPixelOffsetX(ms) {
+    timeToPixelOffsetX (ms) {
       let x = ms - this.state.times.firstTime;
       if (x) {
         x = x / this.state.times.timePerPixel;
       }
       return x;
     },
-    pixelOffsetXToTime(pixelOffsetX) {
-      let offset =
-        pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
-      return (
-        offset * this.state.times.timePerPixel + this.state.times.firstTime
-      );
+    pixelOffsetXToTime (pixelOffsetX) {
+      let offset = pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
+      return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
-    isInsideViewPort(x, width, buffer = 5000) {
+    isInsideViewPort (x, width, buffer = 5000) {
       return (
-        (x + width + buffer >= this.state.scroll.tree.left &&
-          x - buffer <= this.state.scroll.tree.right) ||
-        (x - buffer <= this.state.scroll.tree.left &&
-          x + width + buffer >= this.state.scroll.tree.right)
-      );
+        (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
     },
-    onScrollTree(ev) {
+    onScrollTree (ev) {
       this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
     },
-    _onScrollTree(left, top) {
+    _onScrollTree (left, top) {
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
       this.state.scroll.tree.left = left;
       this.state.scroll.tree.right = left + treeContainerWidth;
-      this.state.scroll.tree.percent =
-        (left / this.state.times.totalViewDurationPx) * 100;
+      this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
       this.state.scroll.tree.top = top;
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(
-        left + treeContainerWidth / 2
-      );
+      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
       this.state.scroll.tree.dateTime.left = dayjs_min_default()(this.state.scroll.tree.time);
-      this.state.scroll.tree.dateTime.right = dayjs_min_default()(
-        this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth)
-      );
+      this.state.scroll.tree.dateTime.right = dayjs_min_default()(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
       this.scrollTo(left);
     },
-    scrollToTime(time) {
+    scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
       pos = pos - treeContainerWidth / 2;
@@ -4830,30 +4624,30 @@ const GanttElastic = {
       }
       this.scrollTo(pos);
     },
-    scrollTo(pos) {
+    scrollTo (pos) {
       this.state.svgTreeContainer.scrollLeft = pos;
       this.state.treeScrollContainer.scrollLeft = pos;
     },
-    fixScrollPos() {
+    fixScrollPos () {
       this.$nextTick(() => {
         this.scrollToTime(this.state.scroll.tree.timeCenter);
       });
     },
-    onWheelTree(ev) {
+    onWheelTree (ev) {
       //this.state.times.timeScale += ev.deltaY * 10;
     },
-    onTimeZoomChange(timeZoom) {
+    onTimeZoomChange (timeZoom) {
       this.state.times.timeZoom = timeZoom;
       this.recalculateTimes();
       this.calculateSteps();
       this.calculateCalendarDimensions();
       this.fixScrollPos();
     },
-    onRowHeightChange(height) {
+    onRowHeightChange (height) {
       this.state.row.height = height;
       this.calculateTaskListColumnsWidths();
     },
-    onScopeChange(value) {
+    onScopeChange (value) {
       this.state.scope.before = value;
       this.state.scope.after = value;
       this.initTimes();
@@ -4861,49 +4655,34 @@ const GanttElastic = {
       this.computeCalendarWidths();
       this.fixScrollPos();
     },
-    onTaskListWidthChange(value) {
+    onTaskListWidthChange (value) {
       this.state.taskList.percent = value;
       this.calculateTaskListColumnsWidths();
       this.fixScrollPos();
     },
-    onTaskListColumnWidthChange(value) {
+    onTaskListColumnWidthChange (value) {
       this.calculateTaskListColumnsWidths();
       this.fixScrollPos();
     },
-    initializeEvents() {
+    initializeEvents () {
       this.$root.$on("gantt-elastic.tree.scroll", this.onScrollTree);
       this.$root.$on("gantt-elastic.tree.wheel", this.onWheelTree);
-      this.$root.$on(
-        "gantt-elastic.times.timeZoom.change",
-        this.onTimeZoomChange
-      );
+      this.$root.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
       this.$root.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
       this.$root.$on("gantt-elastic.scope.change", this.onScopeChange);
-      this.$root.$on(
-        "gantt-elastic.taskList.width.change",
-        this.onTaskListWidthChange
-      );
-      this.$root.$on(
-        "gantt-elastic.taskList.column.width.change",
-        this.onTaskListColumnWidthChange
-      );
+      this.$root.$on("gantt-elastic.taskList.width.change", this.onTaskListWidthChange);
+      this.$root.$on("gantt-elastic.taskList.column.width.change", this.onTaskListColumnWidthChange);
     },
-    recalculateTimes() {
+    recalculateTimes () {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
       let steps = max / min;
       let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel =
-        this.state.times.timeScale * steps * percent +
-        Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(
-        this.state.times.firstDate,
-        "milisecods"
-      );
-      this.state.times.totalViewDurationPx =
-        this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
+      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
     },
-    initTimes() {
+    initTimes () {
       this.state.times.firstDate = dayjs_min_default()(this.state.times.firstTaskDate)
         .locale(this.locale)
         .startOf("day")
@@ -4918,7 +4697,7 @@ const GanttElastic = {
       this.state.times.lastTime = this.state.times.lastDate.valueOf();
       this.recalculateTimes();
     },
-    calculateSteps() {
+    calculateSteps () {
       const steps = [];
       const lastMs = dayjs_min_default()(this.state.times.lastDate).valueOf();
       const step = this.state.times.stepDuration;
@@ -4930,17 +4709,11 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (
-        let currentDate = dayjs_min_default()(this.state.times.firstDate)
-          .add(1, step)
-          .startOf("day");
-        currentDate.valueOf() <= lastMs;
-        currentDate = currentDate.add(1, step).startOf("day")
-      ) {
-        const offsetMs = currentDate.diff(
-          this.state.times.firstDate,
-          "milisecods"
-        );
+      for (let currentDate = dayjs_min_default()(this.state.times.firstDate)
+        .add(1, step)
+        .startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step)
+          .startOf("day")) {
+        const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
         const offsetPx = offsetMs / this.state.times.timePerPixel;
         const step = {
           date: currentDate,
@@ -4963,148 +4736,132 @@ const GanttElastic = {
       };
       this.state.times.steps = steps;
     },
-    computeCalendarWidths() {
+    computeCalendarWidths () {
       this.computeDayWidths();
       this.computeHourWidths();
       this.computeMonthWidths();
     },
-    computeHourWidths() {
+    computeHourWidths () {
       const state = this.state;
-      state.ctx.font =
-        state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
+      state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs_min_default()("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
-      Object.keys(state.calendar.hour.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
+      Object.keys(state.calendar.hour.format)
+        .forEach(formatName => {
+          maxWidths[formatName] = 0;
+        });
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
         };
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(
-            state.calendar.hour.format[formatName](currentDate.toDate())
-          ).width;
-        });
+        Object.keys(state.calendar.hour.format)
+          .forEach(formatName => {
+            widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate()))
+              .width;
+          });
         state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
-          if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
-          }
-        });
+        Object.keys(state.calendar.hour.format)
+          .forEach(formatName => {
+            if (widths[formatName] > maxWidths[formatName]) {
+              maxWidths[formatName] = widths[formatName];
+            }
+          });
         currentDate = currentDate.add(1, "hour");
       }
       state.calendar.hour.maxWidths = maxWidths;
     },
-    computeDayWidths() {
+    computeDayWidths () {
       const state = this.state;
-      state.ctx.font =
-        state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs_min_default()(state.times.steps[0].date);
       let maxWidths = {};
-      Object.keys(state.calendar.day.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
-      for (
-        let day = 0, daysLen = state.times.steps.length;
-        day < daysLen;
-        day++
-      ) {
+      Object.keys(state.calendar.day.format)
+        .forEach(formatName => {
+          maxWidths[formatName] = 0;
+        });
+      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
         const widths = {
           day
         };
-        Object.keys(state.calendar.day.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(
-            state.calendar.day.format[formatName](currentDate.toDate())
-          ).width;
-        });
+        Object.keys(state.calendar.day.format)
+          .forEach(formatName => {
+            widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate()))
+              .width;
+          });
         state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format).forEach(formatName => {
-          if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
-          }
-        });
+        Object.keys(state.calendar.day.format)
+          .forEach(formatName => {
+            if (widths[formatName] > maxWidths[formatName]) {
+              maxWidths[formatName] = widths[formatName];
+            }
+          });
         currentDate = currentDate.add(1, "day");
       }
       state.calendar.day.maxWidths = maxWidths;
     },
-    computeMonthWidths() {
+    computeMonthWidths () {
       const state = this.state;
-      state.ctx.font =
-        state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let maxWidths = {};
-      Object.keys(state.calendar.month.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
+      Object.keys(state.calendar.month.format)
+        .forEach(formatName => {
+          maxWidths[formatName] = 0;
+        });
       let currentDate = dayjs_min_default()(this.state.times.firstDate);
-      const monthsCount = Math.ceil(
-        this.state.times.lastDate.diff(
-          this.state.times.firstDate,
-          "months",
-          true
-        )
-      );
+      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
         };
-        Object.keys(state.calendar.month.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(
-            state.calendar.month.format[formatName](currentDate.toDate())
-          ).width;
-        });
+        Object.keys(state.calendar.month.format)
+          .forEach(formatName => {
+            widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate()))
+              .width;
+          });
         state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format).forEach(formatName => {
-          if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
-          }
-        });
+        Object.keys(state.calendar.month.format)
+          .forEach(formatName => {
+            if (widths[formatName] > maxWidths[formatName]) {
+              maxWidths[formatName] = widths[formatName];
+            }
+          });
         currentDate = currentDate.add(1, "month");
       }
       state.calendar.month.maxWidths = maxWidths;
     }
   },
   computed: {
-    visibleTasks() {
+    visibleTasks () {
       this.state.taskList.width = this.state.taskList.columns.reduce(
         (prev, current) => {
           return {
             width: prev.width + current.width
           };
-        },
-        {
+        }, {
           width: 0
-        }
-      ).width;
-      this.state.width =
-        this.state.times.totalViewDurationPx +
-        this.state.grid.vertical.style.strokeWidth;
+        })
+        .width;
+      this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
       this.resetTaskTree();
-      this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
+      this.state.tasks = this.makeTaskTree(this.state.rootTask)
+        .allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       this.state.height = this.getHeight(visibleTasks);
       this.state.outerHeight = this.getHeight(visibleTasks, true);
       for (let index = 0, len = visibleTasks.length; index < len; index++) {
         let task = visibleTasks[index];
-        task.width =
-          task.durationMs / this.state.times.timePerPixel -
-          this.state.grid.vertical.style.strokeWidth;
+        task.width = task.durationMs / this.state.times.timePerPixel - this.state.grid.vertical.style.strokeWidth;
         if (task.width < 0) {
           task.width = 0;
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y =
-          (this.state.row.height + this.state.grid.horizontal.gap * 2) * index +
-          this.state.grid.horizontal.gap +
-          this.state.calendar.height +
-          this.state.calendar.styles.column["stroke-width"] +
-          this.state.calendar.gap;
+        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
       }
       return visibleTasks;
     }
   },
-  created() {
+  created () {
     this.initialize();
     this.initializeEvents();
     this.tasksById = {};
