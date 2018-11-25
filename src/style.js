@@ -214,5 +214,11 @@ export default {
   "tree-row-progress-bar-outline": {
     "stroke": "#E74C3C",
     "stroke-width": 1
-  }
+  },
+  "tree-dependency-lines-wrapper": {},
+  "tree-dependency-lines-path": {
+    "fill": "transparent",
+    "stroke": "#FFa00090",
+    "stroke-width": 2
+  },
 }

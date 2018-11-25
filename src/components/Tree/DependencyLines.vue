@@ -1,20 +1,27 @@
 <template>
-<g class="gantt-elastic__tree-dependency-lines-container">
-  <g v-for="task in dependencyTasks" :key="task.id" :task="task">
-    <path v-for="dependencyLine in task.dependencyLines" :key="dependencyLine.id" :task="task" :d="dependencyLine.points" :style="root.state.dependencyLines.style">
-    </path>
+  <g class="gantt-elastic__tree-dependency-lines-container" :style="root.style('tree-dependency-lines-container')">
+    <g v-for="task in dependencyTasks" :key="task.id" :task="task">
+      <path
+        class="gantt-elastic__tree-dependency-lines-path"
+        :style="root.style('tree-dependency-lines-path', task.style['tree-dependency-lines-path'])"
+        v-for="dependencyLine in task.dependencyLines"
+        :key="dependencyLine.id"
+        :task="task"
+        :d="dependencyLine.points"
+      ></path>
+    </g>
   </g>
-</g>
 </template>
+
 <script>
 export default {
   inject: ["root"],
   props: ["tasks"],
-  data() {
+  data () {
     return {};
   },
   methods: {
-    getPoints(fromTaskId, toTaskId) {
+    getPoints (fromTaskId, toTaskId) {
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
       if (!toTask.visible || !fromTask.visible) {
@@ -39,47 +46,27 @@ export default {
       let points = `M ${startX} ${startY}
           L ${startX + offset},${startY} `;
       if (isBefore) {
-        points += `Q ${startX + offset + roundness},${startY} ${startX +
-          offset +
-          roundness},${startY + roundness * yMultiplier}
-            L ${startX + offset + roundness},${startY +
-          (distanceY * yMultiplier) / 2 -
-          roundness * yMultiplier}
-            Q ${startX + offset + roundness},${startY +
-          (distanceY * yMultiplier) / 2} ${startX + offset},${startY +
-          (distanceY * yMultiplier) / 2}
-            L ${startX - offset + distanceX},${startY +
-          (distanceY * yMultiplier) / 2}
-            Q ${startX - offset + distanceX - roundness},${startY +
-          (distanceY * yMultiplier) / 2} ${startX -
-          offset +
-          distanceX -
-          roundness},${startY +
-          (distanceY * yMultiplier) / 2 +
-          roundness * yMultiplier}
-            L ${startX - offset + distanceX - roundness},${stopY -
-          roundness * yMultiplier}
-            Q ${startX - offset + distanceX - roundness},${stopY} ${startX -
-          offset +
-          distanceX},${stopY}
+        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}
+            L ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2 - roundness * yMultiplier}
+            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY + (distanceY * yMultiplier) / 2}
+            L ${startX - offset + distanceX},${startY + (distanceY * yMultiplier) / 2}
+            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
+            L ${startX - offset + distanceX - roundness},${stopY - roundness * yMultiplier}
+            Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}
             L ${stopX},${stopY}`;
       } else {
         points += `L ${startX + distanceX / 2 - roundness},${startY}
-            Q ${startX + distanceX / 2},${startY} ${startX +
-          distanceX / 2},${startY + roundness * yMultiplier}
+            Q ${startX + distanceX / 2},${startY} ${startX + distanceX / 2},${startY + roundness * yMultiplier}
             L ${startX + distanceX / 2},${stopY - roundness * yMultiplier}
-            Q ${startX + distanceX / 2},${stopY} ${startX +
-          distanceX / 2 +
-          roundness},${stopY}
+            Q ${startX + distanceX / 2},${stopY} ${startX + distanceX / 2 + roundness},${stopY}
             L ${stopX},${stopY}`;
       }
       return points;
     }
   },
   computed: {
-    dependencyTasks() {
-      return this.tasks
-        .filter(task => typeof task.dependentOn !== "undefined")
+    dependencyTasks () {
+      return this.tasks.filter(task => typeof task.dependentOn !== "undefined")
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
             return {

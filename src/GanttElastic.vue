@@ -69,13 +69,7 @@ function getOptions (userOptions) {
       offset: 0,
       xPadding: 10
     },
-    dependencyLines: {
-      style: {
-        fill: "transparent",
-        stroke: "#FFa00090",
-        "stroke-width": 2
-      }
-    },
+    dependencyLines: {},
     progress: {
       width: 20,
       height: 6,
@@ -91,14 +85,6 @@ function getOptions (userOptions) {
         lines: []
       },
       timeLine: {}
-    },
-    info: {
-      style: "fill:#000000a0",
-      textStyle: "fill:#fff",
-      fontFamily: "sans-serif",
-      fontSize: "12px",
-      fontWeight: "bold",
-      display: false
     },
     taskList: {
       display: true,

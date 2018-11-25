@@ -28,18 +28,15 @@
       <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
     </svg>
     <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
-    <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
   </g>
 </template>
 
 <script>
 import TreeText from "../Text.vue";
-import Info from "../Info.vue";
 import ProgressBar from "../ProgressBar.vue";
 export default {
   components: {
     TreeText,
-    Info,
     ProgressBar
   },
   inject: ["root"],
