@@ -1,23 +1,41 @@
 <template>
-<g class="gantt-elastic__tree-row-project-group" @mouseover="treeRowMouseOver" @mouseout="treeRowMouseOut">
-  <svg class="gantt-elastic__tree-row" :x="task.x" :y="task.y" :width="task.width" :height="task.height" @click="treeRowClick" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <clipPath :id="clipPathId">
-        <path :d="getPoints" :style="root.state.row.styles.bar"></path>
-      </clipPath>
-    </defs>
-    <path :d="getPoints" :style="getStyle"></path>
-    <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
-  </svg>
-  <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
-  <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
-</g>
+  <g
+    class="gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-project-wrapper"
+    :style="root.style('tree-row-bar-wrapper', root.style('tree-row-project-wrapper'), task.style['tree-row-bar-wrapper'])"
+    @mouseover="treeRowMouseOver"
+    @mouseout="treeRowMouseOut"
+  >
+    <svg
+      class="gantt-elastic__tree-row-bar gantt-elastic__tree-row-project"
+      :style="root.style('tree-row-bar', 'tree-row-project', task.style['tree-row-bar'])"
+      :x="task.x"
+      :y="task.y"
+      :width="task.width"
+      :height="task.height"
+      @click="treeRowClick"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <clipPath :id="clipPathId">
+          <path :d="getPoints"></path>
+        </clipPath>
+      </defs>
+      <path
+        class="gantt-elastic__tree-row-bar-polygon gantt-elastic__tree-row-project-polygon"
+        :style="root.style('tree-row-bar-polygon','tree-row-project-polygon', task.style['base'], task.style['tree-row-bar-polygon'])"
+        :d="getPoints"
+      ></path>
+      <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
+    </svg>
+    <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
+    <info :task="task" v-if="root.state.info.display && task.mouseOver"></info>
+  </g>
 </template>
+
 <script>
 import TreeText from "../Text.vue";
 import Info from "../Info.vue";
 import ProgressBar from "../ProgressBar.vue";
-
 export default {
   components: {
     TreeText,
@@ -26,26 +44,21 @@ export default {
   },
   inject: ["root"],
   props: ["task"],
-  data() {
+  data () {
     return {};
   },
   computed: {
-    clipPathId() {
+    clipPathId () {
       return "gantt-elastic__project-clip-path-" + this.task.id;
     },
-    getViewBox() {
+    getViewBox () {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
-    getGroupTransform() {
+    getGroupTransform () {
       return `translate(${this.task.x} ${this.task.y})`;
     },
-    getPoints() {
+    getPoints () {
       const task = this.task;
-      const fifty = task.height / 2;
-      let offset = fifty;
-      if (task.width / 2 - offset < 0) {
-        offset = task.width / 2;
-      }
       const bottom = task.height - task.height / 4;
       const corner = task.height / 6;
       const smallCorner = task.height / 8;
@@ -62,18 +75,15 @@ export default {
                 Z
         `;
     },
-    getStyle() {
-      return Object.assign({}, this.root.state.row.styles.bar, this.task.style);
-    }
   },
   methods: {
-    treeRowClick() {
+    treeRowClick () {
       this.task.tooltip.visible = !this.task.tooltip.visible;
     },
-    treeRowMouseOver() {
+    treeRowMouseOver () {
       this.task.mouseOver = true;
     },
-    treeRowMouseOut() {
+    treeRowMouseOut () {
       this.task.mouseOver = false;
     }
   }

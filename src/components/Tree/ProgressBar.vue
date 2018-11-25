@@ -1,48 +1,75 @@
 <template>
-<g class="gantt-elastic__tree-row-progress-bar">
-  <defs>
-    <pattern id="diagonalHatch" :width="root.state.progress.width" :height="root.state.progress.width" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" :y2="root.state.progress.width" :style="root.state.progress.styles.line" />
-    </pattern>
-  </defs>
-  <rect v-if="root.state.progress.bar" id="gantt-elastic__tree-row-progress" x="0" y="0" :width="getProgressWidth" :style="getSolidStyle"></rect>
-  <g v-if="root.state.progress.pattern">
-    <rect :x="getProgressWidth" y="0" :width="100-task.progress+'%'" height="100%" :style="root.state.progress.styles.bar.pattern"></rect>
-    <path :d="getLinePoints" :style="getLineStyle"></path>
+  <g
+    class="gantt-elastic__tree-row-progress-bar-wrapper"
+    :style="root.style('tree-row-progress-bar-wrapper', task.style['tree-row-progress-bar-wrapper'])"
+  >
+    <defs>
+      <pattern
+        id="diagonalHatch"
+        :width="root.state.progress.width"
+        :height="root.state.progress.width"
+        patternTransform="rotate(45 0 0)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          class="tree-row-progress-bar-line"
+          :style="root.style('tree-row-progress-bar-line', task.style['tree-row-progress-bar-line'])"
+          x1="0"
+          y1="0"
+          x2="0"
+          :y2="root.state.progress.width"
+        />
+      </pattern>
+    </defs>
+    <rect
+      v-if="root.state.progress.bar"
+      class="gantt-elastic__tree-row-progress-bar-solid"
+      :style="root.style('tree-row-progress-bar-solid', task.style['tree-row-progress-bar-solid'])"
+      x="0"
+      y="0"
+      :width="getProgressWidth"
+    ></rect>
+    <g v-if="root.state.progress.pattern">
+      <rect
+        class="gantt-elastic__tree-row-progress-bar-pattern"
+        :style="root.style('tree-row-progress-bar-pattern', task.style['tree-row-progress-bar-pattern'])"
+        :x="getProgressWidth"
+        y="0"
+        :width="100-task.progress+'%'"
+        height="100%"
+      ></rect>
+      <path
+        class="gantt-elastic__tree-row-progress-bar-outline"
+        :style="root.style('tree-row-progress-bar-outline', task.style['base'], task.style['tree-row-progress-bar-outline'])"
+        :d="getLinePoints"
+      ></path>
+    </g>
   </g>
-</g>
 </template>
+
 <script>
 export default {
   inject: ["root"],
   props: ["task"],
-  data() {
+  data () {
     return {};
   },
   computed: {
-    getProgressWidth() {
+    getProgressWidth () {
       return this.task.progress + "%";
     },
-    getLinePoints() {
+    getLinePoints () {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
-    getSolidStyle() {
-      return Object.assign(
-        {},
-        this.root.state.progress.styles.bar.solid,
-        this.task.progressBarStyle.bar
-      );
+    getSolidStyle () {
+      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
-    getLineStyle() {
-      return Object.assign(
-        {},
-        {
-          stroke: this.root.state.row.styles.bar.stroke + "a0",
-          "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
-        },
-        this.task.style
-      );
+    getLineStyle () {
+      return Object.assign({}, {
+        stroke: this.root.state.row.styles.bar.stroke + "a0",
+        "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
+      }, this.task.style);
     }
   }
 };

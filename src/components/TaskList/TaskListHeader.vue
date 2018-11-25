@@ -2,7 +2,7 @@
   <div class="gantt-elastic__task-list-header" :style="root.style('task-list-header')">
     <div
       class="gantt-elastic__task-list-header-column"
-      :style="root.style('task-list-header-column',column.style['task-list-header-column'],getStyle(column))"
+      :style="root.style('task-list-header-column', column.style['task-list-header-column'], getStyle(column))"
       v-for="column in root.state.taskList.columns"
       :key="column._id"
     >

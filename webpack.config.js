@@ -1,15 +1,13 @@
-const path = require( 'path' );
-const { VueLoaderPlugin } = require( 'vue-loader' );
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = [
   {
-    mode: process.env.NODE_ENV || 'production',
-    entry: {
-      bundle: './src/bundle.js'
-    },
+    mode: 'production',
+    entry: './src/bundle.js',
     output: {
-      path: path.resolve( __dirname, 'dist' ),
-      filename: '[name].js'
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.js'
     },
     /*resolve: {
       alias: {
@@ -23,10 +21,10 @@ module.exports = [
           use: 'vue-loader'
         }, {
           test: /\.css$/,
-          use: [ 'vue-style-loader', 'css-loader' ]
+          use: ['vue-style-loader', 'css-loader']
         }
       ]
     },
-    plugins: [ new VueLoaderPlugin() ]
+    plugins: [new VueLoaderPlugin()]
   }
 ];

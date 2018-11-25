@@ -1,6 +1,7 @@
 <template>
   <svg
-    class="gantt-elastic_tree-object"
+    class="gantt-elastic_tree"
+    :style="root.style('tree')"
     x="0"
     y="0"
     :width="getWidth"
@@ -10,7 +11,13 @@
     <calendar></calendar>
     <grid></grid>
     <dependency-lines :tasks="root.visibleTasks"></dependency-lines>
-    <g v-for="task in root.visibleTasks" :task="task" :key="task.id">
+    <g
+      class="gantt-elastic__tree-row-wrapper"
+      :style="root.style('tree-row-wrapper')"
+      v-for="task in root.visibleTasks"
+      :task="task"
+      :key="task.id"
+    >
       <component :task="task" :is="task.type"></component>
     </g>
   </svg>

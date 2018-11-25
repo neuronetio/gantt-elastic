@@ -63,33 +63,10 @@ function getOptions (userOptions) {
     },
     row: {
       height: 24,
-      styles: {
-        bar: {
-          fill: "#F75C4C",
-          stroke: "#E74C3C",
-          "stroke-width": "1"
-        },
-        text: {
-          fill: "#ffffff",
-          "font-family": "sans-serif",
-          "font-size": "12px"
-        }
-      },
       showText: true
     },
     treeText: {
       offset: 0,
-      styles: {
-        text: {
-          "font-family": "sans-serif",
-          "font-size": "12px",
-          "font-weight": "normal",
-          fill: "#000000a0"
-        },
-        background: {
-          fill: "#ffffffb0"
-        }
-      },
       xPadding: 10
     },
     dependencyLines: {
@@ -104,22 +81,6 @@ function getOptions (userOptions) {
       height: 6,
       pattern: true,
       bar: false,
-      styles: {
-        line: {
-          stroke: "#ffffff25",
-          "stroke-width": 20
-        },
-        bar: {
-          pattern: {
-            fill: "url(#diagonalHatch)",
-            transform: "translateY(0.1) scaleY(0.8)"
-          },
-          solid: {
-            fill: "#E74C3C",
-            height: "20%"
-          }
-        }
-      }
     },
     grid: {
       horizontal: {
@@ -141,30 +102,6 @@ function getOptions (userOptions) {
     },
     taskList: {
       display: true,
-      styles: {
-        column: {
-          "border-color": "#eee",
-          height: 0,
-          width: 0,
-          "line-height": 0
-        },
-        label: {
-          display: "inline-flex",
-          margin: "auto 6px",
-          color: "#404040"
-        },
-        value: {
-          margin: "auto 6px",
-          overflow: "hidden",
-          "text-overflow": "ellipsis",
-          "line-height": "1.5em",
-          "word-break": "keep-all",
-          "font-family": "sans-serif",
-          "font-size": "12px",
-          "white-space": "nowrap",
-          color: "#606060"
-        }
-      },
       columns: [{
         id: 0,
         label: "ID",
@@ -333,17 +270,17 @@ const GanttElastic = {
     },
     /**
      * Get style for specified class
-     * @param {string} className
-     * @param {object} mergeWith - if we need to merge custom item specific style with default ones
+     * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
      * @returns {object}
      */
-    style (className, ...mergeWith) {
-      if (mergeWith === null) {
-        return this.state.style[className];
-      }
-      let merged = Object.assign({}, this.state.style[className]);
-      mergeWith.forEach(obj => {
-        merged = Object.assign({}, merged, obj);
+    style (...mergeWith) {
+      let merged = {};
+      mergeWith.forEach(objOrClassName => {
+        if (typeof objOrClassName === 'string') {
+          merged = Object.assign({}, merged, this.state.style[objOrClassName])
+        } else if (typeof objOrClassName === 'object') {
+          merged = Object.assign({}, merged, objOrClassName);
+        }
       })
       return merged;
     },

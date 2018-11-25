@@ -1,7 +1,7 @@
 <template>
   <div
     class="gantt-elastic__task-list-item-column"
-    :style="root.style('task-list-item-column',column.style['task-list-item-column'],{width:column.finalWidth,height:column.height})"
+    :style="root.style('task-list-item-column', column.style['task-list-item-column'], {width:column.finalWidth+'px',height:column.height+'px'})"
   >
     <div
       class="gantt-elastic__task-list-item-value-wrapper"

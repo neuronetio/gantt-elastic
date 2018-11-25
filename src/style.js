@@ -168,5 +168,51 @@ export default {
   "grid-line-time": {
     "stroke": "#FF000080",
     "strokeWidth": 1
+  },
+  "tree": {},
+  "tree-row-text-wrapper": {},
+  "tree-row-text-background": {
+    "fill": "#ffffffb0"
+  },
+  "tree-row-text": {
+    "font-family": fontFamily,
+    "font-size": fontSize,
+    "font-weight": "normal",
+    "fill": "#000000a0"
+  },
+  "tree-row-wrapper": {},
+  "tree-row-bar-wrapper": {},
+  "tree-row-bar": {},
+  "tree-row-bar-polygon": {
+    "stroke": "#E74C3C",
+    "stroke-width": 1,
+    "fill": "#F75C4C",
+  },
+  "tree-row-project-wrapper": {},
+  "tree-row-project": {},
+  "tree-row-project-polygon": {},
+  "tree-row-milestone-wrapper": {},
+  "tree-row-milestone": {},
+  "tree-row-milestone-polygon": {},
+  "tree-row-task-wrapper": {},
+  "tree-row-task": {},
+  "tree-row-task-polygon": {},
+  "tree-row-progress-bar-wrapper": {},
+  "tree-row-progress-bar": {},
+  "tree-row-progress-bar-line": {
+    "stroke": "#ffffff25",
+    "stroke-width": 20
+  },
+  "tree-row-progress-bar-solid": {
+    "fill": "#E74C3C",
+    "height": "20%"
+  },
+  "tree-row-progress-bar-pattern": {
+    "fill": "url(#diagonalHatch)",
+    "transform": "translateY(0.1) scaleY(0.8)",
+  },
+  "tree-row-progress-bar-outline": {
+    "stroke": "#E74C3C",
+    "stroke-width": 1
   }
 }
