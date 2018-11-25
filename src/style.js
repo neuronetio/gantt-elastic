@@ -155,5 +155,18 @@ export default {
     "word-break": "keep-all",
     "white-space": "nowrap",
     "color": "#606060"
+  },
+  "grid-lines": {},
+  "grid-line-horizontal": {
+    "stroke": "#00000010",
+    "strokeWidth": 1
+  },
+  "grid-line-vertical": {
+    "stroke": "#00000010",
+    "strokeWidth": 1
+  },
+  "grid-line-time": {
+    "stroke": "#FF000080",
+    "strokeWidth": 1
   }
 }

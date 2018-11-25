@@ -38,7 +38,7 @@ export default {
         const state = this.root.state;
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const maxLevel = this.root.getMaximalLevel();
-        let height = state.row.height + state.grid.horizontal.gap * 2 - state.grid.horizontal.style.strokeWidth;
+        let height = state.row.height + state.grid.horizontal.gap * 2 - this.root.style('grid-line-vertical').strokeWidth;
         let width = ((state.taskList.expander.size + this.root.style("calendar-row")["stroke-width"] + padding + state.taskList.expander.margin) / 100) * state.taskList.percent;
         if (state.taskList.expander.straight) {
           width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;

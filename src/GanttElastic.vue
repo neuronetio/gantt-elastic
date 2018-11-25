@@ -124,26 +124,12 @@ function getOptions (userOptions) {
     grid: {
       horizontal: {
         gap: 6,
-        style: {
-          stroke: "#00000010",
-          strokeWidth: 1
-        },
         lines: []
       },
       vertical: {
-        strokeWidth: 1,
-        style: {
-          stroke: "#00000010",
-          strokeWidth: 1
-        },
         lines: []
       },
-      timeLine: {
-        style: {
-          stroke: "#FF000080",
-          strokeWidth: 1
-        }
-      }
+      timeLine: {}
     },
     info: {
       style: "fill:#000000a0",
@@ -184,9 +170,6 @@ function getOptions (userOptions) {
         label: "ID",
         value: "id",
         width: 40,
-        styles: {
-          label: {}
-        }
       }],
       resizerWidth: 0,
       percent: 100,
@@ -552,12 +535,11 @@ const GanttElastic = {
       return x;
     },
     pixelOffsetXToTime (pixelOffsetX) {
-      let offset = pixelOffsetX + this.state.grid.vertical.style.strokeWidth / 2;
+      let offset = pixelOffsetX + this.style('grid-line-vertical').strokeWidth / 2;
       return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
     isInsideViewPort (x, width, buffer = 5000) {
-      return (
-        (x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
+      return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
     },
     onScrollTree (ev) {
       this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
@@ -792,16 +774,12 @@ const GanttElastic = {
   },
   computed: {
     visibleTasks () {
-      this.state.taskList.width = this.state.taskList.columns.reduce(
-        (prev, current) => {
-          return {
-            width: prev.width + current.width
-          };
-        }, {
-          width: 0
-        })
-        .width;
-      this.state.width = this.state.times.totalViewDurationPx + this.state.grid.vertical.style.strokeWidth;
+      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
+        return {
+          width: prev.width + current.width
+        };
+      }, { width: 0 }).width;
+      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
       this.resetTaskTree();
       this.state.tasks = this.makeTaskTree(this.state.rootTask)
         .allChildren;
@@ -810,7 +788,7 @@ const GanttElastic = {
       this.state.outerHeight = this.getHeight(visibleTasks, true);
       for (let index = 0, len = visibleTasks.length; index < len; index++) {
         let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.state.grid.vertical.style.strokeWidth;
+        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical').strokeWidth;
         if (task.width < 0) {
           task.width = 0;
         }

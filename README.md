@@ -17,6 +17,8 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 
 #### Gantt-elastic is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
+#### gantt-elastic is not fully finished yet and may change
+
 #### :star2: Give it a star if you want more activity in this repo, thanks!
 
 ### install
