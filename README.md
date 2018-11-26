@@ -77,14 +77,18 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
         progress: 50,
         type: 'milestone',
         style: {
-          fill: '#1EBC61',
-          stroke: '#0EAC51'
+          base: {
+            fill: '#1EBC61',
+            stroke: '#0EAC51'
+          },
+          /*'tree-row-bar': {
+            fill: '#1EBC61',
+            stroke: '#0EAC51'
+          },
+          'tree-row-bar-polygon': {
+            stroke: '#0EAC51'
+          }*/
         },
-        progressBarStyle: {
-          bar: {
-            fill: '#0EAC51'
-          }
-        }
       }, {
         id: 3,
         label: 'Courage is being scared to death, but saddling up anyway.',
@@ -118,12 +122,12 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
           { id: 3, label: 'Assigned to', value: 'user', width: 130, html: true },
           { id: 3, label: 'Start', value: (task) => task.startDate.format('YYYY-MM-DD'), width: 78 },
           { id: 4, label: 'Type', value: 'type', width: 68 },
-          { id: 5, label: '%', value: 'progress', width: 35, styles: {
-              label: {
+          { id: 5, label: '%', value: 'progress', width: 35,  style: {
+              "task-list-header-label": {
                 'text-align': 'center',
                 'width': '100%'
               },
-              value: {
+              "task-list-item-value": {
                 'text-align': 'center',
                 'width': '100%'
               }
