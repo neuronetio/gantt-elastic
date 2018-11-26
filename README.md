@@ -19,7 +19,7 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 gantt-elastic is not fully finished yet and may change (not released yet)
 
-### Full documentation soon - if you can motivate me (leave a :star: :heartpulse:)
+### Full documentation soon - if you can motivate me (leave a :star:)
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
