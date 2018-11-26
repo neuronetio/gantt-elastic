@@ -21,7 +21,8 @@ gantt-elastic is not fully finished yet and may change (no released yet)
 
 ### :star2: Give it a star if you want more activity in this repo, thanks!
 
-### install
+
+### Installation
 `npm install --save gantt-elastic` or download zip from github / clone repo
 
 ### Full documentation soon if you motivate me ;)
