@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>GanttElastic demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
   <script src="../dist/GanttElastic.umd.js"></script>
 </head>
 
@@ -14,7 +14,9 @@
       <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
     </div>
   </div>
-  <input type="text" id="name" placeholder="name"><input type="text" id="value" placeholder="value"><button onclick="update()">update</button>
+  modify first task
+  <input type="text" id="name" placeholder="name" value="label"><input type="text" id="value" value="test" placeholder="value"><button
+    onclick="update()">update</button>
 
   <script>
     // override components - copy component from src directory change it to object or compile *.vue to *.js
@@ -240,13 +242,10 @@
       }
     }).$mount('#app');
 
-    console.log(app);
     function update() {
       const name = document.getElementById('name').value;
       const value = document.getElementById('value').value;
-      console.log(name, value);
-      app.tasks[0][name] = value;
-      console.log(app.tasks[0]);
+      tasks[0][name] = value;
     }
   </script>
 </body>

@@ -193,10 +193,10 @@ function getOptions (userOptions) {
     }
   };
 }
+function isObject (item) {
+  return item && typeof item === "object" && !Array.isArray(item);
+}
 export function mergeDeep (target, ...sources) {
-  const isObject = function isObject (item) {
-    return item && typeof item === "object" && !Array.isArray(item);
-  };
   if (!sources.length) {
     return target;
   }
@@ -233,11 +233,11 @@ const GanttElastic = {
   },
   data () {
     return {
-      state: {}
+      state: mergeDeep(getOptions(this.options), this.options, { tasks: this.tasks })
     };
   },
   methods: {
-    mergeDeep: mergeDeep,
+    mergeDeep,
     getScrollBarHeight () {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
@@ -273,8 +273,8 @@ const GanttElastic = {
      * Initialize component
      */
     initialize () {
-      this.state = this.mergeDeep({}, getOptions(this.options), this.options, {
-        tasks: this.tasks.map(task => this.mergeDeep({}, task, {
+      this.state = this.mergeDeep(this.state, {
+        tasks: this.tasks.map(task => this.mergeDeep(task, {
           start: dayjs(task.start).format("YYYY-MM-DD HH:mm:ss")
         }))
       });
@@ -288,7 +288,7 @@ const GanttElastic = {
           column.style = {};
         }
         column._id = `${index}-${column.label}`;
-        return this.mergeDeep({}, column);
+        return column;
       });
       // initialize observer
       this.state.tasks = this.state.tasks.map(task => {
@@ -319,15 +319,12 @@ const GanttElastic = {
         if (typeof task.style === "undefined") {
           task.style = {};
         }
-        if (typeof task.progressBarStyle === "undefined") {
-          task.progressBarStyle = this.mergeDeep({}, this.state.progress.styles);
-        }
         task.children = [];
         task.allChildren = [];
         task.parents = [];
         task.parent = null;
         task.durationMs = 0;
-        return this.mergeDeep({}, task);
+        return task;
       });
       this.state.rootTask = {
         id: null,
@@ -434,8 +431,7 @@ const GanttElastic = {
           const canvas = document.createElement("canvas");
           canvas.width = this.state.svgMain.clientWidth;
           canvas.height = this.state.svgMain.clientHeight;
-          canvas.getContext("2d")
-            .drawImage(img, 0, 0);
+          canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
         img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
@@ -561,8 +557,7 @@ const GanttElastic = {
     },
     calculateSteps () {
       const steps = [];
-      const lastMs = dayjs(this.state.times.lastDate)
-        .valueOf();
+      const lastMs = dayjs(this.state.times.lastDate).valueOf();
       const step = this.state.times.stepDuration;
       const currentDate = dayjs(this.state.times.firstDate);
       steps.push({
@@ -606,18 +601,16 @@ const GanttElastic = {
       state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
-      Object.keys(state.calendar.hour.format)
-        .forEach(formatName => {
-          maxWidths[formatName] = 0;
-        });
+      Object.keys(state.calendar.hour.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
         };
         Object.keys(state.calendar.hour.format)
           .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate()))
-              .width;
+            widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
           });
         state.calendar.hour.widths.push(widths);
         Object.keys(state.calendar.hour.format)
@@ -645,8 +638,7 @@ const GanttElastic = {
         };
         Object.keys(state.calendar.day.format)
           .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate()))
-              .width;
+            widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
           });
         state.calendar.day.widths.push(widths);
         Object.keys(state.calendar.day.format)
@@ -674,8 +666,7 @@ const GanttElastic = {
         };
         Object.keys(state.calendar.month.format)
           .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate()))
-              .width;
+            widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
           });
         state.calendar.month.widths.push(widths);
         Object.keys(state.calendar.month.format).forEach(formatName => {
@@ -709,7 +700,6 @@ const GanttElastic = {
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
       }
-      console.log('visible tasks change', visibleTasks)
       return visibleTasks;
     }
   },
