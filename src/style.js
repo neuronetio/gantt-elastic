@@ -3,7 +3,7 @@ const fontFamily = 'Arial, sans-serif';
 export default {
   "header": {
     "font-family": fontFamily,
-    "margin": "0 auto",
+    "margin": "0px auto",
     "background": "#f3f5f747",
     "padding": "10px",
     "overflow": "hidden",

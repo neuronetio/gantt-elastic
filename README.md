@@ -17,7 +17,7 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ## Gantt-elastic
 is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
-gantt-elastic is not fully finished yet and may change (no released yet)
+gantt-elastic is not fully finished yet and may change (not released yet)
 
 ### :star2: Give it a star if you want more activity in this repo, thanks!
 
@@ -25,7 +25,7 @@ gantt-elastic is not fully finished yet and may change (no released yet)
 ### Installation
 `npm install --save gantt-elastic` or download zip from github / clone repo
 
-### Full documentation soon if you motivate me ;)
+### Full documentation soon if you motivate me :P
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
@@ -106,14 +106,6 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
       title: {
         label: 'Your project title as html (link or whatever...)',
         html: false,
-        style: {
-          'font-size': '20px',
-          'vertical-align': 'middle',
-          'font-weight': '400',
-          'line-height': '35px',
-          'padding-left': '22px',
-          'letter-spacing': '1px'
-        }
       },
       taskList: {
         columns: [
