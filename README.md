@@ -183,7 +183,7 @@ new Vue({
 or
 ```javascript
 import Vue from 'vue';
-import App from './App.vue'; // your app that is using gantt-elastic from 'gantt-elastic/src/GanttElastic.vue'
+import App from './App.vue'; // your app that uses gantt-elastic from 'gantt-elastic/src/GanttElastic.vue'
 
 new Vue({
   el: '#app',
