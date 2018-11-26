@@ -19,15 +19,12 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 gantt-elastic is not fully finished yet and may change (not released yet)
 
-### :star2: Give it a star if you want more activity in this repo, thanks!
+### Full documentation soon - if you can motivate me (leave a :star: :heartpulse:)
 
+For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
 ### Installation
 `npm install --save gantt-elastic` or download zip from github / clone repo
-
-### Full documentation soon if you motivate me :P
-
-For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
 ### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
 

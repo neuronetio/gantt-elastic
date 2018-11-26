@@ -568,12 +568,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=77c86c1a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=432e851e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=77c86c1a&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=432e851e&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -4294,7 +4294,6 @@ function getOptions (userOptions) {
       label: "gantt-elastic",
       html: false
     },
-    debug: false,
     width: 0,
     height: 0,
     scroll: {
@@ -4853,10 +4852,7 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (let currentDate = dayjs_min_default()(this.state.times.firstDate)
-        .add(1, step)
-        .startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step)
-          .startOf("day")) {
+      for (let currentDate = dayjs_min_default()(this.state.times.firstDate).add(1, step).startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf("day")) {
         const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
         const offsetPx = offsetMs / this.state.times.timePerPixel;
         const step = {
@@ -4947,10 +4943,9 @@ const GanttElastic = {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let maxWidths = {};
-      Object.keys(state.calendar.month.format)
-        .forEach(formatName => {
-          maxWidths[formatName] = 0;
-        });
+      Object.keys(state.calendar.month.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
       let currentDate = dayjs_min_default()(this.state.times.firstDate);
       const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
       for (let month = 0; month < monthsCount; month++) {
@@ -4963,12 +4958,11 @@ const GanttElastic = {
               .width;
           });
         state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format)
-          .forEach(formatName => {
-            if (widths[formatName] > maxWidths[formatName]) {
-              maxWidths[formatName] = widths[formatName];
-            }
-          });
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
         currentDate = currentDate.add(1, "month");
       }
       state.calendar.month.maxWidths = maxWidths;
@@ -4977,14 +4971,11 @@ const GanttElastic = {
   computed: {
     visibleTasks () {
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-        return {
-          width: prev.width + current.width
-        };
+        return { width: prev.width + current.width };
       }, { width: 0 }).width;
       this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
       this.resetTaskTree();
-      this.state.tasks = this.makeTaskTree(this.state.rootTask)
-        .allChildren;
+      this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       this.state.height = this.getHeight(visibleTasks);
       this.state.outerHeight = this.getHeight(visibleTasks, true);
@@ -4998,6 +4989,7 @@ const GanttElastic = {
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
       }
+      console.log('visible tasks change', visibleTasks)
       return visibleTasks;
     }
   },

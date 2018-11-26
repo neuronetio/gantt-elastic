@@ -14,7 +14,6 @@ function getOptions (userOptions) {
       label: "gantt-elastic",
       html: false
     },
-    debug: false,
     width: 0,
     height: 0,
     scroll: {
@@ -573,10 +572,7 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (let currentDate = dayjs(this.state.times.firstDate)
-        .add(1, step)
-        .startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step)
-          .startOf("day")) {
+      for (let currentDate = dayjs(this.state.times.firstDate).add(1, step).startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf("day")) {
         const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
         const offsetPx = offsetMs / this.state.times.timePerPixel;
         const step = {
@@ -667,10 +663,9 @@ const GanttElastic = {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let maxWidths = {};
-      Object.keys(state.calendar.month.format)
-        .forEach(formatName => {
-          maxWidths[formatName] = 0;
-        });
+      Object.keys(state.calendar.month.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
       let currentDate = dayjs(this.state.times.firstDate);
       const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
       for (let month = 0; month < monthsCount; month++) {
@@ -683,12 +678,11 @@ const GanttElastic = {
               .width;
           });
         state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format)
-          .forEach(formatName => {
-            if (widths[formatName] > maxWidths[formatName]) {
-              maxWidths[formatName] = widths[formatName];
-            }
-          });
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
         currentDate = currentDate.add(1, "month");
       }
       state.calendar.month.maxWidths = maxWidths;
@@ -697,14 +691,11 @@ const GanttElastic = {
   computed: {
     visibleTasks () {
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-        return {
-          width: prev.width + current.width
-        };
+        return { width: prev.width + current.width };
       }, { width: 0 }).width;
       this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
       this.resetTaskTree();
-      this.state.tasks = this.makeTaskTree(this.state.rootTask)
-        .allChildren;
+      this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       this.state.height = this.getHeight(visibleTasks);
       this.state.outerHeight = this.getHeight(visibleTasks, true);
@@ -718,6 +709,7 @@ const GanttElastic = {
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
       }
+      console.log('visible tasks change', visibleTasks)
       return visibleTasks;
     }
   },
