@@ -28,7 +28,7 @@ gantt-elastic is not fully finished yet and may change (no released yet)
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
-### standalone usage (vue.js bundled along with gantt-elastic component)
+### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
 
 ```html
 <!DOCTYPE html>
