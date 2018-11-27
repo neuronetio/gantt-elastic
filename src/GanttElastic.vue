@@ -217,6 +217,25 @@ export function mergeDeep (target, ...sources) {
   }
   return mergeDeep(target, ...sources);
 }
+export function mergeDeepReactive (component, target, ...sources) {
+  if (!sources.length) {
+    return target;
+  }
+  const source = sources.shift();
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) {
+          component.$set(target, key, {});
+        }
+        mergeDeepReactive(component, target[key], source[key]);
+      } else {
+        component.$set(target, key, source[key]);
+      }
+    }
+  }
+  return mergeDeepReactive(component, target, ...sources);
+}
 const GanttElastic = {
   components: {
     EgMain: Main
@@ -233,11 +252,12 @@ const GanttElastic = {
   },
   data () {
     return {
-      state: mergeDeep(getOptions(this.options), this.options, { tasks: this.tasks })
+      state: {}
     };
   },
   methods: {
     mergeDeep,
+    mergeDeepReactive,
     getScrollBarHeight () {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
@@ -273,58 +293,61 @@ const GanttElastic = {
      * Initialize component
      */
     initialize () {
-      this.state = this.mergeDeep(this.state, {
-        tasks: this.tasks.map(task => this.mergeDeep(task, {
-          start: dayjs(task.start).format("YYYY-MM-DD HH:mm:ss")
-        }))
+      this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+      this.state.tasks = this.tasks.map(task => {
+        this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
+        return task;
       });
       dayjs.locale(this.options.locale, null, true);
+      if (typeof this.state.taskList === "undefined") {
+        this.$set(this.state, 'taskList', {});
+      }
+      if (typeof this.state.taskList.columns === 'undefined') {
+        this.$set(this.state.taskList, 'columns', []);
+      }
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+        this.$set(column, 'finalWidth', (column.width / 100) * this.state.taskList.percent);
         if (typeof column.height === "undefined") {
-          column.height = 0;
+          this.$set(column, 'height', 0);
         }
         if (typeof column.style === "undefined") {
-          column.style = {};
+          this.$set(column, 'style', {});
         }
-        column._id = `${index}-${column.label}`;
-        return Object.assign({}, column);
+        this.$set(column, '_id', `${index}-${column.label}`);
+        return column;
       });
       // initialize observer
       this.state.tasks = this.state.tasks.map(task => {
-        task.x = 0;
-        task.y = 0;
-        task.width = 0;
-        task.height = 0;
-        task.tooltip = {
-          visible: false
-        };
-        task.mouseOver = false;
-        task.dependencyLines = [];
+        this.$set(task, 'x', 0);
+        this.$set(task, 'y', 0);
+        this.$set(task, 'width', 0);
+        this.$set(task, 'height', 0);
+        this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
+        this.$set(task, 'mouseOver', false);
         if (typeof task.visible === "undefined") {
-          task.visible = true;
+          this.$set(task, 'visible', true);
         }
         if (typeof task.collapsed === "undefined") {
-          task.collapsed = false;
+          this.$set(task, 'collapsed', false);
         }
         if (typeof task.dependencyLines === "undefined") {
-          task.dependencyLines = [];
+          this.$set(task, 'dependencyLines', []);
         }
         if (typeof task.dependentOn === "undefined") {
-          task.dependentOn = [];
+          this.$set(task, 'dependentOn', []);
         }
         if (typeof task.parentId === "undefined") {
-          task.parentId = null;
+          this.$set(task, 'parentId', null);
         }
         if (typeof task.style === "undefined") {
-          task.style = {};
+          this.$set(task, 'style', {});
         }
-        task.children = [];
-        task.allChildren = [];
-        task.parents = [];
-        task.parent = null;
-        task.durationMs = 0;
-        return Object.assign({}, task);
+        this.$set(task, 'children', []);
+        this.$set(task, 'alChildren', []);
+        this.$set(task, 'parents', []);
+        this.$set(task, 'parent', null);
+        this.$set(task, 'durationMs', []);
+        return task;
       });
       this.state.rootTask = {
         id: null,
