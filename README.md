@@ -19,7 +19,7 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 gantt-elastic is not fully finished yet and may change (not released yet)
 
-### Full documentation soon - if you can motivate me (leave a :star:)
+### Full documentation soon
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
@@ -199,3 +199,7 @@ const GanttElastic = require('gant-elastic/dist/GantElastic.common.js');
 ### uglifyjs
 
 If you are using uglifyjs in your project be sure to have es6 compatible version like [uglify-es](https://www.npmjs.com/package/uglify-es)
+
+### Licensce
+
+MIT

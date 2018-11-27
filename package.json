@@ -46,7 +46,7 @@
     "javascript gantt"
   ],
   "author": "Rafal Pospiech <neuronet.io@gmail.com> (https://neuronet.io)",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/neuronetio/gantt-elastic/issues"
   },
