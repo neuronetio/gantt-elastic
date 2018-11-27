@@ -1,4 +1,4 @@
-# Gantt-elastic - Javascript Gantt Chart
+# Gantt-elastic - Javascript Gantt Chart with editing capabilities!
 
 ## Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks
 

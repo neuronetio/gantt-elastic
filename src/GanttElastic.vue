@@ -765,6 +765,11 @@ const GanttElastic = {
     this.calculateSteps();
     this.computeCalendarWidths();
     this.calculateCalendarDimensions();
+    this.$root.$emit('gantt-elastic.created', this);
+  },
+  mounted () {
+    this.$root.$emit('gantt-elastic.mounted', this);
+    this.$root.$emit('gantt-elastic.ready', this);
   }
 };
 export default GanttElastic;

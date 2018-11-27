@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>GanttElastic demo</title>
+  <title>GanttElastic editor demo</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
   <script src="../dist/GanttElastic.umd.js"></script>
 </head>
@@ -14,10 +14,13 @@
       <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
     </div>
   </div>
-  modify first task
-  <input type="text" id="name" placeholder="name" value="label"><input type="text" id="value" value="test" placeholder="value"><button
-    onclick="update()">update</button>
-
+  modify task
+  <input type="number" value="0" id="row" placeholder="which row?">
+  <input type="text" id="name" placeholder="name" value="label">
+  <input type="text" id="value" value="test" placeholder="value">
+  <button onclick="update()">Update</button>
+  <input type="number" value="0" id="delrow" placeholder="which row?">
+  <button onclick="deleteRow()">Delete</button>
   <script>
     // override components - copy component from src directory change it to object or compile *.vue to *.js
     // more info about components you can find here : https://vuejs.org/v2/guide/index.html
@@ -34,7 +37,7 @@
       return new Date(timeStamp + hours * 60 * 60 * 1000);
     }
 
-    const tasks = [
+    let tasks = [
       {
         id: 1,
         label: 'Make some noise',
@@ -169,7 +172,7 @@
       }
     ];
 
-    const options = {
+    let options = {
       title: {
         label: 'Your project title as html (link or whatever...)',
         html: false,
@@ -232,6 +235,7 @@
       },
     };
 
+    // create instance
     const app = new Vue({
       components: {
         'gantt-elastic': GanttElastic
@@ -240,12 +244,36 @@
         tasks,
         options
       }
-    }).$mount('#app');
+    });
+
+    // gantt state which will be updated in realtime
+    let ganttState;
+
+    // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
+    // to get the gantt state for realtime modification
+    app.$on('gantt-elastic.ready', (ganttElasticInstance) => {
+      ganttState = ganttElasticInstance.state;
+      console.log('gantt-elastic ready!', ganttState);
+    });
+
+    // mount gantt to DOM
+    app.$mount('#app');
 
     function update() {
+      const row = document.getElementById('row').value;
       const name = document.getElementById('name').value;
       const value = document.getElementById('value').value;
-      tasks[0][name] = value;
+      ganttState.tasks[row][name] = value;
+    }
+
+    function deleteRow() {
+      const row = Number(document.getElementById('delrow').value);
+      ganttState.tasks = ganttState.tasks.filter((task, index) => {
+        if (index === row) {
+          console.log('removing task', task, index)
+        }
+        return index !== row;
+      });
     }
   </script>
 </body>
