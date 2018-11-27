@@ -288,7 +288,7 @@ const GanttElastic = {
           column.style = {};
         }
         column._id = `${index}-${column.label}`;
-        return column;
+        return Object.assign({}, column);
       });
       // initialize observer
       this.state.tasks = this.state.tasks.map(task => {
@@ -324,7 +324,7 @@ const GanttElastic = {
         task.parents = [];
         task.parent = null;
         task.durationMs = 0;
-        return task;
+        return Object.assign({}, task);
       });
       this.state.rootTask = {
         id: null,
@@ -337,8 +337,7 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      this.state.ctx = document.createElement("canvas")
-        .getContext("2d");
+      this.state.ctx = document.createElement("canvas").getContext("2d");
       this.calculateTaskListColumnsWidths();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
