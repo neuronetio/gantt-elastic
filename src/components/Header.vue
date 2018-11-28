@@ -17,7 +17,7 @@
       <button
         class="gantt-elastic__header-btn-recenter"
         :style="root.style('header-btn-recenter')"
-        @click="recenterPosition"
+        @click.prevent="recenterPosition"
       >{{root.state.locale.Now}}</button>
       <label class="gantt-elastic__header-label" :style="root.style('header-label')">
         {{root.state.locale['X-Scale']}}
