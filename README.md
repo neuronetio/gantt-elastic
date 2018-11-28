@@ -1,7 +1,7 @@
-<h1 align="center">Gantt-elastic - Javascript Gantt Chart with editing capabilities!</h1>
-<h2 align="center">Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
+<h1>Gantt-elastic - Javascript Gantt Chart with editing capabilities!</h1>
+<h2>Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
 
-<p align="center">
+<p>
 <img src="https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a">
 <img src="https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg">
 <img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
@@ -9,7 +9,7 @@
 <img src="https://img.shields.io/npm/l/gantt-elastic.svg">
 </p>
 
-<p align="center">
+<p>
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
 </p>
 
