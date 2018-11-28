@@ -14,13 +14,18 @@
       <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
     </div>
   </div>
-  modify task
+
+  modify task<br>
   <input type="number" value="0" id="row" placeholder="which row?">
   <input type="text" id="name" placeholder="name" value="label">
-  <input type="text" id="value" value="test" placeholder="value">
-  <button onclick="update()">Update</button>
+  <input type="text" id="value" value="test" placeholder="value" onkeyup="update()">
+  <br>
   <input type="number" value="0" id="delrow" placeholder="which row?">
   <button onclick="deleteRow()">Delete</button>
+  <br>
+  <input type="number" id="progRow" value="0"><input type="range" min="0" max="100" oninput="progressChange()" id="progress">
+  <br>
+  <button onclick="addTask()">Add task</button>
   <script>
     // override components - copy component from src directory change it to object or compile *.vue to *.js
     // more info about components you can find here : https://vuejs.org/v2/guide/index.html
@@ -274,6 +279,28 @@
         }
         return index !== row;
       });
+    }
+
+    function progressChange() {
+      const row = Number(document.getElementById('progRow').value);
+      const percent = Number(document.getElementById('progress').value);
+      ganttState.tasks[row].progress = percent;
+    }
+
+    function addTask() {
+      const task = {
+        id: 88,
+        label: 'Yeaahh! you have added a task bro!',
+        user: '<a href="https://www.google.com/search?q=Mind+blow" target="_blank" style="color:#0077c0;">Awesome!</a>',
+        parentId: 7,
+        dependentOn: [7],
+        start: getDate(24 * 3),
+        duration: 1 * 24 * 60 * 60,
+        progress: 0,
+        type: 'task'
+      };
+      ganttState.tasks.push(task);
+      console.log(ganttState.tasks)
     }
   </script>
 </body>

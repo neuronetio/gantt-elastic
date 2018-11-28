@@ -1,14 +1,17 @@
-# Gantt-elastic - Javascript Gantt Chart with editing capabilities!
+<h1 align="center">Gantt-elastic - Javascript Gantt Chart with editing capabilities!</h1>
+<h2 align="center">Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
 
-## Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks
+<p align="center">
+<img src="https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a">
+<img src="https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg">
+<img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
+<img src="https://img.shields.io/npm/dm/gantt-elastic.svg">
+<img src="https://img.shields.io/npm/l/gantt-elastic.svg">
+</p>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a)](https://www.codacy.com/app/neuronetio/gantt-elastic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=neuronetio/gantt-elastic&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg)](https://snyk.io/test/github/{username}/{repo})
-![gzipped](https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped)
-![npm](https://img.shields.io/npm/dm/gantt-elastic.svg)
-![NpmLicense](https://img.shields.io/npm/l/gantt-elastic.svg)
-
+<p align="center">
 Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
+</p>
 
 ![preview img](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.jpg)
 ![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
@@ -18,6 +21,8 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
 gantt-elastic is not fully finished yet and may change (not released yet)
+
+### If you want more activity in this repo give it a :star:
 
 ### Full documentation soon
 

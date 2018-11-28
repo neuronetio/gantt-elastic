@@ -343,7 +343,7 @@ const GanttElastic = {
           this.$set(task, 'style', {});
         }
         this.$set(task, 'children', []);
-        this.$set(task, 'alChildren', []);
+        this.$set(task, 'allChildren', []);
         this.$set(task, 'parents', []);
         this.$set(task, 'parent', null);
         this.$set(task, 'durationMs', []);
