@@ -577,12 +577,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=26fa8cb2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=cc9d6c7c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=26fa8cb2&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=cc9d6c7c&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -4541,7 +4541,9 @@ const GanttElastic = {
   },
   data () {
     return {
-      state: {}
+      state: {
+        tasks: []
+      }
     };
   },
   methods: {
@@ -4578,6 +4580,62 @@ const GanttElastic = {
       })
       return merged;
     },
+    refreshTasks () {
+      this.state.tasks = this.state.tasks.map(task => {
+        if (typeof task.x === 'undefined') {
+          this.$set(task, 'x', 0);
+        }
+        if (typeof task.y === 'undefined') {
+          this.$set(task, 'y', 0);
+        }
+        if (typeof task.width === 'undefined') {
+          this.$set(task, 'width', 0);
+        }
+        if (typeof task.height === 'undefined') {
+          this.$set(task, 'height', 0);
+        }
+        if (typeof task.tooltip === 'undefined') {
+          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
+        }
+        if (typeof task.tooltip.visible === 'undefined') {
+          task.tooltip.visible = false;
+        }
+        if (typeof task.mouseOver === 'undefined') {
+          this.$set(task, 'mouseOver', false);
+        }
+        if (typeof task.visible === "undefined") {
+          this.$set(task, 'visible', true);
+        }
+        if (typeof task.collapsed === "undefined") {
+          this.$set(task, 'collapsed', false);
+        }
+        if (typeof task.dependentOn === "undefined") {
+          this.$set(task, 'dependentOn', []);
+        }
+        if (typeof task.parentId === "undefined") {
+          this.$set(task, 'parentId', null);
+        }
+        if (typeof task.style === "undefined") {
+          this.$set(task, 'style', {});
+        }
+        if (typeof task.children === 'undefined') {
+          this.$set(task, 'children', []);
+        }
+        if (typeof task.allChildren === 'undefined') {
+          this.$set(task, 'allChildren', []);
+        }
+        if (typeof task.parents === 'undefined') {
+          this.$set(task, 'parents', []);
+        }
+        if (typeof task.parent === 'undefined') {
+          this.$set(task, 'parent', null);
+        }
+        if (typeof task.durationMs === 'undefined') {
+          this.$set(task, 'durationMs', []);
+        }
+        return task;
+      });
+    },
     /**
      * Initialize component
      */
@@ -4606,38 +4664,7 @@ const GanttElastic = {
         return column;
       });
       // initialize observer
-      this.state.tasks = this.state.tasks.map(task => {
-        this.$set(task, 'x', 0);
-        this.$set(task, 'y', 0);
-        this.$set(task, 'width', 0);
-        this.$set(task, 'height', 0);
-        this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
-        this.$set(task, 'mouseOver', false);
-        if (typeof task.visible === "undefined") {
-          this.$set(task, 'visible', true);
-        }
-        if (typeof task.collapsed === "undefined") {
-          this.$set(task, 'collapsed', false);
-        }
-        if (typeof task.dependencyLines === "undefined") {
-          this.$set(task, 'dependencyLines', []);
-        }
-        if (typeof task.dependentOn === "undefined") {
-          this.$set(task, 'dependentOn', []);
-        }
-        if (typeof task.parentId === "undefined") {
-          this.$set(task, 'parentId', null);
-        }
-        if (typeof task.style === "undefined") {
-          this.$set(task, 'style', {});
-        }
-        this.$set(task, 'children', []);
-        this.$set(task, 'allChildren', []);
-        this.$set(task, 'parents', []);
-        this.$set(task, 'parent', null);
-        this.$set(task, 'durationMs', []);
-        return task;
-      });
+      this.refreshTasks(true);
       this.state.rootTask = {
         id: null,
         label: "root",
@@ -4696,12 +4723,20 @@ const GanttElastic = {
       this.state.rootTask.allChildren = [];
       this.state.rootTask.parent = null;
       this.state.rootTask.parents = [];
+      /*this.$set(this.state.rootTask, 'children', []);
+      this.$set(this.state.rootTask, 'allChildren', []);
+      this.$set(this.state.rootTask, 'parent', null);
+      this.$set(this.state.rootTask, 'parents', []);*/
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         current.children = [];
         current.allChildren = [];
         current.parent = null;
         current.parents = [];
+        /*this.$set(current, 'children', []);
+        this.$set(current, 'allChildren', []);
+        this.$set(current, 'parent', null);
+        this.$set(current, 'parents', []);*/
       }
     },
     makeTaskTree (task) {
@@ -4988,16 +5023,65 @@ const GanttElastic = {
         currentDate = currentDate.add(1, "month");
       }
       state.calendar.month.maxWidths = maxWidths;
+    },
+    prepareDates () {
+      let firstTaskTime = Number.MAX_SAFE_INTEGER;
+      let lastTaskTime = 0;
+      let firstTaskDate, lastTaskDate;
+      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
+        let task = this.state.tasks[index];
+        task.startDate = dayjs_min_default()(task.start);
+        task.startTime = task.startDate.valueOf();
+        task.durationMs = task.duration * 1000;
+        if (task.startTime < firstTaskTime) {
+          firstTaskTime = task.startTime;
+          firstTaskDate = task.startDate;
+        }
+        if (task.startTime + task.durationMs > lastTaskTime) {
+          lastTaskTime = task.startTime + task.durationMs;
+          lastTaskDate = dayjs_min_default()(task.startTime + task.durationMs);
+        }
+      }
+      this.state.times.firstTaskTime = firstTaskTime;
+      this.state.times.lastTaskTime = lastTaskTime;
+      this.state.times.firstTaskDate = firstTaskDate;
+      this.state.times.lastTaskDate = lastTaskDate;
+      this.state.times.firstDate = dayjs_min_default()(firstTaskDate)
+        .locale(this.locale)
+        .startOf("day")
+        .subtract(this.state.scope.before, "days")
+        .startOf("day");
+      this.state.times.lastDate = dayjs_min_default()(lastTaskDate)
+        .locale(this.locale)
+        .endOf("day")
+        .add(this.state.scope.after, "days")
+        .endOf("day");
+    },
+    setup () {
+      this.initialize();
+      this.tasksById = {};
+      this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
+      this.prepareDates();
+      this.initTimes();
+      this.calculateSteps();
+      this.computeCalendarWidths();
+      this.calculateCalendarDimensions();
     }
   },
   computed: {
     visibleTasks () {
+      this.refreshTasks();
+      this.prepareDates();
+      this.initTimes();
+      this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
         return { width: prev.width + current.width };
       }, { width: 0 }).width;
       this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
       this.resetTaskTree();
-      this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
+      this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+      this.state.tasks = this.state.taskTree.allChildren;
+      //this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       this.state.height = this.getHeight(visibleTasks);
       this.state.outerHeight = this.getHeight(visibleTasks, true);
@@ -5012,48 +5096,11 @@ const GanttElastic = {
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
       }
       return visibleTasks;
-    }
+    },
   },
   created () {
-    this.initialize();
     this.initializeEvents();
-    this.tasksById = {};
-    this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
-    let firstTaskTime = Number.MAX_SAFE_INTEGER;
-    let lastTaskTime = 0;
-    let firstTaskDate, lastTaskDate;
-    for (let index = 0, len = this.state.tasks.length; index < len; index++) {
-      let task = this.state.tasks[index];
-      task.startDate = dayjs_min_default()(task.start);
-      task.startTime = task.startDate.valueOf();
-      task.durationMs = task.duration * 1000;
-      if (task.startTime < firstTaskTime) {
-        firstTaskTime = task.startTime;
-        firstTaskDate = task.startDate;
-      }
-      if (task.startTime + task.durationMs > lastTaskTime) {
-        lastTaskTime = task.startTime + task.durationMs;
-        lastTaskDate = dayjs_min_default()(task.startTime + task.durationMs);
-      }
-    }
-    this.state.times.firstTaskTime = firstTaskTime;
-    this.state.times.lastTaskTime = lastTaskTime;
-    this.state.times.firstTaskDate = firstTaskDate;
-    this.state.times.lastTaskDate = lastTaskDate;
-    this.state.times.firstDate = dayjs_min_default()(firstTaskDate)
-      .locale(this.locale)
-      .startOf("day")
-      .subtract(this.state.scope.before, "days")
-      .startOf("day");
-    this.state.times.lastDate = dayjs_min_default()(lastTaskDate)
-      .locale(this.locale)
-      .endOf("day")
-      .add(this.state.scope.after, "days")
-      .endOf("day");
-    this.initTimes();
-    this.calculateSteps();
-    this.computeCalendarWidths();
-    this.calculateCalendarDimensions();
+    this.setup();
     this.$root.$emit('gantt-elastic.created', this);
   },
   mounted () {

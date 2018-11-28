@@ -252,11 +252,12 @@
     });
 
     // gantt state which will be updated in realtime
-    let ganttState;
+    let ganttState, ganttInstance;
 
     // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
     // to get the gantt state for realtime modification
     app.$on('gantt-elastic.ready', (ganttElasticInstance) => {
+      ganttInstance = ganttElasticInstance;
       ganttState = ganttElasticInstance.state;
       console.log('gantt-elastic ready!', ganttState);
     });
@@ -296,11 +297,11 @@
         dependentOn: [7],
         start: getDate(24 * 3),
         duration: 1 * 24 * 60 * 60,
-        progress: 0,
-        type: 'task'
+        progress: 50,
+        type: 'project',
       };
       ganttState.tasks.push(task);
-      console.log(ganttState.tasks)
+      console.log(ganttState.tasks);
     }
   </script>
 </body>
