@@ -568,12 +568,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=cc9d6c7c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=5994e6fc&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=cc9d6c7c&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=5994e6fc&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -3321,14 +3321,20 @@ var Taskvue_type_template_id_a368ce5e_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/Tree/Row/Task.vue?vue&type=template&id=a368ce5e&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Text.vue?vue&type=template&id=156603c4&
-var Textvue_type_template_id_156603c4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__tree-row-text-wrapper",style:(_vm.root.style('tree-row-text-wrapper')),attrs:{"x":_vm.task.x+_vm.task.width + _vm.root.state.treeText.offset,"y":_vm.task.y-_vm.root.state.grid.horizontal.gap,"width":_vm.getWidth,"height":_vm.task.height+_vm.root.state.grid.horizontal.gap*2}},[_c('rect',{staticClass:"gantt-elastic__tree-row-text-background",style:(_vm.root.style('tree-row-text-background')),attrs:{"x":"0","y":"0","width":"100%","height":"100%"}}),_c('text',{staticClass:"gantt-elastic__tree-row-text",style:(_vm.root.style('tree-row-text')),attrs:{"x":_vm.root.state.treeText.xPadding,"y":"50%","alignment-baseline":"middle"}},[_vm._v(_vm._s(_vm.task.label))])])}
-var Textvue_type_template_id_156603c4_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Text.vue?vue&type=template&id=45273225&
+var Textvue_type_template_id_45273225_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__tree-row-text-wrapper",style:(_vm.root.style('tree-row-text-wrapper')),attrs:{"x":_vm.task.x+_vm.task.width + _vm.root.state.treeText.offset,"y":_vm.task.y-_vm.root.state.grid.horizontal.gap,"width":_vm.getWidth,"height":_vm.getHeight}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":_vm.getHeight}},[_c('div',{staticClass:"gantt-elastic__tree-row-text",style:(_vm.root.style('tree-row-text')),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[(!_vm.html)?_c('div',{staticClass:"gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--text",style:(Object.assign({},_vm.root.style('tree-row-text-content','tree-row-text-content--text'),_vm.contentStyle))},[_c('div',[_vm._v(_vm._s(_vm.task.label))])]):_vm._e(),(_vm.html)?_c('div',{staticClass:"gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--html",style:(Object.assign({},_vm.root.style('tree-row-text-content','tree-row-text-content--html'),_vm.contentStyle)),domProps:{"innerHTML":_vm._s(_vm.task.label)}}):_vm._e()])])],1)}
+var Textvue_type_template_id_45273225_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Text.vue?vue&type=template&id=156603c4&
+// CONCATENATED MODULE: ./src/components/Tree/Text.vue?vue&type=template&id=45273225&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Text.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3369,7 +3375,23 @@ var Textvue_type_template_id_156603c4_staticRenderFns = []
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.treeText.xPadding * 2;
-    }
+    },
+    getHeight () {
+      return this.task.height + this.root.state.grid.horizontal.gap * 2;
+    },
+    contentStyle () {
+      return { height: '100%', 'line-height': this.getHeight + 'px' };
+    },
+    html () {
+      const cols = this.root.state.taskList.columns;
+      for (let i = 0, len = cols.length; i < len; i++) {
+        const col = cols[i];
+        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+          return true;
+        }
+      }
+      return false;
+    },
   }
 });
 
@@ -3385,8 +3407,8 @@ var Textvue_type_template_id_156603c4_staticRenderFns = []
 
 var Text_component = normalizeComponent(
   Tree_Textvue_type_script_lang_js_,
-  Textvue_type_template_id_156603c4_render,
-  Textvue_type_template_id_156603c4_staticRenderFns,
+  Textvue_type_template_id_45273225_render,
+  Textvue_type_template_id_45273225_staticRenderFns,
   false,
   null,
   null,
@@ -4225,15 +4247,20 @@ const fontFamily = 'Arial, sans-serif';
   },
   "tree": {},
   "tree-row-text-wrapper": {},
-  "tree-row-text-background": {
-    "fill": "#ffffffb0"
-  },
   "tree-row-text": {
+    "background": "#ffffffa0",
+    "border-radius": "10px",
     "font-family": fontFamily,
     "font-size": fontSize,
     "font-weight": "normal",
-    "fill": "#000000a0"
+    "color": "#000000a0",
+    "height": '100%'
   },
+  "tree-row-text-content": {
+    "padding": "0px 6px"
+  },
+  "tree-row-text-content--text": {},
+  "tree-row-text-content--html": {},
   "tree-row-wrapper": {},
   "tree-row-bar-wrapper": {},
   "tree-row-bar": {},
@@ -4567,6 +4594,8 @@ const GanttElastic = {
           merged = Object.assign({}, merged, this.state.style[objOrClassName])
         } else if (typeof objOrClassName === 'object') {
           merged = Object.assign({}, merged, objOrClassName);
+        } else if (typeof objOrClassName === 'function') {
+          merged = Object.assign({}, objOrClassName())
         }
       })
       return merged;

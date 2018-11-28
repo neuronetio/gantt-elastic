@@ -287,6 +287,8 @@ const GanttElastic = {
           merged = Object.assign({}, merged, this.state.style[objOrClassName])
         } else if (typeof objOrClassName === 'object') {
           merged = Object.assign({}, merged, objOrClassName);
+        } else if (typeof objOrClassName === 'function') {
+          merged = Object.assign({}, objOrClassName())
         }
       })
       return merged;

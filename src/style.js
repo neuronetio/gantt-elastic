@@ -171,15 +171,20 @@ export default {
   },
   "tree": {},
   "tree-row-text-wrapper": {},
-  "tree-row-text-background": {
-    "fill": "#ffffffb0"
-  },
   "tree-row-text": {
+    "background": "#ffffffa0",
+    "border-radius": "10px",
     "font-family": fontFamily,
     "font-size": fontSize,
     "font-weight": "normal",
-    "fill": "#000000a0"
+    "color": "#000000a0",
+    "height": '100%'
   },
+  "tree-row-text-content": {
+    "padding": "0px 6px"
+  },
+  "tree-row-text-content--text": {},
+  "tree-row-text-content--html": {},
   "tree-row-wrapper": {},
   "tree-row-bar-wrapper": {},
   "tree-row-bar": {},

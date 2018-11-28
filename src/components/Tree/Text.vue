@@ -5,23 +5,29 @@
     :x="task.x+task.width + root.state.treeText.offset"
     :y="task.y-root.state.grid.horizontal.gap"
     :width="getWidth"
-    :height="task.height+root.state.grid.horizontal.gap*2"
+    :height="getHeight"
   >
-    <rect
-      class="gantt-elastic__tree-row-text-background"
-      :style="root.style('tree-row-text-background')"
-      x="0"
-      y="0"
-      width="100%"
-      height="100%"
-    ></rect>
-    <text
-      class="gantt-elastic__tree-row-text"
-      :style="root.style('tree-row-text')"
-      :x="root.state.treeText.xPadding"
-      y="50%"
-      alignment-baseline="middle"
-    >{{task.label}}</text>
+    <foreignObject x="0" y="0" width="100%" :height="getHeight">
+      <div
+        xmlns="http://www.w3.org/1999/xhtml"
+        class="gantt-elastic__tree-row-text"
+        :style="root.style('tree-row-text')"
+      >
+        <div
+          class="gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--text"
+          :style="Object.assign({},root.style('tree-row-text-content','tree-row-text-content--text'),contentStyle)"
+          v-if="!html"
+        >
+          <div>{{task.label}}</div>
+        </div>
+        <div
+          class="gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--html"
+          :style="Object.assign({},root.style('tree-row-text-content','tree-row-text-content--html'),contentStyle)"
+          v-if="html"
+          v-html="task.label"
+        ></div>
+      </div>
+    </foreignObject>
   </svg>
 </template>
 
@@ -38,7 +44,23 @@ export default {
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.treeText.xPadding * 2;
-    }
+    },
+    getHeight () {
+      return this.task.height + this.root.state.grid.horizontal.gap * 2;
+    },
+    contentStyle () {
+      return { height: '100%', 'line-height': this.getHeight + 'px' };
+    },
+    html () {
+      const cols = this.root.state.taskList.columns;
+      for (let i = 0, len = cols.length; i < len; i++) {
+        const col = cols[i];
+        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+          return true;
+        }
+      }
+      return false;
+    },
   }
 };
 </script>
