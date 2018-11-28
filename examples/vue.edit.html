@@ -194,7 +194,8 @@
             label: 'Description',
             value: 'label',
             width: 200,
-            expander: true
+            expander: true,
+            html: true,
           }, {
             id: 3,
             label: 'Assigned to',
@@ -291,8 +292,8 @@
     function addTask() {
       const task = {
         id: 88,
-        label: 'Yeaahh! you have added a task bro!',
-        user: '<a href="https://www.google.com/search?q=Mind+blow" target="_blank" style="color:#0077c0;">Awesome!</a>',
+        label: '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Yeaahh! you have added a task bro!</a>',
+        user: '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Awesome!</a>',
         parentId: 7,
         dependentOn: [7],
         start: getDate(24 * 3),
