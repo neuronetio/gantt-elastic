@@ -3,17 +3,16 @@
   "version": "0.2.6",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
   "main": "dist/GanttElastic.common.js",
-  "dependencies": {
-    "dayjs": "^1.7.7",
-    "vue-slider-component": "^2.7.11",
-    "vue-switches": "^2.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-service": "^3.1.4",
     "css-loader": "^1.0.1",
+    "dayjs": "^1.7.7",
     "gulp-vueify2": "0.0.3",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
+    "vue-slider-component": "^2.8.2",
+    "vue-switches": "^2.0.1",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
