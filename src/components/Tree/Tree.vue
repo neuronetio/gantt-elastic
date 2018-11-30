@@ -41,7 +41,9 @@ export default {
   },
   inject: ["root"],
   data () {
-    return {};
+    return {
+      moving: false
+    };
   },
   computed: {
     getWidth () {
@@ -52,6 +54,6 @@ export default {
       const state = this.root.state;
       return state.height;
     }
-  }
+  },
 };
 </script>

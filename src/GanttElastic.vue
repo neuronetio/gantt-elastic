@@ -17,6 +17,7 @@ function getOptions (userOptions) {
     width: 0,
     height: 0,
     scroll: {
+      dragMoveMultiplier: 3,
       taskList: {
         left: 0,
         right: 0,
@@ -62,8 +63,9 @@ function getOptions (userOptions) {
     },
     row: {
       height: 24,
-      showText: true
+      showText: true,
     },
+    maxRows: 0,
     treeText: {
       offset: 0,
       xPadding: 10

@@ -47,7 +47,9 @@ export default {
   "header-task-list-switch--label": {},
   "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
   "header-label": {},
-  "calendar-wrapper": {},
+  "calendar-wrapper": {
+    "user-select": "none"
+  },
   "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
   "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
   "calendar-row--month": {},
@@ -169,7 +171,9 @@ export default {
     "stroke": "#FF000080",
     "strokeWidth": 1
   },
-  "tree": {},
+  "tree": {
+    "user-select": "none"
+  },
   "tree-row-text-wrapper": {},
   "tree-row-text": {
     "background": "#ffffffa0",
