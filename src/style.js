@@ -125,6 +125,9 @@ export default {
     "border-radius": "100%",
     "margin": "4px 0px",
   },
+  "task-list-items": {
+    "overflow": "hidden"
+  },
   "task-list-item": {
     "border-top": "1px solid #eee",
     "border-right": "1px solid #eee",
@@ -172,7 +175,11 @@ export default {
     "strokeWidth": 1
   },
   "tree": {
-    "user-select": "none"
+    "user-select": "none",
+    "overflow": "hidden"
+  },
+  "tree-graph": {
+    "overflow": "hidden"
   },
   "tree-row-text-wrapper": {},
   "tree-row-text": {
@@ -240,6 +247,9 @@ export default {
     "overflow-x": "hidden",
     "max-height": "100%",
     "float": "right",
+  },
+  "svg-tree": {
+    "overflow": "hidden"
   },
   "svg-container-wrapper": {
     "overflow": "hidden"

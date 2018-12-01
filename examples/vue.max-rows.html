@@ -44,10 +44,11 @@
 
     let tasks = [];
     let types = ['project', 'milestone', 'task'];
-    for (let i = -50; i < 50; i++) {
+    const rows = 40 / 2;
+    for (let i = -rows; i < rows; i++) {
       tasks.push({
-        id: i + 51,
-        label: 'task ' + (i + 51),
+        id: i + rows + 1,
+        label: 'task ' + (i + rows + 1),
         user: 'test',
         start: getDate(24 * i),
         duration: 24 * 60 * 60,

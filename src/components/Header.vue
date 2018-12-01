@@ -44,7 +44,7 @@
             :slider-style="root.style('header-slider--slider')"
             v-model="height"
             :max="100"
-            :min="6"
+            :min="7"
             width="100px"
           ></vue-slider>
         </div>

@@ -1,7 +1,10 @@
 <template>
   <div class="gantt-elastic__main">
     <top-header></top-header>
-    <div class="gantt-elastic__svg-container-wrapper" :style="root.style('svg-container-wrapper')">
+    <div
+      class="gantt-elastic__svg-container-wrapper"
+      :style="root.style('svg-container-wrapper',{height:root.state.height+'px'})"
+    >
       <svg
         :width="getWidth"
         :height="root.state.height"
@@ -37,22 +40,14 @@
               @mouseup.stop="treeMouseUp"
               @mousemove.stop="treeMouseMove"
             >
-              <svg
-                ref="svgTree"
-                xmlns="http://www.w3.org/2000/svg"
-                :width="root.state.width"
-                :height="root.state.height"
-              >
-                <defs v-html="defs"></defs>
-                <tree></tree>
-              </svg>
+              <tree></tree>
             </div>
           </div>
         </foreignObject>
       </svg>
       <div
         class="gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--vertical"
-        :style="root.style('tree-scroll-container','tree-scroll-container--vertical',{width:root.state.scrollBarHeight+'px', height:root.state.height+'px'})"
+        :style="root.style('tree-scroll-container','tree-scroll-container--vertical',verticalStyle)"
         ref="treeScrollContainerVertical"
         @scroll="onVerticalScroll"
       >
@@ -97,12 +92,12 @@ export default {
     };
   },
   mounted () {
-    this.root.state.svgMain = this.$refs.svgMain;
-    this.root.state.svgTree = this.$refs.svgTree;
-    this.root.state.svgTreeContainer = this.$refs.svgTreeContainer;
-    this.root.state.svgTaskList = this.$refs.svgTaskList;
-    this.root.state.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
-    this.root.state.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
+    this.root.state.refs.svgMain = this.$refs.svgMain;
+    this.root.state.refs.svgTree = this.$refs.svgTree;
+    this.root.state.refs.svgTreeContainer = this.$refs.svgTreeContainer;
+    this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
+    this.root.state.refs.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
+    this.root.state.refs.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
   },
   computed: {
     getWidth () {
@@ -119,6 +114,13 @@ export default {
         return "0px";
       }
       return this.root.state.taskList.finalWidth + "px";
+    },
+    verticalStyle () {
+      return {
+        width: this.root.state.scrollBarHeight + 'px',
+        height: this.root.state.rowsHeight + 'px',
+        "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
+      };
     }
   },
   methods: {
@@ -148,10 +150,10 @@ export default {
         const horizontal = this.$refs.treeScrollContainerHorizontal;
         const vertical = this.$refs.treeScrollContainerVertical;
         const currentX = horizontal.scrollLeft;
-        const x = currentX - (ev.movementX * this.root.state.scroll.dragMoveMultiplier);
+        const x = currentX - (ev.movementX * this.root.state.scroll.dragXMoveMultiplier);
         horizontal.scrollLeft = x;
         const currentY = vertical.scrollTop;
-        const y = currentY - (ev.movementY * this.root.state.scroll.dragMoveMultiplier);
+        const y = currentY - (ev.movementY * this.root.state.scroll.dragYMoveMultiplier);
         vertical.scrollTop = y;
       }
     }

@@ -1,6 +1,7 @@
 <template>
   <foreignObject
     class="gantt-elastic__task-list-wrapper"
+    ref="taskListWrapper"
     :style="root.style('task-list-wrapper')"
     x="0"
     y="0"
@@ -8,14 +9,25 @@
     height="100%"
     v-if="root.state.taskList.display"
   >
-    <div xmlns="http://www.w3.org/1999/xhtml" class="gantt-elastic__task-list" :style="root.style('task-list')">
+    <div
+      xmlns="http://www.w3.org/1999/xhtml"
+      class="gantt-elastic__task-list"
+      :style="root.style('task-list')"
+      ref="taskList"
+    >
       <task-list-header></task-list-header>
-      <task-list-item
-        v-for="task in root.visibleTasks"
-        :key="task.id"
-        :task="task"
-        :expander-style="getListExpanderStyle(task)"
-      ></task-list-item>
+      <div
+        class="gantt-elastic__task-list-items"
+        ref="taskListItems"
+        :style="root.style('task-list-items',{height:root.state.rowsHeight+'px'})"
+      >
+        <task-list-item
+          v-for="task in root.visibleTasks"
+          :key="task.id"
+          :task="task"
+          :expander-style="getListExpanderStyle(task)"
+        ></task-list-item>
+      </div>
     </div>
   </foreignObject>
 </template>
@@ -31,6 +43,11 @@ export default {
   inject: ["root"],
   data () {
     return {};
+  },
+  mounted () {
+    this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
+    this.root.state.refs.taskList = this.$refs.taskList;
+    this.root.state.refs.taskListItems = this.$refs.taskListItems;
   },
   computed: {
     getListExpanderStyle () {

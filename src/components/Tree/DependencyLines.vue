@@ -1,5 +1,10 @@
 <template>
-  <g class="gantt-elastic__tree-dependency-lines-container" :style="root.style('tree-dependency-lines-container')">
+  <svg
+    width="100%"
+    height="100%"
+    class="gantt-elastic__tree-dependency-lines-container"
+    :style="root.style('tree-dependency-lines-container')"
+  >
     <g v-for="task in dependencyTasks" :key="task.id" :task="task">
       <path
         class="gantt-elastic__tree-dependency-lines-path"
@@ -10,7 +15,7 @@
         :d="dependencyLine.points"
       ></path>
     </g>
-  </g>
+  </svg>
 </template>
 
 <script>

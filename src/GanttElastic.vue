@@ -16,8 +16,11 @@ function getOptions (userOptions) {
     },
     width: 0,
     height: 0,
+    rowsHeight: 0,
     scroll: {
-      dragMoveMultiplier: 3,
+      dragXMoveMultiplier: 3,
+      dragYMoveMultiplier: 1,
+      top: 0,
       taskList: {
         left: 0,
         right: 0,
@@ -258,7 +261,8 @@ const GanttElastic = {
       state: {
         tasks: [],
         scrollBarHeight: 0,
-        allVisibleTasksHeight: 0
+        allVisibleTasksHeight: 0,
+        refs: {},
       }
     };
   },
@@ -399,6 +403,9 @@ const GanttElastic = {
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
     },
+    getCalendarHeight () {
+      return this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
+    },
     calculateCalendarDimensions () {
       this.state.calendar.height = 0;
       if (this.state.calendar.hour.display) {
@@ -508,6 +515,9 @@ const GanttElastic = {
       }
       return height;
     },
+    getTasksHeight (visibleTasks, outer = false) {
+      return visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2);
+    },
     timeToPixelOffsetX (ms) {
       let x = ms - this.state.times.firstTime;
       if (x) {
@@ -523,12 +533,12 @@ const GanttElastic = {
       return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
     },
     onScrollTree (ev) {
-      const horizontal = this.state.treeScrollContainerHorizontal;
-      const vertical = this.state.treeScrollContainerVertical;
+      const horizontal = this.state.refs.treeScrollContainerHorizontal;
+      const vertical = this.state.refs.treeScrollContainerVertical;
       this._onScrollTree(horizontal.scrollLeft, vertical.scrollTop);
     },
     _onScrollTree (left, top) {
-      const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
+      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
       this.state.scroll.tree.left = left;
       this.state.scroll.tree.right = left + treeContainerWidth;
       this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
@@ -537,21 +547,26 @@ const GanttElastic = {
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
       this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
-      this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.svgTree.clientWidth));
-      this.scrollTo(left);
+      this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.refs.tree.clientWidth));
+      this.scrollTo(left, top);
     },
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
+      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
       pos = pos - treeContainerWidth / 2;
       if (pos > this.state.width) {
         pos = this.state.width - treeContainerWidth;
       }
       this.scrollTo(pos);
     },
-    scrollTo (pos) {
-      this.state.svgTreeContainer.scrollLeft = pos;
-      this.state.treeScrollContainerHorizontal.scrollLeft = pos;
+    scrollTo (left, top = null) {
+      this.state.refs.svgTreeContainer.scrollLeft = left;
+      this.state.refs.treeScrollContainerHorizontal.scrollLeft = left;
+      if (top !== null) {
+        this.state.refs.treeScrollContainerVertical.scrollTop = top;
+        this.state.refs.taskListItems.scrollTop = top;
+        this.state.scroll.top = top;
+      }
     },
     fixScrollPos () {
       this.$nextTick(() => {
@@ -804,17 +819,19 @@ const GanttElastic = {
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
       const allVisibleTasks = this.state.tasks.filter(task => task.visible);
-      const begin = this.state.scroll.tree.topTask;
-      let end = allVisibleTasks.length;
+      let visibleTasks;
       if (this.state.maxRows) {
-        end = this.state.scroll.tree.topTask + this.state.maxRows;
+        const begin = this.state.scroll.tree.topTask;
+        const end = this.state.scroll.tree.topTask + this.state.maxRows;
+        visibleTasks = allVisibleTasks.slice(begin, end);
+      } else {
+        visibleTasks = allVisibleTasks;
       }
-      const visibleTasks = allVisibleTasks.slice(begin, end);
       this.state.height = this.getHeight(visibleTasks);
-      this.state.allVisibleTasksHeight = allVisibleTasks.reduce((prev, curr, index) => {
-        return { height: prev.height + curr.height + this.state.grid.horizontal.gap * 2 };
-      }, { height: 0 }).height;
+      this.state.allVisibleTasksHeight = this.getTasksHeight(allVisibleTasks);
+      this.state.rowsHeight = this.getTasksHeight(visibleTasks);
       this.state.outerHeight = this.getHeight(visibleTasks, true);
+      visibleTasks = allVisibleTasks;
       let len = visibleTasks.length;
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
@@ -824,7 +841,7 @@ const GanttElastic = {
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap + this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
+        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap - this.state.scroll.top;
       }
       return visibleTasks;
     },
