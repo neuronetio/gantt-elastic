@@ -69,7 +69,7 @@ function getOptions (userOptions) {
       height: 24,
       showText: true,
     },
-    maxRows: 0,
+    maxRows: 20,
     treeText: {
       offset: 0,
       xPadding: 10
@@ -448,20 +448,12 @@ const GanttElastic = {
       this.state.rootTask.allChildren = [];
       this.state.rootTask.parent = null;
       this.state.rootTask.parents = [];
-      /*this.$set(this.state.rootTask, 'children', []);
-      this.$set(this.state.rootTask, 'allChildren', []);
-      this.$set(this.state.rootTask, 'parent', null);
-      this.$set(this.state.rootTask, 'parents', []);*/
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         current.children = [];
         current.allChildren = [];
         current.parent = null;
         current.parents = [];
-        /*this.$set(current, 'children', []);
-        this.$set(current, 'allChildren', []);
-        this.$set(current, 'parent', null);
-        this.$set(current, 'parents', []);*/
       }
     },
     makeTaskTree (task) {

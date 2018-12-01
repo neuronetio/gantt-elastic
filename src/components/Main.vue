@@ -98,6 +98,8 @@ export default {
     this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
     this.root.state.refs.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
     this.root.state.refs.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
+    document.addEventListener('mouseup', this.treeMouseUp.bind(this));
+    document.addEventListener('mousemove', this.treeMouseMove.bind(this));
   },
   computed: {
     getWidth () {
