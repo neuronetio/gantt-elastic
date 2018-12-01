@@ -1,55 +1,74 @@
 <template>
   <div class="gantt-elastic__main">
     <top-header></top-header>
-    <svg
-      :width="getWidth"
-      :height="root.state.height"
-      class="gantt-elastic__svg-container"
-      ref="svgMain"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <foreignObject x="0" y="0" width="100%" height="100%">
-        <div
-          xmlns="http://www.w3.org/1999/xhtml"
-          class="gantt-elastic__container"
-          @mousemove="mouseMove"
-          @mouseup="mouseUp"
-        >
-          <div class="gantt-elastic__task-list-container">
-            <svg
-              ref="svgTaskList"
-              class="gantt-elastic__task-list-svg"
-              xmlns="http://www.w3.org/2000/svg"
-              :width="root.state.taskList.finalWidth"
-              :height="root.state.height"
-              v-if="root.state.taskList.display"
-            >
-              <defs v-html="defs"></defs>
-              <task-list></task-list>
-            </svg>
-          </div>
+    <div class="gantt-elastic__svg-container-wrapper" :style="root.style('svg-container-wrapper')">
+      <svg
+        :width="getWidth"
+        :height="root.state.height"
+        class="gantt-elastic__svg-container"
+        :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
+        ref="svgMain"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <foreignObject x="0" y="0" width="100%" height="100%">
           <div
-            class="gantt-elastic__main-container"
-            ref="svgTreeContainer"
-            @mousedown.stop="treeMouseDown"
-            @mouseup.stop="treeMouseUp"
-            @mousemove.stop="treeMouseMove"
+            xmlns="http://www.w3.org/1999/xhtml"
+            class="gantt-elastic__container"
+            @mousemove="mouseMove"
+            @mouseup="mouseUp"
           >
-            <svg ref="svgTree" xmlns="http://www.w3.org/2000/svg" :width="root.state.width" :height="root.state.height">
-              <defs v-html="defs"></defs>
-              <tree></tree>
-            </svg>
+            <div class="gantt-elastic__task-list-container">
+              <svg
+                ref="svgTaskList"
+                class="gantt-elastic__task-list-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                :width="root.state.taskList.finalWidth"
+                :height="root.state.height"
+                v-if="root.state.taskList.display"
+              >
+                <defs v-html="defs"></defs>
+                <task-list></task-list>
+              </svg>
+            </div>
+            <div
+              class="gantt-elastic__main-container"
+              ref="svgTreeContainer"
+              @mousedown.stop="treeMouseDown"
+              @mouseup.stop="treeMouseUp"
+              @mousemove.stop="treeMouseMove"
+            >
+              <svg
+                ref="svgTree"
+                xmlns="http://www.w3.org/2000/svg"
+                :width="root.state.width"
+                :height="root.state.height"
+              >
+                <defs v-html="defs"></defs>
+                <tree></tree>
+              </svg>
+            </div>
           </div>
-        </div>
-      </foreignObject>
-    </svg>
+        </foreignObject>
+      </svg>
+      <div
+        class="gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--vertical"
+        :style="root.style('tree-scroll-container','tree-scroll-container--vertical',{width:root.state.scrollBarHeight+'px', height:root.state.height+'px'})"
+        ref="treeScrollContainerVertical"
+        @scroll="onVerticalScroll"
+      >
+        <div
+          class="gantt-elastic__tree-scroll--vertical"
+          :style="{width:'1px',height:root.state.allVisibleTasksHeight+'px'}"
+        ></div>
+      </div>
+    </div>
     <div
-      class="gantt-elastic__tree-scroll-container"
-      :style="{marginLeft:getMarginLeft}"
-      v-on:scroll="onScroll"
-      ref="treeScrollContainer"
+      class="gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--horizontal"
+      :style="root.style('tree-scroll-container','tree-scroll-container--horizontal',{marginLeft:getMarginLeft})"
+      @scroll="onHorizontalScroll"
+      ref="treeScrollContainerHorizontal"
     >
-      <div class="gantt-elastic__tree-scroll" :style="{height:'1px', width:root.state.width+'px'}"></div>
+      <div class="gantt-elastic__tree-scroll--horizontal" :style="{height:'1px', width:root.state.width+'px'}"></div>
     </div>
   </div>
 </template>
@@ -82,7 +101,8 @@ export default {
     this.root.state.svgTree = this.$refs.svgTree;
     this.root.state.svgTreeContainer = this.$refs.svgTreeContainer;
     this.root.state.svgTaskList = this.$refs.svgTaskList;
-    this.root.state.treeScrollContainer = this.$refs.treeScrollContainer;
+    this.root.state.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
+    this.root.state.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
   },
   computed: {
     getWidth () {
@@ -108,8 +128,11 @@ export default {
     mouseUp (event) {
       this.$root.$emit("gantt-elastic.main.mouseup", event);
     },
-    onScroll (ev) {
-      this.$root.$emit("gantt-elastic.tree.scroll", ev);
+    onHorizontalScroll (ev) {
+      this.$root.$emit("gantt-elastic.tree.scroll.horizontal", ev);
+    },
+    onVerticalScroll (ev) {
+      this.$root.$emit("gantt-elastic.tree.scroll.vertical", ev);
     },
     onWheel (ev) {
       this.$root.$emit("gantt-elastic.tree.wheel", ev);
@@ -122,8 +145,14 @@ export default {
     },
     treeMouseMove (ev) {
       if (this.moving) {
-        let currentPos = this.root.state.svgTreeContainer.scrollLeft;
-        this.root.scrollTo(currentPos - (ev.movementX * this.root.state.scroll.dragMoveMultiplier));
+        const horizontal = this.$refs.treeScrollContainerHorizontal;
+        const vertical = this.$refs.treeScrollContainerVertical;
+        const currentX = horizontal.scrollLeft;
+        const x = currentX - (ev.movementX * this.root.state.scroll.dragMoveMultiplier);
+        horizontal.scrollLeft = x;
+        const currentY = vertical.scrollTop;
+        const y = currentY - (ev.movementY * this.root.state.scroll.dragMoveMultiplier);
+        vertical.scrollTop = y;
       }
     }
   }

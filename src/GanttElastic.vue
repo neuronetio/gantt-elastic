@@ -30,6 +30,7 @@ function getOptions (userOptions) {
         percent: 0,
         timePercent: 0,
         top: 0,
+        topTask: 0,
         bottom: 0,
         time: 0,
         timeCenter: 0,
@@ -255,7 +256,9 @@ const GanttElastic = {
   data () {
     return {
       state: {
-        tasks: []
+        tasks: [],
+        scrollBarHeight: 0,
+        allVisibleTasksHeight: 0
       }
     };
   },
@@ -275,7 +278,7 @@ const GanttElastic = {
       outer.appendChild(inner);
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return noScroll - withScroll;
+      return this.state.scrollBarHeight = noScroll - withScroll;
     },
     /**
      * Get style for specified class
@@ -520,7 +523,9 @@ const GanttElastic = {
       return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
     },
     onScrollTree (ev) {
-      this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
+      const horizontal = this.state.treeScrollContainerHorizontal;
+      const vertical = this.state.treeScrollContainerVertical;
+      this._onScrollTree(horizontal.scrollLeft, vertical.scrollTop);
     },
     _onScrollTree (left, top) {
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
@@ -528,6 +533,7 @@ const GanttElastic = {
       this.state.scroll.tree.right = left + treeContainerWidth;
       this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
       this.state.scroll.tree.top = top;
+      this.state.scroll.tree.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
       this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
@@ -545,7 +551,7 @@ const GanttElastic = {
     },
     scrollTo (pos) {
       this.state.svgTreeContainer.scrollLeft = pos;
-      this.state.treeScrollContainer.scrollLeft = pos;
+      this.state.treeScrollContainerHorizontal.scrollLeft = pos;
     },
     fixScrollPos () {
       this.$nextTick(() => {
@@ -584,7 +590,8 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$root.$on("gantt-elastic.tree.scroll", this.onScrollTree);
+      this.$root.$on("gantt-elastic.tree.scroll.horizontal", this.onScrollTree);
+      this.$root.$on("gantt-elastic.tree.scroll.vertical", this.onScrollTree);
       this.$root.$on("gantt-elastic.tree.wheel", this.onWheelTree);
       this.$root.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
       this.$root.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
@@ -796,11 +803,20 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      //this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const allVisibleTasks = this.state.tasks.filter(task => task.visible);
+      const begin = this.state.scroll.tree.topTask;
+      let end = allVisibleTasks.length;
+      if (this.state.maxRows) {
+        end = this.state.scroll.tree.topTask + this.state.maxRows;
+      }
+      const visibleTasks = allVisibleTasks.slice(begin, end);
       this.state.height = this.getHeight(visibleTasks);
+      this.state.allVisibleTasksHeight = allVisibleTasks.reduce((prev, curr, index) => {
+        return { height: prev.height + curr.height + this.state.grid.horizontal.gap * 2 };
+      }, { height: 0 }).height;
       this.state.outerHeight = this.getHeight(visibleTasks, true);
-      for (let index = 0, len = visibleTasks.length; index < len; index++) {
+      let len = visibleTasks.length;
+      for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
         task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical').strokeWidth;
         if (task.width < 0) {

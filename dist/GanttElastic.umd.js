@@ -577,23 +577,23 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=4b4378dc&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=61445e2a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=4b4378dc&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=61445e2a&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
 var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Main.vue?vue&type=template&id=a9c7bc98&
-var Mainvue_type_template_id_a9c7bc98_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__main"},[_c('top-header'),_c('svg',{ref:"svgMain",staticClass:"gantt-elastic__svg-container",attrs:{"width":_vm.getWidth,"height":_vm.root.state.height,"xmlns":"http://www.w3.org/2000/svg"}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"},on:{"mousemove":_vm.mouseMove,"mouseup":_vm.mouseUp}},[_c('div',{staticClass:"gantt-elastic__task-list-container"},[(_vm.root.state.taskList.display)?_c('svg',{ref:"svgTaskList",staticClass:"gantt-elastic__task-list-svg",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.taskList.finalWidth,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('task-list')],1):_vm._e()]),_c('div',{ref:"svgTreeContainer",staticClass:"gantt-elastic__main-container",on:{"mousedown":function($event){$event.stopPropagation();return _vm.treeMouseDown($event)},"mouseup":function($event){$event.stopPropagation();return _vm.treeMouseUp($event)},"mousemove":function($event){$event.stopPropagation();return _vm.treeMouseMove($event)}}},[_c('svg',{ref:"svgTree",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.width,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('tree')],1)])])])],1),_c('div',{ref:"treeScrollContainer",staticClass:"gantt-elastic__tree-scroll-container",style:({marginLeft:_vm.getMarginLeft}),on:{"scroll":_vm.onScroll}},[_c('div',{staticClass:"gantt-elastic__tree-scroll",style:({height:'1px', width:_vm.root.state.width+'px'})})])],1)}
-var Mainvue_type_template_id_a9c7bc98_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Main.vue?vue&type=template&id=730229d5&
+var Mainvue_type_template_id_730229d5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__main"},[_c('top-header'),_c('div',{staticClass:"gantt-elastic__svg-container-wrapper",style:(_vm.root.style('svg-container-wrapper'))},[_c('svg',{ref:"svgMain",staticClass:"gantt-elastic__svg-container",style:(_vm.root.style('svg-container', {'max-width':'calc(100% - '+_vm.root.state.scrollBarHeight+'px)'})),attrs:{"width":_vm.getWidth,"height":_vm.root.state.height,"xmlns":"http://www.w3.org/2000/svg"}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"},on:{"mousemove":_vm.mouseMove,"mouseup":_vm.mouseUp}},[_c('div',{staticClass:"gantt-elastic__task-list-container"},[(_vm.root.state.taskList.display)?_c('svg',{ref:"svgTaskList",staticClass:"gantt-elastic__task-list-svg",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.taskList.finalWidth,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('task-list')],1):_vm._e()]),_c('div',{ref:"svgTreeContainer",staticClass:"gantt-elastic__main-container",on:{"mousedown":function($event){$event.stopPropagation();return _vm.treeMouseDown($event)},"mouseup":function($event){$event.stopPropagation();return _vm.treeMouseUp($event)},"mousemove":function($event){$event.stopPropagation();return _vm.treeMouseMove($event)}}},[_c('svg',{ref:"svgTree",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.width,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('tree')],1)])])])],1),_c('div',{ref:"treeScrollContainerVertical",staticClass:"gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--vertical",style:(_vm.root.style('tree-scroll-container','tree-scroll-container--vertical',{width:_vm.root.state.scrollBarHeight+'px', height:_vm.root.state.height+'px'})),on:{"scroll":_vm.onVerticalScroll}},[_c('div',{staticClass:"gantt-elastic__tree-scroll--vertical",style:({width:'1px',height:_vm.root.state.allVisibleTasksHeight+'px'})})])]),_c('div',{ref:"treeScrollContainerHorizontal",staticClass:"gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--horizontal",style:(_vm.root.style('tree-scroll-container','tree-scroll-container--horizontal',{marginLeft:_vm.getMarginLeft})),on:{"scroll":_vm.onHorizontalScroll}},[_c('div',{staticClass:"gantt-elastic__tree-scroll--horizontal",style:({height:'1px', width:_vm.root.state.width+'px'})})])],1)}
+var Mainvue_type_template_id_730229d5_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Main.vue?vue&type=template&id=a9c7bc98&
+// CONCATENATED MODULE: ./src/components/Main.vue?vue&type=template&id=730229d5&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Header.vue?vue&type=template&id=6541fa3e&
 var Headervue_type_template_id_6541fa3e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__header",style:(_vm.root.style('header'))},[_c('div',{staticClass:"gantt-elastic__header-title",style:(_vm.root.style('header-title'))},[(!_vm.root.state.title.html)?_c('div',{staticClass:"gantt-elastic__header-title--text",style:(_vm.root.style('header-title--text'))},[_vm._v(_vm._s(_vm.root.state.title.label))]):_vm._e(),(_vm.root.state.title.html)?_c('div',{staticClass:"gantt-elastic__header-title--html",style:(_vm.root.style('header-title--html')),domProps:{"innerHTML":_vm._s(_vm.root.state.title.label)}}):_vm._e()]),_c('div',{staticClass:"gantt-elastic__header-options",style:(_vm.root.style('header-options'))},[_c('button',{staticClass:"gantt-elastic__header-btn-recenter",style:(_vm.root.style('header-btn-recenter')),on:{"click":function($event){$event.preventDefault();return _vm.recenterPosition($event)}}},[_vm._v(_vm._s(_vm.root.state.locale.Now))]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['X-Scale'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":24,"min":2,"width":"100px"},model:{value:(_vm.scale),callback:function ($$v) {_vm.scale=$$v},expression:"scale"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Y-Scale'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":100,"min":6,"width":"100px"},model:{value:(_vm.height),callback:function ($$v) {_vm.height=$$v},expression:"height"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Before/After'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":31,"min":0,"width":"100px"},model:{value:(_vm.scope),callback:function ($$v) {_vm.scope=$$v},expression:"scope"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Task list width'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":100,"min":0,"width":"100px"},model:{value:(_vm.divider),callback:function ($$v) {_vm.divider=$$v},expression:"divider"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-task-list-switch--wrapper",style:(_vm.root.style('header-task-list-switch--label'))},[_c('switches',{staticClass:"gantt-elastic__header-task-list-switch",style:(_vm.root.style('header-task-list-switch')),model:{value:(_vm.root.state.taskList.display),callback:function ($$v) {_vm.$set(_vm.root.state.taskList, "display", $$v)},expression:"root.state.taskList.display"}}),_vm._v("\n      "+_vm._s(_vm.root.state.locale['Display task list'])+"\n    ")],1)])])}
@@ -4009,6 +4009,25 @@ Tree_component.options.__file = "Tree.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4037,7 +4056,8 @@ Tree_component.options.__file = "Tree.vue"
     this.root.state.svgTree = this.$refs.svgTree;
     this.root.state.svgTreeContainer = this.$refs.svgTreeContainer;
     this.root.state.svgTaskList = this.$refs.svgTaskList;
-    this.root.state.treeScrollContainer = this.$refs.treeScrollContainer;
+    this.root.state.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
+    this.root.state.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
   },
   computed: {
     getWidth () {
@@ -4063,8 +4083,11 @@ Tree_component.options.__file = "Tree.vue"
     mouseUp (event) {
       this.$root.$emit("gantt-elastic.main.mouseup", event);
     },
-    onScroll (ev) {
-      this.$root.$emit("gantt-elastic.tree.scroll", ev);
+    onHorizontalScroll (ev) {
+      this.$root.$emit("gantt-elastic.tree.scroll.horizontal", ev);
+    },
+    onVerticalScroll (ev) {
+      this.$root.$emit("gantt-elastic.tree.scroll.vertical", ev);
     },
     onWheel (ev) {
       this.$root.$emit("gantt-elastic.tree.wheel", ev);
@@ -4077,8 +4100,14 @@ Tree_component.options.__file = "Tree.vue"
     },
     treeMouseMove (ev) {
       if (this.moving) {
-        let currentPos = this.root.state.svgTreeContainer.scrollLeft;
-        this.root.scrollTo(currentPos - (ev.movementX * this.root.state.scroll.dragMoveMultiplier));
+        const horizontal = this.$refs.treeScrollContainerHorizontal;
+        const vertical = this.$refs.treeScrollContainerVertical;
+        const currentX = horizontal.scrollLeft;
+        const x = currentX - (ev.movementX * this.root.state.scroll.dragMoveMultiplier);
+        horizontal.scrollLeft = x;
+        const currentY = vertical.scrollTop;
+        const y = currentY - (ev.movementY * this.root.state.scroll.dragMoveMultiplier);
+        vertical.scrollTop = y;
       }
     }
   }
@@ -4096,8 +4125,8 @@ Tree_component.options.__file = "Tree.vue"
 
 var Main_component = normalizeComponent(
   components_Mainvue_type_script_lang_js_,
-  Mainvue_type_template_id_a9c7bc98_render,
-  Mainvue_type_template_id_a9c7bc98_staticRenderFns,
+  Mainvue_type_template_id_730229d5_render,
+  Mainvue_type_template_id_730229d5_staticRenderFns,
   false,
   null,
   null,
@@ -4340,6 +4369,23 @@ const fontFamily = 'Arial, sans-serif';
     "stroke": "#FFa00090",
     "stroke-width": 2
   },
+  "tree-scroll-container": {},
+  "tree-scroll-container--horizontal": {
+    "overflow": "auto",
+    "max-width": "100%"
+  },
+  "tree-scroll-container--vertical": {
+    "overflow-y": "auto",
+    "overflow-x": "hidden",
+    "max-height": "100%",
+    "float": "right",
+  },
+  "svg-container-wrapper": {
+    "overflow": "hidden"
+  },
+  "svg-container": {
+    "float": "left",
+  }
 });
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js&
@@ -4375,6 +4421,7 @@ function getOptions (userOptions) {
         percent: 0,
         timePercent: 0,
         top: 0,
+        topTask: 0,
         bottom: 0,
         time: 0,
         timeCenter: 0,
@@ -4600,7 +4647,9 @@ const GanttElastic = {
   data () {
     return {
       state: {
-        tasks: []
+        tasks: [],
+        scrollBarHeight: 0,
+        allVisibleTasksHeight: 0
       }
     };
   },
@@ -4620,7 +4669,7 @@ const GanttElastic = {
       outer.appendChild(inner);
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return noScroll - withScroll;
+      return this.state.scrollBarHeight = noScroll - withScroll;
     },
     /**
      * Get style for specified class
@@ -4865,7 +4914,9 @@ const GanttElastic = {
       return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
     },
     onScrollTree (ev) {
-      this._onScrollTree(ev.target.scrollLeft, ev.target.scrollTop);
+      const horizontal = this.state.treeScrollContainerHorizontal;
+      const vertical = this.state.treeScrollContainerVertical;
+      this._onScrollTree(horizontal.scrollLeft, vertical.scrollTop);
     },
     _onScrollTree (left, top) {
       const treeContainerWidth = this.state.svgTreeContainer.clientWidth;
@@ -4873,6 +4924,7 @@ const GanttElastic = {
       this.state.scroll.tree.right = left + treeContainerWidth;
       this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
       this.state.scroll.tree.top = top;
+      this.state.scroll.tree.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
       this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
       this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
       this.state.scroll.tree.dateTime.left = dayjs_min_default()(this.state.scroll.tree.time);
@@ -4890,7 +4942,7 @@ const GanttElastic = {
     },
     scrollTo (pos) {
       this.state.svgTreeContainer.scrollLeft = pos;
-      this.state.treeScrollContainer.scrollLeft = pos;
+      this.state.treeScrollContainerHorizontal.scrollLeft = pos;
     },
     fixScrollPos () {
       this.$nextTick(() => {
@@ -4929,7 +4981,8 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$root.$on("gantt-elastic.tree.scroll", this.onScrollTree);
+      this.$root.$on("gantt-elastic.tree.scroll.horizontal", this.onScrollTree);
+      this.$root.$on("gantt-elastic.tree.scroll.vertical", this.onScrollTree);
       this.$root.$on("gantt-elastic.tree.wheel", this.onWheelTree);
       this.$root.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
       this.$root.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
@@ -5141,11 +5194,20 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      //this.state.tasks = this.makeTaskTree(this.state.rootTask).allChildren;
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const allVisibleTasks = this.state.tasks.filter(task => task.visible);
+      const begin = this.state.scroll.tree.topTask;
+      let end = allVisibleTasks.length;
+      if (this.state.maxRows) {
+        end = this.state.scroll.tree.topTask + this.state.maxRows;
+      }
+      const visibleTasks = allVisibleTasks.slice(begin, end);
       this.state.height = this.getHeight(visibleTasks);
+      this.state.allVisibleTasksHeight = allVisibleTasks.reduce((prev, curr, index) => {
+        return { height: prev.height + curr.height + this.state.grid.horizontal.gap * 2 };
+      }, { height: 0 }).height;
       this.state.outerHeight = this.getHeight(visibleTasks, true);
-      for (let index = 0, len = visibleTasks.length; index < len; index++) {
+      let len = visibleTasks.length;
+      for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
         task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical').strokeWidth;
         if (task.width < 0) {
@@ -5231,7 +5293,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, "\n.gantt-elastic__main svg{display:block\n}\n.gantt-elastic__svg-container{position:relative\n}\n.gantt-elastic__main,.gantt-elastic__svg-container{background:#fff\n}\n.gantt-elastic__container,.gantt-elastic__svg-container{max-width:100%\n}\n.gantt-elastic__grid-horizontal-line,.gantt-elastic__grid-vertical-line{stroke:#a0a0a0;stroke-width:1\n}\nforeignObject>*{margin:0\n}\n.gantt-elastic .p-2{padding:10rem\n}\n.gantt-elastic__container{display:flex;max-width:100%;position:absolute;height:100%\n}\n.gantt-elastic__main-container,.gantt-elastic__main-svg-container{overflow:hidden;max-width:100%\n}\n.gantt-elastic__task-list-header-column:last-of-type{border-right:1px solid rgba(0,0,0,.31)\n}\n.gantt-elastic__task-list-item:last-of-type{border-bottom:1px solid rgba(0,0,0,.31)\n}\n.gantt-elastic__tree-scroll-container{overflow:auto;max-width:100%\n}", ""]);
+exports.push([module.i, "\n.gantt-elastic__main svg{display:block\n}\n.gantt-elastic__svg-container{position:relative\n}\n.gantt-elastic__main,.gantt-elastic__svg-container{background:#fff\n}\n.gantt-elastic__container,.gantt-elastic__svg-container{max-width:100%\n}\n.gantt-elastic__grid-horizontal-line,.gantt-elastic__grid-vertical-line{stroke:#a0a0a0;stroke-width:1\n}\nforeignObject>*{margin:0\n}\n.gantt-elastic .p-2{padding:10rem\n}\n.gantt-elastic__container{display:flex;max-width:100%;position:absolute;height:100%\n}\n.gantt-elastic__main-container,.gantt-elastic__main-svg-container{overflow:hidden;max-width:100%\n}\n.gantt-elastic__task-list-header-column:last-of-type{border-right:1px solid rgba(0,0,0,.31)\n}\n.gantt-elastic__task-list-item:last-of-type{border-bottom:1px solid rgba(0,0,0,.31)\n}", ""]);
 
 // exports
 

@@ -230,4 +230,21 @@ export default {
     "stroke": "#FFa00090",
     "stroke-width": 2
   },
+  "tree-scroll-container": {},
+  "tree-scroll-container--horizontal": {
+    "overflow": "auto",
+    "max-width": "100%"
+  },
+  "tree-scroll-container--vertical": {
+    "overflow-y": "auto",
+    "overflow-x": "hidden",
+    "max-height": "100%",
+    "float": "right",
+  },
+  "svg-container-wrapper": {
+    "overflow": "hidden"
+  },
+  "svg-container": {
+    "float": "left",
+  }
 }
