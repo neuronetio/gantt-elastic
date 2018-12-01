@@ -53,8 +53,8 @@ export default {
     };
   },
   created () {
-    /*this.$root.$on("gantt-elastic.recenterPosition", this.recenterPosition);
-    this.$root.$on("gantt-elastic.scope.change", this.regenerate);
+    this.$root.$on("gantt-elastic.recenterPosition", this.recenterPosition);
+    /*this.$root.$on("gantt-elastic.scope.change", this.regenerate);
     this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
     this.$root.$on("gantt-elastic.row.height.change", this.regenerate);
     this.$root.$on("gantt-elastic.tree.scroll", this.regenerate);
