@@ -15,6 +15,7 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 
 ![preview img](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.jpg)
 ![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
+![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/grab-scroll.gif)
 
 
 ## Gantt-elastic
