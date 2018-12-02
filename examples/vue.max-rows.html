@@ -26,6 +26,8 @@
   <input type="number" id="progRow" value="0"><input type="range" min="0" max="100" oninput="progressChange()" id="progress">
   <br>
   <button onclick="addTask()">Add task</button>
+  <br>
+  <button onclick="changeStyle()">Change style</button>
   <script>
     // override components - copy component from src directory change it to object or compile *.vue to *.js
     // more info about components you can find here : https://vuejs.org/v2/guide/index.html
@@ -53,7 +55,7 @@
         start: getDate(24 * i),
         duration: 24 * 60 * 60,
         progress: Math.floor(Math.random() * 100),
-        type: types[Math.floor(Math.random() * 3)]
+        type: types[Math.floor(Math.random() * 3)],
       });
     }
 
@@ -184,6 +186,15 @@
       };
       ganttState.tasks.push(task);
       console.log(ganttState.tasks);
+    }
+
+    function changeStyle() {
+      ganttState.tasks[0].style = {
+        base: {
+          fill: '#8E44AD',
+          stroke: '#7E349D'
+        },
+      };
     }
   </script>
 </body>

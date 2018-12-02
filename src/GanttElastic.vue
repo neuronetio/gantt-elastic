@@ -19,7 +19,7 @@ function getOptions (userOptions) {
     rowsHeight: 0,
     scroll: {
       dragXMoveMultiplier: 3,
-      dragYMoveMultiplier: 1,
+      dragYMoveMultiplier: 2,
       top: 0,
       taskList: {
         left: 0,
@@ -242,6 +242,7 @@ export function mergeDeepReactive (component, target, ...sources) {
   }
   return mergeDeepReactive(component, target, ...sources);
 }
+const styleCache = {};
 const GanttElastic = {
   components: {
     EgMain: Main
@@ -264,7 +265,6 @@ const GanttElastic = {
         allVisibleTasksHeight: 0,
         refs: {},
       },
-      styleCache: {},
     };
   },
   methods: {
@@ -292,8 +292,8 @@ const GanttElastic = {
      */
     style (...mergeWith) {
       const index = JSON.stringify(mergeWith);
-      if (typeof this.styleCache[index] !== 'undefined') {
-        return this.styleCache[index];
+      if (typeof styleCache[index] !== 'undefined') {
+        return styleCache[index];
       }
       let merged = {};
       mergeWith.forEach(objOrClassName => {
@@ -305,7 +305,7 @@ const GanttElastic = {
           merged = Object.assign({}, objOrClassName())
         }
       });
-      this.styleCache[index] = merged;
+      styleCache[index] = merged;
       return merged;
     },
     refreshTasks () {
