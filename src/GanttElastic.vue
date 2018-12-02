@@ -263,7 +263,8 @@ const GanttElastic = {
         scrollBarHeight: 0,
         allVisibleTasksHeight: 0,
         refs: {},
-      }
+      },
+      styleCache: {},
     };
   },
   methods: {
@@ -290,6 +291,10 @@ const GanttElastic = {
      * @returns {object}
      */
     style (...mergeWith) {
+      const index = JSON.stringify(mergeWith);
+      if (typeof this.styleCache[index] !== 'undefined') {
+        return this.styleCache[index];
+      }
       let merged = {};
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
@@ -299,7 +304,8 @@ const GanttElastic = {
         } else if (typeof objOrClassName === 'function') {
           merged = Object.assign({}, objOrClassName())
         }
-      })
+      });
+      this.styleCache[index] = merged;
       return merged;
     },
     refreshTasks () {

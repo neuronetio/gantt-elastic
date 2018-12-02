@@ -568,12 +568,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=0163c82a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=504de580&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=0163c82a&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=504de580&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
@@ -4722,7 +4722,8 @@ const GanttElastic = {
         scrollBarHeight: 0,
         allVisibleTasksHeight: 0,
         refs: {},
-      }
+      },
+      styleCache: {},
     };
   },
   methods: {
@@ -4749,6 +4750,10 @@ const GanttElastic = {
      * @returns {object}
      */
     style (...mergeWith) {
+      const index = JSON.stringify(mergeWith);
+      if (typeof this.styleCache[index] !== 'undefined') {
+        return this.styleCache[index];
+      }
       let merged = {};
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
@@ -4758,7 +4763,8 @@ const GanttElastic = {
         } else if (typeof objOrClassName === 'function') {
           merged = Object.assign({}, objOrClassName())
         }
-      })
+      });
+      this.styleCache[index] = merged;
       return merged;
     },
     refreshTasks () {
