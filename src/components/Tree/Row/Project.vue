@@ -75,13 +75,13 @@ export default {
   },
   methods: {
     treeRowClick () {
-      this.task.tooltip.visible = !this.task.tooltip.visible;
+
     },
     treeRowMouseOver () {
-      this.task.mouseOver = true;
+
     },
     treeRowMouseOut () {
-      this.task.mouseOver = false;
+
     }
   }
 };

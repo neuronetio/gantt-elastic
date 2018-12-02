@@ -88,9 +88,9 @@ export default {
         lines.push({
           key: step.date.valueOf(),
           x1: step.offset.px,
-          y1: 0 - this.root.state.scroll.top,
+          y1: 0,
           x2: step.offset.px,
-          y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth - this.root.state.scroll.top,
+          y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth,
           inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
         });
       });
@@ -104,9 +104,9 @@ export default {
         lines.push({
           key: "hl" + index,
           x1: 0,
-          y1: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2) - this.root.state.scroll.top,
+          y1: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2),
           x2: "100%",
-          y2: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2) - this.root.state.scroll.top
+          y2: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2)
         });
       }
       return (this.horizontalLines = lines);

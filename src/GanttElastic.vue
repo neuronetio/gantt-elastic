@@ -557,6 +557,7 @@ const GanttElastic = {
       if (top !== null) {
         this.state.refs.treeScrollContainerVertical.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
+        this.state.refs.treeGraph.scrollTop = top;
         this.state.scroll.top = top;
       }
     },
@@ -810,20 +811,12 @@ const GanttElastic = {
       this.resetTaskTree();
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
-      const allVisibleTasks = this.state.tasks.filter(task => task.visible);
-      let visibleTasks;
-      if (this.state.maxRows) {
-        const begin = this.state.scroll.tree.topTask;
-        const end = this.state.scroll.tree.topTask + this.state.maxRows;
-        visibleTasks = allVisibleTasks.slice(begin, end);
-      } else {
-        visibleTasks = allVisibleTasks;
-      }
-      this.state.height = this.getHeight(visibleTasks);
-      this.state.allVisibleTasksHeight = this.getTasksHeight(allVisibleTasks);
-      this.state.rowsHeight = this.getTasksHeight(visibleTasks);
-      this.state.outerHeight = this.getHeight(visibleTasks, true);
-      visibleTasks = allVisibleTasks;
+      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const maxRows = visibleTasks.slice(0, this.state.maxRows);
+      this.state.height = this.getHeight(maxRows);
+      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
+      this.state.rowsHeight = this.getTasksHeight(maxRows);
+      this.state.outerHeight = this.getHeight(maxRows, true);
       let len = visibleTasks.length;
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
@@ -833,7 +826,7 @@ const GanttElastic = {
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap - this.state.scroll.top;
+        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;
       }
       return visibleTasks;
     },
