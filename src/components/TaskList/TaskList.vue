@@ -22,10 +22,11 @@
         :style="root.style('task-list-items',{height:root.state.rowsHeight+'px'})"
       >
         <task-list-item
-          v-for="task in root.visibleTasks"
+          v-for="task in root.state.tasks"
           :key="task.id"
           :task="task"
           :expander-style="getListExpanderStyle(task)"
+          v-show="task.visible"
         ></task-list-item>
       </div>
     </div>

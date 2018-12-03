@@ -243,6 +243,7 @@ export function mergeDeepReactive (component, target, ...sources) {
   return mergeDeepReactive(component, target, ...sources);
 }
 const styleCache = {};
+let globalVisibleTasks = [];
 const GanttElastic = {
   components: {
     EgMain: Main
@@ -604,14 +605,14 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$root.$on("gantt-elastic.tree.scroll.horizontal", this.onScrollTree);
-      this.$root.$on("gantt-elastic.tree.scroll.vertical", this.onScrollTree);
-      this.$root.$on("gantt-elastic.tree.wheel", this.onWheelTree);
-      this.$root.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
-      this.$root.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
-      this.$root.$on("gantt-elastic.scope.change", this.onScopeChange);
-      this.$root.$on("gantt-elastic.taskList.width.change", this.onTaskListWidthChange);
-      this.$root.$on("gantt-elastic.taskList.column.width.change", this.onTaskListColumnWidthChange);
+      this.$on("gantt-elastic.tree.scroll.horizontal", this.onScrollTree);
+      this.$on("gantt-elastic.tree.scroll.vertical", this.onScrollTree);
+      this.$on("gantt-elastic.tree.wheel", this.onWheelTree);
+      this.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
+      this.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
+      this.$on("gantt-elastic.scope.change", this.onScopeChange);
+      this.$on("gantt-elastic.taskList.width.change", this.onTaskListWidthChange);
+      this.$on("gantt-elastic.taskList.column.width.change", this.onTaskListColumnWidthChange);
     },
     recalculateTimes () {
       let max = this.state.times.timeScale * 60;
@@ -621,6 +622,7 @@ const GanttElastic = {
       this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
       this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
       this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
     },
     initTimes () {
       this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
@@ -802,21 +804,14 @@ const GanttElastic = {
       this.calculateSteps();
       this.computeCalendarWidths();
       this.calculateCalendarDimensions();
-    }
-  },
-  computed: {
-    visibleTasks () {
-      this.refreshTasks();
-      this.prepareDates();
-      this.initTimes();
-      this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
       this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
         return { width: prev.width + current.width };
       }, { width: 0 }).width;
-      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
-      this.resetTaskTree();
-      this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-      this.state.tasks = this.state.taskTree.allChildren;
+    },
+
+  },
+  computed: {
+    visibleTasks () {
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       const maxRows = visibleTasks.slice(0, this.state.maxRows);
       this.state.height = this.getHeight(maxRows);
@@ -838,6 +833,20 @@ const GanttElastic = {
     },
   },
   created () {
+    let previousTasks = [];
+    this.$watch('state.tasks', (newTasks, oldTasks) => {
+      if (previousTasks.length !== newTasks.length) {
+        this.refreshTasks();
+        this.prepareDates();
+        this.initTimes();
+        this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
+        this.resetTaskTree();
+        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+        this.state.tasks = this.state.taskTree.allChildren;
+        this.root
+      }
+      previousTasks = newTasks.slice();
+    }, { immediate: true, deep: true })
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic.created', this);

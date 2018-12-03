@@ -3,9 +3,29 @@
     <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
       <div class="gantt-elastic__calendar" :style="root.style('calendar')" xmlns="http://www.w3.org/1999/xhtml"></div>
     </foreignObject>
-    <calendar-row class="gantt-elastic__calendar-row--month" v-for="month in months" :key="month.key" :item="month" which="month"></calendar-row>
-    <calendar-row class="gantt-elastic__calendar-row--day" v-for="day in days" :key="day.key" :item="day" which="day" v-if="root.isInsideViewPort(day.x,day.width)"></calendar-row>
-    <calendar-row class="gantt-elastic__calendar-row--hour" v-for="hour in hours" :key="hour.key" :item="hour" which="hour" v-if="root.isInsideViewPort(hour.x,hour.width)"></calendar-row>
+    <calendar-row
+      class="gantt-elastic__calendar-row--month"
+      v-for="month in months"
+      :key="month.key"
+      :item="month"
+      which="month"
+    ></calendar-row>
+    <calendar-row
+      class="gantt-elastic__calendar-row--day"
+      v-for="day in days"
+      :key="day.key"
+      :item="day"
+      which="day"
+      v-if="root.isInsideViewPort(day.x,day.width)"
+    ></calendar-row>
+    <calendar-row
+      class="gantt-elastic__calendar-row--hour"
+      v-for="hour in hours"
+      :key="hour.key"
+      :item="hour"
+      which="hour"
+      v-if="root.isInsideViewPort(hour.x,hour.width)"
+    ></calendar-row>
   </g>
 </template>
 
@@ -25,8 +45,8 @@ export default {
     };
   },
   created () {
-    this.$root.$on("gantt-elastic.scope.change", this.regenerate);
-    this.$root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
+    this.root.$on("gantt-elastic.scope.change", this.regenerate);
+    this.root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
     this.regenerate();
   },
   methods: {

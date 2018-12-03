@@ -5,7 +5,7 @@
     class="gantt-elastic__tree-dependency-lines-container"
     :style="root.style('tree-dependency-lines-container')"
   >
-    <g v-for="task in dependencyTasks" :key="task.id" :task="task">
+    <g v-for="task in dependencyTasks" :key="task.id" :task="task" v-show="task.visible">
       <path
         class="gantt-elastic__tree-dependency-lines-path"
         :style="root.style('tree-dependency-lines-path', task.style['tree-dependency-lines-path'])"

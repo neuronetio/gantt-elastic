@@ -29,13 +29,14 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <grid></grid>
-          <dependency-lines :tasks="root.visibleTasks"></dependency-lines>
+          <dependency-lines :tasks="root.state.tasks"></dependency-lines>
           <g
             class="gantt-elastic__tree-row-wrapper"
             :style="root.style('tree-row-wrapper')"
-            v-for="task in root.visibleTasks"
+            v-for="task in root.state.tasks"
             :task="task"
             :key="task.id"
+            v-show="task.visible"
           >
             <component :task="task" :is="task.type"></component>
           </g>
