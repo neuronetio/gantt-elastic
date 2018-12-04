@@ -558,9 +558,12 @@ const GanttElastic = {
       }
       this.scrollTo(pos);
     },
-    scrollTo (left, top = null) {
-      this.state.refs.svgTreeContainer.scrollLeft = left;
-      this.state.refs.treeScrollContainerHorizontal.scrollLeft = left;
+    scrollTo (left = null, top = null) {
+      if (left !== null) {
+        this.state.refs.svgTreeContainer.scrollLeft = left;
+        this.state.refs.treeScrollContainerHorizontal.scrollLeft = left;
+        this.state.scroll.left = left;
+      }
       if (top !== null) {
         this.state.refs.treeScrollContainerVertical.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
@@ -574,7 +577,27 @@ const GanttElastic = {
       });
     },
     onWheelTree (ev) {
-      //this.state.times.timeScale += ev.deltaY * 10;
+      if (!ev.shiftKey) {
+        let top = this.state.scroll.top + ev.deltaY;
+        const treeClientHeight = this.state.refs.treeGraph.clientHeight;
+        const scrollHeight = this.state.refs.treeGraph.scrollHeight - treeClientHeight;
+        if (top < 0) {
+          top = 0;
+        } else if (top > scrollHeight) {
+          top = scrollHeight;
+        }
+        this.scrollTo(null, top);
+      } else {
+        let left = this.state.scroll.left + ev.deltaY;
+        const treeClientWidth = this.state.refs.treeScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.treeScrollContainerHorizontal.scrollWidth - treeClientWidth;
+        if (left < 0) {
+          left = 0;
+        } else if (left > scrollWidth) {
+          left = scrollWidth;
+        }
+        this.scrollTo(left);
+      }
     },
     onTimeZoomChange (timeZoom) {
       this.state.times.timeZoom = timeZoom;

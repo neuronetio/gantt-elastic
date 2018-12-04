@@ -39,6 +39,7 @@
               @mousedown.stop="treeMouseDown"
               @mouseup.stop="treeMouseUp"
               @mousemove.stop="treeMouseMove"
+              @wheel.prevent="treeWheel"
             >
               <tree></tree>
             </div>
@@ -138,7 +139,7 @@ export default {
     onVerticalScroll (ev) {
       this.root.$emit("gantt-elastic.tree.scroll.vertical", ev);
     },
-    onWheel (ev) {
+    treeWheel (ev) {
       this.root.$emit("gantt-elastic.tree.wheel", ev);
     },
     treeMouseDown (ev) {
