@@ -37,8 +37,11 @@
               class="gantt-elastic__main-container"
               ref="svgTreeContainer"
               @mousedown.stop="treeMouseDown"
-              @mouseup.stop="treeMouseUp"
-              @mousemove.stop="treeMouseMove"
+              @touchstart.stop.prevent="treeMouseDown"
+              @mouseup.stop.prevent="treeMouseUp"
+              @touchend.stop.prevent="treeMouseUp"
+              @mousemove.stop.prevent="treeMouseMove"
+              @touchmove.stop.prevent="treeMouseMove"
               @wheel.prevent="treeWheel"
             >
               <tree></tree>
@@ -88,7 +91,13 @@ export default {
       moving: false,
       mousePos: {
         x: 0,
-        y: 0
+        y: 0,
+        movementX: 0,
+        movementY: 0,
+        lastX: 0,
+        lastY: 0,
+        positiveX: 0,
+        positiveY: 0,
       }
     };
   },
@@ -101,6 +110,8 @@ export default {
     this.root.state.refs.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
     document.addEventListener('mouseup', this.treeMouseUp.bind(this));
     document.addEventListener('mousemove', this.treeMouseMove.bind(this));
+    document.addEventListener('touchmove', this.treeMouseMove.bind(this));
+    document.addEventListener('touchend', this.treeMouseUp.bind(this));
   },
   computed: {
     getWidth () {
@@ -131,6 +142,7 @@ export default {
       this.root.$emit("gantt-elastic.main.mousemove", event);
     },
     mouseUp (event) {
+      console.log(event)
       this.root.$emit("gantt-elastic.main.mouseup", event);
     },
     onHorizontalScroll (ev) {
@@ -143,6 +155,14 @@ export default {
       this.root.$emit("gantt-elastic.tree.wheel", ev);
     },
     treeMouseDown (ev) {
+      if (typeof ev.touches !== 'undefined') {
+        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
+        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
+        this.mousePos.positiveX = 0;
+        this.mousePos.positiveY = 0;
+        this.mousePos.movementX = 0;
+        this.mousePos.movementY = 0;
+      }
       this.moving = true;
     },
     treeMouseUp (ev) {
@@ -150,13 +170,50 @@ export default {
     },
     treeMouseMove (ev) {
       if (this.moving) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        ev.stopPropagation();
+        const touch = typeof ev.touches !== 'undefined';
+        let movementX, movementY;
+        if (touch) {
+          const screenX = ev.touches[0].screenX;
+          const screenY = ev.touches[0].screenY;
+          movementX = this.mousePos.x - screenX;
+          movementY = this.mousePos.y - screenY;
+          let positiveX = screenX - this.mousePos.lastX > 0 ? 1 : -1;
+          let positiveY = screenY - this.mousePos.lastY > 0 ? 1 : -1;
+          this.mousePos.lastX = screenX;
+          this.mousePos.lastY = screenY;
+          if (positiveX !== this.mousePos.positiveX) {
+            this.mousePos.x = screenX;
+            this.mousePos.positiveX = positiveX;
+            movementX = 0;
+          }
+          if (positiveY !== this.mousePos.positiveY) {
+            this.mousePos.y = screenY;
+            this.mousePos.positiveY = positiveY;
+            movementY = 0;
+          }
+        } else {
+          movementX = ev.movementX;
+          movementY = ev.movementY;
+        }
         const horizontal = this.$refs.treeScrollContainerHorizontal;
         const vertical = this.$refs.treeScrollContainerVertical;
         const currentX = horizontal.scrollLeft;
-        const x = currentX - (ev.movementX * this.root.state.scroll.dragXMoveMultiplier);
+        let x = 0, y = 0;
+        if (touch) {
+          x = currentX + movementX;
+        } else {
+          x = currentX - (movementX * this.root.state.scroll.dragXMoveMultiplier);
+        }
         horizontal.scrollLeft = x;
         const currentY = vertical.scrollTop;
-        const y = currentY - (ev.movementY * this.root.state.scroll.dragYMoveMultiplier);
+        if (touch) {
+          y = currentY + movementY;
+        } else {
+          y = currentY - (movementY * this.root.state.scroll.dragYMoveMultiplier);
+        }
         vertical.scrollTop = y;
       }
     }
