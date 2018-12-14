@@ -12,7 +12,16 @@
       :y="task.y"
       :width="task.width"
       :height="task.height"
-      @click="treeRowClick"
+      @click="emitEvent('click', $event)"
+      @mouseenter="emitEvent('mouseenter', $event)"
+      @mouseover="emitEvent('mouseover', $event)"
+      @mouseout="emitEvent('mouseout', $event)"
+      @mousedown="emitEvent('mousedown', $event)"
+      @mouseup="emitEvent('mouseup', $event)"
+      @mousewheel="emitEvent('mousewheel', $event)"
+      @touchstart="emitEvent('touchstart', $event)"
+      @touchmove="emitEvent('touchmove', $event)"
+      @touchend="emitEvent('touchend', $event)"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
@@ -63,14 +72,8 @@ export default {
     },
   },
   methods: {
-    treeRowClick () {
-      this.task.tooltip.visible = !this.task.tooltip.visible;
-    },
-    treeRowMouseOver () {
-
-    },
-    treeRowMouseOut () {
-
+    emitEvent (eventName, event) {
+      this.root.$emit(`gantt-elastic.chart.${this.task.type}.${eventName}`, { event, data: this.task });
     }
   }
 };

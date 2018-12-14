@@ -143,6 +143,15 @@
     app.$on('gantt-elastic.ready', (ganttElasticInstance) => {
       ganttInstance = ganttElasticInstance;
       ganttState = ganttElasticInstance.state;
+      ganttInstance.$on('gantt-elastic.chart.task.click', ({ event, data }) => {
+        console.log('task clicked!', { event, data })
+      });
+      ganttInstance.$on('gantt-elastic.chart.milestone.click', ({ event, data }) => {
+        console.log('milestone clicked!', { event, data })
+      });
+      ganttInstance.$on('gantt-elastic.chart.project.click', ({ event, data }) => {
+        console.log('project clicked!', { event, data })
+      });
       console.log('gantt-elastic ready!', ganttState);
     });
 
