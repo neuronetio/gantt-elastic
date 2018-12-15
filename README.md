@@ -46,7 +46,11 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 <body>
   <div id="gantt" style="width:100%;height:100%;"></div>
 
-  <script src="../dist/bundle.js"></script><!-- ../ is your path to gantt-elastic -->
+  <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
+  <!-- or
+  <script src="../dist/bundle.js"></script>
+  where  ../ is your path to gantt-elastic
+  -->
   <script>
     // override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
     // more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
