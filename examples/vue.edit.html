@@ -258,7 +258,7 @@
 
     // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
     // to get the gantt state for realtime modification
-    app.$on('gantt-elastic.ready', (ganttElasticInstance) => {
+    app.$on('gantt-elastic-ready', (ganttElasticInstance) => {
       ganttInstance = ganttElasticInstance;
       ganttState = ganttElasticInstance.state;
       console.log('gantt-elastic ready!', ganttState);

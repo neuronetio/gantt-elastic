@@ -628,14 +628,14 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$on("gantt-elastic.tree.scroll.horizontal", this.onScrollTree);
-      this.$on("gantt-elastic.tree.scroll.vertical", this.onScrollTree);
-      this.$on("gantt-elastic.tree.wheel", this.onWheelTree);
-      this.$on("gantt-elastic.times.timeZoom.change", this.onTimeZoomChange);
-      this.$on("gantt-elastic.row.height.change", this.onRowHeightChange);
-      this.$on("gantt-elastic.scope.change", this.onScopeChange);
-      this.$on("gantt-elastic.taskList.width.change", this.onTaskListWidthChange);
-      this.$on("gantt-elastic.taskList.column.width.change", this.onTaskListColumnWidthChange);
+      this.$on("gantt-elastic-tree-scroll-horizontal", this.onScrollTree);
+      this.$on("gantt-elastic-tree-scroll-vertical", this.onScrollTree);
+      this.$on("gantt-elastic-tree-wheel", this.onWheelTree);
+      this.$on("gantt-elastic-times-timeZoom-change", this.onTimeZoomChange);
+      this.$on("gantt-elastic-row-height-change", this.onRowHeightChange);
+      this.$on("gantt-elastic-scope-change", this.onScopeChange);
+      this.$on("gantt-elastic-taskList-width-change", this.onTaskListWidthChange);
+      this.$on("gantt-elastic-taskList-column-width-change", this.onTaskListColumnWidthChange);
     },
     recalculateTimes () {
       let max = this.state.times.timeScale * 60;
@@ -872,11 +872,11 @@ const GanttElastic = {
     }, { immediate: true, deep: true })
     this.initializeEvents();
     this.setup();
-    this.$root.$emit('gantt-elastic.created', this);
+    this.$root.$emit('gantt-elastic-created', this);
   },
   mounted () {
-    this.$root.$emit('gantt-elastic.mounted', this);
-    this.$root.$emit('gantt-elastic.ready', this);
+    this.$root.$emit('gantt-elastic-mounted', this);
+    this.$root.$emit('gantt-elastic-ready', this);
   }
 };
 export default GanttElastic;

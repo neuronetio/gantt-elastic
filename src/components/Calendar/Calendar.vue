@@ -45,8 +45,8 @@ export default {
     };
   },
   created () {
-    this.root.$on("gantt-elastic.scope.change", this.regenerate);
-    this.root.$on("gantt-elastic.times.timeZoom.change", this.regenerate);
+    this.root.$on("gantt-elastic-scope-change", this.regenerate);
+    this.root.$on("gantt-elastic-times-timeZoom-change", this.regenerate);
     this.regenerate();
   },
   methods: {

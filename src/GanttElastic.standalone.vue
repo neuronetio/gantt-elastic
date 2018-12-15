@@ -1,5 +1,5 @@
 <template>
-<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
+  <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
 </template>
 <script>
 import GanttElastic from './GanttElastic.vue';

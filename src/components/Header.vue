@@ -147,11 +147,11 @@ export default {
       // debouncing
       if (this.firstScale) {
         this.scaleTimeoutId = setTimeout(() => {
-          this.root.$emit("gantt-elastic.times.timeZoom.change", value);
+          this.root.$emit("gantt-elastic-times-timeZoom-change", value);
           this.scaleTimeoutId = null;
         }, 75);
       } else {
-        this.root.$emit("gantt-elastic.times.timeZoom.change", value);
+        this.root.$emit("gantt-elastic-times-timeZoom-change", value);
         this.firstScale = true;
       }
     }
@@ -172,7 +172,7 @@ export default {
       },
       set (value) {
         this.localHeight = Number(value);
-        this.root.$emit("gantt-elastic.row.height.change", Number(value));
+        this.root.$emit("gantt-elastic-row-height-change", Number(value));
       }
     },
     scope: {
@@ -181,7 +181,7 @@ export default {
       },
       set (value) {
         this.localBefore = Number(value);
-        this.root.$emit("gantt-elastic.scope.change", Number(value));
+        this.root.$emit("gantt-elastic-scope-change", Number(value));
         this.root.$emit("gantt-elastic.scope.before.change", Number(value));
         this.root.$emit("gantt-elastic.scope.after.change", Number(value));
       }
@@ -192,7 +192,7 @@ export default {
       },
       set (value) {
         this.localPercent = Number(value);
-        this.root.$emit("gantt-elastic.taskList.width.change", Number(value));
+        this.root.$emit("gantt-elastic-taskList-width-change", Number(value));
       }
     }
   }

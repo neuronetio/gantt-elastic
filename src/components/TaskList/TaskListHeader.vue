@@ -77,19 +77,19 @@ export default {
         this.resizer.moving = column;
         this.resizer.x = event.clientX;
         this.resizer.initialWidth = column.width;
-        this.root.$emit("gantt-elastic.taskList.column.width.change.start", this.resizer.moving.width);
+        this.root.$emit("gantt-elastic-taskList-column-width-change.start", this.resizer.moving.width);
       }
     },
     resizerMouseMove (event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        this.root.$emit("gantt-elastic.taskList.column.width.change", this.resizer.moving.width);
+        this.root.$emit("gantt-elastic-taskList-column-width-change", this.resizer.moving.width);
       }
     },
     resizerMouseUp (event) {
       if (this.resizer.moving) {
-        this.root.$emit("gantt-elastic.taskList.column.width.change", this.resizer.moving.width);
-        this.root.$emit("gantt-elastic.taskList.column.width.change.stop", this.resizer.moving.width);
+        this.root.$emit("gantt-elastic-taskList-column-width-change", this.resizer.moving.width);
+        this.root.$emit("gantt-elastic-taskList-column-width-change.stop", this.resizer.moving.width);
         this.resizer.moving = false;
       }
     }
