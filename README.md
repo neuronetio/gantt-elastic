@@ -1,4 +1,4 @@
-<h1>Gantt-elastic - Javascript Gantt Chart with editing capabilities!</h1>
+<h1>Gantt-elastic - Javascript Gantt Chart (editable)</h1>
 <h2>Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
 
 <div style="display:block;text-align:center">
