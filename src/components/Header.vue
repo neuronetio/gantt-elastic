@@ -137,7 +137,7 @@ export default {
         });
     },
     recenterPosition () {
-      this.root.$emit("gantt-elastic.recenterPosition");
+      this.root.$emit("gantt-elastic-recenterPosition");
     },
     setScale (value) {
       if (this.scaleTimeoutId !== null) {
@@ -182,8 +182,8 @@ export default {
       set (value) {
         this.localBefore = Number(value);
         this.root.$emit("gantt-elastic-scope-change", Number(value));
-        this.root.$emit("gantt-elastic.scope.before.change", Number(value));
-        this.root.$emit("gantt-elastic.scope.after.change", Number(value));
+        this.root.$emit("gantt-elastic-scope-before-change", Number(value));
+        this.root.$emit("gantt-elastic-scope-after-change", Number(value));
       }
     },
     divider: {

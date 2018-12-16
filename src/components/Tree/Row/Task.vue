@@ -2,8 +2,6 @@
   <g
     class="gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-task-wrapper"
     :style="root.style('tree-row-bar-wrapper', 'tree-row-task-wrapper', task.style['tree-row-bar-wrapper'])"
-    @mouseover="treeRowMouseOver"
-    @mouseout="treeRowMouseOut"
   >
     <svg
       class="gantt-elastic__tree-row-bar gantt-elastic__tree-row-task"

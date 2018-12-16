@@ -139,11 +139,10 @@ export default {
   },
   methods: {
     mouseMove (event) {
-      this.root.$emit("gantt-elastic.main.mousemove", event);
+      this.root.$emit("gantt-elastic-main-mousemove", event);
     },
     mouseUp (event) {
-      console.log(event)
-      this.root.$emit("gantt-elastic.main.mouseup", event);
+      this.root.$emit("gantt-elastic-main-mouseup", event);
     },
     onHorizontalScroll (ev) {
       this.root.$emit("gantt-elastic-tree-scroll-horizontal", ev);
