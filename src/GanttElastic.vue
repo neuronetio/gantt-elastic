@@ -628,14 +628,14 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$on("gantt-elastic-tree-scroll-horizontal", this.onScrollTree);
-      this.$on("gantt-elastic-tree-scroll-vertical", this.onScrollTree);
-      this.$on("gantt-elastic-tree-wheel", this.onWheelTree);
-      this.$on("gantt-elastic-times-timeZoom-change", this.onTimeZoomChange);
-      this.$on("gantt-elastic-row-height-change", this.onRowHeightChange);
-      this.$on("gantt-elastic-scope-change", this.onScopeChange);
-      this.$on("gantt-elastic-taskList-width-change", this.onTaskListWidthChange);
-      this.$on("gantt-elastic-taskList-column-width-change", this.onTaskListColumnWidthChange);
+      this.$on("chart-scroll-horizontal", this.onScrollTree);
+      this.$on("chart-scroll-vertical", this.onScrollTree);
+      this.$on("chart-wheel", this.onWheelTree);
+      this.$on("times-timeZoom-change", this.onTimeZoomChange);
+      this.$on("row-height-change", this.onRowHeightChange);
+      this.$on("scope-change", this.onScopeChange);
+      this.$on("taskList-width-change", this.onTaskListWidthChange);
+      this.$on("taskList-column-width-change", this.onTaskListColumnWidthChange);
     },
     recalculateTimes () {
       let max = this.state.times.timeScale * 60;

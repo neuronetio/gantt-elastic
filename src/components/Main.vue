@@ -139,19 +139,19 @@ export default {
   },
   methods: {
     mouseMove (event) {
-      this.root.$emit("gantt-elastic-main-mousemove", event);
+      this.root.$emit("main-mousemove", event);
     },
     mouseUp (event) {
-      this.root.$emit("gantt-elastic-main-mouseup", event);
+      this.root.$emit("main-mouseup", event);
     },
     onHorizontalScroll (ev) {
-      this.root.$emit("gantt-elastic-tree-scroll-horizontal", ev);
+      this.root.$emit("chart-scroll-horizontal", ev);
     },
     onVerticalScroll (ev) {
-      this.root.$emit("gantt-elastic-tree-scroll-vertical", ev);
+      this.root.$emit("chart-scroll-vertical", ev);
     },
     treeWheel (ev) {
-      this.root.$emit("gantt-elastic-tree-wheel", ev);
+      this.root.$emit("chart-wheel", ev);
     },
     treeMouseDown (ev) {
       if (typeof ev.touches !== 'undefined') {
