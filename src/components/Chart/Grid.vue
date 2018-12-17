@@ -118,7 +118,6 @@ export default {
       };
     },
     timeLinePosition () {
-      const state = this.root.state;
       const d = new Date();
       const current = d.getTime();
       const currentOffset = this.root.timeToPixelOffsetX(current);

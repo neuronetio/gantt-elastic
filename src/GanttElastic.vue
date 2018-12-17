@@ -449,6 +449,11 @@ const GanttElastic = {
         column.height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
       });
       this.state.taskList.finalWidth = final;
+      if (typeof document !== 'undefined') {
+        if (final > document.body.clientWidth / 2) {
+          this.state.taskList.display = false;
+        }
+      }
     },
     resetTaskTree () {
       this.state.rootTask.children = [];
@@ -665,7 +670,6 @@ const GanttElastic = {
     calculateSteps () {
       const steps = [];
       const lastMs = dayjs(this.state.times.lastDate).valueOf();
-      const step = this.state.times.stepDuration;
       const currentDate = dayjs(this.state.times.firstDate);
       steps.push({
         date: currentDate,
@@ -674,7 +678,9 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (let currentDate = dayjs(this.state.times.firstDate).add(1, step).startOf("day"); currentDate.valueOf() <= lastMs; currentDate = currentDate.add(1, step).startOf("day")) {
+      for (let currentDate = dayjs(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+        currentDate.valueOf() <= lastMs;
+        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
         const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
         const offsetPx = offsetMs / this.state.times.timePerPixel;
         const step = {
