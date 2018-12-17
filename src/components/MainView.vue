@@ -1,5 +1,5 @@
 <template>
-  <div class="gantt-elastic__main">
+  <div class="gantt-elastic__main-view">
     <top-header></top-header>
     <div
       class="gantt-elastic__svg-container-wrapper"
@@ -10,7 +10,7 @@
         :height="root.state.height"
         class="gantt-elastic__svg-container"
         :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
-        ref="svgMain"
+        ref="svgMainView"
         xmlns="http://www.w3.org/2000/svg"
       >
         <foreignObject x="0" y="0" width="100%" height="100%">
@@ -34,7 +34,7 @@
               </svg>
             </div>
             <div
-              class="gantt-elastic__main-container"
+              class="gantt-elastic__main-view-container"
               ref="svgChartContainer"
               @mousedown.stop="chartMouseDown"
               @touchstart.stop.prevent="chartMouseDown"
@@ -102,7 +102,7 @@ export default {
     };
   },
   mounted () {
-    this.root.state.refs.svgMain = this.$refs.svgMain;
+    this.root.state.refs.svgMainView = this.$refs.svgMainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
     this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
     this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
@@ -117,7 +117,7 @@ export default {
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
-    getMainStyle () {
+    getMainViewStyle () {
       const state = this.root.state;
       return {
         width: state.width + "px"
@@ -139,10 +139,10 @@ export default {
   },
   methods: {
     mouseMove (event) {
-      this.root.$emit("main-mousemove", event);
+      this.root.$emit("main-view-mousemove", event);
     },
     mouseUp (event) {
-      this.root.$emit("main-mouseup", event);
+      this.root.$emit("main-view-mouseup", event);
     },
     onHorizontalScroll (ev) {
       this.root.$emit("chart-scroll-horizontal", ev);

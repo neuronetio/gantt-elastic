@@ -95,8 +95,8 @@ export default {
     }
   },
   created () {
-    this.root.$on("main-mousemove", this.resizerMouseMove);
-    this.root.$on("main-mouseup", this.resizerMouseUp);
+    this.root.$on("main-view-mousemove", this.resizerMouseMove);
+    this.root.$on("main-view-mouseup", this.resizerMouseUp);
   }
 };
 </script>

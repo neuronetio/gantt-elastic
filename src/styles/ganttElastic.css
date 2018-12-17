@@ -1,10 +1,10 @@
-.gantt-elastic__main svg{
+.gantt-elastic__main-view svg{
   display: block;
 }
 .gantt-elastic__svg-container{
   position: relative;
 }
-.gantt-elastic__main,.gantt-elastic__svg-container{
+.gantt-elastic__main-view,.gantt-elastic__svg-container{
   background: #fff;
 }
 .gantt-elastic__container,.gantt-elastic__svg-container{
@@ -26,7 +26,7 @@ foreignObject > *{
   position: absolute;
   height: 100%;
 }
-.gantt-elastic__main-svg-container , .gantt-elastic__main-container{
+.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{
   overflow: hidden;
   max-width:100%;
 }

@@ -1,10 +1,10 @@
 <template>
-  <eg-main :tasks="tasks" :options="options"></eg-main>
+  <main-view :tasks="tasks" :options="options"></main-view>
 </template>
 
 <script>
 import dayjs from "dayjs";
-import Main from "./components/Main.vue";
+import MainView from "./components/MainView.vue";
 import style from "./style.js";
 
 function getOptions (userOptions) {
@@ -246,7 +246,7 @@ const styleCache = {};
 let globalVisibleTasks = [];
 const GanttElastic = {
   components: {
-    EgMain: Main
+    MainView
   },
   props: ["tasks", "options"],
   provide () {
@@ -492,15 +492,15 @@ const GanttElastic = {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
     getSVG () {
-      return this.state.svgMain.outerHTML;
+      return this.state.svgMainView.outerHTML;
     },
     getImage (type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = this.state.svgMain.clientWidth;
-          canvas.height = this.state.svgMain.clientHeight;
+          canvas.width = this.state.svgMainView.clientWidth;
+          canvas.height = this.state.svgMainView.clientHeight;
           canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };

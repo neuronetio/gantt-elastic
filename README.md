@@ -55,7 +55,7 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
     // override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
     // more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
     // You can change anything! You have full control of components templates, events, data ... and so on!
-    // GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
+    // GanttElastic.component.components.MainView.components.TopHeader = CustomHeader;
 
     // just helper to get current dates
     function getDate(hours) {
