@@ -2,7 +2,7 @@
   <svg
     class="gantt-elastic__grid-lines-wrapper"
     :style="root.style('grid-lines-wrapper')"
-    ref="tree"
+    ref="chart"
     x="0"
     y="0"
     :width="getWidth"
@@ -57,7 +57,7 @@ export default {
     /*this.root.$on("scope-change", this.regenerate);
     this.root.$on("times-timeZoom-change", this.regenerate);
     this.root.$on("row-height-change", this.regenerate);
-    this.root.$on("gantt-elastic.tree.scroll", this.regenerate);
+    this.root.$on("gantt-elastic.chart.scroll", this.regenerate);
     this.regenerate();*/
   },
   mounted () {
@@ -114,7 +114,7 @@ export default {
     inViewPort () {
       return line => {
         const state = this.root.state;
-        return (line.x1 >= state.scroll.tree.left && line.x1 <= state.scroll.tree.right);
+        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
       };
     },
     timeLinePosition () {

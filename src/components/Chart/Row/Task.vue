@@ -1,11 +1,11 @@
 <template>
   <g
-    class="gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-task-wrapper"
-    :style="root.style('tree-row-bar-wrapper', 'tree-row-task-wrapper', task.style['tree-row-bar-wrapper'])"
+    class="gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper"
+    :style="root.style('chart-row-bar-wrapper', 'chart-row-task-wrapper', task.style['chart-row-bar-wrapper'])"
   >
     <svg
-      class="gantt-elastic__tree-row-bar gantt-elastic__tree-row-task"
-      :style="root.style('tree-row-bar','tree-row-task',task.style['tree-row-bar'])"
+      class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-task"
+      :style="root.style('chart-row-bar','chart-row-task',task.style['chart-row-bar'])"
       :x="task.x"
       :y="task.y"
       :width="task.width"
@@ -28,22 +28,22 @@
         </clipPath>
       </defs>
       <polygon
-        class="gantt-elastic__tree-row-bar-polygon gantt-elastic__tree-row-task-polygon"
-        :style="root.style('tree-row-bar-polygon', 'tree-row-task-polygon' , task.style['base'], task.style['tree-row-bar-polygon'])"
+        class="gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon"
+        :style="root.style('chart-row-bar-polygon', 'chart-row-task-polygon' , task.style['base'], task.style['chart-row-bar-polygon'])"
         :points="getPoints"
       ></polygon>
       <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
     </svg>
-    <tree-text :task="task" v-if="root.state.row.showText"></tree-text>
+    <chart-text :task="task" v-if="root.state.row.showText"></chart-text>
   </g>
 </template>
 
 <script>
-import TreeText from "../Text.vue";
+import ChartText from "../Text.vue";
 import ProgressBar from "../ProgressBar.vue";
 export default {
   components: {
-    TreeText,
+    ChartText,
     ProgressBar
   },
   inject: ["root"],

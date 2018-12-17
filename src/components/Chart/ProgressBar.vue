@@ -1,7 +1,7 @@
 <template>
   <g
-    class="gantt-elastic__tree-row-progress-bar-wrapper"
-    :style="root.style('tree-row-progress-bar-wrapper', task.style['tree-row-progress-bar-wrapper'])"
+    class="gantt-elastic__chart-row-progress-bar-wrapper"
+    :style="root.style('chart-row-progress-bar-wrapper', task.style['chart-row-progress-bar-wrapper'])"
   >
     <defs>
       <pattern
@@ -12,8 +12,8 @@
         patternUnits="userSpaceOnUse"
       >
         <line
-          class="tree-row-progress-bar-line"
-          :style="root.style('tree-row-progress-bar-line', task.style['tree-row-progress-bar-line'])"
+          class="chart-row-progress-bar-line"
+          :style="root.style('chart-row-progress-bar-line', task.style['chart-row-progress-bar-line'])"
           x1="0"
           y1="0"
           x2="0"
@@ -23,24 +23,24 @@
     </defs>
     <rect
       v-if="root.state.progress.bar"
-      class="gantt-elastic__tree-row-progress-bar-solid"
-      :style="root.style('tree-row-progress-bar-solid', task.style['tree-row-progress-bar-solid'])"
+      class="gantt-elastic__chart-row-progress-bar-solid"
+      :style="root.style('chart-row-progress-bar-solid', task.style['chart-row-progress-bar-solid'])"
       x="0"
       y="0"
       :width="getProgressWidth"
     ></rect>
     <g v-if="root.state.progress.pattern">
       <rect
-        class="gantt-elastic__tree-row-progress-bar-pattern"
-        :style="root.style('tree-row-progress-bar-pattern', task.style['tree-row-progress-bar-pattern'])"
+        class="gantt-elastic__chart-row-progress-bar-pattern"
+        :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
         :x="getProgressWidth"
         y="0"
         :width="100-task.progress+'%'"
         height="100%"
       ></rect>
       <path
-        class="gantt-elastic__tree-row-progress-bar-outline"
-        :style="root.style('tree-row-progress-bar-outline', task.style['base'], task.style['tree-row-progress-bar-outline'])"
+        class="gantt-elastic__chart-row-progress-bar-outline"
+        :style="root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])"
         :d="getLinePoints"
       ></path>
     </g>

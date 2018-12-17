@@ -27,7 +27,7 @@ function getOptions (userOptions) {
         top: 0,
         bottom: 0
       },
-      tree: {
+      chart: {
         left: 0,
         right: 0,
         percent: 0,
@@ -70,7 +70,7 @@ function getOptions (userOptions) {
       showText: true,
     },
     maxRows: 20,
-    treeText: {
+    chartText: {
       offset: 0,
       xPadding: 10
     },
@@ -529,58 +529,58 @@ const GanttElastic = {
       return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
     isInsideViewPort (x, width, buffer = 5000) {
-      return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
+      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
     },
-    onScrollTree (ev) {
-      const horizontal = this.state.refs.treeScrollContainerHorizontal;
-      const vertical = this.state.refs.treeScrollContainerVertical;
-      this._onScrollTree(horizontal.scrollLeft, vertical.scrollTop);
+    onScrollChart (ev) {
+      const horizontal = this.state.refs.chartScrollContainerHorizontal;
+      const vertical = this.state.refs.chartScrollContainerVertical;
+      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
     },
-    _onScrollTree (left, top) {
-      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
-      this.state.scroll.tree.left = left;
-      this.state.scroll.tree.right = left + treeContainerWidth;
-      this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
-      this.state.scroll.tree.top = top;
-      this.state.scroll.tree.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
-      this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
-      this.state.scroll.tree.dateTime.left = dayjs(this.state.scroll.tree.time);
-      this.state.scroll.tree.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.refs.tree.clientWidth));
+    _onScrollChart (left, top) {
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      this.state.scroll.chart.left = left;
+      this.state.scroll.chart.right = left + chartContainerWidth;
+      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
+      this.state.scroll.chart.top = top;
+      this.state.scroll.chart.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
+      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
+      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
+      this.state.scroll.chart.dateTime.left = dayjs(this.state.scroll.chart.time);
+      this.state.scroll.chart.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
-      pos = pos - treeContainerWidth / 2;
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      pos = pos - chartContainerWidth / 2;
       if (pos > this.state.width) {
-        pos = this.state.width - treeContainerWidth;
+        pos = this.state.width - chartContainerWidth;
       }
       this.scrollTo(pos);
     },
     scrollTo (left = null, top = null) {
       if (left !== null) {
-        this.state.refs.svgTreeContainer.scrollLeft = left;
-        this.state.refs.treeScrollContainerHorizontal.scrollLeft = left;
+        this.state.refs.svgChartContainer.scrollLeft = left;
+        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.scroll.left = left;
       }
       if (top !== null) {
-        this.state.refs.treeScrollContainerVertical.scrollTop = top;
+        this.state.refs.chartScrollContainerVertical.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
-        this.state.refs.treeGraph.scrollTop = top;
+        this.state.refs.chartGraph.scrollTop = top;
         this.state.scroll.top = top;
       }
     },
     fixScrollPos () {
       this.$nextTick(() => {
-        this.scrollToTime(this.state.scroll.tree.timeCenter);
+        this.scrollToTime(this.state.scroll.chart.timeCenter);
       });
     },
-    onWheelTree (ev) {
+    onWheelChart (ev) {
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
-        const treeClientHeight = this.state.refs.treeGraph.clientHeight;
-        const scrollHeight = this.state.refs.treeGraph.scrollHeight - treeClientHeight;
+        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
         } else if (top > scrollHeight) {
@@ -589,8 +589,8 @@ const GanttElastic = {
         this.scrollTo(null, top);
       } else {
         let left = this.state.scroll.left + ev.deltaY;
-        const treeClientWidth = this.state.refs.treeScrollContainerHorizontal.clientWidth;
-        const scrollWidth = this.state.refs.treeScrollContainerHorizontal.scrollWidth - treeClientWidth;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
           left = 0;
         } else if (left > scrollWidth) {
@@ -628,9 +628,9 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$on("chart-scroll-horizontal", this.onScrollTree);
-      this.$on("chart-scroll-vertical", this.onScrollTree);
-      this.$on("chart-wheel", this.onWheelTree);
+      this.$on("chart-scroll-horizontal", this.onScrollChart);
+      this.$on("chart-scroll-vertical", this.onScrollChart);
+      this.$on("chart-wheel", this.onWheelChart);
       this.$on("times-timeZoom-change", this.onTimeZoomChange);
       this.$on("row-height-change", this.onRowHeightChange);
       this.$on("scope-change", this.onScopeChange);

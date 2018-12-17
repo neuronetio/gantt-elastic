@@ -2,13 +2,13 @@
   <svg
     width="100%"
     height="100%"
-    class="gantt-elastic__tree-dependency-lines-container"
-    :style="root.style('tree-dependency-lines-container')"
+    class="gantt-elastic__chart-dependency-lines-container"
+    :style="root.style('chart-dependency-lines-container')"
   >
     <g v-for="task in dependencyTasks" :key="task.id" :task="task" v-show="task.visible">
       <path
-        class="gantt-elastic__tree-dependency-lines-path"
-        :style="root.style('tree-dependency-lines-path', task.style['tree-dependency-lines-path'])"
+        class="gantt-elastic__chart-dependency-lines-path"
+        :style="root.style('chart-dependency-lines-path', task.style['chart-dependency-lines-path'])"
         v-for="dependencyLine in task.dependencyLines"
         :key="dependencyLine.id"
         :task="task"

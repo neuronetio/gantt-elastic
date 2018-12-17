@@ -35,39 +35,39 @@
             </div>
             <div
               class="gantt-elastic__main-container"
-              ref="svgTreeContainer"
-              @mousedown.stop="treeMouseDown"
-              @touchstart.stop.prevent="treeMouseDown"
-              @mouseup.stop.prevent="treeMouseUp"
-              @touchend.stop.prevent="treeMouseUp"
-              @mousemove.stop.prevent="treeMouseMove"
-              @touchmove.stop.prevent="treeMouseMove"
-              @wheel.prevent="treeWheel"
+              ref="svgChartContainer"
+              @mousedown.stop="chartMouseDown"
+              @touchstart.stop.prevent="chartMouseDown"
+              @mouseup.stop.prevent="chartMouseUp"
+              @touchend.stop.prevent="chartMouseUp"
+              @mousemove.stop.prevent="chartMouseMove"
+              @touchmove.stop.prevent="chartMouseMove"
+              @wheel.prevent="chartWheel"
             >
-              <tree></tree>
+              <chart></chart>
             </div>
           </div>
         </foreignObject>
       </svg>
       <div
-        class="gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--vertical"
-        :style="root.style('tree-scroll-container','tree-scroll-container--vertical',verticalStyle)"
-        ref="treeScrollContainerVertical"
+        class="gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical"
+        :style="root.style('chart-scroll-container','chart-scroll-container--vertical',verticalStyle)"
+        ref="chartScrollContainerVertical"
         @scroll="onVerticalScroll"
       >
         <div
-          class="gantt-elastic__tree-scroll--vertical"
+          class="gantt-elastic__chart-scroll--vertical"
           :style="{width:'1px',height:root.state.allVisibleTasksHeight+'px'}"
         ></div>
       </div>
     </div>
     <div
-      class="gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--horizontal"
-      :style="root.style('tree-scroll-container','tree-scroll-container--horizontal',{marginLeft:getMarginLeft})"
+      class="gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal"
+      :style="root.style('chart-scroll-container','chart-scroll-container--horizontal',{marginLeft:getMarginLeft})"
       @scroll="onHorizontalScroll"
-      ref="treeScrollContainerHorizontal"
+      ref="chartScrollContainerHorizontal"
     >
-      <div class="gantt-elastic__tree-scroll--horizontal" :style="{height:'1px', width:root.state.width+'px'}"></div>
+      <div class="gantt-elastic__chart-scroll--horizontal" :style="{height:'1px', width:root.state.width+'px'}"></div>
     </div>
   </div>
 </template>
@@ -75,13 +75,13 @@
 <script>
 import Header from "./Header.vue";
 import TaskList from "./TaskList/TaskList.vue";
-import Tree from "./Tree/Tree.vue";
+import Chart from "./Chart/Chart.vue";
 
 export default {
   components: {
     TopHeader: Header,
     TaskList: TaskList,
-    Tree: Tree
+    Chart: Chart
   },
   inject: ["root"],
   props: ["tasks", "options"],
@@ -103,15 +103,15 @@ export default {
   },
   mounted () {
     this.root.state.refs.svgMain = this.$refs.svgMain;
-    this.root.state.refs.svgTree = this.$refs.svgTree;
-    this.root.state.refs.svgTreeContainer = this.$refs.svgTreeContainer;
+    this.root.state.refs.svgChart = this.$refs.svgChart;
+    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
     this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
-    this.root.state.refs.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
-    this.root.state.refs.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
-    document.addEventListener('mouseup', this.treeMouseUp.bind(this));
-    document.addEventListener('mousemove', this.treeMouseMove.bind(this));
-    document.addEventListener('touchmove', this.treeMouseMove.bind(this));
-    document.addEventListener('touchend', this.treeMouseUp.bind(this));
+    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
+    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
+    document.addEventListener('mouseup', this.chartMouseUp.bind(this));
+    document.addEventListener('mousemove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchmove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
     getWidth () {
@@ -150,10 +150,10 @@ export default {
     onVerticalScroll (ev) {
       this.root.$emit("chart-scroll-vertical", ev);
     },
-    treeWheel (ev) {
+    chartWheel (ev) {
       this.root.$emit("chart-wheel", ev);
     },
-    treeMouseDown (ev) {
+    chartMouseDown (ev) {
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
         this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
@@ -164,10 +164,10 @@ export default {
       }
       this.moving = true;
     },
-    treeMouseUp (ev) {
+    chartMouseUp (ev) {
       this.moving = false;
     },
-    treeMouseMove (ev) {
+    chartMouseMove (ev) {
       if (this.moving) {
         ev.preventDefault();
         ev.stopImmediatePropagation();
@@ -197,8 +197,8 @@ export default {
           movementX = ev.movementX;
           movementY = ev.movementY;
         }
-        const horizontal = this.$refs.treeScrollContainerHorizontal;
-        const vertical = this.$refs.treeScrollContainerVertical;
+        const horizontal = this.$refs.chartScrollContainerHorizontal;
+        const vertical = this.$refs.chartScrollContainerVertical;
         const currentX = horizontal.scrollLeft;
         let x = 0, y = 0;
         if (touch) {

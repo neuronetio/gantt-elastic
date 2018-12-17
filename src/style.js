@@ -174,15 +174,15 @@ export default {
     "stroke": "#FF000080",
     "strokeWidth": 1
   },
-  "tree": {
+  "chart": {
     "user-select": "none",
     "overflow": "hidden"
   },
-  "tree-graph": {
+  "chart-graph": {
     "overflow": "hidden"
   },
-  "tree-row-text-wrapper": {},
-  "tree-row-text": {
+  "chart-row-text-wrapper": {},
+  "chart-row-text": {
     "background": "#ffffffa0",
     "border-radius": "10px",
     "font-family": fontFamily,
@@ -191,64 +191,64 @@ export default {
     "color": "#000000a0",
     "height": '100%'
   },
-  "tree-row-text-content": {
+  "chart-row-text-content": {
     "padding": "0px 6px"
   },
-  "tree-row-text-content--text": {},
-  "tree-row-text-content--html": {},
-  "tree-row-wrapper": {},
-  "tree-row-bar-wrapper": {},
-  "tree-row-bar": {},
-  "tree-row-bar-polygon": {
+  "chart-row-text-content--text": {},
+  "chart-row-text-content--html": {},
+  "chart-row-wrapper": {},
+  "chart-row-bar-wrapper": {},
+  "chart-row-bar": {},
+  "chart-row-bar-polygon": {
     "stroke": "#E74C3C",
     "stroke-width": 1,
     "fill": "#F75C4C",
   },
-  "tree-row-project-wrapper": {},
-  "tree-row-project": {},
-  "tree-row-project-polygon": {},
-  "tree-row-milestone-wrapper": {},
-  "tree-row-milestone": {},
-  "tree-row-milestone-polygon": {},
-  "tree-row-task-wrapper": {},
-  "tree-row-task": {},
-  "tree-row-task-polygon": {},
-  "tree-row-progress-bar-wrapper": {},
-  "tree-row-progress-bar": {},
-  "tree-row-progress-bar-line": {
+  "chart-row-project-wrapper": {},
+  "chart-row-project": {},
+  "chart-row-project-polygon": {},
+  "chart-row-milestone-wrapper": {},
+  "chart-row-milestone": {},
+  "chart-row-milestone-polygon": {},
+  "chart-row-task-wrapper": {},
+  "chart-row-task": {},
+  "chart-row-task-polygon": {},
+  "chart-row-progress-bar-wrapper": {},
+  "chart-row-progress-bar": {},
+  "chart-row-progress-bar-line": {
     "stroke": "#ffffff25",
     "stroke-width": 20
   },
-  "tree-row-progress-bar-solid": {
+  "chart-row-progress-bar-solid": {
     "fill": "#E74C3C",
     "height": "20%"
   },
-  "tree-row-progress-bar-pattern": {
+  "chart-row-progress-bar-pattern": {
     "fill": "url(#diagonalHatch)",
     "transform": "translateY(0.1) scaleY(0.8)",
   },
-  "tree-row-progress-bar-outline": {
+  "chart-row-progress-bar-outline": {
     "stroke": "#E74C3C",
     "stroke-width": 1
   },
-  "tree-dependency-lines-wrapper": {},
-  "tree-dependency-lines-path": {
+  "chart-dependency-lines-wrapper": {},
+  "chart-dependency-lines-path": {
     "fill": "transparent",
     "stroke": "#FFa00090",
     "stroke-width": 2
   },
-  "tree-scroll-container": {},
-  "tree-scroll-container--horizontal": {
+  "chart-scroll-container": {},
+  "chart-scroll-container--horizontal": {
     "overflow": "auto",
     "max-width": "100%"
   },
-  "tree-scroll-container--vertical": {
+  "chart-scroll-container--vertical": {
     "overflow-y": "auto",
     "overflow-x": "hidden",
     "max-height": "100%",
     "float": "right",
   },
-  "svg-tree": {
+  "svg-chart": {
     "overflow": "hidden"
   },
   "svg-container-wrapper": {

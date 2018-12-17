@@ -577,23 +577,23 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=69ff4606&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=61600990&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('eg-main',{attrs:{"tasks":_vm.tasks,"options":_vm.options}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=69ff4606&
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=61600990&
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__("5a0c");
 var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Main.vue?vue&type=template&id=17b80801&
-var Mainvue_type_template_id_17b80801_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__main"},[_c('top-header'),_c('div',{staticClass:"gantt-elastic__svg-container-wrapper",style:(_vm.root.style('svg-container-wrapper',{height:_vm.root.state.height+'px'}))},[_c('svg',{ref:"svgMain",staticClass:"gantt-elastic__svg-container",style:(_vm.root.style('svg-container', {'max-width':'calc(100% - '+_vm.root.state.scrollBarHeight+'px)'})),attrs:{"width":_vm.getWidth,"height":_vm.root.state.height,"xmlns":"http://www.w3.org/2000/svg"}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"},on:{"mousemove":_vm.mouseMove,"mouseup":_vm.mouseUp}},[_c('div',{staticClass:"gantt-elastic__task-list-container"},[(_vm.root.state.taskList.display)?_c('svg',{ref:"svgTaskList",staticClass:"gantt-elastic__task-list-svg",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.taskList.finalWidth,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('task-list')],1):_vm._e()]),_c('div',{ref:"svgTreeContainer",staticClass:"gantt-elastic__main-container",on:{"mousedown":function($event){$event.stopPropagation();return _vm.treeMouseDown($event)},"touchstart":function($event){$event.stopPropagation();$event.preventDefault();return _vm.treeMouseDown($event)},"mouseup":function($event){$event.stopPropagation();$event.preventDefault();return _vm.treeMouseUp($event)},"touchend":function($event){$event.stopPropagation();$event.preventDefault();return _vm.treeMouseUp($event)},"mousemove":function($event){$event.stopPropagation();$event.preventDefault();return _vm.treeMouseMove($event)},"touchmove":function($event){$event.stopPropagation();$event.preventDefault();return _vm.treeMouseMove($event)},"wheel":function($event){$event.preventDefault();return _vm.treeWheel($event)}}},[_c('tree')],1)])])],1),_c('div',{ref:"treeScrollContainerVertical",staticClass:"gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--vertical",style:(_vm.root.style('tree-scroll-container','tree-scroll-container--vertical',_vm.verticalStyle)),on:{"scroll":_vm.onVerticalScroll}},[_c('div',{staticClass:"gantt-elastic__tree-scroll--vertical",style:({width:'1px',height:_vm.root.state.allVisibleTasksHeight+'px'})})])]),_c('div',{ref:"treeScrollContainerHorizontal",staticClass:"gantt-elastic__tree-scroll-container gantt-elastic__tree-scroll-container--horizontal",style:(_vm.root.style('tree-scroll-container','tree-scroll-container--horizontal',{marginLeft:_vm.getMarginLeft})),on:{"scroll":_vm.onHorizontalScroll}},[_c('div',{staticClass:"gantt-elastic__tree-scroll--horizontal",style:({height:'1px', width:_vm.root.state.width+'px'})})])],1)}
-var Mainvue_type_template_id_17b80801_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Main.vue?vue&type=template&id=0554caf2&
+var Mainvue_type_template_id_0554caf2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__main"},[_c('top-header'),_c('div',{staticClass:"gantt-elastic__svg-container-wrapper",style:(_vm.root.style('svg-container-wrapper',{height:_vm.root.state.height+'px'}))},[_c('svg',{ref:"svgMain",staticClass:"gantt-elastic__svg-container",style:(_vm.root.style('svg-container', {'max-width':'calc(100% - '+_vm.root.state.scrollBarHeight+'px)'})),attrs:{"width":_vm.getWidth,"height":_vm.root.state.height,"xmlns":"http://www.w3.org/2000/svg"}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":"100%"}},[_c('div',{staticClass:"gantt-elastic__container",attrs:{"xmlns":"http://www.w3.org/1999/xhtml"},on:{"mousemove":_vm.mouseMove,"mouseup":_vm.mouseUp}},[_c('div',{staticClass:"gantt-elastic__task-list-container"},[(_vm.root.state.taskList.display)?_c('svg',{ref:"svgTaskList",staticClass:"gantt-elastic__task-list-svg",attrs:{"xmlns":"http://www.w3.org/2000/svg","width":_vm.root.state.taskList.finalWidth,"height":_vm.root.state.height}},[_c('defs',{domProps:{"innerHTML":_vm._s(_vm.defs)}}),_c('task-list')],1):_vm._e()]),_c('div',{ref:"svgChartContainer",staticClass:"gantt-elastic__main-container",on:{"mousedown":function($event){$event.stopPropagation();return _vm.chartMouseDown($event)},"touchstart":function($event){$event.stopPropagation();$event.preventDefault();return _vm.chartMouseDown($event)},"mouseup":function($event){$event.stopPropagation();$event.preventDefault();return _vm.chartMouseUp($event)},"touchend":function($event){$event.stopPropagation();$event.preventDefault();return _vm.chartMouseUp($event)},"mousemove":function($event){$event.stopPropagation();$event.preventDefault();return _vm.chartMouseMove($event)},"touchmove":function($event){$event.stopPropagation();$event.preventDefault();return _vm.chartMouseMove($event)},"wheel":function($event){$event.preventDefault();return _vm.chartWheel($event)}}},[_c('chart')],1)])])],1),_c('div',{ref:"chartScrollContainerVertical",staticClass:"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",style:(_vm.root.style('chart-scroll-container','chart-scroll-container--vertical',_vm.verticalStyle)),on:{"scroll":_vm.onVerticalScroll}},[_c('div',{staticClass:"gantt-elastic__chart-scroll--vertical",style:({width:'1px',height:_vm.root.state.allVisibleTasksHeight+'px'})})])]),_c('div',{ref:"chartScrollContainerHorizontal",staticClass:"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",style:(_vm.root.style('chart-scroll-container','chart-scroll-container--horizontal',{marginLeft:_vm.getMarginLeft})),on:{"scroll":_vm.onHorizontalScroll}},[_c('div',{staticClass:"gantt-elastic__chart-scroll--horizontal",style:({height:'1px', width:_vm.root.state.width+'px'})})])],1)}
+var Mainvue_type_template_id_0554caf2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Main.vue?vue&type=template&id=17b80801&
+// CONCATENATED MODULE: ./src/components/Main.vue?vue&type=template&id=0554caf2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Header.vue?vue&type=template&id=0a8ee28f&
 var Headervue_type_template_id_0a8ee28f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-elastic__header",style:(_vm.root.style('header'))},[_c('div',{staticClass:"gantt-elastic__header-title",style:(_vm.root.style('header-title'))},[(!_vm.root.state.title.html)?_c('div',{staticClass:"gantt-elastic__header-title--text",style:(_vm.root.style('header-title--text'))},[_vm._v(_vm._s(_vm.root.state.title.label))]):_vm._e(),(_vm.root.state.title.html)?_c('div',{staticClass:"gantt-elastic__header-title--html",style:(_vm.root.style('header-title--html')),domProps:{"innerHTML":_vm._s(_vm.root.state.title.label)}}):_vm._e()]),_c('div',{staticClass:"gantt-elastic__header-options",style:(_vm.root.style('header-options'))},[_c('button',{staticClass:"gantt-elastic__header-btn-recenter",style:(_vm.root.style('header-btn-recenter')),on:{"click":function($event){$event.preventDefault();return _vm.recenterPosition($event)}}},[_vm._v(_vm._s(_vm.root.state.locale.Now))]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['X-Scale'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":24,"min":2,"width":"100px"},model:{value:(_vm.scale),callback:function ($$v) {_vm.scale=$$v},expression:"scale"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Y-Scale'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":100,"min":7,"width":"100px"},model:{value:(_vm.height),callback:function ($$v) {_vm.height=$$v},expression:"height"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Before/After'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":31,"min":0,"width":"100px"},model:{value:(_vm.scope),callback:function ($$v) {_vm.scope=$$v},expression:"scope"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-label",style:(_vm.root.style('header-label'))},[_vm._v("\n      "+_vm._s(_vm.root.state.locale['Task list width'])+"\n      "),_c('div',{staticClass:"gantt-elastic__header-slider-wrapper",style:(_vm.root.style('header-slider-wrapper'))},[_c('vue-slider',{staticClass:"gantt-elastic__header-slider",attrs:{"tooltip":"false","process-style":_vm.root.style('header-slider--process'),"slider-style":_vm.root.style('header-slider--slider'),"max":100,"min":0,"width":"100px"},model:{value:(_vm.divider),callback:function ($$v) {_vm.divider=$$v},expression:"divider"}})],1)]),_c('label',{staticClass:"gantt-elastic__header-task-list-switch--wrapper",style:(_vm.root.style('header-task-list-switch--label'))},[_c('switches',{staticClass:"gantt-elastic__header-task-list-switch",style:(_vm.root.style('header-task-list-switch')),model:{value:(_vm.root.state.taskList.display),callback:function ($$v) {_vm.$set(_vm.root.state.taskList, "display", $$v)},expression:"root.state.taskList.display"}}),_vm._v("\n      "+_vm._s(_vm.root.state.locale['Display task list'])+"\n    ")],1)])])}
@@ -2750,21 +2750,21 @@ var TaskList_component = normalizeComponent(
 
 TaskList_component.options.__file = "TaskList.vue"
 /* harmony default export */ var TaskList = (TaskList_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Tree.vue?vue&type=template&id=4ab839ee&
-var Treevue_type_template_id_4ab839ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"tree",staticClass:"gantt-elastic__tree",style:(_vm.root.style('tree')),attrs:{"x":"0","y":"0","width":_vm.getWidth+'px',"height":_vm.getHeight+'px',"xmlns":"http://www.w3.org/2000/svg"}},[_c('calendar'),_c('foreignObject',{attrs:{"x":"0","y":_vm.root.getCalendarHeight(),"width":"100%","height":_vm.root.state.rowsHeight}},[_c('div',{ref:"treeGraph",staticClass:"gantt-elastic__tree-graph",style:(_vm.root.style('tree-graph',{height:'100%'})),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('svg',{ref:"tree",staticClass:"gantt-elastic__tree",style:(_vm.root.style('tree')),attrs:{"x":"0","y":"0","width":_vm.getWidth+'px',"height":_vm.root.state.allVisibleTasksHeight+'px',"viewBox":_vm.getViewBox,"xmlns":"http://www.w3.org/2000/svg"}},[_c('grid'),_c('dependency-lines',{attrs:{"tasks":_vm.root.state.tasks}}),_vm._l((_vm.root.state.tasks),function(task){return _c('g',{directives:[{name:"show",rawName:"v-show",value:(task.visible),expression:"task.visible"}],key:task.id,staticClass:"gantt-elastic__tree-row-wrapper",style:(_vm.root.style('tree-row-wrapper')),attrs:{"task":task}},[_c(task.type,{tag:"component",attrs:{"task":task}})],1)})],2)])])],1)}
-var Treevue_type_template_id_4ab839ee_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=template&id=ef43834c&
+var Chartvue_type_template_id_ef43834c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"chart",staticClass:"gantt-elastic__chart",style:(_vm.root.style('chart')),attrs:{"x":"0","y":"0","width":_vm.getWidth+'px',"height":_vm.getHeight+'px',"xmlns":"http://www.w3.org/2000/svg"}},[_c('calendar'),_c('foreignObject',{attrs:{"x":"0","y":_vm.root.getCalendarHeight(),"width":"100%","height":_vm.root.state.rowsHeight}},[_c('div',{ref:"chartGraph",staticClass:"gantt-elastic__chart-graph",style:(_vm.root.style('chart-graph',{height:'100%'})),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[_c('svg',{ref:"chart",staticClass:"gantt-elastic__chart",style:(_vm.root.style('chart')),attrs:{"x":"0","y":"0","width":_vm.getWidth+'px',"height":_vm.root.state.allVisibleTasksHeight+'px',"viewBox":_vm.getViewBox,"xmlns":"http://www.w3.org/2000/svg"}},[_c('grid'),_c('dependency-lines',{attrs:{"tasks":_vm.root.state.tasks}}),_vm._l((_vm.root.state.tasks),function(task){return _c('g',{directives:[{name:"show",rawName:"v-show",value:(task.visible),expression:"task.visible"}],key:task.id,staticClass:"gantt-elastic__chart-row-wrapper",style:(_vm.root.style('chart-row-wrapper')),attrs:{"task":task}},[_c(task.type,{tag:"component",attrs:{"task":task}})],1)})],2)])])],1)}
+var Chartvue_type_template_id_ef43834c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Tree.vue?vue&type=template&id=4ab839ee&
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=template&id=ef43834c&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Grid.vue?vue&type=template&id=b52736e6&
-var Gridvue_type_template_id_b52736e6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"tree",staticClass:"gantt-elastic__grid-lines-wrapper",style:(_vm.root.style('grid-lines-wrapper')),attrs:{"x":"0","y":"0","width":_vm.getWidth,"height":_vm.getHeight,"xmlns":"http://www.w3.org/2000/svg"}},[_c('g',{staticClass:"gantt-elastic__grid-lines",style:(_vm.root.style('grid-lines'))},[_vm._l((_vm.horizontalLines),function(line){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-line-horizontal",style:(_vm.root.style('grid-line-horizontal')),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-line-vertical",style:(_vm.root.style('grid-line-vertical')),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-line-time",style:(_vm.root.style('grid-line-time')),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)])}
-var Gridvue_type_template_id_b52736e6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=template&id=21238081&
+var Gridvue_type_template_id_21238081_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"chart",staticClass:"gantt-elastic__grid-lines-wrapper",style:(_vm.root.style('grid-lines-wrapper')),attrs:{"x":"0","y":"0","width":_vm.getWidth,"height":_vm.getHeight,"xmlns":"http://www.w3.org/2000/svg"}},[_c('g',{staticClass:"gantt-elastic__grid-lines",style:(_vm.root.style('grid-lines'))},[_vm._l((_vm.horizontalLines),function(line){return _c('line',{key:line.key,staticClass:"gantt-elastic__grid-line-horizontal",style:(_vm.root.style('grid-line-horizontal')),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),_vm._l((_vm.verticalLines),function(line){return (line.inViewPort)?_c('line',{key:line.key,staticClass:"gantt-elastic__grid-line-vertical",style:(_vm.root.style('grid-line-vertical')),attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}}):_vm._e()}),_c('line',{staticClass:"gantt-elastic__grid-line-time",style:(_vm.root.style('grid-line-time')),attrs:{"x1":_vm.timeLinePosition.x,"y1":_vm.timeLinePosition.y1,"x2":_vm.timeLinePosition.x,"y2":_vm.timeLinePosition.y2}})],2)])}
+var Gridvue_type_template_id_21238081_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Grid.vue?vue&type=template&id=b52736e6&
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue?vue&type=template&id=21238081&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Grid.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -2824,7 +2824,7 @@ var Gridvue_type_template_id_b52736e6_staticRenderFns = []
     /*this.root.$on("scope-change", this.regenerate);
     this.root.$on("times-timeZoom-change", this.regenerate);
     this.root.$on("row-height-change", this.regenerate);
-    this.root.$on("gantt-elastic.tree.scroll", this.regenerate);
+    this.root.$on("gantt-elastic.chart.scroll", this.regenerate);
     this.regenerate();*/
   },
   mounted () {
@@ -2881,7 +2881,7 @@ var Gridvue_type_template_id_b52736e6_staticRenderFns = []
     inViewPort () {
       return line => {
         const state = this.root.state;
-        return (line.x1 >= state.scroll.tree.left && line.x1 <= state.scroll.tree.right);
+        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
       };
     },
     timeLinePosition () {
@@ -2903,9 +2903,9 @@ var Gridvue_type_template_id_b52736e6_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Grid.vue?vue&type=script&lang=js&
- /* harmony default export */ var Tree_Gridvue_type_script_lang_js_ = (Gridvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Grid.vue
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Gridvue_type_script_lang_js_ = (Gridvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue
 
 
 
@@ -2914,9 +2914,9 @@ var Gridvue_type_template_id_b52736e6_staticRenderFns = []
 /* normalize component */
 
 var Grid_component = normalizeComponent(
-  Tree_Gridvue_type_script_lang_js_,
-  Gridvue_type_template_id_b52736e6_render,
-  Gridvue_type_template_id_b52736e6_staticRenderFns,
+  Chart_Gridvue_type_script_lang_js_,
+  Gridvue_type_template_id_21238081_render,
+  Gridvue_type_template_id_21238081_staticRenderFns,
   false,
   null,
   null,
@@ -3261,14 +3261,14 @@ var Calendar_component = normalizeComponent(
 
 Calendar_component.options.__file = "Calendar.vue"
 /* harmony default export */ var Calendar = (Calendar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/DependencyLines.vue?vue&type=template&id=18ddf6ed&
-var DependencyLinesvue_type_template_id_18ddf6ed_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__tree-dependency-lines-container",style:(_vm.root.style('tree-dependency-lines-container')),attrs:{"width":"100%","height":"100%"}},_vm._l((_vm.dependencyTasks),function(task){return _c('g',{directives:[{name:"show",rawName:"v-show",value:(task.visible),expression:"task.visible"}],key:task.id,attrs:{"task":task}},_vm._l((task.dependencyLines),function(dependencyLine){return _c('path',{key:dependencyLine.id,staticClass:"gantt-elastic__tree-dependency-lines-path",style:(_vm.root.style('tree-dependency-lines-path', task.style['tree-dependency-lines-path'])),attrs:{"task":task,"d":dependencyLine.points}})}))}))}
-var DependencyLinesvue_type_template_id_18ddf6ed_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=template&id=4d090089&
+var DependencyLinesvue_type_template_id_4d090089_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__chart-dependency-lines-container",style:(_vm.root.style('chart-dependency-lines-container')),attrs:{"width":"100%","height":"100%"}},_vm._l((_vm.dependencyTasks),function(task){return _c('g',{directives:[{name:"show",rawName:"v-show",value:(task.visible),expression:"task.visible"}],key:task.id,attrs:{"task":task}},_vm._l((task.dependencyLines),function(dependencyLine){return _c('path',{key:dependencyLine.id,staticClass:"gantt-elastic__chart-dependency-lines-path",style:(_vm.root.style('chart-dependency-lines-path', task.style['chart-dependency-lines-path'])),attrs:{"task":task,"d":dependencyLine.points}})}))}))}
+var DependencyLinesvue_type_template_id_4d090089_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/DependencyLines.vue?vue&type=template&id=18ddf6ed&
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue?vue&type=template&id=4d090089&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/DependencyLines.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3355,9 +3355,9 @@ var DependencyLinesvue_type_template_id_18ddf6ed_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/DependencyLines.vue?vue&type=script&lang=js&
- /* harmony default export */ var Tree_DependencyLinesvue_type_script_lang_js_ = (DependencyLinesvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/DependencyLines.vue
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_DependencyLinesvue_type_script_lang_js_ = (DependencyLinesvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue
 
 
 
@@ -3366,9 +3366,9 @@ var DependencyLinesvue_type_template_id_18ddf6ed_staticRenderFns = []
 /* normalize component */
 
 var DependencyLines_component = normalizeComponent(
-  Tree_DependencyLinesvue_type_script_lang_js_,
-  DependencyLinesvue_type_template_id_18ddf6ed_render,
-  DependencyLinesvue_type_template_id_18ddf6ed_staticRenderFns,
+  Chart_DependencyLinesvue_type_script_lang_js_,
+  DependencyLinesvue_type_template_id_4d090089_render,
+  DependencyLinesvue_type_template_id_4d090089_staticRenderFns,
   false,
   null,
   null,
@@ -3378,21 +3378,21 @@ var DependencyLines_component = normalizeComponent(
 
 DependencyLines_component.options.__file = "DependencyLines.vue"
 /* harmony default export */ var DependencyLines = (DependencyLines_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Task.vue?vue&type=template&id=690bcbda&
-var Taskvue_type_template_id_690bcbda_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-task-wrapper",style:(_vm.root.style('tree-row-bar-wrapper', 'tree-row-task-wrapper', _vm.task.style['tree-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__tree-row-bar gantt-elastic__tree-row-task",style:(_vm.root.style('tree-row-bar','tree-row-task',_vm.task.style['tree-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('polygon',{attrs:{"points":_vm.getPoints}})])]),_c('polygon',{staticClass:"gantt-elastic__tree-row-bar-polygon gantt-elastic__tree-row-task-polygon",style:(_vm.root.style('tree-row-bar-polygon', 'tree-row-task-polygon' , _vm.task.style['base'], _vm.task.style['tree-row-bar-polygon'])),attrs:{"points":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('tree-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
-var Taskvue_type_template_id_690bcbda_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=template&id=3fbf5198&
+var Taskvue_type_template_id_3fbf5198_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper",style:(_vm.root.style('chart-row-bar-wrapper', 'chart-row-task-wrapper', _vm.task.style['chart-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-task",style:(_vm.root.style('chart-row-bar','chart-row-task',_vm.task.style['chart-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('polygon',{attrs:{"points":_vm.getPoints}})])]),_c('polygon',{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon",style:(_vm.root.style('chart-row-bar-polygon', 'chart-row-task-polygon' , _vm.task.style['base'], _vm.task.style['chart-row-bar-polygon'])),attrs:{"points":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('chart-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
+var Taskvue_type_template_id_3fbf5198_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Task.vue?vue&type=template&id=690bcbda&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue?vue&type=template&id=3fbf5198&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Text.vue?vue&type=template&id=0ad7c689&
-var Textvue_type_template_id_0ad7c689_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__tree-row-text-wrapper",style:(_vm.root.style('tree-row-text-wrapper')),attrs:{"x":_vm.task.x+_vm.task.width + _vm.root.state.treeText.offset,"y":_vm.task.y-_vm.root.state.grid.horizontal.gap,"width":_vm.getWidth,"height":_vm.getHeight}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":_vm.getHeight}},[_c('div',{staticClass:"gantt-elastic__tree-row-text",style:(_vm.root.style('tree-row-text')),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[(!_vm.html)?_c('div',{staticClass:"gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--text",style:(Object.assign({},_vm.root.style('tree-row-text-content','tree-row-text-content--text'),_vm.contentStyle))},[_c('div',[_vm._v(_vm._s(_vm.task.label))])]):_vm._e(),(_vm.html)?_c('div',{staticClass:"gantt-elastic__tree-row-text-content gantt-elastic__tree-row-text-content--html",style:(Object.assign({},_vm.root.style('tree-row-text-content','tree-row-text-content--html'),_vm.contentStyle)),domProps:{"innerHTML":_vm._s(_vm.task.label)}}):_vm._e()])])],1)}
-var Textvue_type_template_id_0ad7c689_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=template&id=1e632d43&
+var Textvue_type_template_id_1e632d43_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{staticClass:"gantt-elastic__chart-row-text-wrapper",style:(_vm.root.style('chart-row-text-wrapper')),attrs:{"x":_vm.task.x+_vm.task.width + _vm.root.state.chartText.offset,"y":_vm.task.y-_vm.root.state.grid.horizontal.gap,"width":_vm.getWidth,"height":_vm.getHeight}},[_c('foreignObject',{attrs:{"x":"0","y":"0","width":"100%","height":_vm.getHeight}},[_c('div',{staticClass:"gantt-elastic__chart-row-text",style:(_vm.root.style('chart-row-text')),attrs:{"xmlns":"http://www.w3.org/1999/xhtml"}},[(!_vm.html)?_c('div',{staticClass:"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text",style:(Object.assign({},_vm.root.style('chart-row-text-content','chart-row-text-content--text'),_vm.contentStyle))},[_c('div',[_vm._v(_vm._s(_vm.task.label))])]):_vm._e(),(_vm.html)?_c('div',{staticClass:"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html",style:(Object.assign({},_vm.root.style('chart-row-text-content','chart-row-text-content--html'),_vm.contentStyle)),domProps:{"innerHTML":_vm._s(_vm.task.label)}}):_vm._e()])])],1)}
+var Textvue_type_template_id_1e632d43_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Text.vue?vue&type=template&id=0ad7c689&
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=template&id=1e632d43&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Text.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3435,10 +3435,10 @@ var Textvue_type_template_id_0ad7c689_staticRenderFns = []
   },
   computed: {
     getWidth () {
-      const textStyle = this.root.style('tree-row-text');
+      const textStyle = this.root.style('chart-row-text');
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.treeText.xPadding * 2;
+      return textWidth + this.root.state.chartText.xPadding * 2;
     },
     getHeight () {
       return this.task.height + this.root.state.grid.horizontal.gap * 2;
@@ -3459,9 +3459,9 @@ var Textvue_type_template_id_0ad7c689_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Text.vue?vue&type=script&lang=js&
- /* harmony default export */ var Tree_Textvue_type_script_lang_js_ = (Textvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Text.vue
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Textvue_type_script_lang_js_ = (Textvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue
 
 
 
@@ -3470,9 +3470,9 @@ var Textvue_type_template_id_0ad7c689_staticRenderFns = []
 /* normalize component */
 
 var Text_component = normalizeComponent(
-  Tree_Textvue_type_script_lang_js_,
-  Textvue_type_template_id_0ad7c689_render,
-  Textvue_type_template_id_0ad7c689_staticRenderFns,
+  Chart_Textvue_type_script_lang_js_,
+  Textvue_type_template_id_1e632d43_render,
+  Textvue_type_template_id_1e632d43_staticRenderFns,
   false,
   null,
   null,
@@ -3482,14 +3482,14 @@ var Text_component = normalizeComponent(
 
 Text_component.options.__file = "Text.vue"
 /* harmony default export */ var Text = (Text_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/ProgressBar.vue?vue&type=template&id=149f871f&
-var ProgressBarvue_type_template_id_149f871f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-row-progress-bar-wrapper",style:(_vm.root.style('tree-row-progress-bar-wrapper', _vm.task.style['tree-row-progress-bar-wrapper']))},[_c('defs',[_c('pattern',{attrs:{"id":"diagonalHatch","width":_vm.root.state.progress.width,"height":_vm.root.state.progress.width,"patternTransform":"rotate(45 0 0)","patternUnits":"userSpaceOnUse"}},[_c('line',{staticClass:"tree-row-progress-bar-line",style:(_vm.root.style('tree-row-progress-bar-line', _vm.task.style['tree-row-progress-bar-line'])),attrs:{"x1":"0","y1":"0","x2":"0","y2":_vm.root.state.progress.width}})])]),(_vm.root.state.progress.bar)?_c('rect',{staticClass:"gantt-elastic__tree-row-progress-bar-solid",style:(_vm.root.style('tree-row-progress-bar-solid', _vm.task.style['tree-row-progress-bar-solid'])),attrs:{"x":"0","y":"0","width":_vm.getProgressWidth}}):_vm._e(),(_vm.root.state.progress.pattern)?_c('g',[_c('rect',{staticClass:"gantt-elastic__tree-row-progress-bar-pattern",style:(_vm.root.style('tree-row-progress-bar-pattern', _vm.task.style['tree-row-progress-bar-pattern'])),attrs:{"x":_vm.getProgressWidth,"y":"0","width":100-_vm.task.progress+'%',"height":"100%"}}),_c('path',{staticClass:"gantt-elastic__tree-row-progress-bar-outline",style:(_vm.root.style('tree-row-progress-bar-outline', _vm.task.style['base'], _vm.task.style['tree-row-progress-bar-outline'])),attrs:{"d":_vm.getLinePoints}})]):_vm._e()])}
-var ProgressBarvue_type_template_id_149f871f_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=template&id=c3d7ce8e&
+var ProgressBarvue_type_template_id_c3d7ce8e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__chart-row-progress-bar-wrapper",style:(_vm.root.style('chart-row-progress-bar-wrapper', _vm.task.style['chart-row-progress-bar-wrapper']))},[_c('defs',[_c('pattern',{attrs:{"id":"diagonalHatch","width":_vm.root.state.progress.width,"height":_vm.root.state.progress.width,"patternTransform":"rotate(45 0 0)","patternUnits":"userSpaceOnUse"}},[_c('line',{staticClass:"chart-row-progress-bar-line",style:(_vm.root.style('chart-row-progress-bar-line', _vm.task.style['chart-row-progress-bar-line'])),attrs:{"x1":"0","y1":"0","x2":"0","y2":_vm.root.state.progress.width}})])]),(_vm.root.state.progress.bar)?_c('rect',{staticClass:"gantt-elastic__chart-row-progress-bar-solid",style:(_vm.root.style('chart-row-progress-bar-solid', _vm.task.style['chart-row-progress-bar-solid'])),attrs:{"x":"0","y":"0","width":_vm.getProgressWidth}}):_vm._e(),(_vm.root.state.progress.pattern)?_c('g',[_c('rect',{staticClass:"gantt-elastic__chart-row-progress-bar-pattern",style:(_vm.root.style('chart-row-progress-bar-pattern', _vm.task.style['chart-row-progress-bar-pattern'])),attrs:{"x":_vm.getProgressWidth,"y":"0","width":100-_vm.task.progress+'%',"height":"100%"}}),_c('path',{staticClass:"gantt-elastic__chart-row-progress-bar-outline",style:(_vm.root.style('chart-row-progress-bar-outline', _vm.task.style['base'], _vm.task.style['chart-row-progress-bar-outline'])),attrs:{"d":_vm.getLinePoints}})]):_vm._e()])}
+var ProgressBarvue_type_template_id_c3d7ce8e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/ProgressBar.vue?vue&type=template&id=149f871f&
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue?vue&type=template&id=c3d7ce8e&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/ProgressBar.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3566,9 +3566,9 @@ var ProgressBarvue_type_template_id_149f871f_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/ProgressBar.vue?vue&type=script&lang=js&
- /* harmony default export */ var Tree_ProgressBarvue_type_script_lang_js_ = (ProgressBarvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/ProgressBar.vue
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_ProgressBarvue_type_script_lang_js_ = (ProgressBarvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue
 
 
 
@@ -3577,9 +3577,9 @@ var ProgressBarvue_type_template_id_149f871f_staticRenderFns = []
 /* normalize component */
 
 var ProgressBar_component = normalizeComponent(
-  Tree_ProgressBarvue_type_script_lang_js_,
-  ProgressBarvue_type_template_id_149f871f_render,
-  ProgressBarvue_type_template_id_149f871f_staticRenderFns,
+  Chart_ProgressBarvue_type_script_lang_js_,
+  ProgressBarvue_type_template_id_c3d7ce8e_render,
+  ProgressBarvue_type_template_id_c3d7ce8e_staticRenderFns,
   false,
   null,
   null,
@@ -3589,7 +3589,7 @@ var ProgressBar_component = normalizeComponent(
 
 ProgressBar_component.options.__file = "ProgressBar.vue"
 /* harmony default export */ var ProgressBar = (ProgressBar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Task.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3635,7 +3635,7 @@ ProgressBar_component.options.__file = "ProgressBar.vue"
 
 /* harmony default export */ var Taskvue_type_script_lang_js_ = ({
   components: {
-    TreeText: Text,
+    ChartText: Text,
     ProgressBar: ProgressBar
   },
   inject: ["root"],
@@ -3668,9 +3668,9 @@ ProgressBar_component.options.__file = "ProgressBar.vue"
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Task.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&
  /* harmony default export */ var Row_Taskvue_type_script_lang_js_ = (Taskvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Task.vue
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue
 
 
 
@@ -3680,8 +3680,8 @@ ProgressBar_component.options.__file = "ProgressBar.vue"
 
 var Task_component = normalizeComponent(
   Row_Taskvue_type_script_lang_js_,
-  Taskvue_type_template_id_690bcbda_render,
-  Taskvue_type_template_id_690bcbda_staticRenderFns,
+  Taskvue_type_template_id_3fbf5198_render,
+  Taskvue_type_template_id_3fbf5198_staticRenderFns,
   false,
   null,
   null,
@@ -3691,14 +3691,14 @@ var Task_component = normalizeComponent(
 
 Task_component.options.__file = "Task.vue"
 /* harmony default export */ var Task = (Task_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Milestone.vue?vue&type=template&id=2edc9a16&
-var Milestonevue_type_template_id_2edc9a16_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-milestone-wrapper",style:(_vm.root.style('tree-row-bar-wrapper', 'tree-row-milestone-wrapper', _vm.task.style['tree-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__tree-row-bar gantt-elastic__tree-row-milestone",style:(_vm.root.style('tree-row-bar', 'tree-row-milestone', _vm.task.style['tree-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('polygon',{attrs:{"points":_vm.getPoints}})])]),_c('polygon',{staticClass:"gantt-elastic__tree-row-bar-polygon gantt-elastic__tree-row-milestone-polygon",style:(_vm.root.style('tree-row-bar-polygon','tree-row-milestone-polygon', _vm.task.style['base'], _vm.task.style['tree-row-bar-polygon'])),attrs:{"points":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('tree-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
-var Milestonevue_type_template_id_2edc9a16_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=template&id=5ba2bffd&
+var Milestonevue_type_template_id_5ba2bffd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper",style:(_vm.root.style('chart-row-bar-wrapper', 'chart-row-milestone-wrapper', _vm.task.style['chart-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone",style:(_vm.root.style('chart-row-bar', 'chart-row-milestone', _vm.task.style['chart-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('polygon',{attrs:{"points":_vm.getPoints}})])]),_c('polygon',{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon",style:(_vm.root.style('chart-row-bar-polygon','chart-row-milestone-polygon', _vm.task.style['base'], _vm.task.style['chart-row-bar-polygon'])),attrs:{"points":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('chart-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
+var Milestonevue_type_template_id_5ba2bffd_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Milestone.vue?vue&type=template&id=2edc9a16&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=template&id=5ba2bffd&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Milestone.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3744,7 +3744,7 @@ var Milestonevue_type_template_id_2edc9a16_staticRenderFns = []
 
 /* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
   components: {
-    TreeText: Text,
+    ChartText: Text,
     ProgressBar: ProgressBar
   },
   inject: ["root"],
@@ -3784,9 +3784,9 @@ var Milestonevue_type_template_id_2edc9a16_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Milestone.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
  /* harmony default export */ var Row_Milestonevue_type_script_lang_js_ = (Milestonevue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Milestone.vue
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue
 
 
 
@@ -3796,8 +3796,8 @@ var Milestonevue_type_template_id_2edc9a16_staticRenderFns = []
 
 var Milestone_component = normalizeComponent(
   Row_Milestonevue_type_script_lang_js_,
-  Milestonevue_type_template_id_2edc9a16_render,
-  Milestonevue_type_template_id_2edc9a16_staticRenderFns,
+  Milestonevue_type_template_id_5ba2bffd_render,
+  Milestonevue_type_template_id_5ba2bffd_staticRenderFns,
   false,
   null,
   null,
@@ -3807,14 +3807,14 @@ var Milestone_component = normalizeComponent(
 
 Milestone_component.options.__file = "Milestone.vue"
 /* harmony default export */ var Milestone = (Milestone_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Project.vue?vue&type=template&id=48a1197f&
-var Projectvue_type_template_id_48a1197f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__tree-row-bar-wrapper gantt-elastic__tree-row-project-wrapper",style:(_vm.root.style('tree-row-bar-wrapper', _vm.root.style('tree-row-project-wrapper'), _vm.task.style['tree-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__tree-row-bar gantt-elastic__tree-row-project",style:(_vm.root.style('tree-row-bar', 'tree-row-project', _vm.task.style['tree-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('path',{attrs:{"d":_vm.getPoints}})])]),_c('path',{staticClass:"gantt-elastic__tree-row-bar-polygon gantt-elastic__tree-row-project-polygon",style:(_vm.root.style('tree-row-bar-polygon','tree-row-project-polygon', _vm.task.style['base'], _vm.task.style['tree-row-bar-polygon'])),attrs:{"d":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('tree-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
-var Projectvue_type_template_id_48a1197f_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"279271aa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=template&id=014998cf&
+var Projectvue_type_template_id_014998cf_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('g',{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper",style:(_vm.root.style('chart-row-bar-wrapper', _vm.root.style('chart-row-project-wrapper'), _vm.task.style['chart-row-bar-wrapper']))},[_c('svg',{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-project",style:(_vm.root.style('chart-row-bar', 'chart-row-project', _vm.task.style['chart-row-bar'])),attrs:{"x":_vm.task.x,"y":_vm.task.y,"width":_vm.task.width,"height":_vm.task.height,"xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){_vm.emitEvent('click', $event)},"mouseenter":function($event){_vm.emitEvent('mouseenter', $event)},"mouseover":function($event){_vm.emitEvent('mouseover', $event)},"mouseout":function($event){_vm.emitEvent('mouseout', $event)},"mousedown":function($event){_vm.emitEvent('mousedown', $event)},"mouseup":function($event){_vm.emitEvent('mouseup', $event)},"mousewheel":function($event){_vm.emitEvent('mousewheel', $event)},"touchstart":function($event){_vm.emitEvent('touchstart', $event)},"touchmove":function($event){_vm.emitEvent('touchmove', $event)},"touchend":function($event){_vm.emitEvent('touchend', $event)}}},[_c('defs',[_c('clipPath',{attrs:{"id":_vm.clipPathId}},[_c('path',{attrs:{"d":_vm.getPoints}})])]),_c('path',{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon",style:(_vm.root.style('chart-row-bar-polygon','chart-row-project-polygon', _vm.task.style['base'], _vm.task.style['chart-row-bar-polygon'])),attrs:{"d":_vm.getPoints}}),_c('progress-bar',{attrs:{"task":_vm.task,"clip-path":'url(#'+_vm.clipPathId+')'}})],1),(_vm.root.state.row.showText)?_c('chart-text',{attrs:{"task":_vm.task}}):_vm._e()],1)}
+var Projectvue_type_template_id_014998cf_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Project.vue?vue&type=template&id=48a1197f&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=template&id=014998cf&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Row/Project.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3860,7 +3860,7 @@ var Projectvue_type_template_id_48a1197f_staticRenderFns = []
 
 /* harmony default export */ var Projectvue_type_script_lang_js_ = ({
   components: {
-    TreeText: Text,
+    ChartText: Text,
     ProgressBar: ProgressBar
   },
   inject: ["root"],
@@ -3904,9 +3904,9 @@ var Projectvue_type_template_id_48a1197f_staticRenderFns = []
   }
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Project.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
  /* harmony default export */ var Row_Projectvue_type_script_lang_js_ = (Projectvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Row/Project.vue
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue
 
 
 
@@ -3916,8 +3916,8 @@ var Projectvue_type_template_id_48a1197f_staticRenderFns = []
 
 var Project_component = normalizeComponent(
   Row_Projectvue_type_script_lang_js_,
-  Projectvue_type_template_id_48a1197f_render,
-  Projectvue_type_template_id_48a1197f_staticRenderFns,
+  Projectvue_type_template_id_014998cf_render,
+  Projectvue_type_template_id_014998cf_staticRenderFns,
   false,
   null,
   null,
@@ -3927,7 +3927,7 @@ var Project_component = normalizeComponent(
 
 Project_component.options.__file = "Project.vue"
 /* harmony default export */ var Project = (Project_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Tree/Tree.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -3983,7 +3983,7 @@ Project_component.options.__file = "Project.vue"
 
 
 
-/* harmony default export */ var Treevue_type_script_lang_js_ = ({
+/* harmony default export */ var Chartvue_type_script_lang_js_ = ({
   components: {
     Grid: Grid,
     DependencyLines: DependencyLines,
@@ -3999,8 +3999,8 @@ Project_component.options.__file = "Project.vue"
     };
   },
   mounted () {
-    this.root.state.refs.tree = this.$refs.tree;
-    this.root.state.refs.treeGraph = this.$refs.treeGraph;
+    this.root.state.refs.chart = this.$refs.chart;
+    this.root.state.refs.chartGraph = this.$refs.chartGraph;
   },
   computed: {
     getWidth () {
@@ -4017,9 +4017,9 @@ Project_component.options.__file = "Project.vue"
   },
 });
 
-// CONCATENATED MODULE: ./src/components/Tree/Tree.vue?vue&type=script&lang=js&
- /* harmony default export */ var Tree_Treevue_type_script_lang_js_ = (Treevue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Tree/Tree.vue
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Chartvue_type_script_lang_js_ = (Chartvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue
 
 
 
@@ -4027,10 +4027,10 @@ Project_component.options.__file = "Project.vue"
 
 /* normalize component */
 
-var Tree_component = normalizeComponent(
-  Tree_Treevue_type_script_lang_js_,
-  Treevue_type_template_id_4ab839ee_render,
-  Treevue_type_template_id_4ab839ee_staticRenderFns,
+var Chart_component = normalizeComponent(
+  Chart_Chartvue_type_script_lang_js_,
+  Chartvue_type_template_id_ef43834c_render,
+  Chartvue_type_template_id_ef43834c_staticRenderFns,
   false,
   null,
   null,
@@ -4038,8 +4038,8 @@ var Tree_component = normalizeComponent(
   
 )
 
-Tree_component.options.__file = "Tree.vue"
-/* harmony default export */ var Tree = (Tree_component.exports);
+Chart_component.options.__file = "Chart.vue"
+/* harmony default export */ var Chart = (Chart_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Main.vue?vue&type=script&lang=js&
 //
 //
@@ -4124,7 +4124,7 @@ Tree_component.options.__file = "Tree.vue"
   components: {
     TopHeader: Header,
     TaskList: TaskList,
-    Tree: Tree
+    Chart: Chart
   },
   inject: ["root"],
   props: ["tasks", "options"],
@@ -4146,15 +4146,15 @@ Tree_component.options.__file = "Tree.vue"
   },
   mounted () {
     this.root.state.refs.svgMain = this.$refs.svgMain;
-    this.root.state.refs.svgTree = this.$refs.svgTree;
-    this.root.state.refs.svgTreeContainer = this.$refs.svgTreeContainer;
+    this.root.state.refs.svgChart = this.$refs.svgChart;
+    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
     this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
-    this.root.state.refs.treeScrollContainerHorizontal = this.$refs.treeScrollContainerHorizontal;
-    this.root.state.refs.treeScrollContainerVertical = this.$refs.treeScrollContainerVertical;
-    document.addEventListener('mouseup', this.treeMouseUp.bind(this));
-    document.addEventListener('mousemove', this.treeMouseMove.bind(this));
-    document.addEventListener('touchmove', this.treeMouseMove.bind(this));
-    document.addEventListener('touchend', this.treeMouseUp.bind(this));
+    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
+    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
+    document.addEventListener('mouseup', this.chartMouseUp.bind(this));
+    document.addEventListener('mousemove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchmove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
     getWidth () {
@@ -4193,10 +4193,10 @@ Tree_component.options.__file = "Tree.vue"
     onVerticalScroll (ev) {
       this.root.$emit("chart-scroll-vertical", ev);
     },
-    treeWheel (ev) {
+    chartWheel (ev) {
       this.root.$emit("chart-wheel", ev);
     },
-    treeMouseDown (ev) {
+    chartMouseDown (ev) {
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
         this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
@@ -4207,10 +4207,10 @@ Tree_component.options.__file = "Tree.vue"
       }
       this.moving = true;
     },
-    treeMouseUp (ev) {
+    chartMouseUp (ev) {
       this.moving = false;
     },
-    treeMouseMove (ev) {
+    chartMouseMove (ev) {
       if (this.moving) {
         ev.preventDefault();
         ev.stopImmediatePropagation();
@@ -4240,8 +4240,8 @@ Tree_component.options.__file = "Tree.vue"
           movementX = ev.movementX;
           movementY = ev.movementY;
         }
-        const horizontal = this.$refs.treeScrollContainerHorizontal;
-        const vertical = this.$refs.treeScrollContainerVertical;
+        const horizontal = this.$refs.chartScrollContainerHorizontal;
+        const vertical = this.$refs.chartScrollContainerVertical;
         const currentX = horizontal.scrollLeft;
         let x = 0, y = 0;
         if (touch) {
@@ -4274,8 +4274,8 @@ Tree_component.options.__file = "Tree.vue"
 
 var Main_component = normalizeComponent(
   components_Mainvue_type_script_lang_js_,
-  Mainvue_type_template_id_17b80801_render,
-  Mainvue_type_template_id_17b80801_staticRenderFns,
+  Mainvue_type_template_id_0554caf2_render,
+  Mainvue_type_template_id_0554caf2_staticRenderFns,
   false,
   null,
   null,
@@ -4462,15 +4462,15 @@ const fontFamily = 'Arial, sans-serif';
     "stroke": "#FF000080",
     "strokeWidth": 1
   },
-  "tree": {
+  "chart": {
     "user-select": "none",
     "overflow": "hidden"
   },
-  "tree-graph": {
+  "chart-graph": {
     "overflow": "hidden"
   },
-  "tree-row-text-wrapper": {},
-  "tree-row-text": {
+  "chart-row-text-wrapper": {},
+  "chart-row-text": {
     "background": "#ffffffa0",
     "border-radius": "10px",
     "font-family": fontFamily,
@@ -4479,64 +4479,64 @@ const fontFamily = 'Arial, sans-serif';
     "color": "#000000a0",
     "height": '100%'
   },
-  "tree-row-text-content": {
+  "chart-row-text-content": {
     "padding": "0px 6px"
   },
-  "tree-row-text-content--text": {},
-  "tree-row-text-content--html": {},
-  "tree-row-wrapper": {},
-  "tree-row-bar-wrapper": {},
-  "tree-row-bar": {},
-  "tree-row-bar-polygon": {
+  "chart-row-text-content--text": {},
+  "chart-row-text-content--html": {},
+  "chart-row-wrapper": {},
+  "chart-row-bar-wrapper": {},
+  "chart-row-bar": {},
+  "chart-row-bar-polygon": {
     "stroke": "#E74C3C",
     "stroke-width": 1,
     "fill": "#F75C4C",
   },
-  "tree-row-project-wrapper": {},
-  "tree-row-project": {},
-  "tree-row-project-polygon": {},
-  "tree-row-milestone-wrapper": {},
-  "tree-row-milestone": {},
-  "tree-row-milestone-polygon": {},
-  "tree-row-task-wrapper": {},
-  "tree-row-task": {},
-  "tree-row-task-polygon": {},
-  "tree-row-progress-bar-wrapper": {},
-  "tree-row-progress-bar": {},
-  "tree-row-progress-bar-line": {
+  "chart-row-project-wrapper": {},
+  "chart-row-project": {},
+  "chart-row-project-polygon": {},
+  "chart-row-milestone-wrapper": {},
+  "chart-row-milestone": {},
+  "chart-row-milestone-polygon": {},
+  "chart-row-task-wrapper": {},
+  "chart-row-task": {},
+  "chart-row-task-polygon": {},
+  "chart-row-progress-bar-wrapper": {},
+  "chart-row-progress-bar": {},
+  "chart-row-progress-bar-line": {
     "stroke": "#ffffff25",
     "stroke-width": 20
   },
-  "tree-row-progress-bar-solid": {
+  "chart-row-progress-bar-solid": {
     "fill": "#E74C3C",
     "height": "20%"
   },
-  "tree-row-progress-bar-pattern": {
+  "chart-row-progress-bar-pattern": {
     "fill": "url(#diagonalHatch)",
     "transform": "translateY(0.1) scaleY(0.8)",
   },
-  "tree-row-progress-bar-outline": {
+  "chart-row-progress-bar-outline": {
     "stroke": "#E74C3C",
     "stroke-width": 1
   },
-  "tree-dependency-lines-wrapper": {},
-  "tree-dependency-lines-path": {
+  "chart-dependency-lines-wrapper": {},
+  "chart-dependency-lines-path": {
     "fill": "transparent",
     "stroke": "#FFa00090",
     "stroke-width": 2
   },
-  "tree-scroll-container": {},
-  "tree-scroll-container--horizontal": {
+  "chart-scroll-container": {},
+  "chart-scroll-container--horizontal": {
     "overflow": "auto",
     "max-width": "100%"
   },
-  "tree-scroll-container--vertical": {
+  "chart-scroll-container--vertical": {
     "overflow-y": "auto",
     "overflow-x": "hidden",
     "max-height": "100%",
     "float": "right",
   },
-  "svg-tree": {
+  "svg-chart": {
     "overflow": "hidden"
   },
   "svg-container-wrapper": {
@@ -4577,7 +4577,7 @@ function getOptions (userOptions) {
         top: 0,
         bottom: 0
       },
-      tree: {
+      chart: {
         left: 0,
         right: 0,
         percent: 0,
@@ -4620,7 +4620,7 @@ function getOptions (userOptions) {
       showText: true,
     },
     maxRows: 20,
-    treeText: {
+    chartText: {
       offset: 0,
       xPadding: 10
     },
@@ -5079,58 +5079,58 @@ const GanttElastic = {
       return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
     isInsideViewPort (x, width, buffer = 5000) {
-      return ((x + width + buffer >= this.state.scroll.tree.left && x - buffer <= this.state.scroll.tree.right) || (x - buffer <= this.state.scroll.tree.left && x + width + buffer >= this.state.scroll.tree.right));
+      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
     },
-    onScrollTree (ev) {
-      const horizontal = this.state.refs.treeScrollContainerHorizontal;
-      const vertical = this.state.refs.treeScrollContainerVertical;
-      this._onScrollTree(horizontal.scrollLeft, vertical.scrollTop);
+    onScrollChart (ev) {
+      const horizontal = this.state.refs.chartScrollContainerHorizontal;
+      const vertical = this.state.refs.chartScrollContainerVertical;
+      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
     },
-    _onScrollTree (left, top) {
-      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
-      this.state.scroll.tree.left = left;
-      this.state.scroll.tree.right = left + treeContainerWidth;
-      this.state.scroll.tree.percent = (left / this.state.times.totalViewDurationPx) * 100;
-      this.state.scroll.tree.top = top;
-      this.state.scroll.tree.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
-      this.state.scroll.tree.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.tree.timeCenter = this.pixelOffsetXToTime(left + treeContainerWidth / 2);
-      this.state.scroll.tree.dateTime.left = dayjs_min_default()(this.state.scroll.tree.time);
-      this.state.scroll.tree.dateTime.right = dayjs_min_default()(this.pixelOffsetXToTime(left + this.state.refs.tree.clientWidth));
+    _onScrollChart (left, top) {
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      this.state.scroll.chart.left = left;
+      this.state.scroll.chart.right = left + chartContainerWidth;
+      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
+      this.state.scroll.chart.top = top;
+      this.state.scroll.chart.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
+      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
+      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
+      this.state.scroll.chart.dateTime.left = dayjs_min_default()(this.state.scroll.chart.time);
+      this.state.scroll.chart.dateTime.right = dayjs_min_default()(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const treeContainerWidth = this.state.refs.svgTreeContainer.clientWidth;
-      pos = pos - treeContainerWidth / 2;
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      pos = pos - chartContainerWidth / 2;
       if (pos > this.state.width) {
-        pos = this.state.width - treeContainerWidth;
+        pos = this.state.width - chartContainerWidth;
       }
       this.scrollTo(pos);
     },
     scrollTo (left = null, top = null) {
       if (left !== null) {
-        this.state.refs.svgTreeContainer.scrollLeft = left;
-        this.state.refs.treeScrollContainerHorizontal.scrollLeft = left;
+        this.state.refs.svgChartContainer.scrollLeft = left;
+        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.scroll.left = left;
       }
       if (top !== null) {
-        this.state.refs.treeScrollContainerVertical.scrollTop = top;
+        this.state.refs.chartScrollContainerVertical.scrollTop = top;
         this.state.refs.taskListItems.scrollTop = top;
-        this.state.refs.treeGraph.scrollTop = top;
+        this.state.refs.chartGraph.scrollTop = top;
         this.state.scroll.top = top;
       }
     },
     fixScrollPos () {
       this.$nextTick(() => {
-        this.scrollToTime(this.state.scroll.tree.timeCenter);
+        this.scrollToTime(this.state.scroll.chart.timeCenter);
       });
     },
-    onWheelTree (ev) {
+    onWheelChart (ev) {
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
-        const treeClientHeight = this.state.refs.treeGraph.clientHeight;
-        const scrollHeight = this.state.refs.treeGraph.scrollHeight - treeClientHeight;
+        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
         } else if (top > scrollHeight) {
@@ -5139,8 +5139,8 @@ const GanttElastic = {
         this.scrollTo(null, top);
       } else {
         let left = this.state.scroll.left + ev.deltaY;
-        const treeClientWidth = this.state.refs.treeScrollContainerHorizontal.clientWidth;
-        const scrollWidth = this.state.refs.treeScrollContainerHorizontal.scrollWidth - treeClientWidth;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
           left = 0;
         } else if (left > scrollWidth) {
@@ -5178,9 +5178,9 @@ const GanttElastic = {
       this.fixScrollPos();
     },
     initializeEvents () {
-      this.$on("chart-scroll-horizontal", this.onScrollTree);
-      this.$on("chart-scroll-vertical", this.onScrollTree);
-      this.$on("chart-wheel", this.onWheelTree);
+      this.$on("chart-scroll-horizontal", this.onScrollChart);
+      this.$on("chart-scroll-vertical", this.onScrollChart);
+      this.$on("chart-wheel", this.onWheelChart);
       this.$on("times-timeZoom-change", this.onTimeZoomChange);
       this.$on("row-height-change", this.onRowHeightChange);
       this.$on("scope-change", this.onScopeChange);

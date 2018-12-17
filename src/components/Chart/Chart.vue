@@ -1,8 +1,8 @@
 <template>
   <svg
-    class="gantt-elastic__tree"
-    :style="root.style('tree')"
-    ref="tree"
+    class="gantt-elastic__chart"
+    :style="root.style('chart')"
+    ref="chart"
     x="0"
     y="0"
     :width="getWidth+'px'"
@@ -13,14 +13,14 @@
     <foreignObject x="0" :y="root.getCalendarHeight()" width="100%" :height="root.state.rowsHeight">
       <div
         xmlns="http://www.w3.org/1999/xhtml"
-        class="gantt-elastic__tree-graph"
-        ref="treeGraph"
-        :style="root.style('tree-graph',{height:'100%'})"
+        class="gantt-elastic__chart-graph"
+        ref="chartGraph"
+        :style="root.style('chart-graph',{height:'100%'})"
       >
         <svg
-          class="gantt-elastic__tree"
-          :style="root.style('tree')"
-          ref="tree"
+          class="gantt-elastic__chart"
+          :style="root.style('chart')"
+          ref="chart"
           x="0"
           y="0"
           :width="getWidth+'px'"
@@ -31,8 +31,8 @@
           <grid></grid>
           <dependency-lines :tasks="root.state.tasks"></dependency-lines>
           <g
-            class="gantt-elastic__tree-row-wrapper"
-            :style="root.style('tree-row-wrapper')"
+            class="gantt-elastic__chart-row-wrapper"
+            :style="root.style('chart-row-wrapper')"
             v-for="task in root.state.tasks"
             :task="task"
             :key="task.id"
@@ -69,8 +69,8 @@ export default {
     };
   },
   mounted () {
-    this.root.state.refs.tree = this.$refs.tree;
-    this.root.state.refs.treeGraph = this.$refs.treeGraph;
+    this.root.state.refs.chart = this.$refs.chart;
+    this.root.state.refs.chartGraph = this.$refs.chartGraph;
   },
   computed: {
     getWidth () {
