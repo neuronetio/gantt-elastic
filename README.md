@@ -147,7 +147,7 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
         // from now on locale settings are same as those from dayjs - https://github.com/iamkun/dayjs/blob/master/docs/en/I18n.md
       },
     };
-    
+
     let ganttInstance;
     const app = GanttElastic.mount({
       el: '#gantt', // <- your container id
@@ -157,7 +157,7 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
     // listen to events
     app.$on('gantt-elastic-ready',(instance)=>{
       ganttInstance = instance;
-      ganttInstance.$on('gantt-elastic-chart-task-click',({event, data})=>{
+      ganttInstance.$on('chart-task-click',({event, data})=>{
         console.log('task clicked!', {event, data});
       })
     });
