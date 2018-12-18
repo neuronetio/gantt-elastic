@@ -1,6 +1,5 @@
 <template>
   <div class="gantt-elastic__main-view">
-    <top-header></top-header>
     <div
       class="gantt-elastic__svg-container-wrapper"
       :style="root.style('svg-container-wrapper',{height:root.state.height+'px'})"
@@ -73,13 +72,11 @@
 </template>
 
 <script>
-import Header from "./Header.vue";
 import TaskList from "./TaskList/TaskList.vue";
 import Chart from "./Chart/Chart.vue";
 
 export default {
   components: {
-    TopHeader: Header,
     TaskList: TaskList,
     Chart: Chart
   },

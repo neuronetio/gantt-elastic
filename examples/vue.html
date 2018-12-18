@@ -6,12 +6,19 @@
   <title>GanttElastic demo</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
   <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
+  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+  <!--
+  <script src="../dist/GanttElastic.umd.js"></script>
+  <script src="../dist/Header.umd.js"></script>
+  -->
 </head>
 
 <body>
   <div style="width:100%;height:100%">
     <div id="app">
-      <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
+      <gantt-elastic :tasks="tasks" :options="options">
+        <gantt-elastic-header slot="header"></gantt-elastic-header>
+      </gantt-elastic>
     </div>
   </div>
 
@@ -256,6 +263,7 @@
     };
     new Vue({
       components: {
+        'gantt-elastic-header': Header,
         'gantt-elastic': GanttElastic
       },
       data: {

@@ -19,8 +19,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vue-cli-service build --target lib --name GanttElastic ./src/GanttElastic.vue & webpack",
-    "dev": "vue-cli-service build --watch --mode development --target lib --name GanttElastic ./src/GanttElastic.vue"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "repository": {
     "type": "git",

@@ -5,8 +5,8 @@
     ref="chart"
     x="0"
     y="0"
-    :width="getWidth"
-    :height="getHeight"
+    :width="root.state.width"
+    :height="root.state.allVisibleTasksHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
@@ -47,18 +47,10 @@
 export default {
   inject: ["root"],
   data () {
-    return {
-      /*verticalLines: [],
-      horizontalLines: []*/
-    };
+    return {};
   },
   created () {
     this.root.$on("recenterPosition", this.recenterPosition);
-    /*this.root.$on("scope-change", this.regenerate);
-    this.root.$on("times-timeZoom-change", this.regenerate);
-    this.root.$on("row-height-change", this.regenerate);
-    this.root.$on("gantt-elastic.chart.scroll", this.regenerate);
-    this.regenerate();*/
   },
   mounted () {
     this.$nextTick(() => {
@@ -72,13 +64,6 @@ export default {
     recenterPosition () {
       this.root.scrollToTime(this.timeLinePosition.time);
     },
-
-    /*regenerate () {
-      this.$nextTick(() => {
-        this.generateVerticalLines();
-        this.generateHorizontalLines();
-      });
-    }*/
   },
   computed: {
     verticalLines () {
@@ -94,7 +79,7 @@ export default {
           inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
         });
       });
-      return (this.verticalLines = lines);
+      return lines;
     },
     horizontalLines () {
       let lines = [];
@@ -109,7 +94,7 @@ export default {
           y2: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2)
         });
       }
-      return (this.horizontalLines = lines);
+      return lines;
     },
     inViewPort () {
       return line => {

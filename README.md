@@ -27,7 +27,7 @@ gantt-elastic is not fully finished yet and may change (not released yet)
 
 ### If you want more activity in this repo give it a :star:
 
-### Full documentation soon
+### Full documentation soon (for now take a look at examples folder)
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
@@ -152,15 +152,14 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
     const app = GanttElastic.mount({
       el: '#gantt', // <- your container id
       tasks: tasks,
-      options: options
+      options: options,
+      ready(ganttInstance){
+        ganttInstance.$on('chart-task-click',({event, data})=>{
+          console.log('task clicked!', {event, data});
+        });
+      }
     });
-    // listen to events
-    app.$on('gantt-elastic-ready',(instance)=>{
-      ganttInstance = instance;
-      ganttInstance.$on('chart-task-click',({event, data})=>{
-        console.log('task clicked!', {event, data});
-      })
-    });
+
   </script>
 </body>
 </html>
@@ -177,9 +176,14 @@ import Vue from 'vue';
 import GanttElastic from "gantt-elastic/src/GanttElastic.vue";
 new Vue({
   el:'#gantt',
-  template:`<gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>`,
+  template:`<gantt-elastic :tasks="tasks" :options="options">
+    <gantt-elastic-header slot="header"></gantt-elastic-header>
+    <gantt-elastic-footer slot="footer"></gantt-elastic-footer>
+  </gantt-elastic>`,
   components: {
+    ganttElasticHeader: {template:`<span>your header</span>`},
     ganttElastic: GanttElastic
+    ganttElasticFooter: {template:`<span>your footer</span>`},
   },
   data() {
     return {

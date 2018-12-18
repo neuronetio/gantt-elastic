@@ -5,13 +5,22 @@
   <meta charset="utf-8">
   <title>GanttElastic editor demo</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+
   <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
+  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+  <!--
+  <script src="../dist/GanttElastic.umd.js"></script>
+  <script src="../dist/Header.umd.js"></script>
+  -->
 </head>
 
 <body>
   <div style="width:100%;height:100%">
     <div id="app">
-      <gantt-elastic :tasks="tasks" :options="options"></gantt-elastic>
+      <gantt-elastic :tasks="tasks" :options="options">
+        <gantt-elastic-header slot="header">
+          </gantt-elastic-heade>
+      </gantt-elastic>
     </div>
   </div>
 
@@ -127,7 +136,8 @@
     // create instance
     const app = new Vue({
       components: {
-        'gantt-elastic': GanttElastic
+        'gantt-elastic': GanttElastic,
+        'gantt-elastic-header': Header,
       },
       data: {
         tasks,

@@ -182,8 +182,6 @@ export default {
       set (value) {
         this.localBefore = Number(value);
         this.root.$emit("scope-change", Number(value));
-        this.root.$emit("scope-before-change", Number(value));
-        this.root.$emit("scope-after-change", Number(value));
       }
     },
     divider: {

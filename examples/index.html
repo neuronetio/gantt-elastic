@@ -5,6 +5,11 @@
   <meta charset="utf-8">
   <title>Gangtt-elastic demo</title>
   <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
+  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+  <!--
+  <script src="../dist/bundle.js"></script>
+  <script src="../dist/Header.umd.js"></script>
+  -->
 </head>
 
 <body>
@@ -249,18 +254,18 @@
         }
       }*/
     };
-
-    const gantt = GanttElastic.mount({
+    GanttElastic.component.components['gantt-header'] = Header;
+    const app = GanttElastic.mount({
       el: '#app', // <- your container id
       tasks: tasks,
-      options: options
+      options: options,
+      ready(ganttInstance) {
+        console.log('ready!', ganttInstance);
+        ganttInstance.$on('times-timeZoom-change', (ev) => {
+          console.log('time zoom changed!', ev)
+        })
+      }
     });
-// listen to events
-    /*
-    gantt.$on('gantt-elastic.tree.scroll',(ev)=>{
-      console.log('scroll');
-    });
-    */
   </script>
 </body>
 

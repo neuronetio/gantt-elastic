@@ -1,5 +1,9 @@
 <template>
-  <main-view :tasks="tasks" :options="options"></main-view>
+  <div class="gantt-elastic">
+    <slot name="header"></slot>
+    <main-view :tasks="tasks" :options="options"></main-view>
+    <slot name="footer"></slot>
+  </div>
 </template>
 
 <script>
