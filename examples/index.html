@@ -5,12 +5,14 @@
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>Gangtt-elastic demo</title>
+  <!--
   <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
   <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
-  <!--
+  -->
+
   <script src="../dist/bundle.js"></script>
   <script src="../dist/Header.umd.js"></script>
-  -->
+
 </head>
 
 <body>
@@ -262,6 +264,12 @@
       options: options,
       ready(ganttInstance) {
         console.log('ready!', ganttInstance);
+        ganttInstance.$on('chart-task-click', ({ event, data }) => {
+          console.log('task clicked', { event, data });
+        })
+        ganttInstance.$on('chart-task-mouseover', ({ event, data }) => {
+          console.log('task mouse over', { event, data })
+        })
         ganttInstance.$on('times-timeZoom-change', (ev) => {
           console.log('time zoom changed!', ev)
         })

@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     emitEvent (eventName, event) {
-      this.root.$emit(`gantt-elastic-chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
     }
   }
 };
