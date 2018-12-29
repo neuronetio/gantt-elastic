@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview GanttElastic standalone version component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package
+ */
+-->
 <template>
   <gantt-elastic :tasks="tasks" :options="options">
     <gantt-header slot="header"></gantt-header>

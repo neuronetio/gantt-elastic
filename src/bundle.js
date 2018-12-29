@@ -1,3 +1,9 @@
+/**
+* @fileoverview Bundle main entry file
+* @license MIT
+* @author Rafal Pospiech <neuronet.io@gmail.com>
+* @package GanttElastic
+*/
 import Vue from 'vue';
 import { mergeDeep } from './GanttElastic.vue';
 import GanttElastic from './GanttElastic.standalone.vue';

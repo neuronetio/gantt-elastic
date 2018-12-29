@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview Calendar component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <g class="gantt-elastic__calendar-wrapper" :style="root.style('calendar-wrapper')">
     <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">

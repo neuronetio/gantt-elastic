@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview TaskList component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <foreignObject
     class="gantt-elastic__task-list-wrapper"

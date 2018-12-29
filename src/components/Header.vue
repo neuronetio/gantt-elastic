@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview Header component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <div class="gantt-elastic__header" :style="root.style('header')">
     <div class="gantt-elastic__header-title" :style="root.style('header-title')">

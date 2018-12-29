@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview Text component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <svg
     class="gantt-elastic__chart-row-text-wrapper"

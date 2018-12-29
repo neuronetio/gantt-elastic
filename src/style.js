@@ -1,3 +1,9 @@
+/**
+* @fileoverview Styles for gantt-elastic
+* @license MIT
+* @author Rafal Pospiech <neuronet.io@gmail.com>
+* @package GanttElastic
+*/
 const fontSize = '12px';
 const fontFamily = 'Arial, sans-serif';
 export default {

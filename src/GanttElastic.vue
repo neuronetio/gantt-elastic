@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview GanttElastic component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <div class="gantt-elastic">
     <slot name="header"></slot>
@@ -21,6 +29,7 @@ function getOptions (userOptions) {
     width: 0,
     height: 0,
     rowsHeight: 0,
+    allVisibleTasksHeight: 0,
     scroll: {
       dragXMoveMultiplier: 3,
       dragYMoveMultiplier: 2,

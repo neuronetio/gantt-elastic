@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview TaskListItem component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <div class="gantt-elastic__task-list-item" :style="root.style('task-list-item')">
     <item-column v-for="column in root.state.taskList.columns" :key="column._id" :column="column" :task="task">

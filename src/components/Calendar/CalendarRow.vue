@@ -1,7 +1,29 @@
+<!--
+/**
+ * @fileoverview CalendarRow component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <g class="gantt-elastic__calendar-row" :style="root.style('calendar-row')">
-    <rect :class="'gantt-elastic__calendar-row-rect--'+which" :style="root.style('calendar-row-rect--'+which)" :x="item.x" :y="item.y" :width="item.width" :height="item.height"></rect>
-    <text :class="'gantt-elastic__calendar-row-text--'+which" :style="root.style('calendar-row-text--'+which)" :x="getTextX" :y="getTextY" alignment-baseline="middle" text-anchor="middle">{{item.label}}</text>
+    <rect
+      :class="'gantt-elastic__calendar-row-rect--'+which"
+      :style="root.style('calendar-row-rect--'+which)"
+      :x="item.x"
+      :y="item.y"
+      :width="item.width"
+      :height="item.height"
+    ></rect>
+    <text
+      :class="'gantt-elastic__calendar-row-text--'+which"
+      :style="root.style('calendar-row-text--'+which)"
+      :x="getTextX"
+      :y="getTextY"
+      alignment-baseline="middle"
+      text-anchor="middle"
+    >{{item.label}}</text>
   </g>
 </template>
 

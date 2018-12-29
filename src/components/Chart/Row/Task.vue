@@ -1,3 +1,11 @@
+<!--
+/**
+ * @fileoverview Task component
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+-->
 <template>
   <g
     class="gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper"
