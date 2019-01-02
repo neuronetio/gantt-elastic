@@ -876,8 +876,17 @@ const GanttElastic = {
   },
   created () {
     let previousTasks = [];
-    this.$watch('state.tasks', (newTasks, oldTasks) => {
-      if (previousTasks.length !== newTasks.length) {
+    this.$watch('state.tasks', function (newTasks, oldTasks) {
+      let refresh = previousTasks.length !== newTasks.length;
+      if (!refresh) {
+        for (let i = 0, len = newTasks.length; i < len; i++) {
+          if (typeof newTasks[i].parents === 'undefined') {
+            refresh = true;
+            break;
+          }
+        }
+      }
+      if (refresh) {
         this.refreshTasks();
         this.prepareDates();
         this.initTimes();
@@ -885,10 +894,9 @@ const GanttElastic = {
         this.resetTaskTree();
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
         this.state.tasks = this.state.taskTree.allChildren;
-        this.root
       }
       previousTasks = newTasks.slice();
-    }, { immediate: true, deep: true })
+    }, { immediate: true, deep: false });
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);

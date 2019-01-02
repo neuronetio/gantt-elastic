@@ -6,12 +6,12 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>GanttElastic editor demo</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <!--
   <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
   <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
-  <!--
+  -->
   <script src="../dist/GanttElastic.umd.js"></script>
   <script src="../dist/Header.umd.js"></script>
-  -->
 </head>
 
 <body>
@@ -35,6 +35,7 @@
   <input type="number" id="progRow" value="0"><input type="range" min="0" max="100" oninput="progressChange()" id="progress">
   <br>
   <button onclick="addTask()">Add task</button>
+  <button onclick="addTasks()">Add tasks</button>
   <script>
     // override components - copy component from src directory change it to object or compile *.vue to *.js
     // more info about components you can find here : https://vuejs.org/v2/guide/index.html
@@ -261,7 +262,7 @@
         },
       },
       data: {
-        tasks,
+        tasks: tasks.map(task => Object.assign({}, task)),
         options
       }
     });
@@ -317,6 +318,10 @@
       };
       ganttState.tasks.push(task);
       console.log(ganttState.tasks);
+    }
+    function addTasks() {
+      const newTasks = tasks.map(task => Object.assign({}, task));
+      ganttState.tasks = newTasks;
     }
   </script>
 </body>
