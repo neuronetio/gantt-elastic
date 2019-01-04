@@ -46,7 +46,6 @@ function getOptions (userOptions) {
         percent: 0,
         timePercent: 0,
         top: 0,
-        topTask: 0,
         bottom: 0,
         time: 0,
         timeCenter: 0,
@@ -83,6 +82,7 @@ function getOptions (userOptions) {
       showText: true,
     },
     maxRows: 20,
+    maxHeight: 0,
     chartText: {
       offset: 0,
       xPadding: 10
@@ -450,6 +450,11 @@ const GanttElastic = {
     getMaximalExpanderWidth () {
       return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
     },
+    syncScrollTop () {
+      if (this.state.refs.taskListItems) {
+        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+      }
+    },
     calculateTaskListColumnsWidths () {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
@@ -459,7 +464,7 @@ const GanttElastic = {
           column.finalWidth = (column.width / 100) * this.state.taskList.percent;
         }
         final += column.finalWidth;
-        column.height = this.state.row.height + this.state.grid.horizontal.gap * 2 - this.state.grid.horizontal.strokeWidth;
+        column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
       });
       this.state.taskList.finalWidth = final;
       if (typeof document !== 'undefined') {
@@ -467,6 +472,7 @@ const GanttElastic = {
           this.state.taskList.display = false;
         }
       }
+      this.syncScrollTop();
     },
     resetTaskTree () {
       this.state.rootTask.children = [];
@@ -532,8 +538,18 @@ const GanttElastic = {
       }
       return height;
     },
+    /**
+     * Get one task height
+     * @returns {number}
+     */
+    getTaskHeight (withStroke = false) {
+      if (withStroke) {
+        return (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+      }
+      return (this.state.row.height + this.state.grid.horizontal.gap * 2);
+    },
     getTasksHeight (visibleTasks, outer = false) {
-      return visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2);
+      return visibleTasks.length * this.getTaskHeight();
     },
     timeToPixelOffsetX (ms) {
       let x = ms - this.state.times.firstTime;
@@ -543,7 +559,7 @@ const GanttElastic = {
       return x;
     },
     pixelOffsetXToTime (pixelOffsetX) {
-      let offset = pixelOffsetX + this.style('grid-line-vertical').strokeWidth / 2;
+      let offset = pixelOffsetX + this.style('grid-line-vertical')["stroke-width"] / 2;
       return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
     isInsideViewPort (x, width, buffer = 5000) {
@@ -560,7 +576,6 @@ const GanttElastic = {
       this.state.scroll.chart.right = left + chartContainerWidth;
       this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
       this.state.scroll.chart.top = top;
-      this.state.scroll.chart.topTask = Math.floor(top / (this.state.row.height + this.state.grid.horizontal.gap * 2));
       this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
       this.state.scroll.chart.dateTime.left = dayjs(this.state.scroll.chart.time);
@@ -584,8 +599,8 @@ const GanttElastic = {
       }
       if (top !== null) {
         this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.taskListItems.scrollTop = top;
         this.state.refs.chartGraph.scrollTop = top;
+        this.state.refs.taskListItems.scrollTop = top;
         this.state.scroll.top = top;
       }
     },
@@ -663,7 +678,7 @@ const GanttElastic = {
       this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
       this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
       this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical').strokeWidth;
+      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')["stroke-width"];
     },
     initTimes () {
       this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
@@ -856,14 +871,19 @@ const GanttElastic = {
     visibleTasks () {
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       const maxRows = visibleTasks.slice(0, this.state.maxRows);
-      this.state.height = this.getHeight(maxRows);
-      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
       this.state.rowsHeight = this.getTasksHeight(maxRows);
-      this.state.outerHeight = this.getHeight(maxRows, true);
+      let heightCompensation = 0;
+      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {
+        heightCompensation = this.state.rowsHeight - this.state.maxHeight;
+        this.state.rowsHeight = this.state.maxHeight;
+      }
+      this.state.height = this.getHeight(maxRows) - heightCompensation;
+      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
+      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
       let len = visibleTasks.length;
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical').strokeWidth;
+        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')["stroke-width"];
         if (task.width < 0) {
           task.width = 0;
         }

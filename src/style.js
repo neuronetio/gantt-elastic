@@ -170,15 +170,15 @@ export default {
   "grid-lines": {},
   "grid-line-horizontal": {
     "stroke": "#00000010",
-    "strokeWidth": 1
+    "stroke-width": 1
   },
   "grid-line-vertical": {
     "stroke": "#00000010",
-    "strokeWidth": 1
+    "stroke-width": 1
   },
   "grid-line-time": {
     "stroke": "#FF000080",
-    "strokeWidth": 1
+    "stroke-width": 1
   },
   "chart": {
     "user-select": "none",

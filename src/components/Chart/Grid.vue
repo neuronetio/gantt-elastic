@@ -83,7 +83,7 @@ export default {
           x1: step.offset.px,
           y1: 0,
           x2: step.offset.px,
-          y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth,
+          y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
           inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
         });
       });
@@ -94,12 +94,13 @@ export default {
       const state = this.root.state;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
+        const y = (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
         lines.push({
           key: "hl" + index,
           x1: 0,
-          y1: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2),
+          y1: y,
           x2: "100%",
-          y2: (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical').strokeWidth / 2)
+          y2: y
         });
       }
       return lines;

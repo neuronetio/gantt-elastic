@@ -20,7 +20,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "dev-fast": "webpack --watch --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
