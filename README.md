@@ -128,9 +128,8 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
                 'text-align': 'center',
                 'width': '100%'
               },
-              "task-list-item-value": {
+              "task-list-item-value-container": {
                 'text-align': 'center',
-                'width': '100%'
               }
             }
           }
