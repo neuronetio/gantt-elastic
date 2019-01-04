@@ -19,6 +19,11 @@ import dayjs from "dayjs";
 import MainView from "./components/MainView.vue";
 import style from "./style.js";
 
+/**
+ * Helper function to fill out empty options in user settings
+ * @param {object} userOptions - initial user options that will merge with those below
+ * @returns {object} merged options
+ */
 function getOptions (userOptions) {
   return {
     style,
@@ -213,9 +218,20 @@ function getOptions (userOptions) {
     }
   };
 }
+/**
+ * Helper function to determine if specified variable is an object
+ * @param {any} item
+ * @returns {boolean}
+ */
 function isObject (item) {
   return item && typeof item === "object" && !Array.isArray(item);
 }
+/**
+ * Helper function which will merge objects recursively - creating brand new one - like clone
+ * @param {object} target
+ * @params {object} sources
+ * @returns {object}
+ */
 export function mergeDeep (target, ...sources) {
   if (!sources.length) {
     return target;
@@ -237,6 +253,13 @@ export function mergeDeep (target, ...sources) {
   }
   return mergeDeep(target, ...sources);
 }
+/**
+ * Same as above but with reactivity in mind
+ * @param {Vue.component} component
+ * @param {object} target
+ * @params {object} sources
+ * @returns {object}
+ */
 export function mergeDeepReactive (component, target, ...sources) {
   if (!sources.length) {
     return target;
@@ -258,6 +281,10 @@ export function mergeDeepReactive (component, target, ...sources) {
 }
 const styleCache = {};
 let globalVisibleTasks = [];
+/**
+ * GanttElastic
+ * Main vue component
+ */
 const GanttElastic = {
   components: {
     MainView
@@ -285,6 +312,10 @@ const GanttElastic = {
   methods: {
     mergeDeep,
     mergeDeepReactive,
+    /**
+     * Calculate height of scrollbar in current browser
+     * @returns {number}
+     */
     getScrollBarHeight () {
       const outer = document.createElement("div");
       outer.style.visibility = "hidden";
@@ -323,6 +354,9 @@ const GanttElastic = {
       styleCache[index] = merged;
       return merged;
     },
+    /**
+     * Fill out empty task properties and make it reactive
+     */
     refreshTasks () {
       this.state.tasks = this.state.tasks.map(task => {
         if (typeof task.x === 'undefined') {
@@ -420,13 +454,23 @@ const GanttElastic = {
       this.state.taskTree = this.makeTaskTree(this.state.rootTask);
       this.state.tasks = this.state.taskTree.allChildren;
       this.state.ctx = document.createElement("canvas").getContext("2d");
-      this.calculateTaskListColumnsWidths();
+      this.calculateTaskListColumnsDimensions();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
     },
+
+    /**
+     * Get calendar rows outer height
+     * @returns {int}
+     */
     getCalendarHeight () {
       return this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
     },
+
+    /**
+     * Sum all calendar rows height and return result
+     * @returns {int}
+     */
     calculateCalendarDimensions () {
       this.state.calendar.height = 0;
       if (this.state.calendar.hour.display) {
@@ -439,6 +483,11 @@ const GanttElastic = {
         this.state.calendar.height += this.state.calendar.month.height;
       }
     },
+
+    /**
+     * Get maximal level of nested task children
+     * @returns {int}
+     */
     getMaximalLevel () {
       let maximalLevel = 0;
       this.state.tasks.forEach(task => {
@@ -448,15 +497,28 @@ const GanttElastic = {
       });
       return maximalLevel - 1;
     },
+
+    /**
+     * Get maximal expander width - to calculate straight task list text
+     * @returns {int}
+     */
     getMaximalExpanderWidth () {
       return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
     },
+
+    /**
+     * Synchronize scrollTop property when row height is changed
+     */
     syncScrollTop () {
       if (this.state.refs.taskListItems) {
         this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
       }
     },
-    calculateTaskListColumnsWidths () {
+
+    /**
+     * Calculate task list columns dimensions
+     */
+    calculateTaskListColumnsDimensions () {
       let final = 0;
       this.state.taskList.columns.forEach(column => {
         if (column.expander) {
@@ -475,6 +537,10 @@ const GanttElastic = {
       }
       this.syncScrollTop();
     },
+
+    /**
+     * Reset task tree - which is used to create tree like structure inside task list
+     */
     resetTaskTree () {
       this.state.rootTask.children = [];
       this.state.rootTask.allChildren = [];
@@ -488,6 +554,12 @@ const GanttElastic = {
         current.parents = [];
       }
     },
+
+    /**
+     * Make task tree, after reset - look above
+     * @param {object} task
+     * @returns {object} tasks with children and parents
+     */
     makeTaskTree (task) {
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
@@ -510,15 +582,29 @@ const GanttElastic = {
       }
       return task;
     },
+
+    /**
+     * Get task by id
+     * @param {any} taskId
+     * @returns {object} task
+     */
     getTask (taskId) {
       return this.tasksById[taskId];
     },
+
+    /**
+     * Get children tasks for specified taskId
+     * @param {any} taskId
+     * @returns {array} children
+     */
     getChildren (taskId) {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
+
     getSVG () {
       return this.state.svgMainView.outerHTML;
     },
+
     getImage (type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -532,6 +618,11 @@ const GanttElastic = {
         img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
       });
     },
+
+    /**
+     * Get gantt total height
+     * @returns {number}
+     */
     getHeight (visibleTasks, outer = false) {
       let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
       if (outer) {
@@ -539,6 +630,7 @@ const GanttElastic = {
       }
       return height;
     },
+
     /**
      * Get one task height
      * @returns {number}
@@ -549,9 +641,20 @@ const GanttElastic = {
       }
       return (this.state.row.height + this.state.grid.horizontal.gap * 2);
     },
+
+    /**
+     * Get specified tasks height
+     * @returns {number}
+     */
     getTasksHeight (visibleTasks, outer = false) {
       return visibleTasks.length * this.getTaskHeight();
     },
+
+    /**
+     * Convert time (in milliseconds) to pixel offset inside chart
+     * @param {int} ms
+     * @returns {number}
+     */
     timeToPixelOffsetX (ms) {
       let x = ms - this.state.times.firstTime;
       if (x) {
@@ -559,18 +662,43 @@ const GanttElastic = {
       }
       return x;
     },
+
+    /**
+     * Convert pixel offset inside chart to corresponding time offset in milliseconds
+     * @param {number} pixelOffsetX
+     * @returns {int} milliseconds
+     */
     pixelOffsetXToTime (pixelOffsetX) {
       let offset = pixelOffsetX + this.style('grid-line-vertical')["stroke-width"] / 2;
       return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
     },
+
+    /**
+     * Determine if element is inside current view port
+     * @param {number} x - element placement
+     * @param {number} width - element width
+     * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true
+     * @returns {boolean}
+     */
     isInsideViewPort (x, width, buffer = 5000) {
       return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
     },
+
+    /**
+     * Chart scroll event handler
+     * @param {event} ev
+     */
     onScrollChart (ev) {
       const horizontal = this.state.refs.chartScrollContainerHorizontal;
       const vertical = this.state.refs.chartScrollContainerVertical;
       this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
     },
+
+    /**
+     * After same as above but with different arguments - normalized
+     * @param {number} left
+     * @param {number} top
+     */
     _onScrollChart (left, top) {
       const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
       this.state.scroll.chart.left = left;
@@ -583,6 +711,11 @@ const GanttElastic = {
       this.state.scroll.chart.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
+
+    /**
+     * Scroll current chart to specified time (in milliseconds)
+     * @param {int} time
+     */
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
       const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
@@ -592,6 +725,12 @@ const GanttElastic = {
       }
       this.scrollTo(pos);
     },
+
+    /**
+     * Scroll chart or task list to specified pixel values
+     * @param {number|null} left
+     * @param {number|null} top
+     */
     scrollTo (left = null, top = null) {
       if (left !== null) {
         this.state.refs.svgChartContainer.scrollLeft = left;
@@ -605,11 +744,20 @@ const GanttElastic = {
         this.state.scroll.top = top;
       }
     },
+
+    /**
+     * After some actions like time zoom change we need to recompensate scroll position
+     * so as a result everything will be in same place
+     */
     fixScrollPos () {
       this.$nextTick(() => {
         this.scrollToTime(this.state.scroll.chart.timeCenter);
       });
     },
+
+    /**
+     * Mouse wheel event handler
+     */
     onWheelChart (ev) {
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
@@ -633,6 +781,10 @@ const GanttElastic = {
         this.scrollTo(left);
       }
     },
+
+    /**
+     * Time zoom change event handler
+     */
     onTimeZoomChange (timeZoom) {
       this.state.times.timeZoom = timeZoom;
       this.recalculateTimes();
@@ -640,10 +792,18 @@ const GanttElastic = {
       this.calculateCalendarDimensions();
       this.fixScrollPos();
     },
+
+    /**
+     * Row height change event handler
+     */
     onRowHeightChange (height) {
       this.state.row.height = height;
-      this.calculateTaskListColumnsWidths();
+      this.calculateTaskListColumnsDimensions();
     },
+
+    /**
+     * Scope change event handler
+     */
     onScopeChange (value) {
       this.state.scope.before = value;
       this.state.scope.after = value;
@@ -652,15 +812,27 @@ const GanttElastic = {
       this.computeCalendarWidths();
       this.fixScrollPos();
     },
+
+    /**
+     * Task list width change event handler
+     */
     onTaskListWidthChange (value) {
       this.state.taskList.percent = value;
-      this.calculateTaskListColumnsWidths();
+      this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
+
+    /**
+     * Task list column width change event handler
+     */
     onTaskListColumnWidthChange (value) {
-      this.calculateTaskListColumnsWidths();
+      this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
+
+    /**
+     * Listen to speciefied event names
+     */
     initializeEvents () {
       this.$on("chart-scroll-horizontal", this.onScrollChart);
       this.$on("chart-scroll-vertical", this.onScrollChart);
@@ -671,6 +843,10 @@ const GanttElastic = {
       this.$on("taskList-width-change", this.onTaskListWidthChange);
       this.$on("taskList-column-width-change", this.onTaskListColumnWidthChange);
     },
+
+    /**
+     * When some action was performed (scale change for example) - recalculate time variables
+     */
     recalculateTimes () {
       let max = this.state.times.timeScale * 60;
       let min = this.state.times.timeScale;
@@ -681,6 +857,10 @@ const GanttElastic = {
       this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
       this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')["stroke-width"];
     },
+
+    /**
+     * Initialize time variables
+     */
     initTimes () {
       this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
         .locale(this.locale)
@@ -696,6 +876,12 @@ const GanttElastic = {
       this.state.times.lastTime = this.state.times.lastDate.valueOf();
       this.recalculateTimes();
     },
+
+    /**
+     * Calculate steps
+     * Steps are days by default
+     * Each step contain information about time offset and pixel offset of this time inside gantt chart
+     */
     calculateSteps () {
       const steps = [];
       const lastMs = dayjs(this.state.times.lastDate).valueOf();
@@ -733,11 +919,19 @@ const GanttElastic = {
       };
       this.state.times.steps = steps;
     },
+
+    /**
+     * Calculate calendar widths - when scale was changed for example
+     */
     computeCalendarWidths () {
       this.computeDayWidths();
       this.computeHourWidths();
       this.computeMonthWidths();
     },
+
+    /**
+     * Compute width of calendar hours column widths basing on text widths
+     */
     computeHourWidths () {
       const state = this.state;
       state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
@@ -765,6 +959,10 @@ const GanttElastic = {
       }
       state.calendar.hour.maxWidths = maxWidths;
     },
+
+    /**
+     * Compute calendar days column widths basing on text widths
+     */
     computeDayWidths () {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
@@ -793,6 +991,10 @@ const GanttElastic = {
       }
       state.calendar.day.maxWidths = maxWidths;
     },
+
+    /**
+     * Compute month calendar columns widths basing on text widths
+     */
     computeMonthWidths () {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
@@ -820,6 +1022,10 @@ const GanttElastic = {
       }
       state.calendar.month.maxWidths = maxWidths;
     },
+
+    /**
+     * Prepare time and date variables for gantt
+     */
     prepareDates () {
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
@@ -853,6 +1059,10 @@ const GanttElastic = {
         .add(this.state.scope.after, "days")
         .endOf("day");
     },
+
+    /**
+     * Setup and calulate everything
+     */
     setup () {
       this.initialize();
       this.tasksById = {};
@@ -868,7 +1078,14 @@ const GanttElastic = {
     },
 
   },
+
   computed: {
+
+    /**
+     * Get visible tasks
+     * Very importan method which will bring us only those tasks that are visible inside gantt chart
+     * For example when task is collapsed - children of this task are not visible - we should not render them
+     */
     visibleTasks () {
       const visibleTasks = this.state.tasks.filter(task => task.visible);
       const maxRows = visibleTasks.slice(0, this.state.maxRows);
@@ -895,6 +1112,10 @@ const GanttElastic = {
       return visibleTasks;
     },
   },
+
+  /**
+   * Watch tasks after gantt instance is created and react when we have new kids on the block
+   */
   created () {
     let previousTasks = [];
     this.$watch('state.tasks', function (newTasks, oldTasks) {
@@ -922,6 +1143,10 @@ const GanttElastic = {
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
   },
+
+  /**
+   * Emit ready/mounted events and deliver this gantt instance to outside world when needed
+   */
   mounted () {
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$root.$emit('gantt-elastic-ready', this);
