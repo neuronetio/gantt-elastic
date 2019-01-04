@@ -93,7 +93,6 @@ export default {
   data () {
     return {
       defs: "",
-      moving: false,
       mousePos: {
         x: 0,
         y: 0,
@@ -167,13 +166,13 @@ export default {
         this.mousePos.movementX = 0;
         this.mousePos.movementY = 0;
       }
-      this.moving = true;
+      this.root.state.scroll.scrolling = true;
     },
     chartMouseUp (ev) {
-      this.moving = false;
+      this.root.state.scroll.scrolling = false;
     },
     chartMouseMove (ev) {
-      if (this.moving) {
+      if (this.root.state.scroll.scrolling) {
         ev.preventDefault();
         ev.stopImmediatePropagation();
         ev.stopPropagation();

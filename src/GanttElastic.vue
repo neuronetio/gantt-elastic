@@ -31,6 +31,7 @@ function getOptions (userOptions) {
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
     scroll: {
+      scrolling: false,
       dragXMoveMultiplier: 3,
       dragYMoveMultiplier: 2,
       top: 0,

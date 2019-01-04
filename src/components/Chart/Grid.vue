@@ -37,7 +37,6 @@
         :y1="line.y1"
         :x2="line.x2"
         :y2="line.y2"
-        v-if="line.inViewPort"
       ></line>
       <line
         class="gantt-elastic__grid-line-time"
@@ -78,14 +77,15 @@ export default {
       let lines = [];
       const state = this.root.state;
       state.times.steps.forEach(step => {
-        lines.push({
-          key: step.date.valueOf(),
-          x1: step.offset.px,
-          y1: 0,
-          x2: step.offset.px,
-          y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
-          inViewPort: this.root.isInsideViewPort(step.offset.px, 1)
-        });
+        if (this.root.isInsideViewPort(step.offset.px, 1)) {
+          lines.push({
+            key: step.date.valueOf(),
+            x1: step.offset.px,
+            y1: 0,
+            x2: step.offset.px,
+            y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+          });
+        }
       });
       return lines;
     },

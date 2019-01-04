@@ -22,6 +22,7 @@
       @mouseenter="emitEvent('mouseenter', $event)"
       @mouseover="emitEvent('mouseover', $event)"
       @mouseout="emitEvent('mouseout', $event)"
+      @mousemove="emitEvent('mousemove', $event)"
       @mousedown="emitEvent('mousedown', $event)"
       @mouseup="emitEvent('mouseup', $event)"
       @mousewheel="emitEvent('mousewheel', $event)"
@@ -90,7 +91,9 @@ export default {
   },
   methods: {
     emitEvent (eventName, event) {
-      this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      if (!this.root.state.scroll.scrolling) {
+        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
     }
   }
 };

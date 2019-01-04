@@ -279,6 +279,9 @@
       ganttInstance = ganttElasticInstance;
       ganttState = ganttElasticInstance.state;
       console.log('gantt-elastic ready!', ganttState);
+      ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
+        console.log('task mouse enter', { data, event });
+      })
     });
 
     // mount gantt to DOM
