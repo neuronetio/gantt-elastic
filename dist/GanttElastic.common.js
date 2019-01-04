@@ -2328,11 +2328,18 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
     return {};
   },
   methods: {
+
+    /**
+     * Get path points
+     * @param {any} fromTaskId
+     * @param {any} toTaskId
+     * @returns {string}
+     */
     getPoints (fromTaskId, toTaskId) {
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
-      if (!toTask.visible || !fromTask.visible) {
-        return "";
+      if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {
+        return null;
       }
       const startX = fromTask.x + fromTask.width;
       const startY = fromTask.y + fromTask.height / 2;
@@ -2373,15 +2380,15 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
   },
   computed: {
     dependencyTasks () {
-      return this.tasks.filter(task => typeof task.dependentOn !== "undefined")
+      let lines = this.tasks
+        .filter(task => typeof task.dependentOn !== "undefined")
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
-            return {
-              points: this.getPoints(id, task.id)
-            };
+            return { points: this.getPoints(id, task.id) };
           });
           return task;
-        });
+        }).filter(task => task.dependencyLines.points !== null);
+      return lines;
     }
   }
 });
@@ -4445,12 +4452,14 @@ const GanttElastic = {
         scrollBarHeight: 0,
         allVisibleTasksHeight: 0,
         refs: {},
+        tasksById: {},
       },
     };
   },
   methods: {
     mergeDeep,
     mergeDeepReactive,
+
     /**
      * Calculate height of scrollbar in current browser
      * @returns {number}
@@ -4470,6 +4479,7 @@ const GanttElastic = {
       outer.parentNode.removeChild(outer);
       return this.state.scrollBarHeight = noScroll - withScroll;
     },
+
     /**
      * Get style for specified class
      * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
@@ -4493,6 +4503,7 @@ const GanttElastic = {
       styleCache[index] = merged;
       return merged;
     },
+
     /**
      * Fill out empty task properties and make it reactive
      */
@@ -4552,6 +4563,7 @@ const GanttElastic = {
         return task;
       });
     },
+
     /**
      * Initialize component
      */
@@ -4685,12 +4697,14 @@ const GanttElastic = {
       this.state.rootTask.allChildren = [];
       this.state.rootTask.parent = null;
       this.state.rootTask.parents = [];
+      this.state.tasksById = {};
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         current.children = [];
         current.allChildren = [];
         current.parent = null;
         current.parents = [];
+        this.state.tasksById[current.id] = current;
       }
     },
 
@@ -4725,10 +4739,13 @@ const GanttElastic = {
     /**
      * Get task by id
      * @param {any} taskId
-     * @returns {object} task
+     * @returns {object|null} task
      */
     getTask (taskId) {
-      return this.tasksById[taskId];
+      if (typeof this.state.tasksById[taskId] !== 'undefined') {
+        return this.state.tasksById[taskId];
+      }
+      return null;
     },
 
     /**
@@ -5204,8 +5221,8 @@ const GanttElastic = {
      */
     setup () {
       this.initialize();
-      this.tasksById = {};
-      this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
+      this.state.tasksById = {};
+      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
       this.prepareDates();
       this.initTimes();
       this.calculateSteps();
@@ -5271,7 +5288,7 @@ const GanttElastic = {
         this.refreshTasks();
         this.prepareDates();
         this.initTimes();
-        this.state.tasks.forEach(task => (this.tasksById[task.id] = task));
+        this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
         this.resetTaskTree();
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
         this.state.tasks = this.state.taskTree.allChildren;

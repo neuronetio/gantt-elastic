@@ -34,11 +34,18 @@ export default {
     return {};
   },
   methods: {
+
+    /**
+     * Get path points
+     * @param {any} fromTaskId
+     * @param {any} toTaskId
+     * @returns {string}
+     */
     getPoints (fromTaskId, toTaskId) {
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
-      if (!toTask.visible || !fromTask.visible) {
-        return "";
+      if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {
+        return null;
       }
       const startX = fromTask.x + fromTask.width;
       const startY = fromTask.y + fromTask.height / 2;
@@ -79,15 +86,15 @@ export default {
   },
   computed: {
     dependencyTasks () {
-      return this.tasks.filter(task => typeof task.dependentOn !== "undefined")
+      let lines = this.tasks
+        .filter(task => typeof task.dependentOn !== "undefined")
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
-            return {
-              points: this.getPoints(id, task.id)
-            };
+            return { points: this.getPoints(id, task.id) };
           });
           return task;
-        });
+        }).filter(task => task.dependencyLines.points !== null);
+      return lines;
     }
   }
 };
