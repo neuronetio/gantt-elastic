@@ -153,19 +153,23 @@ export default {
     "display": "flex",
     "width": "100%",
   },
+  "task-list-item-value-container": {
+    "margin": "auto 0px",
+    "overflow": "hidden"
+  },
   "task-list-item-value": {
     "display": "block",
     "flex-shrink": "100",
     "font-family": fontFamily,
     "font-size": fontSize,
-    "width": "100%",
     "margin": "auto 6px",
     "overflow": "hidden",
     "text-overflow": "ellipsis",
     "line-height": "1.5em",
     "word-break": "keep-all",
     "white-space": "nowrap",
-    "color": "#606060"
+    "color": "#606060",
+    "background": "#FFFFFF"
   },
   "grid-lines": {},
   "grid-line-horizontal": {

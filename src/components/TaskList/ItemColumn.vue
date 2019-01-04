@@ -17,16 +17,21 @@
     >
       <slot></slot>
       <div
-        v-if="!html"
-        class="gantt-elastic__task-list-item-value"
-        :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
-      >{{value}}</div>
-      <div
-        v-if="html"
-        class="gantt-elastic__task-list-item-value"
-        :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
-        v-html="value"
-      ></div>
+        class="gantt-elastic__task-list-item-value-container"
+        :style="root.style('task-list-item-value-container', column.style['task-list-item-value-container'])"
+      >
+        <div
+          v-if="!html"
+          class="gantt-elastic__task-list-item-value"
+          :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
+        >{{value}}</div>
+        <div
+          v-if="html"
+          class="gantt-elastic__task-list-item-value"
+          :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
+          v-html="value"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
