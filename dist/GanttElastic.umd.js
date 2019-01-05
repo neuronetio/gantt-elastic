@@ -791,6 +791,11 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
     };
   },
   computed: {
+    /**
+     * Get all tasks
+     *
+     * @returns {array}
+     */
     allChildren () {
       const children = [];
       this.tasks.forEach(task => {
@@ -800,6 +805,12 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
       });
       return children;
     },
+
+    /**
+     * Is current expander collapsed?
+     *
+     * @returns {boolean}
+     */
     collapsed () {
       if (this.tasks.length === 0) {
         return false;
@@ -814,6 +825,9 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
     }
   },
   methods: {
+    /**
+     * Toggle expander
+     */
     toggle () {
       if (this.allChildren.length === 0) {
         return;
@@ -2340,6 +2354,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
 
     /**
      * Get path points
+     *
      * @param {any} fromTaskId
      * @param {any} toTaskId
      * @returns {string}
@@ -2390,6 +2405,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
   computed: {
     /**
      * Get tasks which are dependent on other tasks
+     *
      * @returns {array}
      */
     dependencyTasks () {
@@ -4179,6 +4195,7 @@ const fontFamily = 'Arial, sans-serif';
 
 /**
  * Helper function to fill out empty options in user settings
+ *
  * @param {object} userOptions - initial user options that will merge with those below
  * @returns {object} merged options
  */
@@ -4378,6 +4395,7 @@ function getOptions (userOptions) {
 }
 /**
  * Helper function to determine if specified variable is an object
+ *
  * @param {any} item
  * @returns {boolean}
  */
@@ -4386,6 +4404,7 @@ function isObject (item) {
 }
 /**
  * Helper function which will merge objects recursively - creating brand new one - like clone
+ *
  * @param {object} target
  * @params {object} sources
  * @returns {object}
@@ -4413,6 +4432,7 @@ function mergeDeep (target, ...sources) {
 }
 /**
  * Same as above but with reactivity in mind
+ *
  * @param {Vue.component} component
  * @param {object} target
  * @params {object} sources
@@ -4439,6 +4459,7 @@ function mergeDeepReactive (component, target, ...sources) {
 }
 const styleCache = {};
 let globalVisibleTasks = [];
+
 /**
  * GanttElastic
  * Main vue component
@@ -4474,6 +4495,7 @@ const GanttElastic = {
 
     /**
      * Calculate height of scrollbar in current browser
+     *
      * @returns {number}
      */
     getScrollBarHeight () {
@@ -4494,6 +4516,7 @@ const GanttElastic = {
 
     /**
      * Get style for specified class
+     *
      * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
      * @returns {object}
      */
@@ -4624,6 +4647,7 @@ const GanttElastic = {
 
     /**
      * Get calendar rows outer height
+     *
      * @returns {int}
      */
     getCalendarHeight () {
@@ -4632,6 +4656,7 @@ const GanttElastic = {
 
     /**
      * Sum all calendar rows height and return result
+     *
      * @returns {int}
      */
     calculateCalendarDimensions () {
@@ -4649,6 +4674,7 @@ const GanttElastic = {
 
     /**
      * Get maximal level of nested task children
+     *
      * @returns {int}
      */
     getMaximalLevel () {
@@ -4663,6 +4689,7 @@ const GanttElastic = {
 
     /**
      * Get maximal expander width - to calculate straight task list text
+     *
      * @returns {int}
      */
     getMaximalExpanderWidth () {
@@ -4722,6 +4749,7 @@ const GanttElastic = {
 
     /**
      * Make task tree, after reset - look above
+     *
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
@@ -4750,6 +4778,7 @@ const GanttElastic = {
 
     /**
      * Get task by id
+     *
      * @param {any} taskId
      * @returns {object|null} task
      */
@@ -4762,6 +4791,7 @@ const GanttElastic = {
 
     /**
      * Get children tasks for specified taskId
+     *
      * @param {any} taskId
      * @returns {array} children
      */
@@ -4789,6 +4819,7 @@ const GanttElastic = {
 
     /**
      * Get gantt total height
+     *
      * @returns {number}
      */
     getHeight (visibleTasks, outer = false) {
@@ -4801,6 +4832,7 @@ const GanttElastic = {
 
     /**
      * Get one task height
+     *
      * @returns {number}
      */
     getTaskHeight (withStroke = false) {
@@ -4812,6 +4844,7 @@ const GanttElastic = {
 
     /**
      * Get specified tasks height
+     *
      * @returns {number}
      */
     getTasksHeight (visibleTasks, outer = false) {
@@ -4820,6 +4853,7 @@ const GanttElastic = {
 
     /**
      * Convert time (in milliseconds) to pixel offset inside chart
+     *
      * @param {int} ms
      * @returns {number}
      */
@@ -4833,6 +4867,7 @@ const GanttElastic = {
 
     /**
      * Convert pixel offset inside chart to corresponding time offset in milliseconds
+     *
      * @param {number} pixelOffsetX
      * @returns {int} milliseconds
      */
@@ -4843,6 +4878,7 @@ const GanttElastic = {
 
     /**
      * Determine if element is inside current view port
+     *
      * @param {number} x - element placement
      * @param {number} width - element width
      * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true
@@ -4854,6 +4890,7 @@ const GanttElastic = {
 
     /**
      * Chart scroll event handler
+     *
      * @param {event} ev
      */
     onScrollChart (ev) {
@@ -4864,6 +4901,7 @@ const GanttElastic = {
 
     /**
      * After same as above but with different arguments - normalized
+     *
      * @param {number} left
      * @param {number} top
      */
@@ -4882,6 +4920,7 @@ const GanttElastic = {
 
     /**
      * Scroll current chart to specified time (in milliseconds)
+     *
      * @param {int} time
      */
     scrollToTime (time) {
@@ -4896,6 +4935,7 @@ const GanttElastic = {
 
     /**
      * Scroll chart or task list to specified pixel values
+     *
      * @param {number|null} left
      * @param {number|null} top
      */
@@ -5277,6 +5317,9 @@ const GanttElastic = {
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;
       }
+      this.$nextTick(() => {
+        this.syncScrollTop();
+      });
       return visibleTasks;
     },
   },

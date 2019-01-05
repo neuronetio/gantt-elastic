@@ -68,6 +68,11 @@ export default {
     };
   },
   computed: {
+    /**
+     * Get all tasks
+     *
+     * @returns {array}
+     */
     allChildren () {
       const children = [];
       this.tasks.forEach(task => {
@@ -77,6 +82,12 @@ export default {
       });
       return children;
     },
+
+    /**
+     * Is current expander collapsed?
+     *
+     * @returns {boolean}
+     */
     collapsed () {
       if (this.tasks.length === 0) {
         return false;
@@ -91,6 +102,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * Toggle expander
+     */
     toggle () {
       if (this.allChildren.length === 0) {
         return;

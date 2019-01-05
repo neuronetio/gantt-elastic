@@ -37,6 +37,7 @@ export default {
 
     /**
      * Get path points
+     *
      * @param {any} fromTaskId
      * @param {any} toTaskId
      * @returns {string}
@@ -87,6 +88,7 @@ export default {
   computed: {
     /**
      * Get tasks which are dependent on other tasks
+     *
      * @returns {array}
      */
     dependencyTasks () {
