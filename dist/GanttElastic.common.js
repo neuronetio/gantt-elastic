@@ -2379,8 +2379,12 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
     }
   },
   computed: {
+    /**
+     * Get tasks which are dependent on other tasks
+     * @returns {array}
+     */
     dependencyTasks () {
-      let lines = this.tasks
+      return this.tasks
         .filter(task => typeof task.dependentOn !== "undefined")
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
@@ -2388,7 +2392,6 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
           });
           return task;
         }).filter(task => task.dependencyLines.points !== null);
-      return lines;
     }
   }
 });
@@ -3741,15 +3744,15 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
     document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
+
+    /**
+     * Get width
+     * @returns {number}
+     */
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
-    getMainViewStyle () {
-      const state = this.root.state;
-      return {
-        width: state.width + "px"
-      };
-    },
+
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";
