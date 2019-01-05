@@ -118,15 +118,15 @@ export default {
     document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
+
+    /**
+     * Get width
+     * @returns {number}
+     */
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
-    getMainViewStyle () {
-      const state = this.root.state;
-      return {
-        width: state.width + "px"
-      };
-    },
+
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";

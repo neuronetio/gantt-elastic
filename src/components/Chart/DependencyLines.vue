@@ -85,8 +85,12 @@ export default {
     }
   },
   computed: {
+    /**
+     * Get tasks which are dependent on other tasks
+     * @returns {array}
+     */
     dependencyTasks () {
-      let lines = this.tasks
+      return this.tasks
         .filter(task => typeof task.dependentOn !== "undefined")
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
@@ -94,7 +98,6 @@ export default {
           });
           return task;
         }).filter(task => task.dependencyLines.points !== null);
-      return lines;
     }
   }
 };
