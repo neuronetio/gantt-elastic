@@ -13,7 +13,7 @@
     </foreignObject>
     <calendar-row
       class="gantt-elastic__calendar-row--month"
-      v-for="month in months"
+      v-for="month in getMonths"
       :key="month.key"
       :item="month"
       which="month"
@@ -178,10 +178,11 @@ export default {
           if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
           }
+          let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
             key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
-            x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i,
+            x,
             y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
             textWidth,
@@ -215,10 +216,11 @@ export default {
         if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
         }
+        let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
           key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
-          x: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px,
+          x,
           y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
           width: dayWidthPx,
           textWidth,
@@ -268,10 +270,11 @@ export default {
         if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
         }
+        let x = this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset;
         months.push({
           index: monthIndex,
           key: monthIndex + "m",
-          x: this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset,
+          x,
           y: this.root.style('calendar-row')["stroke-width"] / 2,
           width: monthWidth,
           textWidth,
@@ -291,11 +294,11 @@ export default {
      * Regenerate dates
      */
     regenerate () {
-      this.$nextTick(() => {
-        this.generateHours();
-        this.generateDays();
-        this.generateMonths();
-      });
+      //this.$nextTick(() => {
+      this.generateHours();
+      this.generateDays();
+      this.generateMonths();
+      //});
     }
   },
 
@@ -324,6 +327,9 @@ export default {
     },
     getHours () {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+    },
+    getMonths () {
+      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
     },
   }
 };

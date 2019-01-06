@@ -197,12 +197,12 @@ function getOptions (userOptions) {
           medium (date) {
             return dayjs(date)
               .locale(userOptions.locale.code)
-              .format("MMM / 'YY");
+              .format("MMM 'YY");
           },
           long (date) {
             return dayjs(date)
               .locale(userOptions.locale.code)
-              .format("MMMM / YYYY");
+              .format("MMMM YYYY");
           }
         }
       }

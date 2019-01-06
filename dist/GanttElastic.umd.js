@@ -91,1145 +91,5670 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/GanttElastic.vue");
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=style&index=0&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************/
-/*! no static exports found */
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\nexports.i(__webpack_require__(/*! -!../node_modules/css-loader!./styles/ganttElastic.css */ \"./node_modules/css-loader/index.js!./src/styles/ganttElastic.css\"), \"\");\n\n// module\nexports.push([module.i, \"\\r\\n\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
+!function(t,e){ true?module.exports=e():undefined}(this,function(){"use strict";var t="millisecond",e="second",n="minute",r="hour",s="day",i="week",a="month",u="year",c=/^(\d{4})-?(\d{1,2})-?(\d{0,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?$/,o=/\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,h={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},d=function(t,e,n){var r=String(t);return!r||r.length>=e?t:""+Array(e+1-r.length).join(n)+t},f={padStart:d,padZoneStr:function(t){var e=Math.abs(t),n=Math.floor(e/60),r=e%60;return(t<=0?"+":"-")+d(n,2,"0")+":"+d(r,2,"0")},monthDiff:function(t,e){var n=12*(e.year()-t.year())+(e.month()-t.month()),r=t.clone().add(n,"months"),s=e-r<0,i=t.clone().add(n+(s?-1:1),"months");return Number(-(n+(e-r)/(s?r-i:i-r)))},absFloor:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},prettyUnit:function(c){return{M:a,y:u,w:i,d:s,h:r,m:n,s:e,ms:t}[c]||String(c||"").toLowerCase().replace(/s$/,"")},isUndefined:function(t){return void 0===t}},$="en",l={};l[$]=h;var m=function(t){return t instanceof D},y=function(t,e,n){var r;if(!t)return null;if("string"==typeof t)l[t]&&(r=t),e&&(l[t]=e,r=t);else{var s=t.name;l[s]=t,r=s}return n||($=r),r},M=function(t,e){if(m(t))return t.clone();var n=e||{};return n.date=t,new D(n)},S=function(t,e){return M(t,{locale:e.$L})},p=f;p.parseLocale=y,p.isDayjs=m,p.wrapper=S;var D=function(){function h(t){this.parse(t)}var d=h.prototype;return d.parse=function(t){var e,n;this.$d=null===(e=t.date)?new Date(NaN):p.isUndefined(e)?new Date:e instanceof Date?e:"string"==typeof e&&/.*[^Z]$/i.test(e)&&(n=e.match(c))?new Date(n[1],n[2]-1,n[3]||1,n[5]||0,n[6]||0,n[7]||0,n[8]||0):new Date(e),this.init(t)},d.init=function(t){this.$y=this.$d.getFullYear(),this.$M=this.$d.getMonth(),this.$D=this.$d.getDate(),this.$W=this.$d.getDay(),this.$H=this.$d.getHours(),this.$m=this.$d.getMinutes(),this.$s=this.$d.getSeconds(),this.$ms=this.$d.getMilliseconds(),this.$L=this.$L||y(t.locale,null,!0)||$},d.$utils=function(){return p},d.isValid=function(){return!("Invalid Date"===this.$d.toString())},d.$compare=function(t){return this.valueOf()-M(t).valueOf()},d.isSame=function(t){return 0===this.$compare(t)},d.isBefore=function(t){return this.$compare(t)<0},d.isAfter=function(t){return this.$compare(t)>0},d.year=function(){return this.$y},d.month=function(){return this.$M},d.day=function(){return this.$W},d.date=function(){return this.$D},d.hour=function(){return this.$H},d.minute=function(){return this.$m},d.second=function(){return this.$s},d.millisecond=function(){return this.$ms},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,c){var o=this,h=!!p.isUndefined(c)||c,d=function(t,e){var n=S(new Date(o.$y,e,t),o);return h?n:n.endOf(s)},f=function(t,e){return S(o.toDate()[t].apply(o.toDate(),h?[0,0,0,0].slice(e):[23,59,59,999].slice(e)),o)};switch(p.prettyUnit(t)){case u:return h?d(1,0):d(31,11);case a:return h?d(1,this.$M):d(0,this.$M+1);case i:return d(h?this.$D-this.$W:this.$D+(6-this.$W),this.$M);case s:case"date":return f("setHours",0);case r:return f("setMinutes",1);case n:return f("setSeconds",2);case e:return f("setMilliseconds",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(i,c){switch(p.prettyUnit(i)){case s:this.$d.setDate(this.$D+(c-this.$W));break;case"date":this.$d.setDate(c);break;case a:this.$d.setMonth(c);break;case u:this.$d.setFullYear(c);break;case r:this.$d.setHours(c);break;case n:this.$d.setMinutes(c);break;case e:this.$d.setSeconds(c);break;case t:this.$d.setMilliseconds(c)}return this.init(),this},d.set=function(t,e){return this.clone().$set(t,e)},d.add=function(t,c){var o=this;t=Number(t);var h,d=p.prettyUnit(c),f=function(e,n){var r=o.set("date",1).set(e,n+t);return r.set("date",Math.min(o.$D,r.daysInMonth()))},$=function(e){var n=new Date(o.$d);return n.setDate(n.getDate()+e*t),S(n,o)};if(d===a)return f(a,this.$M);if(d===u)return f(u,this.$y);if(d===s)return $(1);if(d===i)return $(7);switch(d){case n:h=6e4;break;case r:h=36e5;break;case e:h=1e3;break;default:h=1}var l=this.valueOf()+t*h;return S(l,this)},d.subtract=function(t,e){return this.add(-1*t,e)},d.format=function(t){var e=this,n=t||"YYYY-MM-DDTHH:mm:ssZ",r=p.padZoneStr(this.$d.getTimezoneOffset()),s=this.$locale(),i=s.weekdays,a=s.months,u=function(t,e,n,r){return t&&t[e]||n[e].substr(0,r)};return n.replace(o,function(t){if(t.indexOf("[")>-1)return t.replace(/\[|\]/g,"");switch(t){case"YY":return String(e.$y).slice(-2);case"YYYY":return String(e.$y);case"M":return String(e.$M+1);case"MM":return p.padStart(e.$M+1,2,"0");case"MMM":return u(s.monthsShort,e.$M,a,3);case"MMMM":return a[e.$M];case"D":return String(e.$D);case"DD":return p.padStart(e.$D,2,"0");case"d":return String(e.$W);case"dd":return u(s.weekdaysMin,e.$W,i,2);case"ddd":return u(s.weekdaysShort,e.$W,i,3);case"dddd":return i[e.$W];case"H":return String(e.$H);case"HH":return p.padStart(e.$H,2,"0");case"h":case"hh":return 0===e.$H?12:p.padStart(e.$H<13?e.$H:e.$H-12,"hh"===t?2:1,"0");case"a":return e.$H<12?"am":"pm";case"A":return e.$H<12?"AM":"PM";case"m":return String(e.$m);case"mm":return p.padStart(e.$m,2,"0");case"s":return String(e.$s);case"ss":return p.padStart(e.$s,2,"0");case"SSS":return p.padStart(e.$ms,3,"0");case"Z":return r;default:return r.replace(":","")}})},d.diff=function(t,c,o){var h=p.prettyUnit(c),d=M(t),f=this-d,$=p.monthDiff(this,d);switch(h){case u:$/=12;break;case a:break;case"quarter":$/=3;break;case i:$=f/6048e5;break;case s:$=f/864e5;break;case r:$=f/36e5;break;case n:$=f/6e4;break;case e:$=f/1e3;break;default:$=f}return o?$:p.absFloor($)},d.daysInMonth=function(){return this.endOf(a).$D},d.$locale=function(){return l[this.$L]},d.locale=function(t,e){var n=this.clone();return n.$L=y(t,e,!0),n},d.clone=function(){return S(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.toDate().toISOString()},d.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}},d.toString=function(){return this.$d.toUTCString()},h}();return M.extend=function(t,e){return t(e,D,M),M},M.locale=y,M.isDayjs=m,M.unix=function(t){return M(1e3*t)},M.en=l[$],M});
+
 
 /***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./src/styles/ganttElastic.css":
-/*!***************************************************************!*\
-  !*** ./node_modules/css-loader!./src/styles/ganttElastic.css ***!
-  \***************************************************************/
-/*! no static exports found */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".gantt-elastic__main-view svg{\\n  display: block;\\n}\\n.gantt-elastic__svg-container{\\n  position: relative;\\n}\\n.gantt-elastic__main-view,.gantt-elastic__svg-container{\\n  background: #fff;\\n}\\n.gantt-elastic__container,.gantt-elastic__svg-container{\\n  max-width: 100%;\\n}\\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\\n  stroke: #a0a0a0;\\n  stroke-width: 1;\\n}\\nforeignObject > *{\\n  margin: 0px;\\n}\\n.gantt-elastic .p-2{\\n  padding: 10rem;\\n}\\n.gantt-elastic__container{\\n  display: flex;\\n  max-width: 100%;\\n  position: absolute;\\n  height: 100%;\\n}\\n.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{\\n  overflow: hidden;\\n  max-width:100%;\\n}\\n.gantt-elastic__task-list-header-column:last-of-type{\\n  border-right: 1px solid #00000050;\\n}\\n.gantt-elastic__task-list-item:last-of-type{\\n  border-bottom:1px solid #00000050;\\n}\\n.gantt-elastic__task-list-item-value-wrapper:hover {\\n  overflow: visible !important;\\n}\\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\\n  position: relative;\\n  overflow: visible !important;\\n}\\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\\n  position: absolute;\\n}\\n\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack://GanttElastic/./src/styles/ganttElastic.css?./node_modules/css-loader");
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(4);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(7).default
+var update = add("c3e5085c", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/*!*************************************************!*\
-  !*** ./node_modules/css-loader/lib/css-base.js ***!
-  \*************************************************/
-/*! no static exports found */
+/* 2 */
 /***/ (function(module, exports) {
 
-eval("/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n\n\n//# sourceURL=webpack://GanttElastic/./node_modules/css-loader/lib/css-base.js?");
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ "./node_modules/dayjs/dayjs.min.js":
-/*!*****************************************!*\
-  !*** ./node_modules/dayjs/dayjs.min.js ***!
-  \*****************************************/
-/*! no static exports found */
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("!function(t,e){ true?module.exports=e():undefined}(this,function(){\"use strict\";var t=\"millisecond\",e=\"second\",n=\"minute\",r=\"hour\",s=\"day\",i=\"week\",a=\"month\",u=\"year\",c=/^(\\d{4})-?(\\d{1,2})-?(\\d{0,2})(.*?(\\d{1,2}):(\\d{1,2}):(\\d{1,2}))?.?(\\d{1,3})?$/,o=/\\[.*?\\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,h={name:\"en\",weekdays:\"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday\".split(\"_\"),months:\"January_February_March_April_May_June_July_August_September_October_November_December\".split(\"_\")},d=function(t,e,n){var r=String(t);return!r||r.length>=e?t:\"\"+Array(e+1-r.length).join(n)+t},f={padStart:d,padZoneStr:function(t){var e=Math.abs(t),n=Math.floor(e/60),r=e%60;return(t<=0?\"+\":\"-\")+d(n,2,\"0\")+\":\"+d(r,2,\"0\")},monthDiff:function(t,e){var n=12*(e.year()-t.year())+(e.month()-t.month()),r=t.clone().add(n,\"months\"),s=e-r<0,i=t.clone().add(n+(s?-1:1),\"months\");return Number(-(n+(e-r)/(s?r-i:i-r)))},absFloor:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},prettyUnit:function(c){return{M:a,y:u,w:i,d:s,h:r,m:n,s:e,ms:t}[c]||String(c||\"\").toLowerCase().replace(/s$/,\"\")},isUndefined:function(t){return void 0===t}},$=\"en\",l={};l[$]=h;var m=function(t){return t instanceof D},y=function(t,e,n){var r;if(!t)return null;if(\"string\"==typeof t)l[t]&&(r=t),e&&(l[t]=e,r=t);else{var s=t.name;l[s]=t,r=s}return n||($=r),r},M=function(t,e){if(m(t))return t.clone();var n=e||{};return n.date=t,new D(n)},S=function(t,e){return M(t,{locale:e.$L})},p=f;p.parseLocale=y,p.isDayjs=m,p.wrapper=S;var D=function(){function h(t){this.parse(t)}var d=h.prototype;return d.parse=function(t){var e,n;this.$d=null===(e=t.date)?new Date(NaN):p.isUndefined(e)?new Date:e instanceof Date?e:\"string\"==typeof e&&/.*[^Z]$/i.test(e)&&(n=e.match(c))?new Date(n[1],n[2]-1,n[3]||1,n[5]||0,n[6]||0,n[7]||0,n[8]||0):new Date(e),this.init(t)},d.init=function(t){this.$y=this.$d.getFullYear(),this.$M=this.$d.getMonth(),this.$D=this.$d.getDate(),this.$W=this.$d.getDay(),this.$H=this.$d.getHours(),this.$m=this.$d.getMinutes(),this.$s=this.$d.getSeconds(),this.$ms=this.$d.getMilliseconds(),this.$L=this.$L||y(t.locale,null,!0)||$},d.$utils=function(){return p},d.isValid=function(){return!(\"Invalid Date\"===this.$d.toString())},d.$compare=function(t){return this.valueOf()-M(t).valueOf()},d.isSame=function(t){return 0===this.$compare(t)},d.isBefore=function(t){return this.$compare(t)<0},d.isAfter=function(t){return this.$compare(t)>0},d.year=function(){return this.$y},d.month=function(){return this.$M},d.day=function(){return this.$W},d.date=function(){return this.$D},d.hour=function(){return this.$H},d.minute=function(){return this.$m},d.second=function(){return this.$s},d.millisecond=function(){return this.$ms},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,c){var o=this,h=!!p.isUndefined(c)||c,d=function(t,e){var n=S(new Date(o.$y,e,t),o);return h?n:n.endOf(s)},f=function(t,e){return S(o.toDate()[t].apply(o.toDate(),h?[0,0,0,0].slice(e):[23,59,59,999].slice(e)),o)};switch(p.prettyUnit(t)){case u:return h?d(1,0):d(31,11);case a:return h?d(1,this.$M):d(0,this.$M+1);case i:return d(h?this.$D-this.$W:this.$D+(6-this.$W),this.$M);case s:case\"date\":return f(\"setHours\",0);case r:return f(\"setMinutes\",1);case n:return f(\"setSeconds\",2);case e:return f(\"setMilliseconds\",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(i,c){switch(p.prettyUnit(i)){case s:this.$d.setDate(this.$D+(c-this.$W));break;case\"date\":this.$d.setDate(c);break;case a:this.$d.setMonth(c);break;case u:this.$d.setFullYear(c);break;case r:this.$d.setHours(c);break;case n:this.$d.setMinutes(c);break;case e:this.$d.setSeconds(c);break;case t:this.$d.setMilliseconds(c)}return this.init(),this},d.set=function(t,e){return this.clone().$set(t,e)},d.add=function(t,c){var o=this;t=Number(t);var h,d=p.prettyUnit(c),f=function(e,n){var r=o.set(\"date\",1).set(e,n+t);return r.set(\"date\",Math.min(o.$D,r.daysInMonth()))},$=function(e){var n=new Date(o.$d);return n.setDate(n.getDate()+e*t),S(n,o)};if(d===a)return f(a,this.$M);if(d===u)return f(u,this.$y);if(d===s)return $(1);if(d===i)return $(7);switch(d){case n:h=6e4;break;case r:h=36e5;break;case e:h=1e3;break;default:h=1}var l=this.valueOf()+t*h;return S(l,this)},d.subtract=function(t,e){return this.add(-1*t,e)},d.format=function(t){var e=this,n=t||\"YYYY-MM-DDTHH:mm:ssZ\",r=p.padZoneStr(this.$d.getTimezoneOffset()),s=this.$locale(),i=s.weekdays,a=s.months,u=function(t,e,n,r){return t&&t[e]||n[e].substr(0,r)};return n.replace(o,function(t){if(t.indexOf(\"[\")>-1)return t.replace(/\\[|\\]/g,\"\");switch(t){case\"YY\":return String(e.$y).slice(-2);case\"YYYY\":return String(e.$y);case\"M\":return String(e.$M+1);case\"MM\":return p.padStart(e.$M+1,2,\"0\");case\"MMM\":return u(s.monthsShort,e.$M,a,3);case\"MMMM\":return a[e.$M];case\"D\":return String(e.$D);case\"DD\":return p.padStart(e.$D,2,\"0\");case\"d\":return String(e.$W);case\"dd\":return u(s.weekdaysMin,e.$W,i,2);case\"ddd\":return u(s.weekdaysShort,e.$W,i,3);case\"dddd\":return i[e.$W];case\"H\":return String(e.$H);case\"HH\":return p.padStart(e.$H,2,\"0\");case\"h\":case\"hh\":return 0===e.$H?12:p.padStart(e.$H<13?e.$H:e.$H-12,\"hh\"===t?2:1,\"0\");case\"a\":return e.$H<12?\"am\":\"pm\";case\"A\":return e.$H<12?\"AM\":\"PM\";case\"m\":return String(e.$m);case\"mm\":return p.padStart(e.$m,2,\"0\");case\"s\":return String(e.$s);case\"ss\":return p.padStart(e.$s,2,\"0\");case\"SSS\":return p.padStart(e.$ms,3,\"0\");case\"Z\":return r;default:return r.replace(\":\",\"\")}})},d.diff=function(t,c,o){var h=p.prettyUnit(c),d=M(t),f=this-d,$=p.monthDiff(this,d);switch(h){case u:$/=12;break;case a:break;case\"quarter\":$/=3;break;case i:$=f/6048e5;break;case s:$=f/864e5;break;case r:$=f/36e5;break;case n:$=f/6e4;break;case e:$=f/1e3;break;default:$=f}return o?$:p.absFloor($)},d.daysInMonth=function(){return this.endOf(a).$D},d.$locale=function(){return l[this.$L]},d.locale=function(t,e){var n=this.clone();return n.$L=y(t,e,!0),n},d.clone=function(){return S(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.toDate().toISOString()},d.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}},d.toString=function(){return this.$d.toUTCString()},h}();return M.extend=function(t,e){return t(e,D,M),M},M.locale=y,M.isDayjs=m,M.unix=function(t){return M(1e3*t)},M.en=l[$],M});\n\n\n//# sourceURL=webpack://GanttElastic/./node_modules/dayjs/dayjs.min.js?");
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+exports.i(__webpack_require__(5), "");
+
+// module
+exports.push([module.i, "\r\n", ""]);
+
+// exports
+
 
 /***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************/
-/*! exports provided: mergeDeep, mergeDeepReactive, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"mergeDeep\", function() { return mergeDeep; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"mergeDeepReactive\", function() { return mergeDeepReactive; });\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ \"./node_modules/dayjs/dayjs.min.js\");\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_MainView_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MainView.vue */ \"./src/components/MainView.vue\");\n/* harmony import */ var _style_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.js */ \"./src/style.js\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n\r\n\r\n/**\r\n * Helper function to fill out empty options in user settings\r\n *\r\n * @param {object} userOptions - initial user options that will merge with those below\r\n * @returns {object} merged options\r\n */\r\nfunction getOptions (userOptions) {\r\n  return {\r\n    style: _style_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\r\n    title: {\r\n      label: \"gantt-elastic\",\r\n      html: false\r\n    },\r\n    width: 0,\r\n    height: 0,\r\n    rowsHeight: 0,\r\n    allVisibleTasksHeight: 0,\r\n    scroll: {\r\n      scrolling: false,\r\n      dragXMoveMultiplier: 3,\r\n      dragYMoveMultiplier: 2,\r\n      top: 0,\r\n      taskList: {\r\n        left: 0,\r\n        right: 0,\r\n        top: 0,\r\n        bottom: 0\r\n      },\r\n      chart: {\r\n        left: 0,\r\n        right: 0,\r\n        percent: 0,\r\n        timePercent: 0,\r\n        top: 0,\r\n        bottom: 0,\r\n        time: 0,\r\n        timeCenter: 0,\r\n        dateTime: {\r\n          left: \"\",\r\n          right: \"\"\r\n        }\r\n      }\r\n    },\r\n    svgElement: null,\r\n    scope: {\r\n      before: 1,\r\n      after: 1\r\n    },\r\n    times: {\r\n      timeScale: 60 * 1000,\r\n      timeZoom: 17,\r\n      timePerPixel: 0,\r\n      fistDate: null,\r\n      firstTime: null, // firstDate getTime()\r\n      lastDate: null,\r\n      lastTime: null, // last date getTime()\r\n      firstTaskDate: null,\r\n      firstTaskTime: 0,\r\n      lastTaskDate: null,\r\n      lastTaskTime: 0,\r\n      totalViewDurationMs: 0,\r\n      totalViewDurationPx: 0,\r\n      stepDuration: \"day\", // hour, month\r\n      steps: []\r\n    },\r\n    row: {\r\n      height: 24,\r\n      showText: true,\r\n    },\r\n    maxRows: 20,\r\n    maxHeight: 0,\r\n    chartText: {\r\n      offset: 0,\r\n      xPadding: 10\r\n    },\r\n    dependencyLines: {},\r\n    progress: {\r\n      width: 20,\r\n      height: 6,\r\n      pattern: true,\r\n      bar: false,\r\n    },\r\n    grid: {\r\n      horizontal: {\r\n        gap: 6,\r\n        lines: []\r\n      },\r\n      vertical: {\r\n        lines: []\r\n      },\r\n      timeLine: {}\r\n    },\r\n    taskList: {\r\n      display: true,\r\n      columns: [{\r\n        id: 0,\r\n        label: \"ID\",\r\n        value: \"id\",\r\n        width: 40,\r\n      }],\r\n      resizerWidth: 0,\r\n      percent: 100,\r\n      width: 0,\r\n      finalWidth: 0,\r\n      expander: {\r\n        size: 16,\r\n        columnWidth: 24,\r\n        padding: 16,\r\n        margin: 10,\r\n        straight: false\r\n      }\r\n    },\r\n    calendar: {\r\n      hours: [],\r\n      days: [],\r\n      months: [],\r\n      gap: 6,\r\n      height: 0,\r\n      hour: {\r\n        height: 20,\r\n        display: true,\r\n        widths: [],\r\n        maxWidths: {},\r\n        format: {\r\n          long (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"HH:mm\");\r\n          },\r\n          medium (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"HH:mm\");\r\n          },\r\n          short (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"HH\");\r\n          }\r\n        }\r\n      },\r\n      day: {\r\n        height: 20,\r\n        display: true,\r\n        widths: [],\r\n        maxWidths: {},\r\n        format: {\r\n          long (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"DD dddd\");\r\n          },\r\n          medium (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"DD ddd\");\r\n          },\r\n          short (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"DD\");\r\n          }\r\n        }\r\n      },\r\n      month: {\r\n        height: 20,\r\n        display: true,\r\n        widths: [],\r\n        maxWidths: {},\r\n        format: {\r\n          short (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"MM\");\r\n          },\r\n          medium (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"MMM / 'YY\");\r\n          },\r\n          long (date) {\r\n            return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date)\r\n              .locale(userOptions.locale.code)\r\n              .format(\"MMMM / YYYY\");\r\n          }\r\n        }\r\n      }\r\n    },\r\n    defs: [],\r\n    locale: {\r\n      code: \"en\",\r\n      Now: \"Now\",\r\n      \"X-Scale\": \"Zoom-X\",\r\n      \"Y-Scale\": \"Zoom-Y\",\r\n      \"Task list width\": \"Task list\",\r\n      \"Before/After\": \"Expand\",\r\n      \"Display task list\": \"Show task list\"\r\n    }\r\n  };\r\n}\r\n/**\r\n * Helper function to determine if specified variable is an object\r\n *\r\n * @param {any} item\r\n * @returns {boolean}\r\n */\r\nfunction isObject (item) {\r\n  return item && typeof item === \"object\" && !Array.isArray(item);\r\n}\r\n/**\r\n * Helper function which will merge objects recursively - creating brand new one - like clone\r\n *\r\n * @param {object} target\r\n * @params {object} sources\r\n * @returns {object}\r\n */\r\nfunction mergeDeep (target, ...sources) {\r\n  if (!sources.length) {\r\n    return target;\r\n  }\r\n  const source = sources.shift();\r\n  if (isObject(target) && isObject(source)) {\r\n    for (const key in source) {\r\n      if (isObject(source[key])) {\r\n        if (!target[key]) Object.assign(target, {\r\n          [key]: {}\r\n        });\r\n        mergeDeep(target[key], source[key]);\r\n      } else {\r\n        Object.assign(target, {\r\n          [key]: source[key]\r\n        });\r\n      }\r\n    }\r\n  }\r\n  return mergeDeep(target, ...sources);\r\n}\r\n/**\r\n * Same as above but with reactivity in mind\r\n *\r\n * @param {Vue.component} component\r\n * @param {object} target\r\n * @params {object} sources\r\n * @returns {object}\r\n */\r\nfunction mergeDeepReactive (component, target, ...sources) {\r\n  if (!sources.length) {\r\n    return target;\r\n  }\r\n  const source = sources.shift();\r\n  if (isObject(target) && isObject(source)) {\r\n    for (const key in source) {\r\n      if (isObject(source[key])) {\r\n        if (!target[key]) {\r\n          component.$set(target, key, {});\r\n        }\r\n        mergeDeepReactive(component, target[key], source[key]);\r\n      } else {\r\n        component.$set(target, key, source[key]);\r\n      }\r\n    }\r\n  }\r\n  return mergeDeepReactive(component, target, ...sources);\r\n}\r\nconst styleCache = {};\r\nlet globalVisibleTasks = [];\r\n\r\n/**\r\n * GanttElastic\r\n * Main vue component\r\n */\r\nconst GanttElastic = {\r\n  components: {\r\n    MainView: _components_MainView_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  props: [\"tasks\", \"options\"],\r\n  provide () {\r\n    const provider = {};\r\n    const self = this;\r\n    Object.defineProperty(provider, \"root\", {\r\n      enumerable: true,\r\n      get: () => self\r\n    });\r\n    return provider;\r\n  },\r\n  data () {\r\n    return {\r\n      state: {\r\n        tasks: [],\r\n        scrollBarHeight: 0,\r\n        allVisibleTasksHeight: 0,\r\n        refs: {},\r\n        tasksById: {},\r\n      },\r\n    };\r\n  },\r\n  methods: {\r\n    mergeDeep,\r\n    mergeDeepReactive,\r\n\r\n    /**\r\n     * Calculate height of scrollbar in current browser\r\n     *\r\n     * @returns {number}\r\n     */\r\n    getScrollBarHeight () {\r\n      const outer = document.createElement(\"div\");\r\n      outer.style.visibility = \"hidden\";\r\n      outer.style.height = \"100px\";\r\n      outer.style.msOverflowStyle = \"scrollbar\";\r\n      document.body.appendChild(outer);\r\n      var noScroll = outer.offsetHeight;\r\n      outer.style.overflow = \"scroll\";\r\n      var inner = document.createElement(\"div\");\r\n      inner.style.height = \"100%\";\r\n      outer.appendChild(inner);\r\n      var withScroll = inner.offsetHeight;\r\n      outer.parentNode.removeChild(outer);\r\n      return this.state.scrollBarHeight = noScroll - withScroll;\r\n    },\r\n\r\n    /**\r\n     * Get style for specified class\r\n     *\r\n     * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props\r\n     * @returns {object}\r\n     */\r\n    style (...mergeWith) {\r\n      const index = JSON.stringify(mergeWith);\r\n      if (typeof styleCache[index] !== 'undefined') {\r\n        return styleCache[index];\r\n      }\r\n      let merged = {};\r\n      mergeWith.forEach(objOrClassName => {\r\n        if (typeof objOrClassName === 'string') {\r\n          merged = Object.assign({}, merged, this.state.style[objOrClassName])\r\n        } else if (typeof objOrClassName === 'object') {\r\n          merged = Object.assign({}, merged, objOrClassName);\r\n        } else if (typeof objOrClassName === 'function') {\r\n          merged = Object.assign({}, objOrClassName())\r\n        }\r\n      });\r\n      styleCache[index] = merged;\r\n      return merged;\r\n    },\r\n\r\n    /**\r\n     * Fill out empty task properties and make it reactive\r\n     */\r\n    refreshTasks () {\r\n      this.state.tasks = this.state.tasks.map(task => {\r\n        if (typeof task.x === 'undefined') {\r\n          this.$set(task, 'x', 0);\r\n        }\r\n        if (typeof task.y === 'undefined') {\r\n          this.$set(task, 'y', 0);\r\n        }\r\n        if (typeof task.width === 'undefined') {\r\n          this.$set(task, 'width', 0);\r\n        }\r\n        if (typeof task.height === 'undefined') {\r\n          this.$set(task, 'height', 0);\r\n        }\r\n        if (typeof task.tooltip === 'undefined') {\r\n          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });\r\n        }\r\n        if (typeof task.tooltip.visible === 'undefined') {\r\n          task.tooltip.visible = false;\r\n        }\r\n        if (typeof task.mouseOver === 'undefined') {\r\n          this.$set(task, 'mouseOver', false);\r\n        }\r\n        if (typeof task.visible === \"undefined\") {\r\n          this.$set(task, 'visible', true);\r\n        }\r\n        if (typeof task.collapsed === \"undefined\") {\r\n          this.$set(task, 'collapsed', false);\r\n        }\r\n        if (typeof task.dependentOn === \"undefined\") {\r\n          this.$set(task, 'dependentOn', []);\r\n        }\r\n        if (typeof task.parentId === \"undefined\") {\r\n          this.$set(task, 'parentId', null);\r\n        }\r\n        if (typeof task.style === \"undefined\") {\r\n          this.$set(task, 'style', {});\r\n        }\r\n        if (typeof task.children === 'undefined') {\r\n          this.$set(task, 'children', []);\r\n        }\r\n        if (typeof task.allChildren === 'undefined') {\r\n          this.$set(task, 'allChildren', []);\r\n        }\r\n        if (typeof task.parents === 'undefined') {\r\n          this.$set(task, 'parents', []);\r\n        }\r\n        if (typeof task.parent === 'undefined') {\r\n          this.$set(task, 'parent', null);\r\n        }\r\n        if (typeof task.durationMs === 'undefined') {\r\n          this.$set(task, 'durationMs', []);\r\n        }\r\n        return task;\r\n      });\r\n    },\r\n\r\n    /**\r\n     * Initialize component\r\n     */\r\n    initialize () {\r\n      this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });\r\n      this.state.tasks = this.tasks.map(task => {\r\n        this.$set(task, 'start', dayjs__WEBPACK_IMPORTED_MODULE_0___default()(task.start).format(\"YYYY-MM-DD HH:mm:ss\"));\r\n        return task;\r\n      });\r\n      dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.locale(this.options.locale, null, true);\r\n      if (typeof this.state.taskList === \"undefined\") {\r\n        this.$set(this.state, 'taskList', {});\r\n      }\r\n      if (typeof this.state.taskList.columns === 'undefined') {\r\n        this.$set(this.state.taskList, 'columns', []);\r\n      }\r\n      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {\r\n        this.$set(column, 'finalWidth', (column.width / 100) * this.state.taskList.percent);\r\n        if (typeof column.height === \"undefined\") {\r\n          this.$set(column, 'height', 0);\r\n        }\r\n        if (typeof column.style === \"undefined\") {\r\n          this.$set(column, 'style', {});\r\n        }\r\n        this.$set(column, '_id', `${index}-${column.label}`);\r\n        return column;\r\n      });\r\n      // initialize observer\r\n      this.refreshTasks(true);\r\n      this.state.rootTask = {\r\n        id: null,\r\n        label: \"root\",\r\n        children: [],\r\n        allChildren: [],\r\n        parents: [],\r\n        parent: null\r\n      };\r\n      this.resetTaskTree();\r\n      this.state.taskTree = this.makeTaskTree(this.state.rootTask);\r\n      this.state.tasks = this.state.taskTree.allChildren;\r\n      this.state.ctx = document.createElement(\"canvas\").getContext(\"2d\");\r\n      this.calculateTaskListColumnsDimensions();\r\n      this.state.scrollBarHeight = this.getScrollBarHeight();\r\n      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;\r\n    },\r\n\r\n    /**\r\n     * Get calendar rows outer height\r\n     *\r\n     * @returns {int}\r\n     */\r\n    getCalendarHeight () {\r\n      return this.state.calendar.height + this.style('calendar-row')[\"stroke-width\"] + this.state.calendar.gap;\r\n    },\r\n\r\n    /**\r\n     * Sum all calendar rows height and return result\r\n     *\r\n     * @returns {int}\r\n     */\r\n    calculateCalendarDimensions () {\r\n      this.state.calendar.height = 0;\r\n      if (this.state.calendar.hour.display) {\r\n        this.state.calendar.height += this.state.calendar.hour.height;\r\n      }\r\n      if (this.state.calendar.day.display) {\r\n        this.state.calendar.height += this.state.calendar.day.height;\r\n      }\r\n      if (this.state.calendar.month.display) {\r\n        this.state.calendar.height += this.state.calendar.month.height;\r\n      }\r\n    },\r\n\r\n    /**\r\n     * Get maximal level of nested task children\r\n     *\r\n     * @returns {int}\r\n     */\r\n    getMaximalLevel () {\r\n      let maximalLevel = 0;\r\n      this.state.tasks.forEach(task => {\r\n        if (task.parents.length > maximalLevel) {\r\n          maximalLevel = task.parents.length;\r\n        }\r\n      });\r\n      return maximalLevel - 1;\r\n    },\r\n\r\n    /**\r\n     * Get maximal expander width - to calculate straight task list text\r\n     *\r\n     * @returns {int}\r\n     */\r\n    getMaximalExpanderWidth () {\r\n      return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);\r\n    },\r\n\r\n    /**\r\n     * Synchronize scrollTop property when row height is changed\r\n     */\r\n    syncScrollTop () {\r\n      if (this.state.refs.taskListItems) {\r\n        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;\r\n      }\r\n    },\r\n\r\n    /**\r\n     * Calculate task list columns dimensions\r\n     */\r\n    calculateTaskListColumnsDimensions () {\r\n      let final = 0;\r\n      this.state.taskList.columns.forEach(column => {\r\n        if (column.expander) {\r\n          column.finalWidth = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;\r\n        } else {\r\n          column.finalWidth = (column.width / 100) * this.state.taskList.percent;\r\n        }\r\n        final += column.finalWidth;\r\n        column.height = this.getTaskHeight() - this.style(\"grid-line-horizontal\")[\"stroke-width\"];\r\n      });\r\n      this.state.taskList.finalWidth = final;\r\n      if (typeof document !== 'undefined') {\r\n        if (final > document.body.clientWidth / 2) {\r\n          this.state.taskList.display = false;\r\n        }\r\n      }\r\n      this.syncScrollTop();\r\n    },\r\n\r\n    /**\r\n     * Reset task tree - which is used to create tree like structure inside task list\r\n     */\r\n    resetTaskTree () {\r\n      this.state.rootTask.children = [];\r\n      this.state.rootTask.allChildren = [];\r\n      this.state.rootTask.parent = null;\r\n      this.state.rootTask.parents = [];\r\n      this.state.tasksById = {};\r\n      for (let i = 0, len = this.state.tasks.length; i < len; i++) {\r\n        let current = this.state.tasks[i];\r\n        current.children = [];\r\n        current.allChildren = [];\r\n        current.parent = null;\r\n        current.parents = [];\r\n        this.state.tasksById[current.id] = current;\r\n      }\r\n    },\r\n\r\n    /**\r\n     * Make task tree, after reset - look above\r\n     *\r\n     * @param {object} task\r\n     * @returns {object} tasks with children and parents\r\n     */\r\n    makeTaskTree (task) {\r\n      for (let i = 0, len = this.state.tasks.length; i < len; i++) {\r\n        let current = this.state.tasks[i];\r\n        if (current.parentId === task.id) {\r\n          if (task.parents.length) {\r\n            task.parents.forEach(parent => current.parents.push(parent));\r\n          }\r\n          if (task !== this.root) {\r\n            current.parents.push(task);\r\n            current.parent = task;\r\n          } else {\r\n            current.parents = [];\r\n            current.parent = null;\r\n          }\r\n          current = this.makeTaskTree(current);\r\n          task.allChildren.push(current);\r\n          task.children.push(current);\r\n          current.allChildren.forEach(child => task.allChildren.push(child));\r\n        }\r\n      }\r\n      return task;\r\n    },\r\n\r\n    /**\r\n     * Get task by id\r\n     *\r\n     * @param {any} taskId\r\n     * @returns {object|null} task\r\n     */\r\n    getTask (taskId) {\r\n      if (typeof this.state.tasksById[taskId] !== 'undefined') {\r\n        return this.state.tasksById[taskId];\r\n      }\r\n      return null;\r\n    },\r\n\r\n    /**\r\n     * Get children tasks for specified taskId\r\n     *\r\n     * @param {any} taskId\r\n     * @returns {array} children\r\n     */\r\n    getChildren (taskId) {\r\n      return this.state.tasks.filter(task => task.parent === taskId);\r\n    },\r\n\r\n    getSVG () {\r\n      return this.state.svgMainView.outerHTML;\r\n    },\r\n\r\n    getImage (type = \"image/png\") {\r\n      return new Promise((resolve, reject) => {\r\n        const img = new Image();\r\n        img.onload = () => {\r\n          const canvas = document.createElement(\"canvas\");\r\n          canvas.width = this.state.svgMainView.clientWidth;\r\n          canvas.height = this.state.svgMainView.clientHeight;\r\n          canvas.getContext(\"2d\").drawImage(img, 0, 0);\r\n          resolve(canvas.toDataURL(type));\r\n        };\r\n        img.src = \"data:image/svg+xml,\" + encodeURIComponent(this.getSVG());\r\n      });\r\n    },\r\n\r\n    /**\r\n     * Get gantt total height\r\n     *\r\n     * @returns {number}\r\n     */\r\n    getHeight (visibleTasks, outer = false) {\r\n      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')[\"stroke-width\"] * 2 + this.state.calendar.gap;\r\n      if (outer) {\r\n        height += this.state.scrollBarHeight;\r\n      }\r\n      return height;\r\n    },\r\n\r\n    /**\r\n     * Get one task height\r\n     *\r\n     * @returns {number}\r\n     */\r\n    getTaskHeight (withStroke = false) {\r\n      if (withStroke) {\r\n        return (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.style(\"grid-line-horizontal\")[\"stroke-width\"];\r\n      }\r\n      return (this.state.row.height + this.state.grid.horizontal.gap * 2);\r\n    },\r\n\r\n    /**\r\n     * Get specified tasks height\r\n     *\r\n     * @returns {number}\r\n     */\r\n    getTasksHeight (visibleTasks, outer = false) {\r\n      return visibleTasks.length * this.getTaskHeight();\r\n    },\r\n\r\n    /**\r\n     * Convert time (in milliseconds) to pixel offset inside chart\r\n     *\r\n     * @param {int} ms\r\n     * @returns {number}\r\n     */\r\n    timeToPixelOffsetX (ms) {\r\n      let x = ms - this.state.times.firstTime;\r\n      if (x) {\r\n        x = x / this.state.times.timePerPixel;\r\n      }\r\n      return x;\r\n    },\r\n\r\n    /**\r\n     * Convert pixel offset inside chart to corresponding time offset in milliseconds\r\n     *\r\n     * @param {number} pixelOffsetX\r\n     * @returns {int} milliseconds\r\n     */\r\n    pixelOffsetXToTime (pixelOffsetX) {\r\n      let offset = pixelOffsetX + this.style('grid-line-vertical')[\"stroke-width\"] / 2;\r\n      return (offset * this.state.times.timePerPixel + this.state.times.firstTime);\r\n    },\r\n\r\n    /**\r\n     * Determine if element is inside current view port\r\n     *\r\n     * @param {number} x - element placement\r\n     * @param {number} width - element width\r\n     * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true\r\n     * @returns {boolean}\r\n     */\r\n    isInsideViewPort (x, width, buffer = 5000) {\r\n      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));\r\n    },\r\n\r\n    /**\r\n     * Chart scroll event handler\r\n     *\r\n     * @param {event} ev\r\n     */\r\n    onScrollChart (ev) {\r\n      const horizontal = this.state.refs.chartScrollContainerHorizontal;\r\n      const vertical = this.state.refs.chartScrollContainerVertical;\r\n      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);\r\n    },\r\n\r\n    /**\r\n     * After same as above but with different arguments - normalized\r\n     *\r\n     * @param {number} left\r\n     * @param {number} top\r\n     */\r\n    _onScrollChart (left, top) {\r\n      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;\r\n      this.state.scroll.chart.left = left;\r\n      this.state.scroll.chart.right = left + chartContainerWidth;\r\n      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;\r\n      this.state.scroll.chart.top = top;\r\n      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);\r\n      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);\r\n      this.state.scroll.chart.dateTime.left = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.scroll.chart.time);\r\n      this.state.scroll.chart.dateTime.right = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));\r\n      this.scrollTo(left, top);\r\n    },\r\n\r\n    /**\r\n     * Scroll current chart to specified time (in milliseconds)\r\n     *\r\n     * @param {int} time\r\n     */\r\n    scrollToTime (time) {\r\n      let pos = this.timeToPixelOffsetX(time);\r\n      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;\r\n      pos = pos - chartContainerWidth / 2;\r\n      if (pos > this.state.width) {\r\n        pos = this.state.width - chartContainerWidth;\r\n      }\r\n      this.scrollTo(pos);\r\n    },\r\n\r\n    /**\r\n     * Scroll chart or task list to specified pixel values\r\n     *\r\n     * @param {number|null} left\r\n     * @param {number|null} top\r\n     */\r\n    scrollTo (left = null, top = null) {\r\n      if (left !== null) {\r\n        this.state.refs.svgChartContainer.scrollLeft = left;\r\n        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;\r\n        this.state.scroll.left = left;\r\n      }\r\n      if (top !== null) {\r\n        this.state.refs.chartScrollContainerVertical.scrollTop = top;\r\n        this.state.refs.chartGraph.scrollTop = top;\r\n        this.state.refs.taskListItems.scrollTop = top;\r\n        this.state.scroll.top = top;\r\n      }\r\n    },\r\n\r\n    /**\r\n     * After some actions like time zoom change we need to recompensate scroll position\r\n     * so as a result everything will be in same place\r\n     */\r\n    fixScrollPos () {\r\n      this.$nextTick(() => {\r\n        this.scrollToTime(this.state.scroll.chart.timeCenter);\r\n      });\r\n    },\r\n\r\n    /**\r\n     * Mouse wheel event handler\r\n     */\r\n    onWheelChart (ev) {\r\n      if (!ev.shiftKey) {\r\n        let top = this.state.scroll.top + ev.deltaY;\r\n        const chartClientHeight = this.state.refs.chartGraph.clientHeight;\r\n        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;\r\n        if (top < 0) {\r\n          top = 0;\r\n        } else if (top > scrollHeight) {\r\n          top = scrollHeight;\r\n        }\r\n        this.scrollTo(null, top);\r\n      } else {\r\n        let left = this.state.scroll.left + ev.deltaY;\r\n        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;\r\n        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;\r\n        if (left < 0) {\r\n          left = 0;\r\n        } else if (left > scrollWidth) {\r\n          left = scrollWidth;\r\n        }\r\n        this.scrollTo(left);\r\n      }\r\n    },\r\n\r\n    /**\r\n     * Time zoom change event handler\r\n     */\r\n    onTimeZoomChange (timeZoom) {\r\n      this.state.times.timeZoom = timeZoom;\r\n      this.recalculateTimes();\r\n      this.calculateSteps();\r\n      this.calculateCalendarDimensions();\r\n      this.fixScrollPos();\r\n    },\r\n\r\n    /**\r\n     * Row height change event handler\r\n     */\r\n    onRowHeightChange (height) {\r\n      this.state.row.height = height;\r\n      this.calculateTaskListColumnsDimensions();\r\n    },\r\n\r\n    /**\r\n     * Scope change event handler\r\n     */\r\n    onScopeChange (value) {\r\n      this.state.scope.before = value;\r\n      this.state.scope.after = value;\r\n      this.initTimes();\r\n      this.calculateSteps();\r\n      this.computeCalendarWidths();\r\n      this.fixScrollPos();\r\n    },\r\n\r\n    /**\r\n     * Task list width change event handler\r\n     */\r\n    onTaskListWidthChange (value) {\r\n      this.state.taskList.percent = value;\r\n      this.calculateTaskListColumnsDimensions();\r\n      this.fixScrollPos();\r\n    },\r\n\r\n    /**\r\n     * Task list column width change event handler\r\n     */\r\n    onTaskListColumnWidthChange (value) {\r\n      this.calculateTaskListColumnsDimensions();\r\n      this.fixScrollPos();\r\n    },\r\n\r\n    /**\r\n     * Listen to speciefied event names\r\n     */\r\n    initializeEvents () {\r\n      this.$on(\"chart-scroll-horizontal\", this.onScrollChart);\r\n      this.$on(\"chart-scroll-vertical\", this.onScrollChart);\r\n      this.$on(\"chart-wheel\", this.onWheelChart);\r\n      this.$on(\"times-timeZoom-change\", this.onTimeZoomChange);\r\n      this.$on(\"row-height-change\", this.onRowHeightChange);\r\n      this.$on(\"scope-change\", this.onScopeChange);\r\n      this.$on(\"taskList-width-change\", this.onTaskListWidthChange);\r\n      this.$on(\"taskList-column-width-change\", this.onTaskListColumnWidthChange);\r\n    },\r\n\r\n    /**\r\n     * When some action was performed (scale change for example) - recalculate time variables\r\n     */\r\n    recalculateTimes () {\r\n      let max = this.state.times.timeScale * 60;\r\n      let min = this.state.times.timeScale;\r\n      let steps = max / min;\r\n      let percent = this.state.times.timeZoom / 100;\r\n      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);\r\n      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, \"milisecods\");\r\n      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;\r\n      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')[\"stroke-width\"];\r\n    },\r\n\r\n    /**\r\n     * Initialize time variables\r\n     */\r\n    initTimes () {\r\n      this.state.times.firstDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.firstTaskDate)\r\n        .locale(this.locale)\r\n        .startOf(\"day\")\r\n        .subtract(this.state.scope.before, \"days\")\r\n        .startOf(\"day\");\r\n      this.state.times.lastDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.lastTaskDate)\r\n        .locale(this.locale)\r\n        .endOf(\"day\")\r\n        .add(this.state.scope.after, \"days\")\r\n        .endOf(\"day\");\r\n      this.state.times.firstTime = this.state.times.firstDate.valueOf();\r\n      this.state.times.lastTime = this.state.times.lastDate.valueOf();\r\n      this.recalculateTimes();\r\n    },\r\n\r\n    /**\r\n     * Calculate steps\r\n     * Steps are days by default\r\n     * Each step contain information about time offset and pixel offset of this time inside gantt chart\r\n     */\r\n    calculateSteps () {\r\n      const steps = [];\r\n      const lastMs = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.lastDate).valueOf();\r\n      const currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.firstDate);\r\n      steps.push({\r\n        date: currentDate,\r\n        offset: {\r\n          ms: 0,\r\n          px: 0\r\n        }\r\n      });\r\n      for (let currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf(\"day\");\r\n        currentDate.valueOf() <= lastMs;\r\n        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf(\"day\")) {\r\n        const offsetMs = currentDate.diff(this.state.times.firstDate, \"milisecods\");\r\n        const offsetPx = offsetMs / this.state.times.timePerPixel;\r\n        const step = {\r\n          date: currentDate,\r\n          offset: {\r\n            ms: offsetMs,\r\n            px: offsetPx\r\n          }\r\n        };\r\n        const previousStep = steps[steps.length - 1];\r\n        previousStep.width = {\r\n          ms: offsetMs - previousStep.offset.ms,\r\n          px: offsetPx - previousStep.offset.px\r\n        };\r\n        steps.push(step);\r\n      }\r\n      const lastStep = steps[steps.length - 1];\r\n      lastStep.width = {\r\n        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,\r\n        px: this.state.times.totalViewDurationPx - lastStep.offset.px\r\n      };\r\n      this.state.times.steps = steps;\r\n    },\r\n\r\n    /**\r\n     * Calculate calendar widths - when scale was changed for example\r\n     */\r\n    computeCalendarWidths () {\r\n      this.computeDayWidths();\r\n      this.computeHourWidths();\r\n      this.computeMonthWidths();\r\n    },\r\n\r\n    /**\r\n     * Compute width of calendar hours column widths basing on text widths\r\n     */\r\n    computeHourWidths () {\r\n      const state = this.state;\r\n      state.ctx.font = state.calendar.hour.fontSize + \" \" + state.calendar.fontFamily;\r\n      let currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(\"2018-01-01T00:00:00\"); // any date will be good for hours\r\n      let maxWidths = {};\r\n      state.calendar.hour.widths = [];\r\n      Object.keys(state.calendar.hour.format).forEach(formatName => {\r\n        maxWidths[formatName] = 0;\r\n      });\r\n      for (let hour = 0; hour < 24; hour++) {\r\n        const widths = {\r\n          hour\r\n        };\r\n        Object.keys(state.calendar.hour.format).forEach(formatName => {\r\n          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;\r\n        });\r\n        state.calendar.hour.widths.push(widths);\r\n        Object.keys(state.calendar.hour.format).forEach(formatName => {\r\n          if (widths[formatName] > maxWidths[formatName]) {\r\n            maxWidths[formatName] = widths[formatName];\r\n          }\r\n        });\r\n        currentDate = currentDate.add(1, \"hour\");\r\n      }\r\n      state.calendar.hour.maxWidths = maxWidths;\r\n    },\r\n\r\n    /**\r\n     * Compute calendar days column widths basing on text widths\r\n     */\r\n    computeDayWidths () {\r\n      const state = this.state;\r\n      state.ctx.font = state.calendar.day.fontSize + \" \" + state.calendar.fontFamily;\r\n      let currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(state.times.steps[0].date);\r\n      let maxWidths = {};\r\n      state.calendar.day.widths = [];\r\n      Object.keys(state.calendar.day.format).forEach(formatName => {\r\n        maxWidths[formatName] = 0;\r\n      });\r\n      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {\r\n        const widths = {\r\n          day\r\n        };\r\n        Object.keys(state.calendar.day.format).forEach(formatName => {\r\n          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;\r\n        });\r\n        state.calendar.day.widths.push(widths);\r\n        Object.keys(state.calendar.day.format).forEach(formatName => {\r\n          if (widths[formatName] > maxWidths[formatName]) {\r\n            maxWidths[formatName] = widths[formatName];\r\n          }\r\n        });\r\n        currentDate = currentDate.add(1, \"day\");\r\n      }\r\n      state.calendar.day.maxWidths = maxWidths;\r\n    },\r\n\r\n    /**\r\n     * Compute month calendar columns widths basing on text widths\r\n     */\r\n    computeMonthWidths () {\r\n      const state = this.state;\r\n      state.ctx.font = state.calendar.day.fontSize + \" \" + state.calendar.fontFamily;\r\n      let maxWidths = {};\r\n      state.calendar.month.widths = [];\r\n      Object.keys(state.calendar.month.format).forEach(formatName => {\r\n        maxWidths[formatName] = 0;\r\n      });\r\n      let currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.state.times.firstDate);\r\n      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, \"months\", true));\r\n      for (let month = 0; month < monthsCount; month++) {\r\n        const widths = {\r\n          month\r\n        };\r\n        Object.keys(state.calendar.month.format).forEach(formatName => {\r\n          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;\r\n        });\r\n        state.calendar.month.widths.push(widths);\r\n        Object.keys(state.calendar.month.format).forEach(formatName => {\r\n          if (widths[formatName] > maxWidths[formatName]) {\r\n            maxWidths[formatName] = widths[formatName];\r\n          }\r\n        });\r\n        currentDate = currentDate.add(1, \"month\");\r\n      }\r\n      state.calendar.month.maxWidths = maxWidths;\r\n    },\r\n\r\n    /**\r\n     * Prepare time and date variables for gantt\r\n     */\r\n    prepareDates () {\r\n      let firstTaskTime = Number.MAX_SAFE_INTEGER;\r\n      let lastTaskTime = 0;\r\n      let firstTaskDate, lastTaskDate;\r\n      for (let index = 0, len = this.state.tasks.length; index < len; index++) {\r\n        let task = this.state.tasks[index];\r\n        task.startDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(task.start);\r\n        task.startTime = task.startDate.valueOf();\r\n        task.durationMs = task.duration * 1000;\r\n        if (task.startTime < firstTaskTime) {\r\n          firstTaskTime = task.startTime;\r\n          firstTaskDate = task.startDate;\r\n        }\r\n        if (task.startTime + task.durationMs > lastTaskTime) {\r\n          lastTaskTime = task.startTime + task.durationMs;\r\n          lastTaskDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(task.startTime + task.durationMs);\r\n        }\r\n      }\r\n      this.state.times.firstTaskTime = firstTaskTime;\r\n      this.state.times.lastTaskTime = lastTaskTime;\r\n      this.state.times.firstTaskDate = firstTaskDate;\r\n      this.state.times.lastTaskDate = lastTaskDate;\r\n      this.state.times.firstDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(firstTaskDate)\r\n        .locale(this.locale)\r\n        .startOf(\"day\")\r\n        .subtract(this.state.scope.before, \"days\")\r\n        .startOf(\"day\");\r\n      this.state.times.lastDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(lastTaskDate)\r\n        .locale(this.locale)\r\n        .endOf(\"day\")\r\n        .add(this.state.scope.after, \"days\")\r\n        .endOf(\"day\");\r\n    },\r\n\r\n    /**\r\n     * Setup and calulate everything\r\n     */\r\n    setup () {\r\n      this.initialize();\r\n      this.state.tasksById = {};\r\n      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));\r\n      this.prepareDates();\r\n      this.initTimes();\r\n      this.calculateSteps();\r\n      this.computeCalendarWidths();\r\n      this.calculateCalendarDimensions();\r\n      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {\r\n        return { width: prev.width + current.width };\r\n      }, { width: 0 }).width;\r\n    },\r\n\r\n  },\r\n\r\n  computed: {\r\n\r\n    /**\r\n     * Get visible tasks\r\n     * Very importan method which will bring us only those tasks that are visible inside gantt chart\r\n     * For example when task is collapsed - children of this task are not visible - we should not render them\r\n     */\r\n    visibleTasks () {\r\n      const visibleTasks = this.state.tasks.filter(task => task.visible);\r\n      const maxRows = visibleTasks.slice(0, this.state.maxRows);\r\n      this.state.rowsHeight = this.getTasksHeight(maxRows);\r\n      let heightCompensation = 0;\r\n      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {\r\n        heightCompensation = this.state.rowsHeight - this.state.maxHeight;\r\n        this.state.rowsHeight = this.state.maxHeight;\r\n      }\r\n      this.state.height = this.getHeight(maxRows) - heightCompensation;\r\n      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);\r\n      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;\r\n      let len = visibleTasks.length;\r\n      for (let index = 0; index < len; index++) {\r\n        let task = visibleTasks[index];\r\n        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')[\"stroke-width\"];\r\n        if (task.width < 0) {\r\n          task.width = 0;\r\n        }\r\n        task.height = this.state.row.height;\r\n        task.x = this.timeToPixelOffsetX(task.startTime);\r\n        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;\r\n      }\r\n      this.$nextTick(() => {\r\n        this.syncScrollTop();\r\n      });\r\n      return visibleTasks;\r\n    },\r\n  },\r\n\r\n  /**\r\n   * Watch tasks after gantt instance is created and react when we have new kids on the block\r\n   */\r\n  created () {\r\n    let previousTasks = [];\r\n    this.$watch('state.tasks', function (newTasks, oldTasks) {\r\n      let refresh = previousTasks.length !== newTasks.length;\r\n      if (!refresh) {\r\n        for (let i = 0, len = newTasks.length; i < len; i++) {\r\n          if (typeof newTasks[i].parents === 'undefined') {\r\n            refresh = true;\r\n            break;\r\n          }\r\n        }\r\n      }\r\n      if (refresh) {\r\n        this.refreshTasks();\r\n        this.prepareDates();\r\n        this.initTimes();\r\n        this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));\r\n        this.resetTaskTree();\r\n        this.state.taskTree = this.makeTaskTree(this.state.rootTask);\r\n        this.state.tasks = this.state.taskTree.allChildren;\r\n      }\r\n      previousTasks = newTasks.slice();\r\n    }, { immediate: true, deep: false });\r\n    this.initializeEvents();\r\n    this.setup();\r\n    this.$root.$emit('gantt-elastic-created', this);\r\n  },\r\n\r\n  /**\r\n   * Emit ready/mounted events and deliver this gantt instance to outside world when needed\r\n   */\r\n  mounted () {\r\n    this.$root.$emit('gantt-elastic-mounted', this);\r\n    this.$root.$emit('gantt-elastic-ready', this);\r\n  }\r\n};\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (GanttElastic);\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ \"./node_modules/dayjs/dayjs.min.js\");\n/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _CalendarRow_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarRow.vue */ \"./src/components/Calendar/CalendarRow.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    CalendarRow: _CalendarRow_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  data () {\r\n    return {\r\n      hours: [],\r\n      days: [],\r\n      months: []\r\n    };\r\n  },\r\n  created () {\r\n    this.root.$on(\"scope-change\", this.regenerate);\r\n    this.root.$on(\"times-timeZoom-change\", this.regenerate);\r\n    this.regenerate();\r\n  },\r\n  methods: {\r\n    /**\r\n     * How many hours will fit?\r\n     *\r\n     * @returns {object}\r\n     */\r\n    howManyHoursFit (dayIndex) {\r\n      const additionalSpace = this.root.style('calendar-row')[\"stroke-width\"] + 2;\r\n      let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;\r\n      let formatNames = Object.keys(this.root.state.calendar.hour.format);\r\n      for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {\r\n        for (let formatName of formatNames) {\r\n          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {\r\n            return {\r\n              count: hours,\r\n              type: formatName\r\n            };\r\n          }\r\n        }\r\n      }\r\n      return {\r\n        count: 0,\r\n        type: \"\"\r\n      };\r\n    },\r\n\r\n    /**\r\n     * How many days will fit?\r\n     *\r\n     * @returns {object}\r\n     */\r\n    howManyDaysFit () {\r\n      const additionalSpace = this.root.style('calendar-row')[\"stroke-width\"] + 2;\r\n      let fullWidth = this.root.state.width;\r\n      let formatNames = Object.keys(this.root.state.calendar.day.format);\r\n      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {\r\n        for (let formatName of formatNames) {\r\n          if (\r\n            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {\r\n            return {\r\n              count: days,\r\n              type: formatName\r\n            };\r\n          }\r\n        }\r\n      }\r\n      return {\r\n        count: 0,\r\n        type: \"\"\r\n      };\r\n    },\r\n\r\n    /**\r\n     * How many months will fit?\r\n     *\r\n     * @returns {object}\r\n     */\r\n    howManyMonthsFit () {\r\n      const additionalSpace = this.root.style('calendar-row')[\"stroke-width\"] + 2;\r\n      let fullWidth = this.root.state.width;\r\n      let formatNames = Object.keys(this.root.state.calendar.month.format);\r\n      let currentMonth = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.firstDate);\r\n      let previousMonth = currentMonth.clone();\r\n      const lastTime = this.root.state.times.lastTime;\r\n      let monthsCount = 1;\r\n      while (currentMonth.valueOf() <= lastTime) {\r\n        currentMonth = currentMonth.add(1, \"day\");\r\n        if (previousMonth.month() != currentMonth.month()) {\r\n          monthsCount++;\r\n        }\r\n        previousMonth = currentMonth.clone();\r\n      }\r\n      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {\r\n        for (let formatName of formatNames) {\r\n          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {\r\n            return {\r\n              count: months,\r\n              type: formatName\r\n            };\r\n          }\r\n        }\r\n      }\r\n      return {\r\n        count: 1,\r\n        type: formatNames[0]\r\n      };\r\n    },\r\n\r\n    /**\r\n     * Get hour text style\r\n     *\r\n     * @returns {string}\r\n     */\r\n    hourTextStyle () {\r\n      return (\"font-family:\" + this.root.state.calendar.hour.fontFamily + \";font-size:\" + this.root.state.calendar.hour.fontSize);\r\n    },\r\n\r\n    /**\r\n     * Get text style\r\n     *\r\n     * @returns {string}\r\n     */\r\n    dayTextStyle () {\r\n      return (\"font-family:\" + this.root.state.calendar.day.fontFamily + \";font-size:\" + this.root.state.calendar.day.fontSize);\r\n    },\r\n\r\n    /**\r\n     * Generate hours\r\n     *\r\n     * @returns {array}\r\n     */\r\n    generateHours () {\r\n      let hours = [];\r\n      for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {\r\n        const hoursCount = this.howManyHoursFit(hourIndex);\r\n        const hourStep = 24 / hoursCount.count;\r\n        const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;\r\n        for (let i = 0, len = hoursCount.count; i < len; i++) {\r\n          const date = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.steps[hourIndex].date).add(i * hourStep, \"hour\");\r\n          let textWidth = 0;\r\n          if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {\r\n            textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];\r\n          }\r\n          hours.push({\r\n            index: hourIndex,\r\n            key: this.root.state.times.steps[hourIndex].date.valueOf() + \"h\" + i,\r\n            x: this.root.style('calendar-row')[\"stroke-width\"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i,\r\n            y: this.root.style('calendar-row')[\"stroke-width\"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,\r\n            width: hourWidthPx,\r\n            textWidth,\r\n            height: this.root.state.calendar.hour.height,\r\n            label: this.root.state.calendar.hour.format[hoursCount.type](date)\r\n          });\r\n        }\r\n      }\r\n      return (this.hours = hours);\r\n    },\r\n\r\n    /**\r\n     * Generate days\r\n     *\r\n     * @returns {array}\r\n     */\r\n    generateDays () {\r\n      let days = [];\r\n      const daysCount = this.howManyDaysFit();\r\n      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);\r\n      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {\r\n        let dayWidthPx = 0;\r\n        // day could be shorter (daylight saving time) so join widths and divide\r\n        for (let currentStep = 0; currentStep < dayStep; currentStep++) {\r\n          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== \"undefined\") {\r\n            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;\r\n          }\r\n        }\r\n        const date = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.steps[dayIndex].date);\r\n        let textWidth = 0;\r\n        if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {\r\n          textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];\r\n        }\r\n        days.push({\r\n          index: dayIndex,\r\n          key: this.root.state.times.steps[dayIndex].date.valueOf() + \"d\",\r\n          x: this.root.style('calendar-row')[\"stroke-width\"] / 2 + this.root.state.times.steps[dayIndex].offset.px,\r\n          y: this.root.style('calendar-row')[\"stroke-width\"] / 2 + this.root.state.calendar.month.height,\r\n          width: dayWidthPx,\r\n          textWidth,\r\n          height: this.root.state.calendar.day.height,\r\n          label: this.root.state.calendar.day.format[daysCount.type](date)\r\n        });\r\n      }\r\n      return (this.days = days);\r\n    },\r\n\r\n    /**\r\n     * Generate months\r\n     *\r\n     * @returns {array}\r\n     */\r\n    generateMonths () {\r\n      let months = [];\r\n      const monthsCount = this.howManyMonthsFit();\r\n      let formatNames = Object.keys(this.root.state.calendar.month.format);\r\n      let currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.firstDate);\r\n      for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {\r\n        let monthWidth = 0;\r\n        let monthOffset = Number.MAX_SAFE_INTEGER;\r\n        let finalDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(currentDate).add(1, \"month\").startOf(\"month\");\r\n        if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {\r\n          finalDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.lastDate);\r\n        }\r\n        // we must find first and last step to get the offsets / widths\r\n        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {\r\n          let currentStep = this.root.state.times.steps[step];\r\n          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {\r\n            monthWidth += currentStep.width.px;\r\n            if (currentStep.offset.px < monthOffset) {\r\n              monthOffset = currentStep.offset.px;\r\n            }\r\n          }\r\n        }\r\n        let label = \"\";\r\n        let choosenFormatName;\r\n        for (let formatName of formatNames) {\r\n          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {\r\n            label = this.root.state.calendar.month.format[formatName](currentDate);\r\n            choosenFormatName = formatName;\r\n          }\r\n        }\r\n        let textWidth = 0;\r\n        if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {\r\n          textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];\r\n        }\r\n        months.push({\r\n          index: monthIndex,\r\n          key: monthIndex + \"m\",\r\n          x: this.root.style('calendar-row')[\"stroke-width\"] / 2 + monthOffset,\r\n          y: this.root.style('calendar-row')[\"stroke-width\"] / 2,\r\n          width: monthWidth,\r\n          textWidth,\r\n          choosenFormatName,\r\n          height: this.root.state.calendar.month.height,\r\n          label: label\r\n        });\r\n        currentDate = currentDate.add(1, \"month\").startOf(\"month\");\r\n        if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {\r\n          currentDate = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.root.state.times.lastDate);\r\n        }\r\n      }\r\n      return (this.months = months);\r\n    },\r\n\r\n    /**\r\n     * Regenerate dates\r\n     */\r\n    regenerate () {\r\n      this.$nextTick(() => {\r\n        this.generateHours();\r\n        this.generateDays();\r\n        this.generateMonths();\r\n      });\r\n    }\r\n  },\r\n\r\n  computed: {\r\n    getX () {\r\n      return this.root.style('calendar-row')[\"stroke-width\"] / 2;\r\n    },\r\n    getY () {\r\n      return this.root.style('calendar-row')[\"stroke-width\"] / 2;\r\n    },\r\n    getWidth () {\r\n      let width = this.root.state.width - this.root.style('calendar-row')[\"stroke-width\"];\r\n      return width;\r\n    },\r\n    monthsStyle () {\r\n      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);\r\n    },\r\n    daysStyle () {\r\n      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);\r\n    },\r\n    hoursStyle () {\r\n      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);\r\n    },\r\n    getDays () {\r\n      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));\r\n    },\r\n    getHours () {\r\n      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));\r\n    },\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/Calendar.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inject: [\"root\"],\n  props: [\"item\", \"which\"],\n  data () {\n    return {\n      anchor: 'middle'\n    };\n  },\n  computed: {\n    /**\n     * Get x position\n     *\n     * @returns {number}\n     */\n    getTextX () {\n      let x = this.item.x + this.item.width / 2;\n      if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {\n        this.anchor = 'start';\n        let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;\n        x = this.root.state.scroll.chart.left + 2;\n        if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {\n          x = this.item.x + this.item.width - this.item.textWidth - 2;\n        } else if (x < this.item.x) {\n          x = this.item.x + 2;\n        }\n      }\n      return x;\n    },\n\n    /**\n     * Get y position\n     *\n     * @returns {number}\n     */\n    getTextY () {\n      return this.item.y + this.item.height / 2;\n    }\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/CalendarRow.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Chart.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Grid_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Grid.vue */ \"./src/components/Chart/Grid.vue\");\n/* harmony import */ var _Calendar_Calendar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Calendar/Calendar.vue */ \"./src/components/Calendar/Calendar.vue\");\n/* harmony import */ var _DependencyLines_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DependencyLines.vue */ \"./src/components/Chart/DependencyLines.vue\");\n/* harmony import */ var _Row_Task_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Row/Task.vue */ \"./src/components/Chart/Row/Task.vue\");\n/* harmony import */ var _Row_Milestone_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Row/Milestone.vue */ \"./src/components/Chart/Row/Milestone.vue\");\n/* harmony import */ var _Row_Project_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Row/Project.vue */ \"./src/components/Chart/Row/Project.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    Grid: _Grid_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    DependencyLines: _DependencyLines_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\r\n    Calendar: _Calendar_Calendar_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\r\n    Task: _Row_Task_vue__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\r\n    Milestone: _Row_Milestone_vue__WEBPACK_IMPORTED_MODULE_4__[\"default\"],\r\n    Project: _Row_Project_vue__WEBPACK_IMPORTED_MODULE_5__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  data () {\r\n    return {\r\n      moving: false\r\n    };\r\n  },\r\n  mounted () {\r\n    this.root.state.refs.chart = this.$refs.chart;\r\n    this.root.state.refs.chartGraph = this.$refs.chartGraph;\r\n  },\r\n  computed: {\r\n    getWidth () {\r\n      const state = this.root.state;\r\n      return state.width;\r\n    },\r\n    getHeight () {\r\n      const state = this.root.state;\r\n      return state.height;\r\n    },\r\n    getViewBox () {\r\n      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;\r\n    }\r\n  },\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Chart.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inject: [\"root\"],\n  props: [\"tasks\"],\n  data () {\n    return {};\n  },\n  methods: {\n\n    /**\n     * Get path points\n     *\n     * @param {any} fromTaskId\n     * @param {any} toTaskId\n     * @returns {string}\n     */\n    getPoints (fromTaskId, toTaskId) {\n      const fromTask = this.root.getTask(fromTaskId);\n      const toTask = this.root.getTask(toTaskId);\n      if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {\n        return null;\n      }\n      const startX = fromTask.x + fromTask.width;\n      const startY = fromTask.y + fromTask.height / 2;\n      const stopX = toTask.x;\n      const stopY = toTask.y + toTask.height / 2;\n      const distanceX = stopX - startX;\n      let distanceY;\n      let yMultiplier = 1;\n      if (stopY >= startY) {\n        distanceY = stopY - startY;\n      } else {\n        distanceY = startY - stopY;\n        yMultiplier = -1;\n      }\n      const offset = 10;\n      const roundness = 4;\n      const isBefore = distanceX <= offset + roundness;\n      let points = `M ${startX} ${startY}\n          L ${startX + offset},${startY} `;\n      if (isBefore) {\n        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}\n            L ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2 - roundness * yMultiplier}\n            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY + (distanceY * yMultiplier) / 2}\n            L ${startX - offset + distanceX},${startY + (distanceY * yMultiplier) / 2}\n            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}\n            L ${startX - offset + distanceX - roundness},${stopY - roundness * yMultiplier}\n            Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}\n            L ${stopX},${stopY}`;\n      } else {\n        points += `L ${startX + distanceX / 2 - roundness},${startY}\n            Q ${startX + distanceX / 2},${startY} ${startX + distanceX / 2},${startY + roundness * yMultiplier}\n            L ${startX + distanceX / 2},${stopY - roundness * yMultiplier}\n            Q ${startX + distanceX / 2},${stopY} ${startX + distanceX / 2 + roundness},${stopY}\n            L ${stopX},${stopY}`;\n      }\n      return points;\n    }\n  },\n  computed: {\n    /**\n     * Get tasks which are dependent on other tasks\n     *\n     * @returns {array}\n     */\n    dependencyTasks () {\n      return this.tasks\n        .filter(task => typeof task.dependentOn !== \"undefined\")\n        .map(task => {\n          task.dependencyLines = task.dependentOn.map(id => {\n            return { points: this.getPoints(id, task.id) };\n          });\n          return task;\n        }).filter(task => task.dependencyLines.points !== null);\n    }\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/DependencyLines.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Grid.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  inject: [\"root\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  created () {\r\n    this.root.$on(\"recenterPosition\", this.recenterPosition);\r\n  },\r\n  mounted () {\r\n    this.$nextTick(() => {\r\n      this.$nextTick(() => {\r\n        // because of stupid slider :/\r\n        this.root.scrollToTime(this.timeLinePosition.time);\r\n      });\r\n    });\r\n  },\r\n  methods: {\r\n    recenterPosition () {\r\n      this.root.scrollToTime(this.timeLinePosition.time);\r\n    },\r\n  },\r\n  computed: {\r\n    verticalLines () {\r\n      let lines = [];\r\n      const state = this.root.state;\r\n      state.times.steps.forEach(step => {\r\n        if (this.root.isInsideViewPort(step.offset.px, 1)) {\r\n          lines.push({\r\n            key: step.date.valueOf(),\r\n            x1: step.offset.px,\r\n            y1: 0,\r\n            x2: step.offset.px,\r\n            y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],\r\n          });\r\n        }\r\n      });\r\n      return lines;\r\n    },\r\n    horizontalLines () {\r\n      let lines = [];\r\n      const state = this.root.state;\r\n      let tasks = this.root.visibleTasks;\r\n      for (let index = 0, len = tasks.length; index <= len; index++) {\r\n        const y = (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);\r\n        lines.push({\r\n          key: \"hl\" + index,\r\n          x1: 0,\r\n          y1: y,\r\n          x2: \"100%\",\r\n          y2: y\r\n        });\r\n      }\r\n      return lines;\r\n    },\r\n    inViewPort () {\r\n      return line => {\r\n        const state = this.root.state;\r\n        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);\r\n      };\r\n    },\r\n    timeLinePosition () {\r\n      const d = new Date();\r\n      const current = d.getTime();\r\n      const currentOffset = this.root.timeToPixelOffsetX(current);\r\n      const timeLine = {\r\n        x: 0,\r\n        y1: 0,\r\n        y2: \"100%\",\r\n        dateTime: \"\",\r\n        time: current\r\n      };\r\n      timeLine.x = currentOffset;\r\n      timeLine.dateTime = d.toLocaleDateString();\r\n      return timeLine;\r\n    },\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Grid.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inject: [\"root\"],\n  props: [\"task\"],\n  data () {\n    return {};\n  },\n  computed: {\n    getProgressWidth () {\n      return this.task.progress + \"%\";\n    },\n    getLinePoints () {\n      const start = (this.task.width / 100) * this.task.progress;\n      return `M ${start} 0 L ${start} ${this.task.height}`;\n    },\n    getSolidStyle () {\n      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);\n    },\n    getLineStyle () {\n      return Object.assign({}, {\n        stroke: this.root.state.row.styles.bar.stroke + \"a0\",\n        \"stroke-width\": this.root.state.row.styles.bar[\"stroke-width\"] / 2\n      }, this.task.style);\n    }\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/ProgressBar.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Text_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Text.vue */ \"./src/components/Chart/Text.vue\");\n/* harmony import */ var _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ProgressBar.vue */ \"./src/components/Chart/ProgressBar.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    ChartText: _Text_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    ProgressBar: _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  props: [\"task\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  computed: {\r\n    clipPathId () {\r\n      return \"gantt-elastic__milestone-clip-path-\" + this.task.id;\r\n    },\r\n    getViewBox () {\r\n      return `0 0 ${this.task.width} ${this.task.height}`;\r\n    },\r\n    getGroupTransform () {\r\n      return `translate(${this.task.x} ${this.task.y})`;\r\n    },\r\n    getPoints () {\r\n      const task = this.task;\r\n      const fifty = task.height / 2;\r\n      let offset = fifty;\r\n      if (task.width / 2 - offset < 0) {\r\n        offset = task.width / 2;\r\n      }\r\n      return `0,${fifty}\r\n        ${offset},0\r\n        ${task.width - offset},0\r\n        ${task.width},${fifty}\r\n        ${task.width - offset},${task.height}\r\n        ${offset},${task.height}`;\r\n    },\r\n  },\r\n  methods: {\r\n    emitEvent (eventName, event) {\r\n      if (!this.root.state.scroll.scrolling) {\r\n        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });\r\n      }\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Milestone.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Text_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Text.vue */ \"./src/components/Chart/Text.vue\");\n/* harmony import */ var _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ProgressBar.vue */ \"./src/components/Chart/ProgressBar.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    ChartText: _Text_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    ProgressBar: _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  props: [\"task\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  computed: {\r\n    clipPathId () {\r\n      return \"gantt-elastic__project-clip-path-\" + this.task.id;\r\n    },\r\n    getViewBox () {\r\n      return `0 0 ${this.task.width} ${this.task.height}`;\r\n    },\r\n    getGroupTransform () {\r\n      return `translate(${this.task.x} ${this.task.y})`;\r\n    },\r\n    getPoints () {\r\n      const task = this.task;\r\n      const bottom = task.height - task.height / 4;\r\n      const corner = task.height / 6;\r\n      const smallCorner = task.height / 8;\r\n      return `M ${smallCorner},0\r\n                L ${task.width - smallCorner} 0\r\n                L ${task.width} ${smallCorner}\r\n                L ${task.width} ${bottom}\r\n                L ${task.width - corner} ${task.height}\r\n                L ${task.width - corner * 2} ${bottom}\r\n                L ${corner * 2} ${bottom}\r\n                L ${corner} ${task.height}\r\n                L 0 ${bottom}\r\n                L 0 ${smallCorner}\r\n                Z\r\n        `;\r\n    },\r\n  },\r\n  methods: {\r\n    emitEvent (eventName, event) {\r\n      if (!this.root.state.scroll.scrolling) {\r\n        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });\r\n      }\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Project.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Text_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Text.vue */ \"./src/components/Chart/Text.vue\");\n/* harmony import */ var _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ProgressBar.vue */ \"./src/components/Chart/ProgressBar.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    ChartText: _Text_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    ProgressBar: _ProgressBar_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  props: [\"task\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  computed: {\r\n    clipPathId () {\r\n      return \"gantt-elastic__task-clip-path-\" + this.task.id;\r\n    },\r\n    getViewBox () {\r\n      const task = this.task;\r\n      return `0 0 ${task.width} ${task.height}`;\r\n    },\r\n    getGroupTransform () {\r\n      return `translate(${this.task.x} ${this.task.y})`;\r\n    },\r\n    getPoints () {\r\n      const task = this.task;\r\n      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${\r\n        task.height\r\n        }`;\r\n    },\r\n  },\r\n  methods: {\r\n    emitEvent (eventName, event) {\r\n      if (!this.root.state.scroll.scrolling) {\r\n        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });\r\n      }\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Task.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Text.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  inject: [\"root\"],\r\n  props: [\"task\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  computed: {\r\n    getWidth () {\r\n      const textStyle = this.root.style('chart-row-text');\r\n      this.root.state.ctx.font = `${textStyle[\"font-weight\"]} ${textStyle[\"font-size\"]} ${textStyle[\"font-family\"]}`;\r\n      const textWidth = this.root.state.ctx.measureText(this.task.label).width;\r\n      return textWidth + this.root.state.chartText.xPadding * 2;\r\n    },\r\n    getHeight () {\r\n      return this.task.height + this.root.state.grid.horizontal.gap * 2;\r\n    },\r\n    contentStyle () {\r\n      return { height: '100%', 'line-height': this.getHeight + 'px' };\r\n    },\r\n    html () {\r\n      const cols = this.root.state.taskList.columns;\r\n      for (let i = 0, len = cols.length; i < len; i++) {\r\n        const col = cols[i];\r\n        if (col.value === 'label' && typeof col.html !== \"undefined\" && col.html) {\r\n          return true;\r\n        }\r\n      }\r\n      return false;\r\n    },\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Text.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/MainView.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TaskList_TaskList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskList/TaskList.vue */ \"./src/components/TaskList/TaskList.vue\");\n/* harmony import */ var _Chart_Chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart/Chart.vue */ \"./src/components/Chart/Chart.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    TaskList: _TaskList_TaskList_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    Chart: _Chart_Chart_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  props: [\"tasks\", \"options\"],\r\n  data () {\r\n    return {\r\n      defs: \"\",\r\n      mousePos: {\r\n        x: 0,\r\n        y: 0,\r\n        movementX: 0,\r\n        movementY: 0,\r\n        lastX: 0,\r\n        lastY: 0,\r\n        positiveX: 0,\r\n        positiveY: 0,\r\n      }\r\n    };\r\n  },\r\n  mounted () {\r\n    this.root.state.refs.svgMainView = this.$refs.svgMainView;\r\n    this.root.state.refs.svgChart = this.$refs.svgChart;\r\n    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;\r\n    this.root.state.refs.svgTaskList = this.$refs.svgTaskList;\r\n    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;\r\n    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;\r\n    document.addEventListener('mouseup', this.chartMouseUp.bind(this));\r\n    document.addEventListener('mousemove', this.chartMouseMove.bind(this));\r\n    document.addEventListener('touchmove', this.chartMouseMove.bind(this));\r\n    document.addEventListener('touchend', this.chartMouseUp.bind(this));\r\n  },\r\n  computed: {\r\n\r\n    /**\r\n     * Get width\r\n     * @returns {number}\r\n     */\r\n    getWidth () {\r\n      return this.root.state.width + this.root.state.taskList.finalWidth;\r\n    },\r\n\r\n    getMarginLeft () {\r\n      if (!this.root.state.taskList.display) {\r\n        return \"0px\";\r\n      }\r\n      return this.root.state.taskList.finalWidth + \"px\";\r\n    },\r\n    verticalStyle () {\r\n      return {\r\n        width: this.root.state.scrollBarHeight + 'px',\r\n        height: this.root.state.rowsHeight + 'px',\r\n        \"margin-top\": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'\r\n      };\r\n    }\r\n  },\r\n  methods: {\r\n    mouseMove (event) {\r\n      this.root.$emit(\"main-view-mousemove\", event);\r\n    },\r\n    mouseUp (event) {\r\n      this.root.$emit(\"main-view-mouseup\", event);\r\n    },\r\n    onHorizontalScroll (ev) {\r\n      this.root.$emit(\"chart-scroll-horizontal\", ev);\r\n    },\r\n    onVerticalScroll (ev) {\r\n      this.root.$emit(\"chart-scroll-vertical\", ev);\r\n    },\r\n    chartWheel (ev) {\r\n      this.root.$emit(\"chart-wheel\", ev);\r\n    },\r\n    chartMouseDown (ev) {\r\n      if (typeof ev.touches !== 'undefined') {\r\n        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;\r\n        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;\r\n        this.mousePos.positiveX = 0;\r\n        this.mousePos.positiveY = 0;\r\n        this.mousePos.movementX = 0;\r\n        this.mousePos.movementY = 0;\r\n      }\r\n      this.root.state.scroll.scrolling = true;\r\n    },\r\n    chartMouseUp (ev) {\r\n      this.root.state.scroll.scrolling = false;\r\n    },\r\n    chartMouseMove (ev) {\r\n      if (this.root.state.scroll.scrolling) {\r\n        ev.preventDefault();\r\n        ev.stopImmediatePropagation();\r\n        ev.stopPropagation();\r\n        const touch = typeof ev.touches !== 'undefined';\r\n        let movementX, movementY;\r\n        if (touch) {\r\n          const screenX = ev.touches[0].screenX;\r\n          const screenY = ev.touches[0].screenY;\r\n          movementX = this.mousePos.x - screenX;\r\n          movementY = this.mousePos.y - screenY;\r\n          let positiveX = screenX - this.mousePos.lastX > 0 ? 1 : -1;\r\n          let positiveY = screenY - this.mousePos.lastY > 0 ? 1 : -1;\r\n          this.mousePos.lastX = screenX;\r\n          this.mousePos.lastY = screenY;\r\n          if (positiveX !== this.mousePos.positiveX) {\r\n            this.mousePos.x = screenX;\r\n            this.mousePos.positiveX = positiveX;\r\n            movementX = 0;\r\n          }\r\n          if (positiveY !== this.mousePos.positiveY) {\r\n            this.mousePos.y = screenY;\r\n            this.mousePos.positiveY = positiveY;\r\n            movementY = 0;\r\n          }\r\n        } else {\r\n          movementX = ev.movementX;\r\n          movementY = ev.movementY;\r\n        }\r\n        const horizontal = this.$refs.chartScrollContainerHorizontal;\r\n        const vertical = this.$refs.chartScrollContainerVertical;\r\n        const currentX = horizontal.scrollLeft;\r\n        let x = 0, y = 0;\r\n        if (touch) {\r\n          x = currentX + movementX;\r\n        } else {\r\n          x = currentX - (movementX * this.root.state.scroll.dragXMoveMultiplier);\r\n        }\r\n        horizontal.scrollLeft = x;\r\n        const currentY = vertical.scrollTop;\r\n        if (touch) {\r\n          y = currentY + movementY;\r\n        } else {\r\n          y = currentY - (movementY * this.root.state.scroll.dragYMoveMultiplier);\r\n        }\r\n        vertical.scrollTop = y;\r\n      }\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/MainView.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/Expander.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inject: [\"root\"],\n  props: [\"tasks\"],\n  data () {\n    const border = 0.5;\n    return {\n      border,\n      borderStyle: {\n        \"stroke-width\": border\n      },\n      lineOffset: 5\n    };\n  },\n  computed: {\n    /**\n     * Get all tasks\n     *\n     * @returns {array}\n     */\n    allChildren () {\n      const children = [];\n      this.tasks.forEach(task => {\n        task.allChildren.forEach(child => {\n          children.push(child);\n        });\n      });\n      return children;\n    },\n\n    /**\n     * Is current expander collapsed?\n     *\n     * @returns {boolean}\n     */\n    collapsed () {\n      if (this.tasks.length === 0) {\n        return false;\n      }\n      let collapsed = 0;\n      for (let i = 0, len = this.tasks.length; i < len; i++) {\n        if (this.tasks[i].collapsed) {\n          collapsed++;\n        }\n      }\n      return collapsed === this.tasks.length;\n    }\n  },\n  methods: {\n    /**\n     * Toggle expander\n     */\n    toggle () {\n      if (this.allChildren.length === 0) {\n        return;\n      }\n      const collapsed = !this.collapsed;\n      this.tasks.forEach(task => {\n        task.collapsed = collapsed;\n        task.allChildren.forEach(child => {\n          child.visible = !collapsed && !child.parent.collapsed;\n        });\n      });\n    }\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/Expander.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  inject: [\"root\"],\n  props: [\"column\", \"task\"],\n  data () {\n    return {};\n  },\n  computed: {\n    html () {\n      if (typeof this.column.html !== \"undefined\" && this.column.html === true) {\n        return true;\n      }\n      return false;\n    },\n    value () {\n      if (typeof this.column.value === \"function\") {\n        return this.column.value(this.task);\n      }\n      return this.task[this.column.value];\n    }\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/ItemColumn.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TaskListHeader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskListHeader.vue */ \"./src/components/TaskList/TaskListHeader.vue\");\n/* harmony import */ var _TaskListItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskListItem.vue */ \"./src/components/TaskList/TaskListItem.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    TaskListHeader: _TaskListHeader_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    TaskListItem: _TaskListItem_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  data () {\r\n    return {};\r\n  },\r\n  mounted () {\r\n    this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;\r\n    this.root.state.refs.taskList = this.$refs.taskList;\r\n    this.root.state.refs.taskListItems = this.$refs.taskListItems;\r\n  },\r\n  computed: {\r\n    getListExpanderStyle () {\r\n      return task => {\r\n        const state = this.root.state;\r\n        const padding = (task.parents.length - 1) * state.taskList.expander.padding;\r\n        const maxLevel = this.root.getMaximalLevel();\r\n        let height = state.row.height + state.grid.horizontal.gap * 2 - this.root.style('grid-line-vertical')['stroke-width'];\r\n        let width = ((state.taskList.expander.size + this.root.style(\"calendar-row\")[\"stroke-width\"] + padding + state.taskList.expander.margin) / 100) * state.taskList.percent;\r\n        if (state.taskList.expander.straight) {\r\n          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;\r\n        }\r\n        const style = {\r\n          width: width + \"px\",\r\n          height: height + \"px\",\r\n          \"border-color\": \"#00000010\",\r\n          \"padding-left\": padding + state.taskList.expander.margin + \"px\",\r\n          margin: \"auto 0px\"\r\n        };\r\n        return style;\r\n      };\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskList.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Expander_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expander.vue */ \"./src/components/TaskList/Expander.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  components: {\r\n    TaskListExpander: _Expander_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\r\n  },\r\n  inject: [\"root\"],\r\n  data () {\r\n    return {\r\n      resizer: {\r\n        moving: false,\r\n        x: 0\r\n      }\r\n    };\r\n  },\r\n  computed: {\r\n    getStyle () {\r\n      return column => {\r\n        const state = this.root.state;\r\n        return {\r\n          \"height\": state.calendar.height + this.root.style('calendar-row')['stroke-width'] + \"px\",\r\n          \"margin-bottom\": state.calendar.gap + \"px\",\r\n          \"width\": column.finalWidth + \"px\"\r\n        };\r\n      };\r\n    },\r\n    collapsible () {\r\n      return this.root.state.tasks.filter(task => task.allChildren.length > 0);\r\n    },\r\n  },\r\n  methods: {\r\n    resizerMouseDown (event, column) {\r\n      if (!this.resizerMoving) {\r\n        this.resizer.moving = column;\r\n        this.resizer.x = event.clientX;\r\n        this.resizer.initialWidth = column.width;\r\n        this.root.$emit(\"taskList-column-width-change-start\", this.resizer.moving.width);\r\n      }\r\n    },\r\n    resizerMouseMove (event) {\r\n      if (this.resizer.moving) {\r\n        this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;\r\n        this.root.$emit(\"taskList-column-width-change\", this.resizer.moving.width);\r\n      }\r\n    },\r\n    resizerMouseUp (event) {\r\n      if (this.resizer.moving) {\r\n        this.root.$emit(\"taskList-column-width-change\", this.resizer.moving.width);\r\n        this.root.$emit(\"taskList-column-width-change-stop\", this.resizer.moving.width);\r\n        this.resizer.moving = false;\r\n      }\r\n    }\r\n  },\r\n  created () {\r\n    this.root.$on(\"main-view-mousemove\", this.resizerMouseMove);\r\n    this.root.$on(\"main-view-mouseup\", this.resizerMouseUp);\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListHeader.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Expander_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expander.vue */ \"./src/components/TaskList/Expander.vue\");\n/* harmony import */ var _ItemColumn_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemColumn.vue */ \"./src/components/TaskList/ItemColumn.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    TaskListExpander: _Expander_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    ItemColumn: _ItemColumn_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  },\n  inject: [\"root\"],\n  props: [\"task\", \"expanderStyle\"],\n  data () {\n    return {};\n  }\n});\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListItem.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=template&id=02c6304c&":
-/*!*******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=02c6304c& ***!
-  \*******************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    { staticClass: \"gantt-elastic\" },\n    [\n      _vm._t(\"header\"),\n      _vm._v(\" \"),\n      _c(\"main-view\", { attrs: { tasks: _vm.tasks, options: _vm.options } }),\n      _vm._v(\" \"),\n      _vm._t(\"footer\")\n    ],\n    2\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass: \"gantt-elastic__calendar-wrapper\",\n      style: _vm.root.style(\"calendar-wrapper\")\n    },\n    [\n      _c(\n        \"foreignObject\",\n        {\n          attrs: {\n            x: _vm.getX,\n            y: _vm.getY,\n            width: _vm.getWidth,\n            height: _vm.root.state.calendar.height\n          }\n        },\n        [\n          _c(\"div\", {\n            staticClass: \"gantt-elastic__calendar\",\n            style: _vm.root.style(\"calendar\"),\n            attrs: { xmlns: \"http://www.w3.org/1999/xhtml\" }\n          })\n        ]\n      ),\n      _vm._v(\" \"),\n      _vm._l(_vm.months, function(month) {\n        return _c(\"calendar-row\", {\n          key: month.key,\n          staticClass: \"gantt-elastic__calendar-row--month\",\n          attrs: { item: month, which: \"month\" }\n        })\n      }),\n      _vm._v(\" \"),\n      _vm._l(_vm.getDays, function(day) {\n        return _c(\"calendar-row\", {\n          key: day.key,\n          staticClass: \"gantt-elastic__calendar-row--day\",\n          attrs: { item: day, which: \"day\" }\n        })\n      }),\n      _vm._v(\" \"),\n      _vm._l(_vm.getHours, function(hour) {\n        return _c(\"calendar-row\", {\n          key: hour.key,\n          staticClass: \"gantt-elastic__calendar-row--hour\",\n          attrs: { item: hour, which: \"hour\" }\n        })\n      })\n    ],\n    2\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/Calendar.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass: \"gantt-elastic__calendar-row\",\n      style: _vm.root.style(\"calendar-row\")\n    },\n    [\n      _c(\"rect\", {\n        class: \"gantt-elastic__calendar-row-rect--\" + _vm.which,\n        style: _vm.root.style(\"calendar-row-rect--\" + _vm.which),\n        attrs: {\n          x: _vm.item.x,\n          y: _vm.item.y,\n          width: _vm.item.width,\n          height: _vm.item.height\n        }\n      }),\n      _vm._v(\" \"),\n      _c(\n        \"text\",\n        {\n          class: \"gantt-elastic__calendar-row-text--\" + _vm.which,\n          style: _vm.root.style(\"calendar-row-text--\" + _vm.which),\n          attrs: {\n            x: _vm.getTextX,\n            y: _vm.getTextY,\n            \"alignment-baseline\": \"middle\",\n            \"text-anchor\": _vm.anchor\n          }\n        },\n        [_vm._v(_vm._s(_vm.item.label))]\n      )\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/CalendarRow.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd& ***!
-  \*****************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"svg\",\n    {\n      ref: \"chart\",\n      staticClass: \"gantt-elastic__chart\",\n      style: _vm.root.style(\"chart\"),\n      attrs: {\n        x: \"0\",\n        y: \"0\",\n        width: _vm.getWidth + \"px\",\n        height: _vm.getHeight + \"px\",\n        xmlns: \"http://www.w3.org/2000/svg\"\n      }\n    },\n    [\n      _c(\"calendar\"),\n      _vm._v(\" \"),\n      _c(\n        \"foreignObject\",\n        {\n          attrs: {\n            x: \"0\",\n            y: _vm.root.getCalendarHeight(),\n            width: \"100%\",\n            height: _vm.root.state.rowsHeight\n          }\n        },\n        [\n          _c(\n            \"div\",\n            {\n              ref: \"chartGraph\",\n              staticClass: \"gantt-elastic__chart-graph\",\n              style: _vm.root.style(\"chart-graph\", { height: \"100%\" }),\n              attrs: { xmlns: \"http://www.w3.org/1999/xhtml\" }\n            },\n            [\n              _c(\n                \"svg\",\n                {\n                  ref: \"chart\",\n                  staticClass: \"gantt-elastic__chart\",\n                  style: _vm.root.style(\"chart\"),\n                  attrs: {\n                    x: \"0\",\n                    y: \"0\",\n                    width: _vm.getWidth + \"px\",\n                    height: _vm.root.state.allVisibleTasksHeight + \"px\",\n                    viewBox: _vm.getViewBox,\n                    xmlns: \"http://www.w3.org/2000/svg\"\n                  }\n                },\n                [\n                  _c(\"grid\"),\n                  _vm._v(\" \"),\n                  _c(\"dependency-lines\", {\n                    attrs: { tasks: _vm.root.state.tasks }\n                  }),\n                  _vm._v(\" \"),\n                  _vm._l(_vm.root.state.tasks, function(task) {\n                    return _c(\n                      \"g\",\n                      {\n                        directives: [\n                          {\n                            name: \"show\",\n                            rawName: \"v-show\",\n                            value: task.visible,\n                            expression: \"task.visible\"\n                          }\n                        ],\n                        key: task.id,\n                        staticClass: \"gantt-elastic__chart-row-wrapper\",\n                        style: _vm.root.style(\"chart-row-wrapper\"),\n                        attrs: { task: task }\n                      },\n                      [\n                        _c(task.type, {\n                          tag: \"component\",\n                          attrs: { task: task }\n                        })\n                      ],\n                      1\n                    )\n                  })\n                ],\n                2\n              )\n            ]\n          )\n        ]\n      )\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Chart.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"svg\",\n    {\n      staticClass: \"gantt-elastic__chart-dependency-lines-container\",\n      style: _vm.root.style(\"chart-dependency-lines-container\"),\n      attrs: { width: \"100%\", height: \"100%\" }\n    },\n    _vm._l(_vm.dependencyTasks, function(task) {\n      return _c(\n        \"g\",\n        {\n          directives: [\n            {\n              name: \"show\",\n              rawName: \"v-show\",\n              value: task.visible,\n              expression: \"task.visible\"\n            }\n          ],\n          key: task.id,\n          attrs: { task: task }\n        },\n        _vm._l(task.dependencyLines, function(dependencyLine) {\n          return _c(\"path\", {\n            key: dependencyLine.id,\n            staticClass: \"gantt-elastic__chart-dependency-lines-path\",\n            style: _vm.root.style(\n              \"chart-dependency-lines-path\",\n              task.style[\"chart-dependency-lines-path\"]\n            ),\n            attrs: { task: task, d: dependencyLine.points }\n          })\n        })\n      )\n    })\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/DependencyLines.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7& ***!
-  \****************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"svg\",\n    {\n      ref: \"chart\",\n      staticClass: \"gantt-elastic__grid-lines-wrapper\",\n      style: _vm.root.style(\"grid-lines-wrapper\"),\n      attrs: {\n        x: \"0\",\n        y: \"0\",\n        width: _vm.root.state.width,\n        height: _vm.root.state.allVisibleTasksHeight,\n        xmlns: \"http://www.w3.org/2000/svg\"\n      }\n    },\n    [\n      _c(\n        \"g\",\n        {\n          staticClass: \"gantt-elastic__grid-lines\",\n          style: _vm.root.style(\"grid-lines\")\n        },\n        [\n          _vm._l(_vm.horizontalLines, function(line) {\n            return _c(\"line\", {\n              key: line.key,\n              staticClass: \"gantt-elastic__grid-line-horizontal\",\n              style: _vm.root.style(\"grid-line-horizontal\"),\n              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }\n            })\n          }),\n          _vm._v(\" \"),\n          _vm._l(_vm.verticalLines, function(line) {\n            return _c(\"line\", {\n              key: line.key,\n              staticClass: \"gantt-elastic__grid-line-vertical\",\n              style: _vm.root.style(\"grid-line-vertical\"),\n              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }\n            })\n          }),\n          _vm._v(\" \"),\n          _c(\"line\", {\n            staticClass: \"gantt-elastic__grid-line-time\",\n            style: _vm.root.style(\"grid-line-time\"),\n            attrs: {\n              x1: _vm.timeLinePosition.x,\n              y1: _vm.timeLinePosition.y1,\n              x2: _vm.timeLinePosition.x,\n              y2: _vm.timeLinePosition.y2\n            }\n          })\n        ],\n        2\n      )\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Grid.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass: \"gantt-elastic__chart-row-progress-bar-wrapper\",\n      style: _vm.root.style(\n        \"chart-row-progress-bar-wrapper\",\n        _vm.task.style[\"chart-row-progress-bar-wrapper\"]\n      )\n    },\n    [\n      _c(\"defs\", [\n        _c(\n          \"pattern\",\n          {\n            attrs: {\n              id: \"diagonalHatch\",\n              width: _vm.root.state.progress.width,\n              height: _vm.root.state.progress.width,\n              patternTransform: \"rotate(45 0 0)\",\n              patternUnits: \"userSpaceOnUse\"\n            }\n          },\n          [\n            _c(\"line\", {\n              staticClass: \"chart-row-progress-bar-line\",\n              style: _vm.root.style(\n                \"chart-row-progress-bar-line\",\n                _vm.task.style[\"chart-row-progress-bar-line\"]\n              ),\n              attrs: {\n                x1: \"0\",\n                y1: \"0\",\n                x2: \"0\",\n                y2: _vm.root.state.progress.width\n              }\n            })\n          ]\n        )\n      ]),\n      _vm._v(\" \"),\n      _vm.root.state.progress.bar\n        ? _c(\"rect\", {\n            staticClass: \"gantt-elastic__chart-row-progress-bar-solid\",\n            style: _vm.root.style(\n              \"chart-row-progress-bar-solid\",\n              _vm.task.style[\"chart-row-progress-bar-solid\"]\n            ),\n            attrs: { x: \"0\", y: \"0\", width: _vm.getProgressWidth }\n          })\n        : _vm._e(),\n      _vm._v(\" \"),\n      _vm.root.state.progress.pattern\n        ? _c(\"g\", [\n            _c(\"rect\", {\n              staticClass: \"gantt-elastic__chart-row-progress-bar-pattern\",\n              style: _vm.root.style(\n                \"chart-row-progress-bar-pattern\",\n                _vm.task.style[\"chart-row-progress-bar-pattern\"]\n              ),\n              attrs: {\n                x: _vm.getProgressWidth,\n                y: \"0\",\n                width: 100 - _vm.task.progress + \"%\",\n                height: \"100%\"\n              }\n            }),\n            _vm._v(\" \"),\n            _c(\"path\", {\n              staticClass: \"gantt-elastic__chart-row-progress-bar-outline\",\n              style: _vm.root.style(\n                \"chart-row-progress-bar-outline\",\n                _vm.task.style[\"base\"],\n                _vm.task.style[\"chart-row-progress-bar-outline\"]\n              ),\n              attrs: { d: _vm.getLinePoints }\n            })\n          ])\n        : _vm._e()\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/ProgressBar.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c& ***!
-  \*************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass:\n        \"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper\",\n      style: _vm.root.style(\n        \"chart-row-bar-wrapper\",\n        \"chart-row-milestone-wrapper\",\n        _vm.task.style[\"chart-row-bar-wrapper\"]\n      )\n    },\n    [\n      _c(\n        \"svg\",\n        {\n          staticClass:\n            \"gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone\",\n          style: _vm.root.style(\n            \"chart-row-bar\",\n            \"chart-row-milestone\",\n            _vm.task.style[\"chart-row-bar\"]\n          ),\n          attrs: {\n            x: _vm.task.x,\n            y: _vm.task.y,\n            width: _vm.task.width,\n            height: _vm.task.height,\n            xmlns: \"http://www.w3.org/2000/svg\"\n          },\n          on: {\n            click: function($event) {\n              _vm.emitEvent(\"click\", $event)\n            },\n            mouseenter: function($event) {\n              _vm.emitEvent(\"mouseenter\", $event)\n            },\n            mouseover: function($event) {\n              _vm.emitEvent(\"mouseover\", $event)\n            },\n            mouseout: function($event) {\n              _vm.emitEvent(\"mouseout\", $event)\n            },\n            mousemove: function($event) {\n              _vm.emitEvent(\"mousemove\", $event)\n            },\n            mousedown: function($event) {\n              _vm.emitEvent(\"mousedown\", $event)\n            },\n            mouseup: function($event) {\n              _vm.emitEvent(\"mouseup\", $event)\n            },\n            mousewheel: function($event) {\n              _vm.emitEvent(\"mousewheel\", $event)\n            },\n            touchstart: function($event) {\n              _vm.emitEvent(\"touchstart\", $event)\n            },\n            touchmove: function($event) {\n              _vm.emitEvent(\"touchmove\", $event)\n            },\n            touchend: function($event) {\n              _vm.emitEvent(\"touchend\", $event)\n            }\n          }\n        },\n        [\n          _c(\"defs\", [\n            _c(\"clipPath\", { attrs: { id: _vm.clipPathId } }, [\n              _c(\"polygon\", { attrs: { points: _vm.getPoints } })\n            ])\n          ]),\n          _vm._v(\" \"),\n          _c(\"polygon\", {\n            staticClass:\n              \"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon\",\n            style: _vm.root.style(\n              \"chart-row-bar-polygon\",\n              \"chart-row-milestone-polygon\",\n              _vm.task.style[\"base\"],\n              _vm.task.style[\"chart-row-bar-polygon\"]\n            ),\n            attrs: { points: _vm.getPoints }\n          }),\n          _vm._v(\" \"),\n          _c(\"progress-bar\", {\n            attrs: {\n              task: _vm.task,\n              \"clip-path\": \"url(#\" + _vm.clipPathId + \")\"\n            }\n          })\n        ],\n        1\n      ),\n      _vm._v(\" \"),\n      _vm.root.state.row.showText\n        ? _c(\"chart-text\", { attrs: { task: _vm.task } })\n        : _vm._e()\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Milestone.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass:\n        \"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper\",\n      style: _vm.root.style(\n        \"chart-row-bar-wrapper\",\n        _vm.root.style(\"chart-row-project-wrapper\"),\n        _vm.task.style[\"chart-row-bar-wrapper\"]\n      )\n    },\n    [\n      _c(\n        \"svg\",\n        {\n          staticClass:\n            \"gantt-elastic__chart-row-bar gantt-elastic__chart-row-project\",\n          style: _vm.root.style(\n            \"chart-row-bar\",\n            \"chart-row-project\",\n            _vm.task.style[\"chart-row-bar\"]\n          ),\n          attrs: {\n            x: _vm.task.x,\n            y: _vm.task.y,\n            width: _vm.task.width,\n            height: _vm.task.height,\n            xmlns: \"http://www.w3.org/2000/svg\"\n          },\n          on: {\n            click: function($event) {\n              _vm.emitEvent(\"click\", $event)\n            },\n            mouseenter: function($event) {\n              _vm.emitEvent(\"mouseenter\", $event)\n            },\n            mouseover: function($event) {\n              _vm.emitEvent(\"mouseover\", $event)\n            },\n            mouseout: function($event) {\n              _vm.emitEvent(\"mouseout\", $event)\n            },\n            mousemove: function($event) {\n              _vm.emitEvent(\"mousemove\", $event)\n            },\n            mousedown: function($event) {\n              _vm.emitEvent(\"mousedown\", $event)\n            },\n            mouseup: function($event) {\n              _vm.emitEvent(\"mouseup\", $event)\n            },\n            mousewheel: function($event) {\n              _vm.emitEvent(\"mousewheel\", $event)\n            },\n            touchstart: function($event) {\n              _vm.emitEvent(\"touchstart\", $event)\n            },\n            touchmove: function($event) {\n              _vm.emitEvent(\"touchmove\", $event)\n            },\n            touchend: function($event) {\n              _vm.emitEvent(\"touchend\", $event)\n            }\n          }\n        },\n        [\n          _c(\"defs\", [\n            _c(\"clipPath\", { attrs: { id: _vm.clipPathId } }, [\n              _c(\"path\", { attrs: { d: _vm.getPoints } })\n            ])\n          ]),\n          _vm._v(\" \"),\n          _c(\"path\", {\n            staticClass:\n              \"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon\",\n            style: _vm.root.style(\n              \"chart-row-bar-polygon\",\n              \"chart-row-project-polygon\",\n              _vm.task.style[\"base\"],\n              _vm.task.style[\"chart-row-bar-polygon\"]\n            ),\n            attrs: { d: _vm.getPoints }\n          }),\n          _vm._v(\" \"),\n          _c(\"progress-bar\", {\n            attrs: {\n              task: _vm.task,\n              \"clip-path\": \"url(#\" + _vm.clipPathId + \")\"\n            }\n          })\n        ],\n        1\n      ),\n      _vm._v(\" \"),\n      _vm.root.state.row.showText\n        ? _c(\"chart-text\", { attrs: { task: _vm.task } })\n        : _vm._e()\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Project.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&":
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca& ***!
-  \********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"g\",\n    {\n      staticClass:\n        \"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper\",\n      style: _vm.root.style(\n        \"chart-row-bar-wrapper\",\n        \"chart-row-task-wrapper\",\n        _vm.task.style[\"chart-row-bar-wrapper\"]\n      )\n    },\n    [\n      _c(\n        \"svg\",\n        {\n          staticClass:\n            \"gantt-elastic__chart-row-bar gantt-elastic__chart-row-task\",\n          style: _vm.root.style(\n            \"chart-row-bar\",\n            \"chart-row-task\",\n            _vm.task.style[\"chart-row-bar\"]\n          ),\n          attrs: {\n            x: _vm.task.x,\n            y: _vm.task.y,\n            width: _vm.task.width,\n            height: _vm.task.height,\n            xmlns: \"http://www.w3.org/2000/svg\"\n          },\n          on: {\n            click: function($event) {\n              _vm.emitEvent(\"click\", $event)\n            },\n            mouseenter: function($event) {\n              _vm.emitEvent(\"mouseenter\", $event)\n            },\n            mouseover: function($event) {\n              _vm.emitEvent(\"mouseover\", $event)\n            },\n            mouseout: function($event) {\n              _vm.emitEvent(\"mouseout\", $event)\n            },\n            mousemove: function($event) {\n              _vm.emitEvent(\"mousemove\", $event)\n            },\n            mousedown: function($event) {\n              _vm.emitEvent(\"mousedown\", $event)\n            },\n            mouseup: function($event) {\n              _vm.emitEvent(\"mouseup\", $event)\n            },\n            mousewheel: function($event) {\n              _vm.emitEvent(\"mousewheel\", $event)\n            },\n            touchstart: function($event) {\n              _vm.emitEvent(\"touchstart\", $event)\n            },\n            touchmove: function($event) {\n              _vm.emitEvent(\"touchmove\", $event)\n            },\n            touchend: function($event) {\n              _vm.emitEvent(\"touchend\", $event)\n            }\n          }\n        },\n        [\n          _c(\"defs\", [\n            _c(\"clipPath\", { attrs: { id: _vm.clipPathId } }, [\n              _c(\"polygon\", { attrs: { points: _vm.getPoints } })\n            ])\n          ]),\n          _vm._v(\" \"),\n          _c(\"polygon\", {\n            staticClass:\n              \"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon\",\n            style: _vm.root.style(\n              \"chart-row-bar-polygon\",\n              \"chart-row-task-polygon\",\n              _vm.task.style[\"base\"],\n              _vm.task.style[\"chart-row-bar-polygon\"]\n            ),\n            attrs: { points: _vm.getPoints }\n          }),\n          _vm._v(\" \"),\n          _c(\"progress-bar\", {\n            attrs: {\n              task: _vm.task,\n              \"clip-path\": \"url(#\" + _vm.clipPathId + \")\"\n            }\n          })\n        ],\n        1\n      ),\n      _vm._v(\" \"),\n      _vm.root.state.row.showText\n        ? _c(\"chart-text\", { attrs: { task: _vm.task } })\n        : _vm._e()\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Task.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4& ***!
-  \****************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"svg\",\n    {\n      staticClass: \"gantt-elastic__chart-row-text-wrapper\",\n      style: _vm.root.style(\"chart-row-text-wrapper\"),\n      attrs: {\n        x: _vm.task.x + _vm.task.width + _vm.root.state.chartText.offset,\n        y: _vm.task.y - _vm.root.state.grid.horizontal.gap,\n        width: _vm.getWidth,\n        height: _vm.getHeight\n      }\n    },\n    [\n      _c(\n        \"foreignObject\",\n        { attrs: { x: \"0\", y: \"0\", width: \"100%\", height: _vm.getHeight } },\n        [\n          _c(\n            \"div\",\n            {\n              staticClass: \"gantt-elastic__chart-row-text\",\n              style: _vm.root.style(\"chart-row-text\"),\n              attrs: { xmlns: \"http://www.w3.org/1999/xhtml\" }\n            },\n            [\n              !_vm.html\n                ? _c(\n                    \"div\",\n                    {\n                      staticClass:\n                        \"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text\",\n                      style: Object.assign(\n                        {},\n                        _vm.root.style(\n                          \"chart-row-text-content\",\n                          \"chart-row-text-content--text\"\n                        ),\n                        _vm.contentStyle\n                      )\n                    },\n                    [_c(\"div\", [_vm._v(_vm._s(_vm.task.label))])]\n                  )\n                : _vm._e(),\n              _vm._v(\" \"),\n              _vm.html\n                ? _c(\"div\", {\n                    staticClass:\n                      \"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html\",\n                    style: Object.assign(\n                      {},\n                      _vm.root.style(\n                        \"chart-row-text-content\",\n                        \"chart-row-text-content--html\"\n                      ),\n                      _vm.contentStyle\n                    ),\n                    domProps: { innerHTML: _vm._s(_vm.task.label) }\n                  })\n                : _vm._e()\n            ]\n          )\n        ]\n      )\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Text.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/MainView.vue?vue&type=template&id=0bc4212e&":
-/*!**************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e& ***!
-  \**************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"gantt-elastic__main-view\" }, [\n    _c(\n      \"div\",\n      {\n        staticClass: \"gantt-elastic__svg-container-wrapper\",\n        style: _vm.root.style(\"svg-container-wrapper\", {\n          height: _vm.root.state.height + \"px\"\n        })\n      },\n      [\n        _c(\n          \"svg\",\n          {\n            ref: \"svgMainView\",\n            staticClass: \"gantt-elastic__svg-container\",\n            style: _vm.root.style(\"svg-container\", {\n              \"max-width\":\n                \"calc(100% - \" + _vm.root.state.scrollBarHeight + \"px)\"\n            }),\n            attrs: {\n              width: _vm.getWidth,\n              height: _vm.root.state.height,\n              xmlns: \"http://www.w3.org/2000/svg\"\n            }\n          },\n          [\n            _c(\n              \"foreignObject\",\n              { attrs: { x: \"0\", y: \"0\", width: \"100%\", height: \"100%\" } },\n              [\n                _c(\n                  \"div\",\n                  {\n                    staticClass: \"gantt-elastic__container\",\n                    attrs: { xmlns: \"http://www.w3.org/1999/xhtml\" },\n                    on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }\n                  },\n                  [\n                    _c(\n                      \"div\",\n                      { staticClass: \"gantt-elastic__task-list-container\" },\n                      [\n                        _c(\n                          \"svg\",\n                          {\n                            directives: [\n                              {\n                                name: \"show\",\n                                rawName: \"v-show\",\n                                value: _vm.root.state.taskList.display,\n                                expression: \"root.state.taskList.display\"\n                              }\n                            ],\n                            ref: \"svgTaskList\",\n                            staticClass: \"gantt-elastic__task-list-svg\",\n                            attrs: {\n                              xmlns: \"http://www.w3.org/2000/svg\",\n                              width: _vm.root.state.taskList.finalWidth,\n                              height: _vm.root.state.height\n                            }\n                          },\n                          [\n                            _c(\"defs\", {\n                              domProps: { innerHTML: _vm._s(_vm.defs) }\n                            }),\n                            _vm._v(\" \"),\n                            _c(\"task-list\")\n                          ],\n                          1\n                        )\n                      ]\n                    ),\n                    _vm._v(\" \"),\n                    _c(\n                      \"div\",\n                      {\n                        ref: \"svgChartContainer\",\n                        staticClass: \"gantt-elastic__main-view-container\",\n                        on: {\n                          mousedown: function($event) {\n                            $event.stopPropagation()\n                            return _vm.chartMouseDown($event)\n                          },\n                          touchstart: function($event) {\n                            $event.stopPropagation()\n                            $event.preventDefault()\n                            return _vm.chartMouseDown($event)\n                          },\n                          mouseup: function($event) {\n                            $event.stopPropagation()\n                            $event.preventDefault()\n                            return _vm.chartMouseUp($event)\n                          },\n                          touchend: function($event) {\n                            $event.stopPropagation()\n                            $event.preventDefault()\n                            return _vm.chartMouseUp($event)\n                          },\n                          mousemove: function($event) {\n                            $event.stopPropagation()\n                            $event.preventDefault()\n                            return _vm.chartMouseMove($event)\n                          },\n                          touchmove: function($event) {\n                            $event.stopPropagation()\n                            $event.preventDefault()\n                            return _vm.chartMouseMove($event)\n                          },\n                          wheel: function($event) {\n                            $event.preventDefault()\n                            return _vm.chartWheel($event)\n                          }\n                        }\n                      },\n                      [_c(\"chart\")],\n                      1\n                    )\n                  ]\n                )\n              ]\n            )\n          ],\n          1\n        ),\n        _vm._v(\" \"),\n        _c(\n          \"div\",\n          {\n            ref: \"chartScrollContainerVertical\",\n            staticClass:\n              \"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical\",\n            style: _vm.root.style(\n              \"chart-scroll-container\",\n              \"chart-scroll-container--vertical\",\n              _vm.verticalStyle\n            ),\n            on: { scroll: _vm.onVerticalScroll }\n          },\n          [\n            _c(\"div\", {\n              staticClass: \"gantt-elastic__chart-scroll--vertical\",\n              style: {\n                width: \"1px\",\n                height: _vm.root.state.allVisibleTasksHeight + \"px\"\n              }\n            })\n          ]\n        )\n      ]\n    ),\n    _vm._v(\" \"),\n    _c(\n      \"div\",\n      {\n        ref: \"chartScrollContainerHorizontal\",\n        staticClass:\n          \"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal\",\n        style: _vm.root.style(\n          \"chart-scroll-container\",\n          \"chart-scroll-container--horizontal\",\n          { marginLeft: _vm.getMarginLeft }\n        ),\n        on: { scroll: _vm.onHorizontalScroll }\n      },\n      [\n        _c(\"div\", {\n          staticClass: \"gantt-elastic__chart-scroll--horizontal\",\n          style: { height: \"1px\", width: _vm.root.state.width + \"px\" }\n        })\n      ]\n    )\n  ])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/MainView.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    {\n      staticClass: \"gantt-elastic__task-list-column-expander-wrapper\",\n      style: _vm.root.style(\"task-list-column-expander-wrapper\")\n    },\n    [\n      _c(\n        \"svg\",\n        {\n          staticClass: \"gantt-elastic__task-list-column-expander-content\",\n          style: _vm.root.style(\"task-list-column-expander-content\"),\n          attrs: {\n            width: _vm.root.state.taskList.expander.size,\n            height: _vm.root.state.taskList.expander.size\n          }\n        },\n        [\n          _vm.allChildren.length\n            ? _c(\"rect\", {\n                staticClass: \"gantt-elastic__task-list-column-expander-border\",\n                style: _vm.root.style(\n                  \"task-list-column-expander-border\",\n                  _vm.borderStyle\n                ),\n                attrs: {\n                  x: _vm.border,\n                  y: _vm.border,\n                  width: _vm.root.state.taskList.expander.size - _vm.border * 2,\n                  height:\n                    _vm.root.state.taskList.expander.size - _vm.border * 2,\n                  rx: \"2\",\n                  ry: \"2\"\n                },\n                on: { click: _vm.toggle }\n              })\n            : _vm._e(),\n          _vm._v(\" \"),\n          _vm.allChildren.length\n            ? _c(\"line\", {\n                staticClass: \"gantt-elastic__task-list-column-expander-line\",\n                style: _vm.root.style(\"task-list-column-expander-line\"),\n                attrs: {\n                  x1: _vm.lineOffset,\n                  y1: _vm.root.state.taskList.expander.size / 2,\n                  x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,\n                  y2: _vm.root.state.taskList.expander.size / 2\n                },\n                on: { click: _vm.toggle }\n              })\n            : _vm._e(),\n          _vm._v(\" \"),\n          _vm.collapsed\n            ? _c(\"line\", {\n                staticClass: \"gantt-elastic__task-list-column-expander-line\",\n                style: _vm.root.style(\"task-list-column-expander-line\"),\n                attrs: {\n                  x1: _vm.root.state.taskList.expander.size / 2,\n                  y1: _vm.lineOffset,\n                  x2: _vm.root.state.taskList.expander.size / 2,\n                  y2: _vm.root.state.taskList.expander.size - _vm.lineOffset\n                },\n                on: { click: _vm.toggle }\n              })\n            : _vm._e()\n        ]\n      )\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/Expander.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96& ***!
-  \*************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    {\n      staticClass: \"gantt-elastic__task-list-item-column\",\n      style: _vm.root.style(\n        \"task-list-item-column\",\n        _vm.column.style[\"task-list-item-column\"],\n        {\n          width: _vm.column.finalWidth + \"px\",\n          height: _vm.column.height + \"px\"\n        }\n      )\n    },\n    [\n      _c(\n        \"div\",\n        {\n          staticClass: \"gantt-elastic__task-list-item-value-wrapper\",\n          style: _vm.root.style(\n            \"task-list-item-value-wrapper\",\n            _vm.column.style[\"task-list-item-value-wrapper\"]\n          )\n        },\n        [\n          _vm._t(\"default\"),\n          _vm._v(\" \"),\n          _c(\n            \"div\",\n            {\n              staticClass: \"gantt-elastic__task-list-item-value-container\",\n              style: _vm.root.style(\n                \"task-list-item-value-container\",\n                _vm.column.style[\"task-list-item-value-container\"]\n              )\n            },\n            [\n              !_vm.html\n                ? _c(\n                    \"div\",\n                    {\n                      staticClass: \"gantt-elastic__task-list-item-value\",\n                      style: _vm.root.style(\n                        \"task-list-item-value\",\n                        _vm.column.style[\"task-list-item-value\"]\n                      )\n                    },\n                    [_vm._v(_vm._s(_vm.value))]\n                  )\n                : _vm._e(),\n              _vm._v(\" \"),\n              _vm.html\n                ? _c(\"div\", {\n                    staticClass: \"gantt-elastic__task-list-item-value\",\n                    style: _vm.root.style(\n                      \"task-list-item-value\",\n                      _vm.column.style[\"task-list-item-value\"]\n                    ),\n                    domProps: { innerHTML: _vm._s(_vm.value) }\n                  })\n                : _vm._e()\n            ]\n          )\n        ],\n        2\n      )\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/ItemColumn.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f& ***!
-  \***********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"foreignObject\",\n    {\n      directives: [\n        {\n          name: \"show\",\n          rawName: \"v-show\",\n          value: _vm.root.state.taskList.display,\n          expression: \"root.state.taskList.display\"\n        }\n      ],\n      ref: \"taskListWrapper\",\n      staticClass: \"gantt-elastic__task-list-wrapper\",\n      style: _vm.root.style(\"task-list-wrapper\"),\n      attrs: { x: \"0\", y: \"0\", width: \"100%\", height: \"100%\" }\n    },\n    [\n      _c(\n        \"div\",\n        {\n          ref: \"taskList\",\n          staticClass: \"gantt-elastic__task-list\",\n          style: _vm.root.style(\"task-list\"),\n          attrs: { xmlns: \"http://www.w3.org/1999/xhtml\" }\n        },\n        [\n          _c(\"task-list-header\"),\n          _vm._v(\" \"),\n          _c(\n            \"div\",\n            {\n              ref: \"taskListItems\",\n              staticClass: \"gantt-elastic__task-list-items\",\n              style: _vm.root.style(\"task-list-items\", {\n                height: _vm.root.state.rowsHeight + \"px\"\n              })\n            },\n            _vm._l(_vm.root.state.tasks, function(task) {\n              return _c(\"task-list-item\", {\n                directives: [\n                  {\n                    name: \"show\",\n                    rawName: \"v-show\",\n                    value: task.visible,\n                    expression: \"task.visible\"\n                  }\n                ],\n                key: task.id,\n                attrs: {\n                  task: task,\n                  \"expander-style\": _vm.getListExpanderStyle(task)\n                }\n              })\n            })\n          )\n        ],\n        1\n      )\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskList.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8& ***!
-  \*****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    {\n      staticClass: \"gantt-elastic__task-list-header\",\n      style: _vm.root.style(\"task-list-header\")\n    },\n    _vm._l(_vm.root.state.taskList.columns, function(column) {\n      return _c(\n        \"div\",\n        {\n          key: column._id,\n          staticClass: \"gantt-elastic__task-list-header-column\",\n          style: _vm.root.style(\n            \"task-list-header-column\",\n            column.style[\"task-list-header-column\"],\n            _vm.getStyle(column)\n          )\n        },\n        [\n          column.expander\n            ? _c(\"task-list-expander\", { attrs: { tasks: _vm.collapsible } })\n            : _vm._e(),\n          _vm._v(\" \"),\n          _c(\n            \"div\",\n            {\n              staticClass: \"gantt-elastic__task-list-header-label\",\n              style: _vm.root.style(\n                \"task-list-header-label\",\n                column.style[\"task-list-header-label\"]\n              ),\n              attrs: { column: column },\n              on: {\n                mouseup: function($event) {\n                  _vm.resizerMouseUp($event, column)\n                }\n              }\n            },\n            [_vm._v(_vm._s(column.label))]\n          ),\n          _vm._v(\" \"),\n          _c(\n            \"div\",\n            {\n              staticClass: \"gantt-elastic__task-list-header-resizer-wrapper\",\n              style: _vm.root.style(\n                \"task-list-header-resizer-wrapper\",\n                column.style[\"task-list-header-resizer-wrapper\"]\n              ),\n              attrs: { column: column },\n              on: {\n                mousedown: function($event) {\n                  _vm.resizerMouseDown($event, column)\n                }\n              }\n            },\n            [\n              _c(\n                \"div\",\n                {\n                  staticClass: \"gantt-elastic__task-list-header-resizer\",\n                  style: _vm.root.style(\n                    \"task-list-header-resizer\",\n                    column.style[\"task-list-header-resizer\"]\n                  )\n                },\n                [\n                  _c(\"div\", {\n                    staticClass: \"gantt-elastic__task-list-header-resizer-dot\",\n                    style: _vm.root.style(\n                      \"task-list-header-resizer-dot\",\n                      column.style[\"task-list-header-resizer-dot\"]\n                    )\n                  }),\n                  _vm._v(\" \"),\n                  _c(\"div\", {\n                    staticClass: \"gantt-elastic__task-list-header-resizer-dot\",\n                    style: _vm.root.style(\n                      \"task-list-header-resizer-dot\",\n                      column.style[\"task-list-header-resizer-dot\"]\n                    )\n                  }),\n                  _vm._v(\" \"),\n                  _c(\"div\", {\n                    staticClass: \"gantt-elastic__task-list-header-resizer-dot\",\n                    style: _vm.root.style(\n                      \"task-list-header-resizer-dot\",\n                      column.style[\"task-list-header-resizer-dot\"]\n                    )\n                  })\n                ]\n              )\n            ]\n          )\n        ],\n        1\n      )\n    })\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListHeader.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    {\n      staticClass: \"gantt-elastic__task-list-item\",\n      style: _vm.root.style(\"task-list-item\")\n    },\n    _vm._l(_vm.root.state.taskList.columns, function(column) {\n      return _c(\n        \"item-column\",\n        { key: column._id, attrs: { column: column, task: _vm.task } },\n        [\n          column.expander\n            ? _c(\"task-list-expander\", {\n                style: _vm.expanderStyle,\n                attrs: { tasks: [_vm.task] }\n              })\n            : _vm._e()\n        ],\n        1\n      )\n    })\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListItem.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return normalizeComponent; });\n/* globals __VUE_SSR_CONTEXT__ */\n\n// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).\n// This module is a runtime utility for cleaner component module output and will\n// be included in the final webpack user bundle.\n\nfunction normalizeComponent (\n  scriptExports,\n  render,\n  staticRenderFns,\n  functionalTemplate,\n  injectStyles,\n  scopeId,\n  moduleIdentifier, /* server only */\n  shadowMode /* vue-cli only */\n) {\n  // Vue.extend constructor export interop\n  var options = typeof scriptExports === 'function'\n    ? scriptExports.options\n    : scriptExports\n\n  // render functions\n  if (render) {\n    options.render = render\n    options.staticRenderFns = staticRenderFns\n    options._compiled = true\n  }\n\n  // functional template\n  if (functionalTemplate) {\n    options.functional = true\n  }\n\n  // scopedId\n  if (scopeId) {\n    options._scopeId = 'data-v-' + scopeId\n  }\n\n  var hook\n  if (moduleIdentifier) { // server build\n    hook = function (context) {\n      // 2.3 injection\n      context =\n        context || // cached call\n        (this.$vnode && this.$vnode.ssrContext) || // stateful\n        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional\n      // 2.2 with runInNewContext: true\n      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {\n        context = __VUE_SSR_CONTEXT__\n      }\n      // inject component styles\n      if (injectStyles) {\n        injectStyles.call(this, context)\n      }\n      // register component module identifier for async chunk inferrence\n      if (context && context._registeredComponents) {\n        context._registeredComponents.add(moduleIdentifier)\n      }\n    }\n    // used by ssr in case component is cached and beforeCreate\n    // never gets called\n    options._ssrRegister = hook\n  } else if (injectStyles) {\n    hook = shadowMode\n      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }\n      : injectStyles\n  }\n\n  if (hook) {\n    if (options.functional) {\n      // for template-only hot-reload because in that case the render fn doesn't\n      // go through the normalizer\n      options._injectStyles = hook\n      // register for functioal component in vue file\n      var originalRender = options.render\n      options.render = function renderWithStyleInjection (h, context) {\n        hook.call(context)\n        return originalRender(h, context)\n      }\n    } else {\n      // inject component registration as beforeCreate hook\n      var existing = options.beforeCreate\n      options.beforeCreate = existing\n        ? [].concat(existing, hook)\n        : [hook]\n    }\n  }\n\n  return {\n    exports: scriptExports,\n    options: options\n  }\n}\n\n\n//# sourceURL=webpack://GanttElastic/./node_modules/vue-loader/lib/runtime/componentNormalizer.js?");
-
-/***/ }),
-
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../node_modules/css-loader!../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../node_modules/vue-loader/lib??vue-loader-options!./GanttElastic.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"c3e5085c\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?./node_modules/vue-style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__svg-container{\n  position: relative;\n}\n.gantt-elastic__main-view,.gantt-elastic__svg-container{\n  background: #fff;\n}\n.gantt-elastic__container,.gantt-elastic__svg-container{\n  max-width: 100%;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__container{\n  display: flex;\n  max-width: 100%;\n  position: absolute;\n  height: 100%;\n}\n.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
-
-/***/ "./node_modules/vue-style-loader/lib/addStylesClient.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/vue-style-loader/lib/addStylesClient.js ***!
-  \**************************************************************/
-/*! exports provided: default */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return addStylesClient; });\n/* harmony import */ var _listToStyles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./listToStyles */ \"./node_modules/vue-style-loader/lib/listToStyles.js\");\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n  Modified by Evan You @yyx990803\n*/\n\n\n\nvar hasDocument = typeof document !== 'undefined'\n\nif (typeof DEBUG !== 'undefined' && DEBUG) {\n  if (!hasDocument) {\n    throw new Error(\n    'vue-style-loader cannot be used in a non-browser environment. ' +\n    \"Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.\"\n  ) }\n}\n\n/*\ntype StyleObject = {\n  id: number;\n  parts: Array<StyleObjectPart>\n}\n\ntype StyleObjectPart = {\n  css: string;\n  media: string;\n  sourceMap: ?string\n}\n*/\n\nvar stylesInDom = {/*\n  [id: number]: {\n    id: number,\n    refs: number,\n    parts: Array<(obj?: StyleObjectPart) => void>\n  }\n*/}\n\nvar head = hasDocument && (document.head || document.getElementsByTagName('head')[0])\nvar singletonElement = null\nvar singletonCounter = 0\nvar isProduction = false\nvar noop = function () {}\nvar options = null\nvar ssrIdKey = 'data-vue-ssr-id'\n\n// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>\n// tags it will allow on a page\nvar isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase())\n\nfunction addStylesClient (parentId, list, _isProduction, _options) {\n  isProduction = _isProduction\n\n  options = _options || {}\n\n  var styles = Object(_listToStyles__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(parentId, list)\n  addStylesToDom(styles)\n\n  return function update (newList) {\n    var mayRemove = []\n    for (var i = 0; i < styles.length; i++) {\n      var item = styles[i]\n      var domStyle = stylesInDom[item.id]\n      domStyle.refs--\n      mayRemove.push(domStyle)\n    }\n    if (newList) {\n      styles = Object(_listToStyles__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(parentId, newList)\n      addStylesToDom(styles)\n    } else {\n      styles = []\n    }\n    for (var i = 0; i < mayRemove.length; i++) {\n      var domStyle = mayRemove[i]\n      if (domStyle.refs === 0) {\n        for (var j = 0; j < domStyle.parts.length; j++) {\n          domStyle.parts[j]()\n        }\n        delete stylesInDom[domStyle.id]\n      }\n    }\n  }\n}\n\nfunction addStylesToDom (styles /* Array<StyleObject> */) {\n  for (var i = 0; i < styles.length; i++) {\n    var item = styles[i]\n    var domStyle = stylesInDom[item.id]\n    if (domStyle) {\n      domStyle.refs++\n      for (var j = 0; j < domStyle.parts.length; j++) {\n        domStyle.parts[j](item.parts[j])\n      }\n      for (; j < item.parts.length; j++) {\n        domStyle.parts.push(addStyle(item.parts[j]))\n      }\n      if (domStyle.parts.length > item.parts.length) {\n        domStyle.parts.length = item.parts.length\n      }\n    } else {\n      var parts = []\n      for (var j = 0; j < item.parts.length; j++) {\n        parts.push(addStyle(item.parts[j]))\n      }\n      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }\n    }\n  }\n}\n\nfunction createStyleElement () {\n  var styleElement = document.createElement('style')\n  styleElement.type = 'text/css'\n  head.appendChild(styleElement)\n  return styleElement\n}\n\nfunction addStyle (obj /* StyleObjectPart */) {\n  var update, remove\n  var styleElement = document.querySelector('style[' + ssrIdKey + '~=\"' + obj.id + '\"]')\n\n  if (styleElement) {\n    if (isProduction) {\n      // has SSR styles and in production mode.\n      // simply do nothing.\n      return noop\n    } else {\n      // has SSR styles but in dev mode.\n      // for some reason Chrome can't handle source map in server-rendered\n      // style tags - source maps in <style> only works if the style tag is\n      // created and inserted dynamically. So we remove the server rendered\n      // styles and inject new ones.\n      styleElement.parentNode.removeChild(styleElement)\n    }\n  }\n\n  if (isOldIE) {\n    // use singleton mode for IE9.\n    var styleIndex = singletonCounter++\n    styleElement = singletonElement || (singletonElement = createStyleElement())\n    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)\n    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)\n  } else {\n    // use multi-style-tag mode in all other cases\n    styleElement = createStyleElement()\n    update = applyToTag.bind(null, styleElement)\n    remove = function () {\n      styleElement.parentNode.removeChild(styleElement)\n    }\n  }\n\n  update(obj)\n\n  return function updateStyle (newObj /* StyleObjectPart */) {\n    if (newObj) {\n      if (newObj.css === obj.css &&\n          newObj.media === obj.media &&\n          newObj.sourceMap === obj.sourceMap) {\n        return\n      }\n      update(obj = newObj)\n    } else {\n      remove()\n    }\n  }\n}\n\nvar replaceText = (function () {\n  var textStore = []\n\n  return function (index, replacement) {\n    textStore[index] = replacement\n    return textStore.filter(Boolean).join('\\n')\n  }\n})()\n\nfunction applyToSingletonTag (styleElement, index, remove, obj) {\n  var css = remove ? '' : obj.css\n\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = replaceText(index, css)\n  } else {\n    var cssNode = document.createTextNode(css)\n    var childNodes = styleElement.childNodes\n    if (childNodes[index]) styleElement.removeChild(childNodes[index])\n    if (childNodes.length) {\n      styleElement.insertBefore(cssNode, childNodes[index])\n    } else {\n      styleElement.appendChild(cssNode)\n    }\n  }\n}\n\nfunction applyToTag (styleElement, obj) {\n  var css = obj.css\n  var media = obj.media\n  var sourceMap = obj.sourceMap\n\n  if (media) {\n    styleElement.setAttribute('media', media)\n  }\n  if (options.ssrId) {\n    styleElement.setAttribute(ssrIdKey, obj.id)\n  }\n\n  if (sourceMap) {\n    // https://developer.chrome.com/devtools/docs/javascript-debugging\n    // this makes source maps inside style tags work properly in Chrome\n    css += '\\n/*# sourceURL=' + sourceMap.sources[0] + ' */'\n    // http://stackoverflow.com/a/26603875\n    css += '\\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'\n  }\n\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = css\n  } else {\n    while (styleElement.firstChild) {\n      styleElement.removeChild(styleElement.firstChild)\n    }\n    styleElement.appendChild(document.createTextNode(css))\n  }\n}\n\n\n//# sourceURL=webpack://GanttElastic/./node_modules/vue-style-loader/lib/addStylesClient.js?");
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=template&id=02c6304c&
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "gantt-elastic" },
+    [
+      _vm._t("header"),
+      _vm._v(" "),
+      _c("main-view", { attrs: { tasks: _vm.tasks, options: _vm.options } }),
+      _vm._v(" "),
+      _vm._t("footer")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
+
+// EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
+var dayjs_min = __webpack_require__(0);
+var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
+var MainViewvue_type_template_id_0bc4212e_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "gantt-elastic__main-view" }, [
+    _c(
+      "div",
+      {
+        staticClass: "gantt-elastic__svg-container-wrapper",
+        style: _vm.root.style("svg-container-wrapper", {
+          height: _vm.root.state.height + "px"
+        })
+      },
+      [
+        _c(
+          "svg",
+          {
+            ref: "svgMainView",
+            staticClass: "gantt-elastic__svg-container",
+            style: _vm.root.style("svg-container", {
+              "max-width":
+                "calc(100% - " + _vm.root.state.scrollBarHeight + "px)"
+            }),
+            attrs: {
+              width: _vm.getWidth,
+              height: _vm.root.state.height,
+              xmlns: "http://www.w3.org/2000/svg"
+            }
+          },
+          [
+            _c(
+              "foreignObject",
+              { attrs: { x: "0", y: "0", width: "100%", height: "100%" } },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "gantt-elastic__container",
+                    attrs: { xmlns: "http://www.w3.org/1999/xhtml" },
+                    on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "gantt-elastic__task-list-container" },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.root.state.taskList.display,
+                                expression: "root.state.taskList.display"
+                              }
+                            ],
+                            ref: "svgTaskList",
+                            staticClass: "gantt-elastic__task-list-svg",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: _vm.root.state.taskList.finalWidth,
+                              height: _vm.root.state.height
+                            }
+                          },
+                          [
+                            _c("defs", {
+                              domProps: { innerHTML: _vm._s(_vm.defs) }
+                            }),
+                            _vm._v(" "),
+                            _c("task-list")
+                          ],
+                          1
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        ref: "svgChartContainer",
+                        staticClass: "gantt-elastic__main-view-container",
+                        on: {
+                          mousedown: function($event) {
+                            $event.stopPropagation()
+                            return _vm.chartMouseDown($event)
+                          },
+                          touchstart: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            return _vm.chartMouseDown($event)
+                          },
+                          mouseup: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            return _vm.chartMouseUp($event)
+                          },
+                          touchend: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            return _vm.chartMouseUp($event)
+                          },
+                          mousemove: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            return _vm.chartMouseMove($event)
+                          },
+                          touchmove: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            return _vm.chartMouseMove($event)
+                          },
+                          wheel: function($event) {
+                            $event.preventDefault()
+                            return _vm.chartWheel($event)
+                          }
+                        }
+                      },
+                      [_c("chart")],
+                      1
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            ref: "chartScrollContainerVertical",
+            staticClass:
+              "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",
+            style: _vm.root.style(
+              "chart-scroll-container",
+              "chart-scroll-container--vertical",
+              _vm.verticalStyle
+            ),
+            on: { scroll: _vm.onVerticalScroll }
+          },
+          [
+            _c("div", {
+              staticClass: "gantt-elastic__chart-scroll--vertical",
+              style: {
+                width: "1px",
+                height: _vm.root.state.allVisibleTasksHeight + "px"
+              }
+            })
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        ref: "chartScrollContainerHorizontal",
+        staticClass:
+          "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",
+        style: _vm.root.style(
+          "chart-scroll-container",
+          "chart-scroll-container--horizontal",
+          { marginLeft: _vm.getMarginLeft }
+        ),
+        on: { scroll: _vm.onHorizontalScroll }
+      },
+      [
+        _c("div", {
+          staticClass: "gantt-elastic__chart-scroll--horizontal",
+          style: { height: "1px", width: _vm.root.state.width + "px" }
+        })
+      ]
+    )
+  ])
+}
+var MainViewvue_type_template_id_0bc4212e_staticRenderFns = []
+MainViewvue_type_template_id_0bc4212e_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/MainView.vue?vue&type=template&id=0bc4212e&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&
+var TaskListvue_type_template_id_6e11f12f_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "foreignObject",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.root.state.taskList.display,
+          expression: "root.state.taskList.display"
+        }
+      ],
+      ref: "taskListWrapper",
+      staticClass: "gantt-elastic__task-list-wrapper",
+      style: _vm.root.style("task-list-wrapper"),
+      attrs: { x: "0", y: "0", width: "100%", height: "100%" }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "taskList",
+          staticClass: "gantt-elastic__task-list",
+          style: _vm.root.style("task-list"),
+          attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+        },
+        [
+          _c("task-list-header"),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              ref: "taskListItems",
+              staticClass: "gantt-elastic__task-list-items",
+              style: _vm.root.style("task-list-items", {
+                height: _vm.root.state.rowsHeight + "px"
+              })
+            },
+            _vm._l(_vm.root.state.tasks, function(task) {
+              return _c("task-list-item", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: task.visible,
+                    expression: "task.visible"
+                  }
+                ],
+                key: task.id,
+                attrs: {
+                  task: task,
+                  "expander-style": _vm.getListExpanderStyle(task)
+                }
+              })
+            })
+          )
+        ],
+        1
+      )
+    ]
+  )
+}
+var TaskListvue_type_template_id_6e11f12f_staticRenderFns = []
+TaskListvue_type_template_id_6e11f12f_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&
+var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "gantt-elastic__task-list-header",
+      style: _vm.root.style("task-list-header")
+    },
+    _vm._l(_vm.root.state.taskList.columns, function(column) {
+      return _c(
+        "div",
+        {
+          key: column._id,
+          staticClass: "gantt-elastic__task-list-header-column",
+          style: _vm.root.style(
+            "task-list-header-column",
+            column.style["task-list-header-column"],
+            _vm.getStyle(column)
+          )
+        },
+        [
+          column.expander
+            ? _c("task-list-expander", { attrs: { tasks: _vm.collapsible } })
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "gantt-elastic__task-list-header-label",
+              style: _vm.root.style(
+                "task-list-header-label",
+                column.style["task-list-header-label"]
+              ),
+              attrs: { column: column },
+              on: {
+                mouseup: function($event) {
+                  _vm.resizerMouseUp($event, column)
+                }
+              }
+            },
+            [_vm._v(_vm._s(column.label))]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "gantt-elastic__task-list-header-resizer-wrapper",
+              style: _vm.root.style(
+                "task-list-header-resizer-wrapper",
+                column.style["task-list-header-resizer-wrapper"]
+              ),
+              attrs: { column: column },
+              on: {
+                mousedown: function($event) {
+                  _vm.resizerMouseDown($event, column)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "gantt-elastic__task-list-header-resizer",
+                  style: _vm.root.style(
+                    "task-list-header-resizer",
+                    column.style["task-list-header-resizer"]
+                  )
+                },
+                [
+                  _c("div", {
+                    staticClass: "gantt-elastic__task-list-header-resizer-dot",
+                    style: _vm.root.style(
+                      "task-list-header-resizer-dot",
+                      column.style["task-list-header-resizer-dot"]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "gantt-elastic__task-list-header-resizer-dot",
+                    style: _vm.root.style(
+                      "task-list-header-resizer-dot",
+                      column.style["task-list-header-resizer-dot"]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "gantt-elastic__task-list-header-resizer-dot",
+                    style: _vm.root.style(
+                      "task-list-header-resizer-dot",
+                      column.style["task-list-header-resizer-dot"]
+                    )
+                  })
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      )
+    })
+  )
+}
+var TaskListHeadervue_type_template_id_aefdd7c8_staticRenderFns = []
+TaskListHeadervue_type_template_id_aefdd7c8_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&
+var Expandervue_type_template_id_5f156c33_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "gantt-elastic__task-list-column-expander-wrapper",
+      style: _vm.root.style("task-list-column-expander-wrapper")
+    },
+    [
+      _c(
+        "svg",
+        {
+          staticClass: "gantt-elastic__task-list-column-expander-content",
+          style: _vm.root.style("task-list-column-expander-content"),
+          attrs: {
+            width: _vm.root.state.taskList.expander.size,
+            height: _vm.root.state.taskList.expander.size
+          }
+        },
+        [
+          _vm.allChildren.length
+            ? _c("rect", {
+                staticClass: "gantt-elastic__task-list-column-expander-border",
+                style: _vm.root.style(
+                  "task-list-column-expander-border",
+                  _vm.borderStyle
+                ),
+                attrs: {
+                  x: _vm.border,
+                  y: _vm.border,
+                  width: _vm.root.state.taskList.expander.size - _vm.border * 2,
+                  height:
+                    _vm.root.state.taskList.expander.size - _vm.border * 2,
+                  rx: "2",
+                  ry: "2"
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.allChildren.length
+            ? _c("line", {
+                staticClass: "gantt-elastic__task-list-column-expander-line",
+                style: _vm.root.style("task-list-column-expander-line"),
+                attrs: {
+                  x1: _vm.lineOffset,
+                  y1: _vm.root.state.taskList.expander.size / 2,
+                  x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
+                  y2: _vm.root.state.taskList.expander.size / 2
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.collapsed
+            ? _c("line", {
+                staticClass: "gantt-elastic__task-list-column-expander-line",
+                style: _vm.root.style("task-list-column-expander-line"),
+                attrs: {
+                  x1: _vm.root.state.taskList.expander.size / 2,
+                  y1: _vm.lineOffset,
+                  x2: _vm.root.state.taskList.expander.size / 2,
+                  y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
+                },
+                on: { click: _vm.toggle }
+              })
+            : _vm._e()
+        ]
+      )
+    ]
+  )
+}
+var Expandervue_type_template_id_5f156c33_staticRenderFns = []
+Expandervue_type_template_id_5f156c33_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Expandervue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["tasks"],
+  data () {
+    const border = 0.5;
+    return {
+      border,
+      borderStyle: {
+        "stroke-width": border
+      },
+      lineOffset: 5
+    };
+  },
+  computed: {
+    /**
+     * Get all tasks
+     *
+     * @returns {array}
+     */
+    allChildren () {
+      const children = [];
+      this.tasks.forEach(task => {
+        task.allChildren.forEach(child => {
+          children.push(child);
+        });
+      });
+      return children;
+    },
+
+    /**
+     * Is current expander collapsed?
+     *
+     * @returns {boolean}
+     */
+    collapsed () {
+      if (this.tasks.length === 0) {
+        return false;
+      }
+      let collapsed = 0;
+      for (let i = 0, len = this.tasks.length; i < len; i++) {
+        if (this.tasks[i].collapsed) {
+          collapsed++;
+        }
+      }
+      return collapsed === this.tasks.length;
+    }
+  },
+  methods: {
+    /**
+     * Toggle expander
+     */
+    toggle () {
+      if (this.allChildren.length === 0) {
+        return;
+      }
+      const collapsed = !this.collapsed;
+      this.tasks.forEach(task => {
+        task.collapsed = collapsed;
+        task.allChildren.forEach(child => {
+          child.visible = !collapsed && !child.parent.collapsed;
+        });
+      });
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue?vue&type=script&lang=js&
+ /* harmony default export */ var TaskList_Expandervue_type_script_lang_js_ = (Expandervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue
+
+
+
+
+
+/* normalize component */
+
+var component = normalizeComponent(
+  TaskList_Expandervue_type_script_lang_js_,
+  Expandervue_type_template_id_5f156c33_render,
+  Expandervue_type_template_id_5f156c33_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/TaskList/Expander.vue"
+/* harmony default export */ var Expander = (component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
+  components: {
+    TaskListExpander: Expander
+  },
+  inject: ["root"],
+  data () {
+    return {
+      resizer: {
+        moving: false,
+        x: 0
+      }
+    };
+  },
+  computed: {
+    getStyle () {
+      return column => {
+        const state = this.root.state;
+        return {
+          "height": state.calendar.height + this.root.style('calendar-row')['stroke-width'] + "px",
+          "margin-bottom": state.calendar.gap + "px",
+          "width": column.finalWidth + "px"
+        };
+      };
+    },
+    collapsible () {
+      return this.root.state.tasks.filter(task => task.allChildren.length > 0);
+    },
+  },
+  methods: {
+    resizerMouseDown (event, column) {
+      if (!this.resizerMoving) {
+        this.resizer.moving = column;
+        this.resizer.x = event.clientX;
+        this.resizer.initialWidth = column.width;
+        this.root.$emit("taskList-column-width-change-start", this.resizer.moving.width);
+      }
+    },
+    resizerMouseMove (event) {
+      if (this.resizer.moving) {
+        this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+        this.root.$emit("taskList-column-width-change", this.resizer.moving.width);
+      }
+    },
+    resizerMouseUp (event) {
+      if (this.resizer.moving) {
+        this.root.$emit("taskList-column-width-change", this.resizer.moving.width);
+        this.root.$emit("taskList-column-width-change-stop", this.resizer.moving.width);
+        this.resizer.moving = false;
+      }
+    }
+  },
+  created () {
+    this.root.$on("main-view-mousemove", this.resizerMouseMove);
+    this.root.$on("main-view-mouseup", this.resizerMouseUp);
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&
+ /* harmony default export */ var TaskList_TaskListHeadervue_type_script_lang_js_ = (TaskListHeadervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue
+
+
+
+
+
+/* normalize component */
+
+var TaskListHeader_component = normalizeComponent(
+  TaskList_TaskListHeadervue_type_script_lang_js_,
+  TaskListHeadervue_type_template_id_aefdd7c8_render,
+  TaskListHeadervue_type_template_id_aefdd7c8_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var TaskListHeader_api; }
+TaskListHeader_component.options.__file = "src/components/TaskList/TaskListHeader.vue"
+/* harmony default export */ var TaskListHeader = (TaskListHeader_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&
+var TaskListItemvue_type_template_id_9716293c_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "gantt-elastic__task-list-item",
+      style: _vm.root.style("task-list-item")
+    },
+    _vm._l(_vm.root.state.taskList.columns, function(column) {
+      return _c(
+        "item-column",
+        { key: column._id, attrs: { column: column, task: _vm.task } },
+        [
+          column.expander
+            ? _c("task-list-expander", {
+                style: _vm.expanderStyle,
+                attrs: { tasks: [_vm.task] }
+              })
+            : _vm._e()
+        ],
+        1
+      )
+    })
+  )
+}
+var TaskListItemvue_type_template_id_9716293c_staticRenderFns = []
+TaskListItemvue_type_template_id_9716293c_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&
+var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "gantt-elastic__task-list-item-column",
+      style: _vm.root.style(
+        "task-list-item-column",
+        _vm.column.style["task-list-item-column"],
+        {
+          width: _vm.column.finalWidth + "px",
+          height: _vm.column.height + "px"
+        }
+      )
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "gantt-elastic__task-list-item-value-wrapper",
+          style: _vm.root.style(
+            "task-list-item-value-wrapper",
+            _vm.column.style["task-list-item-value-wrapper"]
+          )
+        },
+        [
+          _vm._t("default"),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "gantt-elastic__task-list-item-value-container",
+              style: _vm.root.style(
+                "task-list-item-value-container",
+                _vm.column.style["task-list-item-value-container"]
+              )
+            },
+            [
+              !_vm.html
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__task-list-item-value",
+                      style: _vm.root.style(
+                        "task-list-item-value",
+                        _vm.column.style["task-list-item-value"]
+                      )
+                    },
+                    [_vm._v(_vm._s(_vm.value))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.html
+                ? _c("div", {
+                    staticClass: "gantt-elastic__task-list-item-value",
+                    style: _vm.root.style(
+                      "task-list-item-value",
+                      _vm.column.style["task-list-item-value"]
+                    ),
+                    domProps: { innerHTML: _vm._s(_vm.value) }
+                  })
+                : _vm._e()
+            ]
+          )
+        ],
+        2
+      )
+    ]
+  )
+}
+var ItemColumnvue_type_template_id_cb5a6c96_staticRenderFns = []
+ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var ItemColumnvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["column", "task"],
+  data () {
+    return {};
+  },
+  computed: {
+    html () {
+      if (typeof this.column.html !== "undefined" && this.column.html === true) {
+        return true;
+      }
+      return false;
+    },
+    value () {
+      if (typeof this.column.value === "function") {
+        return this.column.value(this.task);
+      }
+      return this.task[this.column.value];
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&
+ /* harmony default export */ var TaskList_ItemColumnvue_type_script_lang_js_ = (ItemColumnvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/TaskList/ItemColumn.vue
+
+
+
+
+
+/* normalize component */
+
+var ItemColumn_component = normalizeComponent(
+  TaskList_ItemColumnvue_type_script_lang_js_,
+  ItemColumnvue_type_template_id_cb5a6c96_render,
+  ItemColumnvue_type_template_id_cb5a6c96_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var ItemColumn_api; }
+ItemColumn_component.options.__file = "src/components/TaskList/ItemColumn.vue"
+/* harmony default export */ var ItemColumn = (ItemColumn_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ var TaskListItemvue_type_script_lang_js_ = ({
+  components: {
+    TaskListExpander: Expander,
+    ItemColumn: ItemColumn
+  },
+  inject: ["root"],
+  props: ["task", "expanderStyle"],
+  data () {
+    return {};
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&
+ /* harmony default export */ var TaskList_TaskListItemvue_type_script_lang_js_ = (TaskListItemvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/TaskList/TaskListItem.vue
+
+
+
+
+
+/* normalize component */
+
+var TaskListItem_component = normalizeComponent(
+  TaskList_TaskListItemvue_type_script_lang_js_,
+  TaskListItemvue_type_template_id_9716293c_render,
+  TaskListItemvue_type_template_id_9716293c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var TaskListItem_api; }
+TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vue"
+/* harmony default export */ var TaskListItem = (TaskListItem_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var TaskListvue_type_script_lang_js_ = ({
+  components: {
+    TaskListHeader: TaskListHeader,
+    TaskListItem: TaskListItem
+  },
+  inject: ["root"],
+  data () {
+    return {};
+  },
+  mounted () {
+    this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
+    this.root.state.refs.taskList = this.$refs.taskList;
+    this.root.state.refs.taskListItems = this.$refs.taskListItems;
+  },
+  computed: {
+    getListExpanderStyle () {
+      return task => {
+        const state = this.root.state;
+        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
+        const maxLevel = this.root.getMaximalLevel();
+        let height = state.row.height + state.grid.horizontal.gap * 2 - this.root.style('grid-line-vertical')['stroke-width'];
+        let width = ((state.taskList.expander.size + this.root.style("calendar-row")["stroke-width"] + padding + state.taskList.expander.margin) / 100) * state.taskList.percent;
+        if (state.taskList.expander.straight) {
+          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
+        }
+        const style = {
+          width: width + "px",
+          height: height + "px",
+          "border-color": "#00000010",
+          "padding-left": padding + state.taskList.expander.margin + "px",
+          margin: "auto 0px"
+        };
+        return style;
+      };
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&
+ /* harmony default export */ var TaskList_TaskListvue_type_script_lang_js_ = (TaskListvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/TaskList/TaskList.vue
+
+
+
+
+
+/* normalize component */
+
+var TaskList_component = normalizeComponent(
+  TaskList_TaskListvue_type_script_lang_js_,
+  TaskListvue_type_template_id_6e11f12f_render,
+  TaskListvue_type_template_id_6e11f12f_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var TaskList_api; }
+TaskList_component.options.__file = "src/components/TaskList/TaskList.vue"
+/* harmony default export */ var TaskList = (TaskList_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&
+var Chartvue_type_template_id_67c3f5cd_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      ref: "chart",
+      staticClass: "gantt-elastic__chart",
+      style: _vm.root.style("chart"),
+      attrs: {
+        x: "0",
+        y: "0",
+        width: _vm.getWidth + "px",
+        height: _vm.getHeight + "px",
+        xmlns: "http://www.w3.org/2000/svg"
+      }
+    },
+    [
+      _c("calendar"),
+      _vm._v(" "),
+      _c(
+        "foreignObject",
+        {
+          attrs: {
+            x: "0",
+            y: _vm.root.getCalendarHeight(),
+            width: "100%",
+            height: _vm.root.state.rowsHeight
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              ref: "chartGraph",
+              staticClass: "gantt-elastic__chart-graph",
+              style: _vm.root.style("chart-graph", { height: "100%" }),
+              attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  ref: "chart",
+                  staticClass: "gantt-elastic__chart",
+                  style: _vm.root.style("chart"),
+                  attrs: {
+                    x: "0",
+                    y: "0",
+                    width: _vm.getWidth + "px",
+                    height: _vm.root.state.allVisibleTasksHeight + "px",
+                    viewBox: _vm.getViewBox,
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }
+                },
+                [
+                  _c("grid"),
+                  _vm._v(" "),
+                  _c("dependency-lines", {
+                    attrs: { tasks: _vm.root.state.tasks }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.root.state.tasks, function(task) {
+                    return _c(
+                      "g",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: task.visible,
+                            expression: "task.visible"
+                          }
+                        ],
+                        key: task.id,
+                        staticClass: "gantt-elastic__chart-row-wrapper",
+                        style: _vm.root.style("chart-row-wrapper"),
+                        attrs: { task: task }
+                      },
+                      [
+                        _c(task.type, {
+                          tag: "component",
+                          attrs: { task: task }
+                        })
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var Chartvue_type_template_id_67c3f5cd_staticRenderFns = []
+Chartvue_type_template_id_67c3f5cd_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&
+var Gridvue_type_template_id_2bf979a7_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      ref: "chart",
+      staticClass: "gantt-elastic__grid-lines-wrapper",
+      style: _vm.root.style("grid-lines-wrapper"),
+      attrs: {
+        x: "0",
+        y: "0",
+        width: _vm.root.state.width,
+        height: _vm.root.state.allVisibleTasksHeight,
+        xmlns: "http://www.w3.org/2000/svg"
+      }
+    },
+    [
+      _c(
+        "g",
+        {
+          staticClass: "gantt-elastic__grid-lines",
+          style: _vm.root.style("grid-lines")
+        },
+        [
+          _vm._l(_vm.horizontalLines, function(line) {
+            return _c("line", {
+              key: line.key,
+              staticClass: "gantt-elastic__grid-line-horizontal",
+              style: _vm.root.style("grid-line-horizontal"),
+              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+            })
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.verticalLines, function(line) {
+            return _c("line", {
+              key: line.key,
+              staticClass: "gantt-elastic__grid-line-vertical",
+              style: _vm.root.style("grid-line-vertical"),
+              attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+            })
+          }),
+          _vm._v(" "),
+          _c("line", {
+            staticClass: "gantt-elastic__grid-line-time",
+            style: _vm.root.style("grid-line-time"),
+            attrs: {
+              x1: _vm.timeLinePosition.x,
+              y1: _vm.timeLinePosition.y1,
+              x2: _vm.timeLinePosition.x,
+              y2: _vm.timeLinePosition.y2
+            }
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var Gridvue_type_template_id_2bf979a7_staticRenderFns = []
+Gridvue_type_template_id_2bf979a7_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Gridvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  data () {
+    return {};
+  },
+  created () {
+    this.root.$on("recenterPosition", this.recenterPosition);
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.$nextTick(() => {
+        // because of stupid slider :/
+        this.root.scrollToTime(this.timeLinePosition.time);
+      });
+    });
+  },
+  methods: {
+    recenterPosition () {
+      this.root.scrollToTime(this.timeLinePosition.time);
+    },
+  },
+  computed: {
+    verticalLines () {
+      let lines = [];
+      const state = this.root.state;
+      state.times.steps.forEach(step => {
+        if (this.root.isInsideViewPort(step.offset.px, 1)) {
+          lines.push({
+            key: step.date.valueOf(),
+            x1: step.offset.px,
+            y1: 0,
+            x2: step.offset.px,
+            y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+          });
+        }
+      });
+      return lines;
+    },
+    horizontalLines () {
+      let lines = [];
+      const state = this.root.state;
+      let tasks = this.root.visibleTasks;
+      for (let index = 0, len = tasks.length; index <= len; index++) {
+        const y = (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        lines.push({
+          key: "hl" + index,
+          x1: 0,
+          y1: y,
+          x2: "100%",
+          y2: y
+        });
+      }
+      return lines;
+    },
+    inViewPort () {
+      return line => {
+        const state = this.root.state;
+        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
+      };
+    },
+    timeLinePosition () {
+      const d = new Date();
+      const current = d.getTime();
+      const currentOffset = this.root.timeToPixelOffsetX(current);
+      const timeLine = {
+        x: 0,
+        y1: 0,
+        y2: "100%",
+        dateTime: "",
+        time: current
+      };
+      timeLine.x = currentOffset;
+      timeLine.dateTime = d.toLocaleDateString();
+      return timeLine;
+    },
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Gridvue_type_script_lang_js_ = (Gridvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Grid.vue
+
+
+
+
+
+/* normalize component */
+
+var Grid_component = normalizeComponent(
+  Chart_Gridvue_type_script_lang_js_,
+  Gridvue_type_template_id_2bf979a7_render,
+  Gridvue_type_template_id_2bf979a7_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Grid_api; }
+Grid_component.options.__file = "src/components/Chart/Grid.vue"
+/* harmony default export */ var Grid = (Grid_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&
+var Calendarvue_type_template_id_dee108e2_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass: "gantt-elastic__calendar-wrapper",
+      style: _vm.root.style("calendar-wrapper")
+    },
+    [
+      _c(
+        "foreignObject",
+        {
+          attrs: {
+            x: _vm.getX,
+            y: _vm.getY,
+            width: _vm.getWidth,
+            height: _vm.root.state.calendar.height
+          }
+        },
+        [
+          _c("div", {
+            staticClass: "gantt-elastic__calendar",
+            style: _vm.root.style("calendar"),
+            attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.getMonths, function(month) {
+        return _c("calendar-row", {
+          key: month.key,
+          staticClass: "gantt-elastic__calendar-row--month",
+          attrs: { item: month, which: "month" }
+        })
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.getDays, function(day) {
+        return _c("calendar-row", {
+          key: day.key,
+          staticClass: "gantt-elastic__calendar-row--day",
+          attrs: { item: day, which: "day" }
+        })
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.getHours, function(hour) {
+        return _c("calendar-row", {
+          key: hour.key,
+          staticClass: "gantt-elastic__calendar-row--hour",
+          attrs: { item: hour, which: "hour" }
+        })
+      })
+    ],
+    2
+  )
+}
+var Calendarvue_type_template_id_dee108e2_staticRenderFns = []
+Calendarvue_type_template_id_dee108e2_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&
+var CalendarRowvue_type_template_id_0daf06fb_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass: "gantt-elastic__calendar-row",
+      style: _vm.root.style("calendar-row")
+    },
+    [
+      _c("rect", {
+        class: "gantt-elastic__calendar-row-rect--" + _vm.which,
+        style: _vm.root.style("calendar-row-rect--" + _vm.which),
+        attrs: {
+          x: _vm.item.x,
+          y: _vm.item.y,
+          width: _vm.item.width,
+          height: _vm.item.height
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "text",
+        {
+          class: "gantt-elastic__calendar-row-text--" + _vm.which,
+          style: _vm.root.style("calendar-row-text--" + _vm.which),
+          attrs: {
+            x: _vm.getTextX,
+            y: _vm.getTextY,
+            "alignment-baseline": "middle",
+            "text-anchor": _vm.anchor
+          }
+        },
+        [_vm._v(_vm._s(_vm.item.label))]
+      )
+    ]
+  )
+}
+var CalendarRowvue_type_template_id_0daf06fb_staticRenderFns = []
+CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var CalendarRowvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["item", "which"],
+  data () {
+    return {
+      anchor: 'middle'
+    };
+  },
+  computed: {
+    /**
+     * Get x position
+     *
+     * @returns {number}
+     */
+    getTextX () {
+      let x = this.item.x + this.item.width / 2;
+      if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
+        this.anchor = 'start';
+        let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;
+        x = this.root.state.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
+        if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
+          x = this.item.x + this.item.width - this.item.textWidth - 2;
+        } else if (x < this.item.x) {
+          x = this.item.x + 2;
+        }
+      }
+      return x;
+    },
+
+    /**
+     * Get y position
+     *
+     * @returns {number}
+     */
+    getTextY () {
+      return this.item.y + this.item.height / 2;
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Calendar_CalendarRowvue_type_script_lang_js_ = (CalendarRowvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue
+
+
+
+
+
+/* normalize component */
+
+var CalendarRow_component = normalizeComponent(
+  Calendar_CalendarRowvue_type_script_lang_js_,
+  CalendarRowvue_type_template_id_0daf06fb_render,
+  CalendarRowvue_type_template_id_0daf06fb_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var CalendarRow_api; }
+CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
+/* harmony default export */ var CalendarRow = (CalendarRow_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var Calendarvue_type_script_lang_js_ = ({
+  components: {
+    CalendarRow: CalendarRow
+  },
+  inject: ["root"],
+  data () {
+    return {
+      hours: [],
+      days: [],
+      months: []
+    };
+  },
+  created () {
+    this.root.$on("scope-change", this.regenerate);
+    this.root.$on("times-timeZoom-change", this.regenerate);
+    this.regenerate();
+  },
+  methods: {
+    /**
+     * How many hours will fit?
+     *
+     * @returns {object}
+     */
+    howManyHoursFit (dayIndex) {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
+      let formatNames = Object.keys(this.root.state.calendar.hour.format);
+      for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
+        for (let formatName of formatNames) {
+          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+            return {
+              count: hours,
+              type: formatName
+            };
+          }
+        }
+      }
+      return {
+        count: 0,
+        type: ""
+      };
+    },
+
+    /**
+     * How many days will fit?
+     *
+     * @returns {object}
+     */
+    howManyDaysFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      let fullWidth = this.root.state.width;
+      let formatNames = Object.keys(this.root.state.calendar.day.format);
+      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
+        for (let formatName of formatNames) {
+          if (
+            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
+            return {
+              count: days,
+              type: formatName
+            };
+          }
+        }
+      }
+      return {
+        count: 0,
+        type: ""
+      };
+    },
+
+    /**
+     * How many months will fit?
+     *
+     * @returns {object}
+     */
+    howManyMonthsFit () {
+      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      let fullWidth = this.root.state.width;
+      let formatNames = Object.keys(this.root.state.calendar.month.format);
+      let currentMonth = dayjs_min_default()(this.root.state.times.firstDate);
+      let previousMonth = currentMonth.clone();
+      const lastTime = this.root.state.times.lastTime;
+      let monthsCount = 1;
+      while (currentMonth.valueOf() <= lastTime) {
+        currentMonth = currentMonth.add(1, "day");
+        if (previousMonth.month() != currentMonth.month()) {
+          monthsCount++;
+        }
+        previousMonth = currentMonth.clone();
+      }
+      for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
+        for (let formatName of formatNames) {
+          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+            return {
+              count: months,
+              type: formatName
+            };
+          }
+        }
+      }
+      return {
+        count: 1,
+        type: formatNames[0]
+      };
+    },
+
+    /**
+     * Get hour text style
+     *
+     * @returns {string}
+     */
+    hourTextStyle () {
+      return ("font-family:" + this.root.state.calendar.hour.fontFamily + ";font-size:" + this.root.state.calendar.hour.fontSize);
+    },
+
+    /**
+     * Get text style
+     *
+     * @returns {string}
+     */
+    dayTextStyle () {
+      return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
+    },
+
+    /**
+     * Generate hours
+     *
+     * @returns {array}
+     */
+    generateHours () {
+      let hours = [];
+      for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {
+        const hoursCount = this.howManyHoursFit(hourIndex);
+        const hourStep = 24 / hoursCount.count;
+        const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;
+        for (let i = 0, len = hoursCount.count; i < len; i++) {
+          const date = dayjs_min_default()(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
+          let textWidth = 0;
+          if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
+            textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
+          }
+          let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          hours.push({
+            index: hourIndex,
+            key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
+            x,
+            y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            width: hourWidthPx,
+            textWidth,
+            height: this.root.state.calendar.hour.height,
+            label: this.root.state.calendar.hour.format[hoursCount.type](date)
+          });
+        }
+      }
+      return (this.hours = hours);
+    },
+
+    /**
+     * Generate days
+     *
+     * @returns {array}
+     */
+    generateDays () {
+      let days = [];
+      const daysCount = this.howManyDaysFit();
+      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+        let dayWidthPx = 0;
+        // day could be shorter (daylight saving time) so join widths and divide
+        for (let currentStep = 0; currentStep < dayStep; currentStep++) {
+          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== "undefined") {
+            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
+          }
+        }
+        const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date);
+        let textWidth = 0;
+        if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
+          textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
+        }
+        let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px;
+        days.push({
+          index: dayIndex,
+          key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
+          x,
+          y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
+          width: dayWidthPx,
+          textWidth,
+          height: this.root.state.calendar.day.height,
+          label: this.root.state.calendar.day.format[daysCount.type](date)
+        });
+      }
+      return (this.days = days);
+    },
+
+    /**
+     * Generate months
+     *
+     * @returns {array}
+     */
+    generateMonths () {
+      let months = [];
+      const monthsCount = this.howManyMonthsFit();
+      let formatNames = Object.keys(this.root.state.calendar.month.format);
+      let currentDate = dayjs_min_default()(this.root.state.times.firstDate);
+      for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
+        let monthWidth = 0;
+        let monthOffset = Number.MAX_SAFE_INTEGER;
+        let finalDate = dayjs_min_default()(currentDate).add(1, "month").startOf("month");
+        if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
+          finalDate = dayjs_min_default()(this.root.state.times.lastDate);
+        }
+        // we must find first and last step to get the offsets / widths
+        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
+          let currentStep = this.root.state.times.steps[step];
+          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
+            monthWidth += currentStep.width.px;
+            if (currentStep.offset.px < monthOffset) {
+              monthOffset = currentStep.offset.px;
+            }
+          }
+        }
+        let label = "";
+        let choosenFormatName;
+        for (let formatName of formatNames) {
+          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.root.state.calendar.month.format[formatName](currentDate);
+            choosenFormatName = formatName;
+          }
+        }
+        let textWidth = 0;
+        if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
+          textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
+        }
+        let x = this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset;
+        months.push({
+          index: monthIndex,
+          key: monthIndex + "m",
+          x,
+          y: this.root.style('calendar-row')["stroke-width"] / 2,
+          width: monthWidth,
+          textWidth,
+          choosenFormatName,
+          height: this.root.state.calendar.month.height,
+          label: label
+        });
+        currentDate = currentDate.add(1, "month").startOf("month");
+        if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
+          currentDate = dayjs_min_default()(this.root.state.times.lastDate);
+        }
+      }
+      return (this.months = months);
+    },
+
+    /**
+     * Regenerate dates
+     */
+    regenerate () {
+      //this.$nextTick(() => {
+      this.generateHours();
+      this.generateDays();
+      this.generateMonths();
+      //});
+    }
+  },
+
+  computed: {
+    getX () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+    getY () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+    getWidth () {
+      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
+      return width;
+    },
+    monthsStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+    },
+    daysStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+    },
+    hoursStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
+    },
+    getDays () {
+      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+    },
+    getHours () {
+      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+    },
+    getMonths () {
+      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+    },
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Calendar_Calendarvue_type_script_lang_js_ = (Calendarvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Calendar/Calendar.vue
+
+
+
+
+
+/* normalize component */
+
+var Calendar_component = normalizeComponent(
+  Calendar_Calendarvue_type_script_lang_js_,
+  Calendarvue_type_template_id_dee108e2_render,
+  Calendarvue_type_template_id_dee108e2_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Calendar_api; }
+Calendar_component.options.__file = "src/components/Calendar/Calendar.vue"
+/* harmony default export */ var Calendar = (Calendar_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&
+var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      staticClass: "gantt-elastic__chart-dependency-lines-container",
+      style: _vm.root.style("chart-dependency-lines-container"),
+      attrs: { width: "100%", height: "100%" }
+    },
+    _vm._l(_vm.dependencyTasks, function(task) {
+      return _c(
+        "g",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: task.visible,
+              expression: "task.visible"
+            }
+          ],
+          key: task.id,
+          attrs: { task: task }
+        },
+        _vm._l(task.dependencyLines, function(dependencyLine) {
+          return _c("path", {
+            key: dependencyLine.id,
+            staticClass: "gantt-elastic__chart-dependency-lines-path",
+            style: _vm.root.style(
+              "chart-dependency-lines-path",
+              task.style["chart-dependency-lines-path"]
+            ),
+            attrs: { task: task, d: dependencyLine.points }
+          })
+        })
+      )
+    })
+  )
+}
+var DependencyLinesvue_type_template_id_f1cbf6ba_staticRenderFns = []
+DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var DependencyLinesvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["tasks"],
+  data () {
+    return {};
+  },
+  methods: {
+
+    /**
+     * Get path points
+     *
+     * @param {any} fromTaskId
+     * @param {any} toTaskId
+     * @returns {string}
+     */
+    getPoints (fromTaskId, toTaskId) {
+      const fromTask = this.root.getTask(fromTaskId);
+      const toTask = this.root.getTask(toTaskId);
+      if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {
+        return null;
+      }
+      const startX = fromTask.x + fromTask.width;
+      const startY = fromTask.y + fromTask.height / 2;
+      const stopX = toTask.x;
+      const stopY = toTask.y + toTask.height / 2;
+      const distanceX = stopX - startX;
+      let distanceY;
+      let yMultiplier = 1;
+      if (stopY >= startY) {
+        distanceY = stopY - startY;
+      } else {
+        distanceY = startY - stopY;
+        yMultiplier = -1;
+      }
+      const offset = 10;
+      const roundness = 4;
+      const isBefore = distanceX <= offset + roundness;
+      let points = `M ${startX} ${startY}
+          L ${startX + offset},${startY} `;
+      if (isBefore) {
+        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}
+            L ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2 - roundness * yMultiplier}
+            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY + (distanceY * yMultiplier) / 2}
+            L ${startX - offset + distanceX},${startY + (distanceY * yMultiplier) / 2}
+            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
+            L ${startX - offset + distanceX - roundness},${stopY - roundness * yMultiplier}
+            Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}
+            L ${stopX},${stopY}`;
+      } else {
+        points += `L ${startX + distanceX / 2 - roundness},${startY}
+            Q ${startX + distanceX / 2},${startY} ${startX + distanceX / 2},${startY + roundness * yMultiplier}
+            L ${startX + distanceX / 2},${stopY - roundness * yMultiplier}
+            Q ${startX + distanceX / 2},${stopY} ${startX + distanceX / 2 + roundness},${stopY}
+            L ${stopX},${stopY}`;
+      }
+      return points;
+    }
+  },
+  computed: {
+    /**
+     * Get tasks which are dependent on other tasks
+     *
+     * @returns {array}
+     */
+    dependencyTasks () {
+      return this.tasks
+        .filter(task => typeof task.dependentOn !== "undefined")
+        .map(task => {
+          task.dependencyLines = task.dependentOn.map(id => {
+            return { points: this.getPoints(id, task.id) };
+          });
+          return task;
+        }).filter(task => task.dependencyLines.points !== null);
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_DependencyLinesvue_type_script_lang_js_ = (DependencyLinesvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue
+
+
+
+
+
+/* normalize component */
+
+var DependencyLines_component = normalizeComponent(
+  Chart_DependencyLinesvue_type_script_lang_js_,
+  DependencyLinesvue_type_template_id_f1cbf6ba_render,
+  DependencyLinesvue_type_template_id_f1cbf6ba_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var DependencyLines_api; }
+DependencyLines_component.options.__file = "src/components/Chart/DependencyLines.vue"
+/* harmony default export */ var DependencyLines = (DependencyLines_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&
+var Taskvue_type_template_id_e9c23eca_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass:
+        "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper",
+      style: _vm.root.style(
+        "chart-row-bar-wrapper",
+        "chart-row-task-wrapper",
+        _vm.task.style["chart-row-bar-wrapper"]
+      )
+    },
+    [
+      _c(
+        "svg",
+        {
+          staticClass:
+            "gantt-elastic__chart-row-bar gantt-elastic__chart-row-task",
+          style: _vm.root.style(
+            "chart-row-bar",
+            "chart-row-task",
+            _vm.task.style["chart-row-bar"]
+          ),
+          attrs: {
+            x: _vm.task.x,
+            y: _vm.task.y,
+            width: _vm.task.width,
+            height: _vm.task.height,
+            xmlns: "http://www.w3.org/2000/svg"
+          },
+          on: {
+            click: function($event) {
+              _vm.emitEvent("click", $event)
+            },
+            mouseenter: function($event) {
+              _vm.emitEvent("mouseenter", $event)
+            },
+            mouseover: function($event) {
+              _vm.emitEvent("mouseover", $event)
+            },
+            mouseout: function($event) {
+              _vm.emitEvent("mouseout", $event)
+            },
+            mousemove: function($event) {
+              _vm.emitEvent("mousemove", $event)
+            },
+            mousedown: function($event) {
+              _vm.emitEvent("mousedown", $event)
+            },
+            mouseup: function($event) {
+              _vm.emitEvent("mouseup", $event)
+            },
+            mousewheel: function($event) {
+              _vm.emitEvent("mousewheel", $event)
+            },
+            touchstart: function($event) {
+              _vm.emitEvent("touchstart", $event)
+            },
+            touchmove: function($event) {
+              _vm.emitEvent("touchmove", $event)
+            },
+            touchend: function($event) {
+              _vm.emitEvent("touchend", $event)
+            }
+          }
+        },
+        [
+          _c("defs", [
+            _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+              _c("polygon", { attrs: { points: _vm.getPoints } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("polygon", {
+            staticClass:
+              "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon",
+            style: _vm.root.style(
+              "chart-row-bar-polygon",
+              "chart-row-task-polygon",
+              _vm.task.style["base"],
+              _vm.task.style["chart-row-bar-polygon"]
+            ),
+            attrs: { points: _vm.getPoints }
+          }),
+          _vm._v(" "),
+          _c("progress-bar", {
+            attrs: {
+              task: _vm.task,
+              "clip-path": "url(#" + _vm.clipPathId + ")"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.root.state.row.showText
+        ? _c("chart-text", { attrs: { task: _vm.task } })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var Taskvue_type_template_id_e9c23eca_staticRenderFns = []
+Taskvue_type_template_id_e9c23eca_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&
+var Textvue_type_template_id_459c2fe4_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      staticClass: "gantt-elastic__chart-row-text-wrapper",
+      style: _vm.root.style("chart-row-text-wrapper"),
+      attrs: {
+        x: _vm.task.x + _vm.task.width + _vm.root.state.chartText.offset,
+        y: _vm.task.y - _vm.root.state.grid.horizontal.gap,
+        width: _vm.getWidth,
+        height: _vm.getHeight
+      }
+    },
+    [
+      _c(
+        "foreignObject",
+        { attrs: { x: "0", y: "0", width: "100%", height: _vm.getHeight } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "gantt-elastic__chart-row-text",
+              style: _vm.root.style("chart-row-text"),
+              attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+            },
+            [
+              !_vm.html
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text",
+                      style: Object.assign(
+                        {},
+                        _vm.root.style(
+                          "chart-row-text-content",
+                          "chart-row-text-content--text"
+                        ),
+                        _vm.contentStyle
+                      )
+                    },
+                    [_c("div", [_vm._v(_vm._s(_vm.task.label))])]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.html
+                ? _c("div", {
+                    staticClass:
+                      "gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html",
+                    style: Object.assign(
+                      {},
+                      _vm.root.style(
+                        "chart-row-text-content",
+                        "chart-row-text-content--html"
+                      ),
+                      _vm.contentStyle
+                    ),
+                    domProps: { innerHTML: _vm._s(_vm.task.label) }
+                  })
+                : _vm._e()
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var Textvue_type_template_id_459c2fe4_staticRenderFns = []
+Textvue_type_template_id_459c2fe4_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Textvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["task"],
+  data () {
+    return {};
+  },
+  computed: {
+    getWidth () {
+      const textStyle = this.root.style('chart-row-text');
+      this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      const textWidth = this.root.state.ctx.measureText(this.task.label).width;
+      return textWidth + this.root.state.chartText.xPadding * 2;
+    },
+    getHeight () {
+      return this.task.height + this.root.state.grid.horizontal.gap * 2;
+    },
+    contentStyle () {
+      return { height: '100%', 'line-height': this.getHeight + 'px' };
+    },
+    html () {
+      const cols = this.root.state.taskList.columns;
+      for (let i = 0, len = cols.length; i < len; i++) {
+        const col = cols[i];
+        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+          return true;
+        }
+      }
+      return false;
+    },
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Textvue_type_script_lang_js_ = (Textvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Text.vue
+
+
+
+
+
+/* normalize component */
+
+var Text_component = normalizeComponent(
+  Chart_Textvue_type_script_lang_js_,
+  Textvue_type_template_id_459c2fe4_render,
+  Textvue_type_template_id_459c2fe4_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Text_api; }
+Text_component.options.__file = "src/components/Chart/Text.vue"
+/* harmony default export */ var Text = (Text_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&
+var ProgressBarvue_type_template_id_4bc39355_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass: "gantt-elastic__chart-row-progress-bar-wrapper",
+      style: _vm.root.style(
+        "chart-row-progress-bar-wrapper",
+        _vm.task.style["chart-row-progress-bar-wrapper"]
+      )
+    },
+    [
+      _c("defs", [
+        _c(
+          "pattern",
+          {
+            attrs: {
+              id: "diagonalHatch",
+              width: _vm.root.state.progress.width,
+              height: _vm.root.state.progress.width,
+              patternTransform: "rotate(45 0 0)",
+              patternUnits: "userSpaceOnUse"
+            }
+          },
+          [
+            _c("line", {
+              staticClass: "chart-row-progress-bar-line",
+              style: _vm.root.style(
+                "chart-row-progress-bar-line",
+                _vm.task.style["chart-row-progress-bar-line"]
+              ),
+              attrs: {
+                x1: "0",
+                y1: "0",
+                x2: "0",
+                y2: _vm.root.state.progress.width
+              }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.root.state.progress.bar
+        ? _c("rect", {
+            staticClass: "gantt-elastic__chart-row-progress-bar-solid",
+            style: _vm.root.style(
+              "chart-row-progress-bar-solid",
+              _vm.task.style["chart-row-progress-bar-solid"]
+            ),
+            attrs: { x: "0", y: "0", width: _vm.getProgressWidth }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.root.state.progress.pattern
+        ? _c("g", [
+            _c("rect", {
+              staticClass: "gantt-elastic__chart-row-progress-bar-pattern",
+              style: _vm.root.style(
+                "chart-row-progress-bar-pattern",
+                _vm.task.style["chart-row-progress-bar-pattern"]
+              ),
+              attrs: {
+                x: _vm.getProgressWidth,
+                y: "0",
+                width: 100 - _vm.task.progress + "%",
+                height: "100%"
+              }
+            }),
+            _vm._v(" "),
+            _c("path", {
+              staticClass: "gantt-elastic__chart-row-progress-bar-outline",
+              style: _vm.root.style(
+                "chart-row-progress-bar-outline",
+                _vm.task.style["base"],
+                _vm.task.style["chart-row-progress-bar-outline"]
+              ),
+              attrs: { d: _vm.getLinePoints }
+            })
+          ])
+        : _vm._e()
+    ]
+  )
+}
+var ProgressBarvue_type_template_id_4bc39355_staticRenderFns = []
+ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var ProgressBarvue_type_script_lang_js_ = ({
+  inject: ["root"],
+  props: ["task"],
+  data () {
+    return {};
+  },
+  computed: {
+    getProgressWidth () {
+      return this.task.progress + "%";
+    },
+    getLinePoints () {
+      const start = (this.task.width / 100) * this.task.progress;
+      return `M ${start} 0 L ${start} ${this.task.height}`;
+    },
+    getSolidStyle () {
+      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+    },
+    getLineStyle () {
+      return Object.assign({}, {
+        stroke: this.root.state.row.styles.bar.stroke + "a0",
+        "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
+      }, this.task.style);
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_ProgressBarvue_type_script_lang_js_ = (ProgressBarvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue
+
+
+
+
+
+/* normalize component */
+
+var ProgressBar_component = normalizeComponent(
+  Chart_ProgressBarvue_type_script_lang_js_,
+  ProgressBarvue_type_template_id_4bc39355_render,
+  ProgressBarvue_type_template_id_4bc39355_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var ProgressBar_api; }
+ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
+/* harmony default export */ var ProgressBar = (ProgressBar_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var Taskvue_type_script_lang_js_ = ({
+  components: {
+    ChartText: Text,
+    ProgressBar: ProgressBar
+  },
+  inject: ["root"],
+  props: ["task"],
+  data () {
+    return {};
+  },
+  computed: {
+    clipPathId () {
+      return "gantt-elastic__task-clip-path-" + this.task.id;
+    },
+    getViewBox () {
+      const task = this.task;
+      return `0 0 ${task.width} ${task.height}`;
+    },
+    getGroupTransform () {
+      return `translate(${this.task.x} ${this.task.y})`;
+    },
+    getPoints () {
+      const task = this.task;
+      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${
+        task.height
+        }`;
+    },
+  },
+  methods: {
+    emitEvent (eventName, event) {
+      if (!this.root.state.scroll.scrolling) {
+        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Row_Taskvue_type_script_lang_js_ = (Taskvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.vue
+
+
+
+
+
+/* normalize component */
+
+var Task_component = normalizeComponent(
+  Row_Taskvue_type_script_lang_js_,
+  Taskvue_type_template_id_e9c23eca_render,
+  Taskvue_type_template_id_e9c23eca_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Task_api; }
+Task_component.options.__file = "src/components/Chart/Row/Task.vue"
+/* harmony default export */ var Task = (Task_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&
+var Milestonevue_type_template_id_3013006c_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass:
+        "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper",
+      style: _vm.root.style(
+        "chart-row-bar-wrapper",
+        "chart-row-milestone-wrapper",
+        _vm.task.style["chart-row-bar-wrapper"]
+      )
+    },
+    [
+      _c(
+        "svg",
+        {
+          staticClass:
+            "gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone",
+          style: _vm.root.style(
+            "chart-row-bar",
+            "chart-row-milestone",
+            _vm.task.style["chart-row-bar"]
+          ),
+          attrs: {
+            x: _vm.task.x,
+            y: _vm.task.y,
+            width: _vm.task.width,
+            height: _vm.task.height,
+            xmlns: "http://www.w3.org/2000/svg"
+          },
+          on: {
+            click: function($event) {
+              _vm.emitEvent("click", $event)
+            },
+            mouseenter: function($event) {
+              _vm.emitEvent("mouseenter", $event)
+            },
+            mouseover: function($event) {
+              _vm.emitEvent("mouseover", $event)
+            },
+            mouseout: function($event) {
+              _vm.emitEvent("mouseout", $event)
+            },
+            mousemove: function($event) {
+              _vm.emitEvent("mousemove", $event)
+            },
+            mousedown: function($event) {
+              _vm.emitEvent("mousedown", $event)
+            },
+            mouseup: function($event) {
+              _vm.emitEvent("mouseup", $event)
+            },
+            mousewheel: function($event) {
+              _vm.emitEvent("mousewheel", $event)
+            },
+            touchstart: function($event) {
+              _vm.emitEvent("touchstart", $event)
+            },
+            touchmove: function($event) {
+              _vm.emitEvent("touchmove", $event)
+            },
+            touchend: function($event) {
+              _vm.emitEvent("touchend", $event)
+            }
+          }
+        },
+        [
+          _c("defs", [
+            _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+              _c("polygon", { attrs: { points: _vm.getPoints } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("polygon", {
+            staticClass:
+              "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon",
+            style: _vm.root.style(
+              "chart-row-bar-polygon",
+              "chart-row-milestone-polygon",
+              _vm.task.style["base"],
+              _vm.task.style["chart-row-bar-polygon"]
+            ),
+            attrs: { points: _vm.getPoints }
+          }),
+          _vm._v(" "),
+          _c("progress-bar", {
+            attrs: {
+              task: _vm.task,
+              "clip-path": "url(#" + _vm.clipPathId + ")"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.root.state.row.showText
+        ? _c("chart-text", { attrs: { task: _vm.task } })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var Milestonevue_type_template_id_3013006c_staticRenderFns = []
+Milestonevue_type_template_id_3013006c_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
+  components: {
+    ChartText: Text,
+    ProgressBar: ProgressBar
+  },
+  inject: ["root"],
+  props: ["task"],
+  data () {
+    return {};
+  },
+  computed: {
+    clipPathId () {
+      return "gantt-elastic__milestone-clip-path-" + this.task.id;
+    },
+    getViewBox () {
+      return `0 0 ${this.task.width} ${this.task.height}`;
+    },
+    getGroupTransform () {
+      return `translate(${this.task.x} ${this.task.y})`;
+    },
+    getPoints () {
+      const task = this.task;
+      const fifty = task.height / 2;
+      let offset = fifty;
+      if (task.width / 2 - offset < 0) {
+        offset = task.width / 2;
+      }
+      return `0,${fifty}
+        ${offset},0
+        ${task.width - offset},0
+        ${task.width},${fifty}
+        ${task.width - offset},${task.height}
+        ${offset},${task.height}`;
+    },
+  },
+  methods: {
+    emitEvent (eventName, event) {
+      if (!this.root.state.scroll.scrolling) {
+        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Row_Milestonevue_type_script_lang_js_ = (Milestonevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue
+
+
+
+
+
+/* normalize component */
+
+var Milestone_component = normalizeComponent(
+  Row_Milestonevue_type_script_lang_js_,
+  Milestonevue_type_template_id_3013006c_render,
+  Milestonevue_type_template_id_3013006c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Milestone_api; }
+Milestone_component.options.__file = "src/components/Chart/Row/Milestone.vue"
+/* harmony default export */ var Milestone = (Milestone_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&
+var Projectvue_type_template_id_077bbd73_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "g",
+    {
+      staticClass:
+        "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper",
+      style: _vm.root.style(
+        "chart-row-bar-wrapper",
+        _vm.root.style("chart-row-project-wrapper"),
+        _vm.task.style["chart-row-bar-wrapper"]
+      )
+    },
+    [
+      _c(
+        "svg",
+        {
+          staticClass:
+            "gantt-elastic__chart-row-bar gantt-elastic__chart-row-project",
+          style: _vm.root.style(
+            "chart-row-bar",
+            "chart-row-project",
+            _vm.task.style["chart-row-bar"]
+          ),
+          attrs: {
+            x: _vm.task.x,
+            y: _vm.task.y,
+            width: _vm.task.width,
+            height: _vm.task.height,
+            xmlns: "http://www.w3.org/2000/svg"
+          },
+          on: {
+            click: function($event) {
+              _vm.emitEvent("click", $event)
+            },
+            mouseenter: function($event) {
+              _vm.emitEvent("mouseenter", $event)
+            },
+            mouseover: function($event) {
+              _vm.emitEvent("mouseover", $event)
+            },
+            mouseout: function($event) {
+              _vm.emitEvent("mouseout", $event)
+            },
+            mousemove: function($event) {
+              _vm.emitEvent("mousemove", $event)
+            },
+            mousedown: function($event) {
+              _vm.emitEvent("mousedown", $event)
+            },
+            mouseup: function($event) {
+              _vm.emitEvent("mouseup", $event)
+            },
+            mousewheel: function($event) {
+              _vm.emitEvent("mousewheel", $event)
+            },
+            touchstart: function($event) {
+              _vm.emitEvent("touchstart", $event)
+            },
+            touchmove: function($event) {
+              _vm.emitEvent("touchmove", $event)
+            },
+            touchend: function($event) {
+              _vm.emitEvent("touchend", $event)
+            }
+          }
+        },
+        [
+          _c("defs", [
+            _c("clipPath", { attrs: { id: _vm.clipPathId } }, [
+              _c("path", { attrs: { d: _vm.getPoints } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("path", {
+            staticClass:
+              "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon",
+            style: _vm.root.style(
+              "chart-row-bar-polygon",
+              "chart-row-project-polygon",
+              _vm.task.style["base"],
+              _vm.task.style["chart-row-bar-polygon"]
+            ),
+            attrs: { d: _vm.getPoints }
+          }),
+          _vm._v(" "),
+          _c("progress-bar", {
+            attrs: {
+              task: _vm.task,
+              "clip-path": "url(#" + _vm.clipPathId + ")"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.root.state.row.showText
+        ? _c("chart-text", { attrs: { task: _vm.task } })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var Projectvue_type_template_id_077bbd73_staticRenderFns = []
+Projectvue_type_template_id_077bbd73_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var Projectvue_type_script_lang_js_ = ({
+  components: {
+    ChartText: Text,
+    ProgressBar: ProgressBar
+  },
+  inject: ["root"],
+  props: ["task"],
+  data () {
+    return {};
+  },
+  computed: {
+    clipPathId () {
+      return "gantt-elastic__project-clip-path-" + this.task.id;
+    },
+    getViewBox () {
+      return `0 0 ${this.task.width} ${this.task.height}`;
+    },
+    getGroupTransform () {
+      return `translate(${this.task.x} ${this.task.y})`;
+    },
+    getPoints () {
+      const task = this.task;
+      const bottom = task.height - task.height / 4;
+      const corner = task.height / 6;
+      const smallCorner = task.height / 8;
+      return `M ${smallCorner},0
+                L ${task.width - smallCorner} 0
+                L ${task.width} ${smallCorner}
+                L ${task.width} ${bottom}
+                L ${task.width - corner} ${task.height}
+                L ${task.width - corner * 2} ${bottom}
+                L ${corner * 2} ${bottom}
+                L ${corner} ${task.height}
+                L 0 ${bottom}
+                L 0 ${smallCorner}
+                Z
+        `;
+    },
+  },
+  methods: {
+    emitEvent (eventName, event) {
+      if (!this.root.state.scroll.scrolling) {
+        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Row_Projectvue_type_script_lang_js_ = (Projectvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue
+
+
+
+
+
+/* normalize component */
+
+var Project_component = normalizeComponent(
+  Row_Projectvue_type_script_lang_js_,
+  Projectvue_type_template_id_077bbd73_render,
+  Projectvue_type_template_id_077bbd73_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Project_api; }
+Project_component.options.__file = "src/components/Chart/Row/Project.vue"
+/* harmony default export */ var Project = (Project_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ var Chartvue_type_script_lang_js_ = ({
+  components: {
+    Grid: Grid,
+    DependencyLines: DependencyLines,
+    Calendar: Calendar,
+    Task: Task,
+    Milestone: Milestone,
+    Project: Project
+  },
+  inject: ["root"],
+  data () {
+    return {
+      moving: false
+    };
+  },
+  mounted () {
+    this.root.state.refs.chart = this.$refs.chart;
+    this.root.state.refs.chartGraph = this.$refs.chartGraph;
+  },
+  computed: {
+    getWidth () {
+      const state = this.root.state;
+      return state.width;
+    },
+    getHeight () {
+      const state = this.root.state;
+      return state.height;
+    },
+    getViewBox () {
+      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
+    }
+  },
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_Chartvue_type_script_lang_js_ = (Chartvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/Chart.vue
+
+
+
+
+
+/* normalize component */
+
+var Chart_component = normalizeComponent(
+  Chart_Chartvue_type_script_lang_js_,
+  Chartvue_type_template_id_67c3f5cd_render,
+  Chartvue_type_template_id_67c3f5cd_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Chart_api; }
+Chart_component.options.__file = "src/components/Chart/Chart.vue"
+/* harmony default export */ var Chart = (Chart_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ var MainViewvue_type_script_lang_js_ = ({
+  components: {
+    TaskList: TaskList,
+    Chart: Chart
+  },
+  inject: ["root"],
+  props: ["tasks", "options"],
+  data () {
+    return {
+      defs: "",
+      mousePos: {
+        x: 0,
+        y: 0,
+        movementX: 0,
+        movementY: 0,
+        lastX: 0,
+        lastY: 0,
+        positiveX: 0,
+        positiveY: 0,
+      }
+    };
+  },
+  mounted () {
+    this.root.state.refs.svgMainView = this.$refs.svgMainView;
+    this.root.state.refs.svgChart = this.$refs.svgChart;
+    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
+    this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
+    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
+    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
+    document.addEventListener('mouseup', this.chartMouseUp.bind(this));
+    document.addEventListener('mousemove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchmove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchend', this.chartMouseUp.bind(this));
+  },
+  computed: {
+
+    /**
+     * Get width
+     * @returns {number}
+     */
+    getWidth () {
+      return this.root.state.width + this.root.state.taskList.finalWidth;
+    },
+
+    getMarginLeft () {
+      if (!this.root.state.taskList.display) {
+        return "0px";
+      }
+      return this.root.state.taskList.finalWidth + "px";
+    },
+    verticalStyle () {
+      return {
+        width: this.root.state.scrollBarHeight + 'px',
+        height: this.root.state.rowsHeight + 'px',
+        "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
+      };
+    }
+  },
+  methods: {
+    mouseMove (event) {
+      this.root.$emit("main-view-mousemove", event);
+    },
+    mouseUp (event) {
+      this.root.$emit("main-view-mouseup", event);
+    },
+    onHorizontalScroll (ev) {
+      this.root.$emit("chart-scroll-horizontal", ev);
+    },
+    onVerticalScroll (ev) {
+      this.root.$emit("chart-scroll-vertical", ev);
+    },
+    chartWheel (ev) {
+      this.root.$emit("chart-wheel", ev);
+    },
+    chartMouseDown (ev) {
+      if (typeof ev.touches !== 'undefined') {
+        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
+        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
+        this.mousePos.positiveX = 0;
+        this.mousePos.positiveY = 0;
+        this.mousePos.movementX = 0;
+        this.mousePos.movementY = 0;
+      }
+      this.root.state.scroll.scrolling = true;
+    },
+    chartMouseUp (ev) {
+      this.root.state.scroll.scrolling = false;
+    },
+    chartMouseMove (ev) {
+      if (this.root.state.scroll.scrolling) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        ev.stopPropagation();
+        const touch = typeof ev.touches !== 'undefined';
+        let movementX, movementY;
+        if (touch) {
+          const screenX = ev.touches[0].screenX;
+          const screenY = ev.touches[0].screenY;
+          movementX = this.mousePos.x - screenX;
+          movementY = this.mousePos.y - screenY;
+          let positiveX = screenX - this.mousePos.lastX > 0 ? 1 : -1;
+          let positiveY = screenY - this.mousePos.lastY > 0 ? 1 : -1;
+          this.mousePos.lastX = screenX;
+          this.mousePos.lastY = screenY;
+          if (positiveX !== this.mousePos.positiveX) {
+            this.mousePos.x = screenX;
+            this.mousePos.positiveX = positiveX;
+            movementX = 0;
+          }
+          if (positiveY !== this.mousePos.positiveY) {
+            this.mousePos.y = screenY;
+            this.mousePos.positiveY = positiveY;
+            movementY = 0;
+          }
+        } else {
+          movementX = ev.movementX;
+          movementY = ev.movementY;
+        }
+        const horizontal = this.$refs.chartScrollContainerHorizontal;
+        const vertical = this.$refs.chartScrollContainerVertical;
+        const currentX = horizontal.scrollLeft;
+        let x = 0, y = 0;
+        if (touch) {
+          x = currentX + movementX;
+        } else {
+          x = currentX - (movementX * this.root.state.scroll.dragXMoveMultiplier);
+        }
+        horizontal.scrollLeft = x;
+        const currentY = vertical.scrollTop;
+        if (touch) {
+          y = currentY + movementY;
+        } else {
+          y = currentY - (movementY * this.root.state.scroll.dragYMoveMultiplier);
+        }
+        vertical.scrollTop = y;
+      }
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/MainView.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_MainViewvue_type_script_lang_js_ = (MainViewvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/MainView.vue
+
+
+
+
+
+/* normalize component */
+
+var MainView_component = normalizeComponent(
+  components_MainViewvue_type_script_lang_js_,
+  MainViewvue_type_template_id_0bc4212e_render,
+  MainViewvue_type_template_id_0bc4212e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var MainView_api; }
+MainView_component.options.__file = "src/components/MainView.vue"
+/* harmony default export */ var MainView = (MainView_component.exports);
+// CONCATENATED MODULE: ./src/style.js
+/**
+* @fileoverview Styles for gantt-elastic
+* @license MIT
+* @author Rafal Pospiech <neuronet.io@gmail.com>
+* @package GanttElastic
+*/
+const fontSize = '12px';
+const fontFamily = 'Arial, sans-serif';
+/* harmony default export */ var style = ({
+  "header": {
+    "font-family": fontFamily,
+    "margin": "0px auto",
+    "background": "#f3f5f747",
+    "padding": "10px",
+    "overflow": "hidden",
+    "clear": "both",
+    "display": "flex",
+    "justify-content": "space-between"
+  },
+  "header-title": { "float": "left" },
+  "header-options": { "float": "right" },
+  "header-title--text": {
+    "font-size": "20px",
+    "vertical-align": "middle",
+    "font-weight": "400",
+    "line-height": "35px",
+    "padding-left": "22px",
+    "letter-spacing": "1px"
+  },
+  "header-title--html": {
+    "font-size": "20px",
+    "vertical-align": "middle",
+    "font-weight": "400",
+    "line-height": "35px",
+    "padding-left": "22px",
+    "letter-spacing": "1px"
+  },
+  "header-btn-recenter": {
+    "background": "#95A5A6",
+    "border": "none",
+    "outline": "none",
+    "cursor": "pointer",
+    "color": "white",
+    "border-radius": "3px",
+    "margin-right": "27px",
+    "font-size": "16px",
+    "padding": "8px 12px"
+  },
+  "header-slider": {},
+  "header-slider-wrapper": { "display": "inline-block", "vertical-align": "middle" },
+  "header-slider--slider": {},
+  "header-slider--process": { "background": "#ccc" },
+  "header-task-list-switch--label": {},
+  "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
+  "header-label": {},
+  "calendar-wrapper": {
+    "user-select": "none"
+  },
+  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
+  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar-row--month": {},
+  "calendar-row--day": {},
+  "calendar-row--hour": {},
+  "calendar-row-rect--month": {},
+  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--day": {},
+  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-rect--hour": {},
+  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "task-list-wrapper": {},
+  "task-list": { "background": "transparent", "border-color": "#eee" },
+  "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
+  "task-list-header-column": {
+    "border": "1px solid #00000050",
+    "border-top": "none",
+    "border-right": "none",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "background": "#f3f5f7",
+    "border-color": "transparent"
+  },
+  "task-list-column-expander-wrapper": {
+    "stroke": "#909090",
+    "stroke-width": "1",
+    "fill": "#ffffffa0",
+    "display": "inline-flex",
+    "flex-shrink": "0",
+    "box-sizing": "border-box",
+    "margin": "0 10px"
+  },
+  "task-list-column-expander-content": {
+    "display": "inline-flex",
+    "cursor": "pointer",
+    "margin": "auto 0px",
+    "box-sizing": "border-box",
+    "user-select": "none"
+  },
+  "task-list-column-expander-line": {
+    "fill": "transparent",
+    "stroke": "#000000",
+    "stroke-width": "1",
+    "stroke-linecap": "round"
+  },
+  "task-list-column-expander-border": {
+    "fill": "#ffffffa0",
+    "stroke": "#000000",
+  },
+  "task-list-header-label": {
+    "overflow": "hidden",
+    "text-overflow": "ellipsis",
+    "font-family": fontFamily,
+    "font-size": fontSize,
+    "box-sizing": "border-box",
+    "margin": "auto 6px",
+    "flex-grow": "1",
+    "vertical-align": "middle"
+  },
+  "task-list-header-resizer-wrapper": {
+    "background": "transparent",
+    "height": "100%",
+    "width": "6px",
+    "cursor": "col-resize",
+    "display": "inline-flex",
+    "vertical-align": "center"
+  },
+  "task-list-header-resizer": { "margin": "auto 0px" },
+  "task-list-header-resizer-dot": {
+    "width": "3px",
+    "height": "3px",
+    "background": "#ddd",
+    "border-radius": "100%",
+    "margin": "4px 0px",
+  },
+  "task-list-items": {
+    "overflow": "hidden"
+  },
+  "task-list-item": {
+    "border-top": "1px solid #eee",
+    "border-right": "1px solid #eee",
+    "box-sizing": "border-box",
+    "display": "flex",
+    "background": "transparent",
+  },
+  "task-list-item-column": {
+    "display": "inline-flex",
+    "flex-shrink": "0",
+    "border-left": "1px solid #00000050",
+    "box-sizing": "border-box",
+    "border-color": "#eee",
+  },
+  "task-list-item-value-wrapper": {
+    "overflow": "hidden",
+    "display": "flex",
+    "width": "100%",
+  },
+  "task-list-item-value-container": {
+    "margin": "auto 0px",
+    "overflow": "hidden"
+  },
+  "task-list-item-value": {
+    "display": "block",
+    "flex-shrink": "100",
+    "font-family": fontFamily,
+    "font-size": fontSize,
+    "margin": "auto 6px",
+    "overflow": "hidden",
+    "text-overflow": "ellipsis",
+    "line-height": "1.5em",
+    "word-break": "keep-all",
+    "white-space": "nowrap",
+    "color": "#606060",
+    "background": "#FFFFFF"
+  },
+  "grid-lines": {},
+  "grid-line-horizontal": {
+    "stroke": "#00000010",
+    "stroke-width": 1
+  },
+  "grid-line-vertical": {
+    "stroke": "#00000010",
+    "stroke-width": 1
+  },
+  "grid-line-time": {
+    "stroke": "#FF000080",
+    "stroke-width": 1
+  },
+  "chart": {
+    "user-select": "none",
+    "overflow": "hidden"
+  },
+  "chart-graph": {
+    "overflow": "hidden"
+  },
+  "chart-row-text-wrapper": {},
+  "chart-row-text": {
+    "background": "#ffffffa0",
+    "border-radius": "10px",
+    "font-family": fontFamily,
+    "font-size": fontSize,
+    "font-weight": "normal",
+    "color": "#000000a0",
+    "height": '100%'
+  },
+  "chart-row-text-content": {
+    "padding": "0px 6px"
+  },
+  "chart-row-text-content--text": {},
+  "chart-row-text-content--html": {},
+  "chart-row-wrapper": {},
+  "chart-row-bar-wrapper": {},
+  "chart-row-bar": {},
+  "chart-row-bar-polygon": {
+    "stroke": "#E74C3C",
+    "stroke-width": 1,
+    "fill": "#F75C4C",
+  },
+  "chart-row-project-wrapper": {},
+  "chart-row-project": {},
+  "chart-row-project-polygon": {},
+  "chart-row-milestone-wrapper": {},
+  "chart-row-milestone": {},
+  "chart-row-milestone-polygon": {},
+  "chart-row-task-wrapper": {},
+  "chart-row-task": {},
+  "chart-row-task-polygon": {},
+  "chart-row-progress-bar-wrapper": {},
+  "chart-row-progress-bar": {},
+  "chart-row-progress-bar-line": {
+    "stroke": "#ffffff25",
+    "stroke-width": 20
+  },
+  "chart-row-progress-bar-solid": {
+    "fill": "#E74C3C",
+    "height": "20%"
+  },
+  "chart-row-progress-bar-pattern": {
+    "fill": "url(#diagonalHatch)",
+    "transform": "translateY(0.1) scaleY(0.8)",
+  },
+  "chart-row-progress-bar-outline": {
+    "stroke": "#E74C3C",
+    "stroke-width": 1
+  },
+  "chart-dependency-lines-wrapper": {},
+  "chart-dependency-lines-path": {
+    "fill": "transparent",
+    "stroke": "#FFa00090",
+    "stroke-width": 2
+  },
+  "chart-scroll-container": {},
+  "chart-scroll-container--horizontal": {
+    "overflow": "auto",
+    "max-width": "100%"
+  },
+  "chart-scroll-container--vertical": {
+    "overflow-y": "auto",
+    "overflow-x": "hidden",
+    "max-height": "100%",
+    "float": "right",
+  },
+  "svg-chart": {
+    "overflow": "hidden"
+  },
+  "svg-container-wrapper": {
+    "overflow": "hidden"
+  },
+  "svg-container": {
+    "float": "left",
+  }
+});
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/**
+ * Helper function to fill out empty options in user settings
+ *
+ * @param {object} userOptions - initial user options that will merge with those below
+ * @returns {object} merged options
+ */
+function getOptions (userOptions) {
+  return {
+    style: style,
+    title: {
+      label: "gantt-elastic",
+      html: false
+    },
+    width: 0,
+    height: 0,
+    rowsHeight: 0,
+    allVisibleTasksHeight: 0,
+    scroll: {
+      scrolling: false,
+      dragXMoveMultiplier: 3,
+      dragYMoveMultiplier: 2,
+      top: 0,
+      taskList: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
+      },
+      chart: {
+        left: 0,
+        right: 0,
+        percent: 0,
+        timePercent: 0,
+        top: 0,
+        bottom: 0,
+        time: 0,
+        timeCenter: 0,
+        dateTime: {
+          left: "",
+          right: ""
+        }
+      }
+    },
+    svgElement: null,
+    scope: {
+      before: 1,
+      after: 1
+    },
+    times: {
+      timeScale: 60 * 1000,
+      timeZoom: 17,
+      timePerPixel: 0,
+      fistDate: null,
+      firstTime: null, // firstDate getTime()
+      lastDate: null,
+      lastTime: null, // last date getTime()
+      firstTaskDate: null,
+      firstTaskTime: 0,
+      lastTaskDate: null,
+      lastTaskTime: 0,
+      totalViewDurationMs: 0,
+      totalViewDurationPx: 0,
+      stepDuration: "day", // hour, month
+      steps: []
+    },
+    row: {
+      height: 24,
+      showText: true,
+    },
+    maxRows: 20,
+    maxHeight: 0,
+    chartText: {
+      offset: 0,
+      xPadding: 10
+    },
+    dependencyLines: {},
+    progress: {
+      width: 20,
+      height: 6,
+      pattern: true,
+      bar: false,
+    },
+    grid: {
+      horizontal: {
+        gap: 6,
+        lines: []
+      },
+      vertical: {
+        lines: []
+      },
+      timeLine: {}
+    },
+    taskList: {
+      display: true,
+      columns: [{
+        id: 0,
+        label: "ID",
+        value: "id",
+        width: 40,
+      }],
+      resizerWidth: 0,
+      percent: 100,
+      width: 0,
+      finalWidth: 0,
+      expander: {
+        size: 16,
+        columnWidth: 24,
+        padding: 16,
+        margin: 10,
+        straight: false
+      }
+    },
+    calendar: {
+      hours: [],
+      days: [],
+      months: [],
+      gap: 6,
+      height: 0,
+      hour: {
+        height: 20,
+        display: true,
+        widths: [],
+        maxWidths: {},
+        format: {
+          long (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("HH:mm");
+          },
+          medium (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("HH:mm");
+          },
+          short (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("HH");
+          }
+        }
+      },
+      day: {
+        height: 20,
+        display: true,
+        widths: [],
+        maxWidths: {},
+        format: {
+          long (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("DD dddd");
+          },
+          medium (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("DD ddd");
+          },
+          short (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("DD");
+          }
+        }
+      },
+      month: {
+        height: 20,
+        display: true,
+        widths: [],
+        maxWidths: {},
+        format: {
+          short (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("MM");
+          },
+          medium (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("MMM 'YY");
+          },
+          long (date) {
+            return dayjs_min_default()(date)
+              .locale(userOptions.locale.code)
+              .format("MMMM YYYY");
+          }
+        }
+      }
+    },
+    defs: [],
+    locale: {
+      code: "en",
+      Now: "Now",
+      "X-Scale": "Zoom-X",
+      "Y-Scale": "Zoom-Y",
+      "Task list width": "Task list",
+      "Before/After": "Expand",
+      "Display task list": "Show task list"
+    }
+  };
+}
+/**
+ * Helper function to determine if specified variable is an object
+ *
+ * @param {any} item
+ * @returns {boolean}
+ */
+function isObject (item) {
+  return item && typeof item === "object" && !Array.isArray(item);
+}
+/**
+ * Helper function which will merge objects recursively - creating brand new one - like clone
+ *
+ * @param {object} target
+ * @params {object} sources
+ * @returns {object}
+ */
+function mergeDeep (target, ...sources) {
+  if (!sources.length) {
+    return target;
+  }
+  const source = sources.shift();
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, {
+          [key]: {}
+        });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, {
+          [key]: source[key]
+        });
+      }
+    }
+  }
+  return mergeDeep(target, ...sources);
+}
+/**
+ * Same as above but with reactivity in mind
+ *
+ * @param {Vue.component} component
+ * @param {object} target
+ * @params {object} sources
+ * @returns {object}
+ */
+function mergeDeepReactive (component, target, ...sources) {
+  if (!sources.length) {
+    return target;
+  }
+  const source = sources.shift();
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) {
+          component.$set(target, key, {});
+        }
+        mergeDeepReactive(component, target[key], source[key]);
+      } else {
+        component.$set(target, key, source[key]);
+      }
+    }
+  }
+  return mergeDeepReactive(component, target, ...sources);
+}
+const styleCache = {};
+let globalVisibleTasks = [];
+
+/**
+ * GanttElastic
+ * Main vue component
+ */
+const GanttElastic = {
+  components: {
+    MainView: MainView
+  },
+  props: ["tasks", "options"],
+  provide () {
+    const provider = {};
+    const self = this;
+    Object.defineProperty(provider, "root", {
+      enumerable: true,
+      get: () => self
+    });
+    return provider;
+  },
+  data () {
+    return {
+      state: {
+        tasks: [],
+        scrollBarHeight: 0,
+        allVisibleTasksHeight: 0,
+        refs: {},
+        tasksById: {},
+      },
+    };
+  },
+  methods: {
+    mergeDeep,
+    mergeDeepReactive,
+
+    /**
+     * Calculate height of scrollbar in current browser
+     *
+     * @returns {number}
+     */
+    getScrollBarHeight () {
+      const outer = document.createElement("div");
+      outer.style.visibility = "hidden";
+      outer.style.height = "100px";
+      outer.style.msOverflowStyle = "scrollbar";
+      document.body.appendChild(outer);
+      var noScroll = outer.offsetHeight;
+      outer.style.overflow = "scroll";
+      var inner = document.createElement("div");
+      inner.style.height = "100%";
+      outer.appendChild(inner);
+      var withScroll = inner.offsetHeight;
+      outer.parentNode.removeChild(outer);
+      return this.state.scrollBarHeight = noScroll - withScroll;
+    },
+
+    /**
+     * Get style for specified class
+     *
+     * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
+     * @returns {object}
+     */
+    style (...mergeWith) {
+      const index = JSON.stringify(mergeWith);
+      if (typeof styleCache[index] !== 'undefined') {
+        return styleCache[index];
+      }
+      let merged = {};
+      mergeWith.forEach(objOrClassName => {
+        if (typeof objOrClassName === 'string') {
+          merged = Object.assign({}, merged, this.state.style[objOrClassName])
+        } else if (typeof objOrClassName === 'object') {
+          merged = Object.assign({}, merged, objOrClassName);
+        } else if (typeof objOrClassName === 'function') {
+          merged = Object.assign({}, objOrClassName())
+        }
+      });
+      styleCache[index] = merged;
+      return merged;
+    },
+
+    /**
+     * Fill out empty task properties and make it reactive
+     */
+    refreshTasks () {
+      this.state.tasks = this.state.tasks.map(task => {
+        if (typeof task.x === 'undefined') {
+          this.$set(task, 'x', 0);
+        }
+        if (typeof task.y === 'undefined') {
+          this.$set(task, 'y', 0);
+        }
+        if (typeof task.width === 'undefined') {
+          this.$set(task, 'width', 0);
+        }
+        if (typeof task.height === 'undefined') {
+          this.$set(task, 'height', 0);
+        }
+        if (typeof task.tooltip === 'undefined') {
+          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
+        }
+        if (typeof task.tooltip.visible === 'undefined') {
+          task.tooltip.visible = false;
+        }
+        if (typeof task.mouseOver === 'undefined') {
+          this.$set(task, 'mouseOver', false);
+        }
+        if (typeof task.visible === "undefined") {
+          this.$set(task, 'visible', true);
+        }
+        if (typeof task.collapsed === "undefined") {
+          this.$set(task, 'collapsed', false);
+        }
+        if (typeof task.dependentOn === "undefined") {
+          this.$set(task, 'dependentOn', []);
+        }
+        if (typeof task.parentId === "undefined") {
+          this.$set(task, 'parentId', null);
+        }
+        if (typeof task.style === "undefined") {
+          this.$set(task, 'style', {});
+        }
+        if (typeof task.children === 'undefined') {
+          this.$set(task, 'children', []);
+        }
+        if (typeof task.allChildren === 'undefined') {
+          this.$set(task, 'allChildren', []);
+        }
+        if (typeof task.parents === 'undefined') {
+          this.$set(task, 'parents', []);
+        }
+        if (typeof task.parent === 'undefined') {
+          this.$set(task, 'parent', null);
+        }
+        if (typeof task.durationMs === 'undefined') {
+          this.$set(task, 'durationMs', []);
+        }
+        return task;
+      });
+    },
+
+    /**
+     * Initialize component
+     */
+    initialize () {
+      this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+      this.state.tasks = this.tasks.map(task => {
+        this.$set(task, 'start', dayjs_min_default()(task.start).format("YYYY-MM-DD HH:mm:ss"));
+        return task;
+      });
+      dayjs_min_default.a.locale(this.options.locale, null, true);
+      if (typeof this.state.taskList === "undefined") {
+        this.$set(this.state, 'taskList', {});
+      }
+      if (typeof this.state.taskList.columns === 'undefined') {
+        this.$set(this.state.taskList, 'columns', []);
+      }
+      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
+        this.$set(column, 'finalWidth', (column.width / 100) * this.state.taskList.percent);
+        if (typeof column.height === "undefined") {
+          this.$set(column, 'height', 0);
+        }
+        if (typeof column.style === "undefined") {
+          this.$set(column, 'style', {});
+        }
+        this.$set(column, '_id', `${index}-${column.label}`);
+        return column;
+      });
+      // initialize observer
+      this.refreshTasks(true);
+      this.state.rootTask = {
+        id: null,
+        label: "root",
+        children: [],
+        allChildren: [],
+        parents: [],
+        parent: null
+      };
+      this.resetTaskTree();
+      this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+      this.state.tasks = this.state.taskTree.allChildren;
+      this.state.ctx = document.createElement("canvas").getContext("2d");
+      this.calculateTaskListColumnsDimensions();
+      this.state.scrollBarHeight = this.getScrollBarHeight();
+      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
+    },
+
+    /**
+     * Get calendar rows outer height
+     *
+     * @returns {int}
+     */
+    getCalendarHeight () {
+      return this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
+    },
+
+    /**
+     * Sum all calendar rows height and return result
+     *
+     * @returns {int}
+     */
+    calculateCalendarDimensions () {
+      this.state.calendar.height = 0;
+      if (this.state.calendar.hour.display) {
+        this.state.calendar.height += this.state.calendar.hour.height;
+      }
+      if (this.state.calendar.day.display) {
+        this.state.calendar.height += this.state.calendar.day.height;
+      }
+      if (this.state.calendar.month.display) {
+        this.state.calendar.height += this.state.calendar.month.height;
+      }
+    },
+
+    /**
+     * Get maximal level of nested task children
+     *
+     * @returns {int}
+     */
+    getMaximalLevel () {
+      let maximalLevel = 0;
+      this.state.tasks.forEach(task => {
+        if (task.parents.length > maximalLevel) {
+          maximalLevel = task.parents.length;
+        }
+      });
+      return maximalLevel - 1;
+    },
+
+    /**
+     * Get maximal expander width - to calculate straight task list text
+     *
+     * @returns {int}
+     */
+    getMaximalExpanderWidth () {
+      return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
+    },
+
+    /**
+     * Synchronize scrollTop property when row height is changed
+     */
+    syncScrollTop () {
+      if (this.state.refs.taskListItems) {
+        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+      }
+    },
+
+    /**
+     * Calculate task list columns dimensions
+     */
+    calculateTaskListColumnsDimensions () {
+      let final = 0;
+      this.state.taskList.columns.forEach(column => {
+        if (column.expander) {
+          column.finalWidth = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+        } else {
+          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+        }
+        final += column.finalWidth;
+        column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
+      });
+      this.state.taskList.finalWidth = final;
+      if (typeof document !== 'undefined') {
+        if (final > document.body.clientWidth / 2) {
+          this.state.taskList.display = false;
+        }
+      }
+      this.syncScrollTop();
+    },
+
+    /**
+     * Reset task tree - which is used to create tree like structure inside task list
+     */
+    resetTaskTree () {
+      this.state.rootTask.children = [];
+      this.state.rootTask.allChildren = [];
+      this.state.rootTask.parent = null;
+      this.state.rootTask.parents = [];
+      this.state.tasksById = {};
+      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+        let current = this.state.tasks[i];
+        current.children = [];
+        current.allChildren = [];
+        current.parent = null;
+        current.parents = [];
+        this.state.tasksById[current.id] = current;
+      }
+    },
+
+    /**
+     * Make task tree, after reset - look above
+     *
+     * @param {object} task
+     * @returns {object} tasks with children and parents
+     */
+    makeTaskTree (task) {
+      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+        let current = this.state.tasks[i];
+        if (current.parentId === task.id) {
+          if (task.parents.length) {
+            task.parents.forEach(parent => current.parents.push(parent));
+          }
+          if (task !== this.root) {
+            current.parents.push(task);
+            current.parent = task;
+          } else {
+            current.parents = [];
+            current.parent = null;
+          }
+          current = this.makeTaskTree(current);
+          task.allChildren.push(current);
+          task.children.push(current);
+          current.allChildren.forEach(child => task.allChildren.push(child));
+        }
+      }
+      return task;
+    },
+
+    /**
+     * Get task by id
+     *
+     * @param {any} taskId
+     * @returns {object|null} task
+     */
+    getTask (taskId) {
+      if (typeof this.state.tasksById[taskId] !== 'undefined') {
+        return this.state.tasksById[taskId];
+      }
+      return null;
+    },
+
+    /**
+     * Get children tasks for specified taskId
+     *
+     * @param {any} taskId
+     * @returns {array} children
+     */
+    getChildren (taskId) {
+      return this.state.tasks.filter(task => task.parent === taskId);
+    },
+
+    getSVG () {
+      return this.state.svgMainView.outerHTML;
+    },
+
+    getImage (type = "image/png") {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = this.state.svgMainView.clientWidth;
+          canvas.height = this.state.svgMainView.clientHeight;
+          canvas.getContext("2d").drawImage(img, 0, 0);
+          resolve(canvas.toDataURL(type));
+        };
+        img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
+      });
+    },
+
+    /**
+     * Get gantt total height
+     *
+     * @returns {number}
+     */
+    getHeight (visibleTasks, outer = false) {
+      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
+      if (outer) {
+        height += this.state.scrollBarHeight;
+      }
+      return height;
+    },
+
+    /**
+     * Get one task height
+     *
+     * @returns {number}
+     */
+    getTaskHeight (withStroke = false) {
+      if (withStroke) {
+        return (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+      }
+      return (this.state.row.height + this.state.grid.horizontal.gap * 2);
+    },
+
+    /**
+     * Get specified tasks height
+     *
+     * @returns {number}
+     */
+    getTasksHeight (visibleTasks, outer = false) {
+      return visibleTasks.length * this.getTaskHeight();
+    },
+
+    /**
+     * Convert time (in milliseconds) to pixel offset inside chart
+     *
+     * @param {int} ms
+     * @returns {number}
+     */
+    timeToPixelOffsetX (ms) {
+      let x = ms - this.state.times.firstTime;
+      if (x) {
+        x = x / this.state.times.timePerPixel;
+      }
+      return x;
+    },
+
+    /**
+     * Convert pixel offset inside chart to corresponding time offset in milliseconds
+     *
+     * @param {number} pixelOffsetX
+     * @returns {int} milliseconds
+     */
+    pixelOffsetXToTime (pixelOffsetX) {
+      let offset = pixelOffsetX + this.style('grid-line-vertical')["stroke-width"] / 2;
+      return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
+    },
+
+    /**
+     * Determine if element is inside current view port
+     *
+     * @param {number} x - element placement
+     * @param {number} width - element width
+     * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true
+     * @returns {boolean}
+     */
+    isInsideViewPort (x, width, buffer = 5000) {
+      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
+    },
+
+    /**
+     * Chart scroll event handler
+     *
+     * @param {event} ev
+     */
+    onScrollChart (ev) {
+      const horizontal = this.state.refs.chartScrollContainerHorizontal;
+      const vertical = this.state.refs.chartScrollContainerVertical;
+      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
+    },
+
+    /**
+     * After same as above but with different arguments - normalized
+     *
+     * @param {number} left
+     * @param {number} top
+     */
+    _onScrollChart (left, top) {
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      this.state.scroll.chart.left = left;
+      this.state.scroll.chart.right = left + chartContainerWidth;
+      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
+      this.state.scroll.chart.top = top;
+      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
+      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
+      this.state.scroll.chart.dateTime.left = dayjs_min_default()(this.state.scroll.chart.time);
+      this.state.scroll.chart.dateTime.right = dayjs_min_default()(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
+      this.scrollTo(left, top);
+    },
+
+    /**
+     * Scroll current chart to specified time (in milliseconds)
+     *
+     * @param {int} time
+     */
+    scrollToTime (time) {
+      let pos = this.timeToPixelOffsetX(time);
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      pos = pos - chartContainerWidth / 2;
+      if (pos > this.state.width) {
+        pos = this.state.width - chartContainerWidth;
+      }
+      this.scrollTo(pos);
+    },
+
+    /**
+     * Scroll chart or task list to specified pixel values
+     *
+     * @param {number|null} left
+     * @param {number|null} top
+     */
+    scrollTo (left = null, top = null) {
+      if (left !== null) {
+        this.state.refs.svgChartContainer.scrollLeft = left;
+        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
+        this.state.scroll.left = left;
+      }
+      if (top !== null) {
+        this.state.refs.chartScrollContainerVertical.scrollTop = top;
+        this.state.refs.chartGraph.scrollTop = top;
+        this.state.refs.taskListItems.scrollTop = top;
+        this.state.scroll.top = top;
+      }
+    },
+
+    /**
+     * After some actions like time zoom change we need to recompensate scroll position
+     * so as a result everything will be in same place
+     */
+    fixScrollPos () {
+      this.$nextTick(() => {
+        this.scrollToTime(this.state.scroll.chart.timeCenter);
+      });
+    },
+
+    /**
+     * Mouse wheel event handler
+     */
+    onWheelChart (ev) {
+      if (!ev.shiftKey) {
+        let top = this.state.scroll.top + ev.deltaY;
+        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
+        if (top < 0) {
+          top = 0;
+        } else if (top > scrollHeight) {
+          top = scrollHeight;
+        }
+        this.scrollTo(null, top);
+      } else {
+        let left = this.state.scroll.left + ev.deltaY;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        if (left < 0) {
+          left = 0;
+        } else if (left > scrollWidth) {
+          left = scrollWidth;
+        }
+        this.scrollTo(left);
+      }
+    },
+
+    /**
+     * Time zoom change event handler
+     */
+    onTimeZoomChange (timeZoom) {
+      this.state.times.timeZoom = timeZoom;
+      this.recalculateTimes();
+      this.calculateSteps();
+      this.calculateCalendarDimensions();
+      this.fixScrollPos();
+    },
+
+    /**
+     * Row height change event handler
+     */
+    onRowHeightChange (height) {
+      this.state.row.height = height;
+      this.calculateTaskListColumnsDimensions();
+    },
+
+    /**
+     * Scope change event handler
+     */
+    onScopeChange (value) {
+      this.state.scope.before = value;
+      this.state.scope.after = value;
+      this.initTimes();
+      this.calculateSteps();
+      this.computeCalendarWidths();
+      this.fixScrollPos();
+    },
+
+    /**
+     * Task list width change event handler
+     */
+    onTaskListWidthChange (value) {
+      this.state.taskList.percent = value;
+      this.calculateTaskListColumnsDimensions();
+      this.fixScrollPos();
+    },
+
+    /**
+     * Task list column width change event handler
+     */
+    onTaskListColumnWidthChange (value) {
+      this.calculateTaskListColumnsDimensions();
+      this.fixScrollPos();
+    },
+
+    /**
+     * Listen to speciefied event names
+     */
+    initializeEvents () {
+      this.$on("chart-scroll-horizontal", this.onScrollChart);
+      this.$on("chart-scroll-vertical", this.onScrollChart);
+      this.$on("chart-wheel", this.onWheelChart);
+      this.$on("times-timeZoom-change", this.onTimeZoomChange);
+      this.$on("row-height-change", this.onRowHeightChange);
+      this.$on("scope-change", this.onScopeChange);
+      this.$on("taskList-width-change", this.onTaskListWidthChange);
+      this.$on("taskList-column-width-change", this.onTaskListColumnWidthChange);
+    },
+
+    /**
+     * When some action was performed (scale change for example) - recalculate time variables
+     */
+    recalculateTimes () {
+      let max = this.state.times.timeScale * 60;
+      let min = this.state.times.timeScale;
+      let steps = max / min;
+      let percent = this.state.times.timeZoom / 100;
+      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
+      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
+      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
+      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')["stroke-width"];
+    },
+
+    /**
+     * Initialize time variables
+     */
+    initTimes () {
+      this.state.times.firstDate = dayjs_min_default()(this.state.times.firstTaskDate)
+        .locale(this.locale)
+        .startOf("day")
+        .subtract(this.state.scope.before, "days")
+        .startOf("day");
+      this.state.times.lastDate = dayjs_min_default()(this.state.times.lastTaskDate)
+        .locale(this.locale)
+        .endOf("day")
+        .add(this.state.scope.after, "days")
+        .endOf("day");
+      this.state.times.firstTime = this.state.times.firstDate.valueOf();
+      this.state.times.lastTime = this.state.times.lastDate.valueOf();
+      this.recalculateTimes();
+    },
+
+    /**
+     * Calculate steps
+     * Steps are days by default
+     * Each step contain information about time offset and pixel offset of this time inside gantt chart
+     */
+    calculateSteps () {
+      const steps = [];
+      const lastMs = dayjs_min_default()(this.state.times.lastDate).valueOf();
+      const currentDate = dayjs_min_default()(this.state.times.firstDate);
+      steps.push({
+        date: currentDate,
+        offset: {
+          ms: 0,
+          px: 0
+        }
+      });
+      for (let currentDate = dayjs_min_default()(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+        currentDate.valueOf() <= lastMs;
+        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
+        const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
+        const offsetPx = offsetMs / this.state.times.timePerPixel;
+        const step = {
+          date: currentDate,
+          offset: {
+            ms: offsetMs,
+            px: offsetPx
+          }
+        };
+        const previousStep = steps[steps.length - 1];
+        previousStep.width = {
+          ms: offsetMs - previousStep.offset.ms,
+          px: offsetPx - previousStep.offset.px
+        };
+        steps.push(step);
+      }
+      const lastStep = steps[steps.length - 1];
+      lastStep.width = {
+        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
+        px: this.state.times.totalViewDurationPx - lastStep.offset.px
+      };
+      this.state.times.steps = steps;
+    },
+
+    /**
+     * Calculate calendar widths - when scale was changed for example
+     */
+    computeCalendarWidths () {
+      this.computeDayWidths();
+      this.computeHourWidths();
+      this.computeMonthWidths();
+    },
+
+    /**
+     * Compute width of calendar hours column widths basing on text widths
+     */
+    computeHourWidths () {
+      const state = this.state;
+      state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
+      let currentDate = dayjs_min_default()("2018-01-01T00:00:00"); // any date will be good for hours
+      let maxWidths = {};
+      state.calendar.hour.widths = [];
+      Object.keys(state.calendar.hour.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
+      for (let hour = 0; hour < 24; hour++) {
+        const widths = {
+          hour
+        };
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.hour.widths.push(widths);
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, "hour");
+      }
+      state.calendar.hour.maxWidths = maxWidths;
+    },
+
+    /**
+     * Compute calendar days column widths basing on text widths
+     */
+    computeDayWidths () {
+      const state = this.state;
+      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      let currentDate = dayjs_min_default()(state.times.steps[0].date);
+      let maxWidths = {};
+      state.calendar.day.widths = [];
+      Object.keys(state.calendar.day.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
+      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+        const widths = {
+          day
+        };
+        Object.keys(state.calendar.day.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.day.widths.push(widths);
+        Object.keys(state.calendar.day.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, "day");
+      }
+      state.calendar.day.maxWidths = maxWidths;
+    },
+
+    /**
+     * Compute month calendar columns widths basing on text widths
+     */
+    computeMonthWidths () {
+      const state = this.state;
+      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      let maxWidths = {};
+      state.calendar.month.widths = [];
+      Object.keys(state.calendar.month.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
+      let currentDate = dayjs_min_default()(this.state.times.firstDate);
+      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
+      for (let month = 0; month < monthsCount; month++) {
+        const widths = {
+          month
+        };
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
+        });
+        state.calendar.month.widths.push(widths);
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
+        currentDate = currentDate.add(1, "month");
+      }
+      state.calendar.month.maxWidths = maxWidths;
+    },
+
+    /**
+     * Prepare time and date variables for gantt
+     */
+    prepareDates () {
+      let firstTaskTime = Number.MAX_SAFE_INTEGER;
+      let lastTaskTime = 0;
+      let firstTaskDate, lastTaskDate;
+      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
+        let task = this.state.tasks[index];
+        task.startDate = dayjs_min_default()(task.start);
+        task.startTime = task.startDate.valueOf();
+        task.durationMs = task.duration * 1000;
+        if (task.startTime < firstTaskTime) {
+          firstTaskTime = task.startTime;
+          firstTaskDate = task.startDate;
+        }
+        if (task.startTime + task.durationMs > lastTaskTime) {
+          lastTaskTime = task.startTime + task.durationMs;
+          lastTaskDate = dayjs_min_default()(task.startTime + task.durationMs);
+        }
+      }
+      this.state.times.firstTaskTime = firstTaskTime;
+      this.state.times.lastTaskTime = lastTaskTime;
+      this.state.times.firstTaskDate = firstTaskDate;
+      this.state.times.lastTaskDate = lastTaskDate;
+      this.state.times.firstDate = dayjs_min_default()(firstTaskDate)
+        .locale(this.locale)
+        .startOf("day")
+        .subtract(this.state.scope.before, "days")
+        .startOf("day");
+      this.state.times.lastDate = dayjs_min_default()(lastTaskDate)
+        .locale(this.locale)
+        .endOf("day")
+        .add(this.state.scope.after, "days")
+        .endOf("day");
+    },
+
+    /**
+     * Setup and calulate everything
+     */
+    setup () {
+      this.initialize();
+      this.state.tasksById = {};
+      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
+      this.prepareDates();
+      this.initTimes();
+      this.calculateSteps();
+      this.computeCalendarWidths();
+      this.calculateCalendarDimensions();
+      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
+        return { width: prev.width + current.width };
+      }, { width: 0 }).width;
+    },
+
+  },
+
+  computed: {
+
+    /**
+     * Get visible tasks
+     * Very importan method which will bring us only those tasks that are visible inside gantt chart
+     * For example when task is collapsed - children of this task are not visible - we should not render them
+     */
+    visibleTasks () {
+      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const maxRows = visibleTasks.slice(0, this.state.maxRows);
+      this.state.rowsHeight = this.getTasksHeight(maxRows);
+      let heightCompensation = 0;
+      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {
+        heightCompensation = this.state.rowsHeight - this.state.maxHeight;
+        this.state.rowsHeight = this.state.maxHeight;
+      }
+      this.state.height = this.getHeight(maxRows) - heightCompensation;
+      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
+      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
+      let len = visibleTasks.length;
+      for (let index = 0; index < len; index++) {
+        let task = visibleTasks[index];
+        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')["stroke-width"];
+        if (task.width < 0) {
+          task.width = 0;
+        }
+        task.height = this.state.row.height;
+        task.x = this.timeToPixelOffsetX(task.startTime);
+        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;
+      }
+      this.$nextTick(() => {
+        this.syncScrollTop();
+      });
+      return visibleTasks;
+    },
+  },
+
+  /**
+   * Watch tasks after gantt instance is created and react when we have new kids on the block
+   */
+  created () {
+    let previousTasks = [];
+    this.$watch('state.tasks', function (newTasks, oldTasks) {
+      let refresh = previousTasks.length !== newTasks.length;
+      if (!refresh) {
+        for (let i = 0, len = newTasks.length; i < len; i++) {
+          if (typeof newTasks[i].parents === 'undefined') {
+            refresh = true;
+            break;
+          }
+        }
+      }
+      if (refresh) {
+        this.refreshTasks();
+        this.prepareDates();
+        this.initTimes();
+        this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
+        this.resetTaskTree();
+        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+        this.state.tasks = this.state.taskTree.allChildren;
+      }
+      previousTasks = newTasks.slice();
+    }, { immediate: true, deep: false });
+    this.initializeEvents();
+    this.setup();
+    this.$root.$emit('gantt-elastic-created', this);
+  },
+
+  /**
+   * Emit ready/mounted events and deliver this gantt instance to outside world when needed
+   */
+  mounted () {
+    this.$root.$emit('gantt-elastic-mounted', this);
+    this.$root.$emit('gantt-elastic-ready', this);
+  }
+};
+/* harmony default export */ var GanttElasticvue_type_script_lang_js_ = (GanttElastic);
+
+// CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
+ /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(3);
+
+// CONCATENATED MODULE: ./src/GanttElastic.vue
+/* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
+/* concated harmony reexport mergeDeepReactive */__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return mergeDeepReactive; });
+
+
+
+
+
+
+/* normalize component */
+
+var GanttElastic_component = normalizeComponent(
+  src_GanttElasticvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var GanttElastic_api; }
+GanttElastic_component.options.__file = "src/GanttElastic.vue"
+/* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-
-/***/ "./node_modules/vue-style-loader/lib/listToStyles.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/vue-style-loader/lib/listToStyles.js ***!
-  \***********************************************************/
-/*! exports provided: default */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return listToStyles; });\n/**\n * Translates the list format produced by css-loader into something\n * easier to manipulate.\n */\nfunction listToStyles (parentId, list) {\n  var styles = []\n  var newStyles = {}\n  for (var i = 0; i < list.length; i++) {\n    var item = list[i]\n    var id = item[0]\n    var css = item[1]\n    var media = item[2]\n    var sourceMap = item[3]\n    var part = {\n      id: parentId + ':' + i,\n      css: css,\n      media: media,\n      sourceMap: sourceMap\n    }\n    if (!newStyles[id]) {\n      styles.push(newStyles[id] = { id: id, parts: [part] })\n    } else {\n      newStyles[id].parts.push(part)\n    }\n  }\n  return styles\n}\n\n\n//# sourceURL=webpack://GanttElastic/./node_modules/vue-style-loader/lib/listToStyles.js?");
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+function addStylesClient (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
 
-/***/ }),
-
-/***/ "./src/GanttElastic.vue":
-/*!******************************!*\
-  !*** ./src/GanttElastic.vue ***!
-  \******************************/
-/*! exports provided: default, mergeDeep, mergeDeepReactive */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GanttElastic.vue?vue&type=template&id=02c6304c& */ \"./src/GanttElastic.vue?vue&type=template&id=02c6304c&\");\n/* harmony import */ var _GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GanttElastic.vue?vue&type=script&lang=js& */ \"./src/GanttElastic.vue?vue&type=script&lang=js&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"mergeDeep\", function() { return _GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"mergeDeep\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"mergeDeepReactive\", function() { return _GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"mergeDeepReactive\"]; });\n\n/* harmony import */ var _GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GanttElastic.vue?vue&type=style&index=0&lang=css& */ \"./src/GanttElastic.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/GanttElastic.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?");
-
-/***/ }),
-
-/***/ "./src/GanttElastic.vue?vue&type=script&lang=js&":
-/*!*******************************************************!*\
-  !*** ./src/GanttElastic.vue?vue&type=script&lang=js& ***!
-  \*******************************************************/
-/*! exports provided: default, mergeDeep, mergeDeepReactive */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../node_modules/vue-loader/lib??vue-loader-options!./GanttElastic.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=script&lang=js&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"mergeDeep\", function() { return _node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"mergeDeep\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"mergeDeepReactive\", function() { return _node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"mergeDeepReactive\"]; });\n\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?");
-
-/***/ }),
-
-/***/ "./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************!*\
-  !*** ./src/GanttElastic.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../node_modules/vue-style-loader!../node_modules/css-loader!../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../node_modules/vue-loader/lib??vue-loader-options!./GanttElastic.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?");
-
-/***/ }),
-
-/***/ "./src/GanttElastic.vue?vue&type=template&id=02c6304c&":
-/*!*************************************************************!*\
-  !*** ./src/GanttElastic.vue?vue&type=template&id=02c6304c& ***!
-  \*************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../node_modules/vue-loader/lib??vue-loader-options!./GanttElastic.vue?vue&type=template&id=02c6304c& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=template&id=02c6304c&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_template_id_02c6304c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/GanttElastic.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/Calendar.vue":
-/*!**********************************************!*\
-  !*** ./src/components/Calendar/Calendar.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Calendar.vue?vue&type=template&id=dee108e2& */ \"./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&\");\n/* harmony import */ var _Calendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Calendar.vue?vue&type=script&lang=js& */ \"./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Calendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Calendar/Calendar.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/Calendar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./src/components/Calendar/Calendar.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Calendar.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/Calendar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2& ***!
-  \*****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Calendar.vue?vue&type=template&id=dee108e2& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_template_id_dee108e2___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/Calendar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/CalendarRow.vue":
-/*!*************************************************!*\
-  !*** ./src/components/Calendar/CalendarRow.vue ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarRow.vue?vue&type=template&id=0daf06fb& */ \"./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&\");\n/* harmony import */ var _CalendarRow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarRow.vue?vue&type=script&lang=js& */ \"./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _CalendarRow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Calendar/CalendarRow.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/CalendarRow.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarRow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./CalendarRow.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarRow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/CalendarRow.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&":
-/*!********************************************************************************!*\
-  !*** ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb& ***!
-  \********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CalendarRow.vue?vue&type=template&id=0daf06fb& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarRow_vue_vue_type_template_id_0daf06fb___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Calendar/CalendarRow.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Chart.vue":
-/*!****************************************!*\
-  !*** ./src/components/Chart/Chart.vue ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chart.vue?vue&type=template&id=67c3f5cd& */ \"./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&\");\n/* harmony import */ var _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Chart.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Chart.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Chart.vue?vue&type=script&lang=js&":
-/*!*****************************************************************!*\
-  !*** ./src/components/Chart/Chart.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Chart.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Chart.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&":
-/*!***********************************************************************!*\
-  !*** ./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd& ***!
-  \***********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Chart.vue?vue&type=template&id=67c3f5cd& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Chart.vue?vue&type=template&id=67c3f5cd&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Chart_vue_vue_type_template_id_67c3f5cd___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Chart.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/DependencyLines.vue":
-/*!**************************************************!*\
-  !*** ./src/components/Chart/DependencyLines.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DependencyLines.vue?vue&type=template&id=f1cbf6ba& */ \"./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&\");\n/* harmony import */ var _DependencyLines_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DependencyLines.vue?vue&type=script&lang=js& */ \"./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _DependencyLines_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/DependencyLines.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/DependencyLines.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_DependencyLines_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./DependencyLines.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_DependencyLines_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/DependencyLines.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&":
-/*!*********************************************************************************!*\
-  !*** ./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DependencyLines.vue?vue&type=template&id=f1cbf6ba& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DependencyLines_vue_vue_type_template_id_f1cbf6ba___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/DependencyLines.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Grid.vue":
-/*!***************************************!*\
-  !*** ./src/components/Chart/Grid.vue ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Grid.vue?vue&type=template&id=2bf979a7& */ \"./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&\");\n/* harmony import */ var _Grid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Grid.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Grid.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Grid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Grid.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Grid.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Grid.vue?vue&type=script&lang=js&":
-/*!****************************************************************!*\
-  !*** ./src/components/Chart/Grid.vue?vue&type=script&lang=js& ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Grid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Grid.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Grid.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Grid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Grid.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&":
-/*!**********************************************************************!*\
-  !*** ./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7& ***!
-  \**********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Grid.vue?vue&type=template&id=2bf979a7& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Grid_vue_vue_type_template_id_2bf979a7___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Grid.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/ProgressBar.vue":
-/*!**********************************************!*\
-  !*** ./src/components/Chart/ProgressBar.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProgressBar.vue?vue&type=template&id=4bc39355& */ \"./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&\");\n/* harmony import */ var _ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProgressBar.vue?vue&type=script&lang=js& */ \"./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/ProgressBar.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/ProgressBar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./ProgressBar.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/ProgressBar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355& ***!
-  \*****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ProgressBar.vue?vue&type=template&id=4bc39355& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_4bc39355___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/ProgressBar.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Milestone.vue":
-/*!************************************************!*\
-  !*** ./src/components/Chart/Row/Milestone.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Milestone.vue?vue&type=template&id=3013006c& */ \"./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&\");\n/* harmony import */ var _Milestone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Milestone.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Milestone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Row/Milestone.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Milestone.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Milestone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib??vue-loader-options!./Milestone.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Milestone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Milestone.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&":
-/*!*******************************************************************************!*\
-  !*** ./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c& ***!
-  \*******************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Milestone.vue?vue&type=template&id=3013006c& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Milestone_vue_vue_type_template_id_3013006c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Milestone.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Project.vue":
-/*!**********************************************!*\
-  !*** ./src/components/Chart/Row/Project.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Project.vue?vue&type=template&id=077bbd73& */ \"./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&\");\n/* harmony import */ var _Project_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Project.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Project_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Row/Project.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Project.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./src/components/Chart/Row/Project.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Project_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib??vue-loader-options!./Project.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Project_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Project.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73& ***!
-  \*****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Project.vue?vue&type=template&id=077bbd73& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Project_vue_vue_type_template_id_077bbd73___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Project.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Task.vue":
-/*!*******************************************!*\
-  !*** ./src/components/Chart/Row/Task.vue ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Task.vue?vue&type=template&id=e9c23eca& */ \"./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&\");\n/* harmony import */ var _Task_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Task.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Task_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Row/Task.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Task.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./src/components/Chart/Row/Task.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Task_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib??vue-loader-options!./Task.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Task_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Task.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&":
-/*!**************************************************************************!*\
-  !*** ./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca& ***!
-  \**************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Task.vue?vue&type=template&id=e9c23eca& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Row/Task.vue?vue&type=template&id=e9c23eca&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Task_vue_vue_type_template_id_e9c23eca___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Row/Task.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Text.vue":
-/*!***************************************!*\
-  !*** ./src/components/Chart/Text.vue ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Text.vue?vue&type=template&id=459c2fe4& */ \"./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&\");\n/* harmony import */ var _Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Text.vue?vue&type=script&lang=js& */ \"./src/components/Chart/Text.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/Chart/Text.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Text.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Text.vue?vue&type=script&lang=js&":
-/*!****************************************************************!*\
-  !*** ./src/components/Chart/Text.vue?vue&type=script&lang=js& ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Text.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Text.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Text.vue?");
-
-/***/ }),
-
-/***/ "./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&":
-/*!**********************************************************************!*\
-  !*** ./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4& ***!
-  \**********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Text.vue?vue&type=template&id=459c2fe4& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_459c2fe4___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/Chart/Text.vue?");
-
-/***/ }),
-
-/***/ "./src/components/MainView.vue":
-/*!*************************************!*\
-  !*** ./src/components/MainView.vue ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainView.vue?vue&type=template&id=0bc4212e& */ \"./src/components/MainView.vue?vue&type=template&id=0bc4212e&\");\n/* harmony import */ var _MainView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainView.vue?vue&type=script&lang=js& */ \"./src/components/MainView.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _MainView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/MainView.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/MainView.vue?");
-
-/***/ }),
-
-/***/ "./src/components/MainView.vue?vue&type=script&lang=js&":
-/*!**************************************************************!*\
-  !*** ./src/components/MainView.vue?vue&type=script&lang=js& ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_MainView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib??vue-loader-options!./MainView.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/MainView.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_MainView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/MainView.vue?");
-
-/***/ }),
-
-/***/ "./src/components/MainView.vue?vue&type=template&id=0bc4212e&":
-/*!********************************************************************!*\
-  !*** ./src/components/MainView.vue?vue&type=template&id=0bc4212e& ***!
-  \********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./MainView.vue?vue&type=template&id=0bc4212e& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/MainView.vue?vue&type=template&id=0bc4212e&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainView_vue_vue_type_template_id_0bc4212e___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/MainView.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/Expander.vue":
-/*!**********************************************!*\
-  !*** ./src/components/TaskList/Expander.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expander.vue?vue&type=template&id=5f156c33& */ \"./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&\");\n/* harmony import */ var _Expander_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expander.vue?vue&type=script&lang=js& */ \"./src/components/TaskList/Expander.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _Expander_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/TaskList/Expander.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/Expander.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/Expander.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./src/components/TaskList/Expander.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_Expander_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./Expander.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/Expander.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_Expander_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/Expander.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33& ***!
-  \*****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Expander.vue?vue&type=template&id=5f156c33& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expander_vue_vue_type_template_id_5f156c33___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/Expander.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/ItemColumn.vue":
-/*!************************************************!*\
-  !*** ./src/components/TaskList/ItemColumn.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemColumn.vue?vue&type=template&id=cb5a6c96& */ \"./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&\");\n/* harmony import */ var _ItemColumn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemColumn.vue?vue&type=script&lang=js& */ \"./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _ItemColumn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/TaskList/ItemColumn.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/ItemColumn.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_ItemColumn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./ItemColumn.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/ItemColumn.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemColumn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/ItemColumn.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&":
-/*!*******************************************************************************!*\
-  !*** ./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96& ***!
-  \*******************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ItemColumn.vue?vue&type=template&id=cb5a6c96& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/ItemColumn.vue?vue&type=template&id=cb5a6c96&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemColumn_vue_vue_type_template_id_cb5a6c96___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/ItemColumn.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskList.vue":
-/*!**********************************************!*\
-  !*** ./src/components/TaskList/TaskList.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskList.vue?vue&type=template&id=6e11f12f& */ \"./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&\");\n/* harmony import */ var _TaskList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskList.vue?vue&type=script&lang=js& */ \"./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _TaskList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/TaskList/TaskList.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskList.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./src/components/TaskList/TaskList.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskList.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskList.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f& ***!
-  \*****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskList.vue?vue&type=template&id=6e11f12f& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskList.vue?vue&type=template&id=6e11f12f&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_template_id_6e11f12f___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskList.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListHeader.vue":
-/*!****************************************************!*\
-  !*** ./src/components/TaskList/TaskListHeader.vue ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskListHeader.vue?vue&type=template&id=aefdd7c8& */ \"./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&\");\n/* harmony import */ var _TaskListHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskListHeader.vue?vue&type=script&lang=js& */ \"./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _TaskListHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/TaskList/TaskListHeader.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListHeader.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskListHeader.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListHeader.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&":
-/*!***********************************************************************************!*\
-  !*** ./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8& ***!
-  \***********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskListHeader.vue?vue&type=template&id=aefdd7c8& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListHeader_vue_vue_type_template_id_aefdd7c8___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListHeader.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListItem.vue":
-/*!**************************************************!*\
-  !*** ./src/components/TaskList/TaskListItem.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskListItem.vue?vue&type=template&id=9716293c& */ \"./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&\");\n/* harmony import */ var _TaskListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskListItem.vue?vue&type=script&lang=js& */ \"./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _TaskListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/TaskList/TaskListItem.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListItem.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskListItem.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListItem.vue?");
-
-/***/ }),
-
-/***/ "./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&":
-/*!*********************************************************************************!*\
-  !*** ./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TaskListItem.vue?vue&type=template&id=9716293c& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/TaskList/TaskListItem.vue?vue&type=template&id=9716293c&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskListItem_vue_vue_type_template_id_9716293c___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://GanttElastic/./src/components/TaskList/TaskListItem.vue?");
-
-/***/ }),
-
-/***/ "./src/style.js":
-/*!**********************!*\
-  !*** ./src/style.js ***!
-  \**********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/**\r\n* @fileoverview Styles for gantt-elastic\r\n* @license MIT\r\n* @author Rafal Pospiech <neuronet.io@gmail.com>\r\n* @package GanttElastic\r\n*/\r\nconst fontSize = '12px';\r\nconst fontFamily = 'Arial, sans-serif';\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  \"header\": {\r\n    \"font-family\": fontFamily,\r\n    \"margin\": \"0px auto\",\r\n    \"background\": \"#f3f5f747\",\r\n    \"padding\": \"10px\",\r\n    \"overflow\": \"hidden\",\r\n    \"clear\": \"both\",\r\n    \"display\": \"flex\",\r\n    \"justify-content\": \"space-between\"\r\n  },\r\n  \"header-title\": { \"float\": \"left\" },\r\n  \"header-options\": { \"float\": \"right\" },\r\n  \"header-title--text\": {\r\n    \"font-size\": \"20px\",\r\n    \"vertical-align\": \"middle\",\r\n    \"font-weight\": \"400\",\r\n    \"line-height\": \"35px\",\r\n    \"padding-left\": \"22px\",\r\n    \"letter-spacing\": \"1px\"\r\n  },\r\n  \"header-title--html\": {\r\n    \"font-size\": \"20px\",\r\n    \"vertical-align\": \"middle\",\r\n    \"font-weight\": \"400\",\r\n    \"line-height\": \"35px\",\r\n    \"padding-left\": \"22px\",\r\n    \"letter-spacing\": \"1px\"\r\n  },\r\n  \"header-btn-recenter\": {\r\n    \"background\": \"#95A5A6\",\r\n    \"border\": \"none\",\r\n    \"outline\": \"none\",\r\n    \"cursor\": \"pointer\",\r\n    \"color\": \"white\",\r\n    \"border-radius\": \"3px\",\r\n    \"margin-right\": \"27px\",\r\n    \"font-size\": \"16px\",\r\n    \"padding\": \"8px 12px\"\r\n  },\r\n  \"header-slider\": {},\r\n  \"header-slider-wrapper\": { \"display\": \"inline-block\", \"vertical-align\": \"middle\" },\r\n  \"header-slider--slider\": {},\r\n  \"header-slider--process\": { \"background\": \"#ccc\" },\r\n  \"header-task-list-switch--label\": {},\r\n  \"header-task-list-switch\": { \"margin\": \"0px 15px\", \"vertical-align\": \"middle\" },\r\n  \"header-label\": {},\r\n  \"calendar-wrapper\": {\r\n    \"user-select\": \"none\"\r\n  },\r\n  \"calendar\": { \"width\": \"100%\", \"height\": \"100%\", \"background\": \"#f3f5f7\", \"border-color\": \"#f3f5f7\" },\r\n  \"calendar-row\": { \"fill\": \"transparent\", \"stroke\": \"#dadada\", \"stroke-width\": 0.5 },\r\n  \"calendar-row--month\": {},\r\n  \"calendar-row--day\": {},\r\n  \"calendar-row--hour\": {},\r\n  \"calendar-row-rect--month\": {},\r\n  \"calendar-row-text--month\": { \"font-family\": fontFamily, \"font-size\": fontSize, \"fill\": \"#606060\", \"stroke\": \"none\" },\r\n  \"calendar-row-rect--day\": {},\r\n  \"calendar-row-text--day\": { \"font-family\": fontFamily, \"font-size\": fontSize, \"fill\": \"#606060\", \"stroke\": \"none\" },\r\n  \"calendar-row-rect--hour\": {},\r\n  \"calendar-row-text--hour\": { \"font-family\": fontFamily, \"font-size\": fontSize, \"fill\": \"#606060\", \"stroke\": \"none\" },\r\n  \"task-list-wrapper\": {},\r\n  \"task-list\": { \"background\": \"transparent\", \"border-color\": \"#eee\" },\r\n  \"task-list-header\": { \"display\": \"flex\", \"user-select\": \"none\", \"vertical-align\": \"middle\" },\r\n  \"task-list-header-column\": {\r\n    \"border\": \"1px solid #00000050\",\r\n    \"border-top\": \"none\",\r\n    \"border-right\": \"none\",\r\n    \"box-sizing\": \"border-box\",\r\n    \"display\": \"flex\",\r\n    \"background\": \"#f3f5f7\",\r\n    \"border-color\": \"transparent\"\r\n  },\r\n  \"task-list-column-expander-wrapper\": {\r\n    \"stroke\": \"#909090\",\r\n    \"stroke-width\": \"1\",\r\n    \"fill\": \"#ffffffa0\",\r\n    \"display\": \"inline-flex\",\r\n    \"flex-shrink\": \"0\",\r\n    \"box-sizing\": \"border-box\",\r\n    \"margin\": \"0 10px\"\r\n  },\r\n  \"task-list-column-expander-content\": {\r\n    \"display\": \"inline-flex\",\r\n    \"cursor\": \"pointer\",\r\n    \"margin\": \"auto 0px\",\r\n    \"box-sizing\": \"border-box\",\r\n    \"user-select\": \"none\"\r\n  },\r\n  \"task-list-column-expander-line\": {\r\n    \"fill\": \"transparent\",\r\n    \"stroke\": \"#000000\",\r\n    \"stroke-width\": \"1\",\r\n    \"stroke-linecap\": \"round\"\r\n  },\r\n  \"task-list-column-expander-border\": {\r\n    \"fill\": \"#ffffffa0\",\r\n    \"stroke\": \"#000000\",\r\n  },\r\n  \"task-list-header-label\": {\r\n    \"overflow\": \"hidden\",\r\n    \"text-overflow\": \"ellipsis\",\r\n    \"font-family\": fontFamily,\r\n    \"font-size\": fontSize,\r\n    \"box-sizing\": \"border-box\",\r\n    \"margin\": \"auto 6px\",\r\n    \"flex-grow\": \"1\",\r\n    \"vertical-align\": \"middle\"\r\n  },\r\n  \"task-list-header-resizer-wrapper\": {\r\n    \"background\": \"transparent\",\r\n    \"height\": \"100%\",\r\n    \"width\": \"6px\",\r\n    \"cursor\": \"col-resize\",\r\n    \"display\": \"inline-flex\",\r\n    \"vertical-align\": \"center\"\r\n  },\r\n  \"task-list-header-resizer\": { \"margin\": \"auto 0px\" },\r\n  \"task-list-header-resizer-dot\": {\r\n    \"width\": \"3px\",\r\n    \"height\": \"3px\",\r\n    \"background\": \"#ddd\",\r\n    \"border-radius\": \"100%\",\r\n    \"margin\": \"4px 0px\",\r\n  },\r\n  \"task-list-items\": {\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"task-list-item\": {\r\n    \"border-top\": \"1px solid #eee\",\r\n    \"border-right\": \"1px solid #eee\",\r\n    \"box-sizing\": \"border-box\",\r\n    \"display\": \"flex\",\r\n    \"background\": \"transparent\",\r\n  },\r\n  \"task-list-item-column\": {\r\n    \"display\": \"inline-flex\",\r\n    \"flex-shrink\": \"0\",\r\n    \"border-left\": \"1px solid #00000050\",\r\n    \"box-sizing\": \"border-box\",\r\n    \"border-color\": \"#eee\",\r\n  },\r\n  \"task-list-item-value-wrapper\": {\r\n    \"overflow\": \"hidden\",\r\n    \"display\": \"flex\",\r\n    \"width\": \"100%\",\r\n  },\r\n  \"task-list-item-value-container\": {\r\n    \"margin\": \"auto 0px\",\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"task-list-item-value\": {\r\n    \"display\": \"block\",\r\n    \"flex-shrink\": \"100\",\r\n    \"font-family\": fontFamily,\r\n    \"font-size\": fontSize,\r\n    \"margin\": \"auto 6px\",\r\n    \"overflow\": \"hidden\",\r\n    \"text-overflow\": \"ellipsis\",\r\n    \"line-height\": \"1.5em\",\r\n    \"word-break\": \"keep-all\",\r\n    \"white-space\": \"nowrap\",\r\n    \"color\": \"#606060\",\r\n    \"background\": \"#FFFFFF\"\r\n  },\r\n  \"grid-lines\": {},\r\n  \"grid-line-horizontal\": {\r\n    \"stroke\": \"#00000010\",\r\n    \"stroke-width\": 1\r\n  },\r\n  \"grid-line-vertical\": {\r\n    \"stroke\": \"#00000010\",\r\n    \"stroke-width\": 1\r\n  },\r\n  \"grid-line-time\": {\r\n    \"stroke\": \"#FF000080\",\r\n    \"stroke-width\": 1\r\n  },\r\n  \"chart\": {\r\n    \"user-select\": \"none\",\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"chart-graph\": {\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"chart-row-text-wrapper\": {},\r\n  \"chart-row-text\": {\r\n    \"background\": \"#ffffffa0\",\r\n    \"border-radius\": \"10px\",\r\n    \"font-family\": fontFamily,\r\n    \"font-size\": fontSize,\r\n    \"font-weight\": \"normal\",\r\n    \"color\": \"#000000a0\",\r\n    \"height\": '100%'\r\n  },\r\n  \"chart-row-text-content\": {\r\n    \"padding\": \"0px 6px\"\r\n  },\r\n  \"chart-row-text-content--text\": {},\r\n  \"chart-row-text-content--html\": {},\r\n  \"chart-row-wrapper\": {},\r\n  \"chart-row-bar-wrapper\": {},\r\n  \"chart-row-bar\": {},\r\n  \"chart-row-bar-polygon\": {\r\n    \"stroke\": \"#E74C3C\",\r\n    \"stroke-width\": 1,\r\n    \"fill\": \"#F75C4C\",\r\n  },\r\n  \"chart-row-project-wrapper\": {},\r\n  \"chart-row-project\": {},\r\n  \"chart-row-project-polygon\": {},\r\n  \"chart-row-milestone-wrapper\": {},\r\n  \"chart-row-milestone\": {},\r\n  \"chart-row-milestone-polygon\": {},\r\n  \"chart-row-task-wrapper\": {},\r\n  \"chart-row-task\": {},\r\n  \"chart-row-task-polygon\": {},\r\n  \"chart-row-progress-bar-wrapper\": {},\r\n  \"chart-row-progress-bar\": {},\r\n  \"chart-row-progress-bar-line\": {\r\n    \"stroke\": \"#ffffff25\",\r\n    \"stroke-width\": 20\r\n  },\r\n  \"chart-row-progress-bar-solid\": {\r\n    \"fill\": \"#E74C3C\",\r\n    \"height\": \"20%\"\r\n  },\r\n  \"chart-row-progress-bar-pattern\": {\r\n    \"fill\": \"url(#diagonalHatch)\",\r\n    \"transform\": \"translateY(0.1) scaleY(0.8)\",\r\n  },\r\n  \"chart-row-progress-bar-outline\": {\r\n    \"stroke\": \"#E74C3C\",\r\n    \"stroke-width\": 1\r\n  },\r\n  \"chart-dependency-lines-wrapper\": {},\r\n  \"chart-dependency-lines-path\": {\r\n    \"fill\": \"transparent\",\r\n    \"stroke\": \"#FFa00090\",\r\n    \"stroke-width\": 2\r\n  },\r\n  \"chart-scroll-container\": {},\r\n  \"chart-scroll-container--horizontal\": {\r\n    \"overflow\": \"auto\",\r\n    \"max-width\": \"100%\"\r\n  },\r\n  \"chart-scroll-container--vertical\": {\r\n    \"overflow-y\": \"auto\",\r\n    \"overflow-x\": \"hidden\",\r\n    \"max-height\": \"100%\",\r\n    \"float\": \"right\",\r\n  },\r\n  \"svg-chart\": {\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"svg-container-wrapper\": {\r\n    \"overflow\": \"hidden\"\r\n  },\r\n  \"svg-container\": {\r\n    \"float\": \"left\",\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack://GanttElastic/./src/style.js?");
 
 /***/ })
-
-/******/ })["default"];
+/******/ ])["default"];
 });

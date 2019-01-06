@@ -47,7 +47,7 @@ export default {
       if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
         this.anchor = 'start';
         let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;
-        x = this.root.state.scroll.chart.left + 2;
+        x = this.root.state.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
         if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
           x = this.item.x + this.item.width - this.item.textWidth - 2;
         } else if (x < this.item.x) {
