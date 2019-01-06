@@ -22,7 +22,7 @@
       :x="getTextX"
       :y="getTextY"
       alignment-baseline="middle"
-      text-anchor="middle"
+      :text-anchor="anchor"
     >{{item.label}}</text>
   </g>
 </template>
@@ -32,12 +32,36 @@ export default {
   inject: ["root"],
   props: ["item", "which"],
   data () {
-    return {};
+    return {
+      anchor: 'middle'
+    };
   },
   computed: {
+    /**
+     * Get x position
+     *
+     * @returns {number}
+     */
     getTextX () {
-      return this.item.x + this.item.width / 2;
+      let x = this.item.x + this.item.width / 2;
+      if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
+        this.anchor = 'start';
+        let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;
+        x = this.root.state.scroll.chart.left + 2;
+        if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
+          x = this.item.x + this.item.width - this.item.textWidth - 2;
+        } else if (x < this.item.x) {
+          x = this.item.x + 2;
+        }
+      }
+      return x;
     },
+
+    /**
+     * Get y position
+     *
+     * @returns {number}
+     */
     getTextY () {
       return this.item.y + this.item.height / 2;
     }

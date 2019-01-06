@@ -197,12 +197,12 @@ function getOptions (userOptions) {
           medium (date) {
             return dayjs(date)
               .locale(userOptions.locale.code)
-              .format("'YY MMM");
+              .format("MMM / 'YY");
           },
           long (date) {
             return dayjs(date)
               .locale(userOptions.locale.code)
-              .format("YYYY MMMM (MM)");
+              .format("MMMM / YYYY");
           }
         }
       }
@@ -971,6 +971,7 @@ const GanttElastic = {
       state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
+      state.calendar.hour.widths = [];
       Object.keys(state.calendar.hour.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
@@ -978,17 +979,15 @@ const GanttElastic = {
         const widths = {
           hour
         };
-        Object.keys(state.calendar.hour.format)
-          .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
-          });
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
+        });
         state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format)
-          .forEach(formatName => {
-            if (widths[formatName] > maxWidths[formatName]) {
-              maxWidths[formatName] = widths[formatName];
-            }
-          });
+        Object.keys(state.calendar.hour.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
         currentDate = currentDate.add(1, "hour");
       }
       state.calendar.hour.maxWidths = maxWidths;
@@ -1002,25 +1001,23 @@ const GanttElastic = {
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let currentDate = dayjs(state.times.steps[0].date);
       let maxWidths = {};
-      Object.keys(state.calendar.day.format)
-        .forEach(formatName => {
-          maxWidths[formatName] = 0;
-        });
+      state.calendar.day.widths = [];
+      Object.keys(state.calendar.day.format).forEach(formatName => {
+        maxWidths[formatName] = 0;
+      });
       for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
         const widths = {
           day
         };
-        Object.keys(state.calendar.day.format)
-          .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
-          });
+        Object.keys(state.calendar.day.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
+        });
         state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format)
-          .forEach(formatName => {
-            if (widths[formatName] > maxWidths[formatName]) {
-              maxWidths[formatName] = widths[formatName];
-            }
-          });
+        Object.keys(state.calendar.day.format).forEach(formatName => {
+          if (widths[formatName] > maxWidths[formatName]) {
+            maxWidths[formatName] = widths[formatName];
+          }
+        });
         currentDate = currentDate.add(1, "day");
       }
       state.calendar.day.maxWidths = maxWidths;
@@ -1033,6 +1030,7 @@ const GanttElastic = {
       const state = this.state;
       state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
       let maxWidths = {};
+      state.calendar.month.widths = [];
       Object.keys(state.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
@@ -1042,10 +1040,9 @@ const GanttElastic = {
         const widths = {
           month
         };
-        Object.keys(state.calendar.month.format)
-          .forEach(formatName => {
-            widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
-          });
+        Object.keys(state.calendar.month.format).forEach(formatName => {
+          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
+        });
         state.calendar.month.widths.push(widths);
         Object.keys(state.calendar.month.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
