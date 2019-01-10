@@ -1052,7 +1052,6 @@ component.options.__file = "src/components/TaskList/Expander.vue"
   },
   created () {
     this.mouseUpListener = document.addEventListener('mouseup', (event) => {
-      console.log('moving');
       this.resizerMouseUp(event);
     });
     this.mouseMoveListener = document.addEventListener('mousemove', (event) => {

@@ -107,7 +107,6 @@ export default {
   },
   created () {
     this.mouseUpListener = document.addEventListener('mouseup', (event) => {
-      console.log('moving');
       this.resizerMouseUp(event);
     });
     this.mouseMoveListener = document.addEventListener('mousemove', (event) => {
