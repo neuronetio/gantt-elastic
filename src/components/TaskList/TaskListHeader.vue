@@ -19,7 +19,7 @@
         class="gantt-elastic__task-list-header-label"
         :style="root.style('task-list-header-label',column.style['task-list-header-label'])"
         :column="column"
-        @mouseup="resizerMouseUp($event, column)"
+        @mouseup="resizerMouseUp"
       >{{column.label}}</div>
       <div
         class="gantt-elastic__task-list-header-resizer-wrapper"
@@ -91,18 +91,28 @@ export default {
     resizerMouseMove (event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
+        if (this.resizer.moving.width < this.root.state.taskList.minWidth) {
+          this.resizer.moving.width = this.root.state.taskList.minWidth;
+        }
         this.root.$emit("taskList-column-width-change", this.resizer.moving.width);
       }
     },
     resizerMouseUp (event) {
       if (this.resizer.moving) {
-        this.root.$emit("taskList-column-width-change", this.resizer.moving.width);
-        this.root.$emit("taskList-column-width-change-stop", this.resizer.moving.width);
+        this.root.$emit("taskList-column-width-change", this.resizer.moving);
+        this.root.$emit("taskList-column-width-change-stop", this.resizer.moving);
         this.resizer.moving = false;
       }
     }
   },
   created () {
+    this.mouseUpListener = document.addEventListener('mouseup', (event) => {
+      console.log('moving');
+      this.resizerMouseUp(event);
+    });
+    this.mouseMoveListener = document.addEventListener('mousemove', (event) => {
+      this.resizerMouseMove(event);
+    });
     this.root.$on("main-view-mousemove", this.resizerMouseMove);
     this.root.$on("main-view-mouseup", this.resizerMouseUp);
   }

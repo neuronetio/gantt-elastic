@@ -43,12 +43,12 @@
             <div
               class="gantt-elastic__main-view-container"
               ref="svgChartContainer"
-              @mousedown.stop="chartMouseDown"
-              @touchstart.stop.prevent="chartMouseDown"
-              @mouseup.stop.prevent="chartMouseUp"
-              @touchend.stop.prevent="chartMouseUp"
-              @mousemove.stop.prevent="chartMouseMove"
-              @touchmove.stop.prevent="chartMouseMove"
+              @mousedown="chartMouseDown"
+              @touchstart.prevent="chartMouseDown"
+              @mouseup.prevent="chartMouseUp"
+              @touchend.prevent="chartMouseUp"
+              @mousemove.prevent="chartMouseMove"
+              @touchmove.prevent="chartMouseMove"
               @wheel.prevent="chartWheel"
             >
               <chart></chart>

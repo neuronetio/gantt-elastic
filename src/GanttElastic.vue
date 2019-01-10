@@ -123,6 +123,7 @@ function getOptions (userOptions) {
       percent: 100,
       width: 0,
       finalWidth: 0,
+      minWidth: 18,
       expander: {
         size: 16,
         columnWidth: 24,
