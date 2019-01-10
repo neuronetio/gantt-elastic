@@ -188,6 +188,11 @@
     ];
 
     let options = {
+      slots: {
+        header: {
+          beforeOptions: `<button style="display:inline-block" onclick="alert('hello from header!')">test</button>`
+        }
+      },
       maxRows: 100,
       maxHeight: 200,
       title: {

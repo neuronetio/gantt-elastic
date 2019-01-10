@@ -263,5 +263,8 @@ export default {
   },
   "svg-container": {
     "float": "left",
+  },
+  "slot-header-beforeOptions": {
+    "display": "inline-block"
   }
 }

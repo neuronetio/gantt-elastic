@@ -59,16 +59,11 @@ export default {
     this.root.state.refs.taskListItems = this.$refs.taskListItems;
   },
   computed: {
+
     getListExpanderStyle () {
       return task => {
         const state = this.root.state;
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
-        const maxLevel = this.root.getMaximalLevel();
-        let height = state.row.height + state.grid.horizontal.gap * 2 - this.root.style('grid-line-vertical')['stroke-width'];
-        let width = ((state.taskList.expander.size + this.root.style("calendar-row")["stroke-width"] + padding + state.taskList.expander.margin) / 100) * state.taskList.percent;
-        if (state.taskList.expander.straight) {
-          width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
-        }
         const style = {
           "padding-left": padding + state.taskList.expander.margin + "px",
           margin: "auto 0px"

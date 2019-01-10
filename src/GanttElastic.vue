@@ -28,6 +28,9 @@ import style from "./style.js";
 function getOptions (userOptions) {
   return {
     style,
+    slots: {
+      header: {},
+    },
     title: {
       label: "gantt-elastic",
       html: false

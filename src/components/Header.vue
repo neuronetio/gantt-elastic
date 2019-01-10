@@ -22,6 +22,13 @@
       ></div>
     </div>
     <div class="gantt-elastic__header-options" :style="root.style('header-options')">
+      <component v-if="beforeOptionsIsComponent" :is="root.state.slots.header.beforeOptions"></component>
+      <div
+        class="gantt-elastic__slot-header-beforeOptions"
+        :style="root.style('slot-header-beforeOptions')"
+        v-if="beforeOptionsIsHtml"
+        v-html="root.state.slots.header.beforeOptions"
+      ></div>
       <button
         class="gantt-elastic__header-btn-recenter"
         :style="root.style('header-btn-recenter')"
@@ -165,6 +172,27 @@ export default {
     }
   },
   computed: {
+    /**
+     * If there is a component slot specified for header
+     * @returns {bool}
+     */
+    beforeOptionsIsComponent () {
+      const headerSlot = this.root.state.slots.header;
+      if (typeof headerSlot.beforeOptions === 'object' && !Array.isArray(headerSlot.beforeOptions)) {
+        return true;
+      }
+      return false;
+    },
+    /**
+     * If there is a slot with beforeOptions html content
+     * @returns {bool}
+     */
+    beforeOptionsIsHtml () {
+      if (typeof this.root.state.slots.header.beforeOptions === 'string') {
+        return true;
+      }
+      return false;
+    },
     scale: {
       get () {
         return this.localScale;
