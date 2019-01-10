@@ -80,9 +80,6 @@ export default {
     "border-color": "transparent"
   },
   "task-list-column-expander-wrapper": {
-    "stroke": "#909090",
-    "stroke-width": "1",
-    "fill": "#ffffffa0",
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",

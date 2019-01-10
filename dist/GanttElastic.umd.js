@@ -1006,10 +1006,13 @@ component.options.__file = "src/components/TaskList/Expander.vue"
 
 
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
+
   components: {
     TaskListExpander: Expander
   },
+
   inject: ["root"],
+
   data () {
     return {
       resizer: {
@@ -1018,7 +1021,13 @@ component.options.__file = "src/components/TaskList/Expander.vue"
       }
     };
   },
+
   computed: {
+
+    /**
+     * Get style
+     * @returns {object}
+     */
     getStyle () {
       return column => {
         const state = this.root.state;
@@ -1029,28 +1038,45 @@ component.options.__file = "src/components/TaskList/Expander.vue"
         };
       };
     },
+
+    /**
+     * Is this row collapsible?
+     * @returns {bool}
+     */
     collapsible () {
       return this.root.state.tasks.filter(task => task.allChildren.length > 0);
     },
   },
+
   methods: {
+    /**
+     * Resizer mouse down event handler
+     */
     resizerMouseDown (event, column) {
       if (!this.resizerMoving) {
         this.resizer.moving = column;
         this.resizer.x = event.clientX;
         this.resizer.initialWidth = column.width;
-        this.root.$emit("taskList-column-width-change-start", this.resizer.moving.width);
+        this.root.$emit("taskList-column-width-change-start", this.resizer.moving);
       }
     },
+
+    /**
+     * Resizer mouse move event handler
+     */
     resizerMouseMove (event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
         if (this.resizer.moving.width < this.root.state.taskList.minWidth) {
           this.resizer.moving.width = this.root.state.taskList.minWidth;
         }
-        this.root.$emit("taskList-column-width-change", this.resizer.moving.width);
+        this.root.$emit("taskList-column-width-change", this.resizer.moving);
       }
     },
+
+    /**
+     * Resizer mouse up event handler
+     */
     resizerMouseUp (event) {
       if (this.resizer.moving) {
         this.root.$emit("taskList-column-width-change", this.resizer.moving);
@@ -1059,6 +1085,10 @@ component.options.__file = "src/components/TaskList/Expander.vue"
       }
     }
   },
+
+  /**
+   * Created
+   */
   created () {
     this.mouseUpListener = document.addEventListener('mouseup', (event) => {
       this.resizerMouseUp(event);
@@ -1426,9 +1456,6 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
           width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
         }
         const style = {
-          width: width + "px",
-          height: height + "px",
-          "border-color": "#00000010",
           "padding-left": padding + state.taskList.expander.margin + "px",
           margin: "auto 0px"
         };
@@ -4078,9 +4105,6 @@ const fontFamily = 'Arial, sans-serif';
     "border-color": "transparent"
   },
   "task-list-column-expander-wrapper": {
-    "stroke": "#909090",
-    "stroke-width": "1",
-    "fill": "#ffffffa0",
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",

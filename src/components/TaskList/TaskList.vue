@@ -70,9 +70,6 @@ export default {
           width = (maxLevel - 1) * state.taskList.expander.size + state.taskList.expander.padding * 2;
         }
         const style = {
-          width: width + "px",
-          height: height + "px",
-          "border-color": "#00000010",
           "padding-left": padding + state.taskList.expander.margin + "px",
           margin: "auto 0px"
         };
