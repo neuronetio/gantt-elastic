@@ -223,7 +223,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__svg-container{\n  position: relative;\n}\n.gantt-elastic__main-view,.gantt-elastic__svg-container{\n  background: #fff;\n}\n.gantt-elastic__container,.gantt-elastic__svg-container{\n  max-width: 100%;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__container{\n  display: flex;\n  max-width: 100%;\n  position: absolute;\n  height: 100%;\n}\n.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -268,170 +268,178 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "gantt-elastic__main-view" }, [
-    _c(
-      "div",
-      {
-        staticClass: "gantt-elastic__svg-container-wrapper",
-        style: _vm.root.style("svg-container-wrapper", {
-          height: _vm.root.state.height + "px"
-        })
-      },
-      [
-        _c(
-          "svg",
-          {
-            ref: "svgMainView",
-            staticClass: "gantt-elastic__svg-container",
-            style: _vm.root.style("svg-container", {
-              "max-width":
-                "calc(100% - " + _vm.root.state.scrollBarHeight + "px)"
-            }),
-            attrs: {
-              width: _vm.getWidth,
-              height: _vm.root.state.height,
-              xmlns: "http://www.w3.org/2000/svg"
-            }
-          },
-          [
-            _c(
-              "foreignObject",
-              { attrs: { x: "0", y: "0", width: "100%", height: "100%" } },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "gantt-elastic__container",
-                    attrs: { xmlns: "http://www.w3.org/1999/xhtml" },
-                    on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "gantt-elastic__task-list-container" },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.root.state.taskList.display,
-                                expression: "root.state.taskList.display"
-                              }
-                            ],
-                            ref: "svgTaskList",
-                            staticClass: "gantt-elastic__task-list-svg",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: _vm.root.state.taskList.finalWidth,
-                              height: _vm.root.state.height
-                            }
-                          },
-                          [
-                            _c("defs", {
-                              domProps: { innerHTML: _vm._s(_vm.defs) }
-                            }),
-                            _vm._v(" "),
-                            _c("task-list")
-                          ],
-                          1
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        ref: "svgChartContainer",
-                        staticClass: "gantt-elastic__main-view-container",
-                        on: {
-                          mousedown: _vm.chartMouseDown,
-                          touchstart: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartMouseDown($event)
-                          },
-                          mouseup: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartMouseUp($event)
-                          },
-                          touchend: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartMouseUp($event)
-                          },
-                          mousemove: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartMouseMove($event)
-                          },
-                          touchmove: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartMouseMove($event)
-                          },
-                          wheel: function($event) {
-                            $event.preventDefault()
-                            return _vm.chartWheel($event)
-                          }
-                        }
-                      },
-                      [_c("chart")],
-                      1
-                    )
-                  ]
-                )
-              ]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            ref: "chartScrollContainerVertical",
-            staticClass:
-              "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",
-            style: _vm.root.style(
-              "chart-scroll-container",
-              "chart-scroll-container--vertical",
-              _vm.verticalStyle
-            ),
-            on: { scroll: _vm.onVerticalScroll }
-          },
-          [
-            _c("div", {
-              staticClass: "gantt-elastic__chart-scroll--vertical",
-              style: {
-                width: "1px",
-                height: _vm.root.state.allVisibleTasksHeight + "px"
+  return _c(
+    "div",
+    {
+      staticClass: "gantt-elastic__main-view",
+      style: _vm.root.style("main-view")
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "gantt-elastic__svg-container-wrapper",
+          style: _vm.root.style("svg-container-wrapper", {
+            height: _vm.root.state.height + "px"
+          })
+        },
+        [
+          _c(
+            "svg",
+            {
+              ref: "svgMainView",
+              staticClass: "gantt-elastic__svg-container",
+              style: _vm.root.style("svg-container", {
+                "max-width":
+                  "calc(100% - " + _vm.root.state.scrollBarHeight + "px)"
+              }),
+              attrs: {
+                width: _vm.getWidth,
+                height: _vm.root.state.height,
+                xmlns: "http://www.w3.org/2000/svg"
               }
-            })
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        ref: "chartScrollContainerHorizontal",
-        staticClass:
-          "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",
-        style: _vm.root.style(
-          "chart-scroll-container",
-          "chart-scroll-container--horizontal",
-          { marginLeft: _vm.getMarginLeft }
-        ),
-        on: { scroll: _vm.onHorizontalScroll }
-      },
-      [
-        _c("div", {
-          staticClass: "gantt-elastic__chart-scroll--horizontal",
-          style: { height: "1px", width: _vm.root.state.width + "px" }
-        })
-      ]
-    )
-  ])
+            },
+            [
+              _c(
+                "foreignObject",
+                { attrs: { x: "0", y: "0", width: "100%", height: "100%" } },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "gantt-elastic__container",
+                      style: _vm.root.style("container"),
+                      attrs: { xmlns: "http://www.w3.org/1999/xhtml" },
+                      on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "gantt-elastic__task-list-container" },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.root.state.taskList.display,
+                                  expression: "root.state.taskList.display"
+                                }
+                              ],
+                              ref: "svgTaskList",
+                              staticClass: "gantt-elastic__task-list-svg",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                width: _vm.root.state.taskList.finalWidth,
+                                height: _vm.root.state.height
+                              }
+                            },
+                            [
+                              _c("defs", {
+                                domProps: { innerHTML: _vm._s(_vm.defs) }
+                              }),
+                              _vm._v(" "),
+                              _c("task-list")
+                            ],
+                            1
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          ref: "svgChartContainer",
+                          staticClass: "gantt-elastic__main-view-container",
+                          on: {
+                            mousedown: _vm.chartMouseDown,
+                            touchstart: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartMouseDown($event)
+                            },
+                            mouseup: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartMouseUp($event)
+                            },
+                            touchend: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartMouseUp($event)
+                            },
+                            mousemove: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartMouseMove($event)
+                            },
+                            touchmove: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartMouseMove($event)
+                            },
+                            wheel: function($event) {
+                              $event.preventDefault()
+                              return _vm.chartWheel($event)
+                            }
+                          }
+                        },
+                        [_c("chart")],
+                        1
+                      )
+                    ]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              ref: "chartScrollContainerVertical",
+              staticClass:
+                "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",
+              style: _vm.root.style(
+                "chart-scroll-container",
+                "chart-scroll-container--vertical",
+                _vm.verticalStyle
+              ),
+              on: { scroll: _vm.onVerticalScroll }
+            },
+            [
+              _c("div", {
+                staticClass: "gantt-elastic__chart-scroll--vertical",
+                style: {
+                  width: "1px",
+                  height: _vm.root.state.allVisibleTasksHeight + "px"
+                }
+              })
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "chartScrollContainerHorizontal",
+          staticClass:
+            "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",
+          style: _vm.root.style(
+            "chart-scroll-container",
+            "chart-scroll-container--horizontal",
+            { marginLeft: _vm.getMarginLeft }
+          ),
+          on: { scroll: _vm.onHorizontalScroll }
+        },
+        [
+          _c("div", {
+            staticClass: "gantt-elastic__chart-scroll--horizontal",
+            style: { height: "1px", width: _vm.root.state.width + "px" }
+          })
+        ]
+      )
+    ]
+  )
 }
 var MainViewvue_type_template_id_0bc4212e_staticRenderFns = []
 MainViewvue_type_template_id_0bc4212e_render._withStripped = true
@@ -3839,6 +3847,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
+//
 
 
 
@@ -4018,6 +4027,15 @@ MainView_component.options.__file = "src/components/MainView.vue"
 const fontSize = '12px';
 const fontFamily = 'Arial, sans-serif';
 /* harmony default export */ var style = ({
+  "main-view": {
+    "background": "#FFFFFF"
+  },
+  "container": {
+    "display": "flex",
+    "max-width": "100%",
+    "position": "absolute",
+    "height": "100%"
+  },
   "header": {
     "font-family": fontFamily,
     "margin": "0px auto",
@@ -4274,6 +4292,8 @@ const fontFamily = 'Arial, sans-serif';
   },
   "svg-container": {
     "float": "left",
+    "position": "relative",
+    "max-width": "100%"
   },
   "slot-header-beforeOptions": {
     "display": "inline-block"

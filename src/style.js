@@ -7,6 +7,15 @@
 const fontSize = '12px';
 const fontFamily = 'Arial, sans-serif';
 export default {
+  "main-view": {
+    "background": "#FFFFFF"
+  },
+  "container": {
+    "display": "flex",
+    "max-width": "100%",
+    "position": "absolute",
+    "height": "100%"
+  },
   "header": {
     "font-family": fontFamily,
     "margin": "0px auto",
@@ -263,6 +272,8 @@ export default {
   },
   "svg-container": {
     "float": "left",
+    "position": "relative",
+    "max-width": "100%"
   },
   "slot-header-beforeOptions": {
     "display": "inline-block"

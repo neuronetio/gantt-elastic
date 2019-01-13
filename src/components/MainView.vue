@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <div class="gantt-elastic__main-view">
+  <div class="gantt-elastic__main-view" :style="root.style('main-view')">
     <div
       class="gantt-elastic__svg-container-wrapper"
       :style="root.style('svg-container-wrapper',{height:root.state.height+'px'})"
@@ -24,6 +24,7 @@
           <div
             xmlns="http://www.w3.org/1999/xhtml"
             class="gantt-elastic__container"
+            :style="root.style('container')"
             @mousemove="mouseMove"
             @mouseup="mouseUp"
           >

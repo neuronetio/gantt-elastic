@@ -1,15 +1,6 @@
 .gantt-elastic__main-view svg{
   display: block;
 }
-.gantt-elastic__svg-container{
-  position: relative;
-}
-.gantt-elastic__main-view,.gantt-elastic__svg-container{
-  background: #fff;
-}
-.gantt-elastic__container,.gantt-elastic__svg-container{
-  max-width: 100%;
-}
 .gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{
   stroke: #a0a0a0;
   stroke-width: 1;
@@ -19,12 +10,6 @@ foreignObject > *{
 }
 .gantt-elastic .p-2{
   padding: 10rem;
-}
-.gantt-elastic__container{
-  display: flex;
-  max-width: 100%;
-  position: absolute;
-  height: 100%;
 }
 .gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{
   overflow: hidden;
