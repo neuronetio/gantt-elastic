@@ -4019,8 +4019,8 @@ MainView_component.options.__file = "src/components/MainView.vue"
 * @author Rafal Pospiech <neuronet.io@gmail.com>
 * @package GanttElastic
 */
-const fontSize = '12px';
-const fontFamily = 'Arial, sans-serif';
+const fontSize = "12px";
+const fontFamily = "Arial, sans-serif";
 /* harmony default export */ var style = ({
   "main-view": {
     "background": "#FFFFFF"
@@ -4220,7 +4220,8 @@ const fontFamily = 'Arial, sans-serif';
     "font-size": fontSize,
     "font-weight": "normal",
     "color": "#000000a0",
-    "height": '100%'
+    "height": "100%",
+    "display": "inline-block"
   },
   "chart-row-text-content": {
     "padding": "0px 6px"
