@@ -3877,6 +3877,8 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         lastY: 0,
         positiveX: 0,
         positiveY: 0,
+        currentX: 0,
+        currentY: 0,
       }
     };
   },
@@ -3936,10 +3938,10 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
         this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
-        this.mousePos.positiveX = 0;
-        this.mousePos.positiveY = 0;
         this.mousePos.movementX = 0;
         this.mousePos.movementY = 0;
+        this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft;
+        this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop;
       }
       this.root.state.scroll.scrolling = true;
     },
@@ -3958,39 +3960,25 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
           const screenY = ev.touches[0].screenY;
           movementX = this.mousePos.x - screenX;
           movementY = this.mousePos.y - screenY;
-          let positiveX = screenX - this.mousePos.lastX > 0 ? 1 : -1;
-          let positiveY = screenY - this.mousePos.lastY > 0 ? 1 : -1;
           this.mousePos.lastX = screenX;
           this.mousePos.lastY = screenY;
-          if (positiveX !== this.mousePos.positiveX) {
-            this.mousePos.x = screenX;
-            this.mousePos.positiveX = positiveX;
-            movementX = 0;
-          }
-          if (positiveY !== this.mousePos.positiveY) {
-            this.mousePos.y = screenY;
-            this.mousePos.positiveY = positiveY;
-            movementY = 0;
-          }
         } else {
           movementX = ev.movementX;
           movementY = ev.movementY;
         }
         const horizontal = this.$refs.chartScrollContainerHorizontal;
         const vertical = this.$refs.chartScrollContainerVertical;
-        const currentX = horizontal.scrollLeft;
         let x = 0, y = 0;
         if (touch) {
-          x = currentX + movementX;
+          x = this.mousePos.currentX + (movementX * this.root.state.scroll.dragXMoveMultiplier);
         } else {
-          x = currentX - (movementX * this.root.state.scroll.dragXMoveMultiplier);
+          x = horizontal.scrollLeft - (movementX * this.root.state.scroll.dragXMoveMultiplier);
         }
         horizontal.scrollLeft = x;
-        const currentY = vertical.scrollTop;
         if (touch) {
-          y = currentY + movementY;
+          y = this.mousePos.currentY + (movementY * this.root.state.scroll.dragYMoveMultiplier);
         } else {
-          y = currentY - (movementY * this.root.state.scroll.dragYMoveMultiplier);
+          y = vertical.scrollTop - (movementY * this.root.state.scroll.dragYMoveMultiplier);
         }
         vertical.scrollTop = y;
       }
