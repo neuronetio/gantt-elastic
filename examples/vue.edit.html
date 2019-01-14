@@ -16,12 +16,13 @@
 
 <body>
   <div style="width:100%;height:100%">
-    <div id="app">
+    <div id="app" v-if="!destroy">
       <gantt-elastic :tasks="tasks" :options="options">
         <gantt-header slot="header"></gantt-header>
         <gantt-footer slot="footer"></gantt-footer>
       </gantt-elastic>
     </div>
+    <div v-if="destroy">Destroyed</div>
   </div>
 
   modify task<br>
@@ -35,12 +36,9 @@
   <input type="number" id="progRow" value="0"><input type="range" min="0" max="100" oninput="progressChange()" id="progress">
   <br>
   <button onclick="addTask()">Add task</button>
-  <button onclick="addTasks()">Add tasks</button>
+  <button onclick="addTasks()">Add tasks</button><br>
+  <button onclick="destroy()">Destroy</button>
   <script>
-    // override components - copy component from src directory change it to object or compile *.vue to *.js
-    // more info about components you can find here : https://vuejs.org/v2/guide/index.html
-    // You can change anything! You have full control of components templates, events, data ... and so on!
-    // GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
 
     // just helper to get current dates
     function getDate(hours) {
@@ -272,7 +270,8 @@
       },
       data: {
         tasks: tasks.map(task => Object.assign({}, task)),
-        options
+        options,
+        destroy: false,
       }
     });
 
@@ -331,9 +330,14 @@
       ganttState.tasks.push(task);
       console.log(ganttState.tasks);
     }
+
     function addTasks() {
       const newTasks = tasks.map(task => Object.assign({}, task));
       ganttState.tasks = newTasks;
+    }
+
+    function destroy() {
+      app.destroy = true;
     }
   </script>
 </body>

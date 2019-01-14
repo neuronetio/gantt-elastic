@@ -116,6 +116,7 @@ function getOptions (userOptions) {
     },
     taskList: {
       display: true,
+      displayAfterResize: true,
       columns: [{
         id: 0,
         label: "ID",
@@ -220,7 +221,7 @@ function getOptions (userOptions) {
       "Task list width": "Task list",
       "Before/After": "Expand",
       "Display task list": "Show task list"
-    }
+    },
   };
 }
 /**
@@ -552,7 +553,7 @@ const GanttElastic = {
       this.state.taskList.finalWidth = final;
       if (typeof document !== 'undefined') {
         if (final > document.body.clientWidth / 2) {
-          this.state.taskList.display = false;
+          this.state.taskList.displayAfterResize = false;
         }
       }
       this.syncScrollTop();
@@ -1112,6 +1113,17 @@ const GanttElastic = {
       }, { width: 0 }).width;
     },
 
+    /**
+     * Global resize event (from window.addEventListener)
+     */
+    globalOnResize (ev) {
+      if (this.state.taskList.finalWidth > document.body.clientWidth / 2) {
+        this.state.taskList.displayAfterResize = false;
+      } else {
+        this.state.taskList.displayAfterResize = true;
+      }
+    }
+
   },
 
   computed: {
@@ -1186,9 +1198,18 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
+    window.addEventListener('resize', this.globalOnResize);
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$root.$emit('gantt-elastic-ready', this);
-  }
+  },
+
+  /**
+   * Before destroy event - clean up
+   */
+  beforeDestroy () {
+    window.removeEventListener('resize', this.globalOnResize);
+  },
+
 };
 export default GanttElastic;
 </script>

@@ -333,8 +333,11 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.root.state.taskList.display,
-                                  expression: "root.state.taskList.display"
+                                  value:
+                                    _vm.root.state.taskList.display &&
+                                    _vm.root.state.taskList.displayAfterResize,
+                                  expression:
+                                    "root.state.taskList.display && root.state.taskList.displayAfterResize"
                                 }
                               ],
                               ref: "svgTaskList",
@@ -468,8 +471,11 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value: _vm.root.state.taskList.display,
-          expression: "root.state.taskList.display"
+          value:
+            _vm.root.state.taskList.display &&
+            _vm.root.state.taskList.displayAfterResize,
+          expression:
+            "root.state.taskList.display && root.state.taskList.displayAfterResize"
         }
       ],
       ref: "taskListWrapper",
@@ -3998,6 +4004,16 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         vertical.scrollTop = y;
       }
     }
+  },
+
+  /**
+   * Before destroy event - clean up
+   */
+  beforeDestroy () {
+    document.removeEventListener('mouseup', this.chartMouseUp);
+    document.removeEventListener('mousemove', this.chartMouseMove);
+    document.removeEventListener('touchmove', this.chartMouseMove);
+    document.removeEventListener('touchend', this.chartMouseUp);
   }
 });
 
@@ -4428,6 +4444,7 @@ function getOptions (userOptions) {
     },
     taskList: {
       display: true,
+      displayAfterResize: true,
       columns: [{
         id: 0,
         label: "ID",
@@ -4532,7 +4549,7 @@ function getOptions (userOptions) {
       "Task list width": "Task list",
       "Before/After": "Expand",
       "Display task list": "Show task list"
-    }
+    },
   };
 }
 /**
@@ -4864,7 +4881,7 @@ const GanttElastic = {
       this.state.taskList.finalWidth = final;
       if (typeof document !== 'undefined') {
         if (final > document.body.clientWidth / 2) {
-          this.state.taskList.display = false;
+          this.state.taskList.displayAfterResize = false;
         }
       }
       this.syncScrollTop();
@@ -5424,6 +5441,17 @@ const GanttElastic = {
       }, { width: 0 }).width;
     },
 
+    /**
+     * Global resize event (from window.addEventListener)
+     */
+    globalOnResize (ev) {
+      if (this.state.taskList.finalWidth > document.body.clientWidth / 2) {
+        this.state.taskList.displayAfterResize = false;
+      } else {
+        this.state.taskList.displayAfterResize = true;
+      }
+    }
+
   },
 
   computed: {
@@ -5498,9 +5526,18 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
+    window.addEventListener('resize', this.globalOnResize);
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$root.$emit('gantt-elastic-ready', this);
-  }
+  },
+
+  /**
+   * Before destroy event - clean up
+   */
+  beforeDestroy () {
+    window.removeEventListener('resize', this.globalOnResize);
+  },
+
 };
 /* harmony default export */ var GanttElasticvue_type_script_lang_js_ = (GanttElastic);
 

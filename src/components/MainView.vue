@@ -35,7 +35,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 :width="root.state.taskList.finalWidth"
                 :height="root.state.height"
-                v-show="root.state.taskList.display"
+                v-show="root.state.taskList.display && root.state.taskList.displayAfterResize"
               >
                 <defs v-html="defs"></defs>
                 <task-list></task-list>
@@ -221,6 +221,16 @@ export default {
         vertical.scrollTop = y;
       }
     }
+  },
+
+  /**
+   * Before destroy event - clean up
+   */
+  beforeDestroy () {
+    document.removeEventListener('mouseup', this.chartMouseUp);
+    document.removeEventListener('mousemove', this.chartMouseMove);
+    document.removeEventListener('touchmove', this.chartMouseMove);
+    document.removeEventListener('touchend', this.chartMouseUp);
   }
 };
 </script>
