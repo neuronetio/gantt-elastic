@@ -367,18 +367,9 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                           staticClass: "gantt-elastic__main-view-container",
                           on: {
                             mousedown: _vm.chartMouseDown,
-                            touchstart: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartMouseDown($event)
-                            },
-                            mouseup: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartMouseUp($event)
-                            },
-                            touchend: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartMouseUp($event)
-                            },
+                            touchstart: _vm.chartMouseDown,
+                            mouseup: _vm.chartMouseUp,
+                            touchend: _vm.chartMouseUp,
                             mousemove: function($event) {
                               $event.preventDefault()
                               return _vm.chartMouseMove($event)
