@@ -296,12 +296,12 @@
       const row = document.getElementById('row').value;
       const name = document.getElementById('name').value;
       const value = document.getElementById('value').value;
-      ganttState.tasks[row][name] = value;
+      app.tasks[row][name] = value;
     }
 
     function deleteRow() {
       const row = Number(document.getElementById('delrow').value);
-      ganttState.tasks = ganttState.tasks.filter((task, index) => {
+      app.tasks = ganttState.tasks.filter((task, index) => {
         if (index === row) {
           console.log('removing task', task, index)
         }
@@ -312,7 +312,7 @@
     function progressChange() {
       const row = Number(document.getElementById('progRow').value);
       const percent = Number(document.getElementById('progress').value);
-      ganttState.tasks[row].progress = percent;
+      app.tasks[row].progress = percent;
     }
 
     function addTask() {
@@ -327,13 +327,13 @@
         progress: 50,
         type: 'project',
       };
-      ganttState.tasks.push(task);
-      console.log(ganttState.tasks);
+      app.tasks.push(task);
+      console.log(app.tasks);
     }
 
     function addTasks() {
       const newTasks = tasks.map(task => Object.assign({}, task));
-      ganttState.tasks = newTasks;
+      app.tasks = newTasks;
     }
 
     function destroy() {

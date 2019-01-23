@@ -458,7 +458,7 @@ const GanttElastic = {
         return column;
       });
       // initialize observer
-      this.refreshTasks(true);
+      this.refreshTasks();
       this.state.rootTask = {
         id: null,
         label: "root",
@@ -1167,28 +1167,13 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created () {
-    let previousTasks = [];
-    this.$watch('state.tasks', function (newTasks, oldTasks) {
-      let refresh = previousTasks.length !== newTasks.length;
-      if (!refresh) {
-        for (let i = 0, len = newTasks.length; i < len; i++) {
-          if (typeof newTasks[i].parents === 'undefined') {
-            refresh = true;
-            break;
-          }
-        }
-      }
-      if (refresh) {
-        this.refreshTasks();
-        this.prepareDates();
-        this.initTimes();
-        this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
-        this.resetTaskTree();
-        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-        this.state.tasks = this.state.taskTree.allChildren;
-      }
-      previousTasks = newTasks.slice();
-    }, { immediate: true, deep: false });
+    this.$watch('tasks', () => {
+      this.setup();
+    });
+    this.$watch('options', () => {
+      this.setup();
+    })
+
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
