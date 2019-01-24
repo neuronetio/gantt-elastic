@@ -1890,40 +1890,42 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "g",
-    {
-      staticClass: "gantt-elastic__calendar-row",
-      style: _vm.root.style("calendar-row")
-    },
-    [
-      _c("rect", {
-        class: "gantt-elastic__calendar-row-rect--" + _vm.which,
-        style: _vm.root.style("calendar-row-rect--" + _vm.which),
-        attrs: {
-          x: _vm.item.x,
-          y: _vm.item.y,
-          width: _vm.item.width,
-          height: _vm.item.height
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "text",
+  return _vm.root.state.calendar[_vm.which].display
+    ? _c(
+        "g",
         {
-          class: "gantt-elastic__calendar-row-text--" + _vm.which,
-          style: _vm.root.style("calendar-row-text--" + _vm.which),
-          attrs: {
-            x: _vm.getTextX,
-            y: _vm.getTextY,
-            "alignment-baseline": "middle",
-            "text-anchor": _vm.anchor
-          }
+          staticClass: "gantt-elastic__calendar-row",
+          style: _vm.root.style("calendar-row")
         },
-        [_vm._v(_vm._s(_vm.item.label))]
+        [
+          _c("rect", {
+            class: "gantt-elastic__calendar-row-rect--" + _vm.which,
+            style: _vm.root.style("calendar-row-rect--" + _vm.which),
+            attrs: {
+              x: _vm.item.x,
+              y: _vm.item.y,
+              width: _vm.item.width,
+              height: _vm.item.height
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "text",
+            {
+              class: "gantt-elastic__calendar-row-text--" + _vm.which,
+              style: _vm.root.style("calendar-row-text--" + _vm.which),
+              attrs: {
+                x: _vm.getTextX,
+                y: _vm.getTextY,
+                "alignment-baseline": "middle",
+                "text-anchor": _vm.anchor
+              }
+            },
+            [_vm._v(_vm._s(_vm.item.label))]
+          )
+        ]
       )
-    ]
-  )
+    : _vm._e()
 }
 var CalendarRowvue_type_template_id_0daf06fb_staticRenderFns = []
 CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
@@ -1932,6 +1934,9 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&
+//
+//
+//
 //
 //
 //
@@ -4802,12 +4807,18 @@ const GanttElastic = {
       this.state.calendar.height = 0;
       if (this.state.calendar.hour.display) {
         this.state.calendar.height += this.state.calendar.hour.height;
+      } else {
+        this.state.calendar.hour.height = 0;
       }
       if (this.state.calendar.day.display) {
         this.state.calendar.height += this.state.calendar.day.height;
+      } else {
+        this.state.calendar.day.height = 0;
       }
       if (this.state.calendar.month.display) {
         this.state.calendar.height += this.state.calendar.month.height;
+      } else {
+        this.state.calendar.month.height = 0;
       }
     },
 

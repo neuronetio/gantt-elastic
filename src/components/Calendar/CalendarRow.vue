@@ -7,7 +7,10 @@
  */
 -->
 <template>
-  <g class="gantt-elastic__calendar-row" :style="root.style('calendar-row')">
+  <g
+  v-if="root.state.calendar[which].display"
+  class="gantt-elastic__calendar-row"
+  :style="root.style('calendar-row')">
     <rect
       :class="'gantt-elastic__calendar-row-rect--'+which"
       :style="root.style('calendar-row-rect--'+which)"

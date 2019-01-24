@@ -494,12 +494,18 @@ const GanttElastic = {
       this.state.calendar.height = 0;
       if (this.state.calendar.hour.display) {
         this.state.calendar.height += this.state.calendar.hour.height;
+      } else {
+        this.state.calendar.hour.height = 0;
       }
       if (this.state.calendar.day.display) {
         this.state.calendar.height += this.state.calendar.day.height;
+      } else {
+        this.state.calendar.day.height = 0;
       }
       if (this.state.calendar.month.display) {
         this.state.calendar.height += this.state.calendar.month.height;
+      } else {
+        this.state.calendar.month.height = 0;
       }
     },
 
