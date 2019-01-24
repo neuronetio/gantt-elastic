@@ -3899,7 +3899,6 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
-
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";
@@ -4441,9 +4440,6 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
-      hours: [],
-      days: [],
-      months: [],
       gap: 6,
       height: 0,
       hour: {
@@ -5283,7 +5279,8 @@ const GanttElastic = {
      */
     computeHourWidths () {
       const state = this.state;
-      state.ctx.font = state.calendar.hour.fontSize + " " + state.calendar.fontFamily;
+      const monthStyle = this.style("calendar-row-text--hour");
+      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
       let currentDate = dayjs_min_default()("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
       state.calendar.hour.widths = [];
@@ -5313,7 +5310,8 @@ const GanttElastic = {
      */
     computeDayWidths () {
       const state = this.state;
-      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      const monthStyle = this.style("calendar-row-text--day");
+      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
       let currentDate = dayjs_min_default()(state.times.steps[0].date);
       let maxWidths = {};
       state.calendar.day.widths = [];
@@ -5343,7 +5341,8 @@ const GanttElastic = {
      */
     computeMonthWidths () {
       const state = this.state;
-      state.ctx.font = state.calendar.day.fontSize + " " + state.calendar.fontFamily;
+      const monthStyle = this.style("calendar-row-text--month");
+      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
       let maxWidths = {};
       state.calendar.month.widths = [];
       Object.keys(state.calendar.month.format).forEach(formatName => {

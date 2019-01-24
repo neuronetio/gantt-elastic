@@ -129,7 +129,6 @@ export default {
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
-
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";
