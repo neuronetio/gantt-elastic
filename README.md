@@ -4,7 +4,7 @@
 <div style="display:block;text-align:center">
 <img src="https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a">
 <img src="https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg">
-<img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.js.png?compression=gzip&label=gzipped">
+<img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
 <img src="https://img.shields.io/npm/dm/gantt-elastic.svg">
 <img src="https://img.shields.io/npm/l/gantt-elastic.svg">
 </div>
