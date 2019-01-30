@@ -4890,7 +4890,8 @@ const GanttElastic = {
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree (task) {
+    makeTaskTree (task, collapsed = false) {
+      collapsed = collapsed || task.collapsed;
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         if (current.parentId === task.id) {
@@ -4904,7 +4905,11 @@ const GanttElastic = {
             current.parents = [];
             current.parent = null;
           }
-          current = this.makeTaskTree(current);
+          current = this.makeTaskTree(current, collapsed || current.collapsed);
+          current.visible = !collapsed;
+          current.children.forEach(child => {
+            child.visible = !(collapsed || current.collapsed);
+          });
           task.allChildren.push(current);
           task.children.push(current);
           current.allChildren.forEach(child => task.allChildren.push(child));

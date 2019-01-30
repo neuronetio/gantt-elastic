@@ -58,7 +58,8 @@
         start: getDate(-24 * 5),
         duration: 5 * 24 * 60 * 60,
         progress: 85,
-        type: 'project'
+        type: 'project',
+        //collapsed: true,
       }, {
         id: 2,
         label: 'With great power comes great responsibility',
@@ -68,6 +69,7 @@
         duration: 4 * 24 * 60 * 60,
         progress: 50,
         type: 'milestone',
+        collapsed: true,
         style: {
           base: {
             fill: '#1EBC61',
@@ -138,7 +140,8 @@
         start: getDate(24 * 2),
         duration: 4 * 60 * 60,
         progress: 20,
-        type: 'task'
+        type: 'task',
+        collapsed: true,
       }, {
         id: 8,
         label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
