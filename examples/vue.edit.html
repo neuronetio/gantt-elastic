@@ -56,7 +56,7 @@
         label: 'Make some noise',
         user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
         start: getDate(-24 * 5),
-        duration: 5 * 24 * 60 * 60,
+        duration: 15 * 24 * 60 * 60,
         progress: 85,
         type: 'project',
         //collapsed: true,
@@ -294,6 +294,12 @@
       console.log('gantt-elastic ready!', ganttState);
       ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
         console.log('task mouse enter', { data, event });
+      });
+      ganttInstance.$on('updated', () => {
+        console.log('gantt view was updated');
+      });
+      ganttInstance.$on('destroyed', () => {
+        console.log('gantt was destroyed');
       })
     });
 

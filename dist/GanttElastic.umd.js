@@ -5490,8 +5490,9 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created () {
-    this.$watch('tasks', () => {
+    this.$watch('tasks', (tasks) => {
       this.setup();
+      this.$emit('tasks-changed', tasks);
     });
     this.$watch('options', () => {
       this.setup();
@@ -5508,7 +5509,24 @@ const GanttElastic = {
   mounted () {
     window.addEventListener('resize', this.globalOnResize);
     this.$root.$emit('gantt-elastic-mounted', this);
+    this.$emit('mounted');
     this.$root.$emit('gantt-elastic-ready', this);
+  },
+
+  /**
+   * Emit event when data was changed and before update (you can cleanup dom events here for example)
+   */
+  beforeUpdate () {
+    this.$emit('before-update');
+  },
+
+  /**
+   * Emit event when gantt-elastic view was updated
+   */
+  updated () {
+    this.$nextTick(() => {
+      this.$emit('updated');
+    });
   },
 
   /**
@@ -5516,7 +5534,15 @@ const GanttElastic = {
    */
   beforeDestroy () {
     window.removeEventListener('resize', this.globalOnResize);
+    this.$emit('before-destroy');
   },
+
+  /**
+   * Emit event after gantt-elastic was destroyed
+   */
+  destroyed () {
+    this.$emit('destroyed');
+  }
 
 };
 /* harmony default export */ var GanttElasticvue_type_script_lang_js_ = (GanttElastic);
