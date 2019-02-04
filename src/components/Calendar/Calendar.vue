@@ -13,21 +13,21 @@
     </foreignObject>
     <calendar-row
       class="gantt-elastic__calendar-row--month"
-      v-for="month in getMonths"
+      v-for="month in generateMonths"
       :key="month.key"
       :item="month"
       which="month"
     ></calendar-row>
     <calendar-row
       class="gantt-elastic__calendar-row--day"
-      v-for="day in getDays"
+      v-for="day in generateDays"
       :key="day.key"
       :item="day"
       which="day"
     ></calendar-row>
     <calendar-row
       class="gantt-elastic__calendar-row--hour"
-      v-for="hour in getHours"
+      v-for="hour in generateHours"
       :key="hour.key"
       :item="hour"
       which="hour"
@@ -44,18 +44,10 @@ export default {
   },
   inject: ["root"],
   data () {
-    return {
-      hours: [],
-      days: [],
-      months: []
-    };
-  },
-  created () {
-    this.root.$on("scope-change", this.regenerate);
-    this.root.$on("times-timeZoom-change", this.regenerate);
-    this.regenerate();
+    return {};
   },
   methods: {
+
     /**
      * How many hours will fit?
      *
@@ -161,6 +153,58 @@ export default {
       return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
     },
 
+  },
+
+  computed: {
+
+    /**
+     * Get x position
+     * @returns {number}
+     */
+    getX () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+
+    /**
+     * Get y position
+     * @returns {number}
+     */
+    getY () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+
+    /**
+     * Get width
+     * @returns {number}
+     */
+    getWidth () {
+      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
+      return width;
+    },
+
+    /**
+     * Get month style
+     * @returns {object}
+     */
+    monthsStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+    },
+
+    /**
+     * Get day style
+     * @returns {object}
+     */
+    daysStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+    },
+
+    /**
+     * Get hour styke
+     * @returns {object}
+     */
+    hoursStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
+    },
     /**
      * Generate hours
      *
@@ -191,7 +235,7 @@ export default {
           });
         }
       }
-      return (this.hours = hours);
+      return hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
     },
 
     /**
@@ -228,7 +272,7 @@ export default {
           label: this.root.state.calendar.day.format[daysCount.type](date)
         });
       }
-      return (this.days = days);
+      return days.filter(day => this.root.isInsideViewPort(day.x, day.width));
     },
 
     /**
@@ -287,50 +331,9 @@ export default {
           currentDate = dayjs(this.root.state.times.lastDate);
         }
       }
-      return (this.months = months);
+      return months.filter(month => this.root.isInsideViewPort(month.x, month.width));
     },
 
-    /**
-     * Regenerate dates
-     */
-    regenerate () {
-      //this.$nextTick(() => {
-      this.generateHours();
-      this.generateDays();
-      this.generateMonths();
-      //});
-    }
-  },
-
-  computed: {
-    getX () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-    getY () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-    getWidth () {
-      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
-      return width;
-    },
-    monthsStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
-    },
-    daysStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
-    },
-    hoursStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
-    },
-    getDays () {
-      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
-    },
-    getHours () {
-      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
-    },
-    getMonths () {
-      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
-    },
   }
 };
 </script>

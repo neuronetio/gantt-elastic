@@ -964,6 +964,7 @@ const GanttElastic = {
         ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
         px: this.state.times.totalViewDurationPx - lastStep.offset.px
       };
+      console.log('calculated steps',steps)
       this.state.times.steps = steps;
     },
 
