@@ -644,19 +644,19 @@ var Expandervue_type_template_id_5f156c33_render = function() {
       style: _vm.root.style("task-list-column-expander-wrapper")
     },
     [
-      _c(
-        "svg",
-        {
-          staticClass: "gantt-elastic__task-list-column-expander-content",
-          style: _vm.root.style("task-list-column-expander-content"),
-          attrs: {
-            width: _vm.root.state.taskList.expander.size,
-            height: _vm.root.state.taskList.expander.size
-          }
-        },
-        [
-          _vm.allChildren.length
-            ? _c("rect", {
+      _vm.allChildren.length
+        ? _c(
+            "svg",
+            {
+              staticClass: "gantt-elastic__task-list-column-expander-content",
+              style: _vm.root.style("task-list-column-expander-content"),
+              attrs: {
+                width: _vm.root.state.taskList.expander.size,
+                height: _vm.root.state.taskList.expander.size
+              }
+            },
+            [
+              _c("rect", {
                 staticClass: "gantt-elastic__task-list-column-expander-border",
                 style: _vm.root.style(
                   "task-list-column-expander-border",
@@ -672,38 +672,41 @@ var Expandervue_type_template_id_5f156c33_render = function() {
                   ry: "2"
                 },
                 on: { click: _vm.toggle }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.allChildren.length
-            ? _c("line", {
-                staticClass: "gantt-elastic__task-list-column-expander-line",
-                style: _vm.root.style("task-list-column-expander-line"),
-                attrs: {
-                  x1: _vm.lineOffset,
-                  y1: _vm.root.state.taskList.expander.size / 2,
-                  x2: _vm.root.state.taskList.expander.size - _vm.lineOffset,
-                  y2: _vm.root.state.taskList.expander.size / 2
-                },
-                on: { click: _vm.toggle }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.collapsed
-            ? _c("line", {
-                staticClass: "gantt-elastic__task-list-column-expander-line",
-                style: _vm.root.style("task-list-column-expander-line"),
-                attrs: {
-                  x1: _vm.root.state.taskList.expander.size / 2,
-                  y1: _vm.lineOffset,
-                  x2: _vm.root.state.taskList.expander.size / 2,
-                  y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
-                },
-                on: { click: _vm.toggle }
-              })
-            : _vm._e()
-        ]
-      )
+              }),
+              _vm._v(" "),
+              _vm.allChildren.length
+                ? _c("line", {
+                    staticClass:
+                      "gantt-elastic__task-list-column-expander-line",
+                    style: _vm.root.style("task-list-column-expander-line"),
+                    attrs: {
+                      x1: _vm.lineOffset,
+                      y1: _vm.root.state.taskList.expander.size / 2,
+                      x2:
+                        _vm.root.state.taskList.expander.size - _vm.lineOffset,
+                      y2: _vm.root.state.taskList.expander.size / 2
+                    },
+                    on: { click: _vm.toggle }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.collapsed
+                ? _c("line", {
+                    staticClass:
+                      "gantt-elastic__task-list-column-expander-line",
+                    style: _vm.root.style("task-list-column-expander-line"),
+                    attrs: {
+                      x1: _vm.root.state.taskList.expander.size / 2,
+                      y1: _vm.lineOffset,
+                      x2: _vm.root.state.taskList.expander.size / 2,
+                      y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
+                    },
+                    on: { click: _vm.toggle }
+                  })
+                : _vm._e()
+            ]
+          )
+        : _vm._e()
     ]
   )
 }

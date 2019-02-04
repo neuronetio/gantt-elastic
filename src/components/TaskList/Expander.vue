@@ -16,6 +16,7 @@
       :style="root.style('task-list-column-expander-content')"
       :width="root.state.taskList.expander.size"
       :height="root.state.taskList.expander.size"
+      v-if="allChildren.length"
     >
       <rect
         class="gantt-elastic__task-list-column-expander-border"
@@ -26,7 +27,6 @@
         :height="root.state.taskList.expander.size-border*2"
         rx="2"
         ry="2"
-        v-if="allChildren.length"
         @click="toggle"
       ></rect>
       <line
