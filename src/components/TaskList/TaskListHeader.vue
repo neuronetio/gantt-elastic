@@ -11,7 +11,7 @@
     <div
       class="gantt-elastic__task-list-header-column"
       :style="root.style('task-list-header-column', column.style['task-list-header-column'], getStyle(column))"
-      v-for="column in root.state.taskList.columns"
+      v-for="column in root.getTaskListColumns"
       :key="column._id"
     >
       <task-list-expander v-if="column.expander" :tasks="collapsible"></task-list-expander>
@@ -129,21 +129,25 @@ export default {
         this.root.$emit("taskList-column-width-change-stop", this.resizer.moving);
         this.resizer.moving = false;
       }
-    }
+    },
   },
 
   /**
    * Created
    */
   created () {
-    this.mouseUpListener = document.addEventListener('mouseup', (event) => {
-      this.resizerMouseUp(event);
-    });
-    this.mouseMoveListener = document.addEventListener('mousemove', (event) => {
-      this.resizerMouseMove(event);
-    });
+    this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this));
+    this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this));
     this.root.$on("main-view-mousemove", this.resizerMouseMove);
     this.root.$on("main-view-mouseup", this.resizerMouseUp);
+  },
+
+  /**
+   * Before destroy event - clear all event listeners
+   */
+  beforeDestroy () {
+    document.removeEventListener('mouseup', this.resizerMouseUp);
+    document.removeEventListener('mousemove', this.resizerMouseMove);
   }
 };
 </script>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>GanttElastic editor demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
   <!--
   <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
   <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
@@ -37,7 +37,8 @@
   <br>
   <button onclick="addTask()">Add task</button>
   <button onclick="addTasks()">Add tasks</button><br>
-  <button onclick="destroy()">Destroy</button>
+  <button onclick="destroy()">Destroy</button><br>
+  <button onclick="changeOptions()">Change options</button>
   <script>
 
     // just helper to get current dates
@@ -349,6 +350,27 @@
     function addTasks() {
       const newTasks = tasks.map(task => Object.assign({}, task));
       app.tasks = newTasks;
+    }
+
+    function changeOptions() {
+      app.options.taskList.columns[0].label = 'Whooaa!';
+      app.options.taskList.columns[0].width = 100;
+      app.options.taskList.columns[0].style = {
+        "task-list-header-column": {
+          "background": "red",
+          "color": "white"
+        }
+      };
+      Vue.set(app.options.calendar, 'month', {
+        format: {
+          long: function () {
+            return ':P';
+          }
+        }
+      });
+      Vue.set(app.options, 'times', { timeZoom: 2 });
+      app.options.locale['Now'] = 'Center';
+      ganttInstance.fixScrollPos();
     }
 
     function destroy() {

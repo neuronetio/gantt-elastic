@@ -82,34 +82,27 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(t,n){ true?module.exports=n():undefined}(this,function(){"use strict";var t="millisecond",n="second",e="minute",r="hour",i="day",s="week",u="month",a="year",o=/^(\d{4})-?(\d{1,2})-?(\d{0,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?$/,h=/\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,c={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},d=function(t,n,e){var r=String(t);return!r||r.length>=n?t:""+Array(n+1-r.length).join(e)+t},f={padStart:d,padZoneStr:function(t){var n=Math.abs(t),e=Math.floor(n/60),r=n%60;return(t<=0?"+":"-")+d(e,2,"0")+":"+d(r,2,"0")},monthDiff:function(t,n){var e=12*(n.year()-t.year())+(n.month()-t.month()),r=t.clone().add(e,"months"),i=n-r<0,s=t.clone().add(e+(i?-1:1),"months");return Number(-(e+(n-r)/(i?r-s:s-r)))},absFloor:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},prettyUnit:function(o){return{M:u,y:a,w:s,d:i,h:r,m:e,s:n,ms:t}[o]||String(o||"").toLowerCase().replace(/s$/,"")},isUndefined:function(t){return void 0===t}},$="en",l={};l[$]=c;var m=function(t){return t instanceof p},y=function(t,n,e){var r;if(!t)return null;if("string"==typeof t)l[t]&&(r=t),n&&(l[t]=n,r=t);else{var i=t.name;l[i]=t,r=i}return e||($=r),r},M=function(t,n){if(m(t))return t.clone();var e=n||{};return e.date=t,new p(e)},S=function(t,n){return M(t,{locale:n.$L})},D=f;D.parseLocale=y,D.isDayjs=m,D.wrapper=S;var p=function(){function c(t){this.parse(t)}var d=c.prototype;return d.parse=function(t){var n,e;this.$d=null===(n=t.date)?new Date(NaN):D.isUndefined(n)?new Date:n instanceof Date?n:"string"==typeof n&&/.*[^Z]$/i.test(n)&&(e=n.match(o))?new Date(e[1],e[2]-1,e[3]||1,e[5]||0,e[6]||0,e[7]||0,e[8]||0):new Date(n),this.init(t)},d.init=function(t){var n=this.$d;this.$y=n.getFullYear(),this.$M=n.getMonth(),this.$D=n.getDate(),this.$W=n.getDay(),this.$H=n.getHours(),this.$m=n.getMinutes(),this.$s=n.getSeconds(),this.$ms=n.getMilliseconds(),this.$L=this.$L||y(t.locale,null,!0)||$},d.$utils=function(){return D},d.isValid=function(){return!("Invalid Date"===this.$d.toString())},d.isSame=function(t,n){var e=M(t);return this.startOf(n)<=e&&e<=this.endOf(n)},d.isAfter=function(t,n){return M(t)<this.startOf(n)},d.isBefore=function(t,n){return this.endOf(n)<M(t)},d.year=function(){return this.$y},d.month=function(){return this.$M},d.day=function(){return this.$W},d.date=function(){return this.$D},d.hour=function(){return this.$H},d.minute=function(){return this.$m},d.second=function(){return this.$s},d.millisecond=function(){return this.$ms},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,o){var h=this,c=!!D.isUndefined(o)||o,d=function(t,n){var e=S(new Date(h.$y,n,t),h);return c?e:e.endOf(i)},f=function(t,n){return S(h.toDate()[t].apply(h.toDate(),(c?[0,0,0,0]:[23,59,59,999]).slice(n)),h)};switch(D.prettyUnit(t)){case a:return c?d(1,0):d(31,11);case u:return c?d(1,this.$M):d(0,this.$M+1);case s:return d(c?this.$D-this.$W:this.$D+(6-this.$W),this.$M);case i:case"date":return f("setHours",0);case r:return f("setMinutes",1);case e:return f("setSeconds",2);case n:return f("setMilliseconds",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(s,o){var h,c=D.prettyUnit(s),d=(h={},h[i]="setDate",h.date="setDate",h[u]="setMonth",h[a]="setFullYear",h[r]="setHours",h[e]="setMinutes",h[n]="setSeconds",h[t]="setMilliseconds",h)[c],f=c===i?this.$D+(o-this.$W):o;return this.$d[d]&&this.$d[d](f),this.init(),this},d.set=function(t,n){return this.clone().$set(t,n)},d.add=function(t,o){var h,c=this;t=Number(t);var d=D.prettyUnit(o),f=function(n,e){var r=c.set("date",1).set(n,e+t);return r.set("date",Math.min(c.$D,r.daysInMonth()))},$=function(n){var e=new Date(c.$d);return e.setDate(e.getDate()+n*t),S(e,c)};if(d===u)return f(u,this.$M);if(d===a)return f(a,this.$y);if(d===i)return $(1);if(d===s)return $(7);var l=(h={},h[e]=6e4,h[r]=36e5,h[n]=1e3,h)[d]||1,m=this.valueOf()+t*l;return S(m,this)},d.subtract=function(t,n){return this.add(-1*t,n)},d.format=function(t){var n=this,e=t||"YYYY-MM-DDTHH:mm:ssZ",r=D.padZoneStr(this.$d.getTimezoneOffset()),i=this.$locale(),s=i.weekdays,u=i.months,a=function(t,n,e,r){return t&&t[n]||e[n].substr(0,r)},o=function(t){return 0===n.$H?12:D.padStart(n.$H<13?n.$H:n.$H-12,"hh"===t?2:1,"0")};return e.replace(h,function(t){return t.indexOf("[")>-1?t.replace(/\[|\]/g,""):{YY:String(n.$y).slice(-2),YYYY:String(n.$y),M:String(n.$M+1),MM:D.padStart(n.$M+1,2,"0"),MMM:a(i.monthsShort,n.$M,u,3),MMMM:u[n.$M],D:String(n.$D),DD:D.padStart(n.$D,2,"0"),d:String(n.$W),dd:a(i.weekdaysMin,n.$W,s,2),ddd:a(i.weekdaysShort,n.$W,s,3),dddd:s[n.$W],H:String(n.$H),HH:D.padStart(n.$H,2,"0"),h:o(t),hh:o(t),a:n.$H<12?"am":"pm",A:n.$H<12?"AM":"PM",m:String(n.$m),mm:D.padStart(n.$m,2,"0"),s:String(n.$s),ss:D.padStart(n.$s,2,"0"),SSS:D.padStart(n.$ms,3,"0"),Z:r}[t]||r.replace(":","")})},d.diff=function(t,o,h){var c,d=D.prettyUnit(o),f=M(t),$=this-f,l=D.monthDiff(this,f);return l=(c={},c[a]=l/12,c[u]=l,c.quarter=l/3,c[s]=$/6048e5,c[i]=$/864e5,c[r]=$/36e5,c[e]=$/6e4,c[n]=$/1e3,c)[d]||$,h?l:D.absFloor(l)},d.daysInMonth=function(){return this.endOf(u).$D},d.$locale=function(){return l[this.$L]},d.locale=function(t,n){var e=this.clone();return e.$L=y(t,n,!0),e},d.clone=function(){return S(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.$d.toISOString()},d.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}},d.toString=function(){return this.$d.toUTCString()},c}();return M.extend=function(t,n){return t(n,p,M),M},M.locale=y,M.isDayjs=m,M.unix=function(t){return M(1e3*t)},M.en=l[$],M});
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(4);
+var content = __webpack_require__(3);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
+var add = __webpack_require__(6).default
 var update = add("c3e5085c", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 /*
@@ -191,22 +184,22 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
-exports.i(__webpack_require__(5), "");
+exports.i(__webpack_require__(4), "");
 
 // module
 exports.push([module.i, "\r\n", ""]);
@@ -215,10 +208,10 @@ exports.push([module.i, "\r\n", ""]);
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(1)(false);
 // imports
 
 
@@ -229,7 +222,7 @@ exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -259,9 +252,511 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
-// EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
-var dayjs_min = __webpack_require__(0);
-var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
+// CONCATENATED MODULE: ./node_modules/dayjs/src/constant.js
+const SECONDS_A_MINUTE = 60
+const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60
+const SECONDS_A_DAY = SECONDS_A_HOUR * 24
+const SECONDS_A_WEEK = SECONDS_A_DAY * 7
+
+const MILLISECONDS_A_SECOND = 1e3
+const MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND
+const MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND
+const MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND
+const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND
+
+// English locales
+const MS = 'millisecond'
+const S = 'second'
+const MIN = 'minute'
+const H = 'hour'
+const D = 'day'
+const W = 'week'
+const M = 'month'
+const Q = 'quarter'
+const Y = 'year'
+const DATE = 'date'
+
+const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ'
+
+const INVALID_DATE_STRING = 'Invalid Date'
+
+// regex
+const REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/
+const REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g
+
+const en = {
+  name: 'en',
+  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+}
+
+// CONCATENATED MODULE: ./node_modules/dayjs/src/utils.js
+
+
+const padStart = (string, length, pad) => {
+  const s = String(string)
+  if (!s || s.length >= length) return string
+  return `${Array((length + 1) - s.length).join(pad)}${string}`
+}
+
+const padZoneStr = (negMinuts) => {
+  const minutes = Math.abs(negMinuts)
+  const hourOffset = Math.floor(minutes / 60)
+  const minuteOffset = minutes % 60
+  return `${negMinuts <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
+}
+
+const monthDiff = (a, b) => {
+  // function from moment.js in order to keep the same result
+  const wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month())
+  const anchor = a.clone().add(wholeMonthDiff, 'months')
+  const c = b - anchor < 0
+  const anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months')
+  return Number(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) :
+    (anchor2 - anchor)))) || 0)
+}
+
+const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
+
+const prettyUnit = (u) => {
+  const special = {
+    M: M,
+    y: Y,
+    w: W,
+    d: D,
+    h: H,
+    m: MIN,
+    s: S,
+    ms: MS
+  }
+  return special[u] || String(u || '').toLowerCase().replace(/s$/, '')
+}
+
+const isUndefined = s => s === undefined
+
+/* harmony default export */ var utils = ({
+  padStart,
+  padZoneStr,
+  monthDiff,
+  absFloor,
+  prettyUnit,
+  isUndefined
+});
+
+// CONCATENATED MODULE: ./node_modules/dayjs/src/index.js
+
+
+
+let L = 'en' // global locale
+const Ls = {} // global loaded locale
+Ls[L] = en
+
+const isDayjs = d => d instanceof src_Dayjs // eslint-disable-line no-use-before-define
+
+const parseLocale = (preset, object, isLocal) => {
+  let l
+  if (!preset) return null
+  if (typeof preset === 'string') {
+    if (Ls[preset]) {
+      l = preset
+    }
+    if (object) {
+      Ls[preset] = object
+      l = preset
+    }
+  } else {
+    const { name } = preset
+    Ls[name] = preset
+    l = name
+  }
+  if (!isLocal) L = l
+  return l
+}
+
+const dayjs = (date, c) => {
+  if (isDayjs(date)) {
+    return date.clone()
+  }
+  // eslint-disable-next-line no-nested-ternary
+  const cfg = c ? (typeof c === 'string' ? { format: c } : c) : {}
+  cfg.date = date
+  return new src_Dayjs(cfg) // eslint-disable-line no-use-before-define
+}
+
+const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+
+const Utils = utils // for plugin use
+Utils.parseLocale = parseLocale
+Utils.isDayjs = isDayjs
+Utils.wrapper = wrapper
+
+const parseDate = (date) => {
+  let reg
+  if (date === null) return new Date(NaN) // Treat null as an invalid date
+  if (Utils.isUndefined(date)) return new Date()
+  if (date instanceof Date) return date
+  // eslint-disable-next-line no-cond-assign
+  if ((typeof date === 'string')
+    && (/.*[^Z]$/i.test(date)) // looking for a better way
+    && (reg = date.match(REGEX_PARSE))) {
+    // 2018-08-08 or 20180808
+    return new Date(
+      reg[1], reg[2] - 1, reg[3] || 1,
+      reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0
+    )
+  }
+  return new Date(date) // timestamp
+}
+
+class src_Dayjs {
+  constructor(cfg) {
+    this.parse(cfg) // for plugin
+  }
+
+  parse(cfg) {
+    this.$d = parseDate(cfg.date)
+    this.init(cfg)
+  }
+
+  init(cfg) {
+    const { $d } = this
+    this.$y = $d.getFullYear()
+    this.$M = $d.getMonth()
+    this.$D = $d.getDate()
+    this.$W = $d.getDay()
+    this.$H = $d.getHours()
+    this.$m = $d.getMinutes()
+    this.$s = $d.getSeconds()
+    this.$ms = $d.getMilliseconds()
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  $utils() {
+    return Utils
+  }
+
+  isValid() {
+    return !(this.$d.toString() === INVALID_DATE_STRING)
+  }
+
+  isSame(that, units) {
+    const other = dayjs(that)
+    return this.startOf(units) <= other && other <= this.endOf(units)
+  }
+
+  isAfter(that, units) {
+    return dayjs(that) < this.startOf(units)
+  }
+
+  isBefore(that, units) {
+    return this.endOf(units) < dayjs(that)
+  }
+
+  year() {
+    return this.$y
+  }
+
+  month() {
+    return this.$M
+  }
+
+  day() {
+    return this.$W
+  }
+
+  date() {
+    return this.$D
+  }
+
+  hour() {
+    return this.$H
+  }
+
+  minute() {
+    return this.$m
+  }
+
+  second() {
+    return this.$s
+  }
+
+  millisecond() {
+    return this.$ms
+  }
+
+  unix() {
+    return Math.floor(this.valueOf() / 1000)
+  }
+
+  valueOf() {
+    // timezone(hour) * 60 * 60 * 1000 => ms
+    return this.$d.getTime()
+  }
+
+  startOf(units, startOf) { // startOf -> endOf
+    const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
+    const unit = Utils.prettyUnit(units)
+    const instanceFactory = (d, m) => {
+      const ins = wrapper(new Date(this.$y, m, d), this)
+      return isStartOf ? ins : ins.endOf(D)
+    }
+    const instanceFactorySet = (method, slice) => {
+      const argumentStart = [0, 0, 0, 0]
+      const argumentEnd = [23, 59, 59, 999]
+      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+        this.toDate(),
+        (isStartOf ? argumentStart : argumentEnd).slice(slice)
+      ), this)
+    }
+
+    switch (unit) {
+      case Y:
+        return isStartOf ? instanceFactory(1, 0) :
+          instanceFactory(31, 11)
+      case M:
+        return isStartOf ? instanceFactory(1, this.$M) :
+          instanceFactory(0, this.$M + 1)
+      case W:
+        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
+          instanceFactory(this.$D + (6 - this.$W), this.$M)
+      case D:
+      case DATE:
+        return instanceFactorySet('setHours', 0)
+      case H:
+        return instanceFactorySet('setMinutes', 1)
+      case MIN:
+        return instanceFactorySet('setSeconds', 2)
+      case S:
+        return instanceFactorySet('setMilliseconds', 3)
+      default:
+        return this.clone()
+    }
+  }
+
+  endOf(arg) {
+    return this.startOf(arg, false)
+  }
+
+  $set(units, int) { // private set
+    const unit = Utils.prettyUnit(units)
+    const name = {
+      [D]: 'setDate',
+      [DATE]: 'setDate',
+      [M]: 'setMonth',
+      [Y]: 'setFullYear',
+      [H]: 'setHours',
+      [MIN]: 'setMinutes',
+      [S]: 'setSeconds',
+      [MS]: 'setMilliseconds'
+    }[unit]
+    const arg = unit === D ? this.$D + (int - this.$W) : int
+
+    if (this.$d[name]) this.$d[name](arg)
+
+    this.init()
+    return this
+  }
+
+  set(string, int) {
+    return this.clone().$set(string, int)
+  }
+
+  add(number, units) {
+    number = Number(number) // eslint-disable-line no-param-reassign
+    const unit = Utils.prettyUnit(units)
+    const instanceFactory = (u, n) => {
+      const date = this.set(DATE, 1).set(u, n + number)
+      return date.set(DATE, Math.min(this.$D, date.daysInMonth()))
+    }
+    const instanceFactorySet = (n) => {
+      const date = new Date(this.$d)
+      date.setDate(date.getDate() + (n * number))
+      return wrapper(date, this)
+    }
+    if (unit === M) {
+      return instanceFactory(M, this.$M)
+    }
+    if (unit === Y) {
+      return instanceFactory(Y, this.$y)
+    }
+    if (unit === D) {
+      return instanceFactorySet(1)
+    }
+    if (unit === W) {
+      return instanceFactorySet(7)
+    }
+    const step = {
+      [MIN]: MILLISECONDS_A_MINUTE,
+      [H]: MILLISECONDS_A_HOUR,
+      [S]: MILLISECONDS_A_SECOND
+    }[unit] || 1 // ms
+
+    const nextTimeStamp = this.valueOf() + (number * step)
+    return wrapper(nextTimeStamp, this)
+  }
+
+  subtract(number, string) {
+    return this.add(number * -1, string)
+  }
+
+  format(formatStr) {
+    if (!this.isValid()) return INVALID_DATE_STRING
+
+    const str = formatStr || FORMAT_DEFAULT
+    const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
+    const locale = this.$locale()
+    const {
+      weekdays, months
+    } = locale
+    const getShort = (arr, index, full, length) => (
+      (arr && arr[index]) || full[index].substr(0, length)
+    )
+    const get$H = (match) => {
+      if (this.$H === 0) return 12
+      return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
+    }
+
+    const matches = {
+      YY: String(this.$y).slice(-2),
+      YYYY: String(this.$y),
+      M: String(this.$M + 1),
+      MM: Utils.padStart(this.$M + 1, 2, '0'),
+      MMM: getShort(locale.monthsShort, this.$M, months, 3),
+      MMMM: months[this.$M],
+      D: String(this.$D),
+      DD: Utils.padStart(this.$D, 2, '0'),
+      d: String(this.$W),
+      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
+      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
+      dddd: weekdays[this.$W],
+      H: String(this.$H),
+      HH: Utils.padStart(this.$H, 2, '0'),
+      h: get$H('h'),
+      hh: get$H('hh'),
+      a: this.$H < 12 ? 'am' : 'pm',
+      A: this.$H < 12 ? 'AM' : 'PM',
+      m: String(this.$m),
+      mm: Utils.padStart(this.$m, 2, '0'),
+      s: String(this.$s),
+      ss: Utils.padStart(this.$s, 2, '0'),
+      SSS: Utils.padStart(this.$ms, 3, '0'),
+      Z: zoneStr
+    }
+
+    return str.replace(REGEX_FORMAT, (match) => {
+      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
+      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
+    })
+  }
+
+  utcOffset() {
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
+    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
+  }
+
+  diff(input, units, float) {
+    const unit = Utils.prettyUnit(units)
+    const that = dayjs(input)
+    const zoneDelta = (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE
+    const diff = this - that
+    let result = Utils.monthDiff(this, that)
+
+    result = {
+      [Y]: result / 12,
+      [M]: result,
+      [Q]: result / 3,
+      [W]: (diff - zoneDelta) / MILLISECONDS_A_WEEK,
+      [D]: (diff - zoneDelta) / MILLISECONDS_A_DAY,
+      [H]: diff / MILLISECONDS_A_HOUR,
+      [MIN]: diff / MILLISECONDS_A_MINUTE,
+      [S]: diff / MILLISECONDS_A_SECOND
+    }[unit] || diff // milliseconds
+
+    return float ? result : Utils.absFloor(result)
+  }
+
+  daysInMonth() {
+    return this.endOf(M).$D
+  }
+
+  $locale() { // get locale object
+    return Ls[this.$L]
+  }
+
+  locale(preset, object) {
+    const that = this.clone()
+    that.$L = parseLocale(preset, object, true)
+    return that
+  }
+
+  clone() {
+    return wrapper(this.toDate(), this)
+  }
+
+  toDate() {
+    return new Date(this.$d)
+  }
+
+  toArray() {
+    return [
+      this.$y,
+      this.$M,
+      this.$D,
+      this.$H,
+      this.$m,
+      this.$s,
+      this.$ms
+    ]
+  }
+
+  toJSON() {
+    return this.toISOString()
+  }
+
+  toISOString() {
+    // ie 8 return
+    // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
+    // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
+    return this.$d.toISOString()
+  }
+
+  toObject() {
+    return {
+      years: this.$y,
+      months: this.$M,
+      date: this.$D,
+      hours: this.$H,
+      minutes: this.$m,
+      seconds: this.$s,
+      milliseconds: this.$ms
+    }
+  }
+
+  toString() {
+    return this.$d.toUTCString()
+  }
+}
+
+dayjs.prototype = src_Dayjs.prototype
+
+dayjs.extend = (plugin, option) => {
+  plugin(option, src_Dayjs, dayjs)
+  return dayjs
+}
+
+dayjs.locale = parseLocale
+
+dayjs.isDayjs = isDayjs
+
+dayjs.unix = timestamp => (
+  dayjs(timestamp * 1e3)
+)
+
+dayjs.en = Ls[L]
+
+/* harmony default export */ var src = (dayjs);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
 var MainViewvue_type_template_id_0bc4212e_render = function() {
@@ -502,7 +997,8 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
                   "expander-style": _vm.getListExpanderStyle(task)
                 }
               })
-            })
+            }),
+            1
           )
         ],
         1
@@ -527,7 +1023,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
       staticClass: "gantt-elastic__task-list-header",
       style: _vm.root.style("task-list-header")
     },
-    _vm._l(_vm.root.state.taskList.columns, function(column) {
+    _vm._l(_vm.root.getTaskListColumns, function(column) {
       return _c(
         "div",
         {
@@ -569,7 +1065,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
               attrs: { column: column },
               on: {
                 mousedown: function($event) {
-                  _vm.resizerMouseDown($event, column)
+                  return _vm.resizerMouseDown($event, column)
                 }
               }
             },
@@ -614,7 +1110,8 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
         ],
         1
       )
-    })
+    }),
+    0
   )
 }
 var TaskListHeadervue_type_template_id_aefdd7c8_staticRenderFns = []
@@ -1082,21 +1579,25 @@ component.options.__file = "src/components/TaskList/Expander.vue"
         this.root.$emit("taskList-column-width-change-stop", this.resizer.moving);
         this.resizer.moving = false;
       }
-    }
+    },
   },
 
   /**
    * Created
    */
   created () {
-    this.mouseUpListener = document.addEventListener('mouseup', (event) => {
-      this.resizerMouseUp(event);
-    });
-    this.mouseMoveListener = document.addEventListener('mousemove', (event) => {
-      this.resizerMouseMove(event);
-    });
+    this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this));
+    this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this));
     this.root.$on("main-view-mousemove", this.resizerMouseMove);
     this.root.$on("main-view-mouseup", this.resizerMouseUp);
+  },
+
+  /**
+   * Before destroy event - clear all event listeners
+   */
+  beforeDestroy () {
+    document.removeEventListener('mouseup', this.resizerMouseUp);
+    document.removeEventListener('mousemove', this.resizerMouseMove);
   }
 });
 
@@ -1150,7 +1651,8 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
         ],
         1
       )
-    })
+    }),
+    1
   )
 }
 var TaskListItemvue_type_template_id_9716293c_staticRenderFns = []
@@ -2137,7 +2639,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentMonth = dayjs_min_default()(this.root.state.times.firstDate);
+      let currentMonth = src(this.root.state.times.firstDate);
       let previousMonth = currentMonth.clone();
       const lastTime = this.root.state.times.lastTime;
       let monthsCount = 1;
@@ -2246,7 +2748,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs_min_default()(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
+          const date = src(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
           let textWidth = 0;
           if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
@@ -2284,7 +2786,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
             dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = dayjs_min_default()(this.root.state.times.steps[dayIndex].date);
+        const date = src(this.root.state.times.steps[dayIndex].date);
         let textWidth = 0;
         if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
@@ -2313,13 +2815,13 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       let months = [];
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentDate = dayjs_min_default()(this.root.state.times.firstDate);
+      let currentDate = src(this.root.state.times.firstDate);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
-        let finalDate = dayjs_min_default()(currentDate).add(1, "month").startOf("month");
+        let finalDate = src(currentDate).add(1, "month").startOf("month");
         if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          finalDate = dayjs_min_default()(this.root.state.times.lastDate);
+          finalDate = src(this.root.state.times.lastDate);
         }
         // we must find first and last step to get the offsets / widths
         for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
@@ -2357,7 +2859,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         });
         currentDate = currentDate.add(1, "month").startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          currentDate = dayjs_min_default()(this.root.state.times.lastDate);
+          currentDate = src(this.root.state.times.lastDate);
         }
       }
       return months.filter(month => this.root.isInsideViewPort(month.x, month.width));
@@ -2428,9 +2930,11 @@ var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
             ),
             attrs: { task: task, d: dependencyLine.points }
           })
-        })
+        }),
+        0
       )
-    })
+    }),
+    0
   )
 }
 var DependencyLinesvue_type_template_id_f1cbf6ba_staticRenderFns = []
@@ -2607,37 +3111,37 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
           },
           on: {
             click: function($event) {
-              _vm.emitEvent("click", $event)
+              return _vm.emitEvent("click", $event)
             },
             mouseenter: function($event) {
-              _vm.emitEvent("mouseenter", $event)
+              return _vm.emitEvent("mouseenter", $event)
             },
             mouseover: function($event) {
-              _vm.emitEvent("mouseover", $event)
+              return _vm.emitEvent("mouseover", $event)
             },
             mouseout: function($event) {
-              _vm.emitEvent("mouseout", $event)
+              return _vm.emitEvent("mouseout", $event)
             },
             mousemove: function($event) {
-              _vm.emitEvent("mousemove", $event)
+              return _vm.emitEvent("mousemove", $event)
             },
             mousedown: function($event) {
-              _vm.emitEvent("mousedown", $event)
+              return _vm.emitEvent("mousedown", $event)
             },
             mouseup: function($event) {
-              _vm.emitEvent("mouseup", $event)
+              return _vm.emitEvent("mouseup", $event)
             },
             mousewheel: function($event) {
-              _vm.emitEvent("mousewheel", $event)
+              return _vm.emitEvent("mousewheel", $event)
             },
             touchstart: function($event) {
-              _vm.emitEvent("touchstart", $event)
+              return _vm.emitEvent("touchstart", $event)
             },
             touchmove: function($event) {
-              _vm.emitEvent("touchmove", $event)
+              return _vm.emitEvent("touchmove", $event)
             },
             touchend: function($event) {
-              _vm.emitEvent("touchend", $event)
+              return _vm.emitEvent("touchend", $event)
             }
           }
         },
@@ -3214,37 +3718,37 @@ var Milestonevue_type_template_id_3013006c_render = function() {
           },
           on: {
             click: function($event) {
-              _vm.emitEvent("click", $event)
+              return _vm.emitEvent("click", $event)
             },
             mouseenter: function($event) {
-              _vm.emitEvent("mouseenter", $event)
+              return _vm.emitEvent("mouseenter", $event)
             },
             mouseover: function($event) {
-              _vm.emitEvent("mouseover", $event)
+              return _vm.emitEvent("mouseover", $event)
             },
             mouseout: function($event) {
-              _vm.emitEvent("mouseout", $event)
+              return _vm.emitEvent("mouseout", $event)
             },
             mousemove: function($event) {
-              _vm.emitEvent("mousemove", $event)
+              return _vm.emitEvent("mousemove", $event)
             },
             mousedown: function($event) {
-              _vm.emitEvent("mousedown", $event)
+              return _vm.emitEvent("mousedown", $event)
             },
             mouseup: function($event) {
-              _vm.emitEvent("mouseup", $event)
+              return _vm.emitEvent("mouseup", $event)
             },
             mousewheel: function($event) {
-              _vm.emitEvent("mousewheel", $event)
+              return _vm.emitEvent("mousewheel", $event)
             },
             touchstart: function($event) {
-              _vm.emitEvent("touchstart", $event)
+              return _vm.emitEvent("touchstart", $event)
             },
             touchmove: function($event) {
-              _vm.emitEvent("touchmove", $event)
+              return _vm.emitEvent("touchmove", $event)
             },
             touchend: function($event) {
-              _vm.emitEvent("touchend", $event)
+              return _vm.emitEvent("touchend", $event)
             }
           }
         },
@@ -3448,37 +3952,37 @@ var Projectvue_type_template_id_077bbd73_render = function() {
           },
           on: {
             click: function($event) {
-              _vm.emitEvent("click", $event)
+              return _vm.emitEvent("click", $event)
             },
             mouseenter: function($event) {
-              _vm.emitEvent("mouseenter", $event)
+              return _vm.emitEvent("mouseenter", $event)
             },
             mouseover: function($event) {
-              _vm.emitEvent("mouseover", $event)
+              return _vm.emitEvent("mouseover", $event)
             },
             mouseout: function($event) {
-              _vm.emitEvent("mouseout", $event)
+              return _vm.emitEvent("mouseout", $event)
             },
             mousemove: function($event) {
-              _vm.emitEvent("mousemove", $event)
+              return _vm.emitEvent("mousemove", $event)
             },
             mousedown: function($event) {
-              _vm.emitEvent("mousedown", $event)
+              return _vm.emitEvent("mousedown", $event)
             },
             mouseup: function($event) {
-              _vm.emitEvent("mouseup", $event)
+              return _vm.emitEvent("mouseup", $event)
             },
             mousewheel: function($event) {
-              _vm.emitEvent("mousewheel", $event)
+              return _vm.emitEvent("mousewheel", $event)
             },
             touchstart: function($event) {
-              _vm.emitEvent("touchstart", $event)
+              return _vm.emitEvent("touchstart", $event)
             },
             touchmove: function($event) {
-              _vm.emitEvent("touchmove", $event)
+              return _vm.emitEvent("touchmove", $event)
             },
             touchend: function($event) {
-              _vm.emitEvent("touchend", $event)
+              return _vm.emitEvent("touchend", $event)
             }
           }
         },
@@ -4455,17 +4959,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           long (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
           medium (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
           short (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("HH");
           }
@@ -4478,17 +4982,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           long (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("DD dddd");
           },
           medium (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("DD ddd");
           },
           short (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("DD");
           }
@@ -4501,17 +5005,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           short (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("MM");
           },
           medium (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("MMM 'YY");
           },
           long (date) {
-            return dayjs_min_default()(date)
+            return src(date)
               .locale(userOptions.locale.code)
               .format("MMMM YYYY");
           }
@@ -4583,7 +5087,7 @@ function mergeDeepReactive (component, target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key]) {
+        if (typeof target[key] === 'undefined') {
           component.$set(target, key, {});
         }
         mergeDeepReactive(component, target[key], source[key]);
@@ -4739,13 +5243,19 @@ const GanttElastic = {
     /**
      * Initialize component
      */
-    initialize () {
-      this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
-      this.state.tasks = this.tasks.map(task => {
-        this.$set(task, 'start', dayjs_min_default()(task.start).format("YYYY-MM-DD HH:mm:ss"));
-        return task;
-      });
-      dayjs_min_default.a.locale(this.options.locale, null, true);
+    initialize (itsUpdate = '') {
+      switch (itsUpdate) {
+        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.tasks }); break;
+        case 'options': this.mergeDeepReactive(this, this.state, this.options); break;
+        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+      }
+      if (itsUpdate === '' || itsUpdate === 'tasks') {
+        this.state.tasks = this.tasks.map(task => {
+          this.$set(task, 'start', src(task.start).format("YYYY-MM-DD HH:mm:ss"));
+          return task;
+        });
+      }
+      src.locale(this.options.locale, null, true);
       if (typeof this.state.taskList === "undefined") {
         this.$set(this.state, 'taskList', {});
       }
@@ -4763,20 +5273,24 @@ const GanttElastic = {
         this.$set(column, '_id', `${index}-${column.label}`);
         return column;
       });
-      // initialize observer
-      this.refreshTasks();
-      this.state.rootTask = {
-        id: null,
-        label: "root",
-        children: [],
-        allChildren: [],
-        parents: [],
-        parent: null
-      };
-      this.resetTaskTree();
-      this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-      this.state.tasks = this.state.taskTree.allChildren;
-      this.state.ctx = document.createElement("canvas").getContext("2d");
+      if (itsUpdate === '' || itsUpdate === 'tasks') {
+        // initialize observer
+        this.refreshTasks();
+        this.state.rootTask = {
+          id: null,
+          label: "root",
+          children: [],
+          allChildren: [],
+          parents: [],
+          parent: null
+        };
+        this.resetTaskTree();
+        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+        this.state.tasks = this.state.taskTree.allChildren;
+      }
+      if (itsUpdate === '') {
+        this.state.ctx = document.createElement("canvas").getContext("2d");
+      }
       this.calculateTaskListColumnsDimensions();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
@@ -5061,8 +5575,8 @@ const GanttElastic = {
       this.state.scroll.chart.top = top;
       this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.scroll.chart.dateTime.left = dayjs_min_default()(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = dayjs_min_default()(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
+      this.state.scroll.chart.dateTime.left = src(this.state.scroll.chart.time);
+      this.state.scroll.chart.dateTime.right = src(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
 
@@ -5218,12 +5732,12 @@ const GanttElastic = {
      * Initialize time variables
      */
     initTimes () {
-      this.state.times.firstDate = dayjs_min_default()(this.state.times.firstTaskDate)
+      this.state.times.firstDate = src(this.state.times.firstTaskDate)
         .locale(this.locale)
         .startOf("day")
         .subtract(this.state.scope.before, "days")
         .startOf("day");
-      this.state.times.lastDate = dayjs_min_default()(this.state.times.lastTaskDate)
+      this.state.times.lastDate = src(this.state.times.lastTaskDate)
         .locale(this.locale)
         .endOf("day")
         .add(this.state.scope.after, "days")
@@ -5240,8 +5754,8 @@ const GanttElastic = {
      */
     calculateSteps () {
       const steps = [];
-      const lastMs = dayjs_min_default()(this.state.times.lastDate).valueOf();
-      const currentDate = dayjs_min_default()(this.state.times.firstDate);
+      const lastMs = src(this.state.times.lastDate).valueOf();
+      const currentDate = src(this.state.times.firstDate);
       steps.push({
         date: currentDate,
         offset: {
@@ -5249,7 +5763,7 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (let currentDate = dayjs_min_default()(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+      for (let currentDate = src(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
         currentDate.valueOf() <= lastMs;
         currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
         const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
@@ -5273,7 +5787,6 @@ const GanttElastic = {
         ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
         px: this.state.times.totalViewDurationPx - lastStep.offset.px
       };
-      console.log('calculated steps',steps)
       this.state.times.steps = steps;
     },
 
@@ -5293,7 +5806,7 @@ const GanttElastic = {
       const state = this.state;
       const monthStyle = this.style("calendar-row-text--hour");
       state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
-      let currentDate = dayjs_min_default()("2018-01-01T00:00:00"); // any date will be good for hours
+      let currentDate = src("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
       state.calendar.hour.widths = [];
       Object.keys(state.calendar.hour.format).forEach(formatName => {
@@ -5324,7 +5837,7 @@ const GanttElastic = {
       const state = this.state;
       const monthStyle = this.style("calendar-row-text--day");
       state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
-      let currentDate = dayjs_min_default()(state.times.steps[0].date);
+      let currentDate = src(state.times.steps[0].date);
       let maxWidths = {};
       state.calendar.day.widths = [];
       Object.keys(state.calendar.day.format).forEach(formatName => {
@@ -5360,7 +5873,7 @@ const GanttElastic = {
       Object.keys(state.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = dayjs_min_default()(this.state.times.firstDate);
+      let currentDate = src(this.state.times.firstDate);
       const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
@@ -5389,7 +5902,7 @@ const GanttElastic = {
       let firstTaskDate, lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
-        task.startDate = dayjs_min_default()(task.start);
+        task.startDate = src(task.start);
         task.startTime = task.startDate.valueOf();
         task.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
@@ -5398,19 +5911,19 @@ const GanttElastic = {
         }
         if (task.startTime + task.durationMs > lastTaskTime) {
           lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = dayjs_min_default()(task.startTime + task.durationMs);
+          lastTaskDate = src(task.startTime + task.durationMs);
         }
       }
       this.state.times.firstTaskTime = firstTaskTime;
       this.state.times.lastTaskTime = lastTaskTime;
       this.state.times.firstTaskDate = firstTaskDate;
       this.state.times.lastTaskDate = lastTaskDate;
-      this.state.times.firstDate = dayjs_min_default()(firstTaskDate)
+      this.state.times.firstDate = src(firstTaskDate)
         .locale(this.locale)
         .startOf("day")
         .subtract(this.state.scope.before, "days")
         .startOf("day");
-      this.state.times.lastDate = dayjs_min_default()(lastTaskDate)
+      this.state.times.lastDate = src(lastTaskDate)
         .locale(this.locale)
         .endOf("day")
         .add(this.state.scope.after, "days")
@@ -5420,8 +5933,8 @@ const GanttElastic = {
     /**
      * Setup and calulate everything
      */
-    setup () {
-      this.initialize();
+    setup (itsUpdate = '') {
+      this.initialize(itsUpdate);
       this.state.tasksById = {};
       this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
       this.prepareDates();
@@ -5482,6 +5995,14 @@ const GanttElastic = {
       });
       return visibleTasks;
     },
+
+    /**
+     * Get columns and compute dimensions on the fly
+     */
+    getTaskListColumns () {
+      this.calculateTaskListColumnsDimensions();
+      return this.state.taskList.columns;
+    }
   },
 
   /**
@@ -5489,13 +6010,13 @@ const GanttElastic = {
    */
   created () {
     this.$watch('tasks', (tasks) => {
-      this.setup();
+      this.setup('tasks');
       this.$emit('tasks-changed', tasks);
     });
-    this.$watch('options', () => {
-      this.setup();
-    })
-
+    this.$watch('options', (opts) => {
+      this.setup('options');
+      this.$emit('options-changed', opts);
+    });
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
@@ -5548,7 +6069,7 @@ const GanttElastic = {
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
-var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(3);
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
@@ -5578,7 +6099,7 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

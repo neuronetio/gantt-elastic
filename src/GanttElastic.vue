@@ -274,7 +274,7 @@ export function mergeDeepReactive (component, target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key]) {
+        if (typeof target[key] === 'undefined') {
           component.$set(target, key, {});
         }
         mergeDeepReactive(component, target[key], source[key]);
@@ -430,12 +430,18 @@ const GanttElastic = {
     /**
      * Initialize component
      */
-    initialize () {
-      this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
-      this.state.tasks = this.tasks.map(task => {
-        this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
-        return task;
-      });
+    initialize (itsUpdate = '') {
+      switch (itsUpdate) {
+        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.tasks }); break;
+        case 'options': this.mergeDeepReactive(this, this.state, this.options); break;
+        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+      }
+      if (itsUpdate === '' || itsUpdate === 'tasks') {
+        this.state.tasks = this.tasks.map(task => {
+          this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
+          return task;
+        });
+      }
       dayjs.locale(this.options.locale, null, true);
       if (typeof this.state.taskList === "undefined") {
         this.$set(this.state, 'taskList', {});
@@ -454,20 +460,24 @@ const GanttElastic = {
         this.$set(column, '_id', `${index}-${column.label}`);
         return column;
       });
-      // initialize observer
-      this.refreshTasks();
-      this.state.rootTask = {
-        id: null,
-        label: "root",
-        children: [],
-        allChildren: [],
-        parents: [],
-        parent: null
-      };
-      this.resetTaskTree();
-      this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-      this.state.tasks = this.state.taskTree.allChildren;
-      this.state.ctx = document.createElement("canvas").getContext("2d");
+      if (itsUpdate === '' || itsUpdate === 'tasks') {
+        // initialize observer
+        this.refreshTasks();
+        this.state.rootTask = {
+          id: null,
+          label: "root",
+          children: [],
+          allChildren: [],
+          parents: [],
+          parent: null
+        };
+        this.resetTaskTree();
+        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
+        this.state.tasks = this.state.taskTree.allChildren;
+      }
+      if (itsUpdate === '') {
+        this.state.ctx = document.createElement("canvas").getContext("2d");
+      }
       this.calculateTaskListColumnsDimensions();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
@@ -964,7 +974,6 @@ const GanttElastic = {
         ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
         px: this.state.times.totalViewDurationPx - lastStep.offset.px
       };
-      console.log('calculated steps',steps)
       this.state.times.steps = steps;
     },
 
@@ -1111,8 +1120,8 @@ const GanttElastic = {
     /**
      * Setup and calulate everything
      */
-    setup () {
-      this.initialize();
+    setup (itsUpdate = '') {
+      this.initialize(itsUpdate);
       this.state.tasksById = {};
       this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
       this.prepareDates();
@@ -1173,6 +1182,14 @@ const GanttElastic = {
       });
       return visibleTasks;
     },
+
+    /**
+     * Get columns and compute dimensions on the fly
+     */
+    getTaskListColumns () {
+      this.calculateTaskListColumnsDimensions();
+      return this.state.taskList.columns;
+    }
   },
 
   /**
@@ -1180,13 +1197,13 @@ const GanttElastic = {
    */
   created () {
     this.$watch('tasks', (tasks) => {
-      this.setup();
+      this.setup('tasks');
       this.$emit('tasks-changed', tasks);
     });
-    this.$watch('options', () => {
-      this.setup();
-    })
-
+    this.$watch('options', (opts) => {
+      this.setup('options');
+      this.$emit('options-changed', opts);
+    });
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
