@@ -86,8 +86,8 @@ import Chart from "./Chart/Chart.vue";
 
 export default {
   components: {
-    TaskList: TaskList,
-    Chart: Chart
+    TaskList,
+    Chart
   },
   inject: ["root"],
   props: ["tasks", "options"],

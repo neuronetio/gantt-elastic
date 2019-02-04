@@ -285,7 +285,7 @@ export default {
           textWidth,
           choosenFormatName,
           height: this.root.state.calendar.month.height,
-          label: label
+          label
         });
         currentDate = currentDate.add(1, "month").startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {

@@ -279,4 +279,4 @@ export default {
   "slot-header-beforeOptions": {
     "display": "inline-block"
   }
-}
+};

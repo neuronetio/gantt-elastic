@@ -21,5 +21,5 @@ window.GanttElastic = {
       }
     }).$mount(el);
   }
-}
+};
 export default GanttElastic;

@@ -25,5 +25,5 @@ export default {
     tasks: [],
     options: {},
   },
-}
+};
 </script>
