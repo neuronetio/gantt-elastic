@@ -127,7 +127,7 @@ export default {
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
         currentMonth = currentMonth.add(1, "day");
-        if (previousMonth.month() != currentMonth.month()) {
+        if (previousMonth.month() !== currentMonth.month()) {
           monthsCount++;
         }
         previousMonth = currentMonth.clone();
