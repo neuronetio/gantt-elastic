@@ -357,12 +357,23 @@ export default {
       return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
     },
 
+    /**
+     * Get visible days
+     */
     getDays () {
       return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
     },
+
+    /**
+     * Get visible hours
+     */
     getHours () {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
     },
+
+    /**
+     * Get visible months
+     */
     getMonths () {
       return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
     },
