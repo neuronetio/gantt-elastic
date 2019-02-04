@@ -2357,7 +2357,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._l(_vm.generateMonths, function(month) {
+      _vm._l(_vm.getMonths, function(month) {
         return _c("calendar-row", {
           key: month.key,
           staticClass: "gantt-elastic__calendar-row--month",
@@ -2365,7 +2365,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
         })
       }),
       _vm._v(" "),
-      _vm._l(_vm.generateDays, function(day) {
+      _vm._l(_vm.getDays, function(day) {
         return _c("calendar-row", {
           key: day.key,
           staticClass: "gantt-elastic__calendar-row--day",
@@ -2373,7 +2373,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
         })
       }),
       _vm._v(" "),
-      _vm._l(_vm.generateHours, function(hour) {
+      _vm._l(_vm.getHours, function(hour) {
         return _c("calendar-row", {
           key: hour.key,
           staticClass: "gantt-elastic__calendar-row--hour",
@@ -2584,9 +2584,22 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
   },
   inject: ["root"],
   data () {
-    return {};
+    return {
+      hours: [],
+      days: [],
+      months: []
+    };
+  },
+  created () {
+    this.root.$on("scope-change", this.regenerate);
+    this.root.$on("times-timeZoom-change", this.regenerate);
+    this.root.$on("tasks-changed",this.regenerate);
+    this.root.$on("options-changed",this.regenerate);
+    this.regenerate();
   },
   methods: {
+
+
 
     /**
      * How many hours will fit?
@@ -2693,58 +2706,6 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
     },
 
-  },
-
-  computed: {
-
-    /**
-     * Get x position
-     * @returns {number}
-     */
-    getX () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
-     * Get y position
-     * @returns {number}
-     */
-    getY () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
-     * Get width
-     * @returns {number}
-     */
-    getWidth () {
-      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
-      return width;
-    },
-
-    /**
-     * Get month style
-     * @returns {object}
-     */
-    monthsStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
-    },
-
-    /**
-     * Get day style
-     * @returns {object}
-     */
-    daysStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
-    },
-
-    /**
-     * Get hour styke
-     * @returns {object}
-     */
-    hoursStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
-    },
     /**
      * Generate hours
      *
@@ -2775,7 +2736,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           });
         }
       }
-      return hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+      return this.hours = hours;
     },
 
     /**
@@ -2812,7 +2773,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           label: this.root.state.calendar.day.format[daysCount.type](date)
         });
       }
-      return days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+      return this.days = days;
     },
 
     /**
@@ -2871,9 +2832,80 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           currentDate = src(this.root.state.times.lastDate);
         }
       }
-      return months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+      return this.months = months;
     },
 
+    /**
+     * Regenerate dates
+     */
+    regenerate () {
+      this.generateHours();
+      this.generateDays();
+      this.generateMonths();
+    }
+
+  },
+
+  computed: {
+
+    /**
+     * Get x position
+     * @returns {number}
+     */
+    getX () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+
+    /**
+     * Get y position
+     * @returns {number}
+     */
+    getY () {
+      return this.root.style('calendar-row')["stroke-width"] / 2;
+    },
+
+    /**
+     * Get width
+     * @returns {number}
+     */
+    getWidth () {
+      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
+      return width;
+    },
+
+    /**
+     * Get month style
+     * @returns {object}
+     */
+    monthsStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+    },
+
+    /**
+     * Get day style
+     * @returns {object}
+     */
+    daysStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+    },
+
+    /**
+     * Get hour styke
+     * @returns {object}
+     */
+    hoursStyle () {
+      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
+    },
+
+    getDays () {
+      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+    },
+    getHours () {
+      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+    },
+    getMonths () {
+      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+    },
   }
 });
 
