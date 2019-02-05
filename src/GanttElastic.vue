@@ -137,7 +137,6 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
-      showWorkingDays: true,
       workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,

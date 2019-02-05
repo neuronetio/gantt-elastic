@@ -2324,7 +2324,7 @@ var DaysHighlightvue_type_template_id_1bfe64e8_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.root.state.calendar.showWorkingDays
+  return _vm.showWorkingDays
     ? _c(
         "g",
         {
@@ -2395,10 +2395,26 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
     }
   },
   computed: {
+    /**
+     * Get working days
+     * @returns {array}
+     */
     workingDays () {
       return this.root.state.times.steps.filter(step => {
         return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
       });
+    },
+
+    /**
+     * Show working days?
+     * @returns {bool}
+     */
+    showWorkingDays () {
+      const calendar = this.root.state.calendar;
+      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+        return true;
+      }
+      return false;
     }
   }
 });
@@ -5110,7 +5126,6 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
-      showWorkingDays: true,
       workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,

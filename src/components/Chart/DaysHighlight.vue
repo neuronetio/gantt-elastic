@@ -11,7 +11,7 @@
   <g
     class="gantt-elastic__chart-days-highlight-container"
     :style="root.style('chart-days-highlight-container')"
-    v-if="root.state.calendar.showWorkingDays"
+    v-if="showWorkingDays"
   >
     <rect
       class="gantt-elastic__chart-days-highlight-rect"
@@ -38,10 +38,26 @@ export default {
     }
   },
   computed: {
+    /**
+     * Get working days
+     * @returns {array}
+     */
     workingDays () {
       return this.root.state.times.steps.filter(step => {
         return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
       });
+    },
+
+    /**
+     * Show working days?
+     * @returns {bool}
+     */
+    showWorkingDays () {
+      const calendar = this.root.state.calendar;
+      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+        return true;
+      }
+      return false;
     }
   }
 }
