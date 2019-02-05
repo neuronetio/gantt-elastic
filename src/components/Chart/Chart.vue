@@ -36,6 +36,7 @@
           :viewBox="getViewBox"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <days-highlight></days-highlight>
           <grid></grid>
           <dependency-lines :tasks="root.state.tasks"></dependency-lines>
           <g
@@ -56,6 +57,7 @@
 
 <script>
 import Grid from "./Grid.vue";
+import DaysHighlight from "./DaysHighlight.vue";
 import Calendar from "../Calendar/Calendar.vue";
 import DependencyLines from "./DependencyLines.vue";
 import Task from "./Row/Task.vue";
@@ -68,7 +70,8 @@ export default {
     Calendar,
     Task,
     Milestone,
-    Project
+    Project,
+    DaysHighlight
   },
   inject: ["root"],
   data () {

@@ -2044,6 +2044,8 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                   }
                 },
                 [
+                  _c("days-highlight"),
+                  _vm._v(" "),
                   _c("grid"),
                   _vm._v(" "),
                   _c("dependency-lines", {
@@ -2317,6 +2319,115 @@ var Grid_component = normalizeComponent(
 if (false) { var Grid_api; }
 Grid_component.options.__file = "src/components/Chart/Grid.vue"
 /* harmony default export */ var Grid = (Grid_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DaysHighlight.vue?vue&type=template&id=1bfe64e8&
+var DaysHighlightvue_type_template_id_1bfe64e8_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.root.state.calendar.showWorkingDays
+    ? _c(
+        "g",
+        {
+          staticClass: "gantt-elastic__chart-days-highlight-container",
+          style: _vm.root.style("chart-days-highlight-container")
+        },
+        _vm._l(_vm.workingDays, function(day) {
+          return _c("rect", {
+            key: _vm.getKey(day),
+            staticClass: "gantt-elastic__chart-days-highlight-rect",
+            style: _vm.root.style("chart-days-highlight-rect"),
+            attrs: {
+              x: day.offset.px,
+              y: "0",
+              width: day.width.px,
+              height: "100%"
+            }
+          })
+        }),
+        0
+      )
+    : _vm._e()
+}
+var DaysHighlightvue_type_template_id_1bfe64e8_staticRenderFns = []
+DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Chart/DaysHighlight.vue?vue&type=template&id=1bfe64e8&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DaysHighlight.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var DaysHighlightvue_type_script_lang_js_ = ({
+  inject: ['root'],
+  data () {
+    return {};
+  },
+  methods: {
+    getKey (day) {
+      return day.date.format('YYYY-MM-DD');
+    }
+  },
+  computed: {
+    workingDays () {
+      return this.root.state.times.steps.filter(step => {
+        return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
+      });
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./src/components/Chart/DaysHighlight.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Chart_DaysHighlightvue_type_script_lang_js_ = (DaysHighlightvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Chart/DaysHighlight.vue
+
+
+
+
+
+/* normalize component */
+
+var DaysHighlight_component = normalizeComponent(
+  Chart_DaysHighlightvue_type_script_lang_js_,
+  DaysHighlightvue_type_template_id_1bfe64e8_render,
+  DaysHighlightvue_type_template_id_1bfe64e8_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var DaysHighlight_api; }
+DaysHighlight_component.options.__file = "src/components/Chart/DaysHighlight.vue"
+/* harmony default export */ var DaysHighlight = (DaysHighlight_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=template&id=dee108e2&
 var Calendarvue_type_template_id_dee108e2_render = function() {
   var _vm = this
@@ -2658,7 +2769,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
         currentMonth = currentMonth.add(1, "day");
-        if (previousMonth.month() != currentMonth.month()) {
+        if (previousMonth.month() !== currentMonth.month()) {
           monthsCount++;
         }
         previousMonth = currentMonth.clone();
@@ -2816,7 +2927,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           textWidth,
           choosenFormatName,
           height: this.root.state.calendar.month.height,
-          label: label
+          label
         });
         currentDate = currentDate.add(1, "month").startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
@@ -2888,12 +2999,23 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
     },
 
+    /**
+     * Get visible days
+     */
     getDays () {
       return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
     },
+
+    /**
+     * Get visible hours
+     */
     getHours () {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
     },
+
+    /**
+     * Get visible months
+     */
     getMonths () {
       return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
     },
@@ -4243,6 +4365,8 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 //
 //
 //
+//
+
 
 
 
@@ -4257,7 +4381,8 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
     Calendar: Calendar,
     Task: Task,
     Milestone: Milestone,
-    Project: Project
+    Project: Project,
+    DaysHighlight: DaysHighlight
   },
   inject: ["root"],
   data () {
@@ -4826,6 +4951,9 @@ const fontFamily = "Arial, sans-serif";
     "max-height": "100%",
     "float": "right",
   },
+  "chart-days-highlight-rect": {
+    "fill": "#FFCCBC40"
+  },
   "svg-chart": {
     "overflow": "hidden"
   },
@@ -4982,6 +5110,8 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
+      showWorkingDays: true,
+      workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,
       hour: {
@@ -5090,14 +5220,12 @@ function mergeDeep (target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, {
-          [key]: {}
-        });
+        if (typeof target[key] === 'undefined') {
+          Object.assign(target, { [key]: {} });
+        }
         mergeDeep(target[key], source[key]);
       } else {
-        Object.assign(target, {
-          [key]: source[key]
-        });
+        Object.assign(target, { [key]: source[key] });
       }
     }
   }
@@ -5201,11 +5329,11 @@ const GanttElastic = {
       let merged = {};
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.style[objOrClassName])
+          merged = Object.assign({}, merged, this.state.style[objOrClassName]);
         } else if (typeof objOrClassName === 'object') {
           merged = Object.assign({}, merged, objOrClassName);
         } else if (typeof objOrClassName === 'function') {
-          merged = Object.assign({}, objOrClassName())
+          merged = Object.assign({}, objOrClassName());
         }
       });
       styleCache[index] = merged;

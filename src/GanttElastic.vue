@@ -137,6 +137,8 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
+      showWorkingDays: true,
+      workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,
       hour: {
@@ -245,7 +247,7 @@ export function mergeDeep (target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (typeof target[key]==='undefined') {
+        if (typeof target[key] === 'undefined') {
           Object.assign(target, { [key]: {} });
         }
         mergeDeep(target[key], source[key]);

@@ -265,6 +265,9 @@ export default {
     "max-height": "100%",
     "float": "right",
   },
+  "chart-days-highlight-rect": {
+    "fill": "#FFCCBC40"
+  },
   "svg-chart": {
     "overflow": "hidden"
   },
