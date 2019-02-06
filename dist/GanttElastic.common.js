@@ -4968,7 +4968,7 @@ const fontFamily = "Arial, sans-serif";
     "float": "right",
   },
   "chart-days-highlight-rect": {
-    "fill": "#00000008"
+    "fill": "#f3f5f780"
   },
   "svg-chart": {
     "overflow": "hidden"
