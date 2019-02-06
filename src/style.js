@@ -266,7 +266,7 @@ export default {
     "float": "right",
   },
   "chart-days-highlight-rect": {
-    "fill": "#FFCCBC40"
+    "fill": "#00000008"
   },
   "svg-chart": {
     "overflow": "hidden"
