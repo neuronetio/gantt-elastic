@@ -4,19 +4,19 @@
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. jQuery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
-    "dayjs": "^1.8.3"
+    "dayjs": "^1.8.5"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.4.0",
     "css-loader": "^1.0.1",
     "gulp-vueify2": "0.0.3",
-    "vue": "^2.6.0",
+    "vue": "^2.6.4",
     "vue-loader": "^15.6.2",
-    "vue-slider-component": "^2.8.6",
+    "vue-slider-component": "^2.8.7",
     "vue-switches": "^2.0.1",
-    "vue-template-compiler": "^2.6.0",
-    "webpack": "^4.29.1",
-    "webpack-cli": "^3.2.1"
+    "vue-template-compiler": "^2.6.4",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -261,74 +261,68 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
-// CONCATENATED MODULE: ./node_modules/dayjs/src/constant.js
-const SECONDS_A_MINUTE = 60
-const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60
-const SECONDS_A_DAY = SECONDS_A_HOUR * 24
-const SECONDS_A_WEEK = SECONDS_A_DAY * 7
+// CONCATENATED MODULE: ./node_modules/dayjs/esm/constant.js
+var SECONDS_A_MINUTE = 60;
+var SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;
+var SECONDS_A_DAY = SECONDS_A_HOUR * 24;
+var SECONDS_A_WEEK = SECONDS_A_DAY * 7;
+var MILLISECONDS_A_SECOND = 1e3;
+var MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND;
+var MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND;
+var MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND;
+var MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND; // English locales
 
-const MILLISECONDS_A_SECOND = 1e3
-const MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND
-const MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND
-const MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND
-const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND
+var MS = 'millisecond';
+var S = 'second';
+var MIN = 'minute';
+var H = 'hour';
+var D = 'day';
+var W = 'week';
+var M = 'month';
+var Q = 'quarter';
+var Y = 'year';
+var DATE = 'date';
+var FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ';
+var INVALID_DATE_STRING = 'Invalid Date'; // regex
 
-// English locales
-const MS = 'millisecond'
-const S = 'second'
-const MIN = 'minute'
-const H = 'hour'
-const D = 'day'
-const W = 'week'
-const M = 'month'
-const Q = 'quarter'
-const Y = 'year'
-const DATE = 'date'
-
-const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ'
-
-const INVALID_DATE_STRING = 'Invalid Date'
-
-// regex
-const REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/
-const REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g
-
-const en = {
+var REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
+var REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
+var en = {
   name: 'en',
   weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
   months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
-}
+};
+// CONCATENATED MODULE: ./node_modules/dayjs/esm/utils.js
 
-// CONCATENATED MODULE: ./node_modules/dayjs/src/utils.js
 
+var padStart = function padStart(string, length, pad) {
+  var s = String(string);
+  if (!s || s.length >= length) return string;
+  return "" + Array(length + 1 - s.length).join(pad) + string;
+};
 
-const padStart = (string, length, pad) => {
-  const s = String(string)
-  if (!s || s.length >= length) return string
-  return `${Array((length + 1) - s.length).join(pad)}${string}`
-}
+var padZoneStr = function padZoneStr(negMinuts) {
+  var minutes = Math.abs(negMinuts);
+  var hourOffset = Math.floor(minutes / 60);
+  var minuteOffset = minutes % 60;
+  return "" + (negMinuts <= 0 ? '+' : '-') + padStart(hourOffset, 2, '0') + ":" + padStart(minuteOffset, 2, '0');
+};
 
-const padZoneStr = (negMinuts) => {
-  const minutes = Math.abs(negMinuts)
-  const hourOffset = Math.floor(minutes / 60)
-  const minuteOffset = minutes % 60
-  return `${negMinuts <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
-}
-
-const monthDiff = (a, b) => {
+var monthDiff = function monthDiff(a, b) {
   // function from moment.js in order to keep the same result
-  const wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month())
-  const anchor = a.clone().add(wholeMonthDiff, 'months')
-  const c = b - anchor < 0
-  const anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months')
-  return Number(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) :
-    (anchor2 - anchor)))) || 0)
-}
+  var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month());
+  var anchor = a.clone().add(wholeMonthDiff, 'months');
+  var c = b - anchor < 0;
+  var anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months');
+  return Number(-(wholeMonthDiff + (b - anchor) / (c ? anchor - anchor2 : anchor2 - anchor)) || 0);
+};
 
-const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
+var absFloor = function absFloor(n) {
+  return n < 0 ? Math.ceil(n) || 0 : Math.floor(n);
+};
 
-const prettyUnit = (u) => {
-  const special = {
+var utils_prettyUnit = function prettyUnit(u) {
+  var special = {
     M: M,
     y: Y,
     w: W,
@@ -337,296 +331,326 @@ const prettyUnit = (u) => {
     m: MIN,
     s: S,
     ms: MS
-  }
-  return special[u] || String(u || '').toLowerCase().replace(/s$/, '')
-}
+  };
+  return special[u] || String(u || '').toLowerCase().replace(/s$/, '');
+};
 
-const isUndefined = s => s === undefined
+var isUndefined = function isUndefined(s) {
+  return s === undefined;
+};
 
 /* harmony default export */ var utils = ({
-  padStart,
-  padZoneStr,
-  monthDiff,
-  absFloor,
-  prettyUnit,
-  isUndefined
+  padStart: padStart,
+  padZoneStr: padZoneStr,
+  monthDiff: monthDiff,
+  absFloor: absFloor,
+  prettyUnit: utils_prettyUnit,
+  isUndefined: isUndefined
 });
-
-// CONCATENATED MODULE: ./node_modules/dayjs/src/index.js
-
+// CONCATENATED MODULE: ./node_modules/dayjs/esm/index.js
 
 
-let L = 'en' // global locale
-const Ls = {} // global loaded locale
-Ls[L] = en
+var L = 'en'; // global locale
 
-const isDayjs = d => d instanceof src_Dayjs // eslint-disable-line no-use-before-define
+var Ls = {}; // global loaded locale
 
-const parseLocale = (preset, object, isLocal) => {
-  let l
-  if (!preset) return null
+Ls[L] = en;
+
+var isDayjs = function isDayjs(d) {
+  return d instanceof esm_Dayjs;
+}; // eslint-disable-line no-use-before-define
+
+
+var parseLocale = function parseLocale(preset, object, isLocal) {
+  var l;
+  if (!preset) return null;
+
   if (typeof preset === 'string') {
     if (Ls[preset]) {
-      l = preset
+      l = preset;
     }
+
     if (object) {
-      Ls[preset] = object
-      l = preset
+      Ls[preset] = object;
+      l = preset;
     }
   } else {
-    const { name } = preset
-    Ls[name] = preset
-    l = name
+    var name = preset.name;
+    Ls[name] = preset;
+    l = name;
   }
-  if (!isLocal) L = l
-  return l
-}
 
-const dayjs = (date, c) => {
+  if (!isLocal) L = l;
+  return l;
+};
+
+var dayjs = function dayjs(date, c) {
   if (isDayjs(date)) {
-    return date.clone()
-  }
-  // eslint-disable-next-line no-nested-ternary
-  const cfg = c ? (typeof c === 'string' ? { format: c } : c) : {}
-  cfg.date = date
-  return new src_Dayjs(cfg) // eslint-disable-line no-use-before-define
-}
+    return date.clone();
+  } // eslint-disable-next-line no-nested-ternary
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
 
-const Utils = utils // for plugin use
-Utils.parseLocale = parseLocale
-Utils.isDayjs = isDayjs
-Utils.wrapper = wrapper
+  var cfg = c ? typeof c === 'string' ? {
+    format: c
+  } : c : {};
+  cfg.date = date;
+  return new esm_Dayjs(cfg); // eslint-disable-line no-use-before-define
+};
 
-const parseDate = (date) => {
-  let reg
-  if (date === null) return new Date(NaN) // Treat null as an invalid date
-  if (Utils.isUndefined(date)) return new Date()
-  if (date instanceof Date) return date
-  // eslint-disable-next-line no-cond-assign
-  if ((typeof date === 'string')
-    && (/.*[^Z]$/i.test(date)) // looking for a better way
-    && (reg = date.match(REGEX_PARSE))) {
+var wrapper = function wrapper(date, instance) {
+  return dayjs(date, {
+    locale: instance.$L
+  });
+};
+
+var Utils = utils; // for plugin use
+
+Utils.parseLocale = parseLocale;
+Utils.isDayjs = isDayjs;
+Utils.wrapper = wrapper;
+
+var esm_parseDate = function parseDate(date) {
+  var reg;
+  if (date === null) return new Date(NaN); // Treat null as an invalid date
+
+  if (Utils.isUndefined(date)) return new Date();
+  if (date instanceof Date) return date; // eslint-disable-next-line no-cond-assign
+
+  if (typeof date === 'string' && /.*[^Z]$/i.test(date) // looking for a better way
+  && (reg = date.match(REGEX_PARSE))) {
     // 2018-08-08 or 20180808
-    return new Date(
-      reg[1], reg[2] - 1, reg[3] || 1,
-      reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0
-    )
-  }
-  return new Date(date) // timestamp
-}
-
-class src_Dayjs {
-  constructor(cfg) {
-    this.parse(cfg) // for plugin
+    return new Date(reg[1], reg[2] - 1, reg[3] || 1, reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0);
   }
 
-  parse(cfg) {
-    this.$d = parseDate(cfg.date)
-    this.init(cfg)
+  return new Date(date); // timestamp
+};
+
+var esm_Dayjs =
+/*#__PURE__*/
+function () {
+  function Dayjs(cfg) {
+    this.parse(cfg); // for plugin
   }
 
-  init(cfg) {
-    const { $d } = this
-    this.$y = $d.getFullYear()
-    this.$M = $d.getMonth()
-    this.$D = $d.getDate()
-    this.$W = $d.getDay()
-    this.$H = $d.getHours()
-    this.$m = $d.getMinutes()
-    this.$s = $d.getSeconds()
-    this.$ms = $d.getMilliseconds()
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
-  }
+  var _proto = Dayjs.prototype;
 
-  // eslint-disable-next-line class-methods-use-this
-  $utils() {
-    return Utils
-  }
+  _proto.parse = function parse(cfg) {
+    this.$d = esm_parseDate(cfg.date);
+    this.init(cfg);
+  };
 
-  isValid() {
-    return !(this.$d.toString() === INVALID_DATE_STRING)
-  }
+  _proto.init = function init(cfg) {
+    var $d = this.$d;
+    this.$y = $d.getFullYear();
+    this.$M = $d.getMonth();
+    this.$D = $d.getDate();
+    this.$W = $d.getDay();
+    this.$H = $d.getHours();
+    this.$m = $d.getMinutes();
+    this.$s = $d.getSeconds();
+    this.$ms = $d.getMilliseconds();
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L;
+  }; // eslint-disable-next-line class-methods-use-this
 
-  isSame(that, units) {
-    const other = dayjs(that)
-    return this.startOf(units) <= other && other <= this.endOf(units)
-  }
 
-  isAfter(that, units) {
-    return dayjs(that) < this.startOf(units)
-  }
+  _proto.$utils = function $utils() {
+    return Utils;
+  };
 
-  isBefore(that, units) {
-    return this.endOf(units) < dayjs(that)
-  }
+  _proto.isValid = function isValid() {
+    return !(this.$d.toString() === INVALID_DATE_STRING);
+  };
 
-  year() {
-    return this.$y
-  }
+  _proto.isSame = function isSame(that, units) {
+    var other = dayjs(that);
+    return this.startOf(units) <= other && other <= this.endOf(units);
+  };
 
-  month() {
-    return this.$M
-  }
+  _proto.isAfter = function isAfter(that, units) {
+    return dayjs(that) < this.startOf(units);
+  };
 
-  day() {
-    return this.$W
-  }
+  _proto.isBefore = function isBefore(that, units) {
+    return this.endOf(units) < dayjs(that);
+  };
 
-  date() {
-    return this.$D
-  }
+  _proto.year = function year() {
+    return this.$y;
+  };
 
-  hour() {
-    return this.$H
-  }
+  _proto.month = function month() {
+    return this.$M;
+  };
 
-  minute() {
-    return this.$m
-  }
+  _proto.day = function day() {
+    return this.$W;
+  };
 
-  second() {
-    return this.$s
-  }
+  _proto.date = function date() {
+    return this.$D;
+  };
 
-  millisecond() {
-    return this.$ms
-  }
+  _proto.hour = function hour() {
+    return this.$H;
+  };
 
-  unix() {
-    return Math.floor(this.valueOf() / 1000)
-  }
+  _proto.minute = function minute() {
+    return this.$m;
+  };
 
-  valueOf() {
+  _proto.second = function second() {
+    return this.$s;
+  };
+
+  _proto.millisecond = function millisecond() {
+    return this.$ms;
+  };
+
+  _proto.unix = function unix() {
+    return Math.floor(this.valueOf() / 1000);
+  };
+
+  _proto.valueOf = function valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    return this.$d.getTime()
-  }
+    return this.$d.getTime();
+  };
 
-  startOf(units, startOf) { // startOf -> endOf
-    const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
-    const unit = Utils.prettyUnit(units)
-    const instanceFactory = (d, m) => {
-      const ins = wrapper(new Date(this.$y, m, d), this)
-      return isStartOf ? ins : ins.endOf(D)
-    }
-    const instanceFactorySet = (method, slice) => {
-      const argumentStart = [0, 0, 0, 0]
-      const argumentEnd = [23, 59, 59, 999]
-      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate(),
-        (isStartOf ? argumentStart : argumentEnd).slice(slice)
-      ), this)
-    }
+  _proto.startOf = function startOf(units, _startOf) {
+    var _this = this;
+
+    // startOf -> endOf
+    var isStartOf = !Utils.isUndefined(_startOf) ? _startOf : true;
+    var unit = Utils.prettyUnit(units);
+
+    var instanceFactory = function instanceFactory(d, m) {
+      var ins = wrapper(new Date(_this.$y, m, d), _this);
+      return isStartOf ? ins : ins.endOf(D);
+    };
+
+    var instanceFactorySet = function instanceFactorySet(method, slice) {
+      var argumentStart = [0, 0, 0, 0];
+      var argumentEnd = [23, 59, 59, 999];
+      return wrapper(_this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      _this.toDate(), (isStartOf ? argumentStart : argumentEnd).slice(slice)), _this);
+    };
 
     switch (unit) {
       case Y:
-        return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11)
+        return isStartOf ? instanceFactory(1, 0) : instanceFactory(31, 11);
+
       case M:
-        return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1)
+        return isStartOf ? instanceFactory(1, this.$M) : instanceFactory(0, this.$M + 1);
+
       case W:
-        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M)
+        {
+          var weekStart = this.$locale().weekStart || 0;
+          return isStartOf ? instanceFactory(this.$D - (this.$W - weekStart), this.$M) : instanceFactory(this.$D + (6 - (this.$W - weekStart)), this.$M);
+        }
+
       case D:
       case DATE:
-        return instanceFactorySet('setHours', 0)
+        return instanceFactorySet('setHours', 0);
+
       case H:
-        return instanceFactorySet('setMinutes', 1)
+        return instanceFactorySet('setMinutes', 1);
+
       case MIN:
-        return instanceFactorySet('setSeconds', 2)
+        return instanceFactorySet('setSeconds', 2);
+
       case S:
-        return instanceFactorySet('setMilliseconds', 3)
+        return instanceFactorySet('setMilliseconds', 3);
+
       default:
-        return this.clone()
+        return this.clone();
     }
-  }
+  };
 
-  endOf(arg) {
-    return this.startOf(arg, false)
-  }
+  _proto.endOf = function endOf(arg) {
+    return this.startOf(arg, false);
+  };
 
-  $set(units, int) { // private set
-    const unit = Utils.prettyUnit(units)
-    const name = {
-      [D]: 'setDate',
-      [DATE]: 'setDate',
-      [M]: 'setMonth',
-      [Y]: 'setFullYear',
-      [H]: 'setHours',
-      [MIN]: 'setMinutes',
-      [S]: 'setSeconds',
-      [MS]: 'setMilliseconds'
-    }[unit]
-    const arg = unit === D ? this.$D + (int - this.$W) : int
+  _proto.$set = function $set(units, int) {
+    var _C$D$C$DATE$C$M$C$Y$C;
 
-    if (this.$d[name]) this.$d[name](arg)
+    // private set
+    var unit = Utils.prettyUnit(units);
+    var name = (_C$D$C$DATE$C$M$C$Y$C = {}, _C$D$C$DATE$C$M$C$Y$C[D] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[DATE] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[M] = 'setMonth', _C$D$C$DATE$C$M$C$Y$C[Y] = 'setFullYear', _C$D$C$DATE$C$M$C$Y$C[H] = 'setHours', _C$D$C$DATE$C$M$C$Y$C[MIN] = 'setMinutes', _C$D$C$DATE$C$M$C$Y$C[S] = 'setSeconds', _C$D$C$DATE$C$M$C$Y$C[MS] = 'setMilliseconds', _C$D$C$DATE$C$M$C$Y$C)[unit];
+    var arg = unit === D ? this.$D + (int - this.$W) : int;
+    if (this.$d[name]) this.$d[name](arg);
+    this.init();
+    return this;
+  };
 
-    this.init()
-    return this
-  }
+  _proto.set = function set(string, int) {
+    return this.clone().$set(string, int);
+  };
 
-  set(string, int) {
-    return this.clone().$set(string, int)
-  }
+  _proto.add = function add(number, units) {
+    var _this2 = this,
+        _C$MIN$C$H$C$S$unit;
 
-  add(number, units) {
-    number = Number(number) // eslint-disable-line no-param-reassign
-    const unit = Utils.prettyUnit(units)
-    const instanceFactory = (u, n) => {
-      const date = this.set(DATE, 1).set(u, n + number)
-      return date.set(DATE, Math.min(this.$D, date.daysInMonth()))
-    }
-    const instanceFactorySet = (n) => {
-      const date = new Date(this.$d)
-      date.setDate(date.getDate() + (n * number))
-      return wrapper(date, this)
-    }
+    number = Number(number); // eslint-disable-line no-param-reassign
+
+    var unit = Utils.prettyUnit(units);
+
+    var instanceFactory = function instanceFactory(u, n) {
+      var date = _this2.set(DATE, 1).set(u, n + number);
+
+      return date.set(DATE, Math.min(_this2.$D, date.daysInMonth()));
+    };
+
+    var instanceFactorySet = function instanceFactorySet(n) {
+      var date = new Date(_this2.$d);
+      date.setDate(date.getDate() + n * number);
+      return wrapper(date, _this2);
+    };
+
     if (unit === M) {
-      return instanceFactory(M, this.$M)
+      return instanceFactory(M, this.$M);
     }
+
     if (unit === Y) {
-      return instanceFactory(Y, this.$y)
+      return instanceFactory(Y, this.$y);
     }
+
     if (unit === D) {
-      return instanceFactorySet(1)
+      return instanceFactorySet(1);
     }
+
     if (unit === W) {
-      return instanceFactorySet(7)
-    }
-    const step = {
-      [MIN]: MILLISECONDS_A_MINUTE,
-      [H]: MILLISECONDS_A_HOUR,
-      [S]: MILLISECONDS_A_SECOND
-    }[unit] || 1 // ms
-
-    const nextTimeStamp = this.valueOf() + (number * step)
-    return wrapper(nextTimeStamp, this)
-  }
-
-  subtract(number, string) {
-    return this.add(number * -1, string)
-  }
-
-  format(formatStr) {
-    if (!this.isValid()) return INVALID_DATE_STRING
-
-    const str = formatStr || FORMAT_DEFAULT
-    const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    const locale = this.$locale()
-    const {
-      weekdays, months
-    } = locale
-    const getShort = (arr, index, full, length) => (
-      (arr && arr[index]) || full[index].substr(0, length)
-    )
-    const get$H = (match) => {
-      if (this.$H === 0) return 12
-      return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
+      return instanceFactorySet(7);
     }
 
-    const matches = {
+    var step = (_C$MIN$C$H$C$S$unit = {}, _C$MIN$C$H$C$S$unit[MIN] = MILLISECONDS_A_MINUTE, _C$MIN$C$H$C$S$unit[H] = MILLISECONDS_A_HOUR, _C$MIN$C$H$C$S$unit[S] = MILLISECONDS_A_SECOND, _C$MIN$C$H$C$S$unit)[unit] || 1; // ms
+
+    var nextTimeStamp = this.valueOf() + number * step;
+    return wrapper(nextTimeStamp, this);
+  };
+
+  _proto.subtract = function subtract(number, string) {
+    return this.add(number * -1, string);
+  };
+
+  _proto.format = function format(formatStr) {
+    var _this3 = this;
+
+    if (!this.isValid()) return INVALID_DATE_STRING;
+    var str = formatStr || FORMAT_DEFAULT;
+    var zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset());
+    var locale = this.$locale();
+    var weekdays = locale.weekdays,
+        months = locale.months;
+
+    var getShort = function getShort(arr, index, full, length) {
+      return arr && arr[index] || full[index].substr(0, length);
+    };
+
+    var get$H = function get$H(match) {
+      if (_this3.$H === 0) return 12;
+      return Utils.padStart(_this3.$H < 13 ? _this3.$H : _this3.$H - 12, match === 'hh' ? 2 : 1, '0');
+    };
+
+    var matches = {
       YY: String(this.$y).slice(-2),
       YYYY: String(this.$y),
       M: String(this.$M + 1),
@@ -651,87 +675,71 @@ class src_Dayjs {
       ss: Utils.padStart(this.$s, 2, '0'),
       SSS: Utils.padStart(this.$ms, 3, '0'),
       Z: zoneStr
-    }
+    };
+    return str.replace(REGEX_FORMAT, function (match) {
+      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '');
+      return matches[match] || zoneStr.replace(':', ''); // 'ZZ'
+    });
+  };
 
-    return str.replace(REGEX_FORMAT, (match) => {
-      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
-      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
-    })
-  }
-
-  utcOffset() {
+  _proto.utcOffset = function utcOffset() {
     // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
     // https://github.com/moment/moment/pull/1871
-    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
-  }
+    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15;
+  };
 
-  diff(input, units, float) {
-    const unit = Utils.prettyUnit(units)
-    const that = dayjs(input)
-    const zoneDelta = (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE
-    const diff = this - that
-    let result = Utils.monthDiff(this, that)
+  _proto.diff = function diff(input, units, float) {
+    var _C$Y$C$M$C$Q$C$W$C$D$;
 
-    result = {
-      [Y]: result / 12,
-      [M]: result,
-      [Q]: result / 3,
-      [W]: (diff - zoneDelta) / MILLISECONDS_A_WEEK,
-      [D]: (diff - zoneDelta) / MILLISECONDS_A_DAY,
-      [H]: diff / MILLISECONDS_A_HOUR,
-      [MIN]: diff / MILLISECONDS_A_MINUTE,
-      [S]: diff / MILLISECONDS_A_SECOND
-    }[unit] || diff // milliseconds
+    var unit = Utils.prettyUnit(units);
+    var that = dayjs(input);
+    var zoneDelta = (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE;
+    var diff = this - that;
+    var result = Utils.monthDiff(this, that);
+    result = (_C$Y$C$M$C$Q$C$W$C$D$ = {}, _C$Y$C$M$C$Q$C$W$C$D$[Y] = result / 12, _C$Y$C$M$C$Q$C$W$C$D$[M] = result, _C$Y$C$M$C$Q$C$W$C$D$[Q] = result / 3, _C$Y$C$M$C$Q$C$W$C$D$[W] = (diff - zoneDelta) / MILLISECONDS_A_WEEK, _C$Y$C$M$C$Q$C$W$C$D$[D] = (diff - zoneDelta) / MILLISECONDS_A_DAY, _C$Y$C$M$C$Q$C$W$C$D$[H] = diff / MILLISECONDS_A_HOUR, _C$Y$C$M$C$Q$C$W$C$D$[MIN] = diff / MILLISECONDS_A_MINUTE, _C$Y$C$M$C$Q$C$W$C$D$[S] = diff / MILLISECONDS_A_SECOND, _C$Y$C$M$C$Q$C$W$C$D$)[unit] || diff; // milliseconds
 
-    return float ? result : Utils.absFloor(result)
-  }
+    return float ? result : Utils.absFloor(result);
+  };
 
-  daysInMonth() {
-    return this.endOf(M).$D
-  }
+  _proto.daysInMonth = function daysInMonth() {
+    return this.endOf(M).$D;
+  };
 
-  $locale() { // get locale object
-    return Ls[this.$L]
-  }
+  _proto.$locale = function $locale() {
+    // get locale object
+    return Ls[this.$L];
+  };
 
-  locale(preset, object) {
-    const that = this.clone()
-    that.$L = parseLocale(preset, object, true)
-    return that
-  }
+  _proto.locale = function locale(preset, object) {
+    var that = this.clone();
+    that.$L = parseLocale(preset, object, true);
+    return that;
+  };
 
-  clone() {
-    return wrapper(this.toDate(), this)
-  }
+  _proto.clone = function clone() {
+    return wrapper(this.toDate(), this);
+  };
 
-  toDate() {
-    return new Date(this.$d)
-  }
+  _proto.toDate = function toDate() {
+    return new Date(this.$d);
+  };
 
-  toArray() {
-    return [
-      this.$y,
-      this.$M,
-      this.$D,
-      this.$H,
-      this.$m,
-      this.$s,
-      this.$ms
-    ]
-  }
+  _proto.toArray = function toArray() {
+    return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];
+  };
 
-  toJSON() {
-    return this.toISOString()
-  }
+  _proto.toJSON = function toJSON() {
+    return this.toISOString();
+  };
 
-  toISOString() {
+  _proto.toISOString = function toISOString() {
     // ie 8 return
     // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
     // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
-    return this.$d.toISOString()
-  }
+    return this.$d.toISOString();
+  };
 
-  toObject() {
+  _proto.toObject = function toObject() {
     return {
       years: this.$y,
       months: this.$M,
@@ -740,33 +748,32 @@ class src_Dayjs {
       minutes: this.$m,
       seconds: this.$s,
       milliseconds: this.$ms
-    }
-  }
+    };
+  };
 
-  toString() {
-    return this.$d.toUTCString()
-  }
-}
+  _proto.toString = function toString() {
+    return this.$d.toUTCString();
+  };
 
-dayjs.prototype = src_Dayjs.prototype
+  return Dayjs;
+}();
 
-dayjs.extend = (plugin, option) => {
-  plugin(option, src_Dayjs, dayjs)
-  return dayjs
-}
+dayjs.prototype = esm_Dayjs.prototype;
 
-dayjs.locale = parseLocale
+dayjs.extend = function (plugin, option) {
+  plugin(option, esm_Dayjs, dayjs);
+  return dayjs;
+};
 
-dayjs.isDayjs = isDayjs
+dayjs.locale = parseLocale;
+dayjs.isDayjs = isDayjs;
 
-dayjs.unix = timestamp => (
-  dayjs(timestamp * 1e3)
-)
+dayjs.unix = function (timestamp) {
+  return dayjs(timestamp * 1e3);
+};
 
-dayjs.en = Ls[L]
-
-/* harmony default export */ var src = (dayjs);
-
+dayjs.en = Ls[L];
+/* harmony default export */ var esm = (dayjs);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
 var MainViewvue_type_template_id_0bc4212e_render = function() {
   var _vm = this
@@ -2788,7 +2795,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentMonth = src(this.root.state.times.firstDate);
+      let currentMonth = esm(this.root.state.times.firstDate);
       let previousMonth = currentMonth.clone();
       const lastTime = this.root.state.times.lastTime;
       let monthsCount = 1;
@@ -2845,7 +2852,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = src(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
+          const date = esm(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
           let textWidth = 0;
           if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
@@ -2883,7 +2890,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
             dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = src(this.root.state.times.steps[dayIndex].date);
+        const date = esm(this.root.state.times.steps[dayIndex].date);
         let textWidth = 0;
         if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
@@ -2912,13 +2919,13 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       let months = [];
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentDate = src(this.root.state.times.firstDate);
+      let currentDate = esm(this.root.state.times.firstDate);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
-        let finalDate = src(currentDate).add(1, "month").startOf("month");
+        let finalDate = esm(currentDate).add(1, "month").startOf("month");
         if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          finalDate = src(this.root.state.times.lastDate);
+          finalDate = esm(this.root.state.times.lastDate);
         }
         // we must find first and last step to get the offsets / widths
         for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
@@ -2956,7 +2963,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         });
         currentDate = currentDate.add(1, "month").startOf("month");
         if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          currentDate = src(this.root.state.times.lastDate);
+          currentDate = esm(this.root.state.times.lastDate);
         }
       }
       return this.months = months;
@@ -4977,7 +4984,7 @@ const fontFamily = "Arial, sans-serif";
     "float": "right",
   },
   "chart-days-highlight-rect": {
-    "fill": "#f3f5f780"
+    "fill": "#f3f5f7a0"
   },
   "svg-chart": {
     "overflow": "hidden"
@@ -5145,17 +5152,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           long (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
           medium (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("HH:mm");
           },
           short (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("HH");
           }
@@ -5168,17 +5175,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           long (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("DD dddd");
           },
           medium (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("DD ddd");
           },
           short (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("DD");
           }
@@ -5191,17 +5198,17 @@ function getOptions (userOptions) {
         maxWidths: {},
         format: {
           short (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("MM");
           },
           medium (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("MMM 'YY");
           },
           long (date) {
-            return src(date)
+            return esm(date)
               .locale(userOptions.locale.code)
               .format("MMMM YYYY");
           }
@@ -5435,11 +5442,11 @@ const GanttElastic = {
       }
       if (itsUpdate === '' || itsUpdate === 'tasks') {
         this.state.tasks = this.tasks.map(task => {
-          this.$set(task, 'start', src(task.start).format("YYYY-MM-DD HH:mm:ss"));
+          this.$set(task, 'start', esm(task.start).format("YYYY-MM-DD HH:mm:ss"));
           return task;
         });
       }
-      src.locale(this.options.locale, null, true);
+      esm.locale(this.options.locale, null, true);
       if (typeof this.state.taskList === "undefined") {
         this.$set(this.state, 'taskList', {});
       }
@@ -5759,8 +5766,8 @@ const GanttElastic = {
       this.state.scroll.chart.top = top;
       this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.scroll.chart.dateTime.left = src(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = src(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
+      this.state.scroll.chart.dateTime.left = esm(this.state.scroll.chart.time);
+      this.state.scroll.chart.dateTime.right = esm(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
 
@@ -5916,12 +5923,12 @@ const GanttElastic = {
      * Initialize time variables
      */
     initTimes () {
-      this.state.times.firstDate = src(this.state.times.firstTaskDate)
+      this.state.times.firstDate = esm(this.state.times.firstTaskDate)
         .locale(this.locale)
         .startOf("day")
         .subtract(this.state.scope.before, "days")
         .startOf("day");
-      this.state.times.lastDate = src(this.state.times.lastTaskDate)
+      this.state.times.lastDate = esm(this.state.times.lastTaskDate)
         .locale(this.locale)
         .endOf("day")
         .add(this.state.scope.after, "days")
@@ -5938,8 +5945,8 @@ const GanttElastic = {
      */
     calculateSteps () {
       const steps = [];
-      const lastMs = src(this.state.times.lastDate).valueOf();
-      const currentDate = src(this.state.times.firstDate);
+      const lastMs = esm(this.state.times.lastDate).valueOf();
+      const currentDate = esm(this.state.times.firstDate);
       steps.push({
         date: currentDate,
         offset: {
@@ -5947,7 +5954,7 @@ const GanttElastic = {
           px: 0
         }
       });
-      for (let currentDate = src(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+      for (let currentDate = esm(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
         currentDate.valueOf() <= lastMs;
         currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
         const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
@@ -5990,7 +5997,7 @@ const GanttElastic = {
       const state = this.state;
       const monthStyle = this.style("calendar-row-text--hour");
       state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
-      let currentDate = src("2018-01-01T00:00:00"); // any date will be good for hours
+      let currentDate = esm("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
       state.calendar.hour.widths = [];
       Object.keys(state.calendar.hour.format).forEach(formatName => {
@@ -6021,7 +6028,7 @@ const GanttElastic = {
       const state = this.state;
       const monthStyle = this.style("calendar-row-text--day");
       state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
-      let currentDate = src(state.times.steps[0].date);
+      let currentDate = esm(state.times.steps[0].date);
       let maxWidths = {};
       state.calendar.day.widths = [];
       Object.keys(state.calendar.day.format).forEach(formatName => {
@@ -6057,7 +6064,7 @@ const GanttElastic = {
       Object.keys(state.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = src(this.state.times.firstDate);
+      let currentDate = esm(this.state.times.firstDate);
       const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
@@ -6086,7 +6093,7 @@ const GanttElastic = {
       let firstTaskDate, lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
-        task.startDate = src(task.start);
+        task.startDate = esm(task.start);
         task.startTime = task.startDate.valueOf();
         task.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
@@ -6095,19 +6102,19 @@ const GanttElastic = {
         }
         if (task.startTime + task.durationMs > lastTaskTime) {
           lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = src(task.startTime + task.durationMs);
+          lastTaskDate = esm(task.startTime + task.durationMs);
         }
       }
       this.state.times.firstTaskTime = firstTaskTime;
       this.state.times.lastTaskTime = lastTaskTime;
       this.state.times.firstTaskDate = firstTaskDate;
       this.state.times.lastTaskDate = lastTaskDate;
-      this.state.times.firstDate = src(firstTaskDate)
+      this.state.times.firstDate = esm(firstTaskDate)
         .locale(this.locale)
         .startOf("day")
         .subtract(this.state.scope.before, "days")
         .startOf("day");
-      this.state.times.lastDate = src(lastTaskDate)
+      this.state.times.lastDate = esm(lastTaskDate)
         .locale(this.locale)
         .endOf("day")
         .add(this.state.scope.after, "days")
