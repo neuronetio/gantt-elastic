@@ -109,11 +109,18 @@ function getOptions (userOptions) {
         xPadding: 10,
         display: true,
       },
+      expander: {
+        type: 'chart',
+        display: false,
+        displayIfTaskListHidden: true,
+        offset: 4,
+        size: 18,
+      }
     },
     taskList: {
       display: true,
-      displayAfterResize: true,
-      widthThreshold: 100,
+      resizeAfterThreshold: true,
+      widthThreshold: 75,
       columns: [{
         id: 0,
         label: "ID",
@@ -124,8 +131,10 @@ function getOptions (userOptions) {
       percent: 100,
       width: 0,
       finalWidth: 0,
+      widthFromPercentage: 0,
       minWidth: 18,
       expander: {
+        type: 'task-list',
         size: 16,
         columnWidth: 24,
         padding: 16,
@@ -446,7 +455,9 @@ const GanttElastic = {
         this.$set(this.state.taskList, 'columns', []);
       }
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        this.$set(column, 'finalWidth', (column.width / 100) * this.state.taskList.percent);
+        this.$set(column, 'thresholdPercent', 100);
+        this.$set(column, 'widthFromPercentage', 0);
+        this.$set(column, 'finalWidth', 0);
         if (typeof column.height === "undefined") {
           this.$set(column, 'height', 0);
         }
@@ -456,6 +467,7 @@ const GanttElastic = {
         this.$set(column, '_id', `${index}-${column.label}`);
         return column;
       });
+      this.globalOnResize();
       if (itsUpdate === '' || itsUpdate === 'tasks') {
         // initialize observer
         this.refreshTasks();
@@ -550,23 +562,20 @@ const GanttElastic = {
      */
     calculateTaskListColumnsDimensions () {
       let final = 0;
+      let percentage = 0;
       this.state.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.finalWidth = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
         } else {
-          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = (column.width / 100) * this.state.taskList.percent;
         }
+        percentage += column.widthFromPercentage;
+        column.finalWidth = column.thresholdPercent * column.widthFromPercentage / 100;
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
       });
+      this.state.taskList.widthFromPercentage = percentage;
       this.state.taskList.finalWidth = final;
-      if (typeof document !== 'undefined') {
-        if (final > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
-          this.state.taskList.displayAfterResize = false;
-        } else {
-          this.state.taskList.displayAfterResize = true;
-        }
-      }
       this.syncScrollTop();
     },
 
@@ -1136,11 +1145,25 @@ const GanttElastic = {
      * Global resize event (from window.addEventListener)
      */
     globalOnResize (ev) {
-      if (this.state.taskList.finalWidth > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
-        this.state.taskList.displayAfterResize = false;
-      } else {
-        this.state.taskList.displayAfterResize = true;
+      if (typeof this.$el === 'undefined' || !this.$el) {
+        return;
       }
+      this.state.clientWidth = this.$el.clientWidth;
+      if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
+        const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
+        let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
+        if (diffPercent < 0) {
+          diffPercent = 0;
+        }
+        this.state.taskList.columns.forEach(column => {
+          column.thresholdPercent = diffPercent;
+        });
+      } else {
+        this.state.taskList.columns.forEach(column => {
+          column.thresholdPercent = 100;
+        });
+      }
+      this.calculateTaskListColumnsDimensions();
     }
 
   },
@@ -1187,7 +1210,8 @@ const GanttElastic = {
     getTaskListColumns () {
       this.calculateTaskListColumnsDimensions();
       return this.state.taskList.columns;
-    }
+    },
+
   },
 
   /**
@@ -1211,6 +1235,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
+    this.state.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');

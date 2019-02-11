@@ -11,6 +11,17 @@
     class="gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper"
     :style="root.style('chart-row-bar-wrapper', root.style('chart-row-project-wrapper'), task.style['chart-row-bar-wrapper'])"
   >
+    <foreignObject
+      class="gantt-elastic__chart-expander gantt-elastic__chart-expander--project"
+      :style="root.style('chart-expander','chart-expander--project',task.style['chart-expander'])"
+      :x="task.x - root.state.chart.expander.offset - root.state.chart.expander.size"
+      :y="task.y + (root.state.row.height - root.state.chart.expander.size)/2 "
+      :width="root.state.chart.expander.size"
+      :height="root.state.chart.expander.size"
+      v-if="displayExpander"
+    >
+      <expander :tasks="[task]" :options="root.state.chart.expander"></expander>
+    </foreignObject>
     <svg
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-project"
       :style="root.style('chart-row-bar', 'chart-row-project', task.style['chart-row-bar'])"
@@ -50,10 +61,12 @@
 <script>
 import ChartText from "../Text.vue";
 import ProgressBar from "../ProgressBar.vue";
+import Expander from "../../Expander.vue";
 export default {
   components: {
     ChartText,
-    ProgressBar
+    ProgressBar,
+    Expander
   },
   inject: ["root"],
   props: ["task"],
@@ -61,15 +74,34 @@ export default {
     return {};
   },
   computed: {
+    /**
+     * Get clip path id
+     * @returns {string}
+     */
     clipPathId () {
       return "gantt-elastic__project-clip-path-" + this.task.id;
     },
+
+    /**
+     * Get view box
+     * @returns {string}
+     */
     getViewBox () {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
+
+    /**
+     * Get group transform
+     * @returns {string}
+     */
     getGroupTransform () {
       return `translate(${this.task.x} ${this.task.y})`;
     },
+
+    /**
+     * Get points
+     * @returns {string}
+     */
     getPoints () {
       const task = this.task;
       const bottom = task.height - task.height / 4;
@@ -88,8 +120,22 @@ export default {
                 Z
         `;
     },
+
+    /**
+     * Should we display expander?
+     * @returns {boolean}
+     */
+    displayExpander () {
+      const expander = this.root.state.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    }
   },
   methods: {
+    /**
+     * Emit event
+     * @param {string} eventName
+     * @param {Event} event
+     */
     emitEvent (eventName, event) {
       if (!this.root.state.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });

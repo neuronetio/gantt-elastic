@@ -14,7 +14,7 @@
       v-for="column in root.getTaskListColumns"
       :key="column._id"
     >
-      <task-list-expander v-if="column.expander" :tasks="collapsible"></task-list-expander>
+      <task-list-expander v-if="column.expander" :tasks="collapsible" :options="root.state.taskList.expander"></task-list-expander>
       <div
         class="gantt-elastic__task-list-header-label"
         :style="root.style('task-list-header-label',column.style['task-list-header-label'])"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import TaskListExpander from "./Expander.vue";
+import TaskListExpander from "../Expander.vue";
 export default {
 
   components: {

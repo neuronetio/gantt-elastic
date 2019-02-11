@@ -7,46 +7,43 @@
  */
 -->
 <template>
-  <div
-    class="gantt-elastic__task-list-column-expander-wrapper"
-    :style="root.style('task-list-column-expander-wrapper')"
-  >
+  <div :class="getClassPrefix()+'-wrapper'" :style="root.style(getClassPrefix(false)+'-wrapper')">
     <svg
-      class="gantt-elastic__task-list-column-expander-content"
-      :style="root.style('task-list-column-expander-content')"
-      :width="root.state.taskList.expander.size"
-      :height="root.state.taskList.expander.size"
+      :class="getClassPrefix()+'-content'"
+      :style="root.style(getClassPrefix(false)+'-content')"
+      :width="options.size"
+      :height="options.size"
       v-if="allChildren.length"
     >
       <rect
-        class="gantt-elastic__task-list-column-expander-border"
-        :style="root.style('task-list-column-expander-border',borderStyle)"
+        :class="getClassPrefix()+'-border'"
+        :style="root.style(getClassPrefix(false)+'-border',borderStyle)"
         :x="border"
         :y="border"
-        :width="root.state.taskList.expander.size-border*2"
-        :height="root.state.taskList.expander.size-border*2"
+        :width="options.size-border*2"
+        :height="options.size-border*2"
         rx="2"
         ry="2"
         @click="toggle"
       ></rect>
       <line
-        class="gantt-elastic__task-list-column-expander-line"
-        :style="root.style('task-list-column-expander-line')"
+        :class="getClassPrefix()+'-line'"
+        :style="root.style(getClassPrefix(false)+'-line')"
         v-if="allChildren.length"
         :x1="lineOffset"
-        :y1="root.state.taskList.expander.size/2"
-        :x2="root.state.taskList.expander.size-lineOffset"
-        :y2="root.state.taskList.expander.size/2"
+        :y1="options.size/2"
+        :x2="options.size-lineOffset"
+        :y2="options.size/2"
         @click="toggle"
       ></line>
       <line
-        class="gantt-elastic__task-list-column-expander-line"
-        :style="root.style('task-list-column-expander-line')"
+        :class="getClassPrefix()+'-line'"
+        :style="root.style(getClassPrefix(false)+'-line')"
         v-if="collapsed"
-        :x1="root.state.taskList.expander.size/2"
+        :x1="options.size/2"
         :y1="lineOffset"
-        :x2="root.state.taskList.expander.size/2"
-        :y2="root.state.taskList.expander.size-lineOffset"
+        :x2="options.size/2"
+        :y2="options.size-lineOffset"
         @click="toggle"
       ></line>
     </svg>
@@ -56,7 +53,7 @@
 <script>
 export default {
   inject: ["root"],
-  props: ["tasks"],
+  props: ["tasks", "options"],
   data () {
     const border = 0.5;
     return {
@@ -102,6 +99,14 @@ export default {
     }
   },
   methods: {
+    /**
+     * Get specific class prefix
+     * @returns {string}
+     */
+    getClassPrefix (full = true) {
+      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
+    },
+
     /**
      * Toggle expander
      */

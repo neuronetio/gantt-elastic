@@ -35,7 +35,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 :width="root.state.taskList.finalWidth"
                 :height="root.state.height"
-                v-show="root.state.taskList.display && root.state.taskList.displayAfterResize"
+                v-show="root.state.taskList.display"
               >
                 <defs v-html="defs"></defs>
                 <task-list></task-list>

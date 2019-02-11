@@ -826,11 +826,8 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value:
-                                    _vm.root.state.taskList.display &&
-                                    _vm.root.state.taskList.displayAfterResize,
-                                  expression:
-                                    "root.state.taskList.display && root.state.taskList.displayAfterResize"
+                                  value: _vm.root.state.taskList.display,
+                                  expression: "root.state.taskList.display"
                                 }
                               ],
                               ref: "svgTaskList",
@@ -955,11 +952,8 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value:
-            _vm.root.state.taskList.display &&
-            _vm.root.state.taskList.displayAfterResize,
-          expression:
-            "root.state.taskList.display && root.state.taskList.displayAfterResize"
+          value: _vm.root.state.taskList.display,
+          expression: "root.state.taskList.display"
         }
       ],
       ref: "taskListWrapper",
@@ -1044,7 +1038,12 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
         },
         [
           column.expander
-            ? _c("task-list-expander", { attrs: { tasks: _vm.collapsible } })
+            ? _c("task-list-expander", {
+                attrs: {
+                  tasks: _vm.collapsible,
+                  options: _vm.root.state.taskList.expander
+                }
+              })
             : _vm._e(),
           _vm._v(" "),
           _c(
@@ -1127,42 +1126,38 @@ TaskListHeadervue_type_template_id_aefdd7c8_render._withStripped = true
 
 // CONCATENATED MODULE: ./src/components/TaskList/TaskListHeader.vue?vue&type=template&id=aefdd7c8&
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&
-var Expandervue_type_template_id_5f156c33_render = function() {
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Expander.vue?vue&type=template&id=09a21177&
+var Expandervue_type_template_id_09a21177_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
     {
-      staticClass: "gantt-elastic__task-list-column-expander-wrapper",
-      style: _vm.root.style("task-list-column-expander-wrapper")
+      class: _vm.getClassPrefix() + "-wrapper",
+      style: _vm.root.style(_vm.getClassPrefix(false) + "-wrapper")
     },
     [
       _vm.allChildren.length
         ? _c(
             "svg",
             {
-              staticClass: "gantt-elastic__task-list-column-expander-content",
-              style: _vm.root.style("task-list-column-expander-content"),
-              attrs: {
-                width: _vm.root.state.taskList.expander.size,
-                height: _vm.root.state.taskList.expander.size
-              }
+              class: _vm.getClassPrefix() + "-content",
+              style: _vm.root.style(_vm.getClassPrefix(false) + "-content"),
+              attrs: { width: _vm.options.size, height: _vm.options.size }
             },
             [
               _c("rect", {
-                staticClass: "gantt-elastic__task-list-column-expander-border",
+                class: _vm.getClassPrefix() + "-border",
                 style: _vm.root.style(
-                  "task-list-column-expander-border",
+                  _vm.getClassPrefix(false) + "-border",
                   _vm.borderStyle
                 ),
                 attrs: {
                   x: _vm.border,
                   y: _vm.border,
-                  width: _vm.root.state.taskList.expander.size - _vm.border * 2,
-                  height:
-                    _vm.root.state.taskList.expander.size - _vm.border * 2,
+                  width: _vm.options.size - _vm.border * 2,
+                  height: _vm.options.size - _vm.border * 2,
                   rx: "2",
                   ry: "2"
                 },
@@ -1171,15 +1166,13 @@ var Expandervue_type_template_id_5f156c33_render = function() {
               _vm._v(" "),
               _vm.allChildren.length
                 ? _c("line", {
-                    staticClass:
-                      "gantt-elastic__task-list-column-expander-line",
-                    style: _vm.root.style("task-list-column-expander-line"),
+                    class: _vm.getClassPrefix() + "-line",
+                    style: _vm.root.style(_vm.getClassPrefix(false) + "-line"),
                     attrs: {
                       x1: _vm.lineOffset,
-                      y1: _vm.root.state.taskList.expander.size / 2,
-                      x2:
-                        _vm.root.state.taskList.expander.size - _vm.lineOffset,
-                      y2: _vm.root.state.taskList.expander.size / 2
+                      y1: _vm.options.size / 2,
+                      x2: _vm.options.size - _vm.lineOffset,
+                      y2: _vm.options.size / 2
                     },
                     on: { click: _vm.toggle }
                   })
@@ -1187,14 +1180,13 @@ var Expandervue_type_template_id_5f156c33_render = function() {
               _vm._v(" "),
               _vm.collapsed
                 ? _c("line", {
-                    staticClass:
-                      "gantt-elastic__task-list-column-expander-line",
-                    style: _vm.root.style("task-list-column-expander-line"),
+                    class: _vm.getClassPrefix() + "-line",
+                    style: _vm.root.style(_vm.getClassPrefix(false) + "-line"),
                     attrs: {
-                      x1: _vm.root.state.taskList.expander.size / 2,
+                      x1: _vm.options.size / 2,
                       y1: _vm.lineOffset,
-                      x2: _vm.root.state.taskList.expander.size / 2,
-                      y2: _vm.root.state.taskList.expander.size - _vm.lineOffset
+                      x2: _vm.options.size / 2,
+                      y2: _vm.options.size - _vm.lineOffset
                     },
                     on: { click: _vm.toggle }
                   })
@@ -1205,16 +1197,13 @@ var Expandervue_type_template_id_5f156c33_render = function() {
     ]
   )
 }
-var Expandervue_type_template_id_5f156c33_staticRenderFns = []
-Expandervue_type_template_id_5f156c33_render._withStripped = true
+var Expandervue_type_template_id_09a21177_staticRenderFns = []
+Expandervue_type_template_id_09a21177_render._withStripped = true
 
 
-// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue?vue&type=template&id=5f156c33&
+// CONCATENATED MODULE: ./src/components/Expander.vue?vue&type=template&id=09a21177&
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/Expander.vue?vue&type=script&lang=js&
-//
-//
-//
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Expander.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1270,7 +1259,7 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
 
 /* harmony default export */ var Expandervue_type_script_lang_js_ = ({
   inject: ["root"],
-  props: ["tasks"],
+  props: ["tasks", "options"],
   data () {
     const border = 0.5;
     return {
@@ -1317,6 +1306,14 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
   },
   methods: {
     /**
+     * Get specific class prefix
+     * @returns {string}
+     */
+    getClassPrefix (full = true) {
+      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
+    },
+
+    /**
      * Toggle expander
      */
     toggle () {
@@ -1334,8 +1331,8 @@ Expandervue_type_template_id_5f156c33_render._withStripped = true
   }
 });
 
-// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue?vue&type=script&lang=js&
- /* harmony default export */ var TaskList_Expandervue_type_script_lang_js_ = (Expandervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Expander.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Expandervue_type_script_lang_js_ = (Expandervue_type_script_lang_js_); 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -1431,7 +1428,7 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/components/TaskList/Expander.vue
+// CONCATENATED MODULE: ./src/components/Expander.vue
 
 
 
@@ -1440,9 +1437,9 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
-  TaskList_Expandervue_type_script_lang_js_,
-  Expandervue_type_template_id_5f156c33_render,
-  Expandervue_type_template_id_5f156c33_staticRenderFns,
+  components_Expandervue_type_script_lang_js_,
+  Expandervue_type_template_id_09a21177_render,
+  Expandervue_type_template_id_09a21177_staticRenderFns,
   false,
   null,
   null,
@@ -1452,7 +1449,7 @@ var component = normalizeComponent(
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "src/components/TaskList/Expander.vue"
+component.options.__file = "src/components/Expander.vue"
 /* harmony default export */ var Expander = (component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListHeader.vue?vue&type=script&lang=js&
 //
@@ -1652,7 +1649,10 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
           column.expander
             ? _c("task-list-expander", {
                 style: _vm.expanderStyle,
-                attrs: { tasks: [_vm.task] }
+                attrs: {
+                  tasks: [_vm.task],
+                  options: _vm.root.state.taskList.expander
+                }
               })
             : _vm._e()
         ],
@@ -1835,6 +1835,11 @@ if (false) { var ItemColumn_api; }
 ItemColumn_component.options.__file = "src/components/TaskList/ItemColumn.vue"
 /* harmony default export */ var ItemColumn = (ItemColumn_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskListItem.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3274,6 +3279,43 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
       )
     },
     [
+      _vm.displayExpander
+        ? _c(
+            "foreignObject",
+            {
+              staticClass:
+                "gantt-elastic__chart-expander gantt-elastic__chart-expander--task",
+              style: _vm.root.style(
+                "chart-expander",
+                "chart-expander--task",
+                _vm.task.style["chart-expander"]
+              ),
+              attrs: {
+                x:
+                  _vm.task.x -
+                  _vm.root.state.chart.expander.offset -
+                  _vm.root.state.chart.expander.size,
+                y:
+                  _vm.task.y +
+                  (_vm.root.state.row.height -
+                    _vm.root.state.chart.expander.size) /
+                    2,
+                width: _vm.root.state.chart.expander.size,
+                height: _vm.root.state.chart.expander.size
+              }
+            },
+            [
+              _c("expander", {
+                attrs: {
+                  tasks: [_vm.task],
+                  options: _vm.root.state.chart.expander
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "svg",
         {
@@ -3799,13 +3841,26 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ var Taskvue_type_script_lang_js_ = ({
   components: {
     ChartText: Text,
-    ProgressBar: ProgressBar
+    ProgressBar: ProgressBar,
+    Expander: Expander
   },
   inject: ["root"],
   props: ["task"],
@@ -3813,24 +3868,58 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
     return {};
   },
   computed: {
+
+    /**
+     * Get clip path id
+     * @returns {string}
+     */
     clipPathId () {
       return "gantt-elastic__task-clip-path-" + this.task.id;
     },
+
+    /**
+     * Get view box
+     * @returns {string}
+     */
     getViewBox () {
       const task = this.task;
       return `0 0 ${task.width} ${task.height}`;
     },
+
+    /**
+     * Get group transform
+     * @returns {string}
+     */
     getGroupTransform () {
       return `translate(${this.task.x} ${this.task.y})`;
     },
+
+    /**
+     * Get points
+     * @returns {string}
+     */
     getPoints () {
       const task = this.task;
       return `0,0 ${task.width},0 ${task.width},${task.height} 0,${
         task.height
         }`;
     },
+
+    /**
+     * Should we display expander?
+     * @returns {boolean}
+     */
+    displayExpander () {
+      const expander = this.root.state.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    }
   },
   methods: {
+    /**
+     * Emit event
+     * @param {string} eventName
+     * @param {Event} event
+     */
     emitEvent (eventName, event) {
       if (!this.root.state.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
@@ -3881,6 +3970,43 @@ var Milestonevue_type_template_id_3013006c_render = function() {
       )
     },
     [
+      _vm.displayExpander
+        ? _c(
+            "foreignObject",
+            {
+              staticClass:
+                "gantt-elastic__chart-expander gantt-elastic__chart-expander--milestone",
+              style: _vm.root.style(
+                "chart-expander",
+                "chart-expander--milestone",
+                _vm.task.style["chart-expander"]
+              ),
+              attrs: {
+                x:
+                  _vm.task.x -
+                  _vm.root.state.chart.expander.offset -
+                  _vm.root.state.chart.expander.size,
+                y:
+                  _vm.task.y +
+                  (_vm.root.state.row.height -
+                    _vm.root.state.chart.expander.size) /
+                    2,
+                width: _vm.root.state.chart.expander.size,
+                height: _vm.root.state.chart.expander.size
+              }
+            },
+            [
+              _c("expander", {
+                attrs: {
+                  tasks: [_vm.task],
+                  options: _vm.root.state.chart.expander
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "svg",
         {
@@ -4026,13 +4152,26 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
   components: {
     ChartText: Text,
-    ProgressBar: ProgressBar
+    ProgressBar: ProgressBar,
+    Expander: Expander
   },
   inject: ["root"],
   props: ["task"],
@@ -4040,15 +4179,34 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
     return {};
   },
   computed: {
+    /**
+     * Get clip path id
+     * @returns {string}
+     */
     clipPathId () {
       return "gantt-elastic__milestone-clip-path-" + this.task.id;
     },
+
+    /**
+     * Get view box
+     * @returns {string}
+     */
     getViewBox () {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
+
+    /**
+     * Get group transform
+     * @returns {string}
+     */
     getGroupTransform () {
       return `translate(${this.task.x} ${this.task.y})`;
     },
+
+    /**
+     * Get points
+     * @returns {string}
+     */
     getPoints () {
       const task = this.task;
       const fifty = task.height / 2;
@@ -4063,8 +4221,22 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
         ${task.width - offset},${task.height}
         ${offset},${task.height}`;
     },
+
+    /**
+     * Should we display expander?
+     * @returns {boolean}
+     */
+    displayExpander () {
+      const expander = this.root.state.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    }
   },
   methods: {
+    /**
+     * Emit event
+     * @param {string} eventName
+     * @param {Event} event
+     */
     emitEvent (eventName, event) {
       if (!this.root.state.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
@@ -4115,6 +4287,43 @@ var Projectvue_type_template_id_077bbd73_render = function() {
       )
     },
     [
+      _vm.displayExpander
+        ? _c(
+            "foreignObject",
+            {
+              staticClass:
+                "gantt-elastic__chart-expander gantt-elastic__chart-expander--project",
+              style: _vm.root.style(
+                "chart-expander",
+                "chart-expander--project",
+                _vm.task.style["chart-expander"]
+              ),
+              attrs: {
+                x:
+                  _vm.task.x -
+                  _vm.root.state.chart.expander.offset -
+                  _vm.root.state.chart.expander.size,
+                y:
+                  _vm.task.y +
+                  (_vm.root.state.row.height -
+                    _vm.root.state.chart.expander.size) /
+                    2,
+                width: _vm.root.state.chart.expander.size,
+                height: _vm.root.state.chart.expander.size
+              }
+            },
+            [
+              _c("expander", {
+                attrs: {
+                  tasks: [_vm.task],
+                  options: _vm.root.state.chart.expander
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "svg",
         {
@@ -4260,13 +4469,26 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ var Projectvue_type_script_lang_js_ = ({
   components: {
     ChartText: Text,
-    ProgressBar: ProgressBar
+    ProgressBar: ProgressBar,
+    Expander: Expander
   },
   inject: ["root"],
   props: ["task"],
@@ -4274,15 +4496,34 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
     return {};
   },
   computed: {
+    /**
+     * Get clip path id
+     * @returns {string}
+     */
     clipPathId () {
       return "gantt-elastic__project-clip-path-" + this.task.id;
     },
+
+    /**
+     * Get view box
+     * @returns {string}
+     */
     getViewBox () {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
+
+    /**
+     * Get group transform
+     * @returns {string}
+     */
     getGroupTransform () {
       return `translate(${this.task.x} ${this.task.y})`;
     },
+
+    /**
+     * Get points
+     * @returns {string}
+     */
     getPoints () {
       const task = this.task;
       const bottom = task.height - task.height / 4;
@@ -4301,8 +4542,22 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
                 Z
         `;
     },
+
+    /**
+     * Should we display expander?
+     * @returns {boolean}
+     */
+    displayExpander () {
+      const expander = this.root.state.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    }
   },
   methods: {
+    /**
+     * Emit event
+     * @param {string} eventName
+     * @param {Event} event
+     */
     emitEvent (eventName, event) {
       if (!this.root.state.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
@@ -4802,26 +5057,48 @@ const fontFamily = "Arial, sans-serif";
     "background": "#f3f5f7",
     "border-color": "transparent"
   },
-  "task-list-column-expander-wrapper": {
+  "task-list-expander-wrapper": {
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
     "margin": "0 10px"
   },
-  "task-list-column-expander-content": {
+  "task-list-expander-content": {
     "display": "inline-flex",
     "cursor": "pointer",
     "margin": "auto 0px",
     "box-sizing": "border-box",
     "user-select": "none"
   },
-  "task-list-column-expander-line": {
+  "task-list-expander-line": {
     "fill": "transparent",
     "stroke": "#000000",
     "stroke-width": "1",
     "stroke-linecap": "round"
   },
-  "task-list-column-expander-border": {
+  "task-list-expander-border": {
+    "fill": "#ffffffa0",
+    "stroke": "#000000",
+  },
+  "chart-expander-wrapper": {
+    "display": "block",
+    "box-sizing": "border-box",
+    "margin": "0"
+  },
+  "chart-expander-content": {
+    "display": "inline-flex",
+    "cursor": "pointer",
+    "margin": "auto 0px",
+    "box-sizing": "border-box",
+    "user-select": "none"
+  },
+  "chart-expander-line": {
+    "fill": "transparent",
+    "stroke": "#000000",
+    "stroke-width": "1",
+    "stroke-linecap": "round"
+  },
+  "chart-expander-border": {
     "fill": "#ffffffa0",
     "stroke": "#000000",
   },
@@ -5110,11 +5387,18 @@ function getOptions (userOptions) {
         xPadding: 10,
         display: true,
       },
+      expander: {
+        type: 'chart',
+        display: false,
+        displayIfTaskListHidden: true,
+        offset: 4,
+        size: 18,
+      }
     },
     taskList: {
       display: true,
-      displayAfterResize: true,
-      widthThreshold: 100,
+      resizeAfterThreshold: true,
+      widthThreshold: 75,
       columns: [{
         id: 0,
         label: "ID",
@@ -5125,8 +5409,10 @@ function getOptions (userOptions) {
       percent: 100,
       width: 0,
       finalWidth: 0,
+      widthFromPercentage: 0,
       minWidth: 18,
       expander: {
+        type: 'task-list',
         size: 16,
         columnWidth: 24,
         padding: 16,
@@ -5447,7 +5733,9 @@ const GanttElastic = {
         this.$set(this.state.taskList, 'columns', []);
       }
       this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        this.$set(column, 'finalWidth', (column.width / 100) * this.state.taskList.percent);
+        this.$set(column, 'thresholdPercent', 100);
+        this.$set(column, 'widthFromPercentage', 0);
+        this.$set(column, 'finalWidth', 0);
         if (typeof column.height === "undefined") {
           this.$set(column, 'height', 0);
         }
@@ -5457,6 +5745,7 @@ const GanttElastic = {
         this.$set(column, '_id', `${index}-${column.label}`);
         return column;
       });
+      this.globalOnResize();
       if (itsUpdate === '' || itsUpdate === 'tasks') {
         // initialize observer
         this.refreshTasks();
@@ -5551,23 +5840,20 @@ const GanttElastic = {
      */
     calculateTaskListColumnsDimensions () {
       let final = 0;
+      let percentage = 0;
       this.state.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.finalWidth = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
         } else {
-          column.finalWidth = (column.width / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = (column.width / 100) * this.state.taskList.percent;
         }
+        percentage += column.widthFromPercentage;
+        column.finalWidth = column.thresholdPercent * column.widthFromPercentage / 100;
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
       });
+      this.state.taskList.widthFromPercentage = percentage;
       this.state.taskList.finalWidth = final;
-      if (typeof document !== 'undefined') {
-        if (final > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
-          this.state.taskList.displayAfterResize = false;
-        } else {
-          this.state.taskList.displayAfterResize = true;
-        }
-      }
       this.syncScrollTop();
     },
 
@@ -6137,11 +6423,25 @@ const GanttElastic = {
      * Global resize event (from window.addEventListener)
      */
     globalOnResize (ev) {
-      if (this.state.taskList.finalWidth > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
-        this.state.taskList.displayAfterResize = false;
-      } else {
-        this.state.taskList.displayAfterResize = true;
+      if (typeof this.$el === 'undefined' || !this.$el) {
+        return;
       }
+      this.state.clientWidth = this.$el.clientWidth;
+      if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
+        const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
+        let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
+        if (diffPercent < 0) {
+          diffPercent = 0;
+        }
+        this.state.taskList.columns.forEach(column => {
+          column.thresholdPercent = diffPercent;
+        });
+      } else {
+        this.state.taskList.columns.forEach(column => {
+          column.thresholdPercent = 100;
+        });
+      }
+      this.calculateTaskListColumnsDimensions();
     }
 
   },
@@ -6188,7 +6488,8 @@ const GanttElastic = {
     getTaskListColumns () {
       this.calculateTaskListColumnsDimensions();
       return this.state.taskList.columns;
-    }
+    },
+
   },
 
   /**
@@ -6212,6 +6513,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
+    this.state.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');

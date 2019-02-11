@@ -88,26 +88,48 @@ export default {
     "background": "#f3f5f7",
     "border-color": "transparent"
   },
-  "task-list-column-expander-wrapper": {
+  "task-list-expander-wrapper": {
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
     "margin": "0 10px"
   },
-  "task-list-column-expander-content": {
+  "task-list-expander-content": {
     "display": "inline-flex",
     "cursor": "pointer",
     "margin": "auto 0px",
     "box-sizing": "border-box",
     "user-select": "none"
   },
-  "task-list-column-expander-line": {
+  "task-list-expander-line": {
     "fill": "transparent",
     "stroke": "#000000",
     "stroke-width": "1",
     "stroke-linecap": "round"
   },
-  "task-list-column-expander-border": {
+  "task-list-expander-border": {
+    "fill": "#ffffffa0",
+    "stroke": "#000000",
+  },
+  "chart-expander-wrapper": {
+    "display": "block",
+    "box-sizing": "border-box",
+    "margin": "0"
+  },
+  "chart-expander-content": {
+    "display": "inline-flex",
+    "cursor": "pointer",
+    "margin": "auto 0px",
+    "box-sizing": "border-box",
+    "user-select": "none"
+  },
+  "chart-expander-line": {
+    "fill": "transparent",
+    "stroke": "#000000",
+    "stroke-width": "1",
+    "stroke-linecap": "round"
+  },
+  "chart-expander-border": {
     "fill": "#ffffffa0",
     "stroke": "#000000",
   },
