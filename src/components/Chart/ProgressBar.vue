@@ -14,8 +14,8 @@
     <defs>
       <pattern
         id="diagonalHatch"
-        :width="root.state.progress.width"
-        :height="root.state.progress.width"
+        :width="root.state.chart.progress.width"
+        :height="root.state.chart.progress.width"
         patternTransform="rotate(45 0 0)"
         patternUnits="userSpaceOnUse"
       >
@@ -25,19 +25,19 @@
           x1="0"
           y1="0"
           x2="0"
-          :y2="root.state.progress.width"
+          :y2="root.state.chart.progress.width"
         />
       </pattern>
     </defs>
     <rect
-      v-if="root.state.progress.bar"
+      v-if="root.state.chart.progress.bar"
       class="gantt-elastic__chart-row-progress-bar-solid"
       :style="root.style('chart-row-progress-bar-solid', task.style['chart-row-progress-bar-solid'])"
       x="0"
       y="0"
       :width="getProgressWidth"
     ></rect>
-    <g v-if="root.state.progress.pattern">
+    <g v-if="root.state.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
         :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
@@ -71,7 +71,7 @@ export default {
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
     getSolidStyle () {
-      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
     getLineStyle () {
       return Object.assign({}, {

@@ -2255,7 +2255,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: state.tasks.length * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2: state.tasks.length * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
           });
         }
       });
@@ -2266,7 +2266,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
       const state = this.root.state;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        const y = (index * (state.row.height + state.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        const y = (index * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
         lines.push({
           key: "hl" + index,
           x1: 0,
@@ -3356,7 +3356,7 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.row.showText
+      _vm.root.state.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -3380,8 +3380,8 @@ var Textvue_type_template_id_459c2fe4_render = function() {
       staticClass: "gantt-elastic__chart-row-text-wrapper",
       style: _vm.root.style("chart-row-text-wrapper"),
       attrs: {
-        x: _vm.task.x + _vm.task.width + _vm.root.state.chartText.offset,
-        y: _vm.task.y - _vm.root.state.grid.horizontal.gap,
+        x: _vm.task.x + _vm.task.width + _vm.root.state.chart.text.offset,
+        y: _vm.task.y - _vm.root.state.chart.grid.horizontal.gap,
         width: _vm.getWidth,
         height: _vm.getHeight
       }
@@ -3501,10 +3501,10 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
       const textStyle = this.root.style('chart-row-text');
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.chartText.xPadding * 2;
+      return textWidth + this.root.state.chart.text.xPadding * 2;
     },
     getHeight () {
-      return this.task.height + this.root.state.grid.horizontal.gap * 2;
+      return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
     },
     contentStyle () {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
@@ -3568,8 +3568,8 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           {
             attrs: {
               id: "diagonalHatch",
-              width: _vm.root.state.progress.width,
-              height: _vm.root.state.progress.width,
+              width: _vm.root.state.chart.progress.width,
+              height: _vm.root.state.chart.progress.width,
               patternTransform: "rotate(45 0 0)",
               patternUnits: "userSpaceOnUse"
             }
@@ -3585,14 +3585,14 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
                 x1: "0",
                 y1: "0",
                 x2: "0",
-                y2: _vm.root.state.progress.width
+                y2: _vm.root.state.chart.progress.width
               }
             })
           ]
         )
       ]),
       _vm._v(" "),
-      _vm.root.state.progress.bar
+      _vm.root.state.chart.progress.bar
         ? _c("rect", {
             staticClass: "gantt-elastic__chart-row-progress-bar-solid",
             style: _vm.root.style(
@@ -3603,7 +3603,7 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm.root.state.progress.pattern
+      _vm.root.state.chart.progress.pattern
         ? _c("g", [
             _c("rect", {
               staticClass: "gantt-elastic__chart-row-progress-bar-pattern",
@@ -3713,7 +3713,7 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
     getSolidStyle () {
-      return Object.assign({}, this.root.state.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
     getLineStyle () {
       return Object.assign({}, {
@@ -3963,7 +3963,7 @@ var Milestonevue_type_template_id_3013006c_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.row.showText
+      _vm.root.state.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4197,7 +4197,7 @@ var Projectvue_type_template_id_077bbd73_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.row.showText
+      _vm.root.state.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4951,7 +4951,7 @@ const fontFamily = "Arial, sans-serif";
     "stroke-width": 20
   },
   "chart-row-progress-bar-solid": {
-    "fill": "#E74C3C",
+    "fill": "#0EAC51",
     "height": "20%"
   },
   "chart-row-progress-bar-pattern": {
@@ -5075,7 +5075,7 @@ function getOptions (userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      fistDate: null,
+      firstDate: null,
       firstTime: null, // firstDate getTime()
       lastDate: null,
       lastTime: null, // last date getTime()
@@ -5090,30 +5090,26 @@ function getOptions (userOptions) {
     },
     row: {
       height: 24,
-      showText: true,
     },
     maxRows: 20,
     maxHeight: 0,
-    chartText: {
-      offset: 0,
-      xPadding: 10
-    },
-    dependencyLines: {},
-    progress: {
-      width: 20,
-      height: 6,
-      pattern: true,
-      bar: false,
-    },
-    grid: {
-      horizontal: {
-        gap: 6,
-        lines: []
+    chart: {
+      grid: {
+        horizontal: {
+          gap: 6,
+        },
       },
-      vertical: {
-        lines: []
+      progress: {
+        width: 20,
+        height: 6,
+        pattern: true,
+        bar: false,
       },
-      timeLine: {}
+      text: {
+        offset: 0,
+        xPadding: 10,
+        display: true,
+      },
     },
     taskList: {
       display: true,
@@ -5675,7 +5671,7 @@ const GanttElastic = {
      * @returns {number}
      */
     getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
@@ -5689,9 +5685,9 @@ const GanttElastic = {
      */
     getTaskHeight (withStroke = false) {
       if (withStroke) {
-        return (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+        return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
       }
-      return (this.state.row.height + this.state.grid.horizontal.gap * 2);
+      return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2);
     },
 
     /**
@@ -6178,7 +6174,7 @@ const GanttElastic = {
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;
+        task.y = (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) * index + this.state.chart.grid.horizontal.gap;
       }
       this.$nextTick(() => {
         this.syncScrollTop();

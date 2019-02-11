@@ -10,8 +10,8 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="root.style('chart-row-text-wrapper')"
-    :x="task.x+task.width + root.state.chartText.offset"
-    :y="task.y-root.state.grid.horizontal.gap"
+    :x="task.x+task.width + root.state.chart.text.offset"
+    :y="task.y-root.state.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
   >
@@ -51,10 +51,10 @@ export default {
       const textStyle = this.root.style('chart-row-text');
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.chartText.xPadding * 2;
+      return textWidth + this.root.state.chart.text.xPadding * 2;
     },
     getHeight () {
-      return this.task.height + this.root.state.grid.horizontal.gap * 2;
+      return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
     },
     contentStyle () {
       return { height: '100%', 'line-height': this.getHeight + 'px' };

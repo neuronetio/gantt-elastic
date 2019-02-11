@@ -237,7 +237,7 @@ export default {
     "stroke-width": 20
   },
   "chart-row-progress-bar-solid": {
-    "fill": "#E74C3C",
+    "fill": "#0EAC51",
     "height": "20%"
   },
   "chart-row-progress-bar-pattern": {

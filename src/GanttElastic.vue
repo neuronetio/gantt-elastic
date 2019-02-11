@@ -74,7 +74,7 @@ function getOptions (userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      fistDate: null,
+      firstDate: null,
       firstTime: null, // firstDate getTime()
       lastDate: null,
       lastTime: null, // last date getTime()
@@ -89,30 +89,26 @@ function getOptions (userOptions) {
     },
     row: {
       height: 24,
-      showText: true,
     },
     maxRows: 20,
     maxHeight: 0,
-    chartText: {
-      offset: 0,
-      xPadding: 10
-    },
-    dependencyLines: {},
-    progress: {
-      width: 20,
-      height: 6,
-      pattern: true,
-      bar: false,
-    },
-    grid: {
-      horizontal: {
-        gap: 6,
-        lines: []
+    chart: {
+      grid: {
+        horizontal: {
+          gap: 6,
+        },
       },
-      vertical: {
-        lines: []
+      progress: {
+        width: 20,
+        height: 6,
+        pattern: true,
+        bar: false,
       },
-      timeLine: {}
+      text: {
+        offset: 0,
+        xPadding: 10,
+        display: true,
+      },
     },
     taskList: {
       display: true,
@@ -674,7 +670,7 @@ const GanttElastic = {
      * @returns {number}
      */
     getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
@@ -688,9 +684,9 @@ const GanttElastic = {
      */
     getTaskHeight (withStroke = false) {
       if (withStroke) {
-        return (this.state.row.height + this.state.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+        return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
       }
-      return (this.state.row.height + this.state.grid.horizontal.gap * 2);
+      return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2);
     },
 
     /**
@@ -1177,7 +1173,7 @@ const GanttElastic = {
         }
         task.height = this.state.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.grid.horizontal.gap * 2) * index + this.state.grid.horizontal.gap;
+        task.y = (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) * index + this.state.chart.grid.horizontal.gap;
       }
       this.$nextTick(() => {
         this.syncScrollTop();

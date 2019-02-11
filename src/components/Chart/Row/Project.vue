@@ -43,7 +43,7 @@
       ></path>
       <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
     </svg>
-    <chart-text :task="task" v-if="root.state.row.showText"></chart-text>
+    <chart-text :task="task" v-if="root.state.chart.text.display"></chart-text>
   </g>
 </template>
 
