@@ -2406,6 +2406,11 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
     return {};
   },
   methods: {
+    /**
+     * Get key
+     * @param {object} day
+     * @returns {string} key ideintifier for loop
+     */
     getKey (day) {
       return day.date.format('YYYY-MM-DD');
     }
@@ -4984,7 +4989,7 @@ const fontFamily = "Arial, sans-serif";
     "float": "right",
   },
   "chart-days-highlight-rect": {
-    "fill": "#f3f5f7a0"
+    "fill": "#f3f5f780"
   },
   "svg-chart": {
     "overflow": "hidden"

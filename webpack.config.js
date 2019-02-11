@@ -1,9 +1,21 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = [
   {
     mode: 'production',
+    optimization: {
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        }),
+      ],
+    },
     entry: './src/bundle.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -59,6 +71,14 @@ module.exports = [
     mode: 'production',
     optimization: {
       minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        }),
+      ],
     },
     entry: './src/GanttElastic.vue',
     output: {
@@ -112,7 +132,15 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
-      minimize: true
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        }),
+      ],
     },
     entry: './src/GanttElastic.vue',
     output: {

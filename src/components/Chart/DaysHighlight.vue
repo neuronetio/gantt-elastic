@@ -33,6 +33,11 @@ export default {
     return {};
   },
   methods: {
+    /**
+     * Get key
+     * @param {object} day
+     * @returns {string} key ideintifier for loop
+     */
     getKey (day) {
       return day.date.format('YYYY-MM-DD');
     }
