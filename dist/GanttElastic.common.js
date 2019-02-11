@@ -5118,6 +5118,7 @@ function getOptions (userOptions) {
     taskList: {
       display: true,
       displayAfterResize: true,
+      widthThreshold: 100,
       columns: [{
         id: 0,
         label: "ID",
@@ -5565,8 +5566,10 @@ const GanttElastic = {
       });
       this.state.taskList.finalWidth = final;
       if (typeof document !== 'undefined') {
-        if (final > document.body.clientWidth / 2) {
+        if (final > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
           this.state.taskList.displayAfterResize = false;
+        } else {
+          this.state.taskList.displayAfterResize = true;
         }
       }
       this.syncScrollTop();
@@ -6138,7 +6141,7 @@ const GanttElastic = {
      * Global resize event (from window.addEventListener)
      */
     globalOnResize (ev) {
-      if (this.state.taskList.finalWidth > document.body.clientWidth / 2) {
+      if (this.state.taskList.finalWidth > (document.body.clientWidth / 100) * this.state.taskList.widthThreshold) {
         this.state.taskList.displayAfterResize = false;
       } else {
         this.state.taskList.displayAfterResize = true;
