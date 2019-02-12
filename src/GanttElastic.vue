@@ -1219,7 +1219,6 @@ const GanttElastic = {
    */
   created () {
     this.$watch('tasks', (tasks) => {
-      console.log('tasks?', tasks)
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
     });
