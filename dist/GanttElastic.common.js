@@ -798,7 +798,12 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
               attrs: {
                 width: _vm.getWidth,
                 height: _vm.root.state.height,
-                xmlns: "http://www.w3.org/2000/svg"
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox:
+                  "0 0 " +
+                  _vm.root.state.clientWidth +
+                  " " +
+                  _vm.root.state.height
               }
             },
             [
@@ -1307,6 +1312,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
   methods: {
     /**
      * Get specific class prefix
+     *
      * @returns {string}
      */
     getClassPrefix (full = true) {
@@ -1526,6 +1532,7 @@ component.options.__file = "src/components/Expander.vue"
 
     /**
      * Get style
+     *
      * @returns {object}
      */
     getStyle () {
@@ -1541,6 +1548,7 @@ component.options.__file = "src/components/Expander.vue"
 
     /**
      * Is this row collapsible?
+     *
      * @returns {bool}
      */
     collapsible () {
@@ -1794,12 +1802,23 @@ ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
     return {};
   },
   computed: {
+    /**
+     * Should we display html or just text?
+     *
+     * @returns {boolean}
+     */
     html () {
       if (typeof this.column.html !== "undefined" && this.column.html === true) {
         return true;
       }
       return false;
     },
+
+    /**
+     * Get column value
+     *
+     * @returns {any|string}
+     */
     value () {
       if (typeof this.column.value === "function") {
         return this.column.value(this.task);
@@ -1952,13 +1971,21 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
   data () {
     return {};
   },
+  /**
+   * Mounted
+   */
   mounted () {
     this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
     this.root.state.refs.taskList = this.$refs.taskList;
     this.root.state.refs.taskListItems = this.$refs.taskListItems;
   },
-  computed: {
 
+  computed: {
+    /**
+     * Calculate task list expander style
+     *
+     * @returns {object}
+     */
     getListExpanderStyle () {
       return task => {
         const state = this.root.state;
@@ -2233,9 +2260,16 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
   data () {
     return {};
   },
+  /**
+   * Created
+   */
   created () {
     this.root.$on("recenterPosition", this.recenterPosition);
   },
+
+  /**
+   * Mounted
+   */
   mounted () {
     this.$nextTick(() => {
       this.$nextTick(() => {
@@ -2244,12 +2278,22 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
       });
     });
   },
+
   methods: {
+    /**
+     * Recenter position - go to current time line
+     */
     recenterPosition () {
       this.root.scrollToTime(this.timeLinePosition.time);
     },
   },
+
   computed: {
+    /**
+     * Generate vertical lines of the grid
+     *
+     * @returns {array}
+     */
     verticalLines () {
       let lines = [];
       const state = this.root.state;
@@ -2266,6 +2310,12 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
       });
       return lines;
     },
+
+    /**
+     * Generate horizontal lines of the grid
+     *
+     * @returns {array}
+     */
     horizontalLines () {
       let lines = [];
       const state = this.root.state;
@@ -2282,12 +2332,24 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
       }
       return lines;
     },
+
+    /**
+     * Chceck if specified line is inside viewport (visible)
+     *
+     * @returns {function}
+     */
     inViewPort () {
       return line => {
         const state = this.root.state;
         return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
       };
     },
+
+    /**
+     * Get current time line position
+     *
+     * @returns {object}
+     */
     timeLinePosition () {
       const d = new Date();
       const current = d.getTime();
@@ -2404,6 +2466,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
   methods: {
     /**
      * Get key
+     *
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
@@ -2414,6 +2477,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
   computed: {
     /**
      * Get working days
+     *
      * @returns {array}
      */
     workingDays () {
@@ -2424,6 +2488,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
 
     /**
      * Show working days?
+     *
      * @returns {bool}
      */
     showWorkingDays () {
@@ -2725,17 +2790,19 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       months: []
     };
   },
+
+  /**
+   * Created
+   */
   created () {
     this.root.$on("scope-change", this.regenerate);
     this.root.$on("times-timeZoom-change", this.regenerate);
-    this.root.$on("tasks-changed",this.regenerate);
-    this.root.$on("options-changed",this.regenerate);
+    this.root.$on("tasks-changed", this.regenerate);
+    this.root.$on("options-changed", this.regenerate);
     this.regenerate();
   },
+
   methods: {
-
-
-
     /**
      * How many hours will fit?
      *
@@ -2985,6 +3052,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get x position
+     *
      * @returns {number}
      */
     getX () {
@@ -2993,6 +3061,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get y position
+     *
      * @returns {number}
      */
     getY () {
@@ -3001,6 +3070,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get width
+     *
      * @returns {number}
      */
     getWidth () {
@@ -3010,6 +3080,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get month style
+     *
      * @returns {object}
      */
     monthsStyle () {
@@ -3018,6 +3089,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get day style
+     *
      * @returns {object}
      */
     daysStyle () {
@@ -3026,6 +3098,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get hour styke
+     *
      * @returns {object}
      */
     hoursStyle () {
@@ -3034,6 +3107,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get visible days
+     *
+     * @returns {array}
      */
     getDays () {
       return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
@@ -3041,6 +3116,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get visible hours
+     *
+     * @returns {array}
      */
     getHours () {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
@@ -3048,6 +3125,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
     /**
      * Get visible months
+     *
+     * @returns {array}
      */
     getMonths () {
       return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
@@ -3539,18 +3618,41 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
     return {};
   },
   computed: {
+    /**
+     * Get width
+     *
+     * @returns {number}
+     */
     getWidth () {
       const textStyle = this.root.style('chart-row-text');
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.chart.text.xPadding * 2;
     },
+
+    /**
+     * Get height
+     *
+     * @returns {number}
+     */
     getHeight () {
       return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
     },
+
+    /**
+     * Get content style
+     *
+     * @returns {object}
+     */
     contentStyle () {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
     },
+
+    /**
+     * Should we render text as html?
+     *
+     * @returns {boolean}
+     */
     html () {
       const cols = this.root.state.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
@@ -3746,17 +3848,41 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
   data () {
     return {};
   },
+
   computed: {
+    /**
+     * Get progress width
+     *
+     * @returns {string}
+     */
     getProgressWidth () {
       return this.task.progress + "%";
     },
+
+    /**
+     * Get line points
+     *
+     * @returns {string}
+     */
     getLinePoints () {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
+
+    /**
+     * Get solid style
+     *
+     * @returns {object}
+     */
     getSolidStyle () {
       return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
+
+    /**
+     * Get line style
+     *
+     * @returns {object}
+     */
     getLineStyle () {
       return Object.assign({}, {
         stroke: this.root.state.row.styles.bar.stroke + "a0",
@@ -3871,6 +3997,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
     /**
      * Get clip path id
+     *
      * @returns {string}
      */
     clipPathId () {
@@ -3879,6 +4006,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
     /**
      * Get view box
+     *
      * @returns {string}
      */
     getViewBox () {
@@ -3888,6 +4016,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
     /**
      * Get group transform
+     *
      * @returns {string}
      */
     getGroupTransform () {
@@ -3896,6 +4025,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
     /**
      * Get points
+     *
      * @returns {string}
      */
     getPoints () {
@@ -3907,6 +4037,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
     /**
      * Should we display expander?
+     *
      * @returns {boolean}
      */
     displayExpander () {
@@ -3917,6 +4048,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
   methods: {
     /**
      * Emit event
+     *
      * @param {string} eventName
      * @param {Event} event
      */
@@ -4181,6 +4313,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
   computed: {
     /**
      * Get clip path id
+     *
      * @returns {string}
      */
     clipPathId () {
@@ -4189,6 +4322,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 
     /**
      * Get view box
+     *
      * @returns {string}
      */
     getViewBox () {
@@ -4197,6 +4331,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 
     /**
      * Get group transform
+     *
      * @returns {string}
      */
     getGroupTransform () {
@@ -4205,6 +4340,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 
     /**
      * Get points
+     *
      * @returns {string}
      */
     getPoints () {
@@ -4224,6 +4360,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 
     /**
      * Should we display expander?
+     *
      * @returns {boolean}
      */
     displayExpander () {
@@ -4234,6 +4371,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
   methods: {
     /**
      * Emit event
+     *
      * @param {string} eventName
      * @param {Event} event
      */
@@ -4498,6 +4636,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
   computed: {
     /**
      * Get clip path id
+     *
      * @returns {string}
      */
     clipPathId () {
@@ -4506,6 +4645,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 
     /**
      * Get view box
+     *
      * @returns {string}
      */
     getViewBox () {
@@ -4514,6 +4654,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 
     /**
      * Get group transform
+     *
      * @returns {string}
      */
     getGroupTransform () {
@@ -4522,6 +4663,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 
     /**
      * Get points
+     *
      * @returns {string}
      */
     getPoints () {
@@ -4545,6 +4687,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 
     /**
      * Should we display expander?
+     *
      * @returns {boolean}
      */
     displayExpander () {
@@ -4555,6 +4698,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
   methods: {
     /**
      * Emit event
+     *
      * @param {string} eventName
      * @param {Event} event
      */
@@ -4673,19 +4817,40 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
       moving: false
     };
   },
+  /**
+   * Mounted
+   */
   mounted () {
     this.root.state.refs.chart = this.$refs.chart;
     this.root.state.refs.chartGraph = this.$refs.chartGraph;
   },
+
   computed: {
+    /**
+     * Get width
+     *
+     * @returns {number}
+     */
     getWidth () {
       const state = this.root.state;
       return state.width;
     },
+
+    /**
+     * Get height
+     *
+     * @returns {number}
+     */
     getHeight () {
       const state = this.root.state;
       return state.height;
     },
+
+    /**
+     * Get view box
+     *
+     * @returns {string}
+     */
     getViewBox () {
       return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
     }
@@ -4800,6 +4965,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
+//
 
 
 
@@ -4828,7 +4994,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
       }
     };
   },
+  /**
+   * Mounted
+   */
   mounted () {
+    this.viewBoxWidth = this.$el.clientWidth;
     this.root.state.refs.svgMainView = this.$refs.svgMainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
     this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
@@ -4844,41 +5014,78 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 
     /**
      * Get width
+     *
      * @returns {number}
      */
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
+
+    /**
+     * Get margin left
+     *
+     * @returns {string}
+     */
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";
       }
       return this.root.state.taskList.finalWidth + "px";
     },
+
+    /**
+     * Get vertical style
+     *
+     * @returns {object}
+     */
     verticalStyle () {
       return {
         width: this.root.state.scrollBarHeight + 'px',
         height: this.root.state.rowsHeight + 'px',
         "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
       };
-    }
+    },
   },
   methods: {
+    /**
+     * Emit event when mouse is moving inside main view
+     */
     mouseMove (event) {
       this.root.$emit("main-view-mousemove", event);
     },
+
+    /**
+     * Emit mouseup event inside main view
+     */
     mouseUp (event) {
       this.root.$emit("main-view-mouseup", event);
     },
+
+    /**
+     * Horizontal scroll event handler
+     */
     onHorizontalScroll (ev) {
       this.root.$emit("chart-scroll-horizontal", ev);
     },
+
+    /**
+     * Vertical scroll event handler
+     */
     onVerticalScroll (ev) {
       this.root.$emit("chart-scroll-vertical", ev);
     },
+
+    /**
+     * Mouse wheel event handler
+     */
     chartWheel (ev) {
       this.root.$emit("chart-wheel", ev);
     },
+
+    /**
+     * Chart mousedown event handler
+     * Initiates drag scrolling mode
+     */
     chartMouseDown (ev) {
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
@@ -4890,9 +5097,19 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
       }
       this.root.state.scroll.scrolling = true;
     },
+
+    /**
+     * Chart mouseup event handler
+     * Deactivates drag scrolling mode
+     */
     chartMouseUp (ev) {
       this.root.state.scroll.scrolling = false;
     },
+
+    /**
+     * Chart mousemove event handler
+     * When in drag scrolling mode this method calculate scroll movement
+     */
     chartMouseMove (ev) {
       if (this.root.state.scroll.scrolling) {
         ev.preventDefault();
@@ -4927,7 +5144,8 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         }
         vertical.scrollTop = y;
       }
-    }
+    },
+
   },
 
   /**
@@ -5316,6 +5534,8 @@ function getOptions (userOptions) {
     },
     width: 0,
     height: 0,
+    clientWidth: 0,
+    clientHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
     scroll: {
@@ -5344,7 +5564,6 @@ function getOptions (userOptions) {
         }
       }
     },
-    svgElement: null,
     scope: {
       before: 1,
       after: 1
@@ -5934,10 +6153,21 @@ const GanttElastic = {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
 
+    /**
+     * Get svg
+     *
+     * @returns {string} html svg image of gantt
+     */
     getSVG () {
       return this.state.svgMainView.outerHTML;
     },
 
+    /**
+     * Get image
+     *
+     * @param {string} type image format
+     * @returns {Promise} when resolved returns base64 image string of gantt
+     */
     getImage (type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -6428,6 +6658,7 @@ const GanttElastic = {
         return;
       }
       this.state.clientWidth = this.$el.clientWidth;
+      console.log('resize', this.state.clientWidth)
       if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
         const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
         let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
@@ -6511,11 +6742,19 @@ const GanttElastic = {
   },
 
   /**
+   * Emit before-mount event
+   */
+  beforeMount () {
+    this.$emit('before-mount', this);
+  },
+
+  /**
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
     this.state.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
+    this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');
     this.$root.$emit('gantt-elastic-ready', this);

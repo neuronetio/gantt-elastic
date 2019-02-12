@@ -6,14 +6,12 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>GanttElastic editor demo</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
-
   <!--
   <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
   <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
   -->
   <script src="../dist/GanttElastic.umd.js"></script>
   <script src="../dist/Header.umd.js"></script>
-
 </head>
 
 <body>
@@ -189,7 +187,53 @@
         duration: 24 * 60 * 60,
         progress: 0,
         type: 'task'
-      }
+      },
+      {
+        id: 11,
+        label: 'test task',
+        user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+        start: getDate(24 * 6),
+        duration: 24 * 60 * 60,
+        progress: 0,
+        type: 'task'
+      },
+      {
+        id: 12,
+        label: 'test task',
+        user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+        start: getDate(24 * 7),
+        duration: 24 * 60 * 60,
+        progress: 0,
+        type: 'task',
+        parentId: 11
+      },
+      {
+        id: 13,
+        label: 'test task',
+        user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+        start: getDate(24 * 8),
+        duration: 24 * 60 * 60,
+        progress: 0,
+        type: 'task'
+      },
+      {
+        id: 14,
+        label: 'test task',
+        user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+        start: getDate(24 * 9),
+        duration: 24 * 60 * 60,
+        progress: 0,
+        type: 'task',
+      },
+      {
+        id: 15,
+        label: 'test task',
+        user: '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+        start: getDate(24 * 16),
+        duration: 24 * 60 * 60,
+        progress: 0,
+        type: 'task',
+      },
     ];
 
     let options = {
@@ -199,10 +243,13 @@
         }
       },
       maxRows: 100,
-      maxHeight: 200,
+      maxHeight: 300,
       title: {
         label: 'Your project title as html (link or whatever...)',
         html: false,
+      },
+      row: {
+        height: 26
       },
       calendar: {
         hour: {

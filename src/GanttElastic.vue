@@ -37,6 +37,8 @@ function getOptions (userOptions) {
     },
     width: 0,
     height: 0,
+    clientWidth: 0,
+    clientHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
     scroll: {
@@ -65,7 +67,6 @@ function getOptions (userOptions) {
         }
       }
     },
-    svgElement: null,
     scope: {
       before: 1,
       after: 1
@@ -1160,6 +1161,7 @@ const GanttElastic = {
         return;
       }
       this.state.clientWidth = this.$el.clientWidth;
+      console.log('resize', this.state.clientWidth)
       if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
         const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
         let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
@@ -1243,11 +1245,19 @@ const GanttElastic = {
   },
 
   /**
+   * Emit before-mount event
+   */
+  beforeMount () {
+    this.$emit('before-mount', this);
+  },
+
+  /**
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
     this.state.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
+    this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');
     this.$root.$emit('gantt-elastic-ready', this);

@@ -19,6 +19,7 @@
         :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
         ref="svgMainView"
         xmlns="http://www.w3.org/2000/svg"
+        :viewBox="`0 0 ${root.state.clientWidth} ${root.state.height}`"
       >
         <foreignObject x="0" y="0" width="100%" height="100%">
           <div
@@ -112,6 +113,7 @@ export default {
    * Mounted
    */
   mounted () {
+    this.viewBoxWidth = this.$el.clientWidth;
     this.root.state.refs.svgMainView = this.$refs.svgMainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
     this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
@@ -157,7 +159,7 @@ export default {
         height: this.root.state.rowsHeight + 'px',
         "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
       };
-    }
+    },
   },
   methods: {
     /**
@@ -257,7 +259,8 @@ export default {
         }
         vertical.scrollTop = y;
       }
-    }
+    },
+
   },
 
   /**
