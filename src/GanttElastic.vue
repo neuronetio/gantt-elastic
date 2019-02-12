@@ -1161,7 +1161,6 @@ const GanttElastic = {
         return;
       }
       this.state.clientWidth = this.$el.clientWidth;
-      console.log('resize', this.state.clientWidth)
       if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
         const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
         let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
