@@ -799,11 +799,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                 width: _vm.getWidth,
                 height: _vm.root.state.height,
                 xmlns: "http://www.w3.org/2000/svg",
-                viewBox:
-                  "0 0 " +
-                  _vm.root.state.clientWidth +
-                  " " +
-                  _vm.root.state.height
+                viewBox: _vm.getViewBox
               }
             },
             [
@@ -5045,6 +5041,18 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
       };
     },
+
+    /**
+    * Get view box
+    *
+    * @returns {string}
+    */
+    getViewBox () {
+      if (this.root.state.clientWidth) {
+        return `0 0 ${this.root.state.clientWidth - this.root.state.scrollBarHeight} ${this.root.state.height}`;
+      }
+      return `0 0 0 ${this.root.state.height}`;
+    }
   },
   methods: {
     /**

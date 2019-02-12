@@ -19,7 +19,7 @@
         :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
         ref="svgMainView"
         xmlns="http://www.w3.org/2000/svg"
-        :viewBox="`0 0 ${root.state.clientWidth} ${root.state.height}`"
+        :viewBox="getViewBox"
       >
         <foreignObject x="0" y="0" width="100%" height="100%">
           <div
@@ -160,6 +160,18 @@ export default {
         "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
       };
     },
+
+    /**
+    * Get view box
+    *
+    * @returns {string}
+    */
+    getViewBox () {
+      if (this.root.state.clientWidth) {
+        return `0 0 ${this.root.state.clientWidth - this.root.state.scrollBarHeight} ${this.root.state.height}`;
+      }
+      return `0 0 0 ${this.root.state.height}`;
+    }
   },
   methods: {
     /**
