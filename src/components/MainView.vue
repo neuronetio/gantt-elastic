@@ -108,6 +108,9 @@ export default {
       }
     };
   },
+  /**
+   * Mounted
+   */
   mounted () {
     this.root.state.refs.svgMainView = this.$refs.svgMainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
@@ -124,17 +127,30 @@ export default {
 
     /**
      * Get width
+     *
      * @returns {number}
      */
     getWidth () {
       return this.root.state.width + this.root.state.taskList.finalWidth;
     },
+
+    /**
+     * Get margin left
+     *
+     * @returns {string}
+     */
     getMarginLeft () {
       if (!this.root.state.taskList.display) {
         return "0px";
       }
       return this.root.state.taskList.finalWidth + "px";
     },
+
+    /**
+     * Get vertical style
+     *
+     * @returns {object}
+     */
     verticalStyle () {
       return {
         width: this.root.state.scrollBarHeight + 'px',
@@ -144,21 +160,45 @@ export default {
     }
   },
   methods: {
+    /**
+     * Emit event when mouse is moving inside main view
+     */
     mouseMove (event) {
       this.root.$emit("main-view-mousemove", event);
     },
+
+    /**
+     * Emit mouseup event inside main view
+     */
     mouseUp (event) {
       this.root.$emit("main-view-mouseup", event);
     },
+
+    /**
+     * Horizontal scroll event handler
+     */
     onHorizontalScroll (ev) {
       this.root.$emit("chart-scroll-horizontal", ev);
     },
+
+    /**
+     * Vertical scroll event handler
+     */
     onVerticalScroll (ev) {
       this.root.$emit("chart-scroll-vertical", ev);
     },
+
+    /**
+     * Mouse wheel event handler
+     */
     chartWheel (ev) {
       this.root.$emit("chart-wheel", ev);
     },
+
+    /**
+     * Chart mousedown event handler
+     * Initiates drag scrolling mode
+     */
     chartMouseDown (ev) {
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
@@ -170,9 +210,19 @@ export default {
       }
       this.root.state.scroll.scrolling = true;
     },
+
+    /**
+     * Chart mouseup event handler
+     * Deactivates drag scrolling mode
+     */
     chartMouseUp (ev) {
       this.root.state.scroll.scrolling = false;
     },
+
+    /**
+     * Chart mousemove event handler
+     * When in drag scrolling mode this method calculate scroll movement
+     */
     chartMouseMove (ev) {
       if (this.root.state.scroll.scrolling) {
         ev.preventDefault();

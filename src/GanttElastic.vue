@@ -655,10 +655,21 @@ const GanttElastic = {
       return this.state.tasks.filter(task => task.parent === taskId);
     },
 
+    /**
+     * Get svg
+     *
+     * @returns {string} html svg image of gantt
+     */
     getSVG () {
       return this.state.svgMainView.outerHTML;
     },
 
+    /**
+     * Get image
+     *
+     * @param {string} type image format
+     * @returns {Promise} when resolved returns base64 image string of gantt
+     */
     getImage (type = "image/png") {
       return new Promise((resolve, reject) => {
         const img = new Image();

@@ -79,19 +79,40 @@ export default {
       moving: false
     };
   },
+  /**
+   * Mounted
+   */
   mounted () {
     this.root.state.refs.chart = this.$refs.chart;
     this.root.state.refs.chartGraph = this.$refs.chartGraph;
   },
+
   computed: {
+    /**
+     * Get width
+     *
+     * @returns {number}
+     */
     getWidth () {
       const state = this.root.state;
       return state.width;
     },
+
+    /**
+     * Get height
+     *
+     * @returns {number}
+     */
     getHeight () {
       const state = this.root.state;
       return state.height;
     },
+
+    /**
+     * Get view box
+     *
+     * @returns {string}
+     */
     getViewBox () {
       return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
     }

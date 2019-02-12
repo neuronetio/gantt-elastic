@@ -76,6 +76,7 @@ export default {
   computed: {
     /**
      * Get clip path id
+     *
      * @returns {string}
      */
     clipPathId () {
@@ -84,6 +85,7 @@ export default {
 
     /**
      * Get view box
+     *
      * @returns {string}
      */
     getViewBox () {
@@ -92,6 +94,7 @@ export default {
 
     /**
      * Get group transform
+     *
      * @returns {string}
      */
     getGroupTransform () {
@@ -100,6 +103,7 @@ export default {
 
     /**
      * Get points
+     *
      * @returns {string}
      */
     getPoints () {
@@ -119,6 +123,7 @@ export default {
 
     /**
      * Should we display expander?
+     *
      * @returns {boolean}
      */
     displayExpander () {
@@ -129,6 +134,7 @@ export default {
   methods: {
     /**
      * Emit event
+     *
      * @param {string} eventName
      * @param {Event} event
      */

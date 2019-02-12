@@ -50,17 +50,19 @@ export default {
       months: []
     };
   },
+
+  /**
+   * Created
+   */
   created () {
     this.root.$on("scope-change", this.regenerate);
     this.root.$on("times-timeZoom-change", this.regenerate);
-    this.root.$on("tasks-changed",this.regenerate);
-    this.root.$on("options-changed",this.regenerate);
+    this.root.$on("tasks-changed", this.regenerate);
+    this.root.$on("options-changed", this.regenerate);
     this.regenerate();
   },
+
   methods: {
-
-
-
     /**
      * How many hours will fit?
      *
@@ -310,6 +312,7 @@ export default {
 
     /**
      * Get x position
+     *
      * @returns {number}
      */
     getX () {
@@ -318,6 +321,7 @@ export default {
 
     /**
      * Get y position
+     *
      * @returns {number}
      */
     getY () {
@@ -326,6 +330,7 @@ export default {
 
     /**
      * Get width
+     *
      * @returns {number}
      */
     getWidth () {
@@ -335,6 +340,7 @@ export default {
 
     /**
      * Get month style
+     *
      * @returns {object}
      */
     monthsStyle () {
@@ -343,6 +349,7 @@ export default {
 
     /**
      * Get day style
+     *
      * @returns {object}
      */
     daysStyle () {
@@ -351,6 +358,7 @@ export default {
 
     /**
      * Get hour styke
+     *
      * @returns {object}
      */
     hoursStyle () {
@@ -359,6 +367,8 @@ export default {
 
     /**
      * Get visible days
+     *
+     * @returns {array}
      */
     getDays () {
       return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
@@ -366,6 +376,8 @@ export default {
 
     /**
      * Get visible hours
+     *
+     * @returns {array}
      */
     getHours () {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
@@ -373,6 +385,8 @@ export default {
 
     /**
      * Get visible months
+     *
+     * @returns {array}
      */
     getMonths () {
       return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));

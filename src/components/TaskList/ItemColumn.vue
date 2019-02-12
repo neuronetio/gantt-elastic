@@ -44,12 +44,23 @@ export default {
     return {};
   },
   computed: {
+    /**
+     * Should we display html or just text?
+     *
+     * @returns {boolean}
+     */
     html () {
       if (typeof this.column.html !== "undefined" && this.column.html === true) {
         return true;
       }
       return false;
     },
+
+    /**
+     * Get column value
+     *
+     * @returns {any|string}
+     */
     value () {
       if (typeof this.column.value === "function") {
         return this.column.value(this.task);

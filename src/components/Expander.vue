@@ -101,6 +101,7 @@ export default {
   methods: {
     /**
      * Get specific class prefix
+     *
      * @returns {string}
      */
     getClassPrefix (full = true) {

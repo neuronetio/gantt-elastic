@@ -47,18 +47,41 @@ export default {
     return {};
   },
   computed: {
+    /**
+     * Get width
+     *
+     * @returns {number}
+     */
     getWidth () {
       const textStyle = this.root.style('chart-row-text');
       this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.chart.text.xPadding * 2;
     },
+
+    /**
+     * Get height
+     *
+     * @returns {number}
+     */
     getHeight () {
       return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
     },
+
+    /**
+     * Get content style
+     *
+     * @returns {object}
+     */
     contentStyle () {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
     },
+
+    /**
+     * Should we render text as html?
+     *
+     * @returns {boolean}
+     */
     html () {
       const cols = this.root.state.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {

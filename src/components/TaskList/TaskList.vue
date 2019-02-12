@@ -53,13 +53,21 @@ export default {
   data () {
     return {};
   },
+  /**
+   * Mounted
+   */
   mounted () {
     this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
     this.root.state.refs.taskList = this.$refs.taskList;
     this.root.state.refs.taskListItems = this.$refs.taskListItems;
   },
-  computed: {
 
+  computed: {
+    /**
+     * Calculate task list expander style
+     *
+     * @returns {object}
+     */
     getListExpanderStyle () {
       return task => {
         const state = this.root.state;

@@ -56,9 +56,16 @@ export default {
   data () {
     return {};
   },
+  /**
+   * Created
+   */
   created () {
     this.root.$on("recenterPosition", this.recenterPosition);
   },
+
+  /**
+   * Mounted
+   */
   mounted () {
     this.$nextTick(() => {
       this.$nextTick(() => {
@@ -67,12 +74,22 @@ export default {
       });
     });
   },
+
   methods: {
+    /**
+     * Recenter position - go to current time line
+     */
     recenterPosition () {
       this.root.scrollToTime(this.timeLinePosition.time);
     },
   },
+
   computed: {
+    /**
+     * Generate vertical lines of the grid
+     *
+     * @returns {array}
+     */
     verticalLines () {
       let lines = [];
       const state = this.root.state;
@@ -89,6 +106,12 @@ export default {
       });
       return lines;
     },
+
+    /**
+     * Generate horizontal lines of the grid
+     *
+     * @returns {array}
+     */
     horizontalLines () {
       let lines = [];
       const state = this.root.state;
@@ -105,12 +128,24 @@ export default {
       }
       return lines;
     },
+
+    /**
+     * Chceck if specified line is inside viewport (visible)
+     *
+     * @returns {function}
+     */
     inViewPort () {
       return line => {
         const state = this.root.state;
         return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
       };
     },
+
+    /**
+     * Get current time line position
+     *
+     * @returns {object}
+     */
     timeLinePosition () {
       const d = new Date();
       const current = d.getTime();

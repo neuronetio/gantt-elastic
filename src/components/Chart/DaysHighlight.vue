@@ -35,6 +35,7 @@ export default {
   methods: {
     /**
      * Get key
+     *
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
@@ -45,6 +46,7 @@ export default {
   computed: {
     /**
      * Get working days
+     *
      * @returns {array}
      */
     workingDays () {
@@ -55,6 +57,7 @@ export default {
 
     /**
      * Show working days?
+     *
      * @returns {bool}
      */
     showWorkingDays () {

@@ -62,17 +62,41 @@ export default {
   data () {
     return {};
   },
+
   computed: {
+    /**
+     * Get progress width
+     *
+     * @returns {string}
+     */
     getProgressWidth () {
       return this.task.progress + "%";
     },
+
+    /**
+     * Get line points
+     *
+     * @returns {string}
+     */
     getLinePoints () {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
+
+    /**
+     * Get solid style
+     *
+     * @returns {object}
+     */
     getSolidStyle () {
       return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
+
+    /**
+     * Get line style
+     *
+     * @returns {object}
+     */
     getLineStyle () {
       return Object.assign({}, {
         stroke: this.root.state.row.styles.bar.stroke + "a0",

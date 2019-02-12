@@ -72,6 +72,7 @@ export default {
 
     /**
      * Get style
+     *
      * @returns {object}
      */
     getStyle () {
@@ -87,6 +88,7 @@ export default {
 
     /**
      * Is this row collapsible?
+     *
      * @returns {bool}
      */
     collapsible () {
