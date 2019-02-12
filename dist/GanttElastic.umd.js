@@ -5091,6 +5091,7 @@ const fontFamily = "Arial, sans-serif";
   },
   "chart-expander-wrapper": {
     "display": "block",
+    "line-height":"1",
     "box-sizing": "border-box",
     "margin": "0"
   },
@@ -5754,7 +5755,6 @@ const GanttElastic = {
         this.$set(column, '_id', `${index}-${column.label}`);
         return column;
       });
-      this.globalOnResize();
       if (itsUpdate === '' || itsUpdate === 'tasks') {
         // initialize observer
         this.refreshTasks();
@@ -5773,6 +5773,7 @@ const GanttElastic = {
       if (itsUpdate === '') {
         this.state.ctx = document.createElement("canvas").getContext("2d");
       }
+      this.globalOnResize();
       this.calculateTaskListColumnsDimensions();
       this.state.scrollBarHeight = this.getScrollBarHeight();
       this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
@@ -6506,6 +6507,7 @@ const GanttElastic = {
    */
   created () {
     this.$watch('tasks', (tasks) => {
+      console.log('tasks?', tasks)
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
     });
