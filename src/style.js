@@ -113,6 +113,7 @@ export default {
   },
   "chart-expander-wrapper": {
     "display": "block",
+    "line-height":"1",
     "box-sizing": "border-box",
     "margin": "0"
   },
