@@ -1298,5 +1298,5 @@ export default GanttElastic;
 </script>
 
 <style>
-@import "styles/ganttElastic.css";
+@import url("./styles/ganttElastic.css");
 </style>
