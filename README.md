@@ -10,10 +10,10 @@
 </div>
 
 <p>
-Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager ]
+Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager, responsive gantt ]
 </p>
 
-<a href="http://neuronet.io" target="_blank">Gantt-elastic demo here</a>
+<a href="http://neuronet.io" target="_blank" style="font-size:18px">Gantt-elastic demo here</a>
 
 ![preview img](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.jpg)
 ![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
