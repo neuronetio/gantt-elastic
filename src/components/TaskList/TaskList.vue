@@ -74,7 +74,7 @@ export default {
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const style = {
           "padding-left": padding + state.taskList.expander.margin + "px",
-          margin: "auto 0px"
+          margin: "auto 0",
         };
         return style;
       };

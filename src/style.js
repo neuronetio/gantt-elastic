@@ -92,7 +92,7 @@ export default {
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
-    "margin": "0 10px"
+    "margin": "0 18px"
   },
   "task-list-expander-content": {
     "display": "inline-flex",
@@ -113,7 +113,7 @@ export default {
   },
   "chart-expander-wrapper": {
     "display": "block",
-    "line-height":"1",
+    "line-height": "1",
     "box-sizing": "border-box",
     "margin": "0"
   },
@@ -191,7 +191,10 @@ export default {
     "flex-shrink": "100",
     "font-family": fontFamily,
     "font-size": fontSize,
-    "margin": "auto 6px",
+    "margin-top": "auto",
+    "margin-bottom": "auto",
+    "margin-left": "6px", // TaskList
+    "margin-right": "6px",
     "overflow": "hidden",
     "text-overflow": "ellipsis",
     "line-height": "1.5em",

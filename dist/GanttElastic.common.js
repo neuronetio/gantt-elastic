@@ -1145,7 +1145,11 @@ var Expandervue_type_template_id_09a21177_render = function() {
             {
               class: _vm.getClassPrefix() + "-content",
               style: _vm.root.style(_vm.getClassPrefix(false) + "-content"),
-              attrs: { width: _vm.options.size, height: _vm.options.size }
+              attrs: {
+                width: _vm.options.size,
+                height: _vm.options.size,
+                viewBox: "0 0 " + _vm.options.size + " " + _vm.options.size
+              }
             },
             [
               _c("rect", {
@@ -1205,6 +1209,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Expander.vue?vue&type=template&id=09a21177&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Expander.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -1988,7 +1993,7 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
         const padding = (task.parents.length - 1) * state.taskList.expander.padding;
         const style = {
           "padding-left": padding + state.taskList.expander.margin + "px",
-          margin: "auto 0px"
+          margin: "auto 0",
         };
         return style;
       };
@@ -2037,6 +2042,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         y: "0",
         width: _vm.getWidth + "px",
         height: _vm.getHeight + "px",
+        viewBox: "0 0 " + _vm.getWidth + " " + _vm.getHeight,
         xmlns: "http://www.w3.org/2000/svg"
       }
     },
@@ -2146,6 +2152,11 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
         y: "0",
         width: _vm.root.state.width,
         height: _vm.root.state.allVisibleTasksHeight,
+        viewBox:
+          "0 0 " +
+          _vm.root.state.width +
+          " " +
+          _vm.root.state.allVisibleTasksHeight,
         xmlns: "http://www.w3.org/2000/svg"
       }
     },
@@ -2198,6 +2209,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Grid.vue?vue&type=template&id=2bf979a7&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Grid.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -3165,7 +3177,7 @@ var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
     {
       staticClass: "gantt-elastic__chart-dependency-lines-container",
       style: _vm.root.style("chart-dependency-lines-container"),
-      attrs: { width: "100%", height: "100%" }
+      attrs: { x: "0", y: "0", width: "100%", height: "100%" }
     },
     _vm._l(_vm.dependencyTasks, function(task) {
       return _c(
@@ -3206,6 +3218,8 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/DependencyLines.vue?vue&type=template&id=f1cbf6ba&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/DependencyLines.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -3406,6 +3420,7 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
             y: _vm.task.y,
             width: _vm.task.width,
             height: _vm.task.height,
+            viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
           on: {
@@ -3500,7 +3515,8 @@ var Textvue_type_template_id_459c2fe4_render = function() {
         x: _vm.task.x + _vm.task.width + _vm.root.state.chart.text.offset,
         y: _vm.task.y - _vm.root.state.chart.grid.horizontal.gap,
         width: _vm.getWidth,
-        height: _vm.getHeight
+        height: _vm.getHeight,
+        viewBox: "0 0 " + _vm.getWidth + " " + _vm.getHeight
       }
     },
     [
@@ -3565,6 +3581,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Text.vue?vue&type=template&id=459c2fe4&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Text.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -3974,6 +3991,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 //
 //
 //
+//
 
 
 
@@ -4150,6 +4168,7 @@ var Milestonevue_type_template_id_3013006c_render = function() {
             y: _vm.task.y,
             width: _vm.task.width,
             height: _vm.task.height,
+            viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
           on: {
@@ -4231,6 +4250,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -4473,6 +4493,7 @@ var Projectvue_type_template_id_077bbd73_render = function() {
             y: _vm.task.y,
             width: _vm.task.width,
             height: _vm.task.height,
+            viewBox: "0 0 " + _vm.task.width + " " + _vm.task.height,
             xmlns: "http://www.w3.org/2000/svg"
           },
           on: {
@@ -4554,6 +4575,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -4732,6 +4754,7 @@ if (false) { var Project_api; }
 Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 /* harmony default export */ var Project = (Project_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Chart.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -5287,7 +5310,7 @@ const fontFamily = "Arial, sans-serif";
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
-    "margin": "0 10px"
+    "margin": "0 18px"
   },
   "task-list-expander-content": {
     "display": "inline-flex",
@@ -5308,7 +5331,7 @@ const fontFamily = "Arial, sans-serif";
   },
   "chart-expander-wrapper": {
     "display": "block",
-    "line-height":"1",
+    "line-height": "1",
     "box-sizing": "border-box",
     "margin": "0"
   },
@@ -5386,7 +5409,10 @@ const fontFamily = "Arial, sans-serif";
     "flex-shrink": "100",
     "font-family": fontFamily,
     "font-size": fontSize,
-    "margin": "auto 6px",
+    "margin-top": "auto",
+    "margin-bottom": "auto",
+    "margin-left": "6px", // TaskList
+    "margin-right": "6px",
     "overflow": "hidden",
     "text-overflow": "ellipsis",
     "line-height": "1.5em",

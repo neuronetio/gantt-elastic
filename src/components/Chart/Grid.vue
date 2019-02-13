@@ -15,6 +15,7 @@
     y="0"
     :width="root.state.width"
     :height="root.state.allVisibleTasksHeight"
+    :viewBox="`0 0 ${root.state.width} ${root.state.allVisibleTasksHeight}`"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
