@@ -15,7 +15,6 @@
     y="0"
     :width="getWidth+'px'"
     :height="getHeight+'px'"
-    :viewBox="`0 0 ${getWidth} ${getHeight}`"
     xmlns="http://www.w3.org/2000/svg"
   >
     <calendar></calendar>
@@ -34,7 +33,6 @@
           y="0"
           :width="getWidth+'px'"
           :height="root.state.allVisibleTasksHeight+'px'"
-          :viewBox="getViewBox"
           xmlns="http://www.w3.org/2000/svg"
         >
           <days-highlight></days-highlight>

@@ -14,7 +14,6 @@
     :y="task.y-root.state.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
-    :viewBox="`0 0 ${getWidth} ${getHeight}`"
   >
     <foreignObject x="0" y="0" width="100%" :height="getHeight">
       <div

@@ -19,7 +19,6 @@
         :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
         ref="svgMainView"
         xmlns="http://www.w3.org/2000/svg"
-        :viewBox="getViewBox"
       >
         <foreignObject x="0" y="0" width="100%" height="100%">
           <div

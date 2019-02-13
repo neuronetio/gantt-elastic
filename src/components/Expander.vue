@@ -13,7 +13,6 @@
       :style="root.style(getClassPrefix(false)+'-content')"
       :width="options.size"
       :height="options.size"
-      :viewBox="`0 0 ${options.size} ${options.size}`"
       v-if="allChildren.length"
     >
       <rect
