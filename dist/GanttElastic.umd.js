@@ -211,7 +211,7 @@ exports = module.exports = __webpack_require__(1)(false);
 exports.i(__webpack_require__(4), "");
 
 // module
-exports.push([module.i, "\r\n", ""]);
+exports.push([module.i, "\n", ""]);
 
 // exports
 
