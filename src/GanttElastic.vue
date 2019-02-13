@@ -1161,10 +1161,13 @@ const GanttElastic = {
      * @returns {number}
      */
     getDevicePixelRatio () {
-      if (document.documentElement.clientWidth === window.screen.width) {
-        return 1;
+      let ratio = 1;
+      if (typeof window.screen.systemXDPI !== 'undefined' && typeof window.screen.logicalXDPI !== 'undefined' && window.screen.systemXDPI > window.screen.logicalXDPI) {
+        ratio = window.screen.systemXDPI / window.screen.logicalXDPI;
+      } else if (typeof window.devicePixelRatio !== 'undefined') {
+        ratio = window.devicePixelRatio;
       }
-      return window.devicePixelRatio;
+      return ratio;
     },
 
     /**
