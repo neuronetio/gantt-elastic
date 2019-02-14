@@ -7,13 +7,22 @@
 const fontSize = "12px";
 const fontFamily = "Arial, sans-serif";
 export default {
+  "*": {
+    "box-sizing": "border-box"
+  },
   "main-view": {
     "background": "#FFFFFF"
+  },
+  "main-container-wrapper": {
+    "overflow": "hidden"
+  },
+  "main-container": {
+    "float": "left",
+    "max-width": "100%"
   },
   "container": {
     "display": "flex",
     "max-width": "100%",
-    "position": "absolute",
     "height": "100%"
   },
   "header": {
@@ -65,17 +74,35 @@ export default {
   "calendar-wrapper": {
     "user-select": "none"
   },
-  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
-  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar": {
+    "width": "100%",
+    "background": "#f3f5f7",
+    "display": "block"
+  },
+  "calendar-row": {
+    "display": "flex",
+  },
   "calendar-row--month": {},
   "calendar-row--day": {},
   "calendar-row--hour": {},
+  "calendar-row-rect": {
+    "background": "transparent",
+    "border-width": "0.5px", // Calendar
+    "border-color": "#dadada",
+    "border-style": "solid"
+  },
+  "calendar-row-text": {
+    "font-family": fontFamily, // GanttElastic
+    "font-size": fontSize,    //GanttElastic
+    "color": "#606060",
+    "text-align": "center"
+  },
   "calendar-row-rect--month": {},
-  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--month": {},
   "calendar-row-rect--day": {},
-  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--day": {},
   "calendar-row-rect--hour": {},
-  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--hour": {},
   "task-list-wrapper": {},
   "task-list": { "background": "transparent", "border-color": "#eee" },
   "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
@@ -92,7 +119,7 @@ export default {
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
-    "margin": "0 18px"
+    "margin": "0 0 0 10px"
   },
   "task-list-expander-content": {
     "display": "inline-flex",
@@ -134,6 +161,7 @@ export default {
     "fill": "#ffffffa0",
     "stroke": "#000000",
   },
+  "task-list-container": {},
   "task-list-header-label": {
     "overflow": "hidden",
     "text-overflow": "ellipsis",
@@ -220,6 +248,7 @@ export default {
     "user-select": "none",
     "overflow": "hidden"
   },
+  "chart-area": {},
   "chart-graph": {
     "overflow": "hidden"
   },
@@ -294,16 +323,8 @@ export default {
   "chart-days-highlight-rect": {
     "fill": "#f3f5f780"
   },
-  "svg-chart": {
+  "chart": {
     "overflow": "hidden"
-  },
-  "svg-container-wrapper": {
-    "overflow": "hidden"
-  },
-  "svg-container": {
-    "float": "left",
-    "position": "relative",
-    "max-width": "100%"
   },
   "slot-header-beforeOptions": {
     "display": "inline-block"

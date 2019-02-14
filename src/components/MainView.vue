@@ -9,54 +9,43 @@
 <template>
   <div class="gantt-elastic__main-view" :style="root.style('main-view')">
     <div
-      class="gantt-elastic__svg-container-wrapper"
-      :style="root.style('svg-container-wrapper',{height:root.state.height+'px'})"
+      class="gantt-elastic__main-container-wrapper"
+      :style="root.style('main-container-wrapper',{ height:root.state.height+'px'})"
     >
-      <svg
-        :width="getWidth"
-        :height="root.state.height"
-        class="gantt-elastic__svg-container"
-        :style="root.style('svg-container')"
-        ref="svgMainView"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="gantt-elastic__main-container"
+        :style="root.style('main-container',{width:getWidth+'px', height:root.state.height+'px'})"
+        ref="mainView"
       >
-        <foreignObject x="0" y="0" width="100%" height="100%">
+        <div
+          class="gantt-elastic__container"
+          :style="root.style('container')"
+          @mousemove="mouseMove"
+          @mouseup="mouseUp"
+        >
           <div
-            xmlns="http://www.w3.org/1999/xhtml"
-            class="gantt-elastic__container"
-            :style="root.style('container')"
-            @mousemove="mouseMove"
-            @mouseup="mouseUp"
+            ref="taskList"
+            class="gantt-elastic__task-list-container"
+            :style="root.style('task-list-container', {width:root.state.taskList.finalWidth+'px', height:root.state.height+'px'})"
+            v-show="root.state.taskList.display"
           >
-            <div class="gantt-elastic__task-list-container">
-              <svg
-                ref="svgTaskList"
-                class="gantt-elastic__task-list-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                :width="root.state.taskList.finalWidth"
-                :height="root.state.height"
-                v-show="root.state.taskList.display"
-              >
-                <defs v-html="defs"></defs>
-                <task-list></task-list>
-              </svg>
-            </div>
-            <div
-              class="gantt-elastic__main-view-container"
-              ref="svgChartContainer"
-              @mousedown="chartMouseDown"
-              @touchstart="chartMouseDown"
-              @mouseup="chartMouseUp"
-              @touchend="chartMouseUp"
-              @mousemove.prevent="chartMouseMove"
-              @touchmove.prevent="chartMouseMove"
-              @wheel.prevent="chartWheel"
-            >
-              <chart></chart>
-            </div>
+            <task-list></task-list>
           </div>
-        </foreignObject>
-      </svg>
+          <div
+            class="gantt-elastic__main-view-container"
+            ref="chartContainer"
+            @mousedown="chartMouseDown"
+            @touchstart="chartMouseDown"
+            @mouseup="chartMouseUp"
+            @touchend="chartMouseUp"
+            @mousemove.prevent="chartMouseMove"
+            @touchmove.prevent="chartMouseMove"
+            @wheel.prevent="chartWheel"
+          >
+            <chart></chart>
+          </div>
+        </div>
+      </div>
       <div
         class="gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical"
         :style="root.style('chart-scroll-container','chart-scroll-container--vertical',verticalStyle)"
@@ -113,10 +102,10 @@ export default {
    */
   mounted () {
     this.viewBoxWidth = this.$el.clientWidth;
-    this.root.state.refs.svgMainView = this.$refs.svgMainView;
+    this.root.state.refs.mainView = this.$refs.mainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
-    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
-    this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
+    this.root.state.refs.chartContainer = this.$refs.chartContainer;
+    this.root.state.refs.taskList = this.$refs.taskList;
     this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
     this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
     document.addEventListener('mouseup', this.chartMouseUp.bind(this));
@@ -132,7 +121,11 @@ export default {
      * @returns {number}
      */
     getWidth () {
-      return this.root.state.clientWidth ? this.root.state.clientWidth - this.root.state.scrollBarHeight : 0;
+      let width = this.root.state.clientWidth - this.root.state.scrollBarHeight;
+      if (width < 0) {
+        return 0;
+      }
+      return width;
     },
 
     /**

@@ -7,22 +7,13 @@
  */
 -->
 <template>
-  <foreignObject
+  <div
     class="gantt-elastic__task-list-wrapper"
     ref="taskListWrapper"
-    :style="root.style('task-list-wrapper')"
-    x="0"
-    y="0"
-    width="100%"
-    height="100%"
+    :style="root.style('task-list-wrapper',{width:'100%', height:'100%'})"
     v-show="root.state.taskList.display"
   >
-    <div
-      xmlns="http://www.w3.org/1999/xhtml"
-      class="gantt-elastic__task-list"
-      :style="root.style('task-list')"
-      ref="taskList"
-    >
+    <div class="gantt-elastic__task-list" :style="root.style('task-list')" ref="taskList">
       <task-list-header></task-list-header>
       <div
         class="gantt-elastic__task-list-items"
@@ -38,7 +29,7 @@
         ></task-list-item>
       </div>
     </div>
-  </foreignObject>
+  </div>
 </template>
 
 <script>

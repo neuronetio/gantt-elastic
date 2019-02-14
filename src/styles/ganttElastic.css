@@ -11,7 +11,7 @@ foreignObject > *{
 .gantt-elastic .p-2{
   padding: 10rem;
 }
-.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{
+.gantt-elastic__main-view-main-container , .gantt-elastic__main-view-container{
   overflow: hidden;
   max-width:100%;
 }

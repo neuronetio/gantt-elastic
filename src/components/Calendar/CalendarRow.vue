@@ -7,33 +7,28 @@
  */
 -->
 <template>
-  <g
-  v-if="root.state.calendar[which].display"
-  class="gantt-elastic__calendar-row"
-  :style="root.style('calendar-row')">
-    <rect
-      :class="'gantt-elastic__calendar-row-rect--'+which"
-      :style="root.style('calendar-row-rect--'+which)"
-      :x="item.x"
-      :y="item.y"
-      :width="item.width"
-      :height="item.height"
-    ></rect>
-    <text
-      :class="'gantt-elastic__calendar-row-text--'+which"
-      :style="root.style('calendar-row-text--'+which)"
-      :x="getTextX"
-      :y="getTextY"
-      alignment-baseline="middle"
-      :text-anchor="anchor"
-    >{{item.label}}</text>
-  </g>
+  <div
+    :class="'gantt-elastic__calendar-row gantt-elastic__calendar-row-'+which"
+    :style="root.style('calendar-row','calendar-row-'+which)"
+  >
+    <div
+      v-for="item in items"
+      :key="item.key"
+      :class="'gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--'+which"
+      :style="root.style('calendar-row-rect','calendar-row-rect--'+which,{width: item.width + 'px', height: item.height + 'px'})"
+    >
+      <div
+        :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--'+which"
+        :style="root.style('calendar-row-text','calendar-row-text--'+which, getStyle(item))"
+      >{{item.label}}</div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   inject: ["root"],
-  props: ["item", "which"],
+  props: ["items", "which"],
   data () {
     return {
       anchor: 'middle'
@@ -67,6 +62,19 @@ export default {
      */
     getTextY () {
       return this.item.y + this.item.height / 2;
+    },
+
+    /**
+     * Get style for an item
+     *
+     * @returns {function}
+     */
+    getStyle () {
+      return (item) => {
+        return {
+          'line-height': (item.height - parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2) + 'px'
+        };
+      }
     }
   }
 };

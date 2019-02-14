@@ -225,7 +225,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-svg-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -789,106 +789,83 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
       _c(
         "div",
         {
-          staticClass: "gantt-elastic__svg-container-wrapper",
-          style: _vm.root.style("svg-container-wrapper", {
+          staticClass: "gantt-elastic__main-container-wrapper",
+          style: _vm.root.style("main-container-wrapper", {
             height: _vm.root.state.height + "px"
           })
         },
         [
           _c(
-            "svg",
+            "div",
             {
-              ref: "svgMainView",
-              staticClass: "gantt-elastic__svg-container",
-              style: _vm.root.style("svg-container"),
-              attrs: {
-                width: _vm.getWidth,
-                height: _vm.root.state.height,
-                xmlns: "http://www.w3.org/2000/svg"
-              }
+              ref: "mainView",
+              staticClass: "gantt-elastic__main-container",
+              style: _vm.root.style("main-container", {
+                width: _vm.getWidth + "px",
+                height: _vm.root.state.height + "px"
+              })
             },
             [
               _c(
-                "foreignObject",
-                { attrs: { x: "0", y: "0", width: "100%", height: "100%" } },
+                "div",
+                {
+                  staticClass: "gantt-elastic__container",
+                  style: _vm.root.style("container"),
+                  on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+                },
                 [
                   _c(
                     "div",
                     {
-                      staticClass: "gantt-elastic__container",
-                      style: _vm.root.style("container"),
-                      attrs: { xmlns: "http://www.w3.org/1999/xhtml" },
-                      on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "gantt-elastic__task-list-container" },
-                        [
-                          _c(
-                            "svg",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.root.state.taskList.display,
-                                  expression: "root.state.taskList.display"
-                                }
-                              ],
-                              ref: "svgTaskList",
-                              staticClass: "gantt-elastic__task-list-svg",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: _vm.root.state.taskList.finalWidth,
-                                height: _vm.root.state.height
-                              }
-                            },
-                            [
-                              _c("defs", {
-                                domProps: { innerHTML: _vm._s(_vm.defs) }
-                              }),
-                              _vm._v(" "),
-                              _c("task-list")
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
+                      directives: [
                         {
-                          ref: "svgChartContainer",
-                          staticClass: "gantt-elastic__main-view-container",
-                          on: {
-                            mousedown: _vm.chartMouseDown,
-                            touchstart: _vm.chartMouseDown,
-                            mouseup: _vm.chartMouseUp,
-                            touchend: _vm.chartMouseUp,
-                            mousemove: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartMouseMove($event)
-                            },
-                            touchmove: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartMouseMove($event)
-                            },
-                            wheel: function($event) {
-                              $event.preventDefault()
-                              return _vm.chartWheel($event)
-                            }
-                          }
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.root.state.taskList.display,
+                          expression: "root.state.taskList.display"
+                        }
+                      ],
+                      ref: "taskList",
+                      staticClass: "gantt-elastic__task-list-container",
+                      style: _vm.root.style("task-list-container", {
+                        width: _vm.root.state.taskList.finalWidth + "px",
+                        height: _vm.root.state.height + "px"
+                      })
+                    },
+                    [_c("task-list")],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      ref: "chartContainer",
+                      staticClass: "gantt-elastic__main-view-container",
+                      on: {
+                        mousedown: _vm.chartMouseDown,
+                        touchstart: _vm.chartMouseDown,
+                        mouseup: _vm.chartMouseUp,
+                        touchend: _vm.chartMouseUp,
+                        mousemove: function($event) {
+                          $event.preventDefault()
+                          return _vm.chartMouseMove($event)
                         },
-                        [_c("chart")],
-                        1
-                      )
-                    ]
+                        touchmove: function($event) {
+                          $event.preventDefault()
+                          return _vm.chartMouseMove($event)
+                        },
+                        wheel: function($event) {
+                          $event.preventDefault()
+                          return _vm.chartWheel($event)
+                        }
+                      }
+                    },
+                    [_c("chart")],
+                    1
                   )
                 ]
               )
-            ],
-            1
+            ]
           ),
           _vm._v(" "),
           _c(
@@ -952,7 +929,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "foreignObject",
+    "div",
     {
       directives: [
         {
@@ -964,8 +941,10 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
       ],
       ref: "taskListWrapper",
       staticClass: "gantt-elastic__task-list-wrapper",
-      style: _vm.root.style("task-list-wrapper"),
-      attrs: { x: "0", y: "0", width: "100%", height: "100%" }
+      style: _vm.root.style("task-list-wrapper", {
+        width: "100%",
+        height: "100%"
+      })
     },
     [
       _c(
@@ -973,8 +952,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           ref: "taskList",
           staticClass: "gantt-elastic__task-list",
-          style: _vm.root.style("task-list"),
-          attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+          style: _vm.root.style("task-list")
         },
         [
           _c("task-list-header"),
@@ -1028,7 +1006,10 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__task-list-header",
-      style: _vm.root.style("task-list-header")
+      style: _vm.root.style("task-list-header", {
+        height: _vm.root.state.calendar.height + "px",
+        "margin-bottom": _vm.root.state.calendar.gap + "px"
+      })
     },
     _vm._l(_vm.root.getTaskListColumns, function(column) {
       return _c(
@@ -1510,6 +1491,9 @@ component.options.__file = "src/components/Expander.vue"
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
@@ -1540,8 +1524,7 @@ component.options.__file = "src/components/Expander.vue"
       return column => {
         const state = this.root.state;
         return {
-          "height": state.calendar.height + this.root.style('calendar-row')['stroke-width'] + "px",
-          "margin-bottom": state.calendar.gap + "px",
+          "height": state.calendar.height + this.root.style('calendar-row-rect')['border-width'] + "px",
           "width": column.finalWidth + "px"
         };
       };
@@ -1951,15 +1934,6 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2032,31 +2006,25 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "svg",
+    "div",
     {
       ref: "chart",
       staticClass: "gantt-elastic__chart",
-      style: _vm.root.style("chart"),
-      attrs: {
-        x: "0",
-        y: "0",
+      style: _vm.root.style("chart", {
         width: _vm.getWidth + "px",
-        height: _vm.getHeight + "px",
-        xmlns: "http://www.w3.org/2000/svg"
-      }
+        height: _vm.getHeight + "px"
+      })
     },
     [
       _c("calendar"),
       _vm._v(" "),
       _c(
-        "foreignObject",
+        "div",
         {
-          attrs: {
-            x: "0",
-            y: _vm.root.getCalendarHeight(),
+          style: _vm.root.style("chart-area", {
             width: "100%",
-            height: _vm.root.state.rowsHeight
-          }
+            height: _vm.root.state.rowsHeight + "px"
+          })
         },
         [
           _c(
@@ -2064,8 +2032,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
             {
               ref: "chartGraph",
               staticClass: "gantt-elastic__chart-graph",
-              style: _vm.root.style("chart-graph", { height: "100%" }),
-              attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
+              style: _vm.root.style("chart-graph", { height: "100%" })
             },
             [
               _c(
@@ -2532,56 +2499,30 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "g",
+    "div",
     {
       staticClass: "gantt-elastic__calendar-wrapper",
-      style: _vm.root.style("calendar-wrapper")
+      style: _vm.root.style("calendar-wrapper", {
+        "margin-bottom": _vm.root.state.calendar.gap + "px"
+      })
     },
     [
       _c(
-        "foreignObject",
+        "div",
         {
-          attrs: {
-            x: _vm.getX,
-            y: _vm.getY,
-            width: _vm.getWidth,
-            height: _vm.root.state.calendar.height
-          }
+          staticClass: "gantt-elastic__calendar",
+          style: _vm.root.style("calendar", { width: _vm.getWidth + "px" })
         },
         [
-          _c("div", {
-            staticClass: "gantt-elastic__calendar",
-            style: _vm.root.style("calendar"),
-            attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.getMonths, function(month) {
-        return _c("calendar-row", {
-          key: month.key,
-          staticClass: "gantt-elastic__calendar-row--month",
-          attrs: { item: month, which: "month" }
-        })
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.getDays, function(day) {
-        return _c("calendar-row", {
-          key: day.key,
-          staticClass: "gantt-elastic__calendar-row--day",
-          attrs: { item: day, which: "day" }
-        })
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.getHours, function(hour) {
-        return _c("calendar-row", {
-          key: hour.key,
-          staticClass: "gantt-elastic__calendar-row--hour",
-          attrs: { item: hour, which: "hour" }
-        })
-      })
-    ],
-    2
+          _c("calendar-row", { attrs: { items: _vm.months, which: "month" } }),
+          _vm._v(" "),
+          _c("calendar-row", { attrs: { items: _vm.days, which: "day" } }),
+          _vm._v(" "),
+          _c("calendar-row", { attrs: { items: _vm.hours, which: "hour" } })
+        ],
+        1
+      )
+    ]
   )
 }
 var Calendarvue_type_template_id_dee108e2_staticRenderFns = []
@@ -2595,42 +2536,47 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.root.state.calendar[_vm.which].display
-    ? _c(
-        "g",
+  return _c(
+    "div",
+    {
+      class:
+        "gantt-elastic__calendar-row gantt-elastic__calendar-row-" + _vm.which,
+      style: _vm.root.style("calendar-row", "calendar-row-" + _vm.which)
+    },
+    _vm._l(_vm.items, function(item) {
+      return _c(
+        "div",
         {
-          staticClass: "gantt-elastic__calendar-row",
-          style: _vm.root.style("calendar-row")
+          key: item.key,
+          class:
+            "gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--" +
+            _vm.which,
+          style: _vm.root.style(
+            "calendar-row-rect",
+            "calendar-row-rect--" + _vm.which,
+            { width: item.width + "px", height: item.height + "px" }
+          )
         },
         [
-          _c("rect", {
-            class: "gantt-elastic__calendar-row-rect--" + _vm.which,
-            style: _vm.root.style("calendar-row-rect--" + _vm.which),
-            attrs: {
-              x: _vm.item.x,
-              y: _vm.item.y,
-              width: _vm.item.width,
-              height: _vm.item.height
-            }
-          }),
-          _vm._v(" "),
           _c(
-            "text",
+            "div",
             {
-              class: "gantt-elastic__calendar-row-text--" + _vm.which,
-              style: _vm.root.style("calendar-row-text--" + _vm.which),
-              attrs: {
-                x: _vm.getTextX,
-                y: _vm.getTextY,
-                "alignment-baseline": "middle",
-                "text-anchor": _vm.anchor
-              }
+              class:
+                "gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--" +
+                _vm.which,
+              style: _vm.root.style(
+                "calendar-row-text",
+                "calendar-row-text--" + _vm.which,
+                _vm.getStyle(item)
+              )
             },
-            [_vm._v(_vm._s(_vm.item.label))]
+            [_vm._v(_vm._s(item.label))]
           )
         ]
       )
-    : _vm._e()
+    }),
+    0
+  )
 }
 var CalendarRowvue_type_template_id_0daf06fb_staticRenderFns = []
 CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
@@ -2666,15 +2612,10 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ var CalendarRowvue_type_script_lang_js_ = ({
   inject: ["root"],
-  props: ["item", "which"],
+  props: ["items", "which"],
   data () {
     return {
       anchor: 'middle'
@@ -2708,6 +2649,19 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
      */
     getTextY () {
       return this.item.y + this.item.height / 2;
+    },
+
+    /**
+     * Get style for an item
+     *
+     * @returns {function}
+     */
+    getStyle () {
+      return (item) => {
+        return {
+          'line-height': (item.height - parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2) + 'px'
+        };
+      }
     }
   }
 });
@@ -2738,22 +2692,6 @@ if (false) { var CalendarRow_api; }
 CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 /* harmony default export */ var CalendarRow = (CalendarRow_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2809,7 +2747,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     howManyHoursFit (dayIndex) {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
@@ -2834,7 +2773,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     howManyDaysFit () {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
       for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
@@ -2860,7 +2800,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     howManyMonthsFit () {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentMonth = esm(this.root.state.times.firstDate);
@@ -2925,12 +2866,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
           }
-          let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
             key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
             x,
-            y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            y: this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
             textWidth,
             height: this.root.state.calendar.hour.height,
@@ -2963,12 +2904,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px;
+        let x = this.root.state.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
           key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
           x,
-          y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
+          y: this.root.state.calendar.month.height,
           width: dayWidthPx,
           textWidth,
           height: this.root.state.calendar.day.height,
@@ -3017,12 +2958,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
         }
-        let x = this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset;
+        let x = monthOffset;
         months.push({
           index: monthIndex,
           key: monthIndex + "m",
           x,
-          y: this.root.style('calendar-row')["stroke-width"] / 2,
+          y: 0,
           width: monthWidth,
           textWidth,
           choosenFormatName,
@@ -3051,30 +2992,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
   computed: {
 
     /**
-     * Get x position
-     *
-     * @returns {number}
-     */
-    getX () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
-     * Get y position
-     *
-     * @returns {number}
-     */
-    getY () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
      * Get width
      *
      * @returns {number}
      */
     getWidth () {
-      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
+      let width = this.root.state.width;
       return width;
     },
 
@@ -4790,16 +4713,6 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4961,17 +4874,6 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5005,10 +4907,10 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
    */
   mounted () {
     this.viewBoxWidth = this.$el.clientWidth;
-    this.root.state.refs.svgMainView = this.$refs.svgMainView;
+    this.root.state.refs.mainView = this.$refs.mainView;
     this.root.state.refs.svgChart = this.$refs.svgChart;
-    this.root.state.refs.svgChartContainer = this.$refs.svgChartContainer;
-    this.root.state.refs.svgTaskList = this.$refs.svgTaskList;
+    this.root.state.refs.chartContainer = this.$refs.chartContainer;
+    this.root.state.refs.taskList = this.$refs.taskList;
     this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
     this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
     document.addEventListener('mouseup', this.chartMouseUp.bind(this));
@@ -5024,7 +4926,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * @returns {number}
      */
     getWidth () {
-      return this.root.state.clientWidth ? this.root.state.clientWidth - this.root.state.scrollBarHeight : 0;
+      let width = this.root.state.clientWidth - this.root.state.scrollBarHeight;
+      if (width < 0) {
+        return 0;
+      }
+      return width;
     },
 
     /**
@@ -5211,14 +5117,23 @@ MainView_component.options.__file = "src/components/MainView.vue"
 */
 const fontSize = "12px";
 const fontFamily = "Arial, sans-serif";
-/* harmony default export */ var style = ({
+/* harmony default export */ var src_style = ({
+  "*": {
+    "box-sizing": "border-box"
+  },
   "main-view": {
     "background": "#FFFFFF"
+  },
+  "main-container-wrapper": {
+    "overflow": "hidden"
+  },
+  "main-container": {
+    "float": "left",
+    "max-width": "100%"
   },
   "container": {
     "display": "flex",
     "max-width": "100%",
-    "position": "absolute",
     "height": "100%"
   },
   "header": {
@@ -5270,17 +5185,35 @@ const fontFamily = "Arial, sans-serif";
   "calendar-wrapper": {
     "user-select": "none"
   },
-  "calendar": { "width": "100%", "height": "100%", "background": "#f3f5f7", "border-color": "#f3f5f7" },
-  "calendar-row": { "fill": "transparent", "stroke": "#dadada", "stroke-width": 0.5 },
+  "calendar": {
+    "width": "100%",
+    "background": "#f3f5f7",
+    "display": "block"
+  },
+  "calendar-row": {
+    "display": "flex",
+  },
   "calendar-row--month": {},
   "calendar-row--day": {},
   "calendar-row--hour": {},
+  "calendar-row-rect": {
+    "background": "transparent",
+    "border-width": "0.5px", // Calendar
+    "border-color": "#dadada",
+    "border-style": "solid"
+  },
+  "calendar-row-text": {
+    "font-family": fontFamily, // GanttElastic
+    "font-size": fontSize,    //GanttElastic
+    "color": "#606060",
+    "text-align": "center"
+  },
   "calendar-row-rect--month": {},
-  "calendar-row-text--month": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--month": {},
   "calendar-row-rect--day": {},
-  "calendar-row-text--day": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--day": {},
   "calendar-row-rect--hour": {},
-  "calendar-row-text--hour": { "font-family": fontFamily, "font-size": fontSize, "fill": "#606060", "stroke": "none" },
+  "calendar-row-text--hour": {},
   "task-list-wrapper": {},
   "task-list": { "background": "transparent", "border-color": "#eee" },
   "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
@@ -5297,7 +5230,7 @@ const fontFamily = "Arial, sans-serif";
     "display": "inline-flex",
     "flex-shrink": "0",
     "box-sizing": "border-box",
-    "margin": "0 18px"
+    "margin": "0 0 0 10px"
   },
   "task-list-expander-content": {
     "display": "inline-flex",
@@ -5339,6 +5272,7 @@ const fontFamily = "Arial, sans-serif";
     "fill": "#ffffffa0",
     "stroke": "#000000",
   },
+  "task-list-container": {},
   "task-list-header-label": {
     "overflow": "hidden",
     "text-overflow": "ellipsis",
@@ -5425,6 +5359,7 @@ const fontFamily = "Arial, sans-serif";
     "user-select": "none",
     "overflow": "hidden"
   },
+  "chart-area": {},
   "chart-graph": {
     "overflow": "hidden"
   },
@@ -5499,16 +5434,8 @@ const fontFamily = "Arial, sans-serif";
   "chart-days-highlight-rect": {
     "fill": "#f3f5f780"
   },
-  "svg-chart": {
+  "chart": {
     "overflow": "hidden"
-  },
-  "svg-container-wrapper": {
-    "overflow": "hidden"
-  },
-  "svg-container": {
-    "float": "left",
-    "position": "relative",
-    "max-width": "100%"
   },
   "slot-header-beforeOptions": {
     "display": "inline-block"
@@ -5545,7 +5472,7 @@ const fontFamily = "Arial, sans-serif";
  */
 function getOptions (userOptions) {
   return {
-    style: style,
+    style: src_style,
     slots: {
       header: {},
     },
@@ -5556,7 +5483,6 @@ function getOptions (userOptions) {
     width: 0,
     height: 0,
     clientWidth: 0,
-    clientHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
     scroll: {
@@ -5735,7 +5661,6 @@ function getOptions (userOptions) {
         }
       }
     },
-    defs: [],
     locale: {
       code: "en",
       Now: "Now",
@@ -5877,7 +5802,7 @@ const GanttElastic = {
       if (typeof styleCache[index] !== 'undefined') {
         return styleCache[index];
       }
-      let merged = {};
+      let merged = this.state.style['*'];
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
           merged = Object.assign({}, merged, this.state.style[objOrClassName]);
@@ -6016,7 +5941,7 @@ const GanttElastic = {
      * @returns {int}
      */
     getCalendarHeight () {
-      return this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
+      return this.state.calendar.height + this.style('calendar-row')["border-width"] + this.state.calendar.gap;
     },
 
     /**
@@ -6180,7 +6105,7 @@ const GanttElastic = {
      * @returns {string} html svg image of gantt
      */
     getSVG () {
-      return this.state.svgMainView.outerHTML;
+      return this.state.mainView.outerHTML;
     },
 
     /**
@@ -6194,8 +6119,8 @@ const GanttElastic = {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = this.state.svgMainView.clientWidth;
-          canvas.height = this.state.svgMainView.clientHeight;
+          canvas.width = this.state.mainView.clientWidth;
+          canvas.height = this.state.rowsHeight;
           canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
@@ -6209,7 +6134,7 @@ const GanttElastic = {
      * @returns {number}
      */
     getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + parseFloat(this.style('calendar-row-rect')["border-width"]) * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
@@ -6292,7 +6217,7 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart (left, top) {
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       this.state.scroll.chart.left = left;
       this.state.scroll.chart.right = left + chartContainerWidth;
       this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
@@ -6311,7 +6236,7 @@ const GanttElastic = {
      */
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       pos = pos - chartContainerWidth / 2;
       if (pos > this.state.width) {
         pos = this.state.width - chartContainerWidth;
@@ -6327,7 +6252,7 @@ const GanttElastic = {
      */
     scrollTo (left = null, top = null) {
       if (left !== null) {
-        this.state.refs.svgChartContainer.scrollLeft = left;
+        this.state.refs.chartContainer.scrollLeft = left;
         this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.scroll.left = left;
       }
@@ -6355,7 +6280,7 @@ const GanttElastic = {
     onWheelChart (ev) {
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const chartClientHeight = this.state.rowsHeight;
         const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
@@ -6528,8 +6453,8 @@ const GanttElastic = {
      */
     computeHourWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--hour");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--hour");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let currentDate = esm("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
       state.calendar.hour.widths = [];
@@ -6559,8 +6484,8 @@ const GanttElastic = {
      */
     computeDayWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--day");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--day");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let currentDate = esm(state.times.steps[0].date);
       let maxWidths = {};
       state.calendar.day.widths = [];
@@ -6590,8 +6515,8 @@ const GanttElastic = {
      */
     computeMonthWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--month");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--month");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let maxWidths = {};
       state.calendar.month.widths = [];
       Object.keys(state.calendar.month.format).forEach(formatName => {

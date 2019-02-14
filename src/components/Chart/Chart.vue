@@ -7,24 +7,14 @@
  */
 -->
 <template>
-  <svg
+  <div
     class="gantt-elastic__chart"
-    :style="root.style('chart')"
+    :style="root.style('chart',{width:getWidth+'px', height:getHeight+'px'})"
     ref="chart"
-    x="0"
-    y="0"
-    :width="getWidth+'px'"
-    :height="getHeight+'px'"
-    xmlns="http://www.w3.org/2000/svg"
   >
     <calendar></calendar>
-    <foreignObject x="0" :y="root.getCalendarHeight()" width="100%" :height="root.state.rowsHeight">
-      <div
-        xmlns="http://www.w3.org/1999/xhtml"
-        class="gantt-elastic__chart-graph"
-        ref="chartGraph"
-        :style="root.style('chart-graph',{height:'100%'})"
-      >
+    <div :style="root.style('chart-area', {width:'100%', height:root.state.rowsHeight+'px'})">
+      <div class="gantt-elastic__chart-graph" ref="chartGraph" :style="root.style('chart-graph',{height:'100%'})">
         <svg
           class="gantt-elastic__chart"
           :style="root.style('chart')"
@@ -50,8 +40,8 @@
           </g>
         </svg>
       </div>
-    </foreignObject>
-  </svg>
+    </div>
+  </div>
 </template>
 
 <script>

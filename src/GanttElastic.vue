@@ -38,7 +38,6 @@ function getOptions (userOptions) {
     width: 0,
     height: 0,
     clientWidth: 0,
-    clientHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
     scroll: {
@@ -217,7 +216,6 @@ function getOptions (userOptions) {
         }
       }
     },
-    defs: [],
     locale: {
       code: "en",
       Now: "Now",
@@ -359,7 +357,7 @@ const GanttElastic = {
       if (typeof styleCache[index] !== 'undefined') {
         return styleCache[index];
       }
-      let merged = {};
+      let merged = this.state.style['*'];
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
           merged = Object.assign({}, merged, this.state.style[objOrClassName]);
@@ -498,7 +496,7 @@ const GanttElastic = {
      * @returns {int}
      */
     getCalendarHeight () {
-      return this.state.calendar.height + this.style('calendar-row')["stroke-width"] + this.state.calendar.gap;
+      return this.state.calendar.height + this.style('calendar-row')["border-width"] + this.state.calendar.gap;
     },
 
     /**
@@ -662,7 +660,7 @@ const GanttElastic = {
      * @returns {string} html svg image of gantt
      */
     getSVG () {
-      return this.state.svgMainView.outerHTML;
+      return this.state.mainView.outerHTML;
     },
 
     /**
@@ -676,8 +674,8 @@ const GanttElastic = {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = this.state.svgMainView.clientWidth;
-          canvas.height = this.state.svgMainView.clientHeight;
+          canvas.width = this.state.mainView.clientWidth;
+          canvas.height = this.state.rowsHeight;
           canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
@@ -691,7 +689,7 @@ const GanttElastic = {
      * @returns {number}
      */
     getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + this.style('calendar-row')["stroke-width"] * 2 + this.state.calendar.gap;
+      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + parseFloat(this.style('calendar-row-rect')["border-width"]) * 2 + this.state.calendar.gap;
       if (outer) {
         height += this.state.scrollBarHeight;
       }
@@ -774,7 +772,7 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart (left, top) {
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       this.state.scroll.chart.left = left;
       this.state.scroll.chart.right = left + chartContainerWidth;
       this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
@@ -793,7 +791,7 @@ const GanttElastic = {
      */
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
+      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       pos = pos - chartContainerWidth / 2;
       if (pos > this.state.width) {
         pos = this.state.width - chartContainerWidth;
@@ -809,7 +807,7 @@ const GanttElastic = {
      */
     scrollTo (left = null, top = null) {
       if (left !== null) {
-        this.state.refs.svgChartContainer.scrollLeft = left;
+        this.state.refs.chartContainer.scrollLeft = left;
         this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.scroll.left = left;
       }
@@ -837,7 +835,7 @@ const GanttElastic = {
     onWheelChart (ev) {
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const chartClientHeight = this.state.rowsHeight;
         const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
@@ -1010,8 +1008,8 @@ const GanttElastic = {
      */
     computeHourWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--hour");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--hour");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let currentDate = dayjs("2018-01-01T00:00:00"); // any date will be good for hours
       let maxWidths = {};
       state.calendar.hour.widths = [];
@@ -1041,8 +1039,8 @@ const GanttElastic = {
      */
     computeDayWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--day");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--day");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let currentDate = dayjs(state.times.steps[0].date);
       let maxWidths = {};
       state.calendar.day.widths = [];
@@ -1072,8 +1070,8 @@ const GanttElastic = {
      */
     computeMonthWidths () {
       const state = this.state;
-      const monthStyle = this.style("calendar-row-text--month");
-      state.ctx.font = monthStyle["font-size"] + " " + monthStyle["font-family"];
+      const style = this.style("calendar-row-text", "calendar-row-text--month");
+      state.ctx.font = style["font-size"] + " " + style["font-family"];
       let maxWidths = {};
       state.calendar.month.widths = [];
       Object.keys(state.calendar.month.format).forEach(formatName => {

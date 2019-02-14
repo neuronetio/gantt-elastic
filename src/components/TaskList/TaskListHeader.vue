@@ -7,7 +7,10 @@
  */
 -->
 <template>
-  <div class="gantt-elastic__task-list-header" :style="root.style('task-list-header')">
+  <div
+    class="gantt-elastic__task-list-header"
+    :style="root.style('task-list-header', {height: root.state.calendar.height+'px', 'margin-bottom': root.state.calendar.gap+'px'})"
+  >
     <div
       class="gantt-elastic__task-list-header-column"
       :style="root.style('task-list-header-column', column.style['task-list-header-column'], getStyle(column))"
@@ -79,8 +82,7 @@ export default {
       return column => {
         const state = this.root.state;
         return {
-          "height": state.calendar.height + this.root.style('calendar-row')['stroke-width'] + "px",
-          "margin-bottom": state.calendar.gap + "px",
+          "height": state.calendar.height + this.root.style('calendar-row-rect')['border-width'] + "px",
           "width": column.finalWidth + "px"
         };
       };

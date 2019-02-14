@@ -7,32 +7,16 @@
  */
 -->
 <template>
-  <g class="gantt-elastic__calendar-wrapper" :style="root.style('calendar-wrapper')">
-    <foreignObject :x="getX" :y="getY" :width="getWidth" :height="root.state.calendar.height">
-      <div class="gantt-elastic__calendar" :style="root.style('calendar')" xmlns="http://www.w3.org/1999/xhtml"></div>
-    </foreignObject>
-    <calendar-row
-      class="gantt-elastic__calendar-row--month"
-      v-for="month in getMonths"
-      :key="month.key"
-      :item="month"
-      which="month"
-    ></calendar-row>
-    <calendar-row
-      class="gantt-elastic__calendar-row--day"
-      v-for="day in getDays"
-      :key="day.key"
-      :item="day"
-      which="day"
-    ></calendar-row>
-    <calendar-row
-      class="gantt-elastic__calendar-row--hour"
-      v-for="hour in getHours"
-      :key="hour.key"
-      :item="hour"
-      which="hour"
-    ></calendar-row>
-  </g>
+  <div
+    class="gantt-elastic__calendar-wrapper"
+    :style="root.style('calendar-wrapper',{'margin-bottom':root.state.calendar.gap+'px'})"
+  >
+    <div class="gantt-elastic__calendar" :style="root.style('calendar',{width:getWidth+'px'})">
+      <calendar-row :items="months" which="month"></calendar-row>
+      <calendar-row :items="days" which="day"></calendar-row>
+      <calendar-row :items="hours" which="hour"></calendar-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -69,7 +53,8 @@ export default {
      * @returns {object}
      */
     howManyHoursFit (dayIndex) {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
@@ -94,7 +79,8 @@ export default {
      * @returns {object}
      */
     howManyDaysFit () {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.day.format);
       for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
@@ -120,7 +106,8 @@ export default {
      * @returns {object}
      */
     howManyMonthsFit () {
-      const additionalSpace = this.root.style('calendar-row')["stroke-width"] + 2;
+      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
+      const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.root.state.width;
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentMonth = dayjs(this.root.state.times.firstDate);
@@ -185,12 +172,12 @@ export default {
           if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
           }
-          let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
             key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
             x,
-            y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            y: this.root.state.calendar.day.height + this.root.state.calendar.month.height,
             width: hourWidthPx,
             textWidth,
             height: this.root.state.calendar.hour.height,
@@ -223,12 +210,12 @@ export default {
         if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.times.steps[dayIndex].offset.px;
+        let x = this.root.state.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
           key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
           x,
-          y: this.root.style('calendar-row')["stroke-width"] / 2 + this.root.state.calendar.month.height,
+          y: this.root.state.calendar.month.height,
           width: dayWidthPx,
           textWidth,
           height: this.root.state.calendar.day.height,
@@ -277,12 +264,12 @@ export default {
         if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
           textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
         }
-        let x = this.root.style('calendar-row')["stroke-width"] / 2 + monthOffset;
+        let x = monthOffset;
         months.push({
           index: monthIndex,
           key: monthIndex + "m",
           x,
-          y: this.root.style('calendar-row')["stroke-width"] / 2,
+          y: 0,
           width: monthWidth,
           textWidth,
           choosenFormatName,
@@ -311,30 +298,12 @@ export default {
   computed: {
 
     /**
-     * Get x position
-     *
-     * @returns {number}
-     */
-    getX () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
-     * Get y position
-     *
-     * @returns {number}
-     */
-    getY () {
-      return this.root.style('calendar-row')["stroke-width"] / 2;
-    },
-
-    /**
      * Get width
      *
      * @returns {number}
      */
     getWidth () {
-      let width = this.root.state.width - this.root.style('calendar-row')["stroke-width"];
+      let width = this.root.state.width;
       return width;
     },
 
