@@ -800,10 +800,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
             {
               ref: "svgMainView",
               staticClass: "gantt-elastic__svg-container",
-              style: _vm.root.style("svg-container", {
-                "max-width":
-                  "calc(100% - " + _vm.root.state.scrollBarHeight + "px)"
-              }),
+              style: _vm.root.style("svg-container"),
               attrs: {
                 width: _vm.getWidth,
                 height: _vm.root.state.height,
@@ -5027,7 +5024,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * @returns {number}
      */
     getWidth () {
-      return this.root.state.width + this.root.state.taskList.finalWidth;
+      return this.root.state.clientWidth ? this.root.state.clientWidth - this.root.state.scrollBarHeight : 0;
     },
 
     /**
@@ -5556,7 +5553,6 @@ function getOptions (userOptions) {
       label: "gantt-elastic",
       html: false
     },
-    devicePixelRatio: 1,
     width: 0,
     height: 0,
     clientWidth: 0,
@@ -6198,8 +6194,8 @@ const GanttElastic = {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = this.state.svgMainView.clientWidth * this.state.devicePixelRatio;
-          canvas.height = this.state.svgMainView.clientHeight * this.state.devicePixelRatio;
+          canvas.width = this.state.svgMainView.clientWidth;
+          canvas.height = this.state.svgMainView.clientHeight;
           canvas.getContext("2d").drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
@@ -6296,7 +6292,7 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart (left, top) {
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth * this.state.devicePixelRatio;
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
       this.state.scroll.chart.left = left;
       this.state.scroll.chart.right = left + chartContainerWidth;
       this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
@@ -6304,7 +6300,7 @@ const GanttElastic = {
       this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
       this.state.scroll.chart.dateTime.left = esm(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = esm(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth * this.state.devicePixelRatio));
+      this.state.scroll.chart.dateTime.right = esm(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
       this.scrollTo(left, top);
     },
 
@@ -6315,7 +6311,7 @@ const GanttElastic = {
      */
     scrollToTime (time) {
       let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth * this.state.devicePixelRatio;
+      const chartContainerWidth = this.state.refs.svgChartContainer.clientWidth;
       pos = pos - chartContainerWidth / 2;
       if (pos > this.state.width) {
         pos = this.state.width - chartContainerWidth;
@@ -6357,11 +6353,10 @@ const GanttElastic = {
      * Mouse wheel event handler
      */
     onWheelChart (ev) {
-      const dpr = this.state.devicePixelRatio;
       if (!ev.shiftKey) {
         let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.refs.chartGraph.clientHeight * dpr;
-        const scrollHeight = this.state.refs.chartGraph.scrollHeight * dpr - chartClientHeight;
+        const chartClientHeight = this.state.refs.chartGraph.clientHeight;
+        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
         } else if (top > scrollHeight) {
@@ -6370,8 +6365,8 @@ const GanttElastic = {
         this.scrollTo(null, top);
       } else {
         let left = this.state.scroll.left + ev.deltaY;
-        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth * dpr;
-        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth * dpr - chartClientWidth;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
           left = 0;
         } else if (left > scrollWidth) {
@@ -6677,29 +6672,13 @@ const GanttElastic = {
     },
 
     /**
-     * Get device pixel ratio
-     *
-     * @returns {number}
-     */
-    getDevicePixelRatio () {
-      let ratio = 1;
-      if (typeof window.screen.systemXDPI !== 'undefined' && typeof window.screen.logicalXDPI !== 'undefined' && window.screen.systemXDPI > window.screen.logicalXDPI) {
-        ratio = window.screen.systemXDPI / window.screen.logicalXDPI;
-      } else if (typeof window.devicePixelRatio !== 'undefined') {
-        ratio = window.devicePixelRatio;
-      }
-      return ratio;
-    },
-
-    /**
      * Global resize event (from window.addEventListener)
      */
     globalOnResize (ev) {
       if (typeof this.$el === 'undefined' || !this.$el) {
         return;
       }
-      const dpr = this.state.devicePixelRatio = this.getDevicePixelRatio();
-      this.state.clientWidth = this.$el.clientWidth * dpr;
+      this.state.clientWidth = this.$el.clientWidth;
       if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
         const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
         let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
@@ -6793,7 +6772,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted () {
-    this.state.clientWidth = this.$el.clientWidth * this.state.devicePixelRatio;
+    this.state.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);

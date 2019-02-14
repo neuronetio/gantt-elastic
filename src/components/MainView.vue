@@ -16,7 +16,7 @@
         :width="getWidth"
         :height="root.state.height"
         class="gantt-elastic__svg-container"
-        :style="root.style('svg-container', {'max-width':'calc(100% - '+root.state.scrollBarHeight+'px)'})"
+        :style="root.style('svg-container')"
         ref="svgMainView"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -132,7 +132,7 @@ export default {
      * @returns {number}
      */
     getWidth () {
-      return this.root.state.width + this.root.state.taskList.finalWidth;
+      return this.root.state.clientWidth ? this.root.state.clientWidth - this.root.state.scrollBarHeight : 0;
     },
 
     /**
