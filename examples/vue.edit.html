@@ -366,6 +366,9 @@
       });
       ganttInstance.$on('destroyed', () => {
         console.log('gantt was destroyed');
+      });
+      ganttInstance.$on('times-timeZoom-change', () => {
+        console.log('time zoom changed')
       })
     });
 

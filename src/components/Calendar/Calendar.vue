@@ -12,9 +12,9 @@
     :style="root.style('calendar-wrapper',{'margin-bottom':root.state.calendar.gap+'px'})"
   >
     <div class="gantt-elastic__calendar" :style="root.style('calendar',{width:getWidth+'px'})">
-      <calendar-row :items="months" which="month"></calendar-row>
-      <calendar-row :items="days" which="day"></calendar-row>
-      <calendar-row :items="hours" which="hour"></calendar-row>
+      <calendar-row :items="root.state.calendar.months" which="month"></calendar-row>
+      <calendar-row :items="root.state.calendar.days" which="day"></calendar-row>
+      <calendar-row :items="root.state.calendar.hours" which="hour"></calendar-row>
     </div>
   </div>
 </template>
@@ -28,11 +28,7 @@ export default {
   },
   inject: ["root"],
   data () {
-    return {
-      hours: [],
-      days: [],
-      months: []
-    };
+    return {};
   },
 
   /**
@@ -185,7 +181,7 @@ export default {
           });
         }
       }
-      return this.hours = hours;
+      return this.root.state.calendar.hours = hours;
     },
 
     /**
@@ -222,7 +218,7 @@ export default {
           label: this.root.state.calendar.day.format[daysCount.type](date)
         });
       }
-      return this.days = days;
+      return this.root.state.calendar.days = days;
     },
 
     /**
@@ -281,7 +277,7 @@ export default {
           currentDate = dayjs(this.root.state.times.lastDate);
         }
       }
-      return this.months = months;
+      return this.root.state.calendar.months = months;
     },
 
     /**
@@ -291,6 +287,7 @@ export default {
       this.generateHours();
       this.generateDays();
       this.generateMonths();
+      this.root.calculateCalendarDimensions();
     }
 
   },

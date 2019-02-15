@@ -143,6 +143,9 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
+      hours: [],
+      days: [],
+      months: [],
       workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,
@@ -506,20 +509,14 @@ const GanttElastic = {
      */
     calculateCalendarDimensions () {
       this.state.calendar.height = 0;
-      if (this.state.calendar.hour.display) {
+      if (this.state.calendar.hour.display && this.state.calendar.hours.length > 0) {
         this.state.calendar.height += this.state.calendar.hour.height;
-      } else {
-        this.state.calendar.hour.height = 0;
       }
-      if (this.state.calendar.day.display) {
+      if (this.state.calendar.day.display && this.state.calendar.days.length > 0) {
         this.state.calendar.height += this.state.calendar.day.height;
-      } else {
-        this.state.calendar.day.height = 0;
       }
-      if (this.state.calendar.month.display) {
+      if (this.state.calendar.month.display && this.state.calendar.months.length > 0) {
         this.state.calendar.height += this.state.calendar.month.height;
-      } else {
-        this.state.calendar.month.height = 0;
       }
     },
 

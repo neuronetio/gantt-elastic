@@ -2505,11 +2505,17 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
           style: _vm.root.style("calendar", { width: _vm.getWidth + "px" })
         },
         [
-          _c("calendar-row", { attrs: { items: _vm.months, which: "month" } }),
+          _c("calendar-row", {
+            attrs: { items: _vm.root.state.calendar.months, which: "month" }
+          }),
           _vm._v(" "),
-          _c("calendar-row", { attrs: { items: _vm.days, which: "day" } }),
+          _c("calendar-row", {
+            attrs: { items: _vm.root.state.calendar.days, which: "day" }
+          }),
           _vm._v(" "),
-          _c("calendar-row", { attrs: { items: _vm.hours, which: "hour" } })
+          _c("calendar-row", {
+            attrs: { items: _vm.root.state.calendar.hours, which: "hour" }
+          })
         ],
         1
       )
@@ -2713,11 +2719,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
   },
   inject: ["root"],
   data () {
-    return {
-      hours: [],
-      days: [],
-      months: []
-    };
+    return {};
   },
 
   /**
@@ -2870,7 +2872,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           });
         }
       }
-      return this.hours = hours;
+      return this.root.state.calendar.hours = hours;
     },
 
     /**
@@ -2907,7 +2909,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           label: this.root.state.calendar.day.format[daysCount.type](date)
         });
       }
-      return this.days = days;
+      return this.root.state.calendar.days = days;
     },
 
     /**
@@ -2966,7 +2968,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           currentDate = esm(this.root.state.times.lastDate);
         }
       }
-      return this.months = months;
+      return this.root.state.calendar.months = months;
     },
 
     /**
@@ -2976,6 +2978,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       this.generateHours();
       this.generateDays();
       this.generateMonths();
+      this.root.calculateCalendarDimensions();
     }
 
   },
@@ -5579,6 +5582,9 @@ function getOptions (userOptions) {
       }
     },
     calendar: {
+      hours: [],
+      days: [],
+      months: [],
       workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,
@@ -5942,20 +5948,14 @@ const GanttElastic = {
      */
     calculateCalendarDimensions () {
       this.state.calendar.height = 0;
-      if (this.state.calendar.hour.display) {
+      if (this.state.calendar.hour.display && this.state.calendar.hours.length > 0) {
         this.state.calendar.height += this.state.calendar.hour.height;
-      } else {
-        this.state.calendar.hour.height = 0;
       }
-      if (this.state.calendar.day.display) {
+      if (this.state.calendar.day.display && this.state.calendar.days.length > 0) {
         this.state.calendar.height += this.state.calendar.day.height;
-      } else {
-        this.state.calendar.day.height = 0;
       }
-      if (this.state.calendar.month.display) {
+      if (this.state.calendar.month.display && this.state.calendar.months.length > 0) {
         this.state.calendar.height += this.state.calendar.month.height;
-      } else {
-        this.state.calendar.month.height = 0;
       }
     },
 
