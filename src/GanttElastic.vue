@@ -9,7 +9,7 @@
 <template>
   <div class="gantt-elastic">
     <slot name="header"></slot>
-    <main-view :tasks="tasks" :options="options"></main-view>
+    <main-view :tasks="copyTasks" :options="options"></main-view>
     <slot name="footer"></slot>
   </div>
 </template>
@@ -321,6 +321,7 @@ const GanttElastic = {
         refs: {},
         tasksById: {},
       },
+      copyTasks: [],
     };
   },
   methods: {
@@ -438,12 +439,12 @@ const GanttElastic = {
      */
     initialize (itsUpdate = '') {
       switch (itsUpdate) {
-        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.tasks }); break;
+        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.copyTasks }); break;
         case 'options': this.mergeDeepReactive(this, this.state, this.options); break;
-        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.copyTasks });
       }
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.tasks.map(task => {
+        this.state.tasks = this.copyTasks.map(task => {
           this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
           return task;
         });
@@ -1230,6 +1231,7 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created () {
+    this.copyTasks = JSON.parse(JSON.stringify(this.tasks));
     this.$watch('tasks', (tasks) => {
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
