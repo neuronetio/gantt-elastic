@@ -12,9 +12,9 @@
     :style="root.style('calendar-wrapper',{'margin-bottom':root.state.calendar.gap+'px'})"
   >
     <div class="gantt-elastic__calendar" :style="root.style('calendar',{width:getWidth+'px'})">
-      <calendar-row :items="root.state.calendar.months" which="month"></calendar-row>
-      <calendar-row :items="root.state.calendar.days" which="day"></calendar-row>
-      <calendar-row :items="root.state.calendar.hours" which="hour"></calendar-row>
+      <calendar-row :items="root.state.calendar.months" which="month" v-if="root.state.calendar.month.display"></calendar-row>
+      <calendar-row :items="root.state.calendar.days" which="day" v-if="root.state.calendar.day.display"></calendar-row>
+      <calendar-row :items="root.state.calendar.hours" which="hour" v-if="root.state.calendar.hour.display"></calendar-row>
     </div>
   </div>
 </template>
@@ -158,6 +158,9 @@ export default {
      */
     generateHours () {
       let hours = [];
+      if (!this.root.state.calendar.hour.display) {
+        return this.root.state.calendar.hours = hours;
+      }
       for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         const hourStep = 24 / hoursCount.count;
@@ -191,6 +194,9 @@ export default {
      */
     generateDays () {
       let days = [];
+      if (!this.root.state.calendar.day.display) {
+        return this.root.state.calendar.days = days;
+      }
       const daysCount = this.howManyDaysFit();
       const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -228,6 +234,9 @@ export default {
      */
     generateMonths () {
       let months = [];
+      if (!this.root.state.calendar.month.display) {
+        return this.root.state.calendar.months = months;
+      }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentDate = dayjs(this.root.state.times.firstDate);

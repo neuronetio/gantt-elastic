@@ -2514,17 +2514,23 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
           style: _vm.root.style("calendar", { width: _vm.getWidth + "px" })
         },
         [
-          _c("calendar-row", {
-            attrs: { items: _vm.root.state.calendar.months, which: "month" }
-          }),
+          _vm.root.state.calendar.month.display
+            ? _c("calendar-row", {
+                attrs: { items: _vm.root.state.calendar.months, which: "month" }
+              })
+            : _vm._e(),
           _vm._v(" "),
-          _c("calendar-row", {
-            attrs: { items: _vm.root.state.calendar.days, which: "day" }
-          }),
+          _vm.root.state.calendar.day.display
+            ? _c("calendar-row", {
+                attrs: { items: _vm.root.state.calendar.days, which: "day" }
+              })
+            : _vm._e(),
           _vm._v(" "),
-          _c("calendar-row", {
-            attrs: { items: _vm.root.state.calendar.hours, which: "hour" }
-          })
+          _vm.root.state.calendar.hour.display
+            ? _c("calendar-row", {
+                attrs: { items: _vm.root.state.calendar.hours, which: "hour" }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -2858,6 +2864,9 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateHours () {
       let hours = [];
+      if (!this.root.state.calendar.hour.display) {
+        return this.root.state.calendar.hours = hours;
+      }
       for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         const hourStep = 24 / hoursCount.count;
@@ -2891,6 +2900,9 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateDays () {
       let days = [];
+      if (!this.root.state.calendar.day.display) {
+        return this.root.state.calendar.days = days;
+      }
       const daysCount = this.howManyDaysFit();
       const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -2928,6 +2940,9 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateMonths () {
       let months = [];
+      if (!this.root.state.calendar.month.display) {
+        return this.root.state.calendar.months = months;
+      }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.root.state.calendar.month.format);
       let currentDate = esm(this.root.state.times.firstDate);
