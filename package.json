@@ -56,5 +56,10 @@
   "bugs": {
     "url": "https://github.com/neuronetio/gantt-elastic/issues"
   },
-  "homepage": "https://neuronetio.github.io/gantt-elastic/"
+  "homepage": "https://neuronetio.github.io/gantt-elastic/",
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  }
 }

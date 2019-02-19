@@ -26,6 +26,10 @@ import style from "./style.js";
  * @returns {object} merged options
  */
 function getOptions (userOptions) {
+  let localeCode = 'en';
+  if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.code === 'string') {
+    localeCode = userOptions.locale.code;
+  }
   return {
     style,
     slots: {
@@ -157,17 +161,17 @@ function getOptions (userOptions) {
         format: {
           long (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("HH:mm");
           },
           medium (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("HH:mm");
           },
           short (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("HH");
           }
         }
@@ -180,17 +184,17 @@ function getOptions (userOptions) {
         format: {
           long (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("DD dddd");
           },
           medium (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("DD ddd");
           },
           short (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("DD");
           }
         }
@@ -203,25 +207,25 @@ function getOptions (userOptions) {
         format: {
           short (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("MM");
           },
           medium (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("MMM 'YY");
           },
           long (date) {
             return dayjs(date)
-              .locale(userOptions.locale.code)
+              .locale(localeCode)
               .format("MMMM YYYY");
           }
         }
       }
     },
     locale: {
-      code: "en",
-      Now: "Now",
+      "code": "en",
+      "Now": "Now",
       "X-Scale": "Zoom-X",
       "Y-Scale": "Zoom-Y",
       "Task list width": "Task list",
@@ -391,12 +395,6 @@ const GanttElastic = {
         if (typeof task.height === 'undefined') {
           this.$set(task, 'height', 0);
         }
-        if (typeof task.tooltip === 'undefined') {
-          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
-        }
-        if (typeof task.tooltip.visible === 'undefined') {
-          task.tooltip.visible = false;
-        }
         if (typeof task.mouseOver === 'undefined') {
           this.$set(task, 'mouseOver', false);
         }
@@ -438,18 +436,22 @@ const GanttElastic = {
      * Initialize component
      */
     initialize (itsUpdate = '') {
+      const tasks = this.tasks.map(task => {
+        return this.mergeDeep({}, task);
+      });
+      const options = this.mergeDeep({}, this.options);
       switch (itsUpdate) {
-        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.tasks }); break;
-        case 'options': this.mergeDeepReactive(this, this.state, this.options); break;
-        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks }); break;
+        case 'options': this.mergeDeepReactive(this, this.state, { options }); break;
+        default: this.mergeDeepReactive(this, this.state, { options: getOptions(options) }, { tasks }); break;
       }
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.tasks.map(task => {
+        this.state.tasks = this.state.tasks.map(task => {
           this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
           return task;
         });
       }
-      dayjs.locale(this.options.locale, null, true);
+      dayjs.locale(this.state.locale, null, true);
       if (typeof this.state.taskList === "undefined") {
         this.$set(this.state, 'taskList', {});
       }
@@ -1228,11 +1230,11 @@ const GanttElastic = {
     this.$watch('tasks', (tasks) => {
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
-    });
+    }, { deep: true });
     this.$watch('options', (opts) => {
       this.setup('options');
       this.$emit('options-changed', opts);
-    });
+    }, { deep: true });
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);

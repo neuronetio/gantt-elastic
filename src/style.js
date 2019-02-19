@@ -323,9 +323,6 @@ export default {
   "chart-days-highlight-rect": {
     "fill": "#f3f5f780"
   },
-  "chart": {
-    "overflow": "hidden"
-  },
   "slot-header-beforeOptions": {
     "display": "inline-block"
   }
