@@ -4,17 +4,21 @@
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
-    "dayjs": "^1.8.5"
+    "dayjs": "^1.8.5",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
+    "@vue/cli-plugin-eslint": "^3.4.1",
     "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
     "css-loader": "^1.0.1",
+    "eslint": "^5.14.1",
     "gulp-vueify2": "0.0.3",
-    "vue": "^2.6.4",
-    "vue-loader": "^15.6.2",
+    "vue": "^2.6.7",
+    "vue-loader": "^15.6.4",
     "vue-slider-component": "^2.8.7",
     "vue-switches": "^2.0.1",
-    "vue-template-compiler": "^2.6.4",
+    "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   },

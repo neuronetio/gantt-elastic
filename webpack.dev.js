@@ -13,6 +13,11 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: ['vue'],
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      },
+    },
     module: {
       rules: [
         {

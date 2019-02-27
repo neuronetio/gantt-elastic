@@ -252,6 +252,948 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
+// CONCATENATED MODULE: ./node_modules/vuex/dist/vuex.esm.js
+/**
+ * vuex v3.1.0
+ * (c) 2019 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var devtoolHook =
+  typeof window !== 'undefined' &&
+  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (false) {}
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (false) {}
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (false) {}
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var vuex_esm_Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!vuex_esm_Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (false) {}
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new vuex_esm_Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : vuex_esm_Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if (false) {}
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (false) {}
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    false
+  ) {}
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (false) {}
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if (false) {}
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return result.then(function (res) {
+    try {
+      this$1._actionSubscribers
+        .filter(function (sub) { return sub.after; })
+        .forEach(function (sub) { return sub.after(action, this$1.state); });
+    } catch (e) {
+      if (false) {}
+    }
+    return res
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (false) {}
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (false) {}
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (false) {}
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    vuex_esm_Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    computed[key] = function () { return fn(store); };
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = vuex_esm_Vue.config.silent;
+  vuex_esm_Vue.config.silent = true;
+  store._vm = new vuex_esm_Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  vuex_esm_Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    vuex_esm_Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      vuex_esm_Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (false) {}
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (false) {}
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (false) {}
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (false) {}
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (false) {}
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (vuex_esm_Vue && _Vue === vuex_esm_Vue) {
+    if (false) {}
+    return
+  }
+  vuex_esm_Vue = _Vue;
+  applyMixin(vuex_esm_Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if (false) {}
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if (false) {}
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.1.0',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+/* harmony default export */ var vuex_esm = (index_esm);
+
+
 // CONCATENATED MODULE: ./node_modules/dayjs/esm/constant.js
 var SECONDS_A_MINUTE = 60;
 var SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;
@@ -782,7 +1724,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
         {
           staticClass: "gantt-elastic__main-container-wrapper",
           style: _vm.root.style("main-container-wrapper", {
-            height: _vm.root.state.height + "px"
+            height: _vm.$store.state.options.height + "px"
           })
         },
         [
@@ -793,7 +1735,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
               staticClass: "gantt-elastic__main-container",
               style: _vm.root.style("main-container", {
                 width: _vm.getWidth + "px",
-                height: _vm.root.state.height + "px"
+                height: _vm.$store.state.options.height + "px"
               })
             },
             [
@@ -812,15 +1754,16 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.root.state.taskList.display,
-                          expression: "root.state.taskList.display"
+                          value: _vm.$store.state.options.taskList.display,
+                          expression: "$store.state.options.taskList.display"
                         }
                       ],
                       ref: "taskList",
                       staticClass: "gantt-elastic__task-list-container",
                       style: _vm.root.style("task-list-container", {
-                        width: _vm.root.state.taskList.finalWidth + "px",
-                        height: _vm.root.state.height + "px"
+                        width:
+                          _vm.$store.state.options.taskList.finalWidth + "px",
+                        height: _vm.$store.state.options.height + "px"
                       })
                     },
                     [_c("task-list")],
@@ -877,7 +1820,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                 staticClass: "gantt-elastic__chart-scroll--vertical",
                 style: {
                   width: "1px",
-                  height: _vm.root.state.allVisibleTasksHeight + "px"
+                  height: _vm.$store.state.options.allVisibleTasksHeight + "px"
                 }
               })
             ]
@@ -901,7 +1844,10 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
         [
           _c("div", {
             staticClass: "gantt-elastic__chart-scroll--horizontal",
-            style: { height: "1px", width: _vm.root.state.width + "px" }
+            style: {
+              height: "1px",
+              width: _vm.$store.state.options.width + "px"
+            }
           })
         ]
       )
@@ -926,8 +1872,8 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value: _vm.root.state.taskList.display,
-          expression: "root.state.taskList.display"
+          value: _vm.$store.state.options.taskList.display,
+          expression: "$store.state.options.taskList.display"
         }
       ],
       ref: "taskListWrapper",
@@ -954,10 +1900,10 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
               ref: "taskListItems",
               staticClass: "gantt-elastic__task-list-items",
               style: _vm.root.style("task-list-items", {
-                height: _vm.root.state.rowsHeight + "px"
+                height: _vm.$store.state.options.rowsHeight + "px"
               })
             },
-            _vm._l(_vm.root.state.tasks, function(task) {
+            _vm._l(_vm.$store.state.tasks, function(task) {
               return _c("task-list-item", {
                 directives: [
                   {
@@ -998,8 +1944,8 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     {
       staticClass: "gantt-elastic__task-list-header",
       style: _vm.root.style("task-list-header", {
-        height: _vm.root.state.calendar.height + "px",
-        "margin-bottom": _vm.root.state.calendar.gap + "px"
+        height: _vm.$store.state.options.calendar.height + "px",
+        "margin-bottom": _vm.$store.state.options.calendar.gap + "px"
       })
     },
     _vm._l(_vm.root.getTaskListColumns, function(column) {
@@ -1019,7 +1965,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
             ? _c("task-list-expander", {
                 attrs: {
                   tasks: _vm.collapsible,
-                  options: _vm.root.state.taskList.expander
+                  options: _vm.$store.state.options.taskList.expander
                 }
               })
             : _vm._e(),
@@ -1236,17 +2182,17 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 //
 
 /* harmony default export */ var Expandervue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
-    const border = 0.5;
+  inject: ['root'],
+  props: ['tasks', 'options'],
+  data() {
+    const border = 0.5
     return {
       border,
       borderStyle: {
-        "stroke-width": border
+        'stroke-width': border
       },
       lineOffset: 5
-    };
+    }
   },
   computed: {
     /**
@@ -1254,32 +2200,31 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
      *
      * @returns {array}
      */
-    allChildren () {
-      const children = [];
+    allChildren() {
+      const children = []
       this.tasks.forEach(task => {
         task.allChildren.forEach(child => {
-          children.push(child);
-        });
-      });
-      return children;
+          children.push(child)
+        })
+      })
+      return children
     },
-
     /**
      * Is current expander collapsed?
      *
      * @returns {boolean}
      */
-    collapsed () {
+    collapsed() {
       if (this.tasks.length === 0) {
-        return false;
+        return false
       }
-      let collapsed = 0;
+      let collapsed = 0
       for (let i = 0, len = this.tasks.length; i < len; i++) {
         if (this.tasks[i].collapsed) {
-          collapsed++;
+          collapsed++
         }
       }
-      return collapsed === this.tasks.length;
+      return collapsed === this.tasks.length
     }
   },
   methods: {
@@ -1288,24 +2233,25 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
      *
      * @returns {string}
      */
-    getClassPrefix (full = true) {
-      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
+    getClassPrefix(full = true) {
+      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`
     },
-
     /**
      * Toggle expander
      */
-    toggle () {
+    toggle() {
       if (this.allChildren.length === 0) {
-        return;
+        return
       }
-      const collapsed = !this.collapsed;
+      const collapsed = !this.collapsed
       this.tasks.forEach(task => {
-        task.collapsed = collapsed;
+        task.collapsed = collapsed
         task.allChildren.forEach(child => {
-          child.visible = !collapsed && !child.parent.collapsed;
-        });
-      });
+          child.visible = !collapsed && !child.parent.collapsed
+          this.$store.commit(this.root.updateTask, child)
+        })
+        this.$store.commit(this.root.updateTask, task)
+      })
     }
   }
 });
@@ -1513,9 +2459,9 @@ component.options.__file = "src/components/Expander.vue"
      */
     getStyle () {
       return column => {
-        const state = this.root.state;
+        const options = this.$store.state.options;
         return {
-          "height": state.calendar.height + this.root.style('calendar-row-rect')['border-width'] + "px",
+          "height": options.calendar.height + this.root.style('calendar-row-rect')['border-width'] + "px",
           "width": column.finalWidth + "px"
         };
       };
@@ -1527,7 +2473,7 @@ component.options.__file = "src/components/Expander.vue"
      * @returns {bool}
      */
     collapsible () {
-      return this.root.state.tasks.filter(task => task.allChildren.length > 0);
+      return this.$store.state.tasks.filter(task => task.allChildren.length > 0);
     },
   },
 
@@ -1550,8 +2496,8 @@ component.options.__file = "src/components/Expander.vue"
     resizerMouseMove (event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        if (this.resizer.moving.width < this.root.state.taskList.minWidth) {
-          this.resizer.moving.width = this.root.state.taskList.minWidth;
+        if (this.resizer.moving.width < this.$store.state.options.taskList.minWidth) {
+          this.resizer.moving.width = this.$store.state.options.taskList.minWidth;
         }
         this.root.$emit("taskList-column-width-change", this.resizer.moving);
       }
@@ -1624,7 +2570,7 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
       staticClass: "gantt-elastic__task-list-item",
       style: _vm.root.style("task-list-item")
     },
-    _vm._l(_vm.root.state.taskList.columns, function(column) {
+    _vm._l(_vm.$store.state.options.taskList.columns, function(column) {
       return _c(
         "item-column",
         { key: column._id, attrs: { column: column, task: _vm.task } },
@@ -1634,7 +2580,7 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
                 style: _vm.expanderStyle,
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.taskList.expander
+                  options: _vm.$store.state.options.taskList.expander
                 }
               })
             : _vm._e()
@@ -1941,9 +2887,13 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
    * Mounted
    */
   mounted () {
-    this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
-    this.root.state.refs.taskList = this.$refs.taskList;
-    this.root.state.refs.taskListItems = this.$refs.taskListItems;
+    this.$store.commit(this.root.updateOptions, {
+      refs: {
+        taskListWrapper: this.$refs.taskListWrapper,
+        taskList: this.$refs.taskList,
+        taskListItems: this.$refs.taskListItems,
+      }
+    })
   },
 
   computed: {
@@ -1954,10 +2904,10 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
      */
     getListExpanderStyle () {
       return task => {
-        const state = this.root.state;
-        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
+        const options = this.$store.state.options;
+        const padding = (task.parents.length - 1) * options.taskList.expander.padding;
         const style = {
-          "padding-left": padding + state.taskList.expander.margin + "px",
+          "padding-left": padding + options.taskList.expander.margin + "px",
           margin: "auto 0",
         };
         return style;
@@ -2014,7 +2964,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         {
           style: _vm.root.style("chart-area", {
             width: "100%",
-            height: _vm.root.state.rowsHeight + "px"
+            height: _vm.$store.state.options.rowsHeight + "px"
           })
         },
         [
@@ -2036,7 +2986,8 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                     x: "0",
                     y: "0",
                     width: _vm.getWidth + "px",
-                    height: _vm.root.state.allVisibleTasksHeight + "px",
+                    height:
+                      _vm.$store.state.options.allVisibleTasksHeight + "px",
                     xmlns: "http://www.w3.org/2000/svg"
                   }
                 },
@@ -2046,10 +2997,10 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                   _c("grid"),
                   _vm._v(" "),
                   _c("dependency-lines", {
-                    attrs: { tasks: _vm.root.state.tasks }
+                    attrs: { tasks: _vm.$store.state.tasks }
                   }),
                   _vm._v(" "),
-                  _vm._l(_vm.root.state.tasks, function(task) {
+                  _vm._l(_vm.$store.state.tasks, function(task) {
                     return _c(
                       "g",
                       {
@@ -2106,8 +3057,8 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
       attrs: {
         x: "0",
         y: "0",
-        width: _vm.root.state.width,
-        height: _vm.root.state.allVisibleTasksHeight,
+        width: _vm.$store.state.options.width,
+        height: _vm.$store.state.options.allVisibleTasksHeight,
         xmlns: "http://www.w3.org/2000/svg"
       }
     },
@@ -2254,15 +3205,15 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      */
     verticalLines () {
       let lines = [];
-      const state = this.root.state;
-      state.times.steps.forEach(step => {
+      const options = this.$store.state.options;
+      options.times.steps.forEach(step => {
         if (this.root.isInsideViewPort(step.offset.px, 1)) {
           lines.push({
-            key: step.date.valueOf(),
+            key: step.time,
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: state.tasks.length * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2: this.$store.state.tasks.length * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
           });
         }
       });
@@ -2276,10 +3227,10 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      */
     horizontalLines () {
       let lines = [];
-      const state = this.root.state;
+      const options = this.$store.state.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        const y = (index * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        const y = (index * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
         lines.push({
           key: "hl" + index,
           x1: 0,
@@ -2298,8 +3249,8 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      */
     inViewPort () {
       return line => {
-        const state = this.root.state;
-        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
+        const options = this.$store.state.options;
+        return (line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right);
       };
     },
 
@@ -2416,6 +3367,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
 //
 //
 
+
 /* harmony default export */ var DaysHighlightvue_type_script_lang_js_ = ({
   inject: ['root'],
   data () {
@@ -2429,7 +3381,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @returns {string} key ideintifier for loop
      */
     getKey (day) {
-      return day.date.format('YYYY-MM-DD');
+      return esm(day.time).format('YYYY-MM-DD');
     }
   },
   computed: {
@@ -2439,8 +3391,8 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @returns {array}
      */
     workingDays () {
-      return this.root.state.times.steps.filter(step => {
-        return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
+      return this.$store.state.options.times.steps.filter(step => {
+        return this.$store.state.options.calendar.workingDays.indexOf(esm(step.time).day()) === -1;
       });
     },
 
@@ -2450,7 +3402,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @returns {bool}
      */
     showWorkingDays () {
-      const calendar = this.root.state.calendar;
+      const calendar = this.$store.state.options.calendar;
       if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
         return true;
       }
@@ -2494,7 +3446,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
     {
       staticClass: "gantt-elastic__calendar-wrapper",
       style: _vm.root.style("calendar-wrapper", {
-        "margin-bottom": _vm.root.state.calendar.gap + "px"
+        "margin-bottom": _vm.$store.state.options.calendar.gap + "px"
       })
     },
     [
@@ -2505,21 +3457,30 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
           style: _vm.root.style("calendar", { width: _vm.getWidth + "px" })
         },
         [
-          _vm.root.state.calendar.month.display
+          _vm.$store.state.options.calendar.month.display
             ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.months, which: "month" }
+                attrs: {
+                  items: _vm.$store.state.options.calendar.months,
+                  which: "month"
+                }
               })
             : _vm._e(),
           _vm._v(" "),
-          _vm.root.state.calendar.day.display
+          _vm.$store.state.options.calendar.day.display
             ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.days, which: "day" }
+                attrs: {
+                  items: _vm.$store.state.options.calendar.days,
+                  which: "day"
+                }
               })
             : _vm._e(),
           _vm._v(" "),
-          _vm.root.state.calendar.hour.display
+          _vm.$store.state.options.calendar.hour.display
             ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.hours, which: "hour" }
+                attrs: {
+                  items: _vm.$store.state.options.calendar.hours,
+                  which: "hour"
+                }
               })
             : _vm._e()
         ],
@@ -2634,8 +3595,8 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
       let x = this.item.x + this.item.width / 2;
       if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
         this.anchor = 'start';
-        let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;
-        x = this.root.state.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
+        let scrollWidth = this.$store.state.options.scroll.chart.right - this.$store.state.options.scroll.chart.left;
+        x = this.$store.state.options.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
         if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
           x = this.item.x + this.item.width - this.item.textWidth - 2;
         } else if (x < this.item.x) {
@@ -2716,6 +3677,18 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2736,6 +3709,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     this.root.$on("times-timeZoom-change", this.regenerate);
     this.root.$on("tasks-changed", this.regenerate);
     this.root.$on("options-changed", this.regenerate);
+  },
+
+  /**
+   * Mounted
+   */
+  mounted () {
     this.regenerate();
   },
 
@@ -2748,11 +3727,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     howManyHoursFit (dayIndex) {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
-      let formatNames = Object.keys(this.root.state.calendar.hour.format);
+      let fullCellWidth = this.$store.state.options.times.steps[dayIndex].width.px;
+      let formatNames = Object.keys(this.$store.state.options.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+          if ((this.$store.state.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
             return {
               count: hours,
               type: formatName
@@ -2774,12 +3753,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     howManyDaysFit () {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.root.state.width;
-      let formatNames = Object.keys(this.root.state.calendar.day.format);
-      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
+      let fullWidth = this.$store.state.options.width;
+      let formatNames = Object.keys(this.$store.state.options.calendar.day.format);
+      for (let days = this.$store.state.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
+            (this.$store.state.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
             return {
               count: days,
               type: formatName
@@ -2801,11 +3780,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     howManyMonthsFit () {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.root.state.width;
-      let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentMonth = esm(this.root.state.times.firstDate);
+      let fullWidth = this.$store.state.options.width;
+      let formatNames = Object.keys(this.$store.state.options.calendar.month.format);
+      let currentMonth = esm(this.$store.state.options.times.firstTime);
       let previousMonth = currentMonth.clone();
-      const lastTime = this.root.state.times.lastTime;
+      const lastTime = this.$store.state.options.times.lastTime;
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
         currentMonth = currentMonth.add(1, "day");
@@ -2816,7 +3795,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+          if ((this.$store.state.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
             return {
               count: months,
               type: formatName
@@ -2836,7 +3815,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {string}
      */
     hourTextStyle () {
-      return ("font-family:" + this.root.state.calendar.hour.fontFamily + ";font-size:" + this.root.state.calendar.hour.fontSize);
+      return ("font-family:" + this.$store.state.options.calendar.hour.fontFamily + ";font-size:" + this.$store.state.options.calendar.hour.fontSize);
     },
 
     /**
@@ -2845,7 +3824,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {string}
      */
     dayTextStyle () {
-      return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
+      return ("font-family:" + this.$store.state.options.calendar.day.fontFamily + ";font-size:" + this.$store.state.options.calendar.day.fontSize);
     },
 
     /**
@@ -2855,33 +3834,37 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateHours () {
       let hours = [];
-      if (!this.root.state.calendar.hour.display) {
-        return this.root.state.calendar.hours = hours;
+      if (!this.$store.state.options.calendar.hour.display) {
+        return this.$store.commit(this.root.updateOptions, { calendar: { hours: [] } });
       }
-      for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {
+      for (let hourIndex = 0, len = this.$store.state.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
+        if (hoursCount.count === 0) {
+          return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
+        }
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.$store.state.options.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = esm(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
+          const date = esm(this.$store.state.options.times.steps[hourIndex].time).add(i * hourStep, "hour");
           let textWidth = 0;
-          if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
-            textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
+          if (typeof this.$store.state.options.calendar.hour.widths[hourIndex] !== 'undefined') {
+            textWidth = this.$store.state.options.calendar.hour.widths[hourIndex][hoursCount.type];
           }
-          let x = this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = this.$store.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
-            key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
+            key: this.$store.state.options.times.steps[hourIndex].time + "h" + i,
             x,
-            y: this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            y: this.$store.state.options.calendar.day.height + this.$store.state.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
-            height: this.root.state.calendar.hour.height,
-            label: this.root.state.calendar.hour.format[hoursCount.type](date)
+            height: this.$store.state.options.calendar.hour.height,
+            label: this.$store.state.options.calendar.hour.format[hoursCount.type](date),
+            type: hoursCount.type
           });
         }
       }
-      return this.root.state.calendar.hours = hours;
+      return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
     },
 
     /**
@@ -2891,37 +3874,41 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateDays () {
       let days = [];
-      if (!this.root.state.calendar.day.display) {
-        return this.root.state.calendar.days = days;
+      if (!this.$store.state.options.calendar.day.display) {
+        return this.$store.commit(this.root.updateOptions, { calendar: { days: [] } });
       }
       const daysCount = this.howManyDaysFit();
-      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      if (daysCount.count === 0) {
+        return this.$store.commit(this.root.updateOptions, { calendar: { days } });
+      }
+      const dayStep = Math.ceil(this.$store.state.options.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.$store.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== "undefined") {
-            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
+          if (typeof this.$store.state.options.times.steps[dayIndex + currentStep] !== "undefined") {
+            dayWidthPx += this.$store.state.options.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = esm(this.root.state.times.steps[dayIndex].date);
+        const date = esm(this.$store.state.options.times.steps[dayIndex].time);
         let textWidth = 0;
-        if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
-          textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
+        if (typeof this.$store.state.options.calendar.day.widths[dayIndex] !== 'undefined') {
+          textWidth = this.$store.state.options.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.state.times.steps[dayIndex].offset.px;
+        let x = this.$store.state.options.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
+          key: this.$store.state.options.times.steps[dayIndex].time + "d",
           x,
-          y: this.root.state.calendar.month.height,
+          y: this.$store.state.options.calendar.month.height,
           width: dayWidthPx,
           textWidth,
-          height: this.root.state.calendar.day.height,
-          label: this.root.state.calendar.day.format[daysCount.type](date)
+          height: this.$store.state.options.calendar.day.height,
+          label: this.$store.state.options.calendar.day.format[daysCount.type](date),
+          type: daysCount.type
         });
       }
-      return this.root.state.calendar.days = days;
+      return this.$store.commit(this.root.updateOptions, { calendar: { days } });
     },
 
     /**
@@ -2931,23 +3918,23 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      */
     generateMonths () {
       let months = [];
-      if (!this.root.state.calendar.month.display) {
-        return this.root.state.calendar.months = months;
+      if (!this.$store.state.options.calendar.month.display) {
+        return this.$store.commit(this.root.updateOptions, { calendar: { months: [] } });
       }
       const monthsCount = this.howManyMonthsFit();
-      let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentDate = esm(this.root.state.times.firstDate);
+      let formatNames = Object.keys(this.$store.state.options.calendar.month.format);
+      let currentDate = esm(this.$store.state.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
         let finalDate = esm(currentDate).add(1, "month").startOf("month");
-        if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          finalDate = esm(this.root.state.times.lastDate);
+        if (finalDate.valueOf() > this.$store.state.options.times.lastTime) {
+          finalDate = esm(this.$store.state.options.times.lastTime);
         }
         // we must find first and last step to get the offsets / widths
-        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
-          let currentStep = this.root.state.times.steps[step];
-          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
+        for (let step = 0, len = this.$store.state.options.times.steps.length; step < len; step++) {
+          let currentStep = this.$store.state.options.times.steps[step];
+          if (currentStep.time >= currentDate.valueOf() && currentStep.time < finalDate.valueOf()) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
               monthOffset = currentStep.offset.px;
@@ -2957,14 +3944,14 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         let label = "";
         let choosenFormatName;
         for (let formatName of formatNames) {
-          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
-            label = this.root.state.calendar.month.format[formatName](currentDate);
+          if (this.$store.state.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.$store.state.options.calendar.month.format[formatName](currentDate.toDate());
             choosenFormatName = formatName;
           }
         }
         let textWidth = 0;
-        if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
-          textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
+        if (typeof this.$store.state.options.calendar.month.widths[monthIndex] !== 'undefined') {
+          textWidth = this.$store.state.options.calendar.month.widths[monthIndex][choosenFormatName];
         }
         let x = monthOffset;
         months.push({
@@ -2974,16 +3961,16 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           y: 0,
           width: monthWidth,
           textWidth,
-          choosenFormatName,
-          height: this.root.state.calendar.month.height,
+          type: choosenFormatName,
+          height: this.$store.state.options.calendar.month.height,
           label
         });
         currentDate = currentDate.add(1, "month").startOf("month");
-        if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          currentDate = esm(this.root.state.times.lastDate);
+        if (currentDate.valueOf() > this.$store.state.options.times.lastDate) {
+          currentDate = esm(this.$store.state.options.times.lastDate);
         }
       }
-      return this.root.state.calendar.months = months;
+      return this.$store.commit(this.root.updateOptions, { calendar: { months } });
     },
 
     /**
@@ -3006,7 +3993,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {number}
      */
     getWidth () {
-      let width = this.root.state.width;
+      let width = this.$store.state.options.width;
       return width;
     },
 
@@ -3016,7 +4003,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     monthsStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
+      return this.root.mergeDeep({}, this.$store.state.options.calendar.styles.row, this.$store.state.options.calendar.month.style);
     },
 
     /**
@@ -3025,7 +4012,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     daysStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
+      return this.root.mergeDeep({}, this.$store.state.options.calendar.styles.row, this.$store.state.options.calendar.day.style);
     },
 
     /**
@@ -3034,7 +4021,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      * @returns {object}
      */
     hoursStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
+      return this.root.mergeDeep({}, this.$store.state.options.calendar.styles.row, this.$store.state.options.calendar.hour.style);
     },
 
     /**
@@ -3306,22 +4293,22 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.$store.state.options.chart.expander.offset -
+                  _vm.$store.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.$store.state.options.row.height -
+                    _vm.$store.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.$store.state.options.chart.expander.size,
+                height: _vm.$store.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.$store.state.options.chart.expander
                 }
               })
             ],
@@ -3412,7 +4399,7 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.$store.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -3436,8 +4423,11 @@ var Textvue_type_template_id_459c2fe4_render = function() {
       staticClass: "gantt-elastic__chart-row-text-wrapper",
       style: _vm.root.style("chart-row-text-wrapper"),
       attrs: {
-        x: _vm.task.x + _vm.task.width + _vm.root.state.chart.text.offset,
-        y: _vm.task.y - _vm.root.state.chart.grid.horizontal.gap,
+        x:
+          _vm.task.x +
+          _vm.task.width +
+          _vm.$store.state.options.chart.text.offset,
+        y: _vm.task.y - _vm.$store.state.options.chart.grid.horizontal.gap,
         width: _vm.getWidth,
         height: _vm.getHeight
       }
@@ -3560,9 +4550,9 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      */
     getWidth () {
       const textStyle = this.root.style('chart-row-text');
-      this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
-      const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.chart.text.xPadding * 2;
+      this.$store.state.options.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      const textWidth = this.$store.state.options.ctx.measureText(this.task.label).width;
+      return textWidth + this.$store.state.options.chart.text.xPadding * 2;
     },
 
     /**
@@ -3571,7 +4561,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      * @returns {number}
      */
     getHeight () {
-      return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
+      return this.task.height + this.$store.state.options.chart.grid.horizontal.gap * 2;
     },
 
     /**
@@ -3589,7 +4579,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      * @returns {boolean}
      */
     html () {
-      const cols = this.root.state.taskList.columns;
+      const cols = this.$store.state.options.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
         if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
@@ -3647,8 +4637,8 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           {
             attrs: {
               id: "diagonalHatch",
-              width: _vm.root.state.chart.progress.width,
-              height: _vm.root.state.chart.progress.width,
+              width: _vm.$store.state.options.chart.progress.width,
+              height: _vm.$store.state.options.chart.progress.width,
               patternTransform: "rotate(45 0 0)",
               patternUnits: "userSpaceOnUse"
             }
@@ -3664,14 +4654,14 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
                 x1: "0",
                 y1: "0",
                 x2: "0",
-                y2: _vm.root.state.chart.progress.width
+                y2: _vm.$store.state.options.chart.progress.width
               }
             })
           ]
         )
       ]),
       _vm._v(" "),
-      _vm.root.state.chart.progress.bar
+      _vm.$store.state.options.chart.progress.bar
         ? _c("rect", {
             staticClass: "gantt-elastic__chart-row-progress-bar-solid",
             style: _vm.root.style(
@@ -3682,7 +4672,7 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm.root.state.chart.progress.pattern
+      _vm.$store.state.options.chart.progress.pattern
         ? _c("g", [
             _c("rect", {
               staticClass: "gantt-elastic__chart-row-progress-bar-pattern",
@@ -3810,7 +4800,7 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      * @returns {object}
      */
     getSolidStyle () {
-      return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      return Object.assign({}, this.$store.state.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
 
     /**
@@ -3820,8 +4810,8 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      */
     getLineStyle () {
       return Object.assign({}, {
-        stroke: this.root.state.row.styles.bar.stroke + "a0",
-        "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
+        stroke: this.$store.state.options.row.styles.bar.stroke + "a0",
+        "stroke-width": this.$store.state.options.row.styles.bar["stroke-width"] / 2
       }, this.task.style);
     }
   }
@@ -3977,8 +4967,8 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      * @returns {boolean}
      */
     displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+      const expander = this.$store.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.options.taskList.display);
     }
   },
   methods: {
@@ -3989,7 +4979,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      * @param {Event} event
      */
     emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+      if (!this.$store.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4052,22 +5042,22 @@ var Milestonevue_type_template_id_3013006c_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.$store.state.options.chart.expander.offset -
+                  _vm.$store.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.$store.state.options.row.height -
+                    _vm.$store.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.$store.state.options.chart.expander.size,
+                height: _vm.$store.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.$store.state.options.chart.expander
                 }
               })
             ],
@@ -4158,7 +5148,7 @@ var Milestonevue_type_template_id_3013006c_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.$store.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4302,8 +5292,8 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      * @returns {boolean}
      */
     displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+      const expander = this.$store.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.options.taskList.display);
     }
   },
   methods: {
@@ -4314,7 +5304,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      * @param {Event} event
      */
     emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+      if (!this.$store.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4377,22 +5367,22 @@ var Projectvue_type_template_id_077bbd73_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.$store.state.options.chart.expander.offset -
+                  _vm.$store.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.$store.state.options.row.height -
+                    _vm.$store.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.$store.state.options.chart.expander.size,
+                height: _vm.$store.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.$store.state.options.chart.expander
                 }
               })
             ],
@@ -4483,7 +5473,7 @@ var Projectvue_type_template_id_077bbd73_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.$store.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4631,8 +5621,8 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      * @returns {boolean}
      */
     displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+      const expander = this.$store.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.options.taskList.display);
     }
   },
   methods: {
@@ -4643,7 +5633,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      * @param {Event} event
      */
     emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+      if (!this.$store.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4740,18 +5730,22 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
     Project: Project,
     DaysHighlight: DaysHighlight
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {
       moving: false
-    };
+    }
   },
   /**
    * Mounted
    */
-  mounted () {
-    this.root.state.refs.chart = this.$refs.chart;
-    this.root.state.refs.chartGraph = this.$refs.chartGraph;
+  mounted() {
+    this.$store.commit(this.root.updateOptions, {
+      refs: {
+        chart: this.$refs.chart,
+        chartGraph: this.$refs.chartGraph
+      }
+    })
   },
 
   computed: {
@@ -4760,9 +5754,8 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
      *
      * @returns {number}
      */
-    getWidth () {
-      const state = this.root.state;
-      return state.width;
+    getWidth() {
+      return this.$store.state.options.width
     },
 
     /**
@@ -4770,9 +5763,8 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
      *
      * @returns {number}
      */
-    getHeight () {
-      const state = this.root.state;
-      return state.height;
+    getHeight() {
+      return this.$store.state.options.height
     },
 
     /**
@@ -4780,10 +5772,10 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
      *
      * @returns {string}
      */
-    getViewBox () {
-      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
+    getViewBox() {
+      return `0 0 ${Math.round(this.getWidth)} ${this.$store.state.options.allVisibleTasksHeight}`
     }
-  },
+  }
 });
 
 // CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=script&lang=js&
@@ -4883,6 +5875,9 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
+//
+//
+//
 
 
 
@@ -4892,11 +5887,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
     TaskList: TaskList,
     Chart: Chart
   },
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
+  inject: ['root'],
+  props: ['tasks', 'options'],
+  data() {
     return {
-      defs: "",
+      defs: '',
       mousePos: {
         x: 0,
         y: 0,
@@ -4907,39 +5902,42 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         positiveX: 0,
         positiveY: 0,
         currentX: 0,
-        currentY: 0,
+        currentY: 0
       }
-    };
+    }
   },
   /**
    * Mounted
    */
-  mounted () {
-    this.viewBoxWidth = this.$el.clientWidth;
-    this.root.state.refs.mainView = this.$refs.mainView;
-    this.root.state.refs.svgChart = this.$refs.svgChart;
-    this.root.state.refs.chartContainer = this.$refs.chartContainer;
-    this.root.state.refs.taskList = this.$refs.taskList;
-    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
-    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
-    document.addEventListener('mouseup', this.chartMouseUp.bind(this));
-    document.addEventListener('mousemove', this.chartMouseMove.bind(this));
-    document.addEventListener('touchmove', this.chartMouseMove.bind(this));
-    document.addEventListener('touchend', this.chartMouseUp.bind(this));
+  mounted() {
+    this.viewBoxWidth = this.$el.clientWidth
+    this.$store.commit(this.root.updateOptions, {
+      refs: {
+        mainView: this.$refs.mainView,
+        svgChart: this.$refs.svgChart,
+        chartContainer: this.$refs.chartContainer,
+        taskList: this.$refs.taskList,
+        chartScrollContainerHorizontal: this.$refs.chartScrollContainerHorizontal,
+        chartScrollContainerVertical: this.$refs.chartScrollContainerVertical
+      }
+    })
+    document.addEventListener('mouseup', this.chartMouseUp.bind(this))
+    document.addEventListener('mousemove', this.chartMouseMove.bind(this))
+    document.addEventListener('touchmove', this.chartMouseMove.bind(this))
+    document.addEventListener('touchend', this.chartMouseUp.bind(this))
   },
   computed: {
-
     /**
      * Get width
      *
      * @returns {number}
      */
-    getWidth () {
-      let width = this.root.state.clientWidth - this.root.state.scrollBarHeight;
+    getWidth() {
+      let width = this.$store.state.options.clientWidth - this.$store.state.options.scrollBarHeight
       if (width < 0) {
-        return 0;
+        return 0
       }
-      return width;
+      return width
     },
 
     /**
@@ -4947,11 +5945,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      *
      * @returns {string}
      */
-    getMarginLeft () {
-      if (!this.root.state.taskList.display) {
-        return "0px";
+    getMarginLeft() {
+      if (!this.$store.state.options.taskList.display) {
+        return '0px'
       }
-      return this.root.state.taskList.finalWidth + "px";
+      return this.$store.state.options.taskList.finalWidth + 'px'
     },
 
     /**
@@ -4959,136 +5957,138 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      *
      * @returns {object}
      */
-    verticalStyle () {
+    verticalStyle() {
       return {
-        width: this.root.state.scrollBarHeight + 'px',
-        height: this.root.state.rowsHeight + 'px',
-        "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
-      };
+        width: this.$store.state.options.scrollBarHeight + 'px',
+        height: this.$store.state.options.rowsHeight + 'px',
+        'margin-top': this.$store.state.options.calendar.height + this.$store.state.options.calendar.gap + 'px'
+      }
     },
 
     /**
-    * Get view box
-    *
-    * @returns {string}
-    */
-    getViewBox () {
-      if (this.root.state.clientWidth) {
-        return `0 0 ${this.root.state.clientWidth - this.root.state.scrollBarHeight} ${this.root.state.height}`;
+     * Get view box
+     *
+     * @returns {string}
+     */
+    getViewBox() {
+      if (this.$store.state.options.clientWidth) {
+        return `0 0 ${this.$store.state.options.clientWidth - this.$store.state.options.scrollBarHeight} ${
+          this.$store.state.options.height
+        }`
       }
-      return `0 0 0 ${this.root.state.height}`;
+      return `0 0 0 ${this.$store.state.options.height}`
     }
   },
   methods: {
     /**
      * Emit event when mouse is moving inside main view
      */
-    mouseMove (event) {
-      this.root.$emit("main-view-mousemove", event);
+    mouseMove(event) {
+      this.root.$emit('main-view-mousemove', event)
     },
 
     /**
      * Emit mouseup event inside main view
      */
-    mouseUp (event) {
-      this.root.$emit("main-view-mouseup", event);
+    mouseUp(event) {
+      this.root.$emit('main-view-mouseup', event)
     },
 
     /**
      * Horizontal scroll event handler
      */
-    onHorizontalScroll (ev) {
-      this.root.$emit("chart-scroll-horizontal", ev);
+    onHorizontalScroll(ev) {
+      this.root.$emit('chart-scroll-horizontal', ev)
     },
 
     /**
      * Vertical scroll event handler
      */
-    onVerticalScroll (ev) {
-      this.root.$emit("chart-scroll-vertical", ev);
+    onVerticalScroll(ev) {
+      this.root.$emit('chart-scroll-vertical', ev)
     },
 
     /**
      * Mouse wheel event handler
      */
-    chartWheel (ev) {
-      this.root.$emit("chart-wheel", ev);
+    chartWheel(ev) {
+      this.root.$emit('chart-wheel', ev)
     },
 
     /**
      * Chart mousedown event handler
      * Initiates drag scrolling mode
      */
-    chartMouseDown (ev) {
+    chartMouseDown(ev) {
       if (typeof ev.touches !== 'undefined') {
-        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
-        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
-        this.mousePos.movementX = 0;
-        this.mousePos.movementY = 0;
-        this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft;
-        this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop;
+        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX
+        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY
+        this.mousePos.movementX = 0
+        this.mousePos.movementY = 0
+        this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft
+        this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop
       }
-      this.root.state.scroll.scrolling = true;
+      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: true } })
     },
 
     /**
      * Chart mouseup event handler
      * Deactivates drag scrolling mode
      */
-    chartMouseUp (ev) {
-      this.root.state.scroll.scrolling = false;
+    chartMouseUp(ev) {
+      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: false } })
     },
 
     /**
      * Chart mousemove event handler
      * When in drag scrolling mode this method calculate scroll movement
      */
-    chartMouseMove (ev) {
-      if (this.root.state.scroll.scrolling) {
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-        ev.stopPropagation();
-        const touch = typeof ev.touches !== 'undefined';
-        let movementX, movementY;
+    chartMouseMove(ev) {
+      if (this.$store.state.options.scroll.scrolling) {
+        ev.preventDefault()
+        ev.stopImmediatePropagation()
+        ev.stopPropagation()
+        const touch = typeof ev.touches !== 'undefined'
+        let movementX, movementY
         if (touch) {
-          const screenX = ev.touches[0].screenX;
-          const screenY = ev.touches[0].screenY;
-          movementX = this.mousePos.x - screenX;
-          movementY = this.mousePos.y - screenY;
-          this.mousePos.lastX = screenX;
-          this.mousePos.lastY = screenY;
+          const screenX = ev.touches[0].screenX
+          const screenY = ev.touches[0].screenY
+          movementX = this.mousePos.x - screenX
+          movementY = this.mousePos.y - screenY
+          this.mousePos.lastX = screenX
+          this.mousePos.lastY = screenY
         } else {
-          movementX = ev.movementX;
-          movementY = ev.movementY;
+          movementX = ev.movementX
+          movementY = ev.movementY
         }
-        const horizontal = this.$refs.chartScrollContainerHorizontal;
-        const vertical = this.$refs.chartScrollContainerVertical;
-        let x = 0, y = 0;
+        const horizontal = this.$refs.chartScrollContainerHorizontal
+        const vertical = this.$refs.chartScrollContainerVertical
+        let x = 0,
+          y = 0
         if (touch) {
-          x = this.mousePos.currentX + (movementX * this.root.state.scroll.dragXMoveMultiplier);
+          x = this.mousePos.currentX + movementX * this.$store.state.options.scroll.dragXMoveMultiplier
         } else {
-          x = horizontal.scrollLeft - (movementX * this.root.state.scroll.dragXMoveMultiplier);
+          x = horizontal.scrollLeft - movementX * this.$store.state.options.scroll.dragXMoveMultiplier
         }
-        horizontal.scrollLeft = x;
+        horizontal.scrollLeft = x
         if (touch) {
-          y = this.mousePos.currentY + (movementY * this.root.state.scroll.dragYMoveMultiplier);
+          y = this.mousePos.currentY + movementY * this.$store.state.options.scroll.dragYMoveMultiplier
         } else {
-          y = vertical.scrollTop - (movementY * this.root.state.scroll.dragYMoveMultiplier);
+          y = vertical.scrollTop - movementY * this.$store.state.options.scroll.dragYMoveMultiplier
         }
-        vertical.scrollTop = y;
+        vertical.scrollTop = y
       }
-    },
-
+    }
   },
 
   /**
    * Before destroy event - clean up
    */
-  beforeDestroy () {
-    document.removeEventListener('mouseup', this.chartMouseUp);
-    document.removeEventListener('mousemove', this.chartMouseMove);
-    document.removeEventListener('touchmove', this.chartMouseMove);
-    document.removeEventListener('touchend', this.chartMouseUp);
+  beforeDestroy() {
+    document.removeEventListener('mouseup', this.chartMouseUp)
+    document.removeEventListener('mousemove', this.chartMouseMove)
+    document.removeEventListener('touchmove', this.chartMouseMove)
+    document.removeEventListener('touchend', this.chartMouseUp)
   }
 });
 
@@ -5119,335 +6119,333 @@ MainView_component.options.__file = "src/components/MainView.vue"
 /* harmony default export */ var MainView = (MainView_component.exports);
 // CONCATENATED MODULE: ./src/style.js
 /**
-* @fileoverview Styles for gantt-elastic
-* @license MIT
-* @author Rafal Pospiech <neuronet.io@gmail.com>
-* @package GanttElastic
-*/
-const fontSize = "12px";
-const fontFamily = "Arial, sans-serif";
+ * @fileoverview Styles for gantt-elastic
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+const fontSize = '12px'
+const fontFamily = 'Arial, sans-serif'
 /* harmony default export */ var src_style = ({
-  "*": {
-    "box-sizing": "border-box"
+  '*': {
+    'box-sizing': 'border-box'
   },
-  "main-view": {
-    "background": "#FFFFFF"
+  'main-view': {
+    background: '#FFFFFF'
   },
-  "main-container-wrapper": {
-    "overflow": "hidden"
+  'main-container-wrapper': {
+    overflow: 'hidden'
   },
-  "main-container": {
-    "float": "left",
-    "max-width": "100%"
+  'main-container': {
+    float: 'left',
+    'max-width': '100%'
   },
-  "container": {
-    "display": "flex",
-    "max-width": "100%",
-    "height": "100%"
+  container: {
+    display: 'flex',
+    'max-width': '100%',
+    height: '100%'
   },
-  "header": {
-    "font-family": fontFamily,
-    "margin": "0px auto",
-    "background": "#f3f5f747",
-    "padding": "10px",
-    "overflow": "hidden",
-    "clear": "both",
-    "display": "flex",
-    "justify-content": "space-between"
+  header: {
+    'font-family': fontFamily,
+    margin: '0px auto',
+    background: '#f3f5f747',
+    padding: '10px',
+    overflow: 'hidden',
+    clear: 'both',
+    display: 'flex',
+    'justify-content': 'space-between'
   },
-  "header-title": { "float": "left" },
-  "header-options": { "float": "right" },
-  "header-title--text": {
-    "font-size": "20px",
-    "vertical-align": "middle",
-    "font-weight": "400",
-    "line-height": "35px",
-    "padding-left": "22px",
-    "letter-spacing": "1px"
+  'header-title': { float: 'left' },
+  'header-options': { float: 'right' },
+  'header-title--text': {
+    'font-size': '20px',
+    'vertical-align': 'middle',
+    'font-weight': '400',
+    'line-height': '35px',
+    'padding-left': '22px',
+    'letter-spacing': '1px'
   },
-  "header-title--html": {
-    "font-size": "20px",
-    "vertical-align": "middle",
-    "font-weight": "400",
-    "line-height": "35px",
-    "padding-left": "22px",
-    "letter-spacing": "1px"
+  'header-title--html': {
+    'font-size': '20px',
+    'vertical-align': 'middle',
+    'font-weight': '400',
+    'line-height': '35px',
+    'padding-left': '22px',
+    'letter-spacing': '1px'
   },
-  "header-btn-recenter": {
-    "background": "#95A5A6",
-    "border": "none",
-    "outline": "none",
-    "cursor": "pointer",
-    "color": "white",
-    "border-radius": "3px",
-    "margin-right": "27px",
-    "font-size": "16px",
-    "padding": "8px 12px"
+  'header-btn-recenter': {
+    background: '#95A5A6',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    color: 'white',
+    'border-radius': '3px',
+    'margin-right': '27px',
+    'font-size': '16px',
+    padding: '8px 12px'
   },
-  "header-slider": {},
-  "header-slider-wrapper": { "display": "inline-block", "vertical-align": "middle" },
-  "header-slider--slider": {},
-  "header-slider--process": { "background": "#ccc" },
-  "header-task-list-switch--label": {},
-  "header-task-list-switch": { "margin": "0px 15px", "vertical-align": "middle" },
-  "header-label": {},
-  "calendar-wrapper": {
-    "user-select": "none"
+  'header-slider': {},
+  'header-slider-wrapper': { display: 'inline-block', 'vertical-align': 'middle' },
+  'header-slider--slider': {},
+  'header-slider--process': { background: '#ccc' },
+  'header-task-list-switch--label': {},
+  'header-task-list-switch': { margin: '0px 15px', 'vertical-align': 'middle' },
+  'header-label': {},
+  'calendar-wrapper': {
+    'user-select': 'none'
   },
-  "calendar": {
-    "width": "100%",
-    "background": "#f3f5f7",
-    "display": "block"
+  calendar: {
+    width: '100%',
+    background: '#f3f5f7',
+    display: 'block'
   },
-  "calendar-row": {
-    "display": "flex",
+  'calendar-row': {
+    display: 'flex'
   },
-  "calendar-row--month": {},
-  "calendar-row--day": {},
-  "calendar-row--hour": {},
-  "calendar-row-rect": {
-    "background": "transparent",
-    "border-width": "0.5px", // Calendar
-    "border-color": "#dadada",
-    "border-style": "solid"
+  'calendar-row--month': {},
+  'calendar-row--day': {},
+  'calendar-row--hour': {},
+  'calendar-row-rect': {
+    background: 'transparent',
+    'border-width': '0.5px', // Calendar
+    'border-color': '#dadada',
+    'border-style': 'solid',
+    'flex-shrink': '0'
   },
-  "calendar-row-text": {
-    "font-family": fontFamily, // GanttElastic
-    "font-size": fontSize,    //GanttElastic
-    "color": "#606060",
-    "text-align": "center"
+  'calendar-row-text': {
+    'font-family': fontFamily, // GanttElastic
+    'font-size': fontSize, //GanttElastic
+    color: '#606060',
+    'text-align': 'center'
   },
-  "calendar-row-rect--month": {},
-  "calendar-row-text--month": {},
-  "calendar-row-rect--day": {},
-  "calendar-row-text--day": {},
-  "calendar-row-rect--hour": {},
-  "calendar-row-text--hour": {},
-  "task-list-wrapper": {},
-  "task-list": { "background": "transparent", "border-color": "#eee" },
-  "task-list-header": { "display": "flex", "user-select": "none", "vertical-align": "middle" },
-  "task-list-header-column": {
-    "border": "1px solid #00000050",
-    "border-top": "none",
-    "border-right": "none",
-    "box-sizing": "border-box",
-    "display": "flex",
-    "background": "#f3f5f7",
-    "border-color": "transparent"
+  'calendar-row-rect--month': {},
+  'calendar-row-text--month': {},
+  'calendar-row-rect--day': {},
+  'calendar-row-text--day': {},
+  'calendar-row-rect--hour': {},
+  'calendar-row-text--hour': {},
+  'task-list-wrapper': {},
+  'task-list': { background: 'transparent', 'border-color': '#eee' },
+  'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },
+  'task-list-header-column': {
+    border: '1px solid #00000050',
+    'border-top': 'none',
+    'border-right': 'none',
+    'box-sizing': 'border-box',
+    display: 'flex',
+    background: '#f3f5f7',
+    'border-color': 'transparent'
   },
-  "task-list-expander-wrapper": {
-    "display": "inline-flex",
-    "flex-shrink": "0",
-    "box-sizing": "border-box",
-    "margin": "0 0 0 10px"
+  'task-list-expander-wrapper': {
+    display: 'inline-flex',
+    'flex-shrink': '0',
+    'box-sizing': 'border-box',
+    margin: '0 0 0 10px'
   },
-  "task-list-expander-content": {
-    "display": "inline-flex",
-    "cursor": "pointer",
-    "margin": "auto 0px",
-    "box-sizing": "border-box",
-    "user-select": "none"
+  'task-list-expander-content': {
+    display: 'inline-flex',
+    cursor: 'pointer',
+    margin: 'auto 0px',
+    'box-sizing': 'border-box',
+    'user-select': 'none'
   },
-  "task-list-expander-line": {
-    "fill": "transparent",
-    "stroke": "#000000",
-    "stroke-width": "1",
-    "stroke-linecap": "round"
+  'task-list-expander-line': {
+    fill: 'transparent',
+    stroke: '#000000',
+    'stroke-width': '1',
+    'stroke-linecap': 'round'
   },
-  "task-list-expander-border": {
-    "fill": "#ffffffa0",
-    "stroke": "#000000",
+  'task-list-expander-border': {
+    fill: '#ffffffa0',
+    stroke: '#000000'
   },
-  "chart-expander-wrapper": {
-    "display": "block",
-    "line-height": "1",
-    "box-sizing": "border-box",
-    "margin": "0"
+  'chart-expander-wrapper': {
+    display: 'block',
+    'line-height': '1',
+    'box-sizing': 'border-box',
+    margin: '0'
   },
-  "chart-expander-content": {
-    "display": "inline-flex",
-    "cursor": "pointer",
-    "margin": "auto 0px",
-    "box-sizing": "border-box",
-    "user-select": "none"
+  'chart-expander-content': {
+    display: 'inline-flex',
+    cursor: 'pointer',
+    margin: 'auto 0px',
+    'box-sizing': 'border-box',
+    'user-select': 'none'
   },
-  "chart-expander-line": {
-    "fill": "transparent",
-    "stroke": "#000000",
-    "stroke-width": "1",
-    "stroke-linecap": "round"
+  'chart-expander-line': {
+    fill: 'transparent',
+    stroke: '#000000',
+    'stroke-width': '1',
+    'stroke-linecap': 'round'
   },
-  "chart-expander-border": {
-    "fill": "#ffffffa0",
-    "stroke": "#000000",
+  'chart-expander-border': {
+    fill: '#ffffffa0',
+    stroke: '#000000'
   },
-  "task-list-container": {},
-  "task-list-header-label": {
-    "overflow": "hidden",
-    "text-overflow": "ellipsis",
-    "font-family": fontFamily,
-    "font-size": fontSize,
-    "box-sizing": "border-box",
-    "margin": "auto 6px",
-    "flex-grow": "1",
-    "vertical-align": "middle"
+  'task-list-container': {},
+  'task-list-header-label': {
+    overflow: 'hidden',
+    'text-overflow': 'ellipsis',
+    'font-family': fontFamily,
+    'font-size': fontSize,
+    'box-sizing': 'border-box',
+    margin: 'auto 6px',
+    'flex-grow': '1',
+    'vertical-align': 'middle'
   },
-  "task-list-header-resizer-wrapper": {
-    "background": "transparent",
-    "height": "100%",
-    "width": "6px",
-    "cursor": "col-resize",
-    "display": "inline-flex",
-    "vertical-align": "center"
+  'task-list-header-resizer-wrapper': {
+    background: 'transparent',
+    height: '100%',
+    width: '6px',
+    cursor: 'col-resize',
+    display: 'inline-flex',
+    'vertical-align': 'center'
   },
-  "task-list-header-resizer": { "margin": "auto 0px" },
-  "task-list-header-resizer-dot": {
-    "width": "3px",
-    "height": "3px",
-    "background": "#ddd",
-    "border-radius": "100%",
-    "margin": "4px 0px",
+  'task-list-header-resizer': { margin: 'auto 0px' },
+  'task-list-header-resizer-dot': {
+    width: '3px',
+    height: '3px',
+    background: '#ddd',
+    'border-radius': '100%',
+    margin: '4px 0px'
   },
-  "task-list-items": {
-    "overflow": "hidden"
+  'task-list-items': {
+    overflow: 'hidden'
   },
-  "task-list-item": {
-    "border-top": "1px solid #eee",
-    "border-right": "1px solid #eee",
-    "box-sizing": "border-box",
-    "display": "flex",
-    "background": "transparent",
+  'task-list-item': {
+    'border-top': '1px solid #eee',
+    'border-right': '1px solid #eee',
+    'box-sizing': 'border-box',
+    display: 'flex',
+    background: 'transparent'
   },
-  "task-list-item-column": {
-    "display": "inline-flex",
-    "flex-shrink": "0",
-    "border-left": "1px solid #00000050",
-    "box-sizing": "border-box",
-    "border-color": "#eee",
+  'task-list-item-column': {
+    display: 'inline-flex',
+    'flex-shrink': '0',
+    'border-left': '1px solid #00000050',
+    'box-sizing': 'border-box',
+    'border-color': '#eee'
   },
-  "task-list-item-value-wrapper": {
-    "overflow": "hidden",
-    "display": "flex",
-    "width": "100%",
+  'task-list-item-value-wrapper': {
+    overflow: 'hidden',
+    display: 'flex',
+    width: '100%'
   },
-  "task-list-item-value-container": {
-    "margin": "auto 0px",
-    "overflow": "hidden"
+  'task-list-item-value-container': {
+    margin: 'auto 0px',
+    overflow: 'hidden'
   },
-  "task-list-item-value": {
-    "display": "block",
-    "flex-shrink": "100",
-    "font-family": fontFamily,
-    "font-size": fontSize,
-    "margin-top": "auto",
-    "margin-bottom": "auto",
-    "margin-left": "6px", // TaskList
-    "margin-right": "6px",
-    "overflow": "hidden",
-    "text-overflow": "ellipsis",
-    "line-height": "1.5em",
-    "word-break": "keep-all",
-    "white-space": "nowrap",
-    "color": "#606060",
-    "background": "#FFFFFF"
+  'task-list-item-value': {
+    display: 'block',
+    'flex-shrink': '100',
+    'font-family': fontFamily,
+    'font-size': fontSize,
+    'margin-top': 'auto',
+    'margin-bottom': 'auto',
+    'margin-left': '6px', // TaskList
+    'margin-right': '6px',
+    overflow: 'hidden',
+    'text-overflow': 'ellipsis',
+    'line-height': '1.5em',
+    'word-break': 'keep-all',
+    'white-space': 'nowrap',
+    color: '#606060',
+    background: '#FFFFFF'
   },
-  "grid-lines": {},
-  "grid-line-horizontal": {
-    "stroke": "#00000010",
-    "stroke-width": 1
+  'grid-lines': {},
+  'grid-line-horizontal': {
+    stroke: '#00000010',
+    'stroke-width': 1
   },
-  "grid-line-vertical": {
-    "stroke": "#00000010",
-    "stroke-width": 1
+  'grid-line-vertical': {
+    stroke: '#00000010',
+    'stroke-width': 1
   },
-  "grid-line-time": {
-    "stroke": "#FF000080",
-    "stroke-width": 1
+  'grid-line-time': {
+    stroke: '#FF000080',
+    'stroke-width': 1
   },
-  "chart": {
-    "user-select": "none",
-    "overflow": "hidden"
+  chart: {
+    'user-select': 'none',
+    overflow: 'hidden'
   },
-  "chart-area": {},
-  "chart-graph": {
-    "overflow": "hidden"
+  'chart-area': {},
+  'chart-graph': {
+    overflow: 'hidden'
   },
-  "chart-row-text-wrapper": {},
-  "chart-row-text": {
-    "background": "#ffffffa0",
-    "border-radius": "10px",
-    "font-family": fontFamily,
-    "font-size": fontSize,
-    "font-weight": "normal",
-    "color": "#000000a0",
-    "height": "100%",
-    "display": "inline-block"
+  'chart-row-text-wrapper': {},
+  'chart-row-text': {
+    background: '#ffffffa0',
+    'border-radius': '10px',
+    'font-family': fontFamily,
+    'font-size': fontSize,
+    'font-weight': 'normal',
+    color: '#000000a0',
+    height: '100%',
+    display: 'inline-block'
   },
-  "chart-row-text-content": {
-    "padding": "0px 6px"
+  'chart-row-text-content': {
+    padding: '0px 6px'
   },
-  "chart-row-text-content--text": {},
-  "chart-row-text-content--html": {},
-  "chart-row-wrapper": {},
-  "chart-row-bar-wrapper": {},
-  "chart-row-bar": {},
-  "chart-row-bar-polygon": {
-    "stroke": "#E74C3C",
-    "stroke-width": 1,
-    "fill": "#F75C4C",
+  'chart-row-text-content--text': {},
+  'chart-row-text-content--html': {},
+  'chart-row-wrapper': {},
+  'chart-row-bar-wrapper': {},
+  'chart-row-bar': {},
+  'chart-row-bar-polygon': {
+    stroke: '#E74C3C',
+    'stroke-width': 1,
+    fill: '#F75C4C'
   },
-  "chart-row-project-wrapper": {},
-  "chart-row-project": {},
-  "chart-row-project-polygon": {},
-  "chart-row-milestone-wrapper": {},
-  "chart-row-milestone": {},
-  "chart-row-milestone-polygon": {},
-  "chart-row-task-wrapper": {},
-  "chart-row-task": {},
-  "chart-row-task-polygon": {},
-  "chart-row-progress-bar-wrapper": {},
-  "chart-row-progress-bar": {},
-  "chart-row-progress-bar-line": {
-    "stroke": "#ffffff25",
-    "stroke-width": 20
+  'chart-row-project-wrapper': {},
+  'chart-row-project': {},
+  'chart-row-project-polygon': {},
+  'chart-row-milestone-wrapper': {},
+  'chart-row-milestone': {},
+  'chart-row-milestone-polygon': {},
+  'chart-row-task-wrapper': {},
+  'chart-row-task': {},
+  'chart-row-task-polygon': {},
+  'chart-row-progress-bar-wrapper': {},
+  'chart-row-progress-bar': {},
+  'chart-row-progress-bar-line': {
+    stroke: '#ffffff25',
+    'stroke-width': 20
   },
-  "chart-row-progress-bar-solid": {
-    "fill": "#0EAC51",
-    "height": "20%"
+  'chart-row-progress-bar-solid': {
+    fill: '#0EAC51',
+    height: '20%'
   },
-  "chart-row-progress-bar-pattern": {
-    "fill": "url(#diagonalHatch)",
-    "transform": "translateY(0.1) scaleY(0.8)",
+  'chart-row-progress-bar-pattern': {
+    fill: 'url(#diagonalHatch)',
+    transform: 'translateY(0.1) scaleY(0.8)'
   },
-  "chart-row-progress-bar-outline": {
-    "stroke": "#E74C3C",
-    "stroke-width": 1
+  'chart-row-progress-bar-outline': {
+    stroke: '#E74C3C',
+    'stroke-width': 1
   },
-  "chart-dependency-lines-wrapper": {},
-  "chart-dependency-lines-path": {
-    "fill": "transparent",
-    "stroke": "#FFa00090",
-    "stroke-width": 2
+  'chart-dependency-lines-wrapper': {},
+  'chart-dependency-lines-path': {
+    fill: 'transparent',
+    stroke: '#FFa00090',
+    'stroke-width': 2
   },
-  "chart-scroll-container": {},
-  "chart-scroll-container--horizontal": {
-    "overflow": "auto",
-    "max-width": "100%"
+  'chart-scroll-container': {},
+  'chart-scroll-container--horizontal': {
+    overflow: 'auto',
+    'max-width': '100%'
   },
-  "chart-scroll-container--vertical": {
-    "overflow-y": "auto",
-    "overflow-x": "hidden",
-    "max-height": "100%",
-    "float": "right",
+  'chart-scroll-container--vertical': {
+    'overflow-y': 'auto',
+    'overflow-x': 'hidden',
+    'max-height': '100%',
+    float: 'right'
   },
-  "chart-days-highlight-rect": {
-    "fill": "#f3f5f780"
+  'chart-days-highlight-rect': {
+    fill: '#f3f5f780'
   },
-  "chart": {
-    "overflow": "hidden"
-  },
-  "slot-header-beforeOptions": {
-    "display": "inline-block"
+  'slot-header-beforeOptions': {
+    display: 'inline-block'
   }
 });
 
@@ -5473,20 +6471,26 @@ const fontFamily = "Arial, sans-serif";
 
 
 
+Vue.use(vuex_esm)
+
 /**
  * Helper function to fill out empty options in user settings
  *
  * @param {object} userOptions - initial user options that will merge with those below
  * @returns {object} merged options
  */
-function getOptions (userOptions) {
+function getOptions(userOptions) {
+  let localeCode = 'en'
+  if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.code === 'string') {
+    localeCode = userOptions.locale.code
+  }
   return {
     style: src_style,
     slots: {
-      header: {},
+      header: {}
     },
     title: {
-      label: "gantt-elastic",
+      label: 'gantt-elastic',
       html: false
     },
     width: 0,
@@ -5515,8 +6519,8 @@ function getOptions (userOptions) {
         time: 0,
         timeCenter: 0,
         dateTime: {
-          left: "",
-          right: ""
+          left: '',
+          right: ''
         }
       }
     },
@@ -5528,59 +6532,57 @@ function getOptions (userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      firstDate: null,
-      firstTime: null, // firstDate getTime()
-      lastDate: null,
-      lastTime: null, // last date getTime()
-      firstTaskDate: null,
+      firstTime: 0,
+      lastTime: 0,
       firstTaskTime: 0,
-      lastTaskDate: null,
       lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
-      stepDuration: "day", // hour, month
+      stepDuration: 'day', // hour, month
       steps: []
     },
     row: {
-      height: 24,
+      height: 24
     },
     maxRows: 20,
     maxHeight: 0,
     chart: {
       grid: {
         horizontal: {
-          gap: 6,
-        },
+          gap: 6
+        }
       },
       progress: {
         width: 20,
         height: 6,
         pattern: true,
-        bar: false,
+        bar: false
       },
       text: {
         offset: 0,
         xPadding: 10,
-        display: true,
+        display: true
       },
       expander: {
         type: 'chart',
         display: false,
         displayIfTaskListHidden: true,
         offset: 4,
-        size: 18,
+        size: 18
       }
     },
     taskList: {
       display: true,
       resizeAfterThreshold: true,
       widthThreshold: 75,
-      columns: [{
-        id: 0,
-        label: "ID",
-        value: "id",
-        width: 40,
-      }],
+      columns: [
+        {
+          id: 0,
+          label: 'ID',
+          value: 'id',
+          width: 40
+        }
+      ],
       resizerWidth: 0,
       percent: 100,
       width: 0,
@@ -5609,20 +6611,20 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          long (date) {
+          long(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("HH:mm");
+              .locale(localeCode)
+              .format('HH:mm')
           },
-          medium (date) {
+          medium(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("HH:mm");
+              .locale(localeCode)
+              .format('HH:mm')
           },
-          short (date) {
+          short(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("HH");
+              .locale(localeCode)
+              .format('HH')
           }
         }
       },
@@ -5632,20 +6634,20 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          long (date) {
+          long(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("DD dddd");
+              .locale(localeCode)
+              .format('DD dddd')
           },
-          medium (date) {
+          medium(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("DD ddd");
+              .locale(localeCode)
+              .format('DD ddd')
           },
-          short (date) {
+          short(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("DD");
+              .locale(localeCode)
+              .format('DD')
           }
         }
       },
@@ -5655,34 +6657,34 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          short (date) {
+          short(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("MM");
+              .locale(localeCode)
+              .format('MM')
           },
-          medium (date) {
+          medium(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("MMM 'YY");
+              .locale(localeCode)
+              .format("MMM 'YY")
           },
-          long (date) {
+          long(date) {
             return esm(date)
-              .locale(userOptions.locale.code)
-              .format("MMMM YYYY");
+              .locale(localeCode)
+              .format('MMMM YYYY')
           }
         }
       }
     },
     locale: {
-      code: "en",
-      Now: "Now",
-      "X-Scale": "Zoom-X",
-      "Y-Scale": "Zoom-Y",
-      "Task list width": "Task list",
-      "Before/After": "Expand",
-      "Display task list": "Show task list"
-    },
-  };
+      code: 'en',
+      Now: 'Now',
+      'X-Scale': 'Zoom-X',
+      'Y-Scale': 'Zoom-Y',
+      'Task list width': 'Task list',
+      'Before/After': 'Expand',
+      'Display task list': 'Show task list'
+    }
+  }
 }
 /**
  * Helper function to determine if specified variable is an object
@@ -5690,8 +6692,16 @@ function getOptions (userOptions) {
  * @param {any} item
  * @returns {boolean}
  */
-function isObject (item) {
-  return item && typeof item === "object" && !Array.isArray(item);
+function GanttElasticvue_type_script_lang_js_isObject(item) {
+  return (
+    item &&
+    typeof item === 'object' &&
+    !Array.isArray(item) &&
+    !(item instanceof HTMLElement) &&
+    !(item instanceof CanvasRenderingContext2D) &&
+    item.constructor.name !== 'Dayjs' &&
+    typeof item !== 'function'
+  )
 }
 /**
  * Helper function which will merge objects recursively - creating brand new one - like clone
@@ -5700,54 +6710,136 @@ function isObject (item) {
  * @params {object} sources
  * @returns {object}
  */
-function mergeDeep (target, ...sources) {
+function mergeDeep(target, alreadyMerged, ...sources) {
   if (!sources.length) {
-    return target;
+    return target
   }
-  const source = sources.shift();
-  if (isObject(target) && isObject(source)) {
+  const source = sources.shift()
+  let mergedIndex = alreadyMerged.indexOf(source)
+  if (mergedIndex >= 0) {
+    return alreadyMerged[mergedIndex]
+  }
+  alreadyMerged.push(source)
+  if (GanttElasticvue_type_script_lang_js_isObject(target) && GanttElasticvue_type_script_lang_js_isObject(source)) {
     for (const key in source) {
-      if (isObject(source[key])) {
+      if (GanttElasticvue_type_script_lang_js_isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          Object.assign(target, { [key]: {} });
+          Object.assign(target, { [key]: {} })
         }
-        mergeDeep(target[key], source[key]);
+        mergeDeep(target[key], alreadyMerged, source[key])
+      } else if (Array.isArray(source[key])) {
+        target[key] = source[key].map(item => {
+          if (GanttElasticvue_type_script_lang_js_isObject(item)) {
+            return mergeDeep({}, alreadyMerged, item)
+          }
+          return item
+        })
+      } else if (typeof source[key] === 'function' && source[key].constructor.name !== 'Dayjs') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key]
+        }
+      } else if (source[key] && source[key].constructor.name === 'Dayjs') {
+        target[key] = source[key].clone()
       } else {
-        Object.assign(target, { [key]: source[key] });
+        Object.assign(target, { [key]: source[key] })
       }
     }
   }
-  return mergeDeep(target, ...sources);
+  return mergeDeep(target, alreadyMerged, ...sources)
 }
+
 /**
  * Same as above but with reactivity in mind
  *
- * @param {Vue.component} component
  * @param {object} target
  * @params {object} sources
  * @returns {object}
  */
-function mergeDeepReactive (component, target, ...sources) {
+function mergeDeepReactive(target, alreadyMerged, ...sources) {
   if (!sources.length) {
-    return target;
+    return target
   }
-  const source = sources.shift();
-  if (isObject(target) && isObject(source)) {
+  const source = sources.shift()
+  let mergedIndex = alreadyMerged.indexOf(source)
+  if (mergedIndex >= 0) {
+    return alreadyMerged[mergedIndex]
+  }
+  alreadyMerged.push(source)
+  if (GanttElasticvue_type_script_lang_js_isObject(target) && GanttElasticvue_type_script_lang_js_isObject(source)) {
     for (const key in source) {
-      if (isObject(source[key])) {
+      if (GanttElasticvue_type_script_lang_js_isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          component.$set(target, key, {});
+          Vue.set(target, key, {})
         }
-        mergeDeepReactive(component, target[key], source[key]);
+        mergeDeepReactive(target[key], alreadyMerged, source[key])
+      } else if (Array.isArray(source[key])) {
+        Vue.set(
+          target,
+          key,
+          source[key].map(item => {
+            if (GanttElasticvue_type_script_lang_js_isObject(item)) {
+              return mergeDeepReactive({}, alreadyMerged, item)
+            }
+            return item
+          })
+        )
+      } else if (typeof source[key] === 'function' && source[key].constructor.name !== 'Dayjs') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key]
+        }
+      } else if (source[key] && source[key].constructor.name === 'Dayjs') {
+        console.log('dayjs', key)
+        target[key] = source[key].clone()
       } else {
-        component.$set(target, key, source[key]);
+        Vue.set(target, key, source[key])
       }
     }
   }
-  return mergeDeepReactive(component, target, ...sources);
+  return mergeDeepReactive(target, alreadyMerged, ...sources)
 }
-const styleCache = {};
-let globalVisibleTasks = [];
+
+const store = new vuex_esm.Store({
+  state: {
+    tasks: [],
+    options: {
+      scrollBarHeight: 0,
+      allVisibleTasksHeight: 0,
+      refs: {},
+      tasksById: {},
+      times: {}
+    }
+  },
+  mutations: {
+    /**
+     * Update tasks
+     */
+    updateTasks(state, tasks) {
+      state.tasks = tasks.map(task => mergeDeepReactive({}, [], task))
+    },
+
+    /**
+     * Update task
+     */
+    updateTask(state, task) {
+      for (let index = 0, len = state.tasks.length; index < len; index++) {
+        const current = state.tasks[index]
+        if (current.id === task.id) {
+          mergeDeepReactive(state.tasks[index], [], task)
+        }
+      }
+    },
+
+    /**
+     * Update options
+     */
+    updateOptions(state, payload) {
+      mergeDeepReactive(state.options, [], payload)
+    }
+  }
+})
+
+const styleCache = {}
+let globalVisibleTasks = []
 
 /**
  * GanttElastic
@@ -5757,26 +6849,23 @@ const GanttElastic = {
   components: {
     MainView: MainView
   },
-  props: ["tasks", "options"],
-  provide () {
-    const provider = {};
-    const self = this;
-    Object.defineProperty(provider, "root", {
+  store,
+  props: ['tasks', 'options'],
+  provide() {
+    const provider = {}
+    const self = this
+    Object.defineProperty(provider, 'root', {
       enumerable: true,
       get: () => self
-    });
-    return provider;
+    })
+    return provider
   },
-  data () {
+  data() {
     return {
-      state: {
-        tasks: [],
-        scrollBarHeight: 0,
-        allVisibleTasksHeight: 0,
-        refs: {},
-        tasksById: {},
-      },
-    };
+      updateTasks: 'updateTasks',
+      updateTask: 'updateTask',
+      updateOptions: 'updateOptions'
+    }
   },
   methods: {
     mergeDeep,
@@ -5787,20 +6876,20 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getScrollBarHeight () {
-      const outer = document.createElement("div");
-      outer.style.visibility = "hidden";
-      outer.style.height = "100px";
-      outer.style.msOverflowStyle = "scrollbar";
-      document.body.appendChild(outer);
-      var noScroll = outer.offsetHeight;
-      outer.style.overflow = "scroll";
-      var inner = document.createElement("div");
-      inner.style.height = "100%";
-      outer.appendChild(inner);
-      var withScroll = inner.offsetHeight;
-      outer.parentNode.removeChild(outer);
-      return this.state.scrollBarHeight = noScroll - withScroll;
+    getScrollBarHeight() {
+      const outer = document.createElement('div')
+      outer.style.visibility = 'hidden'
+      outer.style.height = '100px'
+      outer.style.msOverflowStyle = 'scrollbar'
+      document.body.appendChild(outer)
+      var noScroll = outer.offsetHeight
+      outer.style.overflow = 'scroll'
+      var inner = document.createElement('div')
+      inner.style.height = '100%'
+      outer.appendChild(inner)
+      var withScroll = inner.offsetHeight
+      outer.parentNode.removeChild(outer)
+      return this.$store.commit(this.updateOptions, { scrollBarHeight: noScroll - withScroll })
     },
 
     /**
@@ -5809,142 +6898,138 @@ const GanttElastic = {
      * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
      * @returns {object}
      */
-    style (...mergeWith) {
-      const index = JSON.stringify(mergeWith);
+    style(...mergeWith) {
+      const index = JSON.stringify(mergeWith)
       if (typeof styleCache[index] !== 'undefined') {
-        return styleCache[index];
+        return styleCache[index]
       }
-      let merged = this.state.style['*'];
+      let merged = this.$store.state.options.style['*']
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.style[objOrClassName]);
+          merged = Object.assign({}, merged, this.$store.state.options.style[objOrClassName])
         } else if (typeof objOrClassName === 'object') {
-          merged = Object.assign({}, merged, objOrClassName);
+          merged = Object.assign({}, merged, objOrClassName)
         } else if (typeof objOrClassName === 'function') {
-          merged = Object.assign({}, objOrClassName());
+          merged = Object.assign({}, objOrClassName())
         }
-      });
-      styleCache[index] = merged;
-      return merged;
+      })
+      styleCache[index] = merged
+      return merged
     },
 
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks () {
-      this.state.tasks = this.state.tasks.map(task => {
+    refreshTasks(tasks) {
+      tasks = tasks.map(task => {
         if (typeof task.x === 'undefined') {
-          this.$set(task, 'x', 0);
+          task.x = 0
         }
         if (typeof task.y === 'undefined') {
-          this.$set(task, 'y', 0);
+          task.y = 0
         }
         if (typeof task.width === 'undefined') {
-          this.$set(task, 'width', 0);
+          task.width = 0
         }
         if (typeof task.height === 'undefined') {
-          this.$set(task, 'height', 0);
-        }
-        if (typeof task.tooltip === 'undefined') {
-          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
-        }
-        if (typeof task.tooltip.visible === 'undefined') {
-          task.tooltip.visible = false;
+          task.height = 0
         }
         if (typeof task.mouseOver === 'undefined') {
-          this.$set(task, 'mouseOver', false);
+          task.mouseOver = false
         }
-        if (typeof task.visible === "undefined") {
-          this.$set(task, 'visible', true);
+        if (typeof task.visible === 'undefined') {
+          task.visible = true
         }
-        if (typeof task.collapsed === "undefined") {
-          this.$set(task, 'collapsed', false);
+        if (typeof task.collapsed === 'undefined') {
+          task.collapsed = false
         }
-        if (typeof task.dependentOn === "undefined") {
-          this.$set(task, 'dependentOn', []);
+        if (typeof task.dependentOn === 'undefined') {
+          task.dependentOn = []
         }
-        if (typeof task.parentId === "undefined") {
-          this.$set(task, 'parentId', null);
+        if (typeof task.parentId === 'undefined') {
+          task.parentId = null
         }
-        if (typeof task.style === "undefined") {
-          this.$set(task, 'style', {});
+        if (typeof task.style === 'undefined') {
+          task.style = {}
         }
         if (typeof task.children === 'undefined') {
-          this.$set(task, 'children', []);
+          task.children = []
         }
         if (typeof task.allChildren === 'undefined') {
-          this.$set(task, 'allChildren', []);
+          task.allChildren = []
         }
         if (typeof task.parents === 'undefined') {
-          this.$set(task, 'parents', []);
+          task.parents = []
         }
         if (typeof task.parent === 'undefined') {
-          this.$set(task, 'parent', null);
+          task.parent = null
         }
         if (typeof task.durationMs === 'undefined') {
-          this.$set(task, 'durationMs', []);
+          task.durationMs = task.duration * 1000
         }
-        return task;
-      });
+        return task
+      })
+      return tasks
     },
 
     /**
      * Initialize component
      */
-    initialize (itsUpdate = '') {
-      switch (itsUpdate) {
-        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks: this.tasks }); break;
-        case 'options': this.mergeDeepReactive(this, this.state, this.options); break;
-        default: this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
-      }
-      if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.tasks.map(task => {
-          this.$set(task, 'start', esm(task.start).format("YYYY-MM-DD HH:mm:ss"));
-          return task;
-        });
-      }
-      esm.locale(this.options.locale, null, true);
-      if (typeof this.state.taskList === "undefined") {
-        this.$set(this.state, 'taskList', {});
-      }
-      if (typeof this.state.taskList.columns === 'undefined') {
-        this.$set(this.state.taskList, 'columns', []);
-      }
-      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        this.$set(column, 'thresholdPercent', 100);
-        this.$set(column, 'widthFromPercentage', 0);
-        this.$set(column, 'finalWidth', 0);
-        if (typeof column.height === "undefined") {
-          this.$set(column, 'height', 0);
+    initialize(itsUpdate = '', data = null) {
+      let tasks = this.tasks.map(task => {
+        return this.mergeDeep({}, [], task)
+      })
+      let options = this.mergeDeep({}, [], getOptions(this.options), this.options)
+      options.tasksById = {}
+      tasks = tasks.map(task => {
+        task.startTime = esm(task.start).valueOf()
+        task.durationMs = task.duration * 1000
+        task.endTime = task.startTime + task.durationMs
+        return task
+      })
+      tasks = this.refreshTasks(tasks)
+      esm.locale(options.locale, null, true)
+      options.taskList.columns = options.taskList.columns.map((column, index) => {
+        const columnOptions = {
+          thresholdPercent: 100,
+          widthFromPercentage: 0,
+          finalWidth: 0
         }
-        if (typeof column.style === "undefined") {
-          this.$set(column, 'style', {});
+        if (typeof column.height === 'undefined') {
+          columnOptions.height = 0
         }
-        this.$set(column, '_id', `${index}-${column.label}`);
-        return column;
-      });
+        if (typeof column.style === 'undefined') {
+          columnOptions.style = {}
+        }
+        columnOptions._id = `${index}-${column.label}`
+        return this.mergeDeep({}, [], column, columnOptions)
+      })
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        // initialize observer
-        this.refreshTasks();
-        this.state.rootTask = {
+        options.rootTask = {
+          root: true,
           id: null,
-          label: "root",
+          label: 'root',
           children: [],
           allChildren: [],
           parents: [],
           parent: null
-        };
-        this.resetTaskTree();
-        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-        this.state.tasks = this.state.taskTree.allChildren;
+        }
+        tasks = this.resetTaskTree(tasks)
+        options.taskTree = this.makeTaskTree(options.rootTask, false, tasks)
+        tasks = options.taskTree.allChildren
       }
       if (itsUpdate === '') {
-        this.state.ctx = document.createElement("canvas").getContext("2d");
+        options.ctx = document.createElement('canvas').getContext('2d')
       }
-      this.globalOnResize();
-      this.calculateTaskListColumnsDimensions();
-      this.state.scrollBarHeight = this.getScrollBarHeight();
-      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
+      this.$store.commit(this.updateTasks, tasks)
+      this.$store.state.tasks.forEach(task => (options.tasksById[task.id] = task))
+      this.$store.commit(this.updateOptions, options)
+      this.globalOnResize()
+      this.calculateTaskListColumnsDimensions()
+      this.getScrollBarHeight()
+      this.$store.commit(this.updateOptions, {
+        outerHeight: this.$store.state.options.height + this.$store.state.options.scrollBarHeight
+      })
     },
 
     /**
@@ -5952,8 +7037,12 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getCalendarHeight () {
-      return this.state.calendar.height + this.style('calendar-row')["border-width"] + this.state.calendar.gap;
+    getCalendarHeight() {
+      return (
+        this.$store.state.options.calendar.height +
+        this.style('calendar-row')['border-width'] +
+        this.$store.state.options.calendar.gap
+      )
     },
 
     /**
@@ -5961,17 +7050,19 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    calculateCalendarDimensions () {
-      this.state.calendar.height = 0;
-      if (this.state.calendar.hour.display && this.state.calendar.hours.length > 0) {
-        this.state.calendar.height += this.state.calendar.hour.height;
+    calculateCalendarDimensions() {
+      let height = 0
+      if (this.$store.state.options.calendar.hour.display && this.$store.state.options.calendar.hours.length > 0) {
+        height += this.$store.state.options.calendar.hour.height
       }
-      if (this.state.calendar.day.display && this.state.calendar.days.length > 0) {
-        this.state.calendar.height += this.state.calendar.day.height;
+      if (this.$store.state.options.calendar.day.display && this.$store.state.options.calendar.days.length > 0) {
+        height += this.$store.state.options.calendar.day.height
       }
-      if (this.state.calendar.month.display && this.state.calendar.months.length > 0) {
-        this.state.calendar.height += this.state.calendar.month.height;
+      if (this.$store.state.options.calendar.month.display && this.$store.state.options.calendar.months.length > 0) {
+        height += this.$store.state.options.calendar.month.height
       }
+      this.$store.commit(this.updateOptions, { calendar: { height } })
+      return height
     },
 
     /**
@@ -5979,14 +7070,14 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getMaximalLevel () {
-      let maximalLevel = 0;
-      this.state.tasks.forEach(task => {
+    getMaximalLevel() {
+      let maximalLevel = 0
+      this.$store.state.tasks.forEach(task => {
         if (task.parents.length > maximalLevel) {
-          maximalLevel = task.parents.length;
+          maximalLevel = task.parents.length
         }
-      });
-      return maximalLevel - 1;
+      })
+      return maximalLevel - 1
     },
 
     /**
@@ -5994,92 +7085,102 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getMaximalExpanderWidth () {
-      return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
+    getMaximalExpanderWidth() {
+      return (
+        this.getMaximalLevel() * this.$store.state.options.taskList.expander.padding +
+        this.$store.state.options.taskList.expander.margin
+      )
     },
 
     /**
      * Synchronize scrollTop property when row height is changed
      */
-    syncScrollTop () {
-      if (this.state.refs.taskListItems) {
-        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+    syncScrollTop() {
+      if (this.$store.state.options.refs.taskListItems) {
+        const scrollTop = this.$store.state.options.refs.chartGraph.scrollTop
+        this.$store.commit(this.updateOptions, {
+          scroll: { top: scrollTop }
+        })
+        this.$store.state.options.refs.taskListItems.scrollTop = scrollTop
+        this.$store.state.options.refs.chartScrollContainerVertical.scrollTop = scrollTop
       }
     },
 
     /**
      * Calculate task list columns dimensions
      */
-    calculateTaskListColumnsDimensions () {
-      let final = 0;
-      let percentage = 0;
-      this.state.taskList.columns.forEach(column => {
+    calculateTaskListColumnsDimensions(columns) {
+      let final = 0
+      let percentage = 0
+      this.$store.state.options.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.widthFromPercentage = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+          column.widthFromPercentage =
+            ((this.getMaximalExpanderWidth() + column.width) / 100) * this.$store.state.options.taskList.percent
         } else {
-          column.widthFromPercentage = (column.width / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = (column.width / 100) * this.$store.state.options.taskList.percent
         }
-        percentage += column.widthFromPercentage;
-        column.finalWidth = column.thresholdPercent * column.widthFromPercentage / 100;
-        final += column.finalWidth;
-        column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
-      });
-      this.state.taskList.widthFromPercentage = percentage;
-      this.state.taskList.finalWidth = final;
-      this.syncScrollTop();
+        percentage += column.widthFromPercentage
+        column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100
+        final += column.finalWidth
+        column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width']
+      })
+      this.$store.commit(this.updateOptions, {
+        taskList: {
+          widthFromPercentage: percentage,
+          finalWidth: final
+        }
+      })
+      this.syncScrollTop()
     },
 
     /**
      * Reset task tree - which is used to create tree like structure inside task list
      */
-    resetTaskTree () {
-      this.state.rootTask.children = [];
-      this.state.rootTask.allChildren = [];
-      this.state.rootTask.parent = null;
-      this.state.rootTask.parents = [];
-      this.state.tasksById = {};
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
-        current.children = [];
-        current.allChildren = [];
-        current.parent = null;
-        current.parents = [];
-        this.state.tasksById[current.id] = current;
+    resetTaskTree(tasks) {
+      const updateTaskProps = {
+        children: [],
+        allChildren: [],
+        parent: null,
+        parents: []
       }
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let task = tasks[i]
+        tasks[i] = Object.assign(task, updateTaskProps)
+      }
+      return tasks
     },
 
     /**
      * Make task tree, after reset - look above
      *
      * @param {object} task
+     * @param {boolean} collapsed
+     * @param {array} tasks
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree (task, collapsed = false) {
-      collapsed = collapsed || task.collapsed;
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
+    makeTaskTree(task, collapsed = false, tasks = []) {
+      collapsed = collapsed || task.collapsed
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let current = this.mergeDeepReactive({}, [], tasks[i])
         if (current.parentId === task.id) {
           if (task.parents.length) {
-            task.parents.forEach(parent => current.parents.push(parent));
+            task.parents.forEach(parent => current.parents.push(parent))
           }
-          if (task !== this.root) {
-            current.parents.push(task);
-            current.parent = task;
-          } else {
-            current.parents = [];
-            current.parent = null;
+          if (typeof task.root === 'undefined') {
+            current.parents.push(task)
+            current.parent = task
           }
-          current = this.makeTaskTree(current, collapsed || current.collapsed);
-          current.visible = !collapsed;
+          current = this.makeTaskTree(current, collapsed || current.collapsed, tasks)
+          current.visible = !collapsed
           current.children.forEach(child => {
-            child.visible = !(collapsed || current.collapsed);
-          });
-          task.allChildren.push(current);
-          task.children.push(current);
-          current.allChildren.forEach(child => task.allChildren.push(child));
+            child.visible = !(collapsed || current.collapsed)
+          })
+          task.allChildren.push(current)
+          task.children.push(current)
+          current.allChildren.forEach(child => task.allChildren.push(child))
         }
       }
-      return task;
+      return task
     },
 
     /**
@@ -6088,11 +7189,11 @@ const GanttElastic = {
      * @param {any} taskId
      * @returns {object|null} task
      */
-    getTask (taskId) {
-      if (typeof this.state.tasksById[taskId] !== 'undefined') {
-        return this.state.tasksById[taskId];
+    getTask(taskId) {
+      if (typeof this.$store.state.options.tasksById[taskId] !== 'undefined') {
+        return this.$store.state.options.tasksById[taskId]
       }
-      return null;
+      return null
     },
 
     /**
@@ -6101,8 +7202,8 @@ const GanttElastic = {
      * @param {any} taskId
      * @returns {array} children
      */
-    getChildren (taskId) {
-      return this.state.tasks.filter(task => task.parent === taskId);
+    getChildren(taskId) {
+      return this.$store.state.tasks.filter(task => task.parent === taskId)
     },
 
     /**
@@ -6110,8 +7211,8 @@ const GanttElastic = {
      *
      * @returns {string} html svg image of gantt
      */
-    getSVG () {
-      return this.state.mainView.outerHTML;
+    getSVG() {
+      return this.$store.state.options.mainView.outerHTML
     },
 
     /**
@@ -6120,18 +7221,18 @@ const GanttElastic = {
      * @param {string} type image format
      * @returns {Promise} when resolved returns base64 image string of gantt
      */
-    getImage (type = "image/png") {
+    getImage(type = 'image/png') {
       return new Promise((resolve, reject) => {
-        const img = new Image();
+        const img = new Image()
         img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = this.state.mainView.clientWidth;
-          canvas.height = this.state.rowsHeight;
-          canvas.getContext("2d").drawImage(img, 0, 0);
-          resolve(canvas.toDataURL(type));
-        };
-        img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
-      });
+          const canvas = document.createElement('canvas')
+          canvas.width = this.$store.state.options.mainView.clientWidth
+          canvas.height = this.$store.state.options.rowsHeight
+          canvas.getContext('2d').drawImage(img, 0, 0)
+          resolve(canvas.toDataURL(type))
+        }
+        img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG())
+      })
     },
 
     /**
@@ -6139,12 +7240,17 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + parseFloat(this.style('calendar-row-rect')["border-width"]) * 2 + this.state.calendar.gap;
+    getHeight(visibleTasks, outer = false) {
+      let height =
+        visibleTasks.length *
+          (this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2) +
+        this.$store.state.options.calendar.height +
+        parseFloat(this.style('calendar-row-rect')['border-width']) * 2 +
+        this.$store.state.options.calendar.gap
       if (outer) {
-        height += this.state.scrollBarHeight;
+        height += this.$store.state.options.scrollBarHeight
       }
-      return height;
+      return height
     },
 
     /**
@@ -6152,11 +7258,15 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getTaskHeight (withStroke = false) {
+    getTaskHeight(withStroke = false) {
       if (withStroke) {
-        return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+        return (
+          this.$store.state.options.row.height +
+          this.$store.state.options.chart.grid.horizontal.gap * 2 +
+          this.style('grid-line-horizontal')['stroke-width']
+        )
       }
-      return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2);
+      return this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2
     },
 
     /**
@@ -6164,8 +7274,8 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getTasksHeight (visibleTasks, outer = false) {
-      return visibleTasks.length * this.getTaskHeight();
+    getTasksHeight(visibleTasks, outer = false) {
+      return visibleTasks.length * this.getTaskHeight()
     },
 
     /**
@@ -6174,12 +7284,12 @@ const GanttElastic = {
      * @param {int} ms
      * @returns {number}
      */
-    timeToPixelOffsetX (ms) {
-      let x = ms - this.state.times.firstTime;
+    timeToPixelOffsetX(ms) {
+      let x = ms - this.$store.state.options.times.firstTime
       if (x) {
-        x = x / this.state.times.timePerPixel;
+        x = x / this.$store.state.options.times.timePerPixel
       }
-      return x;
+      return x
     },
 
     /**
@@ -6188,9 +7298,9 @@ const GanttElastic = {
      * @param {number} pixelOffsetX
      * @returns {int} milliseconds
      */
-    pixelOffsetXToTime (pixelOffsetX) {
-      let offset = pixelOffsetX + this.style('grid-line-vertical')["stroke-width"] / 2;
-      return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
+    pixelOffsetXToTime(pixelOffsetX) {
+      let offset = pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2
+      return offset * this.$store.state.options.times.timePerPixel + this.$store.state.options.times.firstTime
     },
 
     /**
@@ -6201,8 +7311,13 @@ const GanttElastic = {
      * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true
      * @returns {boolean}
      */
-    isInsideViewPort (x, width, buffer = 5000) {
-      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
+    isInsideViewPort(x, width, buffer = 5000) {
+      return (
+        (x + width + buffer >= this.$store.state.options.scroll.chart.left &&
+          x - buffer <= this.$store.state.options.scroll.chart.right) ||
+        (x - buffer <= this.$store.state.options.scroll.chart.left &&
+          x + width + buffer >= this.$store.state.options.scroll.chart.right)
+      )
     },
 
     /**
@@ -6210,10 +7325,10 @@ const GanttElastic = {
      *
      * @param {event} ev
      */
-    onScrollChart (ev) {
-      const horizontal = this.state.refs.chartScrollContainerHorizontal;
-      const vertical = this.state.refs.chartScrollContainerVertical;
-      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
+    onScrollChart(ev) {
+      const horizontal = this.$store.state.options.refs.chartScrollContainerHorizontal
+      const vertical = this.$store.state.options.refs.chartScrollContainerVertical
+      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop)
     },
 
     /**
@@ -6222,17 +7337,26 @@ const GanttElastic = {
      * @param {number} left
      * @param {number} top
      */
-    _onScrollChart (left, top) {
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
-      this.state.scroll.chart.left = left;
-      this.state.scroll.chart.right = left + chartContainerWidth;
-      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
-      this.state.scroll.chart.top = top;
-      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.scroll.chart.dateTime.left = esm(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = esm(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
-      this.scrollTo(left, top);
+    _onScrollChart(left, top) {
+      const chartContainerWidth = this.$store.state.options.refs.chartContainer.clientWidth
+      const options = {
+        scroll: {
+          chart: {
+            left: left,
+            right: left + chartContainerWidth,
+            percent: (left / this.$store.state.options.times.totalViewDurationPx) * 100,
+            top: top,
+            time: this.pixelOffsetXToTime(left),
+            timeCenter: this.pixelOffsetXToTime(left + chartContainerWidth / 2),
+            dateTime: {
+              left: this.$store.state.options.scroll.chart.time,
+              right: this.pixelOffsetXToTime(left + this.$store.state.options.refs.chart.clientWidth)
+            }
+          }
+        }
+      }
+      this.$store.commit(this.updateOptions, options)
+      this.scrollTo(left, top)
     },
 
     /**
@@ -6240,14 +7364,14 @@ const GanttElastic = {
      *
      * @param {int} time
      */
-    scrollToTime (time) {
-      let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
-      pos = pos - chartContainerWidth / 2;
-      if (pos > this.state.width) {
-        pos = this.state.width - chartContainerWidth;
+    scrollToTime(time) {
+      let pos = this.timeToPixelOffsetX(time)
+      const chartContainerWidth = this.$store.state.options.refs.chartContainer.clientWidth
+      pos = pos - chartContainerWidth / 2
+      if (pos > this.$store.state.options.width) {
+        pos = this.$store.state.options.width - chartContainerWidth
       }
-      this.scrollTo(pos);
+      this.scrollTo(pos)
     },
 
     /**
@@ -6256,17 +7380,17 @@ const GanttElastic = {
      * @param {number|null} left
      * @param {number|null} top
      */
-    scrollTo (left = null, top = null) {
+    scrollTo(left = null, top = null) {
       if (left !== null) {
-        this.state.refs.chartContainer.scrollLeft = left;
-        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
-        this.state.scroll.left = left;
+        this.$store.state.options.refs.chartContainer.scrollLeft = left
+        this.$store.state.options.refs.chartScrollContainerHorizontal.scrollLeft = left
+        this.$store.commit(this.updateOptions, { scroll: { left } })
       }
       if (top !== null) {
-        this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.chartGraph.scrollTop = top;
-        this.state.refs.taskListItems.scrollTop = top;
-        this.state.scroll.top = top;
+        this.$store.state.options.refs.chartScrollContainerVertical.scrollTop = top
+        this.$store.state.options.refs.chartGraph.scrollTop = top
+        this.$store.state.options.refs.taskListItems.scrollTop = top
+        this.$store.commit(this.updateOptions, { scroll: { top } })
       }
     },
 
@@ -6274,132 +7398,149 @@ const GanttElastic = {
      * After some actions like time zoom change we need to recompensate scroll position
      * so as a result everything will be in same place
      */
-    fixScrollPos () {
+    fixScrollPos() {
       this.$nextTick(() => {
-        this.scrollToTime(this.state.scroll.chart.timeCenter);
-      });
+        this.scrollToTime(this.$store.state.options.scroll.chart.timeCenter)
+      })
     },
 
     /**
      * Mouse wheel event handler
      */
-    onWheelChart (ev) {
+    onWheelChart(ev) {
       if (!ev.shiftKey) {
-        let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.rowsHeight;
-        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
+        let top = this.$store.state.options.scroll.top + ev.deltaY
+        const chartClientHeight = this.$store.state.options.rowsHeight
+        const scrollHeight = this.$store.state.options.refs.chartGraph.scrollHeight - chartClientHeight
         if (top < 0) {
-          top = 0;
+          top = 0
         } else if (top > scrollHeight) {
-          top = scrollHeight;
+          top = scrollHeight
         }
-        this.scrollTo(null, top);
+        this.scrollTo(null, top)
       } else {
-        let left = this.state.scroll.left + ev.deltaY;
-        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
-        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        let left = this.$store.state.options.scroll.left + ev.deltaY
+        const chartClientWidth = this.$store.state.options.refs.chartScrollContainerHorizontal.clientWidth
+        const scrollWidth = this.$store.state.options.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth
         if (left < 0) {
-          left = 0;
+          left = 0
         } else if (left > scrollWidth) {
-          left = scrollWidth;
+          left = scrollWidth
         }
-        this.scrollTo(left);
+        this.scrollTo(left)
       }
     },
 
     /**
      * Time zoom change event handler
      */
-    onTimeZoomChange (timeZoom) {
-      this.state.times.timeZoom = timeZoom;
-      this.recalculateTimes();
-      this.calculateSteps();
-      this.calculateCalendarDimensions();
-      this.fixScrollPos();
+    onTimeZoomChange(timeZoom) {
+      this.$store.commit(this.updateOptions, { times: { timeZoom: timeZoom } })
+      this.recalculateTimes()
+      this.calculateSteps()
+      this.calculateCalendarDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Row height change event handler
      */
-    onRowHeightChange (height) {
-      this.state.row.height = height;
-      this.calculateTaskListColumnsDimensions();
+    onRowHeightChange(height) {
+      this.$store.commit(this.updateOptions, { row: { height: height } })
+      this.calculateTaskListColumnsDimensions()
     },
 
     /**
      * Scope change event handler
      */
-    onScopeChange (value) {
-      this.state.scope.before = value;
-      this.state.scope.after = value;
-      this.initTimes();
-      this.calculateSteps();
-      this.computeCalendarWidths();
-      this.fixScrollPos();
+    onScopeChange(value) {
+      this.$store.commit(this.updateOptions, { scope: { before: value, after: value } })
+      this.initTimes()
+      this.calculateSteps()
+      this.computeCalendarWidths()
+      this.fixScrollPos()
     },
 
     /**
      * Task list width change event handler
      */
-    onTaskListWidthChange (value) {
-      this.state.taskList.percent = value;
-      this.calculateTaskListColumnsDimensions();
-      this.fixScrollPos();
+    onTaskListWidthChange(value) {
+      this.$store.commit(this.updateOptions, { taskList: { precent: value } })
+      this.calculateTaskListColumnsDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Task list column width change event handler
      */
-    onTaskListColumnWidthChange (value) {
-      this.calculateTaskListColumnsDimensions();
-      this.fixScrollPos();
+    onTaskListColumnWidthChange(value) {
+      this.calculateTaskListColumnsDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Listen to speciefied event names
      */
-    initializeEvents () {
-      this.$on("chart-scroll-horizontal", this.onScrollChart);
-      this.$on("chart-scroll-vertical", this.onScrollChart);
-      this.$on("chart-wheel", this.onWheelChart);
-      this.$on("times-timeZoom-change", this.onTimeZoomChange);
-      this.$on("row-height-change", this.onRowHeightChange);
-      this.$on("scope-change", this.onScopeChange);
-      this.$on("taskList-width-change", this.onTaskListWidthChange);
-      this.$on("taskList-column-width-change", this.onTaskListColumnWidthChange);
+    initializeEvents() {
+      this.$on('chart-scroll-horizontal', this.onScrollChart)
+      this.$on('chart-scroll-vertical', this.onScrollChart)
+      this.$on('chart-wheel', this.onWheelChart)
+      this.$on('times-timeZoom-change', this.onTimeZoomChange)
+      this.$on('row-height-change', this.onRowHeightChange)
+      this.$on('scope-change', this.onScopeChange)
+      this.$on('taskList-width-change', this.onTaskListWidthChange)
+      this.$on('taskList-column-width-change', this.onTaskListColumnWidthChange)
     },
 
     /**
      * When some action was performed (scale change for example) - recalculate time variables
      */
-    recalculateTimes () {
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
-      let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')["stroke-width"];
+    recalculateTimes() {
+      let max = this.$store.state.options.times.timeScale * 60
+      let min = this.$store.state.options.times.timeScale
+      let steps = max / min
+      let percent = this.$store.state.options.times.timeZoom / 100
+      const timePerPixel =
+        this.$store.state.options.times.timeScale * steps * percent +
+        Math.pow(2, this.$store.state.options.times.timeZoom)
+      const totalViewDurationMs = esm(this.$store.state.options.times.lastTime).diff(
+        esm(this.$store.state.options.times.firstTime),
+        'milisecods'
+      )
+      const totalViewDurationPx = totalViewDurationMs / timePerPixel
+      this.$store.commit(this.updateOptions, {
+        times: {
+          timePerPixel,
+          totalViewDurationMs,
+          totalViewDurationPx
+        },
+        width: totalViewDurationPx + this.style('grid-line-vertical')['stroke-width']
+      })
     },
 
     /**
      * Initialize time variables
      */
-    initTimes () {
-      this.state.times.firstDate = esm(this.state.times.firstTaskDate)
+    initTimes() {
+      const firstTime = esm(this.$store.state.options.times.firstTaskTime)
         .locale(this.locale)
-        .startOf("day")
-        .subtract(this.state.scope.before, "days")
-        .startOf("day");
-      this.state.times.lastDate = esm(this.state.times.lastTaskDate)
+        .startOf('day')
+        .subtract(this.$store.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf()
+      const lastTime = esm(this.$store.state.options.times.lastTaskTime)
         .locale(this.locale)
-        .endOf("day")
-        .add(this.state.scope.after, "days")
-        .endOf("day");
-      this.state.times.firstTime = this.state.times.firstDate.valueOf();
-      this.state.times.lastTime = this.state.times.lastDate.valueOf();
-      this.recalculateTimes();
+        .endOf('day')
+        .add(this.$store.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf()
+      this.$store.commit(this.updateOptions, {
+        times: {
+          firstTime,
+          lastTime
+        }
+      })
+      this.recalculateTimes()
     },
 
     /**
@@ -6407,342 +7548,404 @@ const GanttElastic = {
      * Steps are days by default
      * Each step contain information about time offset and pixel offset of this time inside gantt chart
      */
-    calculateSteps () {
-      const steps = [];
-      const lastMs = esm(this.state.times.lastDate).valueOf();
-      const currentDate = esm(this.state.times.firstDate);
+    calculateSteps() {
+      const steps = []
+      const lastMs = this.$store.state.options.times.lastTime
+      const currentDate = esm(this.$store.state.options.times.firstTime)
       steps.push({
-        date: currentDate,
+        time: currentDate.valueOf(),
         offset: {
           ms: 0,
           px: 0
         }
-      });
-      for (let currentDate = esm(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+      })
+      for (
+        let currentDate = esm(this.$store.state.options.times.firstTime)
+          .add(1, this.$store.state.options.times.stepDuration)
+          .startOf('day');
         currentDate.valueOf() <= lastMs;
-        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
-        const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
-        const offsetPx = offsetMs / this.state.times.timePerPixel;
+        currentDate = currentDate.add(1, this.$store.state.options.times.stepDuration).startOf('day')
+      ) {
+        const offsetMs = currentDate.diff(this.$store.state.options.times.firstTime, 'milisecods')
+        const offsetPx = offsetMs / this.$store.state.options.times.timePerPixel
         const step = {
-          date: currentDate,
+          time: currentDate.valueOf(),
           offset: {
             ms: offsetMs,
             px: offsetPx
           }
-        };
-        const previousStep = steps[steps.length - 1];
+        }
+        const previousStep = steps[steps.length - 1]
         previousStep.width = {
           ms: offsetMs - previousStep.offset.ms,
           px: offsetPx - previousStep.offset.px
-        };
-        steps.push(step);
+        }
+        steps.push(step)
       }
-      const lastStep = steps[steps.length - 1];
+      const lastStep = steps[steps.length - 1]
       lastStep.width = {
-        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
-        px: this.state.times.totalViewDurationPx - lastStep.offset.px
-      };
-      this.state.times.steps = steps;
+        ms: this.$store.state.options.times.totalViewDurationMs - lastStep.offset.ms,
+        px: this.$store.state.options.times.totalViewDurationPx - lastStep.offset.px
+      }
+      this.$store.commit(this.updateOptions, { times: { steps } })
     },
 
     /**
      * Calculate calendar widths - when scale was changed for example
      */
-    computeCalendarWidths () {
-      this.computeDayWidths();
-      this.computeHourWidths();
-      this.computeMonthWidths();
+    computeCalendarWidths() {
+      this.computeDayWidths()
+      this.computeHourWidths()
+      this.computeMonthWidths()
     },
 
     /**
      * Compute width of calendar hours column widths basing on text widths
      */
-    computeHourWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--hour");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let currentDate = esm("2018-01-01T00:00:00"); // any date will be good for hours
-      let maxWidths = {};
-      state.calendar.hour.widths = [];
-      Object.keys(state.calendar.hour.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
+    computeHourWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          hour: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--hour')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let currentDate = esm('2018-01-01T00:00:00') // any date will be good for hours
+      let maxWidths = {}
+      Object.keys(options.calendar.hour.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
-        };
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.hour.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.hour.widths.push(widths)
+        Object.keys(options.calendar.hour.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "hour");
+        })
+        currentDate = currentDate.add(1, 'hour')
       }
-      state.calendar.hour.maxWidths = maxWidths;
+      newOptions.calendar.hour.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Compute calendar days column widths basing on text widths
      */
-    computeDayWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--day");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let currentDate = esm(state.times.steps[0].date);
-      let maxWidths = {};
-      state.calendar.day.widths = [];
-      Object.keys(state.calendar.day.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
-      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+    computeDayWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          day: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--day')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let currentDate = esm(options.times.steps[0].date)
+      let maxWidths = {}
+      Object.keys(options.calendar.day.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
+      for (let day = 0, daysLen = options.times.steps.length; day < daysLen; day++) {
         const widths = {
           day
-        };
-        Object.keys(state.calendar.day.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.day.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.day.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.day.widths.push(widths)
+        Object.keys(options.calendar.day.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "day");
+        })
+        currentDate = currentDate.add(1, 'day')
       }
-      state.calendar.day.maxWidths = maxWidths;
+      newOptions.calendar.day.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Compute month calendar columns widths basing on text widths
      */
-    computeMonthWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--month");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let maxWidths = {};
-      state.calendar.month.widths = [];
-      Object.keys(state.calendar.month.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
-      let currentDate = esm(this.state.times.firstDate);
-      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
+    computeMonthWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          month: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--month')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let maxWidths = {}
+      Object.keys(options.calendar.month.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
+      let currentDate = esm(this.$store.state.options.times.firstTime)
+      const monthsCount = Math.ceil(
+        esm(this.$store.state.options.times.lastTime).diff(
+          esm(this.$store.state.options.times.firstTime),
+          'months',
+          true
+        )
+      )
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
-        };
-        Object.keys(state.calendar.month.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.month.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.month.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.month.widths.push(widths)
+        Object.keys(options.calendar.month.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "month");
+        })
+        currentDate = currentDate.add(1, 'month')
       }
-      state.calendar.month.maxWidths = maxWidths;
+      newOptions.calendar.month.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Prepare time and date variables for gantt
      */
-    prepareDates () {
-      let firstTaskTime = Number.MAX_SAFE_INTEGER;
-      let lastTaskTime = 0;
-      let firstTaskDate, lastTaskDate;
-      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
-        let task = this.state.tasks[index];
-        task.startDate = esm(task.start);
-        task.startTime = task.startDate.valueOf();
-        task.durationMs = task.duration * 1000;
+    prepareDates() {
+      let firstTaskTime = Number.MAX_SAFE_INTEGER
+      let lastTaskTime = 0
+      for (let index = 0, len = this.$store.state.tasks.length; index < len; index++) {
+        let task = this.$store.state.tasks[index]
+        const newProps = {
+          id: task.id
+        }
+        newProps.startTime = esm(task.start).valueOf()
+        newProps.durationMs = task.duration * 1000
         if (task.startTime < firstTaskTime) {
-          firstTaskTime = task.startTime;
-          firstTaskDate = task.startDate;
+          firstTaskTime = task.startTime
         }
-        if (task.startTime + task.durationMs > lastTaskTime) {
-          lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = esm(task.startTime + task.durationMs);
+        if (newProps.startTime + newProps.durationMs > lastTaskTime) {
+          lastTaskTime = newProps.startTime + newProps.durationMs
         }
+        this.$store.commit(this.updateTask, newProps)
       }
-      this.state.times.firstTaskTime = firstTaskTime;
-      this.state.times.lastTaskTime = lastTaskTime;
-      this.state.times.firstTaskDate = firstTaskDate;
-      this.state.times.lastTaskDate = lastTaskDate;
-      this.state.times.firstDate = esm(firstTaskDate)
+      const firstTime = esm(firstTaskTime)
         .locale(this.locale)
-        .startOf("day")
-        .subtract(this.state.scope.before, "days")
-        .startOf("day");
-      this.state.times.lastDate = esm(lastTaskDate)
+        .startOf('day')
+        .subtract(this.$store.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf()
+      const lastTime = esm(lastTaskTime)
         .locale(this.locale)
-        .endOf("day")
-        .add(this.state.scope.after, "days")
-        .endOf("day");
+        .endOf('day')
+        .add(this.$store.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf()
+      this.$store.commit(this.updateOptions, {
+        times: {
+          firstTaskTime,
+          lastTaskTime,
+          firstTime,
+          lastTime
+        }
+      })
     },
 
     /**
      * Setup and calulate everything
      */
-    setup (itsUpdate = '') {
-      this.initialize(itsUpdate);
-      this.state.tasksById = {};
-      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
-      this.prepareDates();
-      this.initTimes();
-      this.calculateSteps();
-      this.computeCalendarWidths();
-      this.calculateCalendarDimensions();
-      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-        return { width: prev.width + current.width };
-      }, { width: 0 }).width;
+    setup(itsUpdate = '', data = null) {
+      this.initialize(itsUpdate, data)
+      this.prepareDates()
+      this.initTimes()
+      this.calculateSteps()
+      this.computeCalendarWidths()
+      this.calculateCalendarDimensions()
+      const width = this.$store.state.options.taskList.columns.reduce(
+        (prev, current) => {
+          return { width: prev.width + current.width }
+        },
+        { width: 0 }
+      ).width
+      this.$store.commit(this.updateOptions, { taskList: { width } })
     },
 
     /**
      * Global resize event (from window.addEventListener)
      */
-    globalOnResize (ev) {
+    globalOnResize(ev) {
       if (typeof this.$el === 'undefined' || !this.$el) {
-        return;
+        return
       }
-      this.state.clientWidth = this.$el.clientWidth;
-      if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
-        const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
-        let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
-        if (diffPercent < 0) {
-          diffPercent = 0;
+      const options = {
+        clientWidth: this.$el.clientWidth,
+        taskList: {
+          columns: []
         }
-        this.state.taskList.columns.forEach(column => {
-          column.thresholdPercent = diffPercent;
-        });
-      } else {
-        this.state.taskList.columns.forEach(column => {
-          column.thresholdPercent = 100;
-        });
       }
-      this.calculateTaskListColumnsDimensions();
+      if (
+        this.$store.state.options.taskList.widthFromPercentage >
+        (this.$store.state.options.clientWidth / 100) * this.$store.state.options.taskList.widthThreshold
+      ) {
+        const diff =
+          this.$store.state.options.taskList.widthFromPercentage -
+          (this.$store.state.options.clientWidth / 100) * this.$store.state.options.taskList.widthThreshold
+        let diffPercent = 100 - (diff / this.$store.state.options.taskList.widthFromPercentage) * 100
+        if (diffPercent < 0) {
+          diffPercent = 0
+        }
+        options.taskList.columns = this.$store.state.options.taskList.columns.map(column => {
+          column.thresholdPercent = diffPercent
+          return column
+        })
+      } else {
+        options.taskList.columns = this.$store.state.options.taskList.columns.map(column => {
+          column.thresholdPercent = 100
+          return column
+        })
+      }
+      this.$store.commit(this.updateOptions, options)
+      this.calculateTaskListColumnsDimensions()
     }
-
   },
 
   computed: {
-
     /**
      * Get visible tasks
      * Very importan method which will bring us only those tasks that are visible inside gantt chart
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
-    visibleTasks () {
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
-      const maxRows = visibleTasks.slice(0, this.state.maxRows);
-      this.state.rowsHeight = this.getTasksHeight(maxRows);
-      let heightCompensation = 0;
-      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {
-        heightCompensation = this.state.rowsHeight - this.state.maxHeight;
-        this.state.rowsHeight = this.state.maxHeight;
+    visibleTasks() {
+      const visibleTasks = this.$store.state.tasks.filter(task => task.visible)
+      const maxRows = visibleTasks.slice(0, this.$store.state.options.maxRows)
+      const options = {}
+      options.rowsHeight = this.getTasksHeight(maxRows)
+      let heightCompensation = 0
+      if (this.$store.state.options.maxHeight && options.rowsHeight > this.$store.state.options.maxHeight) {
+        heightCompensation = options.rowsHeight - this.$store.state.options.maxHeight
+        options.rowsHeight = this.$store.state.options.maxHeight
       }
-      this.state.height = this.getHeight(maxRows) - heightCompensation;
-      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
-      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
-      let len = visibleTasks.length;
+      options.height = this.getHeight(maxRows) - heightCompensation
+      options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks)
+      options.outerHeight = this.getHeight(maxRows, true) - heightCompensation
+      let len = visibleTasks.length
       for (let index = 0; index < len; index++) {
-        let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')["stroke-width"];
-        if (task.width < 0) {
-          task.width = 0;
+        let task = visibleTasks[index]
+        const props = { id: task.id }
+        props.width =
+          task.durationMs / this.$store.state.options.times.timePerPixel -
+          this.style('grid-line-vertical')['stroke-width']
+        if (props.width < 0) {
+          props.width = 0
         }
-        task.height = this.state.row.height;
-        task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) * index + this.state.chart.grid.horizontal.gap;
+        props.height = this.$store.state.options.row.height
+        props.x = this.timeToPixelOffsetX(task.startTime)
+        props.y =
+          (this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2) * index +
+          this.$store.state.options.chart.grid.horizontal.gap
+        this.$store.commit(this.updateTask, props)
       }
+      this.$store.commit(this.updateOptions, options)
       this.$nextTick(() => {
-        this.syncScrollTop();
-      });
-      return visibleTasks;
+        this.syncScrollTop()
+      })
+      return visibleTasks
     },
 
     /**
      * Get columns and compute dimensions on the fly
      */
-    getTaskListColumns () {
-      this.calculateTaskListColumnsDimensions();
-      return this.state.taskList.columns;
-    },
-
+    getTaskListColumns() {
+      this.calculateTaskListColumnsDimensions()
+      return this.$store.state.options.taskList.columns
+    }
   },
 
   /**
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
-  created () {
-    this.$watch('tasks', (tasks) => {
+  created() {
+    /*this.$watch('tasks', (tasks) => {
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
-    });
+    }, { deep: true });
     this.$watch('options', (opts) => {
       this.setup('options');
       this.$emit('options-changed', opts);
-    });
-    this.initializeEvents();
-    this.setup();
-    this.$root.$emit('gantt-elastic-created', this);
+    }, { deep: true });*/
+    this.initializeEvents()
+    this.setup()
+    this.$root.$emit('gantt-elastic-created', this)
   },
 
   /**
    * Emit before-mount event
    */
-  beforeMount () {
-    this.$emit('before-mount', this);
+  beforeMount() {
+    this.$emit('before-mount', this)
   },
 
   /**
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
-  mounted () {
-    this.state.clientWidth = this.$el.clientWidth;
-    window.addEventListener('resize', this.globalOnResize);
-    this.globalOnResize();
-    this.$root.$emit('gantt-elastic-mounted', this);
-    this.$emit('mounted');
-    this.$root.$emit('gantt-elastic-ready', this);
+  mounted() {
+    this.$store.commit(this.updateOptions, { clientWidth: this.$el.clientWidth })
+    window.addEventListener('resize', this.globalOnResize)
+    this.globalOnResize()
+    this.$root.$emit('gantt-elastic-mounted', this)
+    this.$emit('mounted')
+    this.$root.$emit('gantt-elastic-ready', this)
   },
 
   /**
    * Emit event when data was changed and before update (you can cleanup dom events here for example)
    */
-  beforeUpdate () {
-    this.$emit('before-update');
+  beforeUpdate() {
+    this.$emit('before-update')
   },
 
   /**
    * Emit event when gantt-elastic view was updated
    */
-  updated () {
+  updated() {
     this.$nextTick(() => {
-      this.$emit('updated');
-    });
+      this.$emit('updated')
+    })
   },
 
   /**
    * Before destroy event - clean up
    */
-  beforeDestroy () {
-    window.removeEventListener('resize', this.globalOnResize);
-    this.$emit('before-destroy');
+  beforeDestroy() {
+    window.removeEventListener('resize', this.globalOnResize)
+    this.$emit('before-destroy')
   },
 
   /**
    * Emit event after gantt-elastic was destroyed
    */
-  destroyed () {
-    this.$emit('destroyed');
+  destroyed() {
+    this.$emit('destroyed')
   }
-
-};
+}
 /* harmony default export */ var GanttElasticvue_type_script_lang_js_ = (GanttElastic);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&

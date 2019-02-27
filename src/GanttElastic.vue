@@ -15,9 +15,11 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import MainView from "./components/MainView.vue";
-import style from "./style.js";
+import Vuex from 'vuex'
+import dayjs from 'dayjs'
+import MainView from './components/MainView.vue'
+import style from './style.js'
+Vue.use(Vuex)
 
 /**
  * Helper function to fill out empty options in user settings
@@ -25,18 +27,18 @@ import style from "./style.js";
  * @param {object} userOptions - initial user options that will merge with those below
  * @returns {object} merged options
  */
-function getOptions (userOptions) {
-  let localeCode = 'en';
+function getOptions(userOptions) {
+  let localeCode = 'en'
   if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.code === 'string') {
-    localeCode = userOptions.locale.code;
+    localeCode = userOptions.locale.code
   }
   return {
     style,
     slots: {
-      header: {},
+      header: {}
     },
     title: {
-      label: "gantt-elastic",
+      label: 'gantt-elastic',
       html: false
     },
     width: 0,
@@ -65,8 +67,8 @@ function getOptions (userOptions) {
         time: 0,
         timeCenter: 0,
         dateTime: {
-          left: "",
-          right: ""
+          left: '',
+          right: ''
         }
       }
     },
@@ -78,59 +80,57 @@ function getOptions (userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      firstDate: null,
-      firstTime: null, // firstDate getTime()
-      lastDate: null,
-      lastTime: null, // last date getTime()
-      firstTaskDate: null,
+      firstTime: 0,
+      lastTime: 0,
       firstTaskTime: 0,
-      lastTaskDate: null,
       lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
-      stepDuration: "day", // hour, month
+      stepDuration: 'day', // hour, month
       steps: []
     },
     row: {
-      height: 24,
+      height: 24
     },
     maxRows: 20,
     maxHeight: 0,
     chart: {
       grid: {
         horizontal: {
-          gap: 6,
-        },
+          gap: 6
+        }
       },
       progress: {
         width: 20,
         height: 6,
         pattern: true,
-        bar: false,
+        bar: false
       },
       text: {
         offset: 0,
         xPadding: 10,
-        display: true,
+        display: true
       },
       expander: {
         type: 'chart',
         display: false,
         displayIfTaskListHidden: true,
         offset: 4,
-        size: 18,
+        size: 18
       }
     },
     taskList: {
       display: true,
       resizeAfterThreshold: true,
       widthThreshold: 75,
-      columns: [{
-        id: 0,
-        label: "ID",
-        value: "id",
-        width: 40,
-      }],
+      columns: [
+        {
+          id: 0,
+          label: 'ID',
+          value: 'id',
+          width: 40
+        }
+      ],
       resizerWidth: 0,
       percent: 100,
       width: 0,
@@ -159,20 +159,20 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          long (date) {
+          long(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("HH:mm");
+              .format('HH:mm')
           },
-          medium (date) {
+          medium(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("HH:mm");
+              .format('HH:mm')
           },
-          short (date) {
+          short(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("HH");
+              .format('HH')
           }
         }
       },
@@ -182,20 +182,20 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          long (date) {
+          long(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("DD dddd");
+              .format('DD dddd')
           },
-          medium (date) {
+          medium(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("DD ddd");
+              .format('DD ddd')
           },
-          short (date) {
+          short(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("DD");
+              .format('DD')
           }
         }
       },
@@ -205,34 +205,34 @@ function getOptions (userOptions) {
         widths: [],
         maxWidths: {},
         format: {
-          short (date) {
+          short(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("MM");
+              .format('MM')
           },
-          medium (date) {
+          medium(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("MMM 'YY");
+              .format("MMM 'YY")
           },
-          long (date) {
+          long(date) {
             return dayjs(date)
               .locale(localeCode)
-              .format("MMMM YYYY");
+              .format('MMMM YYYY')
           }
         }
       }
     },
     locale: {
-      "code": "en",
-      "Now": "Now",
-      "X-Scale": "Zoom-X",
-      "Y-Scale": "Zoom-Y",
-      "Task list width": "Task list",
-      "Before/After": "Expand",
-      "Display task list": "Show task list"
-    },
-  };
+      code: 'en',
+      Now: 'Now',
+      'X-Scale': 'Zoom-X',
+      'Y-Scale': 'Zoom-Y',
+      'Task list width': 'Task list',
+      'Before/After': 'Expand',
+      'Display task list': 'Show task list'
+    }
+  }
 }
 /**
  * Helper function to determine if specified variable is an object
@@ -240,8 +240,15 @@ function getOptions (userOptions) {
  * @param {any} item
  * @returns {boolean}
  */
-function isObject (item) {
-  return item && typeof item === "object" && !Array.isArray(item);
+function isObject(item) {
+  return (
+    item &&
+    typeof item === 'object' &&
+    !Array.isArray(item) &&
+    !(item instanceof HTMLElement) &&
+    !(item instanceof CanvasRenderingContext2D) &&
+    typeof item !== 'function'
+  )
 }
 /**
  * Helper function which will merge objects recursively - creating brand new one - like clone
@@ -250,54 +257,129 @@ function isObject (item) {
  * @params {object} sources
  * @returns {object}
  */
-export function mergeDeep (target, ...sources) {
+export function mergeDeep(target, alreadyMerged, ...sources) {
   if (!sources.length) {
-    return target;
+    return target
   }
-  const source = sources.shift();
+  const source = sources.shift()
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
+      let mergedIndex = alreadyMerged.indexOf(source[key])
+      if (mergedIndex >= 0) {
+        target[key] = alreadyMerged[mergedIndex]
+        continue
+      }
+      alreadyMerged.push(source[key])
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          Object.assign(target, { [key]: {} });
+          Object.assign(target, { [key]: {} })
         }
-        mergeDeep(target[key], source[key]);
+        mergeDeep(target[key], alreadyMerged, source[key])
+      } else if (Array.isArray(source[key])) {
+        target[key] = source[key].map(item => {
+          if (isObject(item)) {
+            return mergeDeep({}, alreadyMerged, item)
+          }
+          return item
+        })
+      } else if (typeof source[key] === 'function') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key]
+        }
       } else {
-        Object.assign(target, { [key]: source[key] });
+        Object.assign(target, { [key]: source[key] })
       }
     }
   }
-  return mergeDeep(target, ...sources);
+  return mergeDeep(target, alreadyMerged, ...sources)
 }
+
 /**
  * Same as above but with reactivity in mind
  *
- * @param {Vue.component} component
  * @param {object} target
  * @params {object} sources
  * @returns {object}
  */
-export function mergeDeepReactive (component, target, ...sources) {
+export function mergeDeepReactive(target, alreadyMerged, ...sources) {
   if (!sources.length) {
-    return target;
+    return Vue.observable(target)
   }
-  const source = sources.shift();
+  const source = sources.shift()
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
+      let mergedIndex = alreadyMerged.indexOf(source[key])
+      if (mergedIndex >= 0) {
+        target[key] = alreadyMerged[mergedIndex]
+        continue
+      }
+      alreadyMerged.push(source[key])
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          component.$set(target, key, {});
+          target[key] = {}
         }
-        mergeDeepReactive(component, target[key], source[key]);
+        mergeDeepReactive(target[key], alreadyMerged, source[key])
+      } else if (Array.isArray(source[key])) {
+        target[key] = source[key].map(item => {
+          if (isObject(item)) {
+            return mergeDeepReactive({}, alreadyMerged, item)
+          }
+          return item
+        })
+      } else if (typeof source[key] === 'function') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key]
+        }
       } else {
-        component.$set(target, key, source[key]);
+        target[key] = source[key]
       }
     }
   }
-  return mergeDeepReactive(component, target, ...sources);
+  return mergeDeepReactive(target, alreadyMerged, ...sources)
 }
-const styleCache = {};
-let globalVisibleTasks = [];
+
+const store = new Vuex.Store({
+  state: {
+    tasks: [],
+    options: {
+      scrollBarHeight: 0,
+      allVisibleTasksHeight: 0,
+      refs: {},
+      tasksById: {},
+      times: {}
+    }
+  },
+  mutations: {
+    /**
+     * Update tasks
+     */
+    updateTasks(state, tasks) {
+      state.tasks = tasks.map(task => mergeDeepReactive({}, [], task))
+    },
+
+    /**
+     * Update task
+     */
+    updateTask(state, task) {
+      for (let index = 0, len = state.tasks.length; index < len; index++) {
+        const current = state.tasks[index]
+        if (current.id === task.id) {
+          state.tasks[index] = mergeDeepReactive({}, [], state.tasks[index], task)
+        }
+      }
+    },
+
+    /**
+     * Update options
+     */
+    updateOptions(state, payload) {
+      state.options = mergeDeepReactive(state.options, [], payload)
+    }
+  }
+})
+
+const styleCache = {}
+let globalVisibleTasks = []
 
 /**
  * GanttElastic
@@ -307,26 +389,23 @@ const GanttElastic = {
   components: {
     MainView
   },
-  props: ["tasks", "options"],
-  provide () {
-    const provider = {};
-    const self = this;
-    Object.defineProperty(provider, "root", {
+  store,
+  props: ['tasks', 'options'],
+  provide() {
+    const provider = {}
+    const self = this
+    Object.defineProperty(provider, 'root', {
       enumerable: true,
       get: () => self
-    });
-    return provider;
+    })
+    return provider
   },
-  data () {
+  data() {
     return {
-      state: {
-        tasks: [],
-        scrollBarHeight: 0,
-        allVisibleTasksHeight: 0,
-        refs: {},
-        tasksById: {},
-      },
-    };
+      updateTasks: 'updateTasks',
+      updateTask: 'updateTask',
+      updateOptions: 'updateOptions'
+    }
   },
   methods: {
     mergeDeep,
@@ -337,20 +416,20 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getScrollBarHeight () {
-      const outer = document.createElement("div");
-      outer.style.visibility = "hidden";
-      outer.style.height = "100px";
-      outer.style.msOverflowStyle = "scrollbar";
-      document.body.appendChild(outer);
-      var noScroll = outer.offsetHeight;
-      outer.style.overflow = "scroll";
-      var inner = document.createElement("div");
-      inner.style.height = "100%";
-      outer.appendChild(inner);
-      var withScroll = inner.offsetHeight;
-      outer.parentNode.removeChild(outer);
-      return this.state.scrollBarHeight = noScroll - withScroll;
+    getScrollBarHeight() {
+      const outer = document.createElement('div')
+      outer.style.visibility = 'hidden'
+      outer.style.height = '100px'
+      outer.style.msOverflowStyle = 'scrollbar'
+      document.body.appendChild(outer)
+      var noScroll = outer.offsetHeight
+      outer.style.overflow = 'scroll'
+      var inner = document.createElement('div')
+      inner.style.height = '100%'
+      outer.appendChild(inner)
+      var withScroll = inner.offsetHeight
+      outer.parentNode.removeChild(outer)
+      return this.$store.commit(this.updateOptions, { scrollBarHeight: noScroll - withScroll })
     },
 
     /**
@@ -359,140 +438,126 @@ const GanttElastic = {
      * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
      * @returns {object}
      */
-    style (...mergeWith) {
-      const index = JSON.stringify(mergeWith);
+    style(...mergeWith) {
+      const index = JSON.stringify(mergeWith)
       if (typeof styleCache[index] !== 'undefined') {
-        return styleCache[index];
+        return styleCache[index]
       }
-      let merged = this.state.style['*'];
+      let merged = this.$store.state.options.style['*']
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.style[objOrClassName]);
+          merged = Object.assign({}, merged, this.$store.state.options.style[objOrClassName])
         } else if (typeof objOrClassName === 'object') {
-          merged = Object.assign({}, merged, objOrClassName);
+          merged = Object.assign({}, merged, objOrClassName)
         } else if (typeof objOrClassName === 'function') {
-          merged = Object.assign({}, objOrClassName());
+          merged = Object.assign({}, objOrClassName())
         }
-      });
-      styleCache[index] = merged;
-      return merged;
+      })
+      styleCache[index] = merged
+      return merged
     },
 
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks () {
-      this.state.tasks = this.state.tasks.map(task => {
+    refreshTasks(tasks) {
+      tasks = tasks.map(task => {
         if (typeof task.x === 'undefined') {
-          this.$set(task, 'x', 0);
+          task.x = 0
         }
         if (typeof task.y === 'undefined') {
-          this.$set(task, 'y', 0);
+          task.y = 0
         }
         if (typeof task.width === 'undefined') {
-          this.$set(task, 'width', 0);
+          task.width = 0
         }
         if (typeof task.height === 'undefined') {
-          this.$set(task, 'height', 0);
+          task.height = 0
         }
         if (typeof task.mouseOver === 'undefined') {
-          this.$set(task, 'mouseOver', false);
+          task.mouseOver = false
         }
-        if (typeof task.visible === "undefined") {
-          this.$set(task, 'visible', true);
+        if (typeof task.visible === 'undefined') {
+          task.visible = true
         }
-        if (typeof task.collapsed === "undefined") {
-          this.$set(task, 'collapsed', false);
+        if (typeof task.collapsed === 'undefined') {
+          task.collapsed = false
         }
-        if (typeof task.dependentOn === "undefined") {
-          this.$set(task, 'dependentOn', []);
+        if (typeof task.dependentOn === 'undefined') {
+          task.dependentOn = []
         }
-        if (typeof task.parentId === "undefined") {
-          this.$set(task, 'parentId', null);
+        if (typeof task.parentId === 'undefined') {
+          task.parentId = null
         }
-        if (typeof task.style === "undefined") {
-          this.$set(task, 'style', {});
+        if (typeof task.style === 'undefined') {
+          task.style = {}
         }
         if (typeof task.children === 'undefined') {
-          this.$set(task, 'children', []);
-        }
-        if (typeof task.allChildren === 'undefined') {
-          this.$set(task, 'allChildren', []);
+          task.children = []
         }
         if (typeof task.parents === 'undefined') {
-          this.$set(task, 'parents', []);
+          task.parents = []
         }
         if (typeof task.parent === 'undefined') {
-          this.$set(task, 'parent', null);
+          task.parent = null
         }
         if (typeof task.durationMs === 'undefined') {
-          this.$set(task, 'durationMs', []);
+          task.durationMs = task.duration * 1000
         }
-        return task;
-      });
+        return task
+      })
+      return tasks
     },
 
     /**
      * Initialize component
      */
-    initialize (itsUpdate = '') {
-      const tasks = this.tasks.map(task => {
-        return this.mergeDeep({}, task);
-      });
-      const options = this.mergeDeep({}, this.options);
-      switch (itsUpdate) {
-        case 'tasks': this.mergeDeepReactive(this, this.state, { tasks }); break;
-        case 'options': this.mergeDeepReactive(this, this.state, { options }); break;
-        default: this.mergeDeepReactive(this, this.state, { options: getOptions(options) }, { tasks }); break;
-      }
-      if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.state.tasks.map(task => {
-          this.$set(task, 'start', dayjs(task.start).format("YYYY-MM-DD HH:mm:ss"));
-          return task;
-        });
-      }
-      dayjs.locale(this.state.locale, null, true);
-      if (typeof this.state.taskList === "undefined") {
-        this.$set(this.state, 'taskList', {});
-      }
-      if (typeof this.state.taskList.columns === 'undefined') {
-        this.$set(this.state.taskList, 'columns', []);
-      }
-      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
-        this.$set(column, 'thresholdPercent', 100);
-        this.$set(column, 'widthFromPercentage', 0);
-        this.$set(column, 'finalWidth', 0);
-        if (typeof column.height === "undefined") {
-          this.$set(column, 'height', 0);
+    initialize(itsUpdate = '', data = null) {
+      let tasks = this.tasks.map(task => {
+        return this.mergeDeep({}, [], task)
+      })
+      let options = this.mergeDeep({}, [], getOptions(this.options), this.options)
+      options.tasksById = {}
+      tasks = tasks.map(task => {
+        task.startTime = dayjs(task.start).valueOf()
+        task.durationMs = task.duration * 1000
+        task.endTime = task.startTime + task.durationMs
+        return task
+      })
+      tasks = this.refreshTasks(tasks)
+      dayjs.locale(options.locale, null, true)
+      options.taskList.columns = options.taskList.columns.map((column, index) => {
+        const columnOptions = {
+          thresholdPercent: 100,
+          widthFromPercentage: 0,
+          finalWidth: 0
         }
-        if (typeof column.style === "undefined") {
-          this.$set(column, 'style', {});
+        if (typeof column.height === 'undefined') {
+          columnOptions.height = 0
         }
-        this.$set(column, '_id', `${index}-${column.label}`);
-        return column;
-      });
+        if (typeof column.style === 'undefined') {
+          columnOptions.style = {}
+        }
+        columnOptions._id = `${index}-${column.label}`
+        return this.mergeDeep({}, [], column, columnOptions)
+      })
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        // initialize observer
-        this.refreshTasks();
-        this.state.rootTask = {
-          id: null,
-          label: "root",
-          children: [],
-          allChildren: [],
-          parents: [],
-          parent: null
-        };
-        this.resetTaskTree();
-        this.state.taskTree = this.makeTaskTree(this.state.rootTask);
-        this.state.tasks = this.state.taskTree.allChildren;
+        tasks = this.resetTaskTree(tasks)
+        tasks = this.makeTaskTree(tasks)
       }
       if (itsUpdate === '') {
-        this.state.ctx = document.createElement("canvas").getContext("2d");
+        options.ctx = document.createElement('canvas').getContext('2d')
       }
-      this.globalOnResize();
-      this.calculateTaskListColumnsDimensions();
-      this.state.scrollBarHeight = this.getScrollBarHeight();
-      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
+      this.$store.commit(this.updateTasks, tasks)
+      this.$store.commit(this.updateOptions, options)
+      console.log(this.$store.state.tasks)
+      this.globalOnResize()
+      this.calculateTaskListColumnsDimensions()
+      this.getScrollBarHeight()
+      this.$store.commit(this.updateOptions, {
+        outerHeight: this.$store.state.options.height + this.$store.state.options.scrollBarHeight
+      })
+      console.log(this.$store.state)
     },
 
     /**
@@ -500,8 +565,12 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getCalendarHeight () {
-      return this.state.calendar.height + this.style('calendar-row')["border-width"] + this.state.calendar.gap;
+    getCalendarHeight() {
+      return (
+        this.$store.state.options.calendar.height +
+        this.style('calendar-row')['border-width'] +
+        this.$store.state.options.calendar.gap
+      )
     },
 
     /**
@@ -509,17 +578,19 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    calculateCalendarDimensions () {
-      this.state.calendar.height = 0;
-      if (this.state.calendar.hour.display && this.state.calendar.hours.length > 0) {
-        this.state.calendar.height += this.state.calendar.hour.height;
+    calculateCalendarDimensions() {
+      let height = 0
+      if (this.$store.state.options.calendar.hour.display && this.$store.state.options.calendar.hours.length > 0) {
+        height += this.$store.state.options.calendar.hour.height
       }
-      if (this.state.calendar.day.display && this.state.calendar.days.length > 0) {
-        this.state.calendar.height += this.state.calendar.day.height;
+      if (this.$store.state.options.calendar.day.display && this.$store.state.options.calendar.days.length > 0) {
+        height += this.$store.state.options.calendar.day.height
       }
-      if (this.state.calendar.month.display && this.state.calendar.months.length > 0) {
-        this.state.calendar.height += this.state.calendar.month.height;
+      if (this.$store.state.options.calendar.month.display && this.$store.state.options.calendar.months.length > 0) {
+        height += this.$store.state.options.calendar.month.height
       }
+      this.$store.commit(this.updateOptions, { calendar: { height } })
+      return height
     },
 
     /**
@@ -527,14 +598,14 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getMaximalLevel () {
-      let maximalLevel = 0;
-      this.state.tasks.forEach(task => {
+    getMaximalLevel() {
+      let maximalLevel = 0
+      this.$store.state.tasks.forEach(task => {
         if (task.parents.length > maximalLevel) {
-          maximalLevel = task.parents.length;
+          maximalLevel = task.parents.length
         }
-      });
-      return maximalLevel - 1;
+      })
+      return maximalLevel - 1
     },
 
     /**
@@ -542,92 +613,93 @@ const GanttElastic = {
      *
      * @returns {int}
      */
-    getMaximalExpanderWidth () {
-      return (this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin);
+    getMaximalExpanderWidth() {
+      return (
+        this.getMaximalLevel() * this.$store.state.options.taskList.expander.padding +
+        this.$store.state.options.taskList.expander.margin
+      )
     },
 
     /**
      * Synchronize scrollTop property when row height is changed
      */
-    syncScrollTop () {
-      if (this.state.refs.taskListItems) {
-        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+    syncScrollTop() {
+      if (this.$store.state.options.refs.taskListItems) {
+        const scrollTop = this.$store.state.options.refs.chartGraph.scrollTop
+        this.$store.commit(this.updateOptions, {
+          scroll: { top: scrollTop }
+        })
+        this.$store.state.options.refs.taskListItems.scrollTop = scrollTop
+        this.$store.state.options.refs.chartScrollContainerVertical.scrollTop = scrollTop
       }
     },
 
     /**
      * Calculate task list columns dimensions
      */
-    calculateTaskListColumnsDimensions () {
-      let final = 0;
-      let percentage = 0;
-      this.state.taskList.columns.forEach(column => {
+    calculateTaskListColumnsDimensions(columns) {
+      let final = 0
+      let percentage = 0
+      this.$store.state.options.taskList.columns.forEach(column => {
         if (column.expander) {
-          column.widthFromPercentage = ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+          column.widthFromPercentage =
+            ((this.getMaximalExpanderWidth() + column.width) / 100) * this.$store.state.options.taskList.percent
         } else {
-          column.widthFromPercentage = (column.width / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = (column.width / 100) * this.$store.state.options.taskList.percent
         }
-        percentage += column.widthFromPercentage;
-        column.finalWidth = column.thresholdPercent * column.widthFromPercentage / 100;
-        final += column.finalWidth;
-        column.height = this.getTaskHeight() - this.style("grid-line-horizontal")["stroke-width"];
-      });
-      this.state.taskList.widthFromPercentage = percentage;
-      this.state.taskList.finalWidth = final;
-      this.syncScrollTop();
+        percentage += column.widthFromPercentage
+        column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100
+        final += column.finalWidth
+        column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width']
+      })
+      this.$store.commit(this.updateOptions, {
+        taskList: {
+          widthFromPercentage: percentage,
+          finalWidth: final
+        }
+      })
+      this.syncScrollTop()
     },
 
     /**
      * Reset task tree - which is used to create tree like structure inside task list
      */
-    resetTaskTree () {
-      this.state.rootTask.children = [];
-      this.state.rootTask.allChildren = [];
-      this.state.rootTask.parent = null;
-      this.state.rootTask.parents = [];
-      this.state.tasksById = {};
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
-        current.children = [];
-        current.allChildren = [];
-        current.parent = null;
-        current.parents = [];
-        this.state.tasksById[current.id] = current;
+    resetTaskTree(tasks) {
+      const updateTaskProps = {
+        children: [],
+        parent: null,
+        parents: []
       }
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let task = tasks[i]
+        tasks[i] = Object.assign(task, updateTaskProps)
+      }
+      return tasks
     },
 
     /**
      * Make task tree, after reset - look above
      *
-     * @param {object} task
+     * @param {array} tasks
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree (task, collapsed = false) {
-      collapsed = collapsed || task.collapsed;
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
-        if (current.parentId === task.id) {
-          if (task.parents.length) {
-            task.parents.forEach(parent => current.parents.push(parent));
+    makeTaskTree(tasks = []) {
+      tasks.forEach(currentTask => {
+        currentTask.children = []
+        tasks.forEach(nestedTask => {
+          if (
+            typeof nestedTask.parentId !== 'undefined' &&
+            nestedTask.parentId &&
+            nestedTask.parentId === currentTask.id
+          ) {
+            nestedTask.parent = currentTask.id
+            nestedTask.parents = [currentTask.id]
+            currentTask.parents.forEach(id => nestedTask.parents.push(id))
+            currentTask.children.push(nestedTask.id)
           }
-          if (task !== this.root) {
-            current.parents.push(task);
-            current.parent = task;
-          } else {
-            current.parents = [];
-            current.parent = null;
-          }
-          current = this.makeTaskTree(current, collapsed || current.collapsed);
-          current.visible = !collapsed;
-          current.children.forEach(child => {
-            child.visible = !(collapsed || current.collapsed);
-          });
-          task.allChildren.push(current);
-          task.children.push(current);
-          current.allChildren.forEach(child => task.allChildren.push(child));
-        }
-      }
-      return task;
+        })
+      })
+      return tasks
     },
 
     /**
@@ -636,11 +708,11 @@ const GanttElastic = {
      * @param {any} taskId
      * @returns {object|null} task
      */
-    getTask (taskId) {
-      if (typeof this.state.tasksById[taskId] !== 'undefined') {
-        return this.state.tasksById[taskId];
+    getTask(taskId) {
+      if (typeof this.$store.state.options.tasksById[taskId] !== 'undefined') {
+        return this.$store.state.options.tasksById[taskId]
       }
-      return null;
+      return null
     },
 
     /**
@@ -649,8 +721,8 @@ const GanttElastic = {
      * @param {any} taskId
      * @returns {array} children
      */
-    getChildren (taskId) {
-      return this.state.tasks.filter(task => task.parent === taskId);
+    getChildren(taskId) {
+      return this.$store.state.tasks.filter(task => task.parent === taskId)
     },
 
     /**
@@ -658,8 +730,8 @@ const GanttElastic = {
      *
      * @returns {string} html svg image of gantt
      */
-    getSVG () {
-      return this.state.mainView.outerHTML;
+    getSVG() {
+      return this.$store.state.options.mainView.outerHTML
     },
 
     /**
@@ -668,18 +740,18 @@ const GanttElastic = {
      * @param {string} type image format
      * @returns {Promise} when resolved returns base64 image string of gantt
      */
-    getImage (type = "image/png") {
+    getImage(type = 'image/png') {
       return new Promise((resolve, reject) => {
-        const img = new Image();
+        const img = new Image()
         img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = this.state.mainView.clientWidth;
-          canvas.height = this.state.rowsHeight;
-          canvas.getContext("2d").drawImage(img, 0, 0);
-          resolve(canvas.toDataURL(type));
-        };
-        img.src = "data:image/svg+xml," + encodeURIComponent(this.getSVG());
-      });
+          const canvas = document.createElement('canvas')
+          canvas.width = this.$store.state.options.mainView.clientWidth
+          canvas.height = this.$store.state.options.rowsHeight
+          canvas.getContext('2d').drawImage(img, 0, 0)
+          resolve(canvas.toDataURL(type))
+        }
+        img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG())
+      })
     },
 
     /**
@@ -687,12 +759,17 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getHeight (visibleTasks, outer = false) {
-      let height = visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.state.calendar.height + parseFloat(this.style('calendar-row-rect')["border-width"]) * 2 + this.state.calendar.gap;
+    getHeight(visibleTasks, outer = false) {
+      let height =
+        visibleTasks.length *
+          (this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2) +
+        this.$store.state.options.calendar.height +
+        parseFloat(this.style('calendar-row-rect')['border-width']) * 2 +
+        this.$store.state.options.calendar.gap
       if (outer) {
-        height += this.state.scrollBarHeight;
+        height += this.$store.state.options.scrollBarHeight
       }
-      return height;
+      return height
     },
 
     /**
@@ -700,11 +777,15 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getTaskHeight (withStroke = false) {
+    getTaskHeight(withStroke = false) {
       if (withStroke) {
-        return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) + this.style("grid-line-horizontal")["stroke-width"];
+        return (
+          this.$store.state.options.row.height +
+          this.$store.state.options.chart.grid.horizontal.gap * 2 +
+          this.style('grid-line-horizontal')['stroke-width']
+        )
       }
-      return (this.state.row.height + this.state.chart.grid.horizontal.gap * 2);
+      return this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2
     },
 
     /**
@@ -712,8 +793,8 @@ const GanttElastic = {
      *
      * @returns {number}
      */
-    getTasksHeight (visibleTasks, outer = false) {
-      return visibleTasks.length * this.getTaskHeight();
+    getTasksHeight(visibleTasks, outer = false) {
+      return visibleTasks.length * this.getTaskHeight()
     },
 
     /**
@@ -722,12 +803,12 @@ const GanttElastic = {
      * @param {int} ms
      * @returns {number}
      */
-    timeToPixelOffsetX (ms) {
-      let x = ms - this.state.times.firstTime;
+    timeToPixelOffsetX(ms) {
+      let x = ms - this.$store.state.options.times.firstTime
       if (x) {
-        x = x / this.state.times.timePerPixel;
+        x = x / this.$store.state.options.times.timePerPixel
       }
-      return x;
+      return x
     },
 
     /**
@@ -736,9 +817,9 @@ const GanttElastic = {
      * @param {number} pixelOffsetX
      * @returns {int} milliseconds
      */
-    pixelOffsetXToTime (pixelOffsetX) {
-      let offset = pixelOffsetX + this.style('grid-line-vertical')["stroke-width"] / 2;
-      return (offset * this.state.times.timePerPixel + this.state.times.firstTime);
+    pixelOffsetXToTime(pixelOffsetX) {
+      let offset = pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2
+      return offset * this.$store.state.options.times.timePerPixel + this.$store.state.options.times.firstTime
     },
 
     /**
@@ -749,8 +830,13 @@ const GanttElastic = {
      * @param {int} buffer - or threshold, if element is outside viewport but offset from view port is below this value return true
      * @returns {boolean}
      */
-    isInsideViewPort (x, width, buffer = 5000) {
-      return ((x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) || (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right));
+    isInsideViewPort(x, width, buffer = 5000) {
+      return (
+        (x + width + buffer >= this.$store.state.options.scroll.chart.left &&
+          x - buffer <= this.$store.state.options.scroll.chart.right) ||
+        (x - buffer <= this.$store.state.options.scroll.chart.left &&
+          x + width + buffer >= this.$store.state.options.scroll.chart.right)
+      )
     },
 
     /**
@@ -758,10 +844,10 @@ const GanttElastic = {
      *
      * @param {event} ev
      */
-    onScrollChart (ev) {
-      const horizontal = this.state.refs.chartScrollContainerHorizontal;
-      const vertical = this.state.refs.chartScrollContainerVertical;
-      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
+    onScrollChart(ev) {
+      const horizontal = this.$store.state.options.refs.chartScrollContainerHorizontal
+      const vertical = this.$store.state.options.refs.chartScrollContainerVertical
+      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop)
     },
 
     /**
@@ -770,17 +856,26 @@ const GanttElastic = {
      * @param {number} left
      * @param {number} top
      */
-    _onScrollChart (left, top) {
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
-      this.state.scroll.chart.left = left;
-      this.state.scroll.chart.right = left + chartContainerWidth;
-      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
-      this.state.scroll.chart.top = top;
-      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.scroll.chart.dateTime.left = dayjs(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = dayjs(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
-      this.scrollTo(left, top);
+    _onScrollChart(left, top) {
+      const chartContainerWidth = this.$store.state.options.refs.chartContainer.clientWidth
+      const options = {
+        scroll: {
+          chart: {
+            left: left,
+            right: left + chartContainerWidth,
+            percent: (left / this.$store.state.options.times.totalViewDurationPx) * 100,
+            top: top,
+            time: this.pixelOffsetXToTime(left),
+            timeCenter: this.pixelOffsetXToTime(left + chartContainerWidth / 2),
+            dateTime: {
+              left: this.$store.state.options.scroll.chart.time,
+              right: this.pixelOffsetXToTime(left + this.$store.state.options.refs.chart.clientWidth)
+            }
+          }
+        }
+      }
+      this.$store.commit(this.updateOptions, options)
+      this.scrollTo(left, top)
     },
 
     /**
@@ -788,14 +883,14 @@ const GanttElastic = {
      *
      * @param {int} time
      */
-    scrollToTime (time) {
-      let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
-      pos = pos - chartContainerWidth / 2;
-      if (pos > this.state.width) {
-        pos = this.state.width - chartContainerWidth;
+    scrollToTime(time) {
+      let pos = this.timeToPixelOffsetX(time)
+      const chartContainerWidth = this.$store.state.options.refs.chartContainer.clientWidth
+      pos = pos - chartContainerWidth / 2
+      if (pos > this.$store.state.options.width) {
+        pos = this.$store.state.options.width - chartContainerWidth
       }
-      this.scrollTo(pos);
+      this.scrollTo(pos)
     },
 
     /**
@@ -804,17 +899,17 @@ const GanttElastic = {
      * @param {number|null} left
      * @param {number|null} top
      */
-    scrollTo (left = null, top = null) {
+    scrollTo(left = null, top = null) {
       if (left !== null) {
-        this.state.refs.chartContainer.scrollLeft = left;
-        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
-        this.state.scroll.left = left;
+        this.$store.state.options.refs.chartContainer.scrollLeft = left
+        this.$store.state.options.refs.chartScrollContainerHorizontal.scrollLeft = left
+        this.$store.commit(this.updateOptions, { scroll: { left } })
       }
       if (top !== null) {
-        this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.chartGraph.scrollTop = top;
-        this.state.refs.taskListItems.scrollTop = top;
-        this.state.scroll.top = top;
+        this.$store.state.options.refs.chartScrollContainerVertical.scrollTop = top
+        this.$store.state.options.refs.chartGraph.scrollTop = top
+        this.$store.state.options.refs.taskListItems.scrollTop = top
+        this.$store.commit(this.updateOptions, { scroll: { top } })
       }
     },
 
@@ -822,132 +917,149 @@ const GanttElastic = {
      * After some actions like time zoom change we need to recompensate scroll position
      * so as a result everything will be in same place
      */
-    fixScrollPos () {
+    fixScrollPos() {
       this.$nextTick(() => {
-        this.scrollToTime(this.state.scroll.chart.timeCenter);
-      });
+        this.scrollToTime(this.$store.state.options.scroll.chart.timeCenter)
+      })
     },
 
     /**
      * Mouse wheel event handler
      */
-    onWheelChart (ev) {
+    onWheelChart(ev) {
       if (!ev.shiftKey) {
-        let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.rowsHeight;
-        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
+        let top = this.$store.state.options.scroll.top + ev.deltaY
+        const chartClientHeight = this.$store.state.options.rowsHeight
+        const scrollHeight = this.$store.state.options.refs.chartGraph.scrollHeight - chartClientHeight
         if (top < 0) {
-          top = 0;
+          top = 0
         } else if (top > scrollHeight) {
-          top = scrollHeight;
+          top = scrollHeight
         }
-        this.scrollTo(null, top);
+        this.scrollTo(null, top)
       } else {
-        let left = this.state.scroll.left + ev.deltaY;
-        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
-        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        let left = this.$store.state.options.scroll.left + ev.deltaY
+        const chartClientWidth = this.$store.state.options.refs.chartScrollContainerHorizontal.clientWidth
+        const scrollWidth = this.$store.state.options.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth
         if (left < 0) {
-          left = 0;
+          left = 0
         } else if (left > scrollWidth) {
-          left = scrollWidth;
+          left = scrollWidth
         }
-        this.scrollTo(left);
+        this.scrollTo(left)
       }
     },
 
     /**
      * Time zoom change event handler
      */
-    onTimeZoomChange (timeZoom) {
-      this.state.times.timeZoom = timeZoom;
-      this.recalculateTimes();
-      this.calculateSteps();
-      this.calculateCalendarDimensions();
-      this.fixScrollPos();
+    onTimeZoomChange(timeZoom) {
+      this.$store.commit(this.updateOptions, { times: { timeZoom: timeZoom } })
+      this.recalculateTimes()
+      this.calculateSteps()
+      this.calculateCalendarDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Row height change event handler
      */
-    onRowHeightChange (height) {
-      this.state.row.height = height;
-      this.calculateTaskListColumnsDimensions();
+    onRowHeightChange(height) {
+      this.$store.commit(this.updateOptions, { row: { height: height } })
+      this.calculateTaskListColumnsDimensions()
     },
 
     /**
      * Scope change event handler
      */
-    onScopeChange (value) {
-      this.state.scope.before = value;
-      this.state.scope.after = value;
-      this.initTimes();
-      this.calculateSteps();
-      this.computeCalendarWidths();
-      this.fixScrollPos();
+    onScopeChange(value) {
+      this.$store.commit(this.updateOptions, { scope: { before: value, after: value } })
+      this.initTimes()
+      this.calculateSteps()
+      this.computeCalendarWidths()
+      this.fixScrollPos()
     },
 
     /**
      * Task list width change event handler
      */
-    onTaskListWidthChange (value) {
-      this.state.taskList.percent = value;
-      this.calculateTaskListColumnsDimensions();
-      this.fixScrollPos();
+    onTaskListWidthChange(value) {
+      this.$store.commit(this.updateOptions, { taskList: { percent: value } })
+      this.calculateTaskListColumnsDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Task list column width change event handler
      */
-    onTaskListColumnWidthChange (value) {
-      this.calculateTaskListColumnsDimensions();
-      this.fixScrollPos();
+    onTaskListColumnWidthChange(value) {
+      this.calculateTaskListColumnsDimensions()
+      this.fixScrollPos()
     },
 
     /**
      * Listen to speciefied event names
      */
-    initializeEvents () {
-      this.$on("chart-scroll-horizontal", this.onScrollChart);
-      this.$on("chart-scroll-vertical", this.onScrollChart);
-      this.$on("chart-wheel", this.onWheelChart);
-      this.$on("times-timeZoom-change", this.onTimeZoomChange);
-      this.$on("row-height-change", this.onRowHeightChange);
-      this.$on("scope-change", this.onScopeChange);
-      this.$on("taskList-width-change", this.onTaskListWidthChange);
-      this.$on("taskList-column-width-change", this.onTaskListColumnWidthChange);
+    initializeEvents() {
+      this.$on('chart-scroll-horizontal', this.onScrollChart)
+      this.$on('chart-scroll-vertical', this.onScrollChart)
+      this.$on('chart-wheel', this.onWheelChart)
+      this.$on('times-timeZoom-change', this.onTimeZoomChange)
+      this.$on('row-height-change', this.onRowHeightChange)
+      this.$on('scope-change', this.onScopeChange)
+      this.$on('taskList-width-change', this.onTaskListWidthChange)
+      this.$on('taskList-column-width-change', this.onTaskListColumnWidthChange)
     },
 
     /**
      * When some action was performed (scale change for example) - recalculate time variables
      */
-    recalculateTimes () {
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
-      let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel = this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, "milisecods");
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')["stroke-width"];
+    recalculateTimes() {
+      let max = this.$store.state.options.times.timeScale * 60
+      let min = this.$store.state.options.times.timeScale
+      let steps = max / min
+      let percent = this.$store.state.options.times.timeZoom / 100
+      const timePerPixel =
+        this.$store.state.options.times.timeScale * steps * percent +
+        Math.pow(2, this.$store.state.options.times.timeZoom)
+      const totalViewDurationMs = dayjs(this.$store.state.options.times.lastTime).diff(
+        dayjs(this.$store.state.options.times.firstTime),
+        'milisecods'
+      )
+      const totalViewDurationPx = totalViewDurationMs / timePerPixel
+      this.$store.commit(this.updateOptions, {
+        times: {
+          timePerPixel,
+          totalViewDurationMs,
+          totalViewDurationPx
+        },
+        width: totalViewDurationPx + this.style('grid-line-vertical')['stroke-width']
+      })
     },
 
     /**
      * Initialize time variables
      */
-    initTimes () {
-      this.state.times.firstDate = dayjs(this.state.times.firstTaskDate)
+    initTimes() {
+      const firstTime = dayjs(this.$store.state.options.times.firstTaskTime)
         .locale(this.locale)
-        .startOf("day")
-        .subtract(this.state.scope.before, "days")
-        .startOf("day");
-      this.state.times.lastDate = dayjs(this.state.times.lastTaskDate)
+        .startOf('day')
+        .subtract(this.$store.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf()
+      const lastTime = dayjs(this.$store.state.options.times.lastTaskTime)
         .locale(this.locale)
-        .endOf("day")
-        .add(this.state.scope.after, "days")
-        .endOf("day");
-      this.state.times.firstTime = this.state.times.firstDate.valueOf();
-      this.state.times.lastTime = this.state.times.lastDate.valueOf();
-      this.recalculateTimes();
+        .endOf('day')
+        .add(this.$store.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf()
+      this.$store.commit(this.updateOptions, {
+        times: {
+          firstTime,
+          lastTime
+        }
+      })
+      this.recalculateTimes()
     },
 
     /**
@@ -955,345 +1067,407 @@ const GanttElastic = {
      * Steps are days by default
      * Each step contain information about time offset and pixel offset of this time inside gantt chart
      */
-    calculateSteps () {
-      const steps = [];
-      const lastMs = dayjs(this.state.times.lastDate).valueOf();
-      const currentDate = dayjs(this.state.times.firstDate);
+    calculateSteps() {
+      const steps = []
+      const lastMs = this.$store.state.options.times.lastTime
+      const currentDate = dayjs(this.$store.state.options.times.firstTime)
       steps.push({
-        date: currentDate,
+        time: currentDate.valueOf(),
         offset: {
           ms: 0,
           px: 0
         }
-      });
-      for (let currentDate = dayjs(this.state.times.firstDate).add(1, this.state.times.stepDuration).startOf("day");
+      })
+      for (
+        let currentDate = dayjs(this.$store.state.options.times.firstTime)
+          .add(1, this.$store.state.options.times.stepDuration)
+          .startOf('day');
         currentDate.valueOf() <= lastMs;
-        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf("day")) {
-        const offsetMs = currentDate.diff(this.state.times.firstDate, "milisecods");
-        const offsetPx = offsetMs / this.state.times.timePerPixel;
+        currentDate = currentDate.add(1, this.$store.state.options.times.stepDuration).startOf('day')
+      ) {
+        const offsetMs = currentDate.diff(this.$store.state.options.times.firstTime, 'milisecods')
+        const offsetPx = offsetMs / this.$store.state.options.times.timePerPixel
         const step = {
-          date: currentDate,
+          time: currentDate.valueOf(),
           offset: {
             ms: offsetMs,
             px: offsetPx
           }
-        };
-        const previousStep = steps[steps.length - 1];
+        }
+        const previousStep = steps[steps.length - 1]
         previousStep.width = {
           ms: offsetMs - previousStep.offset.ms,
           px: offsetPx - previousStep.offset.px
-        };
-        steps.push(step);
+        }
+        steps.push(step)
       }
-      const lastStep = steps[steps.length - 1];
+      const lastStep = steps[steps.length - 1]
       lastStep.width = {
-        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
-        px: this.state.times.totalViewDurationPx - lastStep.offset.px
-      };
-      this.state.times.steps = steps;
+        ms: this.$store.state.options.times.totalViewDurationMs - lastStep.offset.ms,
+        px: this.$store.state.options.times.totalViewDurationPx - lastStep.offset.px
+      }
+      this.$store.commit(this.updateOptions, { times: { steps } })
     },
 
     /**
      * Calculate calendar widths - when scale was changed for example
      */
-    computeCalendarWidths () {
-      this.computeDayWidths();
-      this.computeHourWidths();
-      this.computeMonthWidths();
+    computeCalendarWidths() {
+      this.computeDayWidths()
+      this.computeHourWidths()
+      this.computeMonthWidths()
     },
 
     /**
      * Compute width of calendar hours column widths basing on text widths
      */
-    computeHourWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--hour");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let currentDate = dayjs("2018-01-01T00:00:00"); // any date will be good for hours
-      let maxWidths = {};
-      state.calendar.hour.widths = [];
-      Object.keys(state.calendar.hour.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
+    computeHourWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          hour: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--hour')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let currentDate = dayjs('2018-01-01T00:00:00') // any date will be good for hours
+      let maxWidths = {}
+      Object.keys(options.calendar.hour.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
-        };
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.hour.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.hour.widths.push(widths)
+        Object.keys(options.calendar.hour.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "hour");
+        })
+        currentDate = currentDate.add(1, 'hour')
       }
-      state.calendar.hour.maxWidths = maxWidths;
+      newOptions.calendar.hour.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Compute calendar days column widths basing on text widths
      */
-    computeDayWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--day");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let currentDate = dayjs(state.times.steps[0].date);
-      let maxWidths = {};
-      state.calendar.day.widths = [];
-      Object.keys(state.calendar.day.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
-      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+    computeDayWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          day: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--day')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let currentDate = dayjs(options.times.steps[0].date)
+      let maxWidths = {}
+      Object.keys(options.calendar.day.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
+      for (let day = 0, daysLen = options.times.steps.length; day < daysLen; day++) {
         const widths = {
           day
-        };
-        Object.keys(state.calendar.day.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.day.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.day.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.day.widths.push(widths)
+        Object.keys(options.calendar.day.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "day");
+        })
+        currentDate = currentDate.add(1, 'day')
       }
-      state.calendar.day.maxWidths = maxWidths;
+      newOptions.calendar.day.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Compute month calendar columns widths basing on text widths
      */
-    computeMonthWidths () {
-      const state = this.state;
-      const style = this.style("calendar-row-text", "calendar-row-text--month");
-      state.ctx.font = style["font-size"] + " " + style["font-family"];
-      let maxWidths = {};
-      state.calendar.month.widths = [];
-      Object.keys(state.calendar.month.format).forEach(formatName => {
-        maxWidths[formatName] = 0;
-      });
-      let currentDate = dayjs(this.state.times.firstDate);
-      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, "months", true));
+    computeMonthWidths() {
+      const options = this.$store.state.options
+      const newOptions = {
+        calendar: {
+          month: {
+            widths: []
+          }
+        }
+      }
+      const style = this.style('calendar-row-text', 'calendar-row-text--month')
+      options.ctx.font = style['font-size'] + ' ' + style['font-family']
+      let maxWidths = {}
+      Object.keys(options.calendar.month.format).forEach(formatName => {
+        maxWidths[formatName] = 0
+      })
+      let currentDate = dayjs(this.$store.state.options.times.firstTime)
+      const monthsCount = Math.ceil(
+        dayjs(this.$store.state.options.times.lastTime).diff(
+          dayjs(this.$store.state.options.times.firstTime),
+          'months',
+          true
+        )
+      )
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
-        };
-        Object.keys(state.calendar.month.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width;
-        });
-        state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format).forEach(formatName => {
+        }
+        Object.keys(options.calendar.month.format).forEach(formatName => {
+          widths[formatName] = options.ctx.measureText(
+            options.calendar.month.format[formatName](currentDate.toDate())
+          ).width
+        })
+        newOptions.calendar.month.widths.push(widths)
+        Object.keys(options.calendar.month.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
-            maxWidths[formatName] = widths[formatName];
+            maxWidths[formatName] = widths[formatName]
           }
-        });
-        currentDate = currentDate.add(1, "month");
+        })
+        currentDate = currentDate.add(1, 'month')
       }
-      state.calendar.month.maxWidths = maxWidths;
+      newOptions.calendar.month.maxWidths = maxWidths
+      this.$store.commit(this.updateOptions, newOptions)
     },
 
     /**
      * Prepare time and date variables for gantt
      */
-    prepareDates () {
-      let firstTaskTime = Number.MAX_SAFE_INTEGER;
-      let lastTaskTime = 0;
-      let firstTaskDate, lastTaskDate;
-      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
-        let task = this.state.tasks[index];
-        task.startDate = dayjs(task.start);
-        task.startTime = task.startDate.valueOf();
-        task.durationMs = task.duration * 1000;
+    prepareDates() {
+      let firstTaskTime = Number.MAX_SAFE_INTEGER
+      let lastTaskTime = 0
+      for (let index = 0, len = this.$store.state.tasks.length; index < len; index++) {
+        let task = this.$store.state.tasks[index]
+        const newProps = {
+          id: task.id
+        }
+        newProps.startTime = dayjs(task.start).valueOf()
+        newProps.durationMs = task.duration * 1000
         if (task.startTime < firstTaskTime) {
-          firstTaskTime = task.startTime;
-          firstTaskDate = task.startDate;
+          firstTaskTime = task.startTime
         }
-        if (task.startTime + task.durationMs > lastTaskTime) {
-          lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = dayjs(task.startTime + task.durationMs);
+        if (newProps.startTime + newProps.durationMs > lastTaskTime) {
+          lastTaskTime = newProps.startTime + newProps.durationMs
         }
+        this.$store.commit(this.updateTask, newProps)
       }
-      this.state.times.firstTaskTime = firstTaskTime;
-      this.state.times.lastTaskTime = lastTaskTime;
-      this.state.times.firstTaskDate = firstTaskDate;
-      this.state.times.lastTaskDate = lastTaskDate;
-      this.state.times.firstDate = dayjs(firstTaskDate)
+      const firstTime = dayjs(firstTaskTime)
         .locale(this.locale)
-        .startOf("day")
-        .subtract(this.state.scope.before, "days")
-        .startOf("day");
-      this.state.times.lastDate = dayjs(lastTaskDate)
+        .startOf('day')
+        .subtract(this.$store.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf()
+      const lastTime = dayjs(lastTaskTime)
         .locale(this.locale)
-        .endOf("day")
-        .add(this.state.scope.after, "days")
-        .endOf("day");
+        .endOf('day')
+        .add(this.$store.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf()
+      this.$store.commit(this.updateOptions, {
+        times: {
+          firstTaskTime,
+          lastTaskTime,
+          firstTime,
+          lastTime
+        }
+      })
     },
 
     /**
      * Setup and calulate everything
      */
-    setup (itsUpdate = '') {
-      this.initialize(itsUpdate);
-      this.state.tasksById = {};
-      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
-      this.prepareDates();
-      this.initTimes();
-      this.calculateSteps();
-      this.computeCalendarWidths();
-      this.calculateCalendarDimensions();
-      this.state.taskList.width = this.state.taskList.columns.reduce((prev, current) => {
-        return { width: prev.width + current.width };
-      }, { width: 0 }).width;
+    setup(itsUpdate = '', data = null) {
+      this.initialize(itsUpdate, data)
+      this.prepareDates()
+      this.initTimes()
+      this.calculateSteps()
+      this.computeCalendarWidths()
+      this.calculateCalendarDimensions()
+      const width = this.$store.state.options.taskList.columns.reduce(
+        (prev, current) => {
+          return { width: prev.width + current.width }
+        },
+        { width: 0 }
+      ).width
+      this.$store.commit(this.updateOptions, { taskList: { width } })
     },
 
     /**
      * Global resize event (from window.addEventListener)
      */
-    globalOnResize (ev) {
+    globalOnResize(ev) {
       if (typeof this.$el === 'undefined' || !this.$el) {
-        return;
+        return
       }
-      this.state.clientWidth = this.$el.clientWidth;
-      if (this.state.taskList.widthFromPercentage > (this.state.clientWidth / 100) * this.state.taskList.widthThreshold) {
-        const diff = this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
-        let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage * 100);
-        if (diffPercent < 0) {
-          diffPercent = 0;
+      const options = {
+        clientWidth: this.$el.clientWidth,
+        taskList: {
+          columns: []
         }
-        this.state.taskList.columns.forEach(column => {
-          column.thresholdPercent = diffPercent;
-        });
-      } else {
-        this.state.taskList.columns.forEach(column => {
-          column.thresholdPercent = 100;
-        });
       }
-      this.calculateTaskListColumnsDimensions();
+      if (
+        this.$store.state.options.taskList.widthFromPercentage >
+        (this.$store.state.options.clientWidth / 100) * this.$store.state.options.taskList.widthThreshold
+      ) {
+        const diff =
+          this.$store.state.options.taskList.widthFromPercentage -
+          (this.$store.state.options.clientWidth / 100) * this.$store.state.options.taskList.widthThreshold
+        let diffPercent = 100 - (diff / this.$store.state.options.taskList.widthFromPercentage) * 100
+        if (diffPercent < 0) {
+          diffPercent = 0
+        }
+        options.taskList.columns = this.$store.state.options.taskList.columns.map(column => {
+          column.thresholdPercent = diffPercent
+          return column
+        })
+      } else {
+        options.taskList.columns = this.$store.state.options.taskList.columns.map(column => {
+          column.thresholdPercent = 100
+          return column
+        })
+      }
+      this.$store.commit(this.updateOptions, options)
+      this.calculateTaskListColumnsDimensions()
     }
-
   },
 
   computed: {
-
     /**
      * Get visible tasks
      * Very importan method which will bring us only those tasks that are visible inside gantt chart
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
-    visibleTasks () {
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
-      const maxRows = visibleTasks.slice(0, this.state.maxRows);
-      this.state.rowsHeight = this.getTasksHeight(maxRows);
-      let heightCompensation = 0;
-      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {
-        heightCompensation = this.state.rowsHeight - this.state.maxHeight;
-        this.state.rowsHeight = this.state.maxHeight;
+    visibleTasks() {
+      const visibleTasks = this.$store.state.tasks.filter(task => task.visible)
+      const maxRows = visibleTasks.slice(0, this.$store.state.options.maxRows)
+      const options = {}
+      options.rowsHeight = this.getTasksHeight(maxRows)
+      let heightCompensation = 0
+      if (this.$store.state.options.maxHeight && options.rowsHeight > this.$store.state.options.maxHeight) {
+        heightCompensation = options.rowsHeight - this.$store.state.options.maxHeight
+        options.rowsHeight = this.$store.state.options.maxHeight
       }
-      this.state.height = this.getHeight(maxRows) - heightCompensation;
-      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
-      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
-      let len = visibleTasks.length;
+      options.height = this.getHeight(maxRows) - heightCompensation
+      options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks)
+      options.outerHeight = this.getHeight(maxRows, true) - heightCompensation
+      let len = visibleTasks.length
       for (let index = 0; index < len; index++) {
-        let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')["stroke-width"];
-        if (task.width < 0) {
-          task.width = 0;
+        let task = visibleTasks[index]
+        const props = { id: task.id }
+        props.width =
+          task.durationMs / this.$store.state.options.times.timePerPixel -
+          this.style('grid-line-vertical')['stroke-width']
+        if (props.width < 0) {
+          props.width = 0
         }
-        task.height = this.state.row.height;
-        task.x = this.timeToPixelOffsetX(task.startTime);
-        task.y = (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) * index + this.state.chart.grid.horizontal.gap;
+        props.height = this.$store.state.options.row.height
+        props.x = this.timeToPixelOffsetX(task.startTime)
+        props.y =
+          (this.$store.state.options.row.height + this.$store.state.options.chart.grid.horizontal.gap * 2) * index +
+          this.$store.state.options.chart.grid.horizontal.gap
+        this.$store.commit(this.updateTask, props)
       }
+      this.$store.commit(this.updateOptions, options)
       this.$nextTick(() => {
-        this.syncScrollTop();
-      });
-      return visibleTasks;
+        this.syncScrollTop()
+      })
+      return visibleTasks
     },
 
     /**
      * Get columns and compute dimensions on the fly
      */
-    getTaskListColumns () {
-      this.calculateTaskListColumnsDimensions();
-      return this.state.taskList.columns;
-    },
-
+    getTaskListColumns() {
+      this.calculateTaskListColumnsDimensions()
+      return this.$store.state.options.taskList.columns
+    }
   },
 
   /**
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
-  created () {
-    this.$watch('tasks', (tasks) => {
+  created() {
+    /*this.$watch('tasks', (tasks) => {
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
     }, { deep: true });
     this.$watch('options', (opts) => {
       this.setup('options');
       this.$emit('options-changed', opts);
-    }, { deep: true });
-    this.initializeEvents();
-    this.setup();
-    this.$root.$emit('gantt-elastic-created', this);
+    }, { deep: true });*/
+    this.initializeEvents()
+    this.setup()
+    this.$root.$emit('gantt-elastic-created', this)
   },
 
   /**
    * Emit before-mount event
    */
-  beforeMount () {
-    this.$emit('before-mount', this);
+  beforeMount() {
+    this.$emit('before-mount', this)
   },
 
   /**
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
-  mounted () {
-    this.state.clientWidth = this.$el.clientWidth;
-    window.addEventListener('resize', this.globalOnResize);
-    this.globalOnResize();
-    this.$root.$emit('gantt-elastic-mounted', this);
-    this.$emit('mounted');
-    this.$root.$emit('gantt-elastic-ready', this);
+  mounted() {
+    this.$store.commit(this.updateOptions, { clientWidth: this.$el.clientWidth })
+    window.addEventListener('resize', this.globalOnResize)
+    this.globalOnResize()
+    this.$root.$emit('gantt-elastic-mounted', this)
+    this.$emit('mounted')
+    this.$root.$emit('gantt-elastic-ready', this)
   },
 
   /**
    * Emit event when data was changed and before update (you can cleanup dom events here for example)
    */
-  beforeUpdate () {
-    this.$emit('before-update');
+  beforeUpdate() {
+    this.$emit('before-update')
   },
 
   /**
    * Emit event when gantt-elastic view was updated
    */
-  updated () {
+  updated() {
     this.$nextTick(() => {
-      this.$emit('updated');
-    });
+      this.$emit('updated')
+    })
   },
 
   /**
    * Before destroy event - clean up
    */
-  beforeDestroy () {
-    window.removeEventListener('resize', this.globalOnResize);
-    this.$emit('before-destroy');
+  beforeDestroy() {
+    window.removeEventListener('resize', this.globalOnResize)
+    this.$emit('before-destroy')
   },
 
   /**
    * Emit event after gantt-elastic was destroyed
    */
-  destroyed () {
-    this.$emit('destroyed');
+  destroyed() {
+    this.$emit('destroyed')
   }
-
-};
-export default GanttElastic;
+}
+export default GanttElastic
 </script>
 
 <style>
-@import url("./styles/ganttElastic.css");
+@import url('./styles/ganttElastic.css');
 </style>

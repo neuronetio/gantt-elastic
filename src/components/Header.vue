@@ -12,30 +12,30 @@
       <div
         class="gantt-elastic__header-title--text"
         :style="root.style('header-title--text')"
-        v-if="!root.state.title.html"
-      >{{root.state.title.label}}</div>
+        v-if="!$store.state.options.title.html"
+      >{{$store.state.options.title.label}}</div>
       <div
         class="gantt-elastic__header-title--html"
         :style="root.style('header-title--html')"
-        v-if="root.state.title.html"
-        v-html="root.state.title.label"
+        v-if="$store.state.options.title.html"
+        v-html="$store.state.options.title.label"
       ></div>
     </div>
     <div class="gantt-elastic__header-options" :style="root.style('header-options')">
-      <component v-if="beforeOptionsIsComponent" :is="root.state.slots.header.beforeOptions"></component>
+      <component v-if="beforeOptionsIsComponent" :is="$store.state.options.slots.header.beforeOptions"></component>
       <div
         class="gantt-elastic__slot-header-beforeOptions"
         :style="root.style('slot-header-beforeOptions')"
         v-if="beforeOptionsIsHtml"
-        v-html="root.state.slots.header.beforeOptions"
+        v-html="$store.state.options.slots.header.beforeOptions"
       ></div>
       <button
         class="gantt-elastic__header-btn-recenter"
         :style="root.style('header-btn-recenter')"
         @click.prevent="recenterPosition"
-      >{{root.state.locale.Now}}</button>
+      >{{$store.state.options.locale.Now}}</button>
       <label class="gantt-elastic__header-label" :style="root.style('header-label')">
-        {{root.state.locale['X-Scale']}}
+        {{$store.state.options.locale['X-Scale']}}
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
@@ -50,7 +50,7 @@
         </div>
       </label>
       <label class="gantt-elastic__header-label" :style="root.style('header-label')">
-        {{root.state.locale['Y-Scale']}}
+        {{$store.state.options.locale['Y-Scale']}}
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
@@ -65,7 +65,7 @@
         </div>
       </label>
       <label class="gantt-elastic__header-label" :style="root.style('header-label')">
-        {{root.state.locale['Before/After']}}
+        {{$store.state.options.locale['Before/After']}}
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
@@ -80,7 +80,7 @@
         </div>
       </label>
       <label class="gantt-elastic__header-label" :style="root.style('header-label')">
-        {{root.state.locale['Task list width']}}
+        {{$store.state.options.locale['Task list width']}}
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
@@ -101,73 +101,72 @@
         <switches
           class="gantt-elastic__header-task-list-switch"
           :style="root.style('header-task-list-switch')"
-          v-model="root.state.taskList.display"
+          v-model="$store.state.options.taskList.display"
         ></switches>
-        {{root.state.locale['Display task list']}}
+        {{$store.state.options.locale['Display task list']}}
       </label>
     </div>
   </div>
 </template>
 
 <script>
-import vueSlider from "vue-slider-component/src/vue2-slider.vue";
-import Switches from "vue-switches";
+import vueSlider from 'vue-slider-component/src/vue2-slider.vue'
+import Switches from 'vue-switches'
 export default {
   components: {
     vueSlider,
     Switches
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {
       scaleTimeoutId: null,
       firstScale: false,
-      localScale: this.root.state.times.timeZoom,
-      localHeight: this.root.state.row.height,
-      localBefore: this.root.state.scope.before,
-      localPercent: this.root.state.taskList.percent,
+      localScale: null,
+      localHeight: null,
+      localBefore: null,
+      localPercent: null,
       sliderOptions: {
         xScale: {
-          value: this.root.state.times.timeZoom
+          value: this.$store.state.options.times.timeZoom
         }
       }
-    };
+    }
   },
-  created () {
-    this.localScale = this.root.state.times.timeZoom;
-    this.localHeight = this.root.state.row.height;
-    this.localBefore = this.root.state.scope.before;
-    this.localPercent = this.root.state.taskList.percent;
+  created() {
+    this.localScale = this.$store.state.options.times.timeZoom
+    this.localHeight = this.$store.state.options.row.height
+    this.localBefore = this.$store.state.options.scope.before
+    this.localPercent = this.$store.state.options.taskList.percent
   },
   methods: {
-    getImage () {
-      this.root.getImage("image/png")
-        .then(imgB64 => {
-          const link = document.createElement("a");
-          link.href = imgB64;
-          link.download = "gantt-elastic.png";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        });
+    getImage() {
+      this.root.getImage('image/png').then(imgB64 => {
+        const link = document.createElement('a')
+        link.href = imgB64
+        link.download = 'gantt-elastic.png'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      })
     },
-    recenterPosition () {
-      this.root.$emit("recenterPosition");
+    recenterPosition() {
+      this.root.$emit('recenterPosition')
     },
-    setScale (value) {
+    setScale(value) {
       if (this.scaleTimeoutId !== null) {
-        clearTimeout(this.scaleTimeoutId);
-        this.scaleTimeoutId = null;
+        clearTimeout(this.scaleTimeoutId)
+        this.scaleTimeoutId = null
       }
       // debouncing
       if (this.firstScale) {
         this.scaleTimeoutId = setTimeout(() => {
-          this.root.$emit("times-timeZoom-change", value);
-          this.scaleTimeoutId = null;
-        }, 75);
+          this.root.$emit('times-timeZoom-change', value)
+          this.scaleTimeoutId = null
+        }, 50)
       } else {
-        this.root.$emit("times-timeZoom-change", value);
-        this.firstScale = true;
+        this.root.$emit('times-timeZoom-change', value)
+        this.firstScale = true
       }
     }
   },
@@ -176,59 +175,59 @@ export default {
      * If there is a component slot specified for header
      * @returns {bool}
      */
-    beforeOptionsIsComponent () {
-      const headerSlot = this.root.state.slots.header;
+    beforeOptionsIsComponent() {
+      const headerSlot = this.$store.state.options.slots.header
       if (typeof headerSlot.beforeOptions === 'object' && !Array.isArray(headerSlot.beforeOptions)) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
     /**
      * If there is a slot with beforeOptions html content
      * @returns {bool}
      */
-    beforeOptionsIsHtml () {
-      if (typeof this.root.state.slots.header.beforeOptions === 'string') {
-        return true;
+    beforeOptionsIsHtml() {
+      if (typeof this.$store.state.options.slots.header.beforeOptions === 'string') {
+        return true
       }
-      return false;
+      return false
     },
     scale: {
-      get () {
-        return this.localScale;
+      get() {
+        return this.localScale
       },
-      set (value) {
-        this.localScale = Number(value);
-        this.setScale(this.localScale);
+      set(value) {
+        this.localScale = Number(value)
+        this.setScale(this.localScale)
       }
     },
     height: {
-      get () {
-        return this.localHeight;
+      get() {
+        return this.localHeight
       },
-      set (value) {
-        this.localHeight = Number(value);
-        this.root.$emit("row-height-change", Number(value));
+      set(value) {
+        this.localHeight = Number(value)
+        this.root.$emit('row-height-change', Number(value))
       }
     },
     scope: {
-      get () {
-        return this.localBefore;
+      get() {
+        return this.localBefore
       },
-      set (value) {
-        this.localBefore = Number(value);
-        this.root.$emit("scope-change", Number(value));
+      set(value) {
+        this.localBefore = Number(value)
+        this.root.$emit('scope-change', Number(value))
       }
     },
     divider: {
-      get () {
-        return this.localPercent;
+      get() {
+        return this.localPercent
       },
-      set (value) {
-        this.localPercent = Number(value);
-        this.root.$emit("taskList-width-change", Number(value));
+      set(value) {
+        this.localPercent = Number(value)
+        this.root.$emit('taskList-width-change', Number(value))
       }
     }
   }
-};
+}
 </script>

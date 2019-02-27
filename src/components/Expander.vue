@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <div :class="getClassPrefix()+'-wrapper'" :style="root.style(getClassPrefix(false)+'-wrapper')">
+  <div :class="getClassPrefix()+'-wrapper'" :style="this.root.style(this.getClassPrefix(false) + '-wrapper')">
     <svg
       :class="getClassPrefix()+'-content'"
       :style="root.style(getClassPrefix(false)+'-content')"
@@ -52,17 +52,17 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
-    const border = 0.5;
+  inject: ['root'],
+  props: ['tasks', 'options'],
+  data() {
+    const border = 0.5
     return {
       border,
       borderStyle: {
-        "stroke-width": border
+        'stroke-width': border
       },
       lineOffset: 5
-    };
+    }
   },
   computed: {
     /**
@@ -70,32 +70,31 @@ export default {
      *
      * @returns {array}
      */
-    allChildren () {
-      const children = [];
+    allChildren() {
+      const children = []
       this.tasks.forEach(task => {
-        task.allChildren.forEach(child => {
-          children.push(child);
-        });
-      });
-      return children;
+        task.children.forEach(child => {
+          children.push(child)
+        })
+      })
+      return children
     },
-
     /**
      * Is current expander collapsed?
      *
      * @returns {boolean}
      */
-    collapsed () {
+    collapsed() {
       if (this.tasks.length === 0) {
-        return false;
+        return false
       }
-      let collapsed = 0;
+      let collapsed = 0
       for (let i = 0, len = this.tasks.length; i < len; i++) {
         if (this.tasks[i].collapsed) {
-          collapsed++;
+          collapsed++
         }
       }
-      return collapsed === this.tasks.length;
+      return collapsed === this.tasks.length
     }
   },
   methods: {
@@ -104,25 +103,34 @@ export default {
      *
      * @returns {string}
      */
-    getClassPrefix (full = true) {
-      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
+    getClassPrefix(full = true) {
+      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`
     },
-
     /**
      * Toggle expander
      */
-    toggle () {
+    toggle() {
       if (this.allChildren.length === 0) {
-        return;
+        return
       }
-      const collapsed = !this.collapsed;
+      const collapsed = !this.collapsed
       this.tasks.forEach(task => {
-        task.collapsed = collapsed;
-        task.allChildren.forEach(child => {
-          child.visible = !collapsed && !child.parent.collapsed;
-        });
-      });
+        this.$store.commit(this.root.updateTask, { id: task.id, collapsed })
+        console.log(this.root.getTask(task.id).collapsed, 'cccolapsed')
+      })
+      this.$store.state.tasks.forEach(task => {
+        const props = { id: task.id, visible: true }
+        for (let i = 0, len = task.parents.length; i < len; i++) {
+          const parent = this.root.getTask(task.parents[i])
+          if (parent.collapsed) {
+            console.log('collapsed', parent)
+            props.visible = false
+            return this.$store.commit(this.root.updateTask, { props })
+          }
+        }
+        return this.$store.commit(this.root.updateTask, { props })
+      })
     }
   }
-};
+}
 </script>
