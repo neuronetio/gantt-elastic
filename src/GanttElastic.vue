@@ -264,12 +264,6 @@ export function mergeDeep(target, alreadyMerged, ...sources) {
   const source = sources.shift()
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
-      let mergedIndex = alreadyMerged.indexOf(source[key])
-      if (mergedIndex >= 0) {
-        target[key] = alreadyMerged[mergedIndex]
-        continue
-      }
-      alreadyMerged.push(source[key])
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
           Object.assign(target, { [key]: {} })
@@ -308,30 +302,26 @@ export function mergeDeepReactive(target, alreadyMerged, ...sources) {
   const source = sources.shift()
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
-      let mergedIndex = alreadyMerged.indexOf(source[key])
-      if (mergedIndex >= 0) {
-        target[key] = alreadyMerged[mergedIndex]
-        continue
-      }
-      alreadyMerged.push(source[key])
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
           target[key] = {}
         }
-        mergeDeepReactive(target[key], alreadyMerged, source[key])
+        target[key] = mergeDeepReactive(target[key], alreadyMerged, source[key])
       } else if (Array.isArray(source[key])) {
-        target[key] = source[key].map(item => {
-          if (isObject(item)) {
-            return mergeDeepReactive({}, alreadyMerged, item)
-          }
-          return item
-        })
+        target[key] = Vue.observable(
+          source[key].map(item => {
+            if (isObject(item)) {
+              return mergeDeepReactive({}, alreadyMerged, item)
+            }
+            return Vue.observable(item)
+          })
+        )
       } else if (typeof source[key] === 'function') {
         if (source[key].toString().indexOf('[native code]') === -1) {
           target[key] = source[key]
         }
       } else {
-        target[key] = source[key]
+        target[key] = Vue.observable(source[key])
       }
     }
   }
@@ -549,8 +539,8 @@ const GanttElastic = {
         options.ctx = document.createElement('canvas').getContext('2d')
       }
       this.$store.commit(this.updateTasks, tasks)
+      this.$store.state.tasks.forEach(task => (options.tasksById[task.id] = task))
       this.$store.commit(this.updateOptions, options)
-      console.log(this.$store.state.tasks)
       this.globalOnResize()
       this.calculateTaskListColumnsDimensions()
       this.getScrollBarHeight()

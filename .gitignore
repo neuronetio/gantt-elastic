@@ -1,4 +1,4 @@
-.vscode/launch.json
+.vscode/
 .sonarlint
 node_modules
 src/vue.js
