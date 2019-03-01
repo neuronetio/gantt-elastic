@@ -313,7 +313,7 @@ export function mergeDeepReactive(target, alreadyMerged, ...sources) {
             if (isObject(item)) {
               return mergeDeepReactive({}, alreadyMerged, item)
             }
-            return Vue.observable(item)
+            return item
           })
         )
       } else if (typeof source[key] === 'function') {
@@ -321,7 +321,7 @@ export function mergeDeepReactive(target, alreadyMerged, ...sources) {
           target[key] = source[key]
         }
       } else {
-        target[key] = Vue.observable(source[key])
+        Vue.set(target,key, source[key])
       }
     }
   }
