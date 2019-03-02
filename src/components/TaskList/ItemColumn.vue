@@ -9,11 +9,16 @@
 <template>
   <div
     class="gantt-elastic__task-list-item-column"
-    :style="root.style('task-list-item-column', column.style['task-list-item-column'], {width:column.finalWidth+'px',height:column.height+'px'})"
+    :style="
+      root.style('task-list-item-column', column.style['task-list-item-column'], {
+        width: column.finalWidth + 'px',
+        height: column.height + 'px'
+      })
+    "
   >
     <div
       class="gantt-elastic__task-list-item-value-wrapper"
-      :style="root.style('task-list-item-value-wrapper',column.style['task-list-item-value-wrapper'])"
+      :style="root.style('task-list-item-value-wrapper', column.style['task-list-item-value-wrapper'])"
     >
       <slot></slot>
       <div
@@ -23,12 +28,36 @@
         <div
           v-if="!html"
           class="gantt-elastic__task-list-item-value"
-          :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
-        >{{value}}</div>
+          :style="root.style('task-list-item-value', column.style['task-list-item-value'])"
+          @click="emitEvent('click', $event)"
+          @mouseenter="emitEvent('mouseenter', $event)"
+          @mouseover="emitEvent('mouseover', $event)"
+          @mouseout="emitEvent('mouseout', $event)"
+          @mousemove="emitEvent('mousemove', $event)"
+          @mousedown="emitEvent('mousedown', $event)"
+          @mouseup="emitEvent('mouseup', $event)"
+          @mousewheel="emitEvent('mousewheel', $event)"
+          @touchstart="emitEvent('touchstart', $event)"
+          @touchmove="emitEvent('touchmove', $event)"
+          @touchend="emitEvent('touchend', $event)"
+        >
+          {{ value }}
+        </div>
         <div
           v-if="html"
           class="gantt-elastic__task-list-item-value"
-          :style="root.style('task-list-item-value',column.style['task-list-item-value'])"
+          :style="root.style('task-list-item-value', column.style['task-list-item-value'])"
+          @click="emitEvent('click', $event)"
+          @mouseenter="emitEvent('mouseenter', $event)"
+          @mouseover="emitEvent('mouseover', $event)"
+          @mouseout="emitEvent('mouseout', $event)"
+          @mousemove="emitEvent('mousemove', $event)"
+          @mousedown="emitEvent('mousedown', $event)"
+          @mouseup="emitEvent('mouseup', $event)"
+          @mousewheel="emitEvent('mousewheel', $event)"
+          @touchstart="emitEvent('touchstart', $event)"
+          @touchmove="emitEvent('touchmove', $event)"
+          @touchend="emitEvent('touchend', $event)"
           v-html="value"
         ></div>
       </div>
@@ -38,10 +67,18 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["column", "task"],
-  data () {
+  inject: ['root'],
+  props: ['column', 'task'],
+  data() {
     return {};
+  },
+  methods: {
+    emitEvent(eventName, event) {
+      if (typeof this.column.events !== 'undefined' && typeof this.column.events[eventName] === 'function') {
+        this.column.events[eventName]({ event, task: this.task, column: this.column });
+      }
+      this.root.$emit(`taskList-column-${eventName}`, { event, task: this.task, column: this.column });
+    }
   },
   computed: {
     /**
@@ -49,8 +86,8 @@ export default {
      *
      * @returns {boolean}
      */
-    html () {
-      if (typeof this.column.html !== "undefined" && this.column.html === true) {
+    html() {
+      if (typeof this.column.html !== 'undefined' && this.column.html === true) {
         return true;
       }
       return false;
@@ -61,8 +98,8 @@ export default {
      *
      * @returns {any|string}
      */
-    value () {
-      if (typeof this.column.value === "function") {
+    value() {
+      if (typeof this.column.value === 'function') {
         return this.column.value(this.task);
       }
       return this.task[this.column.value];
