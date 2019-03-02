@@ -1878,9 +1878,9 @@ ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
   methods: {
     emitEvent(eventName, event) {
       if (typeof this.column.events !== 'undefined' && typeof this.column.events[eventName] === 'function') {
-        this.column.events[eventName]({ event, task: this.task, column: this.column });
+        this.column.events[eventName]({ event, data: this.task, column: this.column });
       }
-      this.root.$emit(`taskList-column-${eventName}`, { event, task: this.task, column: this.column });
+      this.root.$emit(`taskList-${this.task.type}-${eventName}`, { event, data: this.task, column: this.column });
     }
   },
   computed: {

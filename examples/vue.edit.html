@@ -6,9 +6,9 @@
     <title>GanttElastic editor demo</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.min.js"></script>
     <!--
-  <script src="https://unpkg.com/gantt-elastic@0.9.1/dist/GanttElastic.umd.js"></script>
-  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
-	-->
+    <script src="https://unpkg.com/gantt-elastic@0.9.4/dist/GanttElastic.umd.js"></script>
+    <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+-->
     <!--
   <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/GanttElastic.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/Header.umd.js"></script>
@@ -313,8 +313,8 @@
               expander: true,
               html: true,
               events: {
-                click({ task, column }) {
-                  alert('description clicked!\n' + task.label);
+                click({ data, column }) {
+                  alert('description clicked!\n' + data.label);
                 }
               }
             },
@@ -403,8 +403,8 @@
         ganttInstance.$on('times-timeZoom-change', () => {
           console.log('time zoom changed');
         });
-        ganttInstance.$on('taskList-column-click', ({ event, task, column }) => {
-          console.log('task list column clicked!', { task, column });
+        ganttInstance.$on('taskList-task-click', ({ event, data, column }) => {
+          console.log('task list clicked! (task)', { data, column });
         });
       });
 
