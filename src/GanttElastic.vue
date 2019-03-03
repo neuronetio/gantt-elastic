@@ -35,6 +35,16 @@ function getOptions(userOptions) {
       label: 'gantt-elastic',
       html: false
     },
+    taskMapping: {
+      id: 'id',
+      start: 'start',
+      label: 'label',
+      duration: 'duration',
+      progress: 'progress',
+      type: 'type',
+      style: 'style',
+      collapsed: 'collapsed'
+    },
     width: 0,
     height: 0,
     clientWidth: 0,
@@ -460,21 +470,46 @@ const GanttElastic = {
     },
 
     /**
+     * Map tasks
+     *
+     * @param {Array} tasks
+     * @param {Object} options
+     */
+    mapTasks(tasks, options) {
+      return tasks.map(task => {
+        return {
+          ...task,
+          id: task[options.taskMapping.id],
+          start: task[options.taskMapping.start],
+          label: task[options.taskMapping.label],
+          duration: task[options.taskMapping.duration],
+          progress: task[options.taskMapping.progress],
+          type: task[options.taskMapping.type],
+          style: task[options.taskMapping.style],
+          collapsed: task[options.taskMapping.collapsed]
+        };
+      });
+    },
+
+    /**
      * Initialize component
      */
     initialize(itsUpdate = '') {
+      const options = this.mergeDeep({}, getOptions(this.options), this.options);
       switch (itsUpdate) {
         case 'tasks':
-          this.mergeDeepReactive(this, this.state, { tasks: this.tasks });
+          this.mergeDeepReactive(this, this.state, { tasks: this.mapTasks(this.tasks, options) });
           break;
         case 'options':
           this.mergeDeepReactive(this, this.state, this.options);
           break;
         default:
-          this.mergeDeepReactive(this, this.state, getOptions(this.options), this.options, { tasks: this.tasks });
+          this.mergeDeepReactive(this, this.state, options, {
+            tasks: this.mapTasks(this.tasks, options)
+          });
       }
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.tasks.map(task => {
+        this.state.tasks = this.state.tasks.map(task => {
           this.$set(task, 'start', dayjs(task.start).format('YYYY-MM-DD HH:mm:ss'));
           return task;
         });

@@ -73,6 +73,12 @@ export default {
     return {};
   },
   methods: {
+    /**
+     * Emit event
+     *
+     * @param {String} eventName
+     * @param {Event} event
+     */
     emitEvent(eventName, event) {
       if (typeof this.column.events !== 'undefined' && typeof this.column.events[eventName] === 'function') {
         this.column.events[eventName]({ event, data: this.task, column: this.column });
