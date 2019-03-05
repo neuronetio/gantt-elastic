@@ -105,7 +105,7 @@ export default {
    */
   mounted() {
     this.viewBoxWidth = this.$el.clientWidth
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         mainView: this.$refs.mainView,
         svgChart: this.$refs.svgChart,
@@ -222,7 +222,7 @@ export default {
         this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft
         this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop
       }
-      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: true } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: true } })
     },
 
     /**
@@ -230,7 +230,7 @@ export default {
      * Deactivates drag scrolling mode
      */
     chartMouseUp(ev) {
-      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: false } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: false } })
     },
 
     /**

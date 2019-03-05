@@ -73,7 +73,7 @@ export default {
    * Mounted
    */
   mounted() {
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         chart: this.$refs.chart,
         chartGraph: this.$refs.chartGraph

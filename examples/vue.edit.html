@@ -365,8 +365,14 @@
       };
 
       Vue.use(Vuex);
-      const store = new Vuex.Store({});
+      const store = new Vuex.Store({
+        state: {
+          tasks,
+          options
+        }
+      });
       store.registerModule('GanttElastic', GanttElasticVuexModule);
+      console.log(store);
 
       // create instance
       const app = new Vue({
@@ -379,8 +385,8 @@
           }
         },
         data: {
-          tasks,
-          options,
+          tasks: store.state.tasks,
+          options: store.state.options,
           destroy: false
         }
       });

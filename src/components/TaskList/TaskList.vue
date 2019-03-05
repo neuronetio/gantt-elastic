@@ -47,7 +47,7 @@ export default {
    * Mounted
    */
   mounted() {
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         taskListWrapper: this.$refs.taskListWrapper,
         taskList: this.$refs.taskList,

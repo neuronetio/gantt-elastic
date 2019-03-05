@@ -361,9 +361,9 @@ const GanttElastic = {
   },
   data() {
     return {
-      updateTasks: 'GanttElastic/updateTasks',
-      updateTask: 'GanttElastic/updateTask',
-      updateOptions: 'GanttElastic/updateOptions'
+      updateTasksMut: 'GanttElastic/updateTasks',
+      updateTaskMut: 'GanttElastic/updateTask',
+      updateOptionsMut: 'GanttElastic/updateOptions'
     };
   },
   methods: {
@@ -388,7 +388,7 @@ const GanttElastic = {
       outer.appendChild(inner);
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return this.$store.commit(this.updateOptions, { scrollBarHeight: noScroll - withScroll });
+      return this.$store.commit(this.updateOptionsMut, { scrollBarHeight: noScroll - withScroll });
     },
 
     /**
@@ -516,12 +516,12 @@ const GanttElastic = {
       if (itsUpdate === '') {
         options.ctx = document.createElement('canvas').getContext('2d');
       }
-      this.$store.commit(this.updateTasks, tasks);
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateTasksMut, tasks);
+      this.$store.commit(this.updateOptionsMut, options);
       this.globalOnResize();
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         outerHeight:
           this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
       });
@@ -566,7 +566,7 @@ const GanttElastic = {
       ) {
         height += this.$store.state.GanttElastic.options.calendar.month.height;
       }
-      this.$store.commit(this.updateOptions, { calendar: { height } });
+      this.$store.commit(this.updateOptionsMut, { calendar: { height } });
       return height;
     },
 
@@ -603,7 +603,7 @@ const GanttElastic = {
     syncScrollTop() {
       if (this.$store.state.GanttElastic.options.refs.taskListItems) {
         const scrollTop = this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop;
-        this.$store.commit(this.updateOptions, {
+        this.$store.commit(this.updateOptionsMut, {
           scroll: { top: scrollTop }
         });
         this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = scrollTop;
@@ -630,7 +630,7 @@ const GanttElastic = {
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width'];
       });
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         taskList: {
           widthFromPercentage: percentage,
           finalWidth: final
@@ -882,7 +882,7 @@ const GanttElastic = {
           }
         }
       };
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.scrollTo(left, top);
     },
 
@@ -911,13 +911,13 @@ const GanttElastic = {
       if (left !== null) {
         this.$store.state.GanttElastic.options.refs.chartContainer.scrollLeft = left;
         this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal.scrollLeft = left;
-        this.$store.commit(this.updateOptions, { scroll: { left } });
+        this.$store.commit(this.updateOptionsMut, { scroll: { left } });
       }
       if (top !== null) {
         this.$store.state.GanttElastic.options.refs.chartScrollContainerVertical.scrollTop = top;
         this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop = top;
         this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = top;
-        this.$store.commit(this.updateOptions, { scroll: { top } });
+        this.$store.commit(this.updateOptionsMut, { scroll: { top } });
       }
     },
 
@@ -963,7 +963,7 @@ const GanttElastic = {
      * Time zoom change event handler
      */
     onTimeZoomChange(timeZoom) {
-      this.$store.commit(this.updateOptions, { times: { timeZoom: timeZoom } });
+      this.$store.commit(this.updateOptionsMut, { times: { timeZoom: timeZoom } });
       this.recalculateTimes();
       this.calculateSteps();
       this.calculateCalendarDimensions();
@@ -974,7 +974,7 @@ const GanttElastic = {
      * Row height change event handler
      */
     onRowHeightChange(height) {
-      this.$store.commit(this.updateOptions, { row: { height: height } });
+      this.$store.commit(this.updateOptionsMut, { row: { height: height } });
       this.calculateTaskListColumnsDimensions();
     },
 
@@ -982,7 +982,7 @@ const GanttElastic = {
      * Scope change event handler
      */
     onScopeChange(value) {
-      this.$store.commit(this.updateOptions, { scope: { before: value, after: value } });
+      this.$store.commit(this.updateOptionsMut, { scope: { before: value, after: value } });
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
@@ -993,7 +993,7 @@ const GanttElastic = {
      * Task list width change event handler
      */
     onTaskListWidthChange(value) {
-      this.$store.commit(this.updateOptions, { taskList: { percent: value } });
+      this.$store.commit(this.updateOptionsMut, { taskList: { percent: value } });
       this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
@@ -1036,7 +1036,7 @@ const GanttElastic = {
         'milisecods'
       );
       const totalViewDurationPx = totalViewDurationMs / timePerPixel;
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           timePerPixel,
           totalViewDurationMs,
@@ -1062,7 +1062,7 @@ const GanttElastic = {
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
         .valueOf();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           firstTime,
           lastTime
@@ -1115,7 +1115,7 @@ const GanttElastic = {
         ms: this.$store.state.GanttElastic.options.times.totalViewDurationMs - lastStep.offset.ms,
         px: this.$store.state.GanttElastic.options.times.totalViewDurationPx - lastStep.offset.px
       };
-      this.$store.commit(this.updateOptions, { times: { steps } });
+      this.$store.commit(this.updateOptionsMut, { times: { steps } });
     },
 
     /**
@@ -1164,7 +1164,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'hour');
       }
       newOptions.calendar.hour.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -1204,7 +1204,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'day');
       }
       newOptions.calendar.day.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -1251,7 +1251,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'month');
       }
       newOptions.calendar.month.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -1273,7 +1273,7 @@ const GanttElastic = {
         if (newProps.startTime + newProps.durationMs > lastTaskTime) {
           lastTaskTime = newProps.startTime + newProps.durationMs;
         }
-        this.$store.commit(this.updateTask, newProps);
+        this.$store.commit(this.updateTaskMut, newProps);
       }
       const firstTime = dayjs(firstTaskTime)
         .locale(this.locale)
@@ -1287,7 +1287,7 @@ const GanttElastic = {
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
         .valueOf();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           firstTaskTime,
           lastTaskTime,
@@ -1313,7 +1313,7 @@ const GanttElastic = {
         },
         { width: 0 }
       ).width;
-      this.$store.commit(this.updateOptions, { taskList: { width } });
+      this.$store.commit(this.updateOptionsMut, { taskList: { width } });
     },
 
     /**
@@ -1352,7 +1352,7 @@ const GanttElastic = {
           return column;
         });
       }
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.calculateTaskListColumnsDimensions();
     }
   },
@@ -1396,9 +1396,9 @@ const GanttElastic = {
             this.$store.state.GanttElastic.options.chart.grid.horizontal.gap * 2) *
             index +
           this.$store.state.GanttElastic.options.chart.grid.horizontal.gap;
-        this.$store.commit(this.updateTask, props);
+        this.$store.commit(this.updateTaskMut, props);
       }
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.$nextTick(() => {
         this.syncScrollTop();
       });
@@ -1418,14 +1418,22 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    /*this.$watch('tasks', (tasks) => {
-      this.setup('tasks');
-      this.$emit('tasks-changed', tasks);
-    }, { deep: true });
-    this.$watch('options', (opts) => {
-      this.setup('options');
-      this.$emit('options-changed', opts);
-    }, { deep: true });*/
+    /*this.$watch(
+      'tasks',
+      tasks => {
+        this.setup('tasks');
+        this.$emit('tasks-changed', tasks);
+      },
+      { deep: true }
+    );
+    this.$watch(
+      'options',
+      opts => {
+        this.setup('options');
+        this.$emit('options-changed', opts);
+      },
+      { deep: true }
+    );*/
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
@@ -1442,7 +1450,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted() {
-    this.$store.commit(this.updateOptions, { clientWidth: this.$el.clientWidth });
+    this.$store.commit(this.updateOptionsMut, { clientWidth: this.$el.clientWidth });
     window.addEventListener('resize', this.globalOnResize);
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);

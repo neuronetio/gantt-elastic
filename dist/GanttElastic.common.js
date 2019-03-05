@@ -1304,7 +1304,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
       }
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        this.$store.commit(this.root.updateTask, { id: task.id, collapsed });
+        this.$store.commit(this.root.updateTaskMut, { id: task.id, collapsed });
       });
     }
   }
@@ -1941,7 +1941,7 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
    * Mounted
    */
   mounted() {
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         taskListWrapper: this.$refs.taskListWrapper,
         taskList: this.$refs.taskList,
@@ -2883,12 +2883,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateHours () {
       let hours = [];
       if (!this.$store.state.GanttElastic.options.calendar.hour.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { hours: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: [] } });
       }
       for (let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
-          return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
+          return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
         }
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
@@ -2912,7 +2912,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           });
         }
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
     },
 
     /**
@@ -2923,11 +2923,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateDays () {
       let days = [];
       if (!this.$store.state.GanttElastic.options.calendar.day.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { days: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: [] } });
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { days } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
       }
       const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -2956,7 +2956,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           type: daysCount.type
         });
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { days } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
     },
 
     /**
@@ -2967,7 +2967,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateMonths () {
       let months = [];
       if (!this.$store.state.GanttElastic.options.calendar.month.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { months: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: [] } });
       }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
@@ -3018,7 +3018,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           currentDate = esm(this.$store.state.GanttElastic.options.times.lastDate);
         }
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { months } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { months } });
     },
 
     /**
@@ -3278,7 +3278,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
           props.dependencyLines = task.dependentOn.map(id => {
             return { points: this.getPoints(id, task.id) };
           });
-          this.$store.commit(this.root.updateTask, props);
+          this.$store.commit(this.root.updateTaskMut, props);
           return task;
         })
         .filter(task => task.dependencyLines.points !== null);
@@ -4799,7 +4799,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
    * Mounted
    */
   mounted() {
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         chart: this.$refs.chart,
         chartGraph: this.$refs.chartGraph
@@ -4970,7 +4970,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
    */
   mounted() {
     this.viewBoxWidth = this.$el.clientWidth
-    this.$store.commit(this.root.updateOptions, {
+    this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         mainView: this.$refs.mainView,
         svgChart: this.$refs.svgChart,
@@ -5087,7 +5087,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft
         this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop
       }
-      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: true } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: true } })
     },
 
     /**
@@ -5095,7 +5095,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * Deactivates drag scrolling mode
      */
     chartMouseUp(ev) {
-      this.$store.commit(this.root.updateOptions, { scroll: { scrolling: false } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: false } })
     },
 
     /**
@@ -5872,9 +5872,9 @@ const GanttElastic = {
   },
   data() {
     return {
-      updateTasks: 'GanttElastic/updateTasks',
-      updateTask: 'GanttElastic/updateTask',
-      updateOptions: 'GanttElastic/updateOptions'
+      updateTasksMut: 'GanttElastic/updateTasks',
+      updateTaskMut: 'GanttElastic/updateTask',
+      updateOptionsMut: 'GanttElastic/updateOptions'
     };
   },
   methods: {
@@ -5899,7 +5899,7 @@ const GanttElastic = {
       outer.appendChild(inner);
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return this.$store.commit(this.updateOptions, { scrollBarHeight: noScroll - withScroll });
+      return this.$store.commit(this.updateOptionsMut, { scrollBarHeight: noScroll - withScroll });
     },
 
     /**
@@ -6023,21 +6023,19 @@ const GanttElastic = {
         tasks = this.makeTaskTree(rootTask, tasks).allChildren.map(taskId => {
           return tasks[tasks.findIndex(task => task.id === taskId)];
         });
-        console.log('tasks', rootTask, tasks);
       }
       if (itsUpdate === '') {
         options.ctx = document.createElement('canvas').getContext('2d');
       }
-      this.$store.commit(this.updateTasks, tasks);
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateTasksMut, tasks);
+      this.$store.commit(this.updateOptionsMut, options);
       this.globalOnResize();
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         outerHeight:
           this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
       });
-      console.log(this.$store.state, this.$store.state.tasks);
       window.tasks = this.$store.state.tasks;
     },
 
@@ -6079,7 +6077,7 @@ const GanttElastic = {
       ) {
         height += this.$store.state.GanttElastic.options.calendar.month.height;
       }
-      this.$store.commit(this.updateOptions, { calendar: { height } });
+      this.$store.commit(this.updateOptionsMut, { calendar: { height } });
       return height;
     },
 
@@ -6116,7 +6114,7 @@ const GanttElastic = {
     syncScrollTop() {
       if (this.$store.state.GanttElastic.options.refs.taskListItems) {
         const scrollTop = this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop;
-        this.$store.commit(this.updateOptions, {
+        this.$store.commit(this.updateOptionsMut, {
           scroll: { top: scrollTop }
         });
         this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = scrollTop;
@@ -6143,7 +6141,7 @@ const GanttElastic = {
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width'];
       });
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         taskList: {
           widthFromPercentage: percentage,
           finalWidth: final
@@ -6395,7 +6393,7 @@ const GanttElastic = {
           }
         }
       };
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.scrollTo(left, top);
     },
 
@@ -6424,13 +6422,13 @@ const GanttElastic = {
       if (left !== null) {
         this.$store.state.GanttElastic.options.refs.chartContainer.scrollLeft = left;
         this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal.scrollLeft = left;
-        this.$store.commit(this.updateOptions, { scroll: { left } });
+        this.$store.commit(this.updateOptionsMut, { scroll: { left } });
       }
       if (top !== null) {
         this.$store.state.GanttElastic.options.refs.chartScrollContainerVertical.scrollTop = top;
         this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop = top;
         this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = top;
-        this.$store.commit(this.updateOptions, { scroll: { top } });
+        this.$store.commit(this.updateOptionsMut, { scroll: { top } });
       }
     },
 
@@ -6476,7 +6474,7 @@ const GanttElastic = {
      * Time zoom change event handler
      */
     onTimeZoomChange(timeZoom) {
-      this.$store.commit(this.updateOptions, { times: { timeZoom: timeZoom } });
+      this.$store.commit(this.updateOptionsMut, { times: { timeZoom: timeZoom } });
       this.recalculateTimes();
       this.calculateSteps();
       this.calculateCalendarDimensions();
@@ -6487,7 +6485,7 @@ const GanttElastic = {
      * Row height change event handler
      */
     onRowHeightChange(height) {
-      this.$store.commit(this.updateOptions, { row: { height: height } });
+      this.$store.commit(this.updateOptionsMut, { row: { height: height } });
       this.calculateTaskListColumnsDimensions();
     },
 
@@ -6495,7 +6493,7 @@ const GanttElastic = {
      * Scope change event handler
      */
     onScopeChange(value) {
-      this.$store.commit(this.updateOptions, { scope: { before: value, after: value } });
+      this.$store.commit(this.updateOptionsMut, { scope: { before: value, after: value } });
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
@@ -6506,7 +6504,7 @@ const GanttElastic = {
      * Task list width change event handler
      */
     onTaskListWidthChange(value) {
-      this.$store.commit(this.updateOptions, { taskList: { percent: value } });
+      this.$store.commit(this.updateOptionsMut, { taskList: { percent: value } });
       this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
@@ -6549,7 +6547,7 @@ const GanttElastic = {
         'milisecods'
       );
       const totalViewDurationPx = totalViewDurationMs / timePerPixel;
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           timePerPixel,
           totalViewDurationMs,
@@ -6575,7 +6573,7 @@ const GanttElastic = {
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
         .valueOf();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           firstTime,
           lastTime
@@ -6628,7 +6626,7 @@ const GanttElastic = {
         ms: this.$store.state.GanttElastic.options.times.totalViewDurationMs - lastStep.offset.ms,
         px: this.$store.state.GanttElastic.options.times.totalViewDurationPx - lastStep.offset.px
       };
-      this.$store.commit(this.updateOptions, { times: { steps } });
+      this.$store.commit(this.updateOptionsMut, { times: { steps } });
     },
 
     /**
@@ -6677,7 +6675,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'hour');
       }
       newOptions.calendar.hour.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -6717,7 +6715,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'day');
       }
       newOptions.calendar.day.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -6764,7 +6762,7 @@ const GanttElastic = {
         currentDate = currentDate.add(1, 'month');
       }
       newOptions.calendar.month.maxWidths = maxWidths;
-      this.$store.commit(this.updateOptions, newOptions);
+      this.$store.commit(this.updateOptionsMut, newOptions);
     },
 
     /**
@@ -6786,7 +6784,7 @@ const GanttElastic = {
         if (newProps.startTime + newProps.durationMs > lastTaskTime) {
           lastTaskTime = newProps.startTime + newProps.durationMs;
         }
-        this.$store.commit(this.updateTask, newProps);
+        this.$store.commit(this.updateTaskMut, newProps);
       }
       const firstTime = esm(firstTaskTime)
         .locale(this.locale)
@@ -6800,7 +6798,7 @@ const GanttElastic = {
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
         .valueOf();
-      this.$store.commit(this.updateOptions, {
+      this.$store.commit(this.updateOptionsMut, {
         times: {
           firstTaskTime,
           lastTaskTime,
@@ -6826,7 +6824,7 @@ const GanttElastic = {
         },
         { width: 0 }
       ).width;
-      this.$store.commit(this.updateOptions, { taskList: { width } });
+      this.$store.commit(this.updateOptionsMut, { taskList: { width } });
     },
 
     /**
@@ -6865,7 +6863,7 @@ const GanttElastic = {
           return column;
         });
       }
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.calculateTaskListColumnsDimensions();
     }
   },
@@ -6909,9 +6907,9 @@ const GanttElastic = {
             this.$store.state.GanttElastic.options.chart.grid.horizontal.gap * 2) *
             index +
           this.$store.state.GanttElastic.options.chart.grid.horizontal.gap;
-        this.$store.commit(this.updateTask, props);
+        this.$store.commit(this.updateTaskMut, props);
       }
-      this.$store.commit(this.updateOptions, options);
+      this.$store.commit(this.updateOptionsMut, options);
       this.$nextTick(() => {
         this.syncScrollTop();
       });
@@ -6931,14 +6929,22 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    /*this.$watch('tasks', (tasks) => {
-      this.setup('tasks');
-      this.$emit('tasks-changed', tasks);
-    }, { deep: true });
-    this.$watch('options', (opts) => {
-      this.setup('options');
-      this.$emit('options-changed', opts);
-    }, { deep: true });*/
+    /*this.$watch(
+      'tasks',
+      tasks => {
+        this.setup('tasks');
+        this.$emit('tasks-changed', tasks);
+      },
+      { deep: true }
+    );
+    this.$watch(
+      'options',
+      opts => {
+        this.setup('options');
+        this.$emit('options-changed', opts);
+      },
+      { deep: true }
+    );*/
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
@@ -6955,7 +6961,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted() {
-    this.$store.commit(this.updateOptions, { clientWidth: this.$el.clientWidth });
+    this.$store.commit(this.updateOptionsMut, { clientWidth: this.$el.clientWidth });
     window.addEventListener('resize', this.globalOnResize);
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);

@@ -177,12 +177,12 @@ export default {
     generateHours () {
       let hours = [];
       if (!this.$store.state.GanttElastic.options.calendar.hour.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { hours: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: [] } });
       }
       for (let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
-          return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
+          return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
         }
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
@@ -206,7 +206,7 @@ export default {
           });
         }
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { hours } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
     },
 
     /**
@@ -217,11 +217,11 @@ export default {
     generateDays () {
       let days = [];
       if (!this.$store.state.GanttElastic.options.calendar.day.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { days: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: [] } });
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { days } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
       }
       const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -250,7 +250,7 @@ export default {
           type: daysCount.type
         });
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { days } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
     },
 
     /**
@@ -261,7 +261,7 @@ export default {
     generateMonths () {
       let months = [];
       if (!this.$store.state.GanttElastic.options.calendar.month.display) {
-        return this.$store.commit(this.root.updateOptions, { calendar: { months: [] } });
+        return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: [] } });
       }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
@@ -312,7 +312,7 @@ export default {
           currentDate = dayjs(this.$store.state.GanttElastic.options.times.lastDate);
         }
       }
-      return this.$store.commit(this.root.updateOptions, { calendar: { months } });
+      return this.$store.commit(this.root.updateOptionsMut, { calendar: { months } });
     },
 
     /**

@@ -115,7 +115,7 @@ export default {
       }
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        this.$store.commit(this.root.updateTask, { id: task.id, collapsed });
+        this.$store.commit(this.root.updateTaskMut, { id: task.id, collapsed });
       });
     }
   }

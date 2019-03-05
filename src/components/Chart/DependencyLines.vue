@@ -110,7 +110,7 @@ export default {
           props.dependencyLines = task.dependentOn.map(id => {
             return { points: this.getPoints(id, task.id) };
           });
-          this.$store.commit(this.root.updateTask, props);
+          this.$store.commit(this.root.updateTaskMut, props);
           return task;
         })
         .filter(task => task.dependencyLines.points !== null);
