@@ -10,22 +10,21 @@
   <div
     class="gantt-elastic__task-list-wrapper"
     ref="taskListWrapper"
-    :style="root.style('task-list-wrapper',{width:'100%', height:'100%'})"
-    v-show="$store.state.options.taskList.display"
+    :style="root.style('task-list-wrapper', { width: '100%', height: '100%' })"
+    v-show="$store.state.GanttElastic.options.taskList.display"
   >
     <div class="gantt-elastic__task-list" :style="root.style('task-list')" ref="taskList">
       <task-list-header></task-list-header>
       <div
         class="gantt-elastic__task-list-items"
         ref="taskListItems"
-        :style="root.style('task-list-items',{height:$store.state.options.rowsHeight+'px'})"
+        :style="root.style('task-list-items', { height: $store.state.GanttElastic.options.rowsHeight + 'px' })"
       >
         <task-list-item
-          v-for="task in $store.state.tasks"
+          v-for="task in root.visibleTasks"
           :key="task.id"
           :task="task"
           :expander-style="getListExpanderStyle(task)"
-          v-show="task.visible"
         ></task-list-item>
       </div>
     </div>
@@ -33,8 +32,8 @@
 </template>
 
 <script>
-import TaskListHeader from './TaskListHeader.vue'
-import TaskListItem from './TaskListItem.vue'
+import TaskListHeader from './TaskListHeader.vue';
+import TaskListItem from './TaskListItem.vue';
 export default {
   components: {
     TaskListHeader,
@@ -42,7 +41,7 @@ export default {
   },
   inject: ['root'],
   data() {
-    return {}
+    return {};
   },
   /**
    * Mounted
@@ -54,7 +53,7 @@ export default {
         taskList: this.$refs.taskList,
         taskListItems: this.$refs.taskListItems
       }
-    })
+    });
   },
 
   computed: {
@@ -65,15 +64,15 @@ export default {
      */
     getListExpanderStyle() {
       return task => {
-        const options = this.$store.state.options
-        const padding = (task.parents.length - 1) * options.taskList.expander.padding
+        const options = this.$store.state.GanttElastic.options;
+        const padding = (task.parents.length - 1) * options.taskList.expander.padding;
         const style = {
           'padding-left': padding + options.taskList.expander.margin + 'px',
           margin: `auto 0px auto 10px`
-        }
-        return style
-      }
+        };
+        return style;
+      };
     }
   }
-}
+};
 </script>

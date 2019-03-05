@@ -6,6 +6,60 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
+      minimize: false,
+      namedModules: true
+    },
+    entry: './src/GanttElastic.vuex.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'GanttElastic.vuex.umd.js',
+      libraryTarget: 'umd',
+      libraryExport: 'default'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader'
+        },
+        {
+          test: /\.css$/,
+          use: ['vue-style-loader', 'css-loader']
+        }
+      ]
+    },
+    plugins: [new VueLoaderPlugin()]
+  },
+  {
+    mode: 'production',
+    optimization: {
+      minimize: false,
+      namedModules: true
+    },
+    entry: './src/GanttElastic.vuex.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'GanttElastic.vuex.common.js',
+      libraryTarget: 'commonjs2',
+      libraryExport: 'default'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader'
+        },
+        {
+          test: /\.css$/,
+          use: ['vue-style-loader', 'css-loader']
+        }
+      ]
+    },
+    plugins: [new VueLoaderPlugin()]
+  },
+  {
+    mode: 'production',
+    optimization: {
       minimize: true,
       namedModules: true,
       minimizer: [
@@ -13,8 +67,8 @@ module.exports = [
           terserOptions: {
             mangle: false
           }
-        }),
-      ],
+        })
+      ]
     },
     entry: './src/bundle.js',
     output: {
@@ -32,7 +86,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -43,7 +98,7 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
-      minimize: false,
+      minimize: false
     },
     entry: './src/GanttElastic.vue',
     output: {
@@ -59,7 +114,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -77,8 +133,8 @@ module.exports = [
           terserOptions: {
             mangle: false
           }
-        }),
-      ],
+        })
+      ]
     },
     entry: './src/GanttElastic.vue',
     output: {
@@ -94,7 +150,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -121,7 +178,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -139,8 +197,8 @@ module.exports = [
           terserOptions: {
             mangle: false
           }
-        }),
-      ],
+        })
+      ]
     },
     entry: './src/GanttElastic.vue',
     output: {
@@ -156,7 +214,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -180,7 +239,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }
@@ -204,7 +264,8 @@ module.exports = [
         {
           test: /\.vue$/,
           use: 'vue-loader'
-        }, {
+        },
+        {
           test: /\.css$/,
           use: ['vue-style-loader', 'css-loader']
         }

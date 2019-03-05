@@ -13,8 +13,8 @@
     ref="chart"
     x="0"
     y="0"
-    :width="$store.state.options.width"
-    :height="$store.state.options.allVisibleTasksHeight"
+    :width="$store.state.GanttElastic.options.width"
+    :height="$store.state.GanttElastic.options.allVisibleTasksHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
@@ -92,7 +92,7 @@ export default {
      */
     verticalLines () {
       let lines = [];
-      const options = this.$store.state.options;
+      const options = this.$store.state.GanttElastic.options;
       options.times.steps.forEach(step => {
         if (this.root.isInsideViewPort(step.offset.px, 1)) {
           lines.push({
@@ -100,7 +100,7 @@ export default {
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: this.$store.state.tasks.length * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2: this.$store.state.GanttElastic.tasks.length * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
           });
         }
       });
@@ -114,7 +114,7 @@ export default {
      */
     horizontalLines () {
       let lines = [];
-      const options = this.$store.state.options;
+      const options = this.$store.state.GanttElastic.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
         const y = (index * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
@@ -136,7 +136,7 @@ export default {
      */
     inViewPort () {
       return line => {
-        const options = this.$store.state.options;
+        const options = this.$store.state.GanttElastic.options;
         return (line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right);
       };
     },

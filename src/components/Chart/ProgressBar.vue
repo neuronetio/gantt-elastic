@@ -14,8 +14,8 @@
     <defs>
       <pattern
         id="diagonalHatch"
-        :width="$store.state.options.chart.progress.width"
-        :height="$store.state.options.chart.progress.width"
+        :width="$store.state.GanttElastic.options.chart.progress.width"
+        :height="$store.state.GanttElastic.options.chart.progress.width"
         patternTransform="rotate(45 0 0)"
         patternUnits="userSpaceOnUse"
       >
@@ -25,19 +25,19 @@
           x1="0"
           y1="0"
           x2="0"
-          :y2="$store.state.options.chart.progress.width"
+          :y2="$store.state.GanttElastic.options.chart.progress.width"
         />
       </pattern>
     </defs>
     <rect
-      v-if="$store.state.options.chart.progress.bar"
+      v-if="$store.state.GanttElastic.options.chart.progress.bar"
       class="gantt-elastic__chart-row-progress-bar-solid"
       :style="root.style('chart-row-progress-bar-solid', task.style['chart-row-progress-bar-solid'])"
       x="0"
       y="0"
       :width="getProgressWidth"
     ></rect>
-    <g v-if="$store.state.options.chart.progress.pattern">
+    <g v-if="$store.state.GanttElastic.options.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
         :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
@@ -89,7 +89,7 @@ export default {
      * @returns {object}
      */
     getSolidStyle () {
-      return Object.assign({}, this.$store.state.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+      return Object.assign({}, this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
 
     /**
@@ -99,8 +99,8 @@ export default {
      */
     getLineStyle () {
       return Object.assign({}, {
-        stroke: this.$store.state.options.row.styles.bar.stroke + "a0",
-        "stroke-width": this.$store.state.options.row.styles.bar["stroke-width"] / 2
+        stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + "a0",
+        "stroke-width": this.$store.state.GanttElastic.options.row.styles.bar["stroke-width"] / 2
       }, this.task.style);
     }
   }

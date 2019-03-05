@@ -7,43 +7,43 @@
  */
 -->
 <template>
-  <div :class="getClassPrefix()+'-wrapper'" :style="this.root.style(this.getClassPrefix(false) + '-wrapper')">
+  <div :class="getClassPrefix() + '-wrapper'" :style="this.root.style(this.getClassPrefix(false) + '-wrapper')">
     <svg
-      :class="getClassPrefix()+'-content'"
-      :style="root.style(getClassPrefix(false)+'-content')"
+      :class="getClassPrefix() + '-content'"
+      :style="root.style(getClassPrefix(false) + '-content')"
       :width="options.size"
       :height="options.size"
       v-if="allChildren.length"
     >
       <rect
-        :class="getClassPrefix()+'-border'"
-        :style="root.style(getClassPrefix(false)+'-border',borderStyle)"
+        :class="getClassPrefix() + '-border'"
+        :style="root.style(getClassPrefix(false) + '-border', borderStyle)"
         :x="border"
         :y="border"
-        :width="options.size-border*2"
-        :height="options.size-border*2"
+        :width="options.size - border * 2"
+        :height="options.size - border * 2"
         rx="2"
         ry="2"
         @click="toggle"
       ></rect>
       <line
-        :class="getClassPrefix()+'-line'"
-        :style="root.style(getClassPrefix(false)+'-line')"
+        :class="getClassPrefix() + '-line'"
+        :style="root.style(getClassPrefix(false) + '-line')"
         v-if="allChildren.length"
         :x1="lineOffset"
-        :y1="options.size/2"
-        :x2="options.size-lineOffset"
-        :y2="options.size/2"
+        :y1="options.size / 2"
+        :x2="options.size - lineOffset"
+        :y2="options.size / 2"
         @click="toggle"
       ></line>
       <line
-        :class="getClassPrefix()+'-line'"
-        :style="root.style(getClassPrefix(false)+'-line')"
+        :class="getClassPrefix() + '-line'"
+        :style="root.style(getClassPrefix(false) + '-line')"
         v-if="collapsed"
-        :x1="options.size/2"
+        :x1="options.size / 2"
         :y1="lineOffset"
-        :x2="options.size/2"
-        :y2="options.size-lineOffset"
+        :x2="options.size / 2"
+        :y2="options.size - lineOffset"
         @click="toggle"
       ></line>
     </svg>
@@ -55,14 +55,14 @@ export default {
   inject: ['root'],
   props: ['tasks', 'options'],
   data() {
-    const border = 0.5
+    const border = 0.5;
     return {
       border,
       borderStyle: {
         'stroke-width': border
       },
       lineOffset: 5
-    }
+    };
   },
   computed: {
     /**
@@ -71,13 +71,13 @@ export default {
      * @returns {array}
      */
     allChildren() {
-      const children = []
+      const children = [];
       this.tasks.forEach(task => {
         task.children.forEach(child => {
-          children.push(child)
-        })
-      })
-      return children
+          children.push(child);
+        });
+      });
+      return children;
     },
     /**
      * Is current expander collapsed?
@@ -86,15 +86,15 @@ export default {
      */
     collapsed() {
       if (this.tasks.length === 0) {
-        return false
+        return false;
       }
-      let collapsed = 0
+      let collapsed = 0;
       for (let i = 0, len = this.tasks.length; i < len; i++) {
         if (this.tasks[i].collapsed) {
-          collapsed++
+          collapsed++;
         }
       }
-      return collapsed === this.tasks.length
+      return collapsed === this.tasks.length;
     }
   },
   methods: {
@@ -104,33 +104,20 @@ export default {
      * @returns {string}
      */
     getClassPrefix(full = true) {
-      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`
+      return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
     },
     /**
      * Toggle expander
      */
     toggle() {
       if (this.allChildren.length === 0) {
-        return
+        return;
       }
-      const collapsed = !this.collapsed
+      const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        this.$store.commit(this.root.updateTask, { id: task.id, collapsed })
-        console.log(this.root.getTask(task.id).collapsed, 'cccolapsed')
-      })
-      this.$store.state.tasks.forEach(task => {
-        const props = { id: task.id, visible: true }
-        for (let i = 0, len = task.parents.length; i < len; i++) {
-          const parent = this.root.getTask(task.parents[i])
-          if (parent.collapsed) {
-            console.log('collapsed', parent)
-            props.visible = false
-            return this.$store.commit(this.root.updateTask, { props })
-          }
-        }
-        return this.$store.commit(this.root.updateTask, { props })
-      })
+        this.$store.commit(this.root.updateTask, { id: task.id, collapsed });
+      });
     }
   }
-}
+};
 </script>

@@ -10,11 +10,11 @@
   <div class="gantt-elastic__main-view" :style="root.style('main-view')">
     <div
       class="gantt-elastic__main-container-wrapper"
-      :style="root.style('main-container-wrapper',{ height:$store.state.options.height+'px'})"
+      :style="root.style('main-container-wrapper',{ height:$store.state.GanttElastic.options.height+'px'})"
     >
       <div
         class="gantt-elastic__main-container"
-        :style="root.style('main-container',{width:getWidth+'px', height:$store.state.options.height+'px'})"
+        :style="root.style('main-container',{width:getWidth+'px', height:$store.state.GanttElastic.options.height+'px'})"
         ref="mainView"
       >
         <div
@@ -26,8 +26,8 @@
           <div
             ref="taskList"
             class="gantt-elastic__task-list-container"
-            :style="root.style('task-list-container', {width:$store.state.options.taskList.finalWidth+'px', height:$store.state.options.height+'px'})"
-            v-show="$store.state.options.taskList.display"
+            :style="root.style('task-list-container', {width:$store.state.GanttElastic.options.taskList.finalWidth+'px', height:$store.state.GanttElastic.options.height+'px'})"
+            v-show="$store.state.GanttElastic.options.taskList.display"
           >
             <task-list></task-list>
           </div>
@@ -54,7 +54,7 @@
       >
         <div
           class="gantt-elastic__chart-scroll--vertical"
-          :style="{width:'1px',height:$store.state.options.allVisibleTasksHeight+'px'}"
+          :style="{width:'1px',height:$store.state.GanttElastic.options.allVisibleTasksHeight+'px'}"
         ></div>
       </div>
     </div>
@@ -66,7 +66,7 @@
     >
       <div
         class="gantt-elastic__chart-scroll--horizontal"
-        :style="{height:'1px', width:$store.state.options.width+'px'}"
+        :style="{height:'1px', width:$store.state.GanttElastic.options.width+'px'}"
       ></div>
     </div>
   </div>
@@ -127,7 +127,7 @@ export default {
      * @returns {number}
      */
     getWidth() {
-      let width = this.$store.state.options.clientWidth - this.$store.state.options.scrollBarHeight
+      let width = this.$store.state.GanttElastic.options.clientWidth - this.$store.state.GanttElastic.options.scrollBarHeight
       if (width < 0) {
         return 0
       }
@@ -140,10 +140,10 @@ export default {
      * @returns {string}
      */
     getMarginLeft() {
-      if (!this.$store.state.options.taskList.display) {
+      if (!this.$store.state.GanttElastic.options.taskList.display) {
         return '0px'
       }
-      return this.$store.state.options.taskList.finalWidth + 'px'
+      return this.$store.state.GanttElastic.options.taskList.finalWidth + 'px'
     },
 
     /**
@@ -153,9 +153,9 @@ export default {
      */
     verticalStyle() {
       return {
-        width: this.$store.state.options.scrollBarHeight + 'px',
-        height: this.$store.state.options.rowsHeight + 'px',
-        'margin-top': this.$store.state.options.calendar.height + this.$store.state.options.calendar.gap + 'px'
+        width: this.$store.state.GanttElastic.options.scrollBarHeight + 'px',
+        height: this.$store.state.GanttElastic.options.rowsHeight + 'px',
+        'margin-top': this.$store.state.GanttElastic.options.calendar.height + this.$store.state.GanttElastic.options.calendar.gap + 'px'
       }
     },
 
@@ -165,12 +165,12 @@ export default {
      * @returns {string}
      */
     getViewBox() {
-      if (this.$store.state.options.clientWidth) {
-        return `0 0 ${this.$store.state.options.clientWidth - this.$store.state.options.scrollBarHeight} ${
-          this.$store.state.options.height
+      if (this.$store.state.GanttElastic.options.clientWidth) {
+        return `0 0 ${this.$store.state.GanttElastic.options.clientWidth - this.$store.state.GanttElastic.options.scrollBarHeight} ${
+          this.$store.state.GanttElastic.options.height
         }`
       }
-      return `0 0 0 ${this.$store.state.options.height}`
+      return `0 0 0 ${this.$store.state.GanttElastic.options.height}`
     }
   },
   methods: {
@@ -238,7 +238,7 @@ export default {
      * When in drag scrolling mode this method calculate scroll movement
      */
     chartMouseMove(ev) {
-      if (this.$store.state.options.scroll.scrolling) {
+      if (this.$store.state.GanttElastic.options.scroll.scrolling) {
         ev.preventDefault()
         ev.stopImmediatePropagation()
         ev.stopPropagation()
@@ -260,15 +260,15 @@ export default {
         let x = 0,
           y = 0
         if (touch) {
-          x = this.mousePos.currentX + movementX * this.$store.state.options.scroll.dragXMoveMultiplier
+          x = this.mousePos.currentX + movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier
         } else {
-          x = horizontal.scrollLeft - movementX * this.$store.state.options.scroll.dragXMoveMultiplier
+          x = horizontal.scrollLeft - movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier
         }
         horizontal.scrollLeft = x
         if (touch) {
-          y = this.mousePos.currentY + movementY * this.$store.state.options.scroll.dragYMoveMultiplier
+          y = this.mousePos.currentY + movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier
         } else {
-          y = vertical.scrollTop - movementY * this.$store.state.options.scroll.dragYMoveMultiplier
+          y = vertical.scrollTop - movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier
         }
         vertical.scrollTop = y
       }

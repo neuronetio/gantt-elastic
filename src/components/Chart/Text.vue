@@ -10,8 +10,8 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="root.style('chart-row-text-wrapper')"
-    :x="task.x+task.width + $store.state.options.chart.text.offset"
-    :y="task.y-$store.state.options.chart.grid.horizontal.gap"
+    :x="task.x+task.width + $store.state.GanttElastic.options.chart.text.offset"
+    :y="task.y-$store.state.GanttElastic.options.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
   >
@@ -54,9 +54,9 @@ export default {
      */
     getWidth () {
       const textStyle = this.root.style('chart-row-text');
-      this.$store.state.options.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
-      const textWidth = this.$store.state.options.ctx.measureText(this.task.label).width;
-      return textWidth + this.$store.state.options.chart.text.xPadding * 2;
+      this.$store.state.GanttElastic.options.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      const textWidth = this.$store.state.GanttElastic.options.ctx.measureText(this.task.label).width;
+      return textWidth + this.$store.state.GanttElastic.options.chart.text.xPadding * 2;
     },
 
     /**
@@ -65,7 +65,7 @@ export default {
      * @returns {number}
      */
     getHeight () {
-      return this.task.height + this.$store.state.options.chart.grid.horizontal.gap * 2;
+      return this.task.height + this.$store.state.GanttElastic.options.chart.grid.horizontal.gap * 2;
     },
 
     /**
@@ -83,7 +83,7 @@ export default {
      * @returns {boolean}
      */
     html () {
-      const cols = this.$store.state.options.taskList.columns;
+      const cols = this.$store.state.GanttElastic.options.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
         if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
