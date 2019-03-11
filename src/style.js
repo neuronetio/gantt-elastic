@@ -4,8 +4,8 @@
  * @author Rafal Pospiech <neuronet.io@gmail.com>
  * @package GanttElastic
  */
-const fontSize = '12px'
-const fontFamily = 'Arial, sans-serif'
+const fontSize = '12px';
+const fontFamily = 'Arial, sans-serif';
 export default {
   '*': {
     'box-sizing': 'border-box'
@@ -87,7 +87,8 @@ export default {
   'calendar-row--hour': {},
   'calendar-row-rect': {
     background: 'transparent',
-    'border-width': '0.5px', // Calendar
+    'border-width': '0px', // Calendar
+    'border-right-width': '1px',
     'border-color': '#dadada',
     'border-style': 'solid',
     'flex-shrink': '0'
@@ -98,11 +99,15 @@ export default {
     color: '#606060',
     'text-align': 'center'
   },
-  'calendar-row-rect--month': {},
+  'calendar-row-rect--month': {
+    'border-top': '1px solid #dadada'
+  },
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {},
+  'calendar-row-rect--hour': {
+    'border-bottom': '1px solid #dadada'
+  },
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
@@ -327,4 +332,4 @@ export default {
   'slot-header-beforeOptions': {
     display: 'inline-block'
   }
-}
+};

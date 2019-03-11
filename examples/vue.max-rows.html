@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   <title>GanttElastic editor demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
 
   <!--<script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
@@ -134,12 +135,15 @@
       },
     };
 
+    Vue.use(Vuex);
+    const store = new Vuex.Store({});
     // create instance
     const app = new Vue({
       components: {
         'gantt-elastic': GanttElastic,
         'gantt-elastic-header': Header,
       },
+      store,
       data: {
         tasks,
         options

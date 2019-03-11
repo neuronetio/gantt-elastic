@@ -82,27 +82,34 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+!function(t,n){ true?module.exports=n():undefined}(this,function(){"use strict";var t="millisecond",n="second",e="minute",i="hour",r="day",s="week",u="month",o="year",a=/^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,h=/\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,c=function(t,n,e){var i=String(t);return!i||i.length>=n?t:""+Array(n+1-i.length).join(e)+t},f={s:c,z:function(t){var n=-t.utcOffset(),e=Math.abs(n),i=Math.floor(e/60),r=e%60;return(n<=0?"+":"-")+c(i,2,"0")+":"+c(r,2,"0")},m:function(t,n){var e=12*(n.year()-t.year())+(n.month()-t.month()),i=t.clone().add(e,u),r=n-i<0,s=t.clone().add(e+(r?-1:1),u);return Number(-(e+(n-i)/(r?i-s:s-i))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(a){return{M:u,y:o,w:s,d:r,h:i,m:e,s:n,ms:t}[a]||String(a||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},d={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},$="en",l={};l[$]=d;var m=function(t){return t instanceof S},y=function(t,n,e){var i;if(!t)return null;if("string"==typeof t)l[t]&&(i=t),n&&(l[t]=n,i=t);else{var r=t.name;l[r]=t,i=r}return e||($=i),i},M=function(t,n,e){if(m(t))return t.clone();var i=n?"string"==typeof n?{format:n,pl:e}:n:{};return i.date=t,new S(i)},D=f;D.l=y,D.i=m,D.w=function(t,n){return M(t,{locale:n.$L,utc:n.$u})};var S=function(){function c(t){this.$L=this.$L||y(t.locale,null,!0)||$,this.parse(t)}var f=c.prototype;return f.parse=function(t){this.$d=function(t){var n=t.date,e=t.utc;if(null===n)return new Date(NaN);if(D.u(n))return new Date;if(n instanceof Date)return new Date(n);if("string"==typeof n&&!/Z$/i.test(n)){var i=n.match(a);if(i)return e?new Date(Date.UTC(i[1],i[2]-1,i[3]||1,i[4]||0,i[5]||0,i[6]||0,i[7]||0)):new Date(i[1],i[2]-1,i[3]||1,i[4]||0,i[5]||0,i[6]||0,i[7]||0)}return new Date(n)}(t),this.init()},f.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},f.$utils=function(){return D},f.isValid=function(){return!("Invalid Date"===this.$d.toString())},f.isSame=function(t,n){var e=M(t);return this.startOf(n)<=e&&e<=this.endOf(n)},f.isAfter=function(t,n){return M(t)<this.startOf(n)},f.isBefore=function(t,n){return this.endOf(n)<M(t)},f.year=function(){return this.$y},f.month=function(){return this.$M},f.day=function(){return this.$W},f.date=function(){return this.$D},f.hour=function(){return this.$H},f.minute=function(){return this.$m},f.second=function(){return this.$s},f.millisecond=function(){return this.$ms},f.unix=function(){return Math.floor(this.valueOf()/1e3)},f.valueOf=function(){return this.$d.getTime()},f.startOf=function(t,a){var h=this,c=!!D.u(a)||a,f=D.p(t),d=function(t,n){var e=D.w(h.$u?Date.UTC(h.$y,n,t):new Date(h.$y,n,t),h);return c?e:e.endOf(r)},$=function(t,n){return D.w(h.toDate()[t].apply(h.toDate(),(c?[0,0,0,0]:[23,59,59,999]).slice(n)),h)},l=this.$W,m=this.$M,y=this.$D,M="set"+(this.$u?"UTC":"");switch(f){case o:return c?d(1,0):d(31,11);case u:return c?d(1,m):d(0,m+1);case s:var S=this.$locale().weekStart||0,g=(l<S?l+7:l)-S;return d(c?y-g:y+(6-g),m);case r:case"date":return $(M+"Hours",0);case i:return $(M+"Minutes",1);case e:return $(M+"Seconds",2);case n:return $(M+"Milliseconds",3);default:return this.clone()}},f.endOf=function(t){return this.startOf(t,!1)},f.$set=function(s,a){var h,c=D.p(s),f="set"+(this.$u?"UTC":""),d=(h={},h[r]=f+"Date",h.date=f+"Date",h[u]=f+"Month",h[o]=f+"FullYear",h[i]=f+"Hours",h[e]=f+"Minutes",h[n]=f+"Seconds",h[t]=f+"Milliseconds",h)[c],$=c===r?this.$D+(a-this.$W):a;return this.$d[d]&&this.$d[d]($),this.init(),this},f.set=function(t,n){return this.clone().$set(t,n)},f.add=function(t,a){var h,c=this;t=Number(t);var f=D.p(a),d=function(n,e){var i=c.set("date",1).set(n,e+t);return i.set("date",Math.min(c.$D,i.daysInMonth()))},$=function(n){var e=new Date(c.$d);return e.setDate(e.getDate()+n*t),D.w(e,c)};if(f===u)return d(u,this.$M);if(f===o)return d(o,this.$y);if(f===r)return $(1);if(f===s)return $(7);var l=(h={},h[e]=6e4,h[i]=36e5,h[n]=1e3,h)[f]||1,m=this.valueOf()+t*l;return D.w(m,this)},f.subtract=function(t,n){return this.add(-1*t,n)},f.format=function(t){var n=this;if(!this.isValid())return"Invalid Date";var e=t||"YYYY-MM-DDTHH:mm:ssZ",i=D.z(this),r=this.$locale(),s=r.weekdays,u=r.months,o=function(t,n,e,i){return t&&t[n]||e[n].substr(0,i)},a=function(t){return D.s(n.$H%12||12,t,"0")},c={YY:String(this.$y).slice(-2),YYYY:String(this.$y),M:String(this.$M+1),MM:D.s(this.$M+1,2,"0"),MMM:o(r.monthsShort,this.$M,u,3),MMMM:u[this.$M],D:String(this.$D),DD:D.s(this.$D,2,"0"),d:String(this.$W),dd:o(r.weekdaysMin,this.$W,s,2),ddd:o(r.weekdaysShort,this.$W,s,3),dddd:s[this.$W],H:String(this.$H),HH:D.s(this.$H,2,"0"),h:a(1),hh:a(2),a:this.$H<12?"am":"pm",A:this.$H<12?"AM":"PM",m:String(this.$m),mm:D.s(this.$m,2,"0"),s:String(this.$s),ss:D.s(this.$s,2,"0"),SSS:D.s(this.$ms,3,"0"),Z:i};return e.replace(h,function(t){return t.indexOf("[")>-1?t.replace(/\[|\]/g,""):c[t]||i.replace(":","")})},f.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},f.diff=function(t,a,h){var c,f=D.p(a),d=M(t),$=6e4*(d.utcOffset()-this.utcOffset()),l=this-d,m=D.m(this,d);return m=(c={},c[o]=m/12,c[u]=m,c.quarter=m/3,c[s]=(l-$)/6048e5,c[r]=(l-$)/864e5,c[i]=l/36e5,c[e]=l/6e4,c[n]=l/1e3,c)[f]||l,h?m:D.a(m)},f.daysInMonth=function(){return this.endOf(u).$D},f.$locale=function(){return l[this.$L]},f.locale=function(t,n){var e=this.clone();return e.$L=y(t,n,!0),e},f.clone=function(){return D.w(this.toDate(),this)},f.toDate=function(){return new Date(this.$d)},f.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]},f.toJSON=function(){return this.toISOString()},f.toISOString=function(){return this.$d.toISOString()},f.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}},f.toString=function(){return this.$d.toUTCString()},c}();return M.prototype=S.prototype,M.extend=function(t,n){return t(n,S,M),M},M.locale=y,M.isDayjs=m,M.unix=function(t){return M(1e3*t)},M.en=l[$],M.Ls=l,M});
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(3);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(6).default
+var add = __webpack_require__(13).default
 var update = add("c3e5085c", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -184,22 +191,1486 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+// compare and isBuffer taken from https://github.com/feross/buffer/blob/680e9e5e488f22aac27599a57dc844a6315928dd/index.js
+// original notice:
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+function compare(a, b) {
+  if (a === b) {
+    return 0;
+  }
+
+  var x = a.length;
+  var y = b.length;
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i];
+      y = b[i];
+      break;
+    }
+  }
+
+  if (x < y) {
+    return -1;
+  }
+  if (y < x) {
+    return 1;
+  }
+  return 0;
+}
+function isBuffer(b) {
+  if (global.Buffer && typeof global.Buffer.isBuffer === 'function') {
+    return global.Buffer.isBuffer(b);
+  }
+  return !!(b != null && b._isBuffer);
+}
+
+// based on node assert, original notice:
+
+// http://wiki.commonjs.org/wiki/Unit_Testing/1.0
+//
+// THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
+//
+// Originally from narwhal.js (http://narwhaljs.org)
+// Copyright (c) 2009 Thomas Robinson <280north.com>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the 'Software'), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var util = __webpack_require__(5);
+var hasOwn = Object.prototype.hasOwnProperty;
+var pSlice = Array.prototype.slice;
+var functionsHaveNames = (function () {
+  return function foo() {}.name === 'foo';
+}());
+function pToString (obj) {
+  return Object.prototype.toString.call(obj);
+}
+function isView(arrbuf) {
+  if (isBuffer(arrbuf)) {
+    return false;
+  }
+  if (typeof global.ArrayBuffer !== 'function') {
+    return false;
+  }
+  if (typeof ArrayBuffer.isView === 'function') {
+    return ArrayBuffer.isView(arrbuf);
+  }
+  if (!arrbuf) {
+    return false;
+  }
+  if (arrbuf instanceof DataView) {
+    return true;
+  }
+  if (arrbuf.buffer && arrbuf.buffer instanceof ArrayBuffer) {
+    return true;
+  }
+  return false;
+}
+// 1. The assert module provides functions that throw
+// AssertionError's when particular conditions are not met. The
+// assert module must conform to the following interface.
+
+var assert = module.exports = ok;
+
+// 2. The AssertionError is defined in assert.
+// new assert.AssertionError({ message: message,
+//                             actual: actual,
+//                             expected: expected })
+
+var regex = /\s*function\s+([^\(\s]*)\s*/;
+// based on https://github.com/ljharb/function.prototype.name/blob/adeeeec8bfcc6068b187d7d9fb3d5bb1d3a30899/implementation.js
+function getName(func) {
+  if (!util.isFunction(func)) {
+    return;
+  }
+  if (functionsHaveNames) {
+    return func.name;
+  }
+  var str = func.toString();
+  var match = str.match(regex);
+  return match && match[1];
+}
+assert.AssertionError = function AssertionError(options) {
+  this.name = 'AssertionError';
+  this.actual = options.actual;
+  this.expected = options.expected;
+  this.operator = options.operator;
+  if (options.message) {
+    this.message = options.message;
+    this.generatedMessage = false;
+  } else {
+    this.message = getMessage(this);
+    this.generatedMessage = true;
+  }
+  var stackStartFunction = options.stackStartFunction || fail;
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, stackStartFunction);
+  } else {
+    // non v8 browsers so we can have a stacktrace
+    var err = new Error();
+    if (err.stack) {
+      var out = err.stack;
+
+      // try to strip useless frames
+      var fn_name = getName(stackStartFunction);
+      var idx = out.indexOf('\n' + fn_name);
+      if (idx >= 0) {
+        // once we have located the function frame
+        // we need to strip out everything before it (and its line)
+        var next_line = out.indexOf('\n', idx + 1);
+        out = out.substring(next_line + 1);
+      }
+
+      this.stack = out;
+    }
+  }
+};
+
+// assert.AssertionError instanceof Error
+util.inherits(assert.AssertionError, Error);
+
+function truncate(s, n) {
+  if (typeof s === 'string') {
+    return s.length < n ? s : s.slice(0, n);
+  } else {
+    return s;
+  }
+}
+function inspect(something) {
+  if (functionsHaveNames || !util.isFunction(something)) {
+    return util.inspect(something);
+  }
+  var rawname = getName(something);
+  var name = rawname ? ': ' + rawname : '';
+  return '[Function' +  name + ']';
+}
+function getMessage(self) {
+  return truncate(inspect(self.actual), 128) + ' ' +
+         self.operator + ' ' +
+         truncate(inspect(self.expected), 128);
+}
+
+// At present only the three keys mentioned above are used and
+// understood by the spec. Implementations or sub modules can pass
+// other keys to the AssertionError's constructor - they will be
+// ignored.
+
+// 3. All of the following functions must throw an AssertionError
+// when a corresponding condition is not met, with a message that
+// may be undefined if not provided.  All assertion methods provide
+// both the actual and expected values to the assertion error for
+// display purposes.
+
+function fail(actual, expected, message, operator, stackStartFunction) {
+  throw new assert.AssertionError({
+    message: message,
+    actual: actual,
+    expected: expected,
+    operator: operator,
+    stackStartFunction: stackStartFunction
+  });
+}
+
+// EXTENSION! allows for well behaved errors defined elsewhere.
+assert.fail = fail;
+
+// 4. Pure assertion tests whether a value is truthy, as determined
+// by !!guard.
+// assert.ok(guard, message_opt);
+// This statement is equivalent to assert.equal(true, !!guard,
+// message_opt);. To test strictly for the value true, use
+// assert.strictEqual(true, guard, message_opt);.
+
+function ok(value, message) {
+  if (!value) fail(value, true, message, '==', assert.ok);
+}
+assert.ok = ok;
+
+// 5. The equality assertion tests shallow, coercive equality with
+// ==.
+// assert.equal(actual, expected, message_opt);
+
+assert.equal = function equal(actual, expected, message) {
+  if (actual != expected) fail(actual, expected, message, '==', assert.equal);
+};
+
+// 6. The non-equality assertion tests for whether two objects are not equal
+// with != assert.notEqual(actual, expected, message_opt);
+
+assert.notEqual = function notEqual(actual, expected, message) {
+  if (actual == expected) {
+    fail(actual, expected, message, '!=', assert.notEqual);
+  }
+};
+
+// 7. The equivalence assertion tests a deep equality relation.
+// assert.deepEqual(actual, expected, message_opt);
+
+assert.deepEqual = function deepEqual(actual, expected, message) {
+  if (!_deepEqual(actual, expected, false)) {
+    fail(actual, expected, message, 'deepEqual', assert.deepEqual);
+  }
+};
+
+assert.deepStrictEqual = function deepStrictEqual(actual, expected, message) {
+  if (!_deepEqual(actual, expected, true)) {
+    fail(actual, expected, message, 'deepStrictEqual', assert.deepStrictEqual);
+  }
+};
+
+function _deepEqual(actual, expected, strict, memos) {
+  // 7.1. All identical values are equivalent, as determined by ===.
+  if (actual === expected) {
+    return true;
+  } else if (isBuffer(actual) && isBuffer(expected)) {
+    return compare(actual, expected) === 0;
+
+  // 7.2. If the expected value is a Date object, the actual value is
+  // equivalent if it is also a Date object that refers to the same time.
+  } else if (util.isDate(actual) && util.isDate(expected)) {
+    return actual.getTime() === expected.getTime();
+
+  // 7.3 If the expected value is a RegExp object, the actual value is
+  // equivalent if it is also a RegExp object with the same source and
+  // properties (`global`, `multiline`, `lastIndex`, `ignoreCase`).
+  } else if (util.isRegExp(actual) && util.isRegExp(expected)) {
+    return actual.source === expected.source &&
+           actual.global === expected.global &&
+           actual.multiline === expected.multiline &&
+           actual.lastIndex === expected.lastIndex &&
+           actual.ignoreCase === expected.ignoreCase;
+
+  // 7.4. Other pairs that do not both pass typeof value == 'object',
+  // equivalence is determined by ==.
+  } else if ((actual === null || typeof actual !== 'object') &&
+             (expected === null || typeof expected !== 'object')) {
+    return strict ? actual === expected : actual == expected;
+
+  // If both values are instances of typed arrays, wrap their underlying
+  // ArrayBuffers in a Buffer each to increase performance
+  // This optimization requires the arrays to have the same type as checked by
+  // Object.prototype.toString (aka pToString). Never perform binary
+  // comparisons for Float*Arrays, though, since e.g. +0 === -0 but their
+  // bit patterns are not identical.
+  } else if (isView(actual) && isView(expected) &&
+             pToString(actual) === pToString(expected) &&
+             !(actual instanceof Float32Array ||
+               actual instanceof Float64Array)) {
+    return compare(new Uint8Array(actual.buffer),
+                   new Uint8Array(expected.buffer)) === 0;
+
+  // 7.5 For all other Object pairs, including Array objects, equivalence is
+  // determined by having the same number of owned properties (as verified
+  // with Object.prototype.hasOwnProperty.call), the same set of keys
+  // (although not necessarily the same order), equivalent values for every
+  // corresponding key, and an identical 'prototype' property. Note: this
+  // accounts for both named and indexed properties on Arrays.
+  } else if (isBuffer(actual) !== isBuffer(expected)) {
+    return false;
+  } else {
+    memos = memos || {actual: [], expected: []};
+
+    var actualIndex = memos.actual.indexOf(actual);
+    if (actualIndex !== -1) {
+      if (actualIndex === memos.expected.indexOf(expected)) {
+        return true;
+      }
+    }
+
+    memos.actual.push(actual);
+    memos.expected.push(expected);
+
+    return objEquiv(actual, expected, strict, memos);
+  }
+}
+
+function isArguments(object) {
+  return Object.prototype.toString.call(object) == '[object Arguments]';
+}
+
+function objEquiv(a, b, strict, actualVisitedObjects) {
+  if (a === null || a === undefined || b === null || b === undefined)
+    return false;
+  // if one is a primitive, the other must be same
+  if (util.isPrimitive(a) || util.isPrimitive(b))
+    return a === b;
+  if (strict && Object.getPrototypeOf(a) !== Object.getPrototypeOf(b))
+    return false;
+  var aIsArgs = isArguments(a);
+  var bIsArgs = isArguments(b);
+  if ((aIsArgs && !bIsArgs) || (!aIsArgs && bIsArgs))
+    return false;
+  if (aIsArgs) {
+    a = pSlice.call(a);
+    b = pSlice.call(b);
+    return _deepEqual(a, b, strict);
+  }
+  var ka = objectKeys(a);
+  var kb = objectKeys(b);
+  var key, i;
+  // having the same number of owned properties (keys incorporates
+  // hasOwnProperty)
+  if (ka.length !== kb.length)
+    return false;
+  //the same set of keys (although not necessarily the same order),
+  ka.sort();
+  kb.sort();
+  //~~~cheap key test
+  for (i = ka.length - 1; i >= 0; i--) {
+    if (ka[i] !== kb[i])
+      return false;
+  }
+  //equivalent values for every corresponding key, and
+  //~~~possibly expensive deep test
+  for (i = ka.length - 1; i >= 0; i--) {
+    key = ka[i];
+    if (!_deepEqual(a[key], b[key], strict, actualVisitedObjects))
+      return false;
+  }
+  return true;
+}
+
+// 8. The non-equivalence assertion tests for any deep inequality.
+// assert.notDeepEqual(actual, expected, message_opt);
+
+assert.notDeepEqual = function notDeepEqual(actual, expected, message) {
+  if (_deepEqual(actual, expected, false)) {
+    fail(actual, expected, message, 'notDeepEqual', assert.notDeepEqual);
+  }
+};
+
+assert.notDeepStrictEqual = notDeepStrictEqual;
+function notDeepStrictEqual(actual, expected, message) {
+  if (_deepEqual(actual, expected, true)) {
+    fail(actual, expected, message, 'notDeepStrictEqual', notDeepStrictEqual);
+  }
+}
+
+
+// 9. The strict equality assertion tests strict equality, as determined by ===.
+// assert.strictEqual(actual, expected, message_opt);
+
+assert.strictEqual = function strictEqual(actual, expected, message) {
+  if (actual !== expected) {
+    fail(actual, expected, message, '===', assert.strictEqual);
+  }
+};
+
+// 10. The strict non-equality assertion tests for strict inequality, as
+// determined by !==.  assert.notStrictEqual(actual, expected, message_opt);
+
+assert.notStrictEqual = function notStrictEqual(actual, expected, message) {
+  if (actual === expected) {
+    fail(actual, expected, message, '!==', assert.notStrictEqual);
+  }
+};
+
+function expectedException(actual, expected) {
+  if (!actual || !expected) {
+    return false;
+  }
+
+  if (Object.prototype.toString.call(expected) == '[object RegExp]') {
+    return expected.test(actual);
+  }
+
+  try {
+    if (actual instanceof expected) {
+      return true;
+    }
+  } catch (e) {
+    // Ignore.  The instanceof check doesn't work for arrow functions.
+  }
+
+  if (Error.isPrototypeOf(expected)) {
+    return false;
+  }
+
+  return expected.call({}, actual) === true;
+}
+
+function _tryBlock(block) {
+  var error;
+  try {
+    block();
+  } catch (e) {
+    error = e;
+  }
+  return error;
+}
+
+function _throws(shouldThrow, block, expected, message) {
+  var actual;
+
+  if (typeof block !== 'function') {
+    throw new TypeError('"block" argument must be a function');
+  }
+
+  if (typeof expected === 'string') {
+    message = expected;
+    expected = null;
+  }
+
+  actual = _tryBlock(block);
+
+  message = (expected && expected.name ? ' (' + expected.name + ').' : '.') +
+            (message ? ' ' + message : '.');
+
+  if (shouldThrow && !actual) {
+    fail(actual, expected, 'Missing expected exception' + message);
+  }
+
+  var userProvidedMessage = typeof message === 'string';
+  var isUnwantedException = !shouldThrow && util.isError(actual);
+  var isUnexpectedException = !shouldThrow && actual && !expected;
+
+  if ((isUnwantedException &&
+      userProvidedMessage &&
+      expectedException(actual, expected)) ||
+      isUnexpectedException) {
+    fail(actual, expected, 'Got unwanted exception' + message);
+  }
+
+  if ((shouldThrow && actual && expected &&
+      !expectedException(actual, expected)) || (!shouldThrow && actual)) {
+    throw actual;
+  }
+}
+
+// 11. Expected to throw an error:
+// assert.throws(block, Error_opt, message_opt);
+
+assert.throws = function(block, /*optional*/error, /*optional*/message) {
+  _throws(true, block, error, message);
+};
+
+// EXTENSION! This is annoying to write outside this module.
+assert.doesNotThrow = function(block, /*optional*/error, /*optional*/message) {
+  _throws(false, block, error, message);
+};
+
+assert.ifError = function(err) { if (err) throw err; };
+
+var objectKeys = Object.keys || function (obj) {
+  var keys = [];
+  for (var key in obj) {
+    if (hasOwn.call(obj, key)) keys.push(key);
+  }
+  return keys;
+};
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
+  function getOwnPropertyDescriptors(obj) {
+    var keys = Object.keys(obj);
+    var descriptors = {};
+    for (var i = 0; i < keys.length; i++) {
+      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
+    }
+    return descriptors;
+  };
+
+var formatRegExp = /%[sdj%]/g;
+exports.format = function(f) {
+  if (!isString(f)) {
+    var objects = [];
+    for (var i = 0; i < arguments.length; i++) {
+      objects.push(inspect(arguments[i]));
+    }
+    return objects.join(' ');
+  }
+
+  var i = 1;
+  var args = arguments;
+  var len = args.length;
+  var str = String(f).replace(formatRegExp, function(x) {
+    if (x === '%%') return '%';
+    if (i >= len) return x;
+    switch (x) {
+      case '%s': return String(args[i++]);
+      case '%d': return Number(args[i++]);
+      case '%j':
+        try {
+          return JSON.stringify(args[i++]);
+        } catch (_) {
+          return '[Circular]';
+        }
+      default:
+        return x;
+    }
+  });
+  for (var x = args[i]; i < len; x = args[++i]) {
+    if (isNull(x) || !isObject(x)) {
+      str += ' ' + x;
+    } else {
+      str += ' ' + inspect(x);
+    }
+  }
+  return str;
+};
+
+
+// Mark that a method should not be used.
+// Returns a modified function which warns once by default.
+// If --no-deprecation is set, then it is a no-op.
+exports.deprecate = function(fn, msg) {
+  if (typeof process !== 'undefined' && process.noDeprecation === true) {
+    return fn;
+  }
+
+  // Allow for deprecating things in the process of starting up.
+  if (typeof process === 'undefined') {
+    return function() {
+      return exports.deprecate(fn, msg).apply(this, arguments);
+    };
+  }
+
+  var warned = false;
+  function deprecated() {
+    if (!warned) {
+      if (process.throwDeprecation) {
+        throw new Error(msg);
+      } else if (process.traceDeprecation) {
+        console.trace(msg);
+      } else {
+        console.error(msg);
+      }
+      warned = true;
+    }
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
+};
+
+
+var debugs = {};
+var debugEnviron;
+exports.debuglog = function(set) {
+  if (isUndefined(debugEnviron))
+    debugEnviron = process.env.NODE_DEBUG || '';
+  set = set.toUpperCase();
+  if (!debugs[set]) {
+    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
+      var pid = process.pid;
+      debugs[set] = function() {
+        var msg = exports.format.apply(exports, arguments);
+        console.error('%s %d: %s', set, pid, msg);
+      };
+    } else {
+      debugs[set] = function() {};
+    }
+  }
+  return debugs[set];
+};
+
+
+/**
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */
+/* legacy: obj, showHidden, depth, colors*/
+function inspect(obj, opts) {
+  // default options
+  var ctx = {
+    seen: [],
+    stylize: stylizeNoColor
+  };
+  // legacy...
+  if (arguments.length >= 3) ctx.depth = arguments[2];
+  if (arguments.length >= 4) ctx.colors = arguments[3];
+  if (isBoolean(opts)) {
+    // legacy...
+    ctx.showHidden = opts;
+  } else if (opts) {
+    // got an "options" object
+    exports._extend(ctx, opts);
+  }
+  // set default options
+  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
+  if (isUndefined(ctx.depth)) ctx.depth = 2;
+  if (isUndefined(ctx.colors)) ctx.colors = false;
+  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
+  if (ctx.colors) ctx.stylize = stylizeWithColor;
+  return formatValue(ctx, obj, ctx.depth);
+}
+exports.inspect = inspect;
+
+
+// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+inspect.colors = {
+  'bold' : [1, 22],
+  'italic' : [3, 23],
+  'underline' : [4, 24],
+  'inverse' : [7, 27],
+  'white' : [37, 39],
+  'grey' : [90, 39],
+  'black' : [30, 39],
+  'blue' : [34, 39],
+  'cyan' : [36, 39],
+  'green' : [32, 39],
+  'magenta' : [35, 39],
+  'red' : [31, 39],
+  'yellow' : [33, 39]
+};
+
+// Don't use 'blue' not visible on cmd.exe
+inspect.styles = {
+  'special': 'cyan',
+  'number': 'yellow',
+  'boolean': 'yellow',
+  'undefined': 'grey',
+  'null': 'bold',
+  'string': 'green',
+  'date': 'magenta',
+  // "name": intentionally not styling
+  'regexp': 'red'
+};
+
+
+function stylizeWithColor(str, styleType) {
+  var style = inspect.styles[styleType];
+
+  if (style) {
+    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
+           '\u001b[' + inspect.colors[style][1] + 'm';
+  } else {
+    return str;
+  }
+}
+
+
+function stylizeNoColor(str, styleType) {
+  return str;
+}
+
+
+function arrayToHash(array) {
+  var hash = {};
+
+  array.forEach(function(val, idx) {
+    hash[val] = true;
+  });
+
+  return hash;
+}
+
+
+function formatValue(ctx, value, recurseTimes) {
+  // Provide a hook for user-specified inspect functions.
+  // Check that value is an object with an inspect function on it
+  if (ctx.customInspect &&
+      value &&
+      isFunction(value.inspect) &&
+      // Filter out the util module, it's inspect function is special
+      value.inspect !== exports.inspect &&
+      // Also filter out any prototype objects using the circular check.
+      !(value.constructor && value.constructor.prototype === value)) {
+    var ret = value.inspect(recurseTimes, ctx);
+    if (!isString(ret)) {
+      ret = formatValue(ctx, ret, recurseTimes);
+    }
+    return ret;
+  }
+
+  // Primitive types cannot have properties
+  var primitive = formatPrimitive(ctx, value);
+  if (primitive) {
+    return primitive;
+  }
+
+  // Look up the keys of the object.
+  var keys = Object.keys(value);
+  var visibleKeys = arrayToHash(keys);
+
+  if (ctx.showHidden) {
+    keys = Object.getOwnPropertyNames(value);
+  }
+
+  // IE doesn't make error fields non-enumerable
+  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
+  if (isError(value)
+      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
+    return formatError(value);
+  }
+
+  // Some type of object without properties can be shortcutted.
+  if (keys.length === 0) {
+    if (isFunction(value)) {
+      var name = value.name ? ': ' + value.name : '';
+      return ctx.stylize('[Function' + name + ']', 'special');
+    }
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    }
+    if (isDate(value)) {
+      return ctx.stylize(Date.prototype.toString.call(value), 'date');
+    }
+    if (isError(value)) {
+      return formatError(value);
+    }
+  }
+
+  var base = '', array = false, braces = ['{', '}'];
+
+  // Make Array say that they are Array
+  if (isArray(value)) {
+    array = true;
+    braces = ['[', ']'];
+  }
+
+  // Make functions say that they are functions
+  if (isFunction(value)) {
+    var n = value.name ? ': ' + value.name : '';
+    base = ' [Function' + n + ']';
+  }
+
+  // Make RegExps say that they are RegExps
+  if (isRegExp(value)) {
+    base = ' ' + RegExp.prototype.toString.call(value);
+  }
+
+  // Make dates with properties first say the date
+  if (isDate(value)) {
+    base = ' ' + Date.prototype.toUTCString.call(value);
+  }
+
+  // Make error with message first say the error
+  if (isError(value)) {
+    base = ' ' + formatError(value);
+  }
+
+  if (keys.length === 0 && (!array || value.length == 0)) {
+    return braces[0] + base + braces[1];
+  }
+
+  if (recurseTimes < 0) {
+    if (isRegExp(value)) {
+      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+    } else {
+      return ctx.stylize('[Object]', 'special');
+    }
+  }
+
+  ctx.seen.push(value);
+
+  var output;
+  if (array) {
+    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
+  } else {
+    output = keys.map(function(key) {
+      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+    });
+  }
+
+  ctx.seen.pop();
+
+  return reduceToSingleString(output, base, braces);
+}
+
+
+function formatPrimitive(ctx, value) {
+  if (isUndefined(value))
+    return ctx.stylize('undefined', 'undefined');
+  if (isString(value)) {
+    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+                                             .replace(/'/g, "\\'")
+                                             .replace(/\\"/g, '"') + '\'';
+    return ctx.stylize(simple, 'string');
+  }
+  if (isNumber(value))
+    return ctx.stylize('' + value, 'number');
+  if (isBoolean(value))
+    return ctx.stylize('' + value, 'boolean');
+  // For some reason typeof null is "object", so special case here.
+  if (isNull(value))
+    return ctx.stylize('null', 'null');
+}
+
+
+function formatError(value) {
+  return '[' + Error.prototype.toString.call(value) + ']';
+}
+
+
+function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
+  var output = [];
+  for (var i = 0, l = value.length; i < l; ++i) {
+    if (hasOwnProperty(value, String(i))) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          String(i), true));
+    } else {
+      output.push('');
+    }
+  }
+  keys.forEach(function(key) {
+    if (!key.match(/^\d+$/)) {
+      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+          key, true));
+    }
+  });
+  return output;
+}
+
+
+function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+  var name, str, desc;
+  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
+  if (desc.get) {
+    if (desc.set) {
+      str = ctx.stylize('[Getter/Setter]', 'special');
+    } else {
+      str = ctx.stylize('[Getter]', 'special');
+    }
+  } else {
+    if (desc.set) {
+      str = ctx.stylize('[Setter]', 'special');
+    }
+  }
+  if (!hasOwnProperty(visibleKeys, key)) {
+    name = '[' + key + ']';
+  }
+  if (!str) {
+    if (ctx.seen.indexOf(desc.value) < 0) {
+      if (isNull(recurseTimes)) {
+        str = formatValue(ctx, desc.value, null);
+      } else {
+        str = formatValue(ctx, desc.value, recurseTimes - 1);
+      }
+      if (str.indexOf('\n') > -1) {
+        if (array) {
+          str = str.split('\n').map(function(line) {
+            return '  ' + line;
+          }).join('\n').substr(2);
+        } else {
+          str = '\n' + str.split('\n').map(function(line) {
+            return '   ' + line;
+          }).join('\n');
+        }
+      }
+    } else {
+      str = ctx.stylize('[Circular]', 'special');
+    }
+  }
+  if (isUndefined(name)) {
+    if (array && key.match(/^\d+$/)) {
+      return str;
+    }
+    name = JSON.stringify('' + key);
+    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
+      name = name.substr(1, name.length - 2);
+      name = ctx.stylize(name, 'name');
+    } else {
+      name = name.replace(/'/g, "\\'")
+                 .replace(/\\"/g, '"')
+                 .replace(/(^"|"$)/g, "'");
+      name = ctx.stylize(name, 'string');
+    }
+  }
+
+  return name + ': ' + str;
+}
+
+
+function reduceToSingleString(output, base, braces) {
+  var numLinesEst = 0;
+  var length = output.reduce(function(prev, cur) {
+    numLinesEst++;
+    if (cur.indexOf('\n') >= 0) numLinesEst++;
+    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
+  }, 0);
+
+  if (length > 60) {
+    return braces[0] +
+           (base === '' ? '' : base + '\n ') +
+           ' ' +
+           output.join(',\n  ') +
+           ' ' +
+           braces[1];
+  }
+
+  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
+}
+
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
+function isArray(ar) {
+  return Array.isArray(ar);
+}
+exports.isArray = isArray;
+
+function isBoolean(arg) {
+  return typeof arg === 'boolean';
+}
+exports.isBoolean = isBoolean;
+
+function isNull(arg) {
+  return arg === null;
+}
+exports.isNull = isNull;
+
+function isNullOrUndefined(arg) {
+  return arg == null;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+exports.isNumber = isNumber;
+
+function isString(arg) {
+  return typeof arg === 'string';
+}
+exports.isString = isString;
+
+function isSymbol(arg) {
+  return typeof arg === 'symbol';
+}
+exports.isSymbol = isSymbol;
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+exports.isUndefined = isUndefined;
+
+function isRegExp(re) {
+  return isObject(re) && objectToString(re) === '[object RegExp]';
+}
+exports.isRegExp = isRegExp;
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+exports.isObject = isObject;
+
+function isDate(d) {
+  return isObject(d) && objectToString(d) === '[object Date]';
+}
+exports.isDate = isDate;
+
+function isError(e) {
+  return isObject(e) &&
+      (objectToString(e) === '[object Error]' || e instanceof Error);
+}
+exports.isError = isError;
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+exports.isFunction = isFunction;
+
+function isPrimitive(arg) {
+  return arg === null ||
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
+}
+exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = __webpack_require__(7);
+
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+
+function pad(n) {
+  return n < 10 ? '0' + n.toString(10) : n.toString(10);
+}
+
+
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+              'Oct', 'Nov', 'Dec'];
+
+// 26 Feb 16:19:34
+function timestamp() {
+  var d = new Date();
+  var time = [pad(d.getHours()),
+              pad(d.getMinutes()),
+              pad(d.getSeconds())].join(':');
+  return [d.getDate(), months[d.getMonth()], time].join(' ');
+}
+
+
+// log is just a thin wrapper to console.log that prepends a timestamp
+exports.log = function() {
+  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
+};
+
+
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */
+exports.inherits = __webpack_require__(8);
+
+exports._extend = function(origin, add) {
+  // Don't do anything if add isn't an object
+  if (!add || !isObject(add)) return origin;
+
+  var keys = Object.keys(add);
+  var i = keys.length;
+  while (i--) {
+    origin[keys[i]] = add[keys[i]];
+  }
+  return origin;
+};
+
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
+
+exports.promisify = function promisify(original) {
+  if (typeof original !== 'function')
+    throw new TypeError('The "original" argument must be of type Function');
+
+  if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
+    var fn = original[kCustomPromisifiedSymbol];
+    if (typeof fn !== 'function') {
+      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+    }
+    Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+      value: fn, enumerable: false, writable: false, configurable: true
+    });
+    return fn;
+  }
+
+  function fn() {
+    var promiseResolve, promiseReject;
+    var promise = new Promise(function (resolve, reject) {
+      promiseResolve = resolve;
+      promiseReject = reject;
+    });
+
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+    args.push(function (err, value) {
+      if (err) {
+        promiseReject(err);
+      } else {
+        promiseResolve(value);
+      }
+    });
+
+    try {
+      original.apply(this, args);
+    } catch (err) {
+      promiseReject(err);
+    }
+
+    return promise;
+  }
+
+  Object.setPrototypeOf(fn, Object.getPrototypeOf(original));
+
+  if (kCustomPromisifiedSymbol) Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+    value: fn, enumerable: false, writable: false, configurable: true
+  });
+  return Object.defineProperties(
+    fn,
+    getOwnPropertyDescriptors(original)
+  );
+}
+
+exports.promisify.custom = kCustomPromisifiedSymbol
+
+function callbackifyOnRejected(reason, cb) {
+  // `!reason` guard inspired by bluebird (Ref: https://goo.gl/t5IS6M).
+  // Because `null` is a special error value in callbacks which means "no error
+  // occurred", we error-wrap so the callback consumer can distinguish between
+  // "the promise rejected with null" or "the promise fulfilled with undefined".
+  if (!reason) {
+    var newReason = new Error('Promise was rejected with a falsy value');
+    newReason.reason = reason;
+    reason = newReason;
+  }
+  return cb(reason);
+}
+
+function callbackify(original) {
+  if (typeof original !== 'function') {
+    throw new TypeError('The "original" argument must be of type Function');
+  }
+
+  // We DO NOT return the promise as it gives the user a false sense that
+  // the promise is actually somehow related to the callback's execution
+  // and that the callback throwing will reject the promise.
+  function callbackified() {
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    var maybeCb = args.pop();
+    if (typeof maybeCb !== 'function') {
+      throw new TypeError('The last argument must be of type Function');
+    }
+    var self = this;
+    var cb = function() {
+      return maybeCb.apply(self, arguments);
+    };
+    // In true node style we process the callback on `nextTick` with all the
+    // implications (stack, `uncaughtException`, `async_hooks`)
+    original.apply(this, args)
+      .then(function(ret) { process.nextTick(cb, null, ret) },
+            function(rej) { process.nextTick(callbackifyOnRejected, rej, cb) });
+  }
+
+  Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
+  Object.defineProperties(callbackified,
+                          getOwnPropertyDescriptors(original));
+  return callbackified;
+}
+exports.callbackify = callbackify;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = function isBuffer(arg) {
+  return arg && typeof arg === 'object'
+    && typeof arg.copy === 'function'
+    && typeof arg.fill === 'function'
+    && typeof arg.readUInt8 === 'function';
+}
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 3 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
-exports.i(__webpack_require__(4), "");
+exports.i(__webpack_require__(11), "");
 
 // module
 exports.push([module.i, "\n", ""]);
@@ -208,10 +1679,10 @@ exports.push([module.i, "\n", ""]);
 
 
 /***/ }),
-/* 4 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -222,7 +1693,7 @@ exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.
 
 
 /***/ }),
-/* 5 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -252,519 +1723,10 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/constant.js
-var SECONDS_A_MINUTE = 60;
-var SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;
-var SECONDS_A_DAY = SECONDS_A_HOUR * 24;
-var SECONDS_A_WEEK = SECONDS_A_DAY * 7;
-var MILLISECONDS_A_SECOND = 1e3;
-var MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND; // English locales
+// EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
+var dayjs_min = __webpack_require__(0);
+var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
 
-var MS = 'millisecond';
-var S = 'second';
-var MIN = 'minute';
-var H = 'hour';
-var D = 'day';
-var W = 'week';
-var M = 'month';
-var Q = 'quarter';
-var Y = 'year';
-var DATE = 'date';
-var FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ';
-var INVALID_DATE_STRING = 'Invalid Date'; // regex
-
-var REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
-var REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
-var en = {
-  name: 'en',
-  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
-};
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/utils.js
-
-
-var padStart = function padStart(string, length, pad) {
-  var s = String(string);
-  if (!s || s.length >= length) return string;
-  return "" + Array(length + 1 - s.length).join(pad) + string;
-};
-
-var padZoneStr = function padZoneStr(negMinuts) {
-  var minutes = Math.abs(negMinuts);
-  var hourOffset = Math.floor(minutes / 60);
-  var minuteOffset = minutes % 60;
-  return "" + (negMinuts <= 0 ? '+' : '-') + padStart(hourOffset, 2, '0') + ":" + padStart(minuteOffset, 2, '0');
-};
-
-var monthDiff = function monthDiff(a, b) {
-  // function from moment.js in order to keep the same result
-  var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month());
-  var anchor = a.clone().add(wholeMonthDiff, 'months');
-  var c = b - anchor < 0;
-  var anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months');
-  return Number(-(wholeMonthDiff + (b - anchor) / (c ? anchor - anchor2 : anchor2 - anchor)) || 0);
-};
-
-var absFloor = function absFloor(n) {
-  return n < 0 ? Math.ceil(n) || 0 : Math.floor(n);
-};
-
-var utils_prettyUnit = function prettyUnit(u) {
-  var special = {
-    M: M,
-    y: Y,
-    w: W,
-    d: D,
-    h: H,
-    m: MIN,
-    s: S,
-    ms: MS
-  };
-  return special[u] || String(u || '').toLowerCase().replace(/s$/, '');
-};
-
-var isUndefined = function isUndefined(s) {
-  return s === undefined;
-};
-
-/* harmony default export */ var utils = ({
-  padStart: padStart,
-  padZoneStr: padZoneStr,
-  monthDiff: monthDiff,
-  absFloor: absFloor,
-  prettyUnit: utils_prettyUnit,
-  isUndefined: isUndefined
-});
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/index.js
-
-
-var L = 'en'; // global locale
-
-var Ls = {}; // global loaded locale
-
-Ls[L] = en;
-
-var isDayjs = function isDayjs(d) {
-  return d instanceof esm_Dayjs;
-}; // eslint-disable-line no-use-before-define
-
-
-var parseLocale = function parseLocale(preset, object, isLocal) {
-  var l;
-  if (!preset) return null;
-
-  if (typeof preset === 'string') {
-    if (Ls[preset]) {
-      l = preset;
-    }
-
-    if (object) {
-      Ls[preset] = object;
-      l = preset;
-    }
-  } else {
-    var name = preset.name;
-    Ls[name] = preset;
-    l = name;
-  }
-
-  if (!isLocal) L = l;
-  return l;
-};
-
-var dayjs = function dayjs(date, c) {
-  if (isDayjs(date)) {
-    return date.clone();
-  } // eslint-disable-next-line no-nested-ternary
-
-
-  var cfg = c ? typeof c === 'string' ? {
-    format: c
-  } : c : {};
-  cfg.date = date;
-  return new esm_Dayjs(cfg); // eslint-disable-line no-use-before-define
-};
-
-var wrapper = function wrapper(date, instance) {
-  return dayjs(date, {
-    locale: instance.$L
-  });
-};
-
-var Utils = utils; // for plugin use
-
-Utils.parseLocale = parseLocale;
-Utils.isDayjs = isDayjs;
-Utils.wrapper = wrapper;
-
-var esm_parseDate = function parseDate(date) {
-  var reg;
-  if (date === null) return new Date(NaN); // Treat null as an invalid date
-
-  if (Utils.isUndefined(date)) return new Date();
-  if (date instanceof Date) return date; // eslint-disable-next-line no-cond-assign
-
-  if (typeof date === 'string' && /.*[^Z]$/i.test(date) // looking for a better way
-  && (reg = date.match(REGEX_PARSE))) {
-    // 2018-08-08 or 20180808
-    return new Date(reg[1], reg[2] - 1, reg[3] || 1, reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0);
-  }
-
-  return new Date(date); // timestamp
-};
-
-var esm_Dayjs =
-/*#__PURE__*/
-function () {
-  function Dayjs(cfg) {
-    this.parse(cfg); // for plugin
-  }
-
-  var _proto = Dayjs.prototype;
-
-  _proto.parse = function parse(cfg) {
-    this.$d = esm_parseDate(cfg.date);
-    this.init(cfg);
-  };
-
-  _proto.init = function init(cfg) {
-    var $d = this.$d;
-    this.$y = $d.getFullYear();
-    this.$M = $d.getMonth();
-    this.$D = $d.getDate();
-    this.$W = $d.getDay();
-    this.$H = $d.getHours();
-    this.$m = $d.getMinutes();
-    this.$s = $d.getSeconds();
-    this.$ms = $d.getMilliseconds();
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L;
-  }; // eslint-disable-next-line class-methods-use-this
-
-
-  _proto.$utils = function $utils() {
-    return Utils;
-  };
-
-  _proto.isValid = function isValid() {
-    return !(this.$d.toString() === INVALID_DATE_STRING);
-  };
-
-  _proto.isSame = function isSame(that, units) {
-    var other = dayjs(that);
-    return this.startOf(units) <= other && other <= this.endOf(units);
-  };
-
-  _proto.isAfter = function isAfter(that, units) {
-    return dayjs(that) < this.startOf(units);
-  };
-
-  _proto.isBefore = function isBefore(that, units) {
-    return this.endOf(units) < dayjs(that);
-  };
-
-  _proto.year = function year() {
-    return this.$y;
-  };
-
-  _proto.month = function month() {
-    return this.$M;
-  };
-
-  _proto.day = function day() {
-    return this.$W;
-  };
-
-  _proto.date = function date() {
-    return this.$D;
-  };
-
-  _proto.hour = function hour() {
-    return this.$H;
-  };
-
-  _proto.minute = function minute() {
-    return this.$m;
-  };
-
-  _proto.second = function second() {
-    return this.$s;
-  };
-
-  _proto.millisecond = function millisecond() {
-    return this.$ms;
-  };
-
-  _proto.unix = function unix() {
-    return Math.floor(this.valueOf() / 1000);
-  };
-
-  _proto.valueOf = function valueOf() {
-    // timezone(hour) * 60 * 60 * 1000 => ms
-    return this.$d.getTime();
-  };
-
-  _proto.startOf = function startOf(units, _startOf) {
-    var _this = this;
-
-    // startOf -> endOf
-    var isStartOf = !Utils.isUndefined(_startOf) ? _startOf : true;
-    var unit = Utils.prettyUnit(units);
-
-    var instanceFactory = function instanceFactory(d, m) {
-      var ins = wrapper(new Date(_this.$y, m, d), _this);
-      return isStartOf ? ins : ins.endOf(D);
-    };
-
-    var instanceFactorySet = function instanceFactorySet(method, slice) {
-      var argumentStart = [0, 0, 0, 0];
-      var argumentEnd = [23, 59, 59, 999];
-      return wrapper(_this.toDate()[method].apply( // eslint-disable-line prefer-spread
-      _this.toDate(), (isStartOf ? argumentStart : argumentEnd).slice(slice)), _this);
-    };
-
-    switch (unit) {
-      case Y:
-        return isStartOf ? instanceFactory(1, 0) : instanceFactory(31, 11);
-
-      case M:
-        return isStartOf ? instanceFactory(1, this.$M) : instanceFactory(0, this.$M + 1);
-
-      case W:
-        {
-          var weekStart = this.$locale().weekStart || 0;
-          return isStartOf ? instanceFactory(this.$D - (this.$W - weekStart), this.$M) : instanceFactory(this.$D + (6 - (this.$W - weekStart)), this.$M);
-        }
-
-      case D:
-      case DATE:
-        return instanceFactorySet('setHours', 0);
-
-      case H:
-        return instanceFactorySet('setMinutes', 1);
-
-      case MIN:
-        return instanceFactorySet('setSeconds', 2);
-
-      case S:
-        return instanceFactorySet('setMilliseconds', 3);
-
-      default:
-        return this.clone();
-    }
-  };
-
-  _proto.endOf = function endOf(arg) {
-    return this.startOf(arg, false);
-  };
-
-  _proto.$set = function $set(units, int) {
-    var _C$D$C$DATE$C$M$C$Y$C;
-
-    // private set
-    var unit = Utils.prettyUnit(units);
-    var name = (_C$D$C$DATE$C$M$C$Y$C = {}, _C$D$C$DATE$C$M$C$Y$C[D] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[DATE] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[M] = 'setMonth', _C$D$C$DATE$C$M$C$Y$C[Y] = 'setFullYear', _C$D$C$DATE$C$M$C$Y$C[H] = 'setHours', _C$D$C$DATE$C$M$C$Y$C[MIN] = 'setMinutes', _C$D$C$DATE$C$M$C$Y$C[S] = 'setSeconds', _C$D$C$DATE$C$M$C$Y$C[MS] = 'setMilliseconds', _C$D$C$DATE$C$M$C$Y$C)[unit];
-    var arg = unit === D ? this.$D + (int - this.$W) : int;
-    if (this.$d[name]) this.$d[name](arg);
-    this.init();
-    return this;
-  };
-
-  _proto.set = function set(string, int) {
-    return this.clone().$set(string, int);
-  };
-
-  _proto.add = function add(number, units) {
-    var _this2 = this,
-        _C$MIN$C$H$C$S$unit;
-
-    number = Number(number); // eslint-disable-line no-param-reassign
-
-    var unit = Utils.prettyUnit(units);
-
-    var instanceFactory = function instanceFactory(u, n) {
-      var date = _this2.set(DATE, 1).set(u, n + number);
-
-      return date.set(DATE, Math.min(_this2.$D, date.daysInMonth()));
-    };
-
-    var instanceFactorySet = function instanceFactorySet(n) {
-      var date = new Date(_this2.$d);
-      date.setDate(date.getDate() + n * number);
-      return wrapper(date, _this2);
-    };
-
-    if (unit === M) {
-      return instanceFactory(M, this.$M);
-    }
-
-    if (unit === Y) {
-      return instanceFactory(Y, this.$y);
-    }
-
-    if (unit === D) {
-      return instanceFactorySet(1);
-    }
-
-    if (unit === W) {
-      return instanceFactorySet(7);
-    }
-
-    var step = (_C$MIN$C$H$C$S$unit = {}, _C$MIN$C$H$C$S$unit[MIN] = MILLISECONDS_A_MINUTE, _C$MIN$C$H$C$S$unit[H] = MILLISECONDS_A_HOUR, _C$MIN$C$H$C$S$unit[S] = MILLISECONDS_A_SECOND, _C$MIN$C$H$C$S$unit)[unit] || 1; // ms
-
-    var nextTimeStamp = this.valueOf() + number * step;
-    return wrapper(nextTimeStamp, this);
-  };
-
-  _proto.subtract = function subtract(number, string) {
-    return this.add(number * -1, string);
-  };
-
-  _proto.format = function format(formatStr) {
-    var _this3 = this;
-
-    if (!this.isValid()) return INVALID_DATE_STRING;
-    var str = formatStr || FORMAT_DEFAULT;
-    var zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset());
-    var locale = this.$locale();
-    var weekdays = locale.weekdays,
-        months = locale.months;
-
-    var getShort = function getShort(arr, index, full, length) {
-      return arr && arr[index] || full[index].substr(0, length);
-    };
-
-    var get$H = function get$H(match) {
-      if (_this3.$H === 0) return 12;
-      return Utils.padStart(_this3.$H < 13 ? _this3.$H : _this3.$H - 12, match === 'hh' ? 2 : 1, '0');
-    };
-
-    var matches = {
-      YY: String(this.$y).slice(-2),
-      YYYY: String(this.$y),
-      M: String(this.$M + 1),
-      MM: Utils.padStart(this.$M + 1, 2, '0'),
-      MMM: getShort(locale.monthsShort, this.$M, months, 3),
-      MMMM: months[this.$M],
-      D: String(this.$D),
-      DD: Utils.padStart(this.$D, 2, '0'),
-      d: String(this.$W),
-      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
-      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
-      dddd: weekdays[this.$W],
-      H: String(this.$H),
-      HH: Utils.padStart(this.$H, 2, '0'),
-      h: get$H('h'),
-      hh: get$H('hh'),
-      a: this.$H < 12 ? 'am' : 'pm',
-      A: this.$H < 12 ? 'AM' : 'PM',
-      m: String(this.$m),
-      mm: Utils.padStart(this.$m, 2, '0'),
-      s: String(this.$s),
-      ss: Utils.padStart(this.$s, 2, '0'),
-      SSS: Utils.padStart(this.$ms, 3, '0'),
-      Z: zoneStr
-    };
-    return str.replace(REGEX_FORMAT, function (match) {
-      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '');
-      return matches[match] || zoneStr.replace(':', ''); // 'ZZ'
-    });
-  };
-
-  _proto.utcOffset = function utcOffset() {
-    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
-    // https://github.com/moment/moment/pull/1871
-    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15;
-  };
-
-  _proto.diff = function diff(input, units, float) {
-    var _C$Y$C$M$C$Q$C$W$C$D$;
-
-    var unit = Utils.prettyUnit(units);
-    var that = dayjs(input);
-    var zoneDelta = (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE;
-    var diff = this - that;
-    var result = Utils.monthDiff(this, that);
-    result = (_C$Y$C$M$C$Q$C$W$C$D$ = {}, _C$Y$C$M$C$Q$C$W$C$D$[Y] = result / 12, _C$Y$C$M$C$Q$C$W$C$D$[M] = result, _C$Y$C$M$C$Q$C$W$C$D$[Q] = result / 3, _C$Y$C$M$C$Q$C$W$C$D$[W] = (diff - zoneDelta) / MILLISECONDS_A_WEEK, _C$Y$C$M$C$Q$C$W$C$D$[D] = (diff - zoneDelta) / MILLISECONDS_A_DAY, _C$Y$C$M$C$Q$C$W$C$D$[H] = diff / MILLISECONDS_A_HOUR, _C$Y$C$M$C$Q$C$W$C$D$[MIN] = diff / MILLISECONDS_A_MINUTE, _C$Y$C$M$C$Q$C$W$C$D$[S] = diff / MILLISECONDS_A_SECOND, _C$Y$C$M$C$Q$C$W$C$D$)[unit] || diff; // milliseconds
-
-    return float ? result : Utils.absFloor(result);
-  };
-
-  _proto.daysInMonth = function daysInMonth() {
-    return this.endOf(M).$D;
-  };
-
-  _proto.$locale = function $locale() {
-    // get locale object
-    return Ls[this.$L];
-  };
-
-  _proto.locale = function locale(preset, object) {
-    var that = this.clone();
-    that.$L = parseLocale(preset, object, true);
-    return that;
-  };
-
-  _proto.clone = function clone() {
-    return wrapper(this.toDate(), this);
-  };
-
-  _proto.toDate = function toDate() {
-    return new Date(this.$d);
-  };
-
-  _proto.toArray = function toArray() {
-    return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];
-  };
-
-  _proto.toJSON = function toJSON() {
-    return this.toISOString();
-  };
-
-  _proto.toISOString = function toISOString() {
-    // ie 8 return
-    // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
-    // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
-    return this.$d.toISOString();
-  };
-
-  _proto.toObject = function toObject() {
-    return {
-      years: this.$y,
-      months: this.$M,
-      date: this.$D,
-      hours: this.$H,
-      minutes: this.$m,
-      seconds: this.$s,
-      milliseconds: this.$ms
-    };
-  };
-
-  _proto.toString = function toString() {
-    return this.$d.toUTCString();
-  };
-
-  return Dayjs;
-}();
-
-dayjs.prototype = esm_Dayjs.prototype;
-
-dayjs.extend = function (plugin, option) {
-  plugin(option, esm_Dayjs, dayjs);
-  return dayjs;
-};
-
-dayjs.locale = parseLocale;
-dayjs.isDayjs = isDayjs;
-
-dayjs.unix = function (timestamp) {
-  return dayjs(timestamp * 1e3);
-};
-
-dayjs.en = Ls[L];
-/* harmony default export */ var esm = (dayjs);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
 var MainViewvue_type_template_id_0bc4212e_render = function() {
   var _vm = this
@@ -2428,7 +3390,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @returns {string} key ideintifier for loop
      */
     getKey (day) {
-      return esm(day.time).format('YYYY-MM-DD');
+      return dayjs_min_default()(day.time).format('YYYY-MM-DD');
     }
   },
   computed: {
@@ -2439,7 +3401,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      */
     workingDays () {
       return this.$store.state.GanttElastic.options.times.steps.filter(step => {
-        return this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(esm(step.time).day()) === -1;
+        return this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(dayjs_min_default()(step.time).day()) === -1;
       });
     },
 
@@ -2744,25 +3706,26 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
   components: {
     CalendarRow: CalendarRow
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {};
   },
 
   /**
    * Created
    */
-  created () {
-    this.root.$on("scope-change", this.regenerate);
-    this.root.$on("times-timeZoom-change", this.regenerate);
-    this.root.$on("tasks-changed", this.regenerate);
-    this.root.$on("options-changed", this.regenerate);
+  created() {
+    this.root.$on('scope-change', this.regenerate);
+    this.root.$on('times-timeZoom-change', this.regenerate);
+    this.root.$on('tasks-updated', this.regenerate);
+    this.root.$on('options-updated', this.regenerate);
+    this.root.$on('calendar-recalculate', this.regenerate);
   },
 
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.regenerate();
   },
 
@@ -2772,14 +3735,18 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyHoursFit (dayIndex) {
+    howManyHoursFit(dayIndex) {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
       let fullCellWidth = this.$store.state.GanttElastic.options.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if ((this.$store.state.GanttElastic.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+          if (
+            (this.$store.state.GanttElastic.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <=
+              fullCellWidth &&
+            hours > 1
+          ) {
             return {
               count: hours,
               type: formatName
@@ -2789,7 +3756,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ""
+        type: ''
       };
     },
 
@@ -2798,7 +3765,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyDaysFit () {
+    howManyDaysFit() {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.$store.state.GanttElastic.options.width;
@@ -2806,7 +3773,10 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       for (let days = this.$store.state.GanttElastic.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.$store.state.GanttElastic.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
+            (this.$store.state.GanttElastic.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <=
+              fullWidth &&
+            days > 1
+          ) {
             return {
               count: days,
               type: formatName
@@ -2816,7 +3786,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ""
+        type: ''
       };
     },
 
@@ -2825,17 +3795,17 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyMonthsFit () {
+    howManyMonthsFit() {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
       let fullWidth = this.$store.state.GanttElastic.options.width;
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
-      let currentMonth = esm(this.$store.state.GanttElastic.options.times.firstTime);
+      let currentMonth = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
       let previousMonth = currentMonth.clone();
       const lastTime = this.$store.state.GanttElastic.options.times.lastTime;
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
-        currentMonth = currentMonth.add(1, "day");
+        currentMonth = currentMonth.add(1, 'day');
         if (previousMonth.month() !== currentMonth.month()) {
           monthsCount++;
         }
@@ -2843,7 +3813,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
-          if ((this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+          if (
+            (this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <=
+              fullWidth &&
+            months > 1
+          ) {
             return {
               count: months,
               type: formatName
@@ -2862,8 +3836,13 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {string}
      */
-    hourTextStyle () {
-      return ("font-family:" + this.$store.state.GanttElastic.options.calendar.hour.fontFamily + ";font-size:" + this.$store.state.GanttElastic.options.calendar.hour.fontSize);
+    hourTextStyle() {
+      return (
+        'font-family:' +
+        this.$store.state.GanttElastic.options.calendar.hour.fontFamily +
+        ';font-size:' +
+        this.$store.state.GanttElastic.options.calendar.hour.fontSize
+      );
     },
 
     /**
@@ -2871,8 +3850,13 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {string}
      */
-    dayTextStyle () {
-      return ("font-family:" + this.$store.state.GanttElastic.options.calendar.day.fontFamily + ";font-size:" + this.$store.state.GanttElastic.options.calendar.day.fontSize);
+    dayTextStyle() {
+      return (
+        'font-family:' +
+        this.$store.state.GanttElastic.options.calendar.day.fontFamily +
+        ';font-size:' +
+        this.$store.state.GanttElastic.options.calendar.day.fontSize
+      );
     },
 
     /**
@@ -2880,12 +3864,16 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    generateHours () {
+    generateHours() {
       let hours = [];
       if (!this.$store.state.GanttElastic.options.calendar.hour.display) {
         return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: [] } });
       }
-      for (let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; hourIndex < len; hourIndex++) {
+      for (
+        let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
+        hourIndex < len;
+        hourIndex++
+      ) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
           return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
@@ -2893,7 +3881,10 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = esm(this.$store.state.GanttElastic.options.times.steps[hourIndex].time).add(i * hourStep, "hour");
+          const date = dayjs_min_default()(this.$store.state.GanttElastic.options.times.steps[hourIndex].time).add(
+            i * hourStep,
+            'hour'
+          );
           let textWidth = 0;
           if (typeof this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex] !== 'undefined') {
             textWidth = this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex][hoursCount.type];
@@ -2901,9 +3892,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           let x = this.$store.state.GanttElastic.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
-            key: this.$store.state.GanttElastic.options.times.steps[hourIndex].time + "h" + i,
+            key: this.$store.state.GanttElastic.options.times.steps[hourIndex].time + 'h' + i,
             x,
-            y: this.$store.state.GanttElastic.options.calendar.day.height + this.$store.state.GanttElastic.options.calendar.month.height,
+            y:
+              this.$store.state.GanttElastic.options.calendar.day.height +
+              this.$store.state.GanttElastic.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
             height: this.$store.state.GanttElastic.options.calendar.hour.height,
@@ -2920,7 +3913,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    generateDays () {
+    generateDays() {
       let days = [];
       if (!this.$store.state.GanttElastic.options.calendar.day.display) {
         return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: [] } });
@@ -2930,15 +3923,19 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
       }
       const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      for (
+        let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
+        dayIndex < len;
+        dayIndex += dayStep
+      ) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep] !== "undefined") {
+          if (typeof this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep] !== 'undefined') {
             dayWidthPx += this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = esm(this.$store.state.GanttElastic.options.times.steps[dayIndex].time);
+        const date = dayjs_min_default()(this.$store.state.GanttElastic.options.times.steps[dayIndex].time);
         let textWidth = 0;
         if (typeof this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex][daysCount.type];
@@ -2946,7 +3943,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         let x = this.$store.state.GanttElastic.options.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.$store.state.GanttElastic.options.times.steps[dayIndex].time + "d",
+          key: this.$store.state.GanttElastic.options.times.steps[dayIndex].time + 'd',
           x,
           y: this.$store.state.GanttElastic.options.calendar.month.height,
           width: dayWidthPx,
@@ -2964,20 +3961,22 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    generateMonths () {
+    generateMonths() {
       let months = [];
       if (!this.$store.state.GanttElastic.options.calendar.month.display) {
         return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: [] } });
       }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
-      let currentDate = esm(this.$store.state.GanttElastic.options.times.firstTime);
+      let currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
-        let finalDate = esm(currentDate).add(1, "month").startOf("month");
+        let finalDate = dayjs_min_default()(currentDate)
+          .add(1, 'month')
+          .startOf('month');
         if (finalDate.valueOf() > this.$store.state.GanttElastic.options.times.lastTime) {
-          finalDate = esm(this.$store.state.GanttElastic.options.times.lastTime);
+          finalDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime);
         }
         // we must find first and last step to get the offsets / widths
         for (let step = 0, len = this.$store.state.GanttElastic.options.times.steps.length; step < len; step++) {
@@ -2989,7 +3988,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
             }
           }
         }
-        let label = "";
+        let label = '';
         let choosenFormatName;
         for (let formatName of formatNames) {
           if (this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
@@ -3004,7 +4003,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         let x = monthOffset;
         months.push({
           index: monthIndex,
-          key: monthIndex + "m",
+          key: monthIndex + 'm',
           x,
           y: 0,
           width: monthWidth,
@@ -3013,9 +4012,9 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           height: this.$store.state.GanttElastic.options.calendar.month.height,
           label
         });
-        currentDate = currentDate.add(1, "month").startOf("month");
+        currentDate = currentDate.add(1, 'month').startOf('month');
         if (currentDate.valueOf() > this.$store.state.GanttElastic.options.times.lastDate) {
-          currentDate = esm(this.$store.state.GanttElastic.options.times.lastDate);
+          currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastDate);
         }
       }
       return this.$store.commit(this.root.updateOptionsMut, { calendar: { months } });
@@ -3024,23 +4023,21 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     /**
      * Regenerate dates
      */
-    regenerate () {
+    regenerate() {
       this.generateHours();
       this.generateDays();
       this.generateMonths();
       this.root.calculateCalendarDimensions();
     }
-
   },
 
   computed: {
-
     /**
      * Get width
      *
      * @returns {number}
      */
-    getWidth () {
+    getWidth() {
       let width = this.$store.state.GanttElastic.options.width;
       return width;
     },
@@ -3050,8 +4047,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    monthsStyle () {
-      return this.root.mergeDeep({}, this.$store.state.GanttElastic.options.calendar.styles.row, this.$store.state.GanttElastic.options.calendar.month.style);
+    monthsStyle() {
+      return this.root.mergeDeep(
+        {},
+        this.$store.state.GanttElastic.options.calendar.styles.row,
+        this.$store.state.GanttElastic.options.calendar.month.style
+      );
     },
 
     /**
@@ -3059,8 +4060,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    daysStyle () {
-      return this.root.mergeDeep({}, this.$store.state.GanttElastic.options.calendar.styles.row, this.$store.state.GanttElastic.options.calendar.day.style);
+    daysStyle() {
+      return this.root.mergeDeep(
+        {},
+        this.$store.state.GanttElastic.options.calendar.styles.row,
+        this.$store.state.GanttElastic.options.calendar.day.style
+      );
     },
 
     /**
@@ -3068,8 +4073,12 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    hoursStyle () {
-      return this.root.mergeDeep({}, this.$store.state.GanttElastic.options.calendar.styles.row, this.$store.state.GanttElastic.options.calendar.hour.style);
+    hoursStyle() {
+      return this.root.mergeDeep(
+        {},
+        this.$store.state.GanttElastic.options.calendar.styles.row,
+        this.$store.state.GanttElastic.options.calendar.hour.style
+      );
     },
 
     /**
@@ -3077,7 +4086,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    getDays () {
+    getDays() {
       return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
     },
 
@@ -3086,7 +4095,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    getHours () {
+    getHours() {
       return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
     },
 
@@ -3095,9 +4104,9 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    getMonths () {
+    getMonths() {
       return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
-    },
+    }
   }
 });
 
@@ -4937,6 +5946,16 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4963,13 +5982,13 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         currentX: 0,
         currentY: 0
       }
-    }
+    };
   },
   /**
    * Mounted
    */
   mounted() {
-    this.viewBoxWidth = this.$el.clientWidth
+    this.viewBoxWidth = this.$el.clientWidth;
     this.$store.commit(this.root.updateOptionsMut, {
       refs: {
         mainView: this.$refs.mainView,
@@ -4979,11 +5998,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         chartScrollContainerHorizontal: this.$refs.chartScrollContainerHorizontal,
         chartScrollContainerVertical: this.$refs.chartScrollContainerVertical
       }
-    })
-    document.addEventListener('mouseup', this.chartMouseUp.bind(this))
-    document.addEventListener('mousemove', this.chartMouseMove.bind(this))
-    document.addEventListener('touchmove', this.chartMouseMove.bind(this))
-    document.addEventListener('touchend', this.chartMouseUp.bind(this))
+    });
+    document.addEventListener('mouseup', this.chartMouseUp.bind(this));
+    document.addEventListener('mousemove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchmove', this.chartMouseMove.bind(this));
+    document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
     /**
@@ -4992,11 +6011,11 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * @returns {number}
      */
     getWidth() {
-      let width = this.$store.state.GanttElastic.options.clientWidth - this.$store.state.GanttElastic.options.scrollBarHeight
+      let width = this.$store.state.GanttElastic.options.clientWidth;
       if (width < 0) {
-        return 0
+        return 0;
       }
-      return width
+      return width;
     },
 
     /**
@@ -5006,9 +6025,9 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      */
     getMarginLeft() {
       if (!this.$store.state.GanttElastic.options.taskList.display) {
-        return '0px'
+        return '0px';
       }
-      return this.$store.state.GanttElastic.options.taskList.finalWidth + 'px'
+      return this.$store.state.GanttElastic.options.taskList.finalWidth + 'px';
     },
 
     /**
@@ -5019,9 +6038,13 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
     verticalStyle() {
       return {
         width: this.$store.state.GanttElastic.options.scrollBarHeight + 'px',
+        'margin-left': -this.$store.state.GanttElastic.options.scrollBarHeight + 'px',
         height: this.$store.state.GanttElastic.options.rowsHeight + 'px',
-        'margin-top': this.$store.state.GanttElastic.options.calendar.height + this.$store.state.GanttElastic.options.calendar.gap + 'px'
-      }
+        'margin-top':
+          this.$store.state.GanttElastic.options.calendar.height +
+          this.$store.state.GanttElastic.options.calendar.gap +
+          'px'
+      };
     },
 
     /**
@@ -5031,11 +6054,10 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      */
     getViewBox() {
       if (this.$store.state.GanttElastic.options.clientWidth) {
-        return `0 0 ${this.$store.state.GanttElastic.options.clientWidth - this.$store.state.GanttElastic.options.scrollBarHeight} ${
-          this.$store.state.GanttElastic.options.height
-        }`
+        return `0 0 ${this.$store.state.GanttElastic.options.clientWidth -
+          this.$store.state.GanttElastic.options.scrollBarHeight} ${this.$store.state.GanttElastic.options.height}`;
       }
-      return `0 0 0 ${this.$store.state.GanttElastic.options.height}`
+      return `0 0 0 ${this.$store.state.GanttElastic.options.height}`;
     }
   },
   methods: {
@@ -5043,35 +6065,35 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * Emit event when mouse is moving inside main view
      */
     mouseMove(event) {
-      this.root.$emit('main-view-mousemove', event)
+      this.root.$emit('main-view-mousemove', event);
     },
 
     /**
      * Emit mouseup event inside main view
      */
     mouseUp(event) {
-      this.root.$emit('main-view-mouseup', event)
+      this.root.$emit('main-view-mouseup', event);
     },
 
     /**
      * Horizontal scroll event handler
      */
     onHorizontalScroll(ev) {
-      this.root.$emit('chart-scroll-horizontal', ev)
+      this.root.$emit('chart-scroll-horizontal', ev);
     },
 
     /**
      * Vertical scroll event handler
      */
     onVerticalScroll(ev) {
-      this.root.$emit('chart-scroll-vertical', ev)
+      this.root.$emit('chart-scroll-vertical', ev);
     },
 
     /**
      * Mouse wheel event handler
      */
     chartWheel(ev) {
-      this.root.$emit('chart-wheel', ev)
+      this.root.$emit('chart-wheel', ev);
     },
 
     /**
@@ -5080,14 +6102,14 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      */
     chartMouseDown(ev) {
       if (typeof ev.touches !== 'undefined') {
-        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX
-        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY
-        this.mousePos.movementX = 0
-        this.mousePos.movementY = 0
-        this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft
-        this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop
+        this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
+        this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
+        this.mousePos.movementX = 0;
+        this.mousePos.movementY = 0;
+        this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft;
+        this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop;
       }
-      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: true } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: true } });
     },
 
     /**
@@ -5095,7 +6117,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      * Deactivates drag scrolling mode
      */
     chartMouseUp(ev) {
-      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: false } })
+      this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: false } });
     },
 
     /**
@@ -5104,38 +6126,38 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      */
     chartMouseMove(ev) {
       if (this.$store.state.GanttElastic.options.scroll.scrolling) {
-        ev.preventDefault()
-        ev.stopImmediatePropagation()
-        ev.stopPropagation()
-        const touch = typeof ev.touches !== 'undefined'
-        let movementX, movementY
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        ev.stopPropagation();
+        const touch = typeof ev.touches !== 'undefined';
+        let movementX, movementY;
         if (touch) {
-          const screenX = ev.touches[0].screenX
-          const screenY = ev.touches[0].screenY
-          movementX = this.mousePos.x - screenX
-          movementY = this.mousePos.y - screenY
-          this.mousePos.lastX = screenX
-          this.mousePos.lastY = screenY
+          const screenX = ev.touches[0].screenX;
+          const screenY = ev.touches[0].screenY;
+          movementX = this.mousePos.x - screenX;
+          movementY = this.mousePos.y - screenY;
+          this.mousePos.lastX = screenX;
+          this.mousePos.lastY = screenY;
         } else {
-          movementX = ev.movementX
-          movementY = ev.movementY
+          movementX = ev.movementX;
+          movementY = ev.movementY;
         }
-        const horizontal = this.$refs.chartScrollContainerHorizontal
-        const vertical = this.$refs.chartScrollContainerVertical
+        const horizontal = this.$refs.chartScrollContainerHorizontal;
+        const vertical = this.$refs.chartScrollContainerVertical;
         let x = 0,
-          y = 0
+          y = 0;
         if (touch) {
-          x = this.mousePos.currentX + movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier
+          x = this.mousePos.currentX + movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier;
         } else {
-          x = horizontal.scrollLeft - movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier
+          x = horizontal.scrollLeft - movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier;
         }
-        horizontal.scrollLeft = x
+        horizontal.scrollLeft = x;
         if (touch) {
-          y = this.mousePos.currentY + movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier
+          y = this.mousePos.currentY + movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier;
         } else {
-          y = vertical.scrollTop - movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier
+          y = vertical.scrollTop - movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier;
         }
-        vertical.scrollTop = y
+        vertical.scrollTop = y;
       }
     }
   },
@@ -5144,10 +6166,10 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
    * Before destroy event - clean up
    */
   beforeDestroy() {
-    document.removeEventListener('mouseup', this.chartMouseUp)
-    document.removeEventListener('mousemove', this.chartMouseMove)
-    document.removeEventListener('touchmove', this.chartMouseMove)
-    document.removeEventListener('touchend', this.chartMouseUp)
+    document.removeEventListener('mouseup', this.chartMouseUp);
+    document.removeEventListener('mousemove', this.chartMouseMove);
+    document.removeEventListener('touchmove', this.chartMouseMove);
+    document.removeEventListener('touchend', this.chartMouseUp);
   }
 });
 
@@ -5183,8 +6205,8 @@ MainView_component.options.__file = "src/components/MainView.vue"
  * @author Rafal Pospiech <neuronet.io@gmail.com>
  * @package GanttElastic
  */
-const fontSize = '12px'
-const fontFamily = 'Arial, sans-serif'
+const fontSize = '12px';
+const fontFamily = 'Arial, sans-serif';
 /* harmony default export */ var src_style = ({
   '*': {
     'box-sizing': 'border-box'
@@ -5266,7 +6288,8 @@ const fontFamily = 'Arial, sans-serif'
   'calendar-row--hour': {},
   'calendar-row-rect': {
     background: 'transparent',
-    'border-width': '0.5px', // Calendar
+    'border-width': '0px', // Calendar
+    'border-right-width': '1px',
     'border-color': '#dadada',
     'border-style': 'solid',
     'flex-shrink': '0'
@@ -5277,11 +6300,15 @@ const fontFamily = 'Arial, sans-serif'
     color: '#606060',
     'text-align': 'center'
   },
-  'calendar-row-rect--month': {},
+  'calendar-row-rect--month': {
+    'border-top': '1px solid #dadada'
+  },
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {},
+  'calendar-row-rect--hour': {
+    'border-bottom': '1px solid #dadada'
+  },
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
@@ -5508,6 +6535,53 @@ const fontFamily = 'Arial, sans-serif'
   }
 });
 
+// CONCATENATED MODULE: ./src/GanttElastic.vuex.js
+
+const GanttElasticVuexModule = {
+  state: {
+    tasks: [],
+    options: {
+      scrollBarHeight: 0,
+      allVisibleTasksHeight: 0,
+      refs: {},
+      tasksById: {},
+      times: {}
+    }
+  },
+  mutations: {
+    /**
+     * Update tasks
+     */
+    ['GanttElastic/updateTasks'](state, tasks) {
+      state.tasks = tasks.map(task => mergeDeepReactive({}, task));
+    },
+
+    /**
+     * Update task
+     */
+    ['GanttElastic/updateTask'](state, task) {
+      for (let index = 0, len = state.tasks.length; index < len; index++) {
+        const current = state.tasks[index];
+        if (current.id === task.id) {
+          mergeDeepReactive(state.tasks[index], task);
+        }
+      }
+    },
+
+    /**
+     * Update options
+     */
+    ['GanttElastic/updateOptions'](state, payload) {
+      state.options = mergeDeepReactive(state.options, payload);
+    }
+  }
+};
+window.GanttElasticVuexModule = GanttElasticVuexModule;
+/* harmony default export */ var GanttElastic_vuex = (GanttElasticVuexModule);
+
+// EXTERNAL MODULE: ./node_modules/assert/assert.js
+var assert = __webpack_require__(3);
+
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js&
 //
 //
@@ -5525,6 +6599,8 @@ const fontFamily = 'Arial, sans-serif'
 //
 //
 //
+
+
 
 
 
@@ -5669,17 +6745,17 @@ function getOptions(userOptions) {
         maxWidths: {},
         format: {
           long(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('HH:mm');
           },
           medium(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('HH:mm');
           },
           short(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('HH');
           }
@@ -5692,17 +6768,17 @@ function getOptions(userOptions) {
         maxWidths: {},
         format: {
           long(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('DD dddd');
           },
           medium(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('DD ddd');
           },
           short(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('DD');
           }
@@ -5715,17 +6791,17 @@ function getOptions(userOptions) {
         maxWidths: {},
         format: {
           short(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('MM');
           },
           medium(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format("MMM 'YY");
           },
           long(date) {
-            return esm(date)
+            return dayjs_min_default()(date)
               .locale(localeCode)
               .format('MMMM YYYY');
           }
@@ -5847,6 +6923,78 @@ function mergeDeepReactive(target, ...sources) {
     }
   }
   return mergeDeepReactive(target, ...sources);
+}
+
+/**
+ * Check if objects or arrays are equal by comparing nested values
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {boolean}
+ */
+function equalDeep(left, right) {
+  if (typeof right !== typeof left) {
+    return false;
+  }
+  if (Array.isArray(left)) {
+    if (left.length !== right.length) {
+      return false;
+    }
+    for (let [index, value] of left.entries()) {
+      if (typeof value !== typeof right[index]) {
+        return false;
+      }
+      if (isObject(value) || Array.isArray(value)) {
+        if (!equalDeep(value, right[index])) {
+          return false;
+        }
+      } else if (value !== right[index]) {
+        return false;
+      }
+    }
+  } else {
+    for (let key in left) {
+      if (typeof left[key] !== typeof right[key]) {
+        return false;
+      }
+      if (isObject(left[key]) || Array.isArray(left[key])) {
+        if (!equalDeep(left[key], right[key])) {
+          return false;
+        }
+      } else if (left[key] !== right[key]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+/**
+ * Synchronize properties that exist in left object with values from right
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {object|array}
+ */
+function synchronizeDeep(left, right) {
+  for (let key in left) {
+    if (isObject(right[key])) {
+      left[key] = synchronizeDeep(left[key], right[key]);
+    } else if (Array.isArray(right[key])) {
+      left[key] = right[key].map((item, index) => {
+        if (isObject(item)) {
+          // we predict that array want change inside gantt elastic itself
+          item = synchronizeDeep(mergeDeep({}, left[key][index]), item);
+        }
+        return item;
+      });
+    } else {
+      left[key] = right[key];
+    }
+  }
+  return left;
 }
 
 const styleCache = {};
@@ -5980,37 +7128,20 @@ const GanttElastic = {
      * Initialize component
      */
     initialize(itsUpdate = '', data = null) {
-      let tasks = Vue.observable(
-        this.tasks.map(task => {
-          return this.mergeDeepReactive({}, task);
-        })
-      );
-      let options = this.mergeDeepReactive({}, getOptions(this.options), this.options);
-      options.tasksById = {};
-      tasks = tasks.map(task => {
-        task.startTime = esm(task.start).valueOf();
-        task.durationMs = task.duration * 1000;
-        task.endTime = task.startTime + task.durationMs;
-        return task;
-      });
-      tasks = this.refreshTasks(tasks);
-      esm.locale(options.locale, null, true);
-      options.taskList.columns = options.taskList.columns.map((column, index) => {
-        const columnOptions = {
-          thresholdPercent: 100,
-          widthFromPercentage: 0,
-          finalWidth: 0
-        };
-        if (typeof column.height === 'undefined') {
-          columnOptions.height = 0;
-        }
-        if (typeof column.style === 'undefined') {
-          columnOptions.style = {};
-        }
-        columnOptions._id = `${index}-${column.label}`;
-        return this.mergeDeep({}, column, columnOptions);
-      });
+      let tasks;
       if (itsUpdate === '' || itsUpdate === 'tasks') {
+        tasks = Vue.observable(
+          this.tasks.map(task => {
+            return this.mergeDeepReactive({}, task);
+          })
+        );
+        tasks = tasks.map(task => {
+          task.startTime = dayjs_min_default()(task.start).valueOf();
+          task.durationMs = task.duration * 1000;
+          task.endTime = task.startTime + task.durationMs;
+          return task;
+        });
+        tasks = this.refreshTasks(tasks);
         const rootTask = {
           id: null,
           parent: null,
@@ -6023,20 +7154,46 @@ const GanttElastic = {
         tasks = this.makeTaskTree(rootTask, tasks).allChildren.map(taskId => {
           return tasks[tasks.findIndex(task => task.id === taskId)];
         });
+        this.$store.commit(this.updateTasksMut, tasks);
       }
+
+      let options;
       if (itsUpdate === '') {
-        options.ctx = document.createElement('canvas').getContext('2d');
+        options = this.mergeDeep({}, getOptions(this.options), this.options);
+      } else if (itsUpdate === 'options') {
+        options = this.mergeDeep({}, this.$store.state.GanttElastic.options, this.options);
       }
-      this.$store.commit(this.updateTasksMut, tasks);
-      this.$store.commit(this.updateOptionsMut, options);
+      if (itsUpdate === '' || itsUpdate === 'options') {
+        options.tasksById = {};
+        dayjs_min_default.a.locale(options.locale, null, true);
+        options.taskList.columns = options.taskList.columns.map((column, index) => {
+          const columnOptions = {
+            thresholdPercent: 100,
+            widthFromPercentage: 0,
+            finalWidth: 0
+          };
+          if (typeof column.height === 'undefined') {
+            columnOptions.height = 0;
+          }
+          if (typeof column.style === 'undefined') {
+            columnOptions.style = {};
+          }
+          columnOptions._id = `${index}-${column.label}`;
+          return this.mergeDeep({}, column, columnOptions);
+        });
+        if (itsUpdate === '') {
+          options.ctx = document.createElement('canvas').getContext('2d');
+        }
+        this.$store.commit(this.updateOptionsMut, options);
+        this.calculateTaskListColumnsDimensions();
+        this.getScrollBarHeight();
+        this.$store.commit(this.updateOptionsMut, {
+          outerHeight:
+            this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
+        });
+      }
+
       this.globalOnResize();
-      this.calculateTaskListColumnsDimensions();
-      this.getScrollBarHeight();
-      this.$store.commit(this.updateOptionsMut, {
-        outerHeight:
-          this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
-      });
-      window.tasks = this.$store.state.tasks;
     },
 
     /**
@@ -6542,8 +7699,8 @@ const GanttElastic = {
       const timePerPixel =
         this.$store.state.GanttElastic.options.times.timeScale * steps * percent +
         Math.pow(2, this.$store.state.GanttElastic.options.times.timeZoom);
-      const totalViewDurationMs = esm(this.$store.state.GanttElastic.options.times.lastTime).diff(
-        esm(this.$store.state.GanttElastic.options.times.firstTime),
+      const totalViewDurationMs = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime).diff(
+        dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime),
         'milisecods'
       );
       const totalViewDurationPx = totalViewDurationMs / timePerPixel;
@@ -6561,13 +7718,13 @@ const GanttElastic = {
      * Initialize time variables
      */
     initTimes() {
-      const firstTime = esm(this.$store.state.GanttElastic.options.times.firstTaskTime)
+      const firstTime = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTaskTime)
         .locale(this.locale)
         .startOf('day')
         .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
         .startOf('day')
         .valueOf();
-      const lastTime = esm(this.$store.state.GanttElastic.options.times.lastTaskTime)
+      const lastTime = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTaskTime)
         .locale(this.locale)
         .endOf('day')
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
@@ -6590,7 +7747,7 @@ const GanttElastic = {
     calculateSteps() {
       const steps = [];
       const lastMs = this.$store.state.GanttElastic.options.times.lastTime;
-      const currentDate = esm(this.$store.state.GanttElastic.options.times.firstTime);
+      const currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
       steps.push({
         time: currentDate.valueOf(),
         offset: {
@@ -6599,7 +7756,7 @@ const GanttElastic = {
         }
       });
       for (
-        let currentDate = esm(this.$store.state.GanttElastic.options.times.firstTime)
+        let currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime)
           .add(1, this.$store.state.GanttElastic.options.times.stepDuration)
           .startOf('day');
         currentDate.valueOf() <= lastMs;
@@ -6652,7 +7809,7 @@ const GanttElastic = {
       };
       const style = this.style('calendar-row-text', 'calendar-row-text--hour');
       options.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = esm('2018-01-01T00:00:00'); // any date will be good for hours
+      let currentDate = dayjs_min_default()('2018-01-01T00:00:00'); // any date will be good for hours
       let maxWidths = {};
       Object.keys(options.calendar.hour.format).forEach(formatName => {
         maxWidths[formatName] = 0;
@@ -6692,7 +7849,7 @@ const GanttElastic = {
       };
       const style = this.style('calendar-row-text', 'calendar-row-text--day');
       options.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = esm(options.times.steps[0].date);
+      let currentDate = dayjs_min_default()(options.times.steps[0].date);
       let maxWidths = {};
       Object.keys(options.calendar.day.format).forEach(formatName => {
         maxWidths[formatName] = 0;
@@ -6736,10 +7893,10 @@ const GanttElastic = {
       Object.keys(options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = esm(this.$store.state.GanttElastic.options.times.firstTime);
+      let currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
       const monthsCount = Math.ceil(
-        esm(this.$store.state.GanttElastic.options.times.lastTime).diff(
-          esm(this.$store.state.GanttElastic.options.times.firstTime),
+        dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime).diff(
+          dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime),
           'months',
           true
         )
@@ -6776,7 +7933,7 @@ const GanttElastic = {
         const newProps = {
           id: task.id
         };
-        newProps.startTime = esm(task.start).valueOf();
+        newProps.startTime = dayjs_min_default()(task.start).valueOf();
         newProps.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
@@ -6786,13 +7943,13 @@ const GanttElastic = {
         }
         this.$store.commit(this.updateTaskMut, newProps);
       }
-      const firstTime = esm(firstTaskTime)
+      const firstTime = dayjs_min_default()(firstTaskTime)
         .locale(this.locale)
         .startOf('day')
         .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
         .startOf('day')
         .valueOf();
-      const lastTime = esm(lastTaskTime)
+      const lastTime = dayjs_min_default()(lastTaskTime)
         .locale(this.locale)
         .endOf('day')
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
@@ -6809,7 +7966,7 @@ const GanttElastic = {
     },
 
     /**
-     * Setup and calulate everything
+     * Setup and calculate everything
      */
     setup(itsUpdate = '', data = null) {
       this.initialize(itsUpdate, data);
@@ -6817,7 +7974,7 @@ const GanttElastic = {
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
-      this.calculateCalendarDimensions();
+      this.$emit('calendar-recalculate');
       const width = this.$store.state.GanttElastic.options.taskList.columns.reduce(
         (prev, current) => {
           return { width: prev.width + current.width };
@@ -6870,8 +8027,22 @@ const GanttElastic = {
 
   computed: {
     /**
+     * Getter for watcher
+     */
+    internalTasks() {
+      return this.$store.state.GanttElastic.tasks.map(task => task);
+    },
+
+    /**
+     * Getter for watcher
+     */
+    internalOptions() {
+      return mergeDeep({}, this.$store.state.GanttElastic.options);
+    },
+
+    /**
      * Get visible tasks
-     * Very importan method which will bring us only those tasks that are visible inside gantt chart
+     * Very important method which will bring us only those tasks that are visible inside gantt chart
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
@@ -6929,25 +8100,52 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    /*this.$watch(
-      'tasks',
-      tasks => {
-        this.setup('tasks');
-        this.$emit('tasks-changed', tasks);
+    this.$store.registerModule('GanttElastic', GanttElastic_vuex);
+
+    this.$watch('internalTasks', tasks => {
+      const newTasks = tasks.map(task => {
+        const source = this.tasks.find(sourceTask => sourceTask.id === task.id);
+        const dest = synchronizeDeep(mergeDeep({}, source), task);
+        return dest;
+      });
+      if (!equalDeep(this.tasks, newTasks)) {
+        this.$emit('tasks-updated', newTasks);
+      }
+    });
+
+    this.$watch('tasks', tasks => {
+      const oldTasks = this.$store.state.GanttElastic.tasks.map((task, index) => {
+        return synchronizeDeep(mergeDeep({}, this.tasks[index]), task);
+      });
+      const newTasks = tasks.map(task => mergeDeep({}, task));
+      if (!equalDeep(newTasks, oldTasks)) {
+        this.setup('tasks', newTasks);
+      }
+    });
+
+    this.$watch('internalOptions', options => {
+      const newOptions = synchronizeDeep(mergeDeep({}, this.options), this.$store.state.GanttElastic.options);
+      if (!equalDeep(this.options, newOptions)) {
+        this.$emit('options-updated', newOptions);
+      }
+    });
+
+    this.$watch(
+      'options',
+      options => {
+        const newOptions = mergeDeep({}, options);
+        const oldOptions = mergeDeep({}, this.$store.state.GanttElastic.options);
+        if (!equalDeep(newOptions, oldOptions)) {
+          this.setup('options', newOptions);
+        }
       },
       { deep: true }
     );
-    this.$watch(
-      'options',
-      opts => {
-        this.setup('options');
-        this.$emit('options-changed', opts);
-      },
-      { deep: true }
-    );*/
+
+    this.$root.$emit('gantt-elastic-created', this);
+    this.$emit('created', this);
     this.initializeEvents();
     this.setup();
-    this.$root.$emit('gantt-elastic-created', this);
   },
 
   /**
@@ -7005,11 +8203,13 @@ const GanttElastic = {
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
-var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(2);
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
 /* concated harmony reexport mergeDeepReactive */__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return mergeDeepReactive; });
+/* concated harmony reexport equalDeep */__webpack_require__.d(__webpack_exports__, "equalDeep", function() { return equalDeep; });
+/* concated harmony reexport synchronizeDeep */__webpack_require__.d(__webpack_exports__, "synchronizeDeep", function() { return synchronizeDeep; });
 
 
 
@@ -7035,7 +8235,7 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-/* 6 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7298,3 +8498,4 @@ function applyToTag (styleElement, obj) {
 
 /***/ })
 /******/ ])["default"];
+//# sourceMappingURL=GanttElastic.common.js.map

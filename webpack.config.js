@@ -6,8 +6,15 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
-      minimize: false,
-      namedModules: true
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        })
+      ]
     },
     entry: './src/GanttElastic.vuex.js',
     output: {
@@ -33,8 +40,15 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
-      minimize: false,
-      namedModules: true
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        })
+      ]
     },
     entry: './src/GanttElastic.vuex.js',
     output: {
@@ -59,9 +73,20 @@ module.exports = [
   },
   {
     mode: 'production',
+    entry: './src/bundle.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'bundle.js'
+    },
+    devtool: 'source-map',
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     optimization: {
       minimize: true,
-      namedModules: true,
+      namedModules: false,
       minimizer: [
         new TerserPlugin({
           terserOptions: {
@@ -70,15 +95,9 @@ module.exports = [
         })
       ]
     },
-    entry: './src/bundle.js',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
-      libraryTarget: 'umd'
-    },
     /*resolve: {
       alias: {
-        'vue$': 'vue/dist/vue.esm.js'
+        vue$: 'vue/dist/vue.esm.js'
       }
     },*/
     module: {
@@ -98,7 +117,14 @@ module.exports = [
   {
     mode: 'production',
     optimization: {
-      minimize: false
+      minimize: false,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        })
+      ]
     },
     entry: './src/GanttElastic.vue',
     output: {
@@ -108,7 +134,12 @@ module.exports = [
       libraryTarget: 'umd',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    devtool: 'source-map',
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {
@@ -137,6 +168,7 @@ module.exports = [
       ]
     },
     entry: './src/GanttElastic.vue',
+    devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'GanttElastic.umd.min.js',
@@ -144,7 +176,11 @@ module.exports = [
       libraryTarget: 'umd',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {
@@ -165,6 +201,7 @@ module.exports = [
       minimize: false
     },
     entry: './src/GanttElastic.vue',
+    devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'GanttElastic.common.js',
@@ -172,7 +209,11 @@ module.exports = [
       libraryTarget: 'commonjs2',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {
@@ -201,6 +242,7 @@ module.exports = [
       ]
     },
     entry: './src/GanttElastic.vue',
+    devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'GanttElastic.common.min.js',
@@ -208,7 +250,11 @@ module.exports = [
       libraryTarget: 'commonjs2',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {
@@ -226,6 +272,17 @@ module.exports = [
   {
     mode: 'production',
     entry: './src/components/Header.vue',
+    optimization: {
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        })
+      ]
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'Header.umd.js',
@@ -233,7 +290,11 @@ module.exports = [
       libraryTarget: 'umd',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {
@@ -251,6 +312,17 @@ module.exports = [
   {
     mode: 'production',
     entry: './src/components/Header.vue',
+    optimization: {
+      minimize: true,
+      namedModules: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: false
+          }
+        })
+      ]
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'Header.common.js',
@@ -258,7 +330,11 @@ module.exports = [
       libraryTarget: 'commonjs2',
       libraryExport: 'default'
     },
-    externals: ['vue'],
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex'
+      //dayjs: 'dayjs'
+    },
     module: {
       rules: [
         {

@@ -18,6 +18,8 @@
 import dayjs from 'dayjs';
 import MainView from './components/MainView.vue';
 import style from './style.js';
+import GanttElasticVuex from './GanttElastic.vuex.js';
+import { equal } from 'assert';
 
 /**
  * Helper function to fill out empty options in user settings
@@ -338,6 +340,78 @@ export function mergeDeepReactive(target, ...sources) {
   return mergeDeepReactive(target, ...sources);
 }
 
+/**
+ * Check if objects or arrays are equal by comparing nested values
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {boolean}
+ */
+export function equalDeep(left, right) {
+  if (typeof right !== typeof left) {
+    return false;
+  }
+  if (Array.isArray(left)) {
+    if (left.length !== right.length) {
+      return false;
+    }
+    for (let [index, value] of left.entries()) {
+      if (typeof value !== typeof right[index]) {
+        return false;
+      }
+      if (isObject(value) || Array.isArray(value)) {
+        if (!equalDeep(value, right[index])) {
+          return false;
+        }
+      } else if (value !== right[index]) {
+        return false;
+      }
+    }
+  } else {
+    for (let key in left) {
+      if (typeof left[key] !== typeof right[key]) {
+        return false;
+      }
+      if (isObject(left[key]) || Array.isArray(left[key])) {
+        if (!equalDeep(left[key], right[key])) {
+          return false;
+        }
+      } else if (left[key] !== right[key]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+/**
+ * Synchronize properties that exist in left object with values from right
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {object|array}
+ */
+export function synchronizeDeep(left, right) {
+  for (let key in left) {
+    if (isObject(right[key])) {
+      left[key] = synchronizeDeep(left[key], right[key]);
+    } else if (Array.isArray(right[key])) {
+      left[key] = right[key].map((item, index) => {
+        if (isObject(item)) {
+          // we predict that array want change inside gantt elastic itself
+          item = synchronizeDeep(mergeDeep({}, left[key][index]), item);
+        }
+        return item;
+      });
+    } else {
+      left[key] = right[key];
+    }
+  }
+  return left;
+}
+
 const styleCache = {};
 let globalVisibleTasks = [];
 
@@ -469,37 +543,20 @@ const GanttElastic = {
      * Initialize component
      */
     initialize(itsUpdate = '', data = null) {
-      let tasks = Vue.observable(
-        this.tasks.map(task => {
-          return this.mergeDeepReactive({}, task);
-        })
-      );
-      let options = this.mergeDeepReactive({}, getOptions(this.options), this.options);
-      options.tasksById = {};
-      tasks = tasks.map(task => {
-        task.startTime = dayjs(task.start).valueOf();
-        task.durationMs = task.duration * 1000;
-        task.endTime = task.startTime + task.durationMs;
-        return task;
-      });
-      tasks = this.refreshTasks(tasks);
-      dayjs.locale(options.locale, null, true);
-      options.taskList.columns = options.taskList.columns.map((column, index) => {
-        const columnOptions = {
-          thresholdPercent: 100,
-          widthFromPercentage: 0,
-          finalWidth: 0
-        };
-        if (typeof column.height === 'undefined') {
-          columnOptions.height = 0;
-        }
-        if (typeof column.style === 'undefined') {
-          columnOptions.style = {};
-        }
-        columnOptions._id = `${index}-${column.label}`;
-        return this.mergeDeep({}, column, columnOptions);
-      });
+      let tasks;
       if (itsUpdate === '' || itsUpdate === 'tasks') {
+        tasks = Vue.observable(
+          this.tasks.map(task => {
+            return this.mergeDeepReactive({}, task);
+          })
+        );
+        tasks = tasks.map(task => {
+          task.startTime = dayjs(task.start).valueOf();
+          task.durationMs = task.duration * 1000;
+          task.endTime = task.startTime + task.durationMs;
+          return task;
+        });
+        tasks = this.refreshTasks(tasks);
         const rootTask = {
           id: null,
           parent: null,
@@ -512,20 +569,46 @@ const GanttElastic = {
         tasks = this.makeTaskTree(rootTask, tasks).allChildren.map(taskId => {
           return tasks[tasks.findIndex(task => task.id === taskId)];
         });
+        this.$store.commit(this.updateTasksMut, tasks);
       }
+
+      let options;
       if (itsUpdate === '') {
-        options.ctx = document.createElement('canvas').getContext('2d');
+        options = this.mergeDeep({}, getOptions(this.options), this.options);
+      } else if (itsUpdate === 'options') {
+        options = this.mergeDeep({}, this.$store.state.GanttElastic.options, this.options);
       }
-      this.$store.commit(this.updateTasksMut, tasks);
-      this.$store.commit(this.updateOptionsMut, options);
+      if (itsUpdate === '' || itsUpdate === 'options') {
+        options.tasksById = {};
+        dayjs.locale(options.locale, null, true);
+        options.taskList.columns = options.taskList.columns.map((column, index) => {
+          const columnOptions = {
+            thresholdPercent: 100,
+            widthFromPercentage: 0,
+            finalWidth: 0
+          };
+          if (typeof column.height === 'undefined') {
+            columnOptions.height = 0;
+          }
+          if (typeof column.style === 'undefined') {
+            columnOptions.style = {};
+          }
+          columnOptions._id = `${index}-${column.label}`;
+          return this.mergeDeep({}, column, columnOptions);
+        });
+        if (itsUpdate === '') {
+          options.ctx = document.createElement('canvas').getContext('2d');
+        }
+        this.$store.commit(this.updateOptionsMut, options);
+        this.calculateTaskListColumnsDimensions();
+        this.getScrollBarHeight();
+        this.$store.commit(this.updateOptionsMut, {
+          outerHeight:
+            this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
+        });
+      }
+
       this.globalOnResize();
-      this.calculateTaskListColumnsDimensions();
-      this.getScrollBarHeight();
-      this.$store.commit(this.updateOptionsMut, {
-        outerHeight:
-          this.$store.state.GanttElastic.options.height + this.$store.state.GanttElastic.options.scrollBarHeight
-      });
-      window.tasks = this.$store.state.tasks;
     },
 
     /**
@@ -1298,7 +1381,7 @@ const GanttElastic = {
     },
 
     /**
-     * Setup and calulate everything
+     * Setup and calculate everything
      */
     setup(itsUpdate = '', data = null) {
       this.initialize(itsUpdate, data);
@@ -1306,7 +1389,7 @@ const GanttElastic = {
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
-      this.calculateCalendarDimensions();
+      this.$emit('calendar-recalculate');
       const width = this.$store.state.GanttElastic.options.taskList.columns.reduce(
         (prev, current) => {
           return { width: prev.width + current.width };
@@ -1359,8 +1442,22 @@ const GanttElastic = {
 
   computed: {
     /**
+     * Getter for watcher
+     */
+    internalTasks() {
+      return this.$store.state.GanttElastic.tasks.map(task => task);
+    },
+
+    /**
+     * Getter for watcher
+     */
+    internalOptions() {
+      return mergeDeep({}, this.$store.state.GanttElastic.options);
+    },
+
+    /**
      * Get visible tasks
-     * Very importan method which will bring us only those tasks that are visible inside gantt chart
+     * Very important method which will bring us only those tasks that are visible inside gantt chart
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
@@ -1418,25 +1515,52 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    /*this.$watch(
-      'tasks',
-      tasks => {
-        this.setup('tasks');
-        this.$emit('tasks-changed', tasks);
+    this.$store.registerModule('GanttElastic', GanttElasticVuex);
+
+    this.$watch('internalTasks', tasks => {
+      const newTasks = tasks.map(task => {
+        const source = this.tasks.find(sourceTask => sourceTask.id === task.id);
+        const dest = synchronizeDeep(mergeDeep({}, source), task);
+        return dest;
+      });
+      if (!equalDeep(this.tasks, newTasks)) {
+        this.$emit('tasks-updated', newTasks);
+      }
+    });
+
+    this.$watch('tasks', tasks => {
+      const oldTasks = this.$store.state.GanttElastic.tasks.map((task, index) => {
+        return synchronizeDeep(mergeDeep({}, this.tasks[index]), task);
+      });
+      const newTasks = tasks.map(task => mergeDeep({}, task));
+      if (!equalDeep(newTasks, oldTasks)) {
+        this.setup('tasks', newTasks);
+      }
+    });
+
+    this.$watch('internalOptions', options => {
+      const newOptions = synchronizeDeep(mergeDeep({}, this.options), this.$store.state.GanttElastic.options);
+      if (!equalDeep(this.options, newOptions)) {
+        this.$emit('options-updated', newOptions);
+      }
+    });
+
+    this.$watch(
+      'options',
+      options => {
+        const newOptions = mergeDeep({}, options);
+        const oldOptions = mergeDeep({}, this.$store.state.GanttElastic.options);
+        if (!equalDeep(newOptions, oldOptions)) {
+          this.setup('options', newOptions);
+        }
       },
       { deep: true }
     );
-    this.$watch(
-      'options',
-      opts => {
-        this.setup('options');
-        this.$emit('options-changed', opts);
-      },
-      { deep: true }
-    );*/
+
+    this.$root.$emit('gantt-elastic-created', this);
+    this.$emit('created', this);
     this.initializeEvents();
     this.setup();
-    this.$root.$emit('gantt-elastic-created', this);
   },
 
   /**

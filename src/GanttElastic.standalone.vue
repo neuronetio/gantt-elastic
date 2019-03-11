@@ -13,17 +13,22 @@
   </gantt-elastic>
 </template>
 <script>
+import Vue from 'vue';
+import Vuex from 'vuex';
 import GanttElastic from './GanttElastic.vue';
+Vue.use(Vuex);
+const store = new Vuex.Store({});
 export default {
   components: {
-    'gantt-header': { template: `` },
+    'gantt-header': { template: `<div></div>` },
     'gantt-elastic': GanttElastic,
-    'gantt-footer': { template: `` }
+    'gantt-footer': { template: `<div></div>` }
   },
+  store,
   props: ['header', 'footer'],
   data: {
     tasks: [],
-    options: {},
-  },
+    options: {}
+  }
 };
 </script>
