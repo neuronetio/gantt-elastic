@@ -1,4 +1,4 @@
-import { mergeDeep, mergeDeepReactive, equalDeep } from './GanttElastic.vue';
+import { mergeDeepReactive } from './GanttElastic.vue';
 const GanttElasticVuexModule = {
   state: {
     tasks: [],

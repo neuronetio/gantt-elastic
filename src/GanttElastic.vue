@@ -18,6 +18,7 @@
 import dayjs from 'dayjs';
 import MainView from './components/MainView.vue';
 import style from './style.js';
+import GanttElasticVuex from './GanttElastic.vuex.js';
 
 /**
  * Helper function to fill out empty options in user settings
