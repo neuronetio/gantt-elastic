@@ -4,15 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>GanttElastic editor demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
     <!--
-    <script src="https://unpkg.com/gantt-elastic@0.9.5/dist/GanttElastic.umd.js"></script>
-    <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
--->
+  <script src="https://unpkg.com/gantt-elastic@0.9.1/dist/GanttElastic.umd.js"></script>
+  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+	-->
     <!--
   <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/GanttElastic.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/Header.umd.js"></script>
-	-->
+  -->
 
     <script src="../dist/GanttElastic.umd.js"></script>
     <script src="../dist/Header.umd.js"></script>
@@ -20,8 +22,8 @@
 
   <body>
     <div style="width:100%;height:100%">
-      <div id="app" v-if="!destroy">
-        <gantt-elastic :tasks="tasks" :options="options">
+      <div id="app">
+        <gantt-elastic :tasks="$store.state.tasks" :options="$store.state.options">
           <gantt-header slot="header"></gantt-header>
           <gantt-footer slot="footer"></gantt-footer>
         </gantt-elastic>
@@ -29,14 +31,7 @@
     </div>
 
     modify task<br />
-    <input type="number" value="0" id="row" placeholder="which row?" />
-    <input type="text" id="name" placeholder="name" value="label" />
-    <input type="text" id="value" value="test" placeholder="value" onkeyup="update()" />
-    <br />
-    <input type="number" value="0" id="delrow" placeholder="which row?" />
-    <button onclick="deleteRow()">Delete</button>
-    <br />
-    <input type="number" id="progRow" value="0" /><input
+    <input type="number" id="progId" value="1" /><input
       type="range"
       min="0"
       max="100"
@@ -45,8 +40,6 @@
     />
     <br />
     <button onclick="addTask()">Add task</button>
-    <button onclick="addTasks()">Add tasks</button><br />
-    <button onclick="destroy()">Destroy</button><br />
     <button onclick="changeOptions()">Change options</button>
     <script>
       // just helper to get current dates
@@ -56,7 +49,7 @@
         const currentMonth = currentDate.getMonth() + 1;
         const currentDay = currentDate.getDate();
         const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-        return new Date(timeStamp + hours * 60 * 60 * 1000);
+        return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
       }
 
       let tasks = [
@@ -67,7 +60,7 @@
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
           start: getDate(-24 * 5),
           duration: 15 * 24 * 60 * 60,
-          percent: 85,
+          progress: 85,
           type: 'project'
           //collapsed: true,
         },
@@ -79,7 +72,7 @@
           parentId: 1,
           start: getDate(-24 * 4),
           duration: 4 * 24 * 60 * 60,
-          percent: 50,
+          progress: 50,
           type: 'milestone',
           collapsed: true,
           style: {
@@ -104,7 +97,7 @@
           parentId: 2,
           start: getDate(-24 * 3),
           duration: 2 * 24 * 60 * 60,
-          percent: 100,
+          progress: 100,
           type: 'task'
         },
         {
@@ -114,7 +107,7 @@
             '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
           start: getDate(-24 * 2),
           duration: 2 * 24 * 60 * 60,
-          percent: 50,
+          progress: 50,
           type: 'task',
           dependentOn: [3]
         },
@@ -126,7 +119,7 @@
           parentId: 4,
           start: getDate(0),
           duration: 2 * 24 * 60 * 60,
-          percent: 10,
+          progress: 10,
           type: 'milestone',
           style: {
             base: {
@@ -143,7 +136,7 @@
           parentId: 5,
           start: getDate(24),
           duration: 1 * 24 * 60 * 60,
-          percent: 50,
+          progress: 50,
           type: 'task',
           collapsed: true,
           style: {
@@ -162,7 +155,7 @@
           dependentOn: [6],
           start: getDate(24 * 2),
           duration: 4 * 60 * 60,
-          percent: 20,
+          progress: 20,
           type: 'task',
           collapsed: true
         },
@@ -175,7 +168,7 @@
           dependentOn: [7],
           start: getDate(24 * 3),
           duration: 1 * 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         },
         {
@@ -187,7 +180,7 @@
           dependentOn: [8, 7],
           start: getDate(24 * 4),
           duration: 4 * 60 * 60,
-          percent: 20,
+          progress: 20,
           type: 'task',
           style: {
             base: {
@@ -210,7 +203,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 5),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         },
         {
@@ -220,7 +213,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 6),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         },
         {
@@ -230,7 +223,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 7),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task',
           parentId: 11
         },
@@ -241,7 +234,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 8),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         },
         {
@@ -251,7 +244,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 9),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         },
         {
@@ -261,7 +254,7 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 16),
           duration: 24 * 60 * 60,
-          percent: 0,
+          progress: 0,
           type: 'task'
         }
       ];
@@ -271,9 +264,6 @@
           header: {
             beforeOptions: `<button style="display:inline-block" onclick="alert('hello from header!')">test</button>`
           }
-        },
-        taskMapping: {
-          progress: 'percent'
         },
         maxRows: 100,
         maxHeight: 300,
@@ -286,7 +276,7 @@
         },
         calendar: {
           hour: {
-            display: false
+            display: true
           }
         },
         chart: {
@@ -314,12 +304,7 @@
               value: 'label',
               width: 200,
               expander: true,
-              html: true,
-              events: {
-                click({ data, column }) {
-                  alert('description clicked!\n' + data.label);
-                }
-              }
+              html: true
             },
             {
               id: 3,
@@ -331,7 +316,7 @@
             {
               id: 3,
               label: 'Start',
-              value: task => task.startDate.format('YYYY-MM-DD'),
+              value: task => dayjs(task.startTime).format('YYYY-MM-DD'),
               width: 78
             },
             {
@@ -369,36 +354,53 @@
         }
       };
 
+      Vue.use(Vuex);
+      const store = new Vuex.Store({
+        state: {
+          tasks,
+          options
+        },
+        mutations: {
+          updateTasks(state, tasks) {
+            state.tasks = tasks.map(task => task);
+          },
+          updateOptions(state, options) {
+            state.options = { ...options };
+          }
+        }
+      });
+
       // create instance
       const app = new Vue({
+        store,
         components: {
           'gantt-header': Header,
           'gantt-elastic': GanttElastic,
           'gantt-footer': {
             template: `<span>this is a footer</span>`
           }
-        },
-        data: {
-          tasks: tasks.map(task => Object.assign({}, task)),
-          options,
-          destroy: false
         }
       });
 
-      // gantt state which will be updated in realtime
-      let ganttState, ganttInstance;
+      let ganttInstance;
 
       // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
       // to get the gantt state for realtime modification
-      app.$on('gantt-elastic-ready', ganttElasticInstance => {
+      app.$on('gantt-elastic-created', ganttElasticInstance => {
         ganttInstance = ganttElasticInstance;
-        ganttState = ganttElasticInstance.state;
-        console.log('gantt-elastic ready!', ganttState);
+        ganttInstance.$on('tasks-updated', tasks => {
+          console.log('tasks-updated', tasks);
+          store.commit('updateTasks', tasks);
+        });
+        ganttInstance.$on('options-updated', options => {
+          console.log('options-updated', options);
+          store.commit('updateOptions', options);
+        });
         ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
           console.log('task mouse enter', { data, event });
         });
         ganttInstance.$on('updated', () => {
-          console.log('gantt view was updated');
+          //console.log('gantt view was updated');
         });
         ganttInstance.$on('destroyed', () => {
           console.log('gantt was destroyed');
@@ -406,79 +408,58 @@
         ganttInstance.$on('times-timeZoom-change', () => {
           console.log('time zoom changed');
         });
-        ganttInstance.$on('taskList-task-click', ({ event, data, column }) => {
-          console.log('task list clicked! (task)', { data, column });
-        });
       });
 
       // mount gantt to DOM
       app.$mount('#app');
 
-      function update() {
-        const row = document.getElementById('row').value;
-        const name = document.getElementById('name').value;
-        const value = document.getElementById('value').value;
-        app.tasks[row][name] = value;
-      }
-
-      function deleteRow() {
-        const row = Number(document.getElementById('delrow').value);
-        app.tasks = ganttState.tasks.filter((task, index) => {
-          if (index === row) {
-            console.log('removing task', task, index);
-          }
-          return index !== row;
-        });
-      }
-
       function progressChange() {
-        const row = Number(document.getElementById('progRow').value);
+        const id = Number(document.getElementById('progId').value);
         const percent = Number(document.getElementById('progress').value);
-        app.tasks[row].progress = percent;
+        store.commit(
+          'updateTasks',
+          store.state.tasks.map(task => {
+            if (task.id === id) {
+              task.progress = percent;
+            }
+            return task;
+          })
+        );
       }
 
       function addTask() {
         const task = {
-          id: 88,
+          id: 16,
           label:
             '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Yeaahh! you have added a task bro!</a>',
           user:
             '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Awesome!</a>',
-          parentId: 7,
-          dependentOn: [7],
-          start: getDate(24 * 3),
+          parentId: 1,
+          dependentOn: [1],
+          start: getDate(24),
           duration: 1 * 24 * 60 * 60,
           progress: 50,
           type: 'project'
         };
-        app.tasks.push(task);
-        console.log(app.tasks);
-      }
-
-      function addTasks() {
-        const newTasks = tasks.map(task => Object.assign({}, task));
-        app.tasks = newTasks;
+        const tasks = store.state.tasks.map(task => task);
+        tasks.push(task);
+        store.commit('updateTasks', tasks);
       }
 
       function changeOptions() {
-        app.options.taskList.columns[0].label = 'Whooaa!';
-        app.options.taskList.columns[0].width = 100;
-        app.options.taskList.columns[0].style = {
+        const options = ganttInstance.mergeDeep({}, store.state.options);
+
+        options.taskList.columns[0].label = 'Whooaa!';
+        options.taskList.columns[0].width = 100;
+        options.taskList.columns[0].style = {
           'task-list-header-column': {
             background: 'red',
             color: 'white'
           }
         };
-        Vue.set(app.options.calendar, 'month', {
-          format: {
-            long: function() {
-              return ':P';
-            }
-          }
-        });
-        Vue.set(app.options, 'times', { timeZoom: 2 });
-        app.options.locale['Now'] = 'Center';
-        ganttInstance.fixScrollPos();
+        options.locale['Now'] = 'Center';
+        options.times = { timeZoom: 4 };
+        store.commit('updateOptions', options);
       }
 
       function destroy() {

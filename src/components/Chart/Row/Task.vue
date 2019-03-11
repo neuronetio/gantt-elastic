@@ -14,13 +14,13 @@
     <foreignObject
       class="gantt-elastic__chart-expander gantt-elastic__chart-expander--task"
       :style="root.style('chart-expander','chart-expander--task',task.style['chart-expander'])"
-      :x="task.x - root.state.chart.expander.offset - root.state.chart.expander.size"
-      :y="task.y + (root.state.row.height - root.state.chart.expander.size)/2 "
-      :width="root.state.chart.expander.size"
-      :height="root.state.chart.expander.size"
+      :x="task.x - $store.state.GanttElastic.options.chart.expander.offset - $store.state.GanttElastic.options.chart.expander.size"
+      :y="task.y + ($store.state.GanttElastic.options.row.height - $store.state.GanttElastic.options.chart.expander.size)/2 "
+      :width="$store.state.GanttElastic.options.chart.expander.size"
+      :height="$store.state.GanttElastic.options.chart.expander.size"
       v-if="displayExpander"
     >
-      <expander :tasks="[task]" :options="root.state.chart.expander"></expander>
+      <expander :tasks="[task]" :options="$store.state.GanttElastic.options.chart.expander"></expander>
     </foreignObject>
     <svg
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-task"
@@ -55,7 +55,7 @@
       ></polygon>
       <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
     </svg>
-    <chart-text :task="task" v-if="root.state.chart.text.display"></chart-text>
+    <chart-text :task="task" v-if="$store.state.GanttElastic.options.chart.text.display"></chart-text>
   </g>
 </template>
 
@@ -122,8 +122,8 @@ export default {
      * @returns {boolean}
      */
     displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+      const expander = this.$store.state.GanttElastic.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display);
     }
   },
   methods: {
@@ -134,7 +134,7 @@ export default {
      * @param {Event} event
      */
     emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+      if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }

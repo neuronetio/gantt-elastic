@@ -1,19 +1,5102 @@
-!function(root,factory){if("object"==typeof exports&&"object"==typeof module)module.exports=factory();else if("function"==typeof define&&define.amd)define([],factory);else{var a=factory();for(var i in a)("object"==typeof exports?exports:root)[i]=a[i]}}(window,function(){return function(modules){var installedModules={};function __webpack_require__(moduleId){if(installedModules[moduleId])return installedModules[moduleId].exports;var module=installedModules[moduleId]={i:moduleId,l:!1,exports:{}};return modules[moduleId].call(module.exports,module,module.exports,__webpack_require__),module.l=!0,module.exports}return __webpack_require__.m=modules,__webpack_require__.c=installedModules,__webpack_require__.d=function(exports,name,getter){__webpack_require__.o(exports,name)||Object.defineProperty(exports,name,{enumerable:!0,get:getter})},__webpack_require__.r=function(exports){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(exports,"__esModule",{value:!0})},__webpack_require__.t=function(value,mode){if(1&mode&&(value=__webpack_require__(value)),8&mode)return value;if(4&mode&&"object"==typeof value&&value&&value.__esModule)return value;var ns=Object.create(null);if(__webpack_require__.r(ns),Object.defineProperty(ns,"default",{enumerable:!0,value:value}),2&mode&&"string"!=typeof value)for(var key in value)__webpack_require__.d(ns,key,function(key){return value[key]}.bind(null,key));return ns},__webpack_require__.n=function(module){var getter=module&&module.__esModule?function(){return module.default}:function(){return module};return __webpack_require__.d(getter,"a",getter),getter},__webpack_require__.o=function(object,property){return Object.prototype.hasOwnProperty.call(object,property)},__webpack_require__.p="",__webpack_require__(__webpack_require__.s="./src/bundle.js")}({"./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":function(module,exports,__webpack_require__){(exports=module.exports=__webpack_require__("./node_modules/css-loader/lib/css-base.js")(!1)).i(__webpack_require__("./node_modules/css-loader/index.js!./src/styles/ganttElastic.css"),""),exports.push([module.i,"\n",""])},"./node_modules/css-loader/index.js!./src/styles/ganttElastic.css":function(module,exports,__webpack_require__){(module.exports=__webpack_require__("./node_modules/css-loader/lib/css-base.js")(!1)).push([module.i,".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n",""])},"./node_modules/css-loader/lib/css-base.js":function(module,exports){module.exports=function(useSourceMap){var list=[];return list.toString=function(){return this.map(function(item){var content=function(item,useSourceMap){var content=item[1]||"",cssMapping=item[3];if(!cssMapping)return content;if(useSourceMap&&"function"==typeof btoa){var sourceMapping=(sourceMap=cssMapping,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))))+" */"),sourceURLs=cssMapping.sources.map(function(source){return"/*# sourceURL="+cssMapping.sourceRoot+source+" */"});return[content].concat(sourceURLs).concat([sourceMapping]).join("\n")}var sourceMap;return[content].join("\n")}(item,useSourceMap);return item[2]?"@media "+item[2]+"{"+content+"}":content}).join("")},list.i=function(modules,mediaQuery){"string"==typeof modules&&(modules=[[null,modules,""]]);for(var alreadyImportedModules={},i=0;i<this.length;i++){var id=this[i][0];"number"==typeof id&&(alreadyImportedModules[id]=!0)}for(i=0;i<modules.length;i++){var item=modules[i];"number"==typeof item[0]&&alreadyImportedModules[item[0]]||(mediaQuery&&!item[2]?item[2]=mediaQuery:mediaQuery&&(item[2]="("+item[2]+") and ("+mediaQuery+")"),list.push(item))}},list}},"./node_modules/process/browser.js":function(module,exports){var cachedSetTimeout,cachedClearTimeout,process=module.exports={};function defaultSetTimout(){throw new Error("setTimeout has not been defined")}function defaultClearTimeout(){throw new Error("clearTimeout has not been defined")}function runTimeout(fun){if(cachedSetTimeout===setTimeout)return setTimeout(fun,0);if((cachedSetTimeout===defaultSetTimout||!cachedSetTimeout)&&setTimeout)return cachedSetTimeout=setTimeout,setTimeout(fun,0);try{return cachedSetTimeout(fun,0)}catch(e){try{return cachedSetTimeout.call(null,fun,0)}catch(e){return cachedSetTimeout.call(this,fun,0)}}}!function(){try{cachedSetTimeout="function"==typeof setTimeout?setTimeout:defaultSetTimout}catch(e){cachedSetTimeout=defaultSetTimout}try{cachedClearTimeout="function"==typeof clearTimeout?clearTimeout:defaultClearTimeout}catch(e){cachedClearTimeout=defaultClearTimeout}}();var currentQueue,queue=[],draining=!1,queueIndex=-1;function cleanUpNextTick(){draining&&currentQueue&&(draining=!1,currentQueue.length?queue=currentQueue.concat(queue):queueIndex=-1,queue.length&&drainQueue())}function drainQueue(){if(!draining){var timeout=runTimeout(cleanUpNextTick);draining=!0;for(var len=queue.length;len;){for(currentQueue=queue,queue=[];++queueIndex<len;)currentQueue&&currentQueue[queueIndex].run();queueIndex=-1,len=queue.length}currentQueue=null,draining=!1,function(marker){if(cachedClearTimeout===clearTimeout)return clearTimeout(marker);if((cachedClearTimeout===defaultClearTimeout||!cachedClearTimeout)&&clearTimeout)return cachedClearTimeout=clearTimeout,clearTimeout(marker);try{cachedClearTimeout(marker)}catch(e){try{return cachedClearTimeout.call(null,marker)}catch(e){return cachedClearTimeout.call(this,marker)}}}(timeout)}}function Item(fun,array){this.fun=fun,this.array=array}function noop(){}process.nextTick=function(fun){var args=new Array(arguments.length-1);if(arguments.length>1)for(var i=1;i<arguments.length;i++)args[i-1]=arguments[i];queue.push(new Item(fun,args)),1!==queue.length||draining||runTimeout(drainQueue)},Item.prototype.run=function(){this.fun.apply(null,this.array)},process.title="browser",process.browser=!0,process.env={},process.argv=[],process.version="",process.versions={},process.on=noop,process.addListener=noop,process.once=noop,process.off=noop,process.removeListener=noop,process.removeAllListeners=noop,process.emit=noop,process.prependListener=noop,process.prependOnceListener=noop,process.listeners=function(name){return[]},process.binding=function(name){throw new Error("process.binding is not supported")},process.cwd=function(){return"/"},process.chdir=function(dir){throw new Error("process.chdir is not supported")},process.umask=function(){return 0}},"./node_modules/setimmediate/setImmediate.js":function(module,exports,__webpack_require__){(function(global,process){!function(global,undefined){"use strict";if(!global.setImmediate){var registerImmediate,html,channel,messagePrefix,onGlobalMessage,nextHandle=1,tasksByHandle={},currentlyRunningATask=!1,doc=global.document,attachTo=Object.getPrototypeOf&&Object.getPrototypeOf(global);attachTo=attachTo&&attachTo.setTimeout?attachTo:global,"[object process]"==={}.toString.call(global.process)?registerImmediate=function(handle){process.nextTick(function(){runIfPresent(handle)})}:!function(){if(global.postMessage&&!global.importScripts){var postMessageIsAsynchronous=!0,oldOnMessage=global.onmessage;return global.onmessage=function(){postMessageIsAsynchronous=!1},global.postMessage("","*"),global.onmessage=oldOnMessage,postMessageIsAsynchronous}}()?global.MessageChannel?((channel=new MessageChannel).port1.onmessage=function(event){runIfPresent(event.data)},registerImmediate=function(handle){channel.port2.postMessage(handle)}):doc&&"onreadystatechange"in doc.createElement("script")?(html=doc.documentElement,registerImmediate=function(handle){var script=doc.createElement("script");script.onreadystatechange=function(){runIfPresent(handle),script.onreadystatechange=null,html.removeChild(script),script=null},html.appendChild(script)}):registerImmediate=function(handle){setTimeout(runIfPresent,0,handle)}:(messagePrefix="setImmediate$"+Math.random()+"$",onGlobalMessage=function(event){event.source===global&&"string"==typeof event.data&&0===event.data.indexOf(messagePrefix)&&runIfPresent(+event.data.slice(messagePrefix.length))},global.addEventListener?global.addEventListener("message",onGlobalMessage,!1):global.attachEvent("onmessage",onGlobalMessage),registerImmediate=function(handle){global.postMessage(messagePrefix+handle,"*")}),attachTo.setImmediate=function(callback){"function"!=typeof callback&&(callback=new Function(""+callback));for(var args=new Array(arguments.length-1),i=0;i<args.length;i++)args[i]=arguments[i+1];var task={callback:callback,args:args};return tasksByHandle[nextHandle]=task,registerImmediate(nextHandle),nextHandle++},attachTo.clearImmediate=clearImmediate}function clearImmediate(handle){delete tasksByHandle[handle]}function runIfPresent(handle){if(currentlyRunningATask)setTimeout(runIfPresent,0,handle);else{var task=tasksByHandle[handle];if(task){currentlyRunningATask=!0;try{!function(task){var callback=task.callback,args=task.args;switch(args.length){case 0:callback();break;case 1:callback(args[0]);break;case 2:callback(args[0],args[1]);break;case 3:callback(args[0],args[1],args[2]);break;default:callback.apply(undefined,args)}}(task)}finally{clearImmediate(handle),currentlyRunningATask=!1}}}}}("undefined"==typeof self?void 0===global?this:global:self)}).call(this,__webpack_require__("./node_modules/webpack/buildin/global.js"),__webpack_require__("./node_modules/process/browser.js"))},"./node_modules/timers-browserify/main.js":function(module,exports,__webpack_require__){(function(global){var scope=void 0!==global&&global||"undefined"!=typeof self&&self||window,apply=Function.prototype.apply;function Timeout(id,clearFn){this._id=id,this._clearFn=clearFn}exports.setTimeout=function(){return new Timeout(apply.call(setTimeout,scope,arguments),clearTimeout)},exports.setInterval=function(){return new Timeout(apply.call(setInterval,scope,arguments),clearInterval)},exports.clearTimeout=exports.clearInterval=function(timeout){timeout&&timeout.close()},Timeout.prototype.unref=Timeout.prototype.ref=function(){},Timeout.prototype.close=function(){this._clearFn.call(scope,this._id)},exports.enroll=function(item,msecs){clearTimeout(item._idleTimeoutId),item._idleTimeout=msecs},exports.unenroll=function(item){clearTimeout(item._idleTimeoutId),item._idleTimeout=-1},exports._unrefActive=exports.active=function(item){clearTimeout(item._idleTimeoutId);var msecs=item._idleTimeout;msecs>=0&&(item._idleTimeoutId=setTimeout(function(){item._onTimeout&&item._onTimeout()},msecs))},__webpack_require__("./node_modules/setimmediate/setImmediate.js"),exports.setImmediate="undefined"!=typeof self&&self.setImmediate||void 0!==global&&global.setImmediate||this&&this.setImmediate,exports.clearImmediate="undefined"!=typeof self&&self.clearImmediate||void 0!==global&&global.clearImmediate||this&&this.clearImmediate}).call(this,__webpack_require__("./node_modules/webpack/buildin/global.js"))},"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":function(module,exports,__webpack_require__){var content=__webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&");"string"==typeof content&&(content=[[module.i,content,""]]),content.locals&&(module.exports=content.locals);(0,__webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js").default)("c3e5085c",content,!1,{})},"./node_modules/vue-style-loader/lib/addStylesClient.js":function(module,__webpack_exports__,__webpack_require__){"use strict";function listToStyles(parentId,list){for(var styles=[],newStyles={},i=0;i<list.length;i++){var item=list[i],id=item[0],part={id:parentId+":"+i,css:item[1],media:item[2],sourceMap:item[3]};newStyles[id]?newStyles[id].parts.push(part):styles.push(newStyles[id]={id:id,parts:[part]})}return styles}__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,"default",function(){return addStylesClient});var hasDocument="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!hasDocument)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var stylesInDom={},head=hasDocument&&(document.head||document.getElementsByTagName("head")[0]),singletonElement=null,singletonCounter=0,isProduction=!1,noop=function(){},options=null,ssrIdKey="data-vue-ssr-id",isOldIE="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function addStylesClient(parentId,list,_isProduction,_options){isProduction=_isProduction,options=_options||{};var styles=listToStyles(parentId,list);return addStylesToDom(styles),function(newList){for(var mayRemove=[],i=0;i<styles.length;i++){var item=styles[i];(domStyle=stylesInDom[item.id]).refs--,mayRemove.push(domStyle)}newList?addStylesToDom(styles=listToStyles(parentId,newList)):styles=[];for(i=0;i<mayRemove.length;i++){var domStyle;if(0===(domStyle=mayRemove[i]).refs){for(var j=0;j<domStyle.parts.length;j++)domStyle.parts[j]();delete stylesInDom[domStyle.id]}}}}function addStylesToDom(styles){for(var i=0;i<styles.length;i++){var item=styles[i],domStyle=stylesInDom[item.id];if(domStyle){domStyle.refs++;for(var j=0;j<domStyle.parts.length;j++)domStyle.parts[j](item.parts[j]);for(;j<item.parts.length;j++)domStyle.parts.push(addStyle(item.parts[j]));domStyle.parts.length>item.parts.length&&(domStyle.parts.length=item.parts.length)}else{var parts=[];for(j=0;j<item.parts.length;j++)parts.push(addStyle(item.parts[j]));stylesInDom[item.id]={id:item.id,refs:1,parts:parts}}}}function createStyleElement(){var styleElement=document.createElement("style");return styleElement.type="text/css",head.appendChild(styleElement),styleElement}function addStyle(obj){var update,remove,styleElement=document.querySelector("style["+ssrIdKey+'~="'+obj.id+'"]');if(styleElement){if(isProduction)return noop;styleElement.parentNode.removeChild(styleElement)}if(isOldIE){var styleIndex=singletonCounter++;styleElement=singletonElement||(singletonElement=createStyleElement()),update=applyToSingletonTag.bind(null,styleElement,styleIndex,!1),remove=applyToSingletonTag.bind(null,styleElement,styleIndex,!0)}else styleElement=createStyleElement(),update=function(styleElement,obj){var css=obj.css,media=obj.media,sourceMap=obj.sourceMap;media&&styleElement.setAttribute("media",media);options.ssrId&&styleElement.setAttribute(ssrIdKey,obj.id);sourceMap&&(css+="\n/*# sourceURL="+sourceMap.sources[0]+" */",css+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))))+" */");if(styleElement.styleSheet)styleElement.styleSheet.cssText=css;else{for(;styleElement.firstChild;)styleElement.removeChild(styleElement.firstChild);styleElement.appendChild(document.createTextNode(css))}}.bind(null,styleElement),remove=function(){styleElement.parentNode.removeChild(styleElement)};return update(obj),function(newObj){if(newObj){if(newObj.css===obj.css&&newObj.media===obj.media&&newObj.sourceMap===obj.sourceMap)return;update(obj=newObj)}else remove()}}var textStore,replaceText=(textStore=[],function(index,replacement){return textStore[index]=replacement,textStore.filter(Boolean).join("\n")});function applyToSingletonTag(styleElement,index,remove,obj){var css=remove?"":obj.css;if(styleElement.styleSheet)styleElement.styleSheet.cssText=replaceText(index,css);else{var cssNode=document.createTextNode(css),childNodes=styleElement.childNodes;childNodes[index]&&styleElement.removeChild(childNodes[index]),childNodes.length?styleElement.insertBefore(cssNode,childNodes[index]):styleElement.appendChild(cssNode)}}},"./node_modules/vue/dist/vue.runtime.esm.js":function(module,__webpack_exports__,__webpack_require__){"use strict";(function(global,setImmediate){
-/*!
- * Vue.js v2.6.4
- * (c) 2014-2019 Evan You
- * Released under the MIT License.
- */
-var emptyObject=Object.freeze({});function isUndef(v){return null==v}function isDef(v){return null!=v}function isTrue(v){return!0===v}function isPrimitive(value){return"string"==typeof value||"number"==typeof value||"symbol"==typeof value||"boolean"==typeof value}function isObject(obj){return null!==obj&&"object"==typeof obj}var _toString=Object.prototype.toString;function isPlainObject(obj){return"[object Object]"===_toString.call(obj)}function isRegExp(v){return"[object RegExp]"===_toString.call(v)}function isValidArrayIndex(val){var n=parseFloat(String(val));return n>=0&&Math.floor(n)===n&&isFinite(val)}function isPromise(val){return isDef(val)&&"function"==typeof val.then&&"function"==typeof val.catch}function toString(val){return null==val?"":Array.isArray(val)||isPlainObject(val)&&val.toString===_toString?JSON.stringify(val,null,2):String(val)}function toNumber(val){var n=parseFloat(val);return isNaN(n)?val:n}function makeMap(str,expectsLowerCase){for(var map=Object.create(null),list=str.split(","),i=0;i<list.length;i++)map[list[i]]=!0;return expectsLowerCase?function(val){return map[val.toLowerCase()]}:function(val){return map[val]}}makeMap("slot,component",!0);var isReservedAttribute=makeMap("key,ref,slot,slot-scope,is");function remove(arr,item){if(arr.length){var index=arr.indexOf(item);if(index>-1)return arr.splice(index,1)}}var hasOwnProperty=Object.prototype.hasOwnProperty;function hasOwn(obj,key){return hasOwnProperty.call(obj,key)}function cached(fn){var cache=Object.create(null);return function(str){return cache[str]||(cache[str]=fn(str))}}var camelizeRE=/-(\w)/g,camelize=cached(function(str){return str.replace(camelizeRE,function(_,c){return c?c.toUpperCase():""})}),capitalize=cached(function(str){return str.charAt(0).toUpperCase()+str.slice(1)}),hyphenateRE=/\B([A-Z])/g,hyphenate=cached(function(str){return str.replace(hyphenateRE,"-$1").toLowerCase()});var bind=Function.prototype.bind?function(fn,ctx){return fn.bind(ctx)}:function(fn,ctx){function boundFn(a){var l=arguments.length;return l?l>1?fn.apply(ctx,arguments):fn.call(ctx,a):fn.call(ctx)}return boundFn._length=fn.length,boundFn};function toArray(list,start){start=start||0;for(var i=list.length-start,ret=new Array(i);i--;)ret[i]=list[i+start];return ret}function extend(to,_from){for(var key in _from)to[key]=_from[key];return to}function toObject(arr){for(var res={},i=0;i<arr.length;i++)arr[i]&&extend(res,arr[i]);return res}function noop(a,b,c){}var no=function(a,b,c){return!1},identity=function(_){return _};function looseEqual(a,b){if(a===b)return!0;var isObjectA=isObject(a),isObjectB=isObject(b);if(!isObjectA||!isObjectB)return!isObjectA&&!isObjectB&&String(a)===String(b);try{var isArrayA=Array.isArray(a),isArrayB=Array.isArray(b);if(isArrayA&&isArrayB)return a.length===b.length&&a.every(function(e,i){return looseEqual(e,b[i])});if(a instanceof Date&&b instanceof Date)return a.getTime()===b.getTime();if(isArrayA||isArrayB)return!1;var keysA=Object.keys(a),keysB=Object.keys(b);return keysA.length===keysB.length&&keysA.every(function(key){return looseEqual(a[key],b[key])})}catch(e){return!1}}function looseIndexOf(arr,val){for(var i=0;i<arr.length;i++)if(looseEqual(arr[i],val))return i;return-1}function once(fn){var called=!1;return function(){called||(called=!0,fn.apply(this,arguments))}}var SSR_ATTR="data-server-rendered",ASSET_TYPES=["component","directive","filter"],LIFECYCLE_HOOKS=["beforeCreate","created","beforeMount","mounted","beforeUpdate","updated","beforeDestroy","destroyed","activated","deactivated","errorCaptured","serverPrefetch"],config={optionMergeStrategies:Object.create(null),silent:!1,productionTip:!1,devtools:!1,performance:!1,errorHandler:null,warnHandler:null,ignoredElements:[],keyCodes:Object.create(null),isReservedTag:no,isReservedAttr:no,isUnknownElement:no,getTagNamespace:noop,parsePlatformTagName:identity,mustUseProp:no,async:!0,_lifecycleHooks:LIFECYCLE_HOOKS},unicodeLetters="a-zA-Z·À-ÖØ-öø-ͽͿ-῿‌-‍‿-⁀⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�";function def(obj,key,val,enumerable){Object.defineProperty(obj,key,{value:val,enumerable:!!enumerable,writable:!0,configurable:!0})}var bailRE=new RegExp("[^"+unicodeLetters+".$_\\d]");var _isServer,hasProto="__proto__"in{},inBrowser="undefined"!=typeof window,inWeex="undefined"!=typeof WXEnvironment&&!!WXEnvironment.platform,weexPlatform=inWeex&&WXEnvironment.platform.toLowerCase(),UA=inBrowser&&window.navigator.userAgent.toLowerCase(),isIE=UA&&/msie|trident/.test(UA),isIE9=UA&&UA.indexOf("msie 9.0")>0,isEdge=UA&&UA.indexOf("edge/")>0,isIOS=(UA&&UA.indexOf("android"),UA&&/iphone|ipad|ipod|ios/.test(UA)||"ios"===weexPlatform),isFF=(UA&&/chrome\/\d+/.test(UA),UA&&/phantomjs/.test(UA),UA&&UA.match(/firefox\/(\d+)/)),nativeWatch={}.watch,supportsPassive=!1;if(inBrowser)try{var opts={};Object.defineProperty(opts,"passive",{get:function(){supportsPassive=!0}}),window.addEventListener("test-passive",null,opts)}catch(e){}var isServerRendering=function(){return void 0===_isServer&&(_isServer=!inBrowser&&!inWeex&&void 0!==global&&(global.process&&"server"===global.process.env.VUE_ENV)),_isServer},devtools=inBrowser&&window.__VUE_DEVTOOLS_GLOBAL_HOOK__;function isNative(Ctor){return"function"==typeof Ctor&&/native code/.test(Ctor.toString())}var _Set,hasSymbol="undefined"!=typeof Symbol&&isNative(Symbol)&&"undefined"!=typeof Reflect&&isNative(Reflect.ownKeys);_Set="undefined"!=typeof Set&&isNative(Set)?Set:function(){function Set(){this.set=Object.create(null)}return Set.prototype.has=function(key){return!0===this.set[key]},Set.prototype.add=function(key){this.set[key]=!0},Set.prototype.clear=function(){this.set=Object.create(null)},Set}();var warn=noop,uid=0,Dep=function(){this.id=uid++,this.subs=[]};Dep.prototype.addSub=function(sub){this.subs.push(sub)},Dep.prototype.removeSub=function(sub){remove(this.subs,sub)},Dep.prototype.depend=function(){Dep.target&&Dep.target.addDep(this)},Dep.prototype.notify=function(){var subs=this.subs.slice();for(var i=0,l=subs.length;i<l;i++)subs[i].update()},Dep.target=null;var targetStack=[];function pushTarget(target){targetStack.push(target),Dep.target=target}function popTarget(){targetStack.pop(),Dep.target=targetStack[targetStack.length-1]}var VNode=function(tag,data,children,text,elm,context,componentOptions,asyncFactory){this.tag=tag,this.data=data,this.children=children,this.text=text,this.elm=elm,this.ns=void 0,this.context=context,this.fnContext=void 0,this.fnOptions=void 0,this.fnScopeId=void 0,this.key=data&&data.key,this.componentOptions=componentOptions,this.componentInstance=void 0,this.parent=void 0,this.raw=!1,this.isStatic=!1,this.isRootInsert=!0,this.isComment=!1,this.isCloned=!1,this.isOnce=!1,this.asyncFactory=asyncFactory,this.asyncMeta=void 0,this.isAsyncPlaceholder=!1},prototypeAccessors={child:{configurable:!0}};prototypeAccessors.child.get=function(){return this.componentInstance},Object.defineProperties(VNode.prototype,prototypeAccessors);var createEmptyVNode=function(text){void 0===text&&(text="");var node=new VNode;return node.text=text,node.isComment=!0,node};function createTextVNode(val){return new VNode(void 0,void 0,void 0,String(val))}function cloneVNode(vnode){var cloned=new VNode(vnode.tag,vnode.data,vnode.children&&vnode.children.slice(),vnode.text,vnode.elm,vnode.context,vnode.componentOptions,vnode.asyncFactory);return cloned.ns=vnode.ns,cloned.isStatic=vnode.isStatic,cloned.key=vnode.key,cloned.isComment=vnode.isComment,cloned.fnContext=vnode.fnContext,cloned.fnOptions=vnode.fnOptions,cloned.fnScopeId=vnode.fnScopeId,cloned.asyncMeta=vnode.asyncMeta,cloned.isCloned=!0,cloned}var arrayProto=Array.prototype,arrayMethods=Object.create(arrayProto);["push","pop","shift","unshift","splice","sort","reverse"].forEach(function(method){var original=arrayProto[method];def(arrayMethods,method,function(){for(var args=[],len=arguments.length;len--;)args[len]=arguments[len];var inserted,result=original.apply(this,args),ob=this.__ob__;switch(method){case"push":case"unshift":inserted=args;break;case"splice":inserted=args.slice(2)}return inserted&&ob.observeArray(inserted),ob.dep.notify(),result})});var arrayKeys=Object.getOwnPropertyNames(arrayMethods),shouldObserve=!0;function toggleObserving(value){shouldObserve=value}var Observer=function(value){var src;this.value=value,this.dep=new Dep,this.vmCount=0,def(value,"__ob__",this),Array.isArray(value)?(hasProto?(src=arrayMethods,value.__proto__=src):function(target,src,keys){for(var i=0,l=keys.length;i<l;i++){var key=keys[i];def(target,key,src[key])}}(value,arrayMethods,arrayKeys),this.observeArray(value)):this.walk(value)};function observe(value,asRootData){var ob;if(isObject(value)&&!(value instanceof VNode))return hasOwn(value,"__ob__")&&value.__ob__ instanceof Observer?ob=value.__ob__:shouldObserve&&!isServerRendering()&&(Array.isArray(value)||isPlainObject(value))&&Object.isExtensible(value)&&!value._isVue&&(ob=new Observer(value)),asRootData&&ob&&ob.vmCount++,ob}function defineReactive$$1(obj,key,val,customSetter,shallow){var dep=new Dep,property=Object.getOwnPropertyDescriptor(obj,key);if(!property||!1!==property.configurable){var getter=property&&property.get,setter=property&&property.set;getter&&!setter||2!==arguments.length||(val=obj[key]);var childOb=!shallow&&observe(val);Object.defineProperty(obj,key,{enumerable:!0,configurable:!0,get:function(){var value=getter?getter.call(obj):val;return Dep.target&&(dep.depend(),childOb&&(childOb.dep.depend(),Array.isArray(value)&&function dependArray(value){for(var e=void 0,i=0,l=value.length;i<l;i++)(e=value[i])&&e.__ob__&&e.__ob__.dep.depend(),Array.isArray(e)&&dependArray(e)}(value))),value},set:function(newVal){var value=getter?getter.call(obj):val;newVal===value||newVal!=newVal&&value!=value||getter&&!setter||(setter?setter.call(obj,newVal):val=newVal,childOb=!shallow&&observe(newVal),dep.notify())}})}}function set(target,key,val){if(Array.isArray(target)&&isValidArrayIndex(key))return target.length=Math.max(target.length,key),target.splice(key,1,val),val;if(key in target&&!(key in Object.prototype))return target[key]=val,val;var ob=target.__ob__;return target._isVue||ob&&ob.vmCount?val:ob?(defineReactive$$1(ob.value,key,val),ob.dep.notify(),val):(target[key]=val,val)}function del(target,key){if(Array.isArray(target)&&isValidArrayIndex(key))target.splice(key,1);else{var ob=target.__ob__;target._isVue||ob&&ob.vmCount||hasOwn(target,key)&&(delete target[key],ob&&ob.dep.notify())}}Observer.prototype.walk=function(obj){for(var keys=Object.keys(obj),i=0;i<keys.length;i++)defineReactive$$1(obj,keys[i])},Observer.prototype.observeArray=function(items){for(var i=0,l=items.length;i<l;i++)observe(items[i])};var strats=config.optionMergeStrategies;function mergeData(to,from){if(!from)return to;for(var key,toVal,fromVal,keys=hasSymbol?Reflect.ownKeys(from):Object.keys(from),i=0;i<keys.length;i++)"__ob__"!==(key=keys[i])&&(toVal=to[key],fromVal=from[key],hasOwn(to,key)?toVal!==fromVal&&isPlainObject(toVal)&&isPlainObject(fromVal)&&mergeData(toVal,fromVal):set(to,key,fromVal));return to}function mergeDataOrFn(parentVal,childVal,vm){return vm?function(){var instanceData="function"==typeof childVal?childVal.call(vm,vm):childVal,defaultData="function"==typeof parentVal?parentVal.call(vm,vm):parentVal;return instanceData?mergeData(instanceData,defaultData):defaultData}:childVal?parentVal?function(){return mergeData("function"==typeof childVal?childVal.call(this,this):childVal,"function"==typeof parentVal?parentVal.call(this,this):parentVal)}:childVal:parentVal}function mergeHook(parentVal,childVal){var res=childVal?parentVal?parentVal.concat(childVal):Array.isArray(childVal)?childVal:[childVal]:parentVal;return res?function(hooks){for(var res=[],i=0;i<hooks.length;i++)-1===res.indexOf(hooks[i])&&res.push(hooks[i]);return res}(res):res}function mergeAssets(parentVal,childVal,vm,key){var res=Object.create(parentVal||null);return childVal?extend(res,childVal):res}strats.data=function(parentVal,childVal,vm){return vm?mergeDataOrFn(parentVal,childVal,vm):childVal&&"function"!=typeof childVal?parentVal:mergeDataOrFn(parentVal,childVal)},LIFECYCLE_HOOKS.forEach(function(hook){strats[hook]=mergeHook}),ASSET_TYPES.forEach(function(type){strats[type+"s"]=mergeAssets}),strats.watch=function(parentVal,childVal,vm,key){if(parentVal===nativeWatch&&(parentVal=void 0),childVal===nativeWatch&&(childVal=void 0),!childVal)return Object.create(parentVal||null);if(!parentVal)return childVal;var ret={};for(var key$1 in extend(ret,parentVal),childVal){var parent=ret[key$1],child=childVal[key$1];parent&&!Array.isArray(parent)&&(parent=[parent]),ret[key$1]=parent?parent.concat(child):Array.isArray(child)?child:[child]}return ret},strats.props=strats.methods=strats.inject=strats.computed=function(parentVal,childVal,vm,key){if(!parentVal)return childVal;var ret=Object.create(null);return extend(ret,parentVal),childVal&&extend(ret,childVal),ret},strats.provide=mergeDataOrFn;var defaultStrat=function(parentVal,childVal){return void 0===childVal?parentVal:childVal};function mergeOptions(parent,child,vm){if("function"==typeof child&&(child=child.options),function(options,vm){var props=options.props;if(props){var i,val,res={};if(Array.isArray(props))for(i=props.length;i--;)"string"==typeof(val=props[i])&&(res[camelize(val)]={type:null});else if(isPlainObject(props))for(var key in props)val=props[key],res[camelize(key)]=isPlainObject(val)?val:{type:val};options.props=res}}(child),function(options,vm){var inject=options.inject;if(inject){var normalized=options.inject={};if(Array.isArray(inject))for(var i=0;i<inject.length;i++)normalized[inject[i]]={from:inject[i]};else if(isPlainObject(inject))for(var key in inject){var val=inject[key];normalized[key]=isPlainObject(val)?extend({from:key},val):{from:val}}}}(child),function(options){var dirs=options.directives;if(dirs)for(var key in dirs){var def$$1=dirs[key];"function"==typeof def$$1&&(dirs[key]={bind:def$$1,update:def$$1})}}(child),!child._base&&(child.extends&&(parent=mergeOptions(parent,child.extends,vm)),child.mixins))for(var i=0,l=child.mixins.length;i<l;i++)parent=mergeOptions(parent,child.mixins[i],vm);var key,options={};for(key in parent)mergeField(key);for(key in child)hasOwn(parent,key)||mergeField(key);function mergeField(key){var strat=strats[key]||defaultStrat;options[key]=strat(parent[key],child[key],vm,key)}return options}function resolveAsset(options,type,id,warnMissing){if("string"==typeof id){var assets=options[type];if(hasOwn(assets,id))return assets[id];var camelizedId=camelize(id);if(hasOwn(assets,camelizedId))return assets[camelizedId];var PascalCaseId=capitalize(camelizedId);return hasOwn(assets,PascalCaseId)?assets[PascalCaseId]:assets[id]||assets[camelizedId]||assets[PascalCaseId]}}function validateProp(key,propOptions,propsData,vm){var prop=propOptions[key],absent=!hasOwn(propsData,key),value=propsData[key],booleanIndex=getTypeIndex(Boolean,prop.type);if(booleanIndex>-1)if(absent&&!hasOwn(prop,"default"))value=!1;else if(""===value||value===hyphenate(key)){var stringIndex=getTypeIndex(String,prop.type);(stringIndex<0||booleanIndex<stringIndex)&&(value=!0)}if(void 0===value){value=function(vm,prop,key){if(!hasOwn(prop,"default"))return;var def=prop.default;0;if(vm&&vm.$options.propsData&&void 0===vm.$options.propsData[key]&&void 0!==vm._props[key])return vm._props[key];return"function"==typeof def&&"Function"!==getType(prop.type)?def.call(vm):def}(vm,prop,key);var prevShouldObserve=shouldObserve;toggleObserving(!0),observe(value),toggleObserving(prevShouldObserve)}return value}function getType(fn){var match=fn&&fn.toString().match(/^\s*function (\w+)/);return match?match[1]:""}function isSameType(a,b){return getType(a)===getType(b)}function getTypeIndex(type,expectedTypes){if(!Array.isArray(expectedTypes))return isSameType(expectedTypes,type)?0:-1;for(var i=0,len=expectedTypes.length;i<len;i++)if(isSameType(expectedTypes[i],type))return i;return-1}function handleError(err,vm,info){if(vm)for(var cur=vm;cur=cur.$parent;){var hooks=cur.$options.errorCaptured;if(hooks)for(var i=0;i<hooks.length;i++)try{if(!1===hooks[i].call(cur,err,vm,info))return}catch(e){globalHandleError(e,cur,"errorCaptured hook")}}globalHandleError(err,vm,info)}function invokeWithErrorHandling(handler,context,args,vm,info){var res;try{(res=args?handler.apply(context,args):handler.call(context))&&!res._isVue&&isPromise(res)&&res.catch(function(e){return handleError(e,vm,info+" (Promise/async)")})}catch(e){handleError(e,vm,info)}return res}function globalHandleError(err,vm,info){if(config.errorHandler)try{return config.errorHandler.call(null,err,vm,info)}catch(e){e!==err&&logError(e,null,"config.errorHandler")}logError(err,vm,info)}function logError(err,vm,info){if(!inBrowser&&!inWeex||"undefined"==typeof console)throw err;console.error(err)}var timerFunc,isUsingMicroTask=!1,callbacks=[],pending=!1;function flushCallbacks(){pending=!1;var copies=callbacks.slice(0);callbacks.length=0;for(var i=0;i<copies.length;i++)copies[i]()}if("undefined"!=typeof Promise&&isNative(Promise)){var p=Promise.resolve();timerFunc=function(){p.then(flushCallbacks),isIOS&&setTimeout(noop)},isUsingMicroTask=!0}else if(isIE||"undefined"==typeof MutationObserver||!isNative(MutationObserver)&&"[object MutationObserverConstructor]"!==MutationObserver.toString())timerFunc=void 0!==setImmediate&&isNative(setImmediate)?function(){setImmediate(flushCallbacks)}:function(){setTimeout(flushCallbacks,0)};else{var counter=1,observer=new MutationObserver(flushCallbacks),textNode=document.createTextNode(String(counter));observer.observe(textNode,{characterData:!0}),timerFunc=function(){counter=(counter+1)%2,textNode.data=String(counter)},isUsingMicroTask=!0}function nextTick(cb,ctx){var _resolve;if(callbacks.push(function(){if(cb)try{cb.call(ctx)}catch(e){handleError(e,ctx,"nextTick")}else _resolve&&_resolve(ctx)}),pending||(pending=!0,timerFunc()),!cb&&"undefined"!=typeof Promise)return new Promise(function(resolve){_resolve=resolve})}var seenObjects=new _Set;function traverse(val){!function _traverse(val,seen){var i,keys;var isA=Array.isArray(val);if(!isA&&!isObject(val)||Object.isFrozen(val)||val instanceof VNode)return;if(val.__ob__){var depId=val.__ob__.dep.id;if(seen.has(depId))return;seen.add(depId)}if(isA)for(i=val.length;i--;)_traverse(val[i],seen);else for(keys=Object.keys(val),i=keys.length;i--;)_traverse(val[keys[i]],seen)}(val,seenObjects),seenObjects.clear()}var normalizeEvent=cached(function(name){var passive="&"===name.charAt(0),once$$1="~"===(name=passive?name.slice(1):name).charAt(0),capture="!"===(name=once$$1?name.slice(1):name).charAt(0);return{name:name=capture?name.slice(1):name,once:once$$1,capture:capture,passive:passive}});function createFnInvoker(fns,vm){function invoker(){var arguments$1=arguments,fns=invoker.fns;if(!Array.isArray(fns))return invokeWithErrorHandling(fns,null,arguments,vm,"v-on handler");for(var cloned=fns.slice(),i=0;i<cloned.length;i++)invokeWithErrorHandling(cloned[i],null,arguments$1,vm,"v-on handler")}return invoker.fns=fns,invoker}function updateListeners(on,oldOn,add,remove$$1,createOnceHandler,vm){var name,cur,old,event;for(name in on)cur=on[name],old=oldOn[name],event=normalizeEvent(name),isUndef(cur)||(isUndef(old)?(isUndef(cur.fns)&&(cur=on[name]=createFnInvoker(cur,vm)),isTrue(event.once)&&(cur=on[name]=createOnceHandler(event.name,cur,event.capture)),add(event.name,cur,event.capture,event.passive,event.params)):cur!==old&&(old.fns=cur,on[name]=old));for(name in oldOn)isUndef(on[name])&&remove$$1((event=normalizeEvent(name)).name,oldOn[name],event.capture)}function mergeVNodeHook(def,hookKey,hook){var invoker;def instanceof VNode&&(def=def.data.hook||(def.data.hook={}));var oldHook=def[hookKey];function wrappedHook(){hook.apply(this,arguments),remove(invoker.fns,wrappedHook)}isUndef(oldHook)?invoker=createFnInvoker([wrappedHook]):isDef(oldHook.fns)&&isTrue(oldHook.merged)?(invoker=oldHook).fns.push(wrappedHook):invoker=createFnInvoker([oldHook,wrappedHook]),invoker.merged=!0,def[hookKey]=invoker}function checkProp(res,hash,key,altKey,preserve){if(isDef(hash)){if(hasOwn(hash,key))return res[key]=hash[key],preserve||delete hash[key],!0;if(hasOwn(hash,altKey))return res[key]=hash[altKey],preserve||delete hash[altKey],!0}return!1}function normalizeChildren(children){return isPrimitive(children)?[createTextVNode(children)]:Array.isArray(children)?function normalizeArrayChildren(children,nestedIndex){var res=[];var i,c,lastIndex,last;for(i=0;i<children.length;i++)isUndef(c=children[i])||"boolean"==typeof c||(lastIndex=res.length-1,last=res[lastIndex],Array.isArray(c)?c.length>0&&(isTextNode((c=normalizeArrayChildren(c,(nestedIndex||"")+"_"+i))[0])&&isTextNode(last)&&(res[lastIndex]=createTextVNode(last.text+c[0].text),c.shift()),res.push.apply(res,c)):isPrimitive(c)?isTextNode(last)?res[lastIndex]=createTextVNode(last.text+c):""!==c&&res.push(createTextVNode(c)):isTextNode(c)&&isTextNode(last)?res[lastIndex]=createTextVNode(last.text+c.text):(isTrue(children._isVList)&&isDef(c.tag)&&isUndef(c.key)&&isDef(nestedIndex)&&(c.key="__vlist"+nestedIndex+"_"+i+"__"),res.push(c)));return res}(children):void 0}function isTextNode(node){return isDef(node)&&isDef(node.text)&&!1===node.isComment}function resolveInject(inject,vm){if(inject){for(var result=Object.create(null),keys=hasSymbol?Reflect.ownKeys(inject):Object.keys(inject),i=0;i<keys.length;i++){var key=keys[i];if("__ob__"!==key){for(var provideKey=inject[key].from,source=vm;source;){if(source._provided&&hasOwn(source._provided,provideKey)){result[key]=source._provided[provideKey];break}source=source.$parent}if(!source)if("default"in inject[key]){var provideDefault=inject[key].default;result[key]="function"==typeof provideDefault?provideDefault.call(vm):provideDefault}else 0}}return result}}function resolveSlots(children,context){if(!children||!children.length)return{};for(var slots={},i=0,l=children.length;i<l;i++){var child=children[i],data=child.data;if(data&&data.attrs&&data.attrs.slot&&delete data.attrs.slot,child.context!==context&&child.fnContext!==context||!data||null==data.slot)(slots.default||(slots.default=[])).push(child);else{var name=data.slot,slot=slots[name]||(slots[name]=[]);"template"===child.tag?slot.push.apply(slot,child.children||[]):slot.push(child)}}for(var name$1 in slots)slots[name$1].every(isWhitespace)&&delete slots[name$1];return slots}function isWhitespace(node){return node.isComment&&!node.asyncFactory||" "===node.text}function normalizeScopedSlots(slots,normalSlots,prevSlots){var res;if(slots){if(slots._normalized)return slots._normalized;if(slots.$stable&&prevSlots&&prevSlots!==emptyObject)return prevSlots;for(var key in res={},slots)slots[key]&&"$"!==key[0]&&(res[key]=normalizeScopedSlot(normalSlots,key,slots[key]))}else res={};for(var key$1 in normalSlots)key$1 in res||(res[key$1]=proxyNormalSlot(normalSlots,key$1));return slots&&Object.isExtensible(slots)&&(slots._normalized=res),def(res,"$stable",!slots||!!slots.$stable),res}function normalizeScopedSlot(normalSlots,key,fn){var normalized=function(scope){var res=fn(scope||{});return(res=res&&"object"==typeof res&&!Array.isArray(res)?[res]:normalizeChildren(res))&&0===res.length?void 0:res};return fn.proxy&&Object.defineProperty(normalSlots,key,{get:normalized,enumerable:!0,configurable:!0}),normalized}function proxyNormalSlot(slots,key){return function(){return slots[key]}}function renderList(val,render){var ret,i,l,keys,key;if(Array.isArray(val)||"string"==typeof val)for(ret=new Array(val.length),i=0,l=val.length;i<l;i++)ret[i]=render(val[i],i);else if("number"==typeof val)for(ret=new Array(val),i=0;i<val;i++)ret[i]=render(i+1,i);else if(isObject(val))if(hasSymbol&&val[Symbol.iterator]){ret=[];for(var iterator=val[Symbol.iterator](),result=iterator.next();!result.done;)ret.push(render(result.value,ret.length)),result=iterator.next()}else for(keys=Object.keys(val),ret=new Array(keys.length),i=0,l=keys.length;i<l;i++)key=keys[i],ret[i]=render(val[key],key,i);return isDef(ret)||(ret=[]),ret._isVList=!0,ret}function renderSlot(name,fallback,props,bindObject){var nodes,scopedSlotFn=this.$scopedSlots[name];scopedSlotFn?(props=props||{},bindObject&&(props=extend(extend({},bindObject),props)),nodes=scopedSlotFn(props)||fallback):nodes=this.$slots[name]||fallback;var target=props&&props.slot;return target?this.$createElement("template",{slot:target},nodes):nodes}function resolveFilter(id){return resolveAsset(this.$options,"filters",id)||identity}function isKeyNotMatch(expect,actual){return Array.isArray(expect)?-1===expect.indexOf(actual):expect!==actual}function checkKeyCodes(eventKeyCode,key,builtInKeyCode,eventKeyName,builtInKeyName){var mappedKeyCode=config.keyCodes[key]||builtInKeyCode;return builtInKeyName&&eventKeyName&&!config.keyCodes[key]?isKeyNotMatch(builtInKeyName,eventKeyName):mappedKeyCode?isKeyNotMatch(mappedKeyCode,eventKeyCode):eventKeyName?hyphenate(eventKeyName)!==key:void 0}function bindObjectProps(data,tag,value,asProp,isSync){if(value)if(isObject(value)){var hash;Array.isArray(value)&&(value=toObject(value));var loop=function(key){if("class"===key||"style"===key||isReservedAttribute(key))hash=data;else{var type=data.attrs&&data.attrs.type;hash=asProp||config.mustUseProp(tag,type,key)?data.domProps||(data.domProps={}):data.attrs||(data.attrs={})}var camelizedKey=camelize(key);key in hash||camelizedKey in hash||(hash[key]=value[key],isSync&&((data.on||(data.on={}))["update:"+camelizedKey]=function($event){value[key]=$event}))};for(var key in value)loop(key)}else;return data}function renderStatic(index,isInFor){var cached=this._staticTrees||(this._staticTrees=[]),tree=cached[index];return tree&&!isInFor?tree:(markStatic(tree=cached[index]=this.$options.staticRenderFns[index].call(this._renderProxy,null,this),"__static__"+index,!1),tree)}function markOnce(tree,index,key){return markStatic(tree,"__once__"+index+(key?"_"+key:""),!0),tree}function markStatic(tree,key,isOnce){if(Array.isArray(tree))for(var i=0;i<tree.length;i++)tree[i]&&"string"!=typeof tree[i]&&markStaticNode(tree[i],key+"_"+i,isOnce);else markStaticNode(tree,key,isOnce)}function markStaticNode(node,key,isOnce){node.isStatic=!0,node.key=key,node.isOnce=isOnce}function bindObjectListeners(data,value){if(value)if(isPlainObject(value)){var on=data.on=data.on?extend({},data.on):{};for(var key in value){var existing=on[key],ours=value[key];on[key]=existing?[].concat(existing,ours):ours}}else;return data}function resolveScopedSlots(fns,hasDynamicKeys,res){res=res||{$stable:!hasDynamicKeys};for(var i=0;i<fns.length;i++){var slot=fns[i];Array.isArray(slot)?resolveScopedSlots(slot,hasDynamicKeys,res):slot&&(slot.proxy&&(slot.fn.proxy=!0),res[slot.key]=slot.fn)}return res}function bindDynamicKeys(baseObj,values){for(var i=0;i<values.length;i+=2){var key=values[i];"string"==typeof key&&key&&(baseObj[values[i]]=values[i+1])}return baseObj}function prependModifier(value,symbol){return"string"==typeof value?symbol+value:value}function installRenderHelpers(target){target._o=markOnce,target._n=toNumber,target._s=toString,target._l=renderList,target._t=renderSlot,target._q=looseEqual,target._i=looseIndexOf,target._m=renderStatic,target._f=resolveFilter,target._k=checkKeyCodes,target._b=bindObjectProps,target._v=createTextVNode,target._e=createEmptyVNode,target._u=resolveScopedSlots,target._g=bindObjectListeners,target._d=bindDynamicKeys,target._p=prependModifier}function FunctionalRenderContext(data,props,children,parent,Ctor){var contextVm,this$1=this,options=Ctor.options;hasOwn(parent,"_uid")?(contextVm=Object.create(parent))._original=parent:(contextVm=parent,parent=parent._original);var isCompiled=isTrue(options._compiled),needNormalization=!isCompiled;this.data=data,this.props=props,this.children=children,this.parent=parent,this.listeners=data.on||emptyObject,this.injections=resolveInject(options.inject,parent),this.slots=function(){return this$1.$slots||normalizeScopedSlots(data.scopedSlots,this$1.$slots=resolveSlots(children,parent)),this$1.$slots},Object.defineProperty(this,"scopedSlots",{enumerable:!0,get:function(){return normalizeScopedSlots(data.scopedSlots,this.slots())}}),isCompiled&&(this.$options=options,this.$slots=this.slots(),this.$scopedSlots=normalizeScopedSlots(data.scopedSlots,this.$slots)),options._scopeId?this._c=function(a,b,c,d){var vnode=createElement(contextVm,a,b,c,d,needNormalization);return vnode&&!Array.isArray(vnode)&&(vnode.fnScopeId=options._scopeId,vnode.fnContext=parent),vnode}:this._c=function(a,b,c,d){return createElement(contextVm,a,b,c,d,needNormalization)}}function cloneAndMarkFunctionalResult(vnode,data,contextVm,options,renderContext){var clone=cloneVNode(vnode);return clone.fnContext=contextVm,clone.fnOptions=options,data.slot&&((clone.data||(clone.data={})).slot=data.slot),clone}function mergeProps(to,from){for(var key in from)to[camelize(key)]=from[key]}installRenderHelpers(FunctionalRenderContext.prototype);var componentVNodeHooks={init:function(vnode,hydrating){if(vnode.componentInstance&&!vnode.componentInstance._isDestroyed&&vnode.data.keepAlive){var mountedNode=vnode;componentVNodeHooks.prepatch(mountedNode,mountedNode)}else{(vnode.componentInstance=function(vnode,parent){var options={_isComponent:!0,_parentVnode:vnode,parent:parent},inlineTemplate=vnode.data.inlineTemplate;isDef(inlineTemplate)&&(options.render=inlineTemplate.render,options.staticRenderFns=inlineTemplate.staticRenderFns);return new vnode.componentOptions.Ctor(options)}(vnode,activeInstance)).$mount(hydrating?vnode.elm:void 0,hydrating)}},prepatch:function(oldVnode,vnode){var options=vnode.componentOptions;!function(vm,propsData,listeners,parentVnode,renderChildren){0;var hasDynamicScopedSlot=!!(parentVnode.data.scopedSlots&&!parentVnode.data.scopedSlots.$stable||vm.$scopedSlots!==emptyObject&&!vm.$scopedSlots.$stable),needsForceUpdate=!!(renderChildren||vm.$options._renderChildren||hasDynamicScopedSlot);vm.$options._parentVnode=parentVnode,vm.$vnode=parentVnode,vm._vnode&&(vm._vnode.parent=parentVnode);if(vm.$options._renderChildren=renderChildren,vm.$attrs=parentVnode.data.attrs||emptyObject,vm.$listeners=listeners||emptyObject,propsData&&vm.$options.props){toggleObserving(!1);for(var props=vm._props,propKeys=vm.$options._propKeys||[],i=0;i<propKeys.length;i++){var key=propKeys[i],propOptions=vm.$options.props;props[key]=validateProp(key,propOptions,propsData,vm)}toggleObserving(!0),vm.$options.propsData=propsData}listeners=listeners||emptyObject;var oldListeners=vm.$options._parentListeners;vm.$options._parentListeners=listeners,updateComponentListeners(vm,listeners,oldListeners),needsForceUpdate&&(vm.$slots=resolveSlots(renderChildren,parentVnode.context),vm.$forceUpdate());0}(vnode.componentInstance=oldVnode.componentInstance,options.propsData,options.listeners,vnode,options.children)},insert:function(vnode){var vm,context=vnode.context,componentInstance=vnode.componentInstance;componentInstance._isMounted||(componentInstance._isMounted=!0,callHook(componentInstance,"mounted")),vnode.data.keepAlive&&(context._isMounted?((vm=componentInstance)._inactive=!1,activatedChildren.push(vm)):activateChildComponent(componentInstance,!0))},destroy:function(vnode){var componentInstance=vnode.componentInstance;componentInstance._isDestroyed||(vnode.data.keepAlive?function deactivateChildComponent(vm,direct){if(direct&&(vm._directInactive=!0,isInInactiveTree(vm)))return;if(!vm._inactive){vm._inactive=!0;for(var i=0;i<vm.$children.length;i++)deactivateChildComponent(vm.$children[i]);callHook(vm,"deactivated")}}(componentInstance,!0):componentInstance.$destroy())}},hooksToMerge=Object.keys(componentVNodeHooks);function createComponent(Ctor,data,context,children,tag){if(!isUndef(Ctor)){var baseCtor=context.$options._base;if(isObject(Ctor)&&(Ctor=baseCtor.extend(Ctor)),"function"==typeof Ctor){var asyncFactory;if(isUndef(Ctor.cid)&&void 0===(Ctor=function(factory,baseCtor){if(isTrue(factory.error)&&isDef(factory.errorComp))return factory.errorComp;if(isDef(factory.resolved))return factory.resolved;if(isTrue(factory.loading)&&isDef(factory.loadingComp))return factory.loadingComp;var owner=currentRenderingInstance;if(!isDef(factory.owners)){var owners=factory.owners=[owner],sync=!0,forceRender=function(renderCompleted){for(var i=0,l=owners.length;i<l;i++)owners[i].$forceUpdate();renderCompleted&&(owners.length=0)},resolve=once(function(res){factory.resolved=ensureCtor(res,baseCtor),sync?owners.length=0:forceRender(!0)}),reject=once(function(reason){isDef(factory.errorComp)&&(factory.error=!0,forceRender(!0))}),res=factory(resolve,reject);return isObject(res)&&(isPromise(res)?isUndef(factory.resolved)&&res.then(resolve,reject):isPromise(res.component)&&(res.component.then(resolve,reject),isDef(res.error)&&(factory.errorComp=ensureCtor(res.error,baseCtor)),isDef(res.loading)&&(factory.loadingComp=ensureCtor(res.loading,baseCtor),0===res.delay?factory.loading=!0:setTimeout(function(){isUndef(factory.resolved)&&isUndef(factory.error)&&(factory.loading=!0,forceRender(!1))},res.delay||200)),isDef(res.timeout)&&setTimeout(function(){isUndef(factory.resolved)&&reject(null)},res.timeout))),sync=!1,factory.loading?factory.loadingComp:factory.resolved}factory.owners.push(owner)}(asyncFactory=Ctor,baseCtor)))return function(factory,data,context,children,tag){var node=createEmptyVNode();return node.asyncFactory=factory,node.asyncMeta={data:data,context:context,children:children,tag:tag},node}(asyncFactory,data,context,children,tag);data=data||{},resolveConstructorOptions(Ctor),isDef(data.model)&&function(options,data){var prop=options.model&&options.model.prop||"value",event=options.model&&options.model.event||"input";(data.attrs||(data.attrs={}))[prop]=data.model.value;var on=data.on||(data.on={}),existing=on[event],callback=data.model.callback;isDef(existing)?(Array.isArray(existing)?-1===existing.indexOf(callback):existing!==callback)&&(on[event]=[callback].concat(existing)):on[event]=callback}(Ctor.options,data);var propsData=function(data,Ctor,tag){var propOptions=Ctor.options.props;if(!isUndef(propOptions)){var res={},attrs=data.attrs,props=data.props;if(isDef(attrs)||isDef(props))for(var key in propOptions){var altKey=hyphenate(key);checkProp(res,props,key,altKey,!0)||checkProp(res,attrs,key,altKey,!1)}return res}}(data,Ctor);if(isTrue(Ctor.options.functional))return function(Ctor,propsData,data,contextVm,children){var options=Ctor.options,props={},propOptions=options.props;if(isDef(propOptions))for(var key in propOptions)props[key]=validateProp(key,propOptions,propsData||emptyObject);else isDef(data.attrs)&&mergeProps(props,data.attrs),isDef(data.props)&&mergeProps(props,data.props);var renderContext=new FunctionalRenderContext(data,props,children,contextVm,Ctor),vnode=options.render.call(null,renderContext._c,renderContext);if(vnode instanceof VNode)return cloneAndMarkFunctionalResult(vnode,data,renderContext.parent,options);if(Array.isArray(vnode)){for(var vnodes=normalizeChildren(vnode)||[],res=new Array(vnodes.length),i=0;i<vnodes.length;i++)res[i]=cloneAndMarkFunctionalResult(vnodes[i],data,renderContext.parent,options);return res}}(Ctor,propsData,data,context,children);var listeners=data.on;if(data.on=data.nativeOn,isTrue(Ctor.options.abstract)){var slot=data.slot;data={},slot&&(data.slot=slot)}!function(data){for(var hooks=data.hook||(data.hook={}),i=0;i<hooksToMerge.length;i++){var key=hooksToMerge[i],existing=hooks[key],toMerge=componentVNodeHooks[key];existing===toMerge||existing&&existing._merged||(hooks[key]=existing?mergeHook$1(toMerge,existing):toMerge)}}(data);var name=Ctor.options.name||tag;return new VNode("vue-component-"+Ctor.cid+(name?"-"+name:""),data,void 0,void 0,void 0,context,{Ctor:Ctor,propsData:propsData,listeners:listeners,tag:tag,children:children},asyncFactory)}}}function mergeHook$1(f1,f2){var merged=function(a,b){f1(a,b),f2(a,b)};return merged._merged=!0,merged}var SIMPLE_NORMALIZE=1,ALWAYS_NORMALIZE=2;function createElement(context,tag,data,children,normalizationType,alwaysNormalize){return(Array.isArray(data)||isPrimitive(data))&&(normalizationType=children,children=data,data=void 0),isTrue(alwaysNormalize)&&(normalizationType=ALWAYS_NORMALIZE),function(context,tag,data,children,normalizationType){if(isDef(data)&&isDef(data.__ob__))return createEmptyVNode();isDef(data)&&isDef(data.is)&&(tag=data.is);if(!tag)return createEmptyVNode();0;Array.isArray(children)&&"function"==typeof children[0]&&((data=data||{}).scopedSlots={default:children[0]},children.length=0);normalizationType===ALWAYS_NORMALIZE?children=normalizeChildren(children):normalizationType===SIMPLE_NORMALIZE&&(children=function(children){for(var i=0;i<children.length;i++)if(Array.isArray(children[i]))return Array.prototype.concat.apply([],children);return children}(children));var vnode,ns;if("string"==typeof tag){var Ctor;ns=context.$vnode&&context.$vnode.ns||config.getTagNamespace(tag),vnode=config.isReservedTag(tag)?new VNode(config.parsePlatformTagName(tag),data,children,void 0,void 0,context):data&&data.pre||!isDef(Ctor=resolveAsset(context.$options,"components",tag))?new VNode(tag,data,children,void 0,void 0,context):createComponent(Ctor,data,context,children,tag)}else vnode=createComponent(tag,data,context,children);return Array.isArray(vnode)?vnode:isDef(vnode)?(isDef(ns)&&function applyNS(vnode,ns,force){vnode.ns=ns;"foreignObject"===vnode.tag&&(ns=void 0,force=!0);if(isDef(vnode.children))for(var i=0,l=vnode.children.length;i<l;i++){var child=vnode.children[i];isDef(child.tag)&&(isUndef(child.ns)||isTrue(force)&&"svg"!==child.tag)&&applyNS(child,ns,force)}}(vnode,ns),isDef(data)&&function(data){isObject(data.style)&&traverse(data.style);isObject(data.class)&&traverse(data.class)}(data),vnode):createEmptyVNode()}(context,tag,data,children,normalizationType)}var target,currentRenderingInstance=null;function ensureCtor(comp,base){return(comp.__esModule||hasSymbol&&"Module"===comp[Symbol.toStringTag])&&(comp=comp.default),isObject(comp)?base.extend(comp):comp}function isAsyncPlaceholder(node){return node.isComment&&node.asyncFactory}function getFirstComponentChild(children){if(Array.isArray(children))for(var i=0;i<children.length;i++){var c=children[i];if(isDef(c)&&(isDef(c.componentOptions)||isAsyncPlaceholder(c)))return c}}function add(event,fn){target.$on(event,fn)}function remove$1(event,fn){target.$off(event,fn)}function createOnceHandler(event,fn){var _target=target;return function onceHandler(){null!==fn.apply(null,arguments)&&_target.$off(event,onceHandler)}}function updateComponentListeners(vm,listeners,oldListeners){target=vm,updateListeners(listeners,oldListeners||{},add,remove$1,createOnceHandler,vm),target=void 0}var activeInstance=null;function setActiveInstance(vm){var prevActiveInstance=activeInstance;return activeInstance=vm,function(){activeInstance=prevActiveInstance}}function isInInactiveTree(vm){for(;vm&&(vm=vm.$parent);)if(vm._inactive)return!0;return!1}function activateChildComponent(vm,direct){if(direct){if(vm._directInactive=!1,isInInactiveTree(vm))return}else if(vm._directInactive)return;if(vm._inactive||null===vm._inactive){vm._inactive=!1;for(var i=0;i<vm.$children.length;i++)activateChildComponent(vm.$children[i]);callHook(vm,"activated")}}function callHook(vm,hook){pushTarget();var handlers=vm.$options[hook],info=hook+" hook";if(handlers)for(var i=0,j=handlers.length;i<j;i++)invokeWithErrorHandling(handlers[i],vm,null,vm,info);vm._hasHookEvent&&vm.$emit("hook:"+hook),popTarget()}var queue=[],activatedChildren=[],has={},waiting=!1,flushing=!1,index=0;var currentFlushTimestamp=0,getNow=Date.now;function flushSchedulerQueue(){var watcher,id;for(currentFlushTimestamp=getNow(),flushing=!0,queue.sort(function(a,b){return a.id-b.id}),index=0;index<queue.length;index++)(watcher=queue[index]).before&&watcher.before(),id=watcher.id,has[id]=null,watcher.run();var activatedQueue=activatedChildren.slice(),updatedQueue=queue.slice();index=queue.length=activatedChildren.length=0,has={},waiting=flushing=!1,function(queue){for(var i=0;i<queue.length;i++)queue[i]._inactive=!0,activateChildComponent(queue[i],!0)}(activatedQueue),function(queue){var i=queue.length;for(;i--;){var watcher=queue[i],vm=watcher.vm;vm._watcher===watcher&&vm._isMounted&&!vm._isDestroyed&&callHook(vm,"updated")}}(updatedQueue),devtools&&config.devtools&&devtools.emit("flush")}inBrowser&&getNow()>document.createEvent("Event").timeStamp&&(getNow=function(){return performance.now()});var uid$2=0,Watcher=function(vm,expOrFn,cb,options,isRenderWatcher){this.vm=vm,isRenderWatcher&&(vm._watcher=this),vm._watchers.push(this),options?(this.deep=!!options.deep,this.user=!!options.user,this.lazy=!!options.lazy,this.sync=!!options.sync,this.before=options.before):this.deep=this.user=this.lazy=this.sync=!1,this.cb=cb,this.id=++uid$2,this.active=!0,this.dirty=this.lazy,this.deps=[],this.newDeps=[],this.depIds=new _Set,this.newDepIds=new _Set,this.expression="","function"==typeof expOrFn?this.getter=expOrFn:(this.getter=function(path){if(!bailRE.test(path)){var segments=path.split(".");return function(obj){for(var i=0;i<segments.length;i++){if(!obj)return;obj=obj[segments[i]]}return obj}}}(expOrFn),this.getter||(this.getter=noop)),this.value=this.lazy?void 0:this.get()};Watcher.prototype.get=function(){var value;pushTarget(this);var vm=this.vm;try{value=this.getter.call(vm,vm)}catch(e){if(!this.user)throw e;handleError(e,vm,'getter for watcher "'+this.expression+'"')}finally{this.deep&&traverse(value),popTarget(),this.cleanupDeps()}return value},Watcher.prototype.addDep=function(dep){var id=dep.id;this.newDepIds.has(id)||(this.newDepIds.add(id),this.newDeps.push(dep),this.depIds.has(id)||dep.addSub(this))},Watcher.prototype.cleanupDeps=function(){for(var i=this.deps.length;i--;){var dep=this.deps[i];this.newDepIds.has(dep.id)||dep.removeSub(this)}var tmp=this.depIds;this.depIds=this.newDepIds,this.newDepIds=tmp,this.newDepIds.clear(),tmp=this.deps,this.deps=this.newDeps,this.newDeps=tmp,this.newDeps.length=0},Watcher.prototype.update=function(){this.lazy?this.dirty=!0:this.sync?this.run():function(watcher){var id=watcher.id;if(null==has[id]){if(has[id]=!0,flushing){for(var i=queue.length-1;i>index&&queue[i].id>watcher.id;)i--;queue.splice(i+1,0,watcher)}else queue.push(watcher);waiting||(waiting=!0,nextTick(flushSchedulerQueue))}}(this)},Watcher.prototype.run=function(){if(this.active){var value=this.get();if(value!==this.value||isObject(value)||this.deep){var oldValue=this.value;if(this.value=value,this.user)try{this.cb.call(this.vm,value,oldValue)}catch(e){handleError(e,this.vm,'callback for watcher "'+this.expression+'"')}else this.cb.call(this.vm,value,oldValue)}}},Watcher.prototype.evaluate=function(){this.value=this.get(),this.dirty=!1},Watcher.prototype.depend=function(){for(var i=this.deps.length;i--;)this.deps[i].depend()},Watcher.prototype.teardown=function(){if(this.active){this.vm._isBeingDestroyed||remove(this.vm._watchers,this);for(var i=this.deps.length;i--;)this.deps[i].removeSub(this);this.active=!1}};var sharedPropertyDefinition={enumerable:!0,configurable:!0,get:noop,set:noop};function proxy(target,sourceKey,key){sharedPropertyDefinition.get=function(){return this[sourceKey][key]},sharedPropertyDefinition.set=function(val){this[sourceKey][key]=val},Object.defineProperty(target,key,sharedPropertyDefinition)}function initState(vm){vm._watchers=[];var opts=vm.$options;opts.props&&function(vm,propsOptions){var propsData=vm.$options.propsData||{},props=vm._props={},keys=vm.$options._propKeys=[];vm.$parent&&toggleObserving(!1);var loop=function(key){keys.push(key);var value=validateProp(key,propsOptions,propsData,vm);defineReactive$$1(props,key,value),key in vm||proxy(vm,"_props",key)};for(var key in propsOptions)loop(key);toggleObserving(!0)}(vm,opts.props),opts.methods&&function(vm,methods){vm.$options.props;for(var key in methods)vm[key]="function"!=typeof methods[key]?noop:bind(methods[key],vm)}(vm,opts.methods),opts.data?function(vm){var data=vm.$options.data;isPlainObject(data=vm._data="function"==typeof data?function(data,vm){pushTarget();try{return data.call(vm,vm)}catch(e){return handleError(e,vm,"data()"),{}}finally{popTarget()}}(data,vm):data||{})||(data={});var keys=Object.keys(data),props=vm.$options.props,i=(vm.$options.methods,keys.length);for(;i--;){var key=keys[i];0,props&&hasOwn(props,key)||(c=void 0,36!==(c=(key+"").charCodeAt(0))&&95!==c&&proxy(vm,"_data",key))}var c;observe(data,!0)}(vm):observe(vm._data={},!0),opts.computed&&function(vm,computed){var watchers=vm._computedWatchers=Object.create(null),isSSR=isServerRendering();for(var key in computed){var userDef=computed[key],getter="function"==typeof userDef?userDef:userDef.get;0,isSSR||(watchers[key]=new Watcher(vm,getter||noop,noop,computedWatcherOptions)),key in vm||defineComputed(vm,key,userDef)}}(vm,opts.computed),opts.watch&&opts.watch!==nativeWatch&&function(vm,watch){for(var key in watch){var handler=watch[key];if(Array.isArray(handler))for(var i=0;i<handler.length;i++)createWatcher(vm,key,handler[i]);else createWatcher(vm,key,handler)}}(vm,opts.watch)}var computedWatcherOptions={lazy:!0};function defineComputed(target,key,userDef){var shouldCache=!isServerRendering();"function"==typeof userDef?(sharedPropertyDefinition.get=shouldCache?createComputedGetter(key):createGetterInvoker(userDef),sharedPropertyDefinition.set=noop):(sharedPropertyDefinition.get=userDef.get?shouldCache&&!1!==userDef.cache?createComputedGetter(key):createGetterInvoker(userDef.get):noop,sharedPropertyDefinition.set=userDef.set||noop),Object.defineProperty(target,key,sharedPropertyDefinition)}function createComputedGetter(key){return function(){var watcher=this._computedWatchers&&this._computedWatchers[key];if(watcher)return watcher.dirty&&watcher.evaluate(),Dep.target&&watcher.depend(),watcher.value}}function createGetterInvoker(fn){return function(){return fn.call(this,this)}}function createWatcher(vm,expOrFn,handler,options){return isPlainObject(handler)&&(options=handler,handler=handler.handler),"string"==typeof handler&&(handler=vm[handler]),vm.$watch(expOrFn,handler,options)}var uid$3=0;function resolveConstructorOptions(Ctor){var options=Ctor.options;if(Ctor.super){var superOptions=resolveConstructorOptions(Ctor.super);if(superOptions!==Ctor.superOptions){Ctor.superOptions=superOptions;var modifiedOptions=function(Ctor){var modified,latest=Ctor.options,sealed=Ctor.sealedOptions;for(var key in latest)latest[key]!==sealed[key]&&(modified||(modified={}),modified[key]=latest[key]);return modified}(Ctor);modifiedOptions&&extend(Ctor.extendOptions,modifiedOptions),(options=Ctor.options=mergeOptions(superOptions,Ctor.extendOptions)).name&&(options.components[options.name]=Ctor)}}return options}function Vue(options){this._init(options)}function initExtend(Vue){Vue.cid=0;var cid=1;Vue.extend=function(extendOptions){extendOptions=extendOptions||{};var Super=this,SuperId=Super.cid,cachedCtors=extendOptions._Ctor||(extendOptions._Ctor={});if(cachedCtors[SuperId])return cachedCtors[SuperId];var name=extendOptions.name||Super.options.name;var Sub=function(options){this._init(options)};return(Sub.prototype=Object.create(Super.prototype)).constructor=Sub,Sub.cid=cid++,Sub.options=mergeOptions(Super.options,extendOptions),Sub.super=Super,Sub.options.props&&function(Comp){var props=Comp.options.props;for(var key in props)proxy(Comp.prototype,"_props",key)}(Sub),Sub.options.computed&&function(Comp){var computed=Comp.options.computed;for(var key in computed)defineComputed(Comp.prototype,key,computed[key])}(Sub),Sub.extend=Super.extend,Sub.mixin=Super.mixin,Sub.use=Super.use,ASSET_TYPES.forEach(function(type){Sub[type]=Super[type]}),name&&(Sub.options.components[name]=Sub),Sub.superOptions=Super.options,Sub.extendOptions=extendOptions,Sub.sealedOptions=extend({},Sub.options),cachedCtors[SuperId]=Sub,Sub}}function getComponentName(opts){return opts&&(opts.Ctor.options.name||opts.tag)}function matches(pattern,name){return Array.isArray(pattern)?pattern.indexOf(name)>-1:"string"==typeof pattern?pattern.split(",").indexOf(name)>-1:!!isRegExp(pattern)&&pattern.test(name)}function pruneCache(keepAliveInstance,filter){var cache=keepAliveInstance.cache,keys=keepAliveInstance.keys,_vnode=keepAliveInstance._vnode;for(var key in cache){var cachedNode=cache[key];if(cachedNode){var name=getComponentName(cachedNode.componentOptions);name&&!filter(name)&&pruneCacheEntry(cache,key,keys,_vnode)}}}function pruneCacheEntry(cache,key,keys,current){var cached$$1=cache[key];!cached$$1||current&&cached$$1.tag===current.tag||cached$$1.componentInstance.$destroy(),cache[key]=null,remove(keys,key)}!function(Vue){Vue.prototype._init=function(options){var vm=this;vm._uid=uid$3++,vm._isVue=!0,options&&options._isComponent?function(vm,options){var opts=vm.$options=Object.create(vm.constructor.options),parentVnode=options._parentVnode;opts.parent=options.parent,opts._parentVnode=parentVnode;var vnodeComponentOptions=parentVnode.componentOptions;opts.propsData=vnodeComponentOptions.propsData,opts._parentListeners=vnodeComponentOptions.listeners,opts._renderChildren=vnodeComponentOptions.children,opts._componentTag=vnodeComponentOptions.tag,options.render&&(opts.render=options.render,opts.staticRenderFns=options.staticRenderFns)}(vm,options):vm.$options=mergeOptions(resolveConstructorOptions(vm.constructor),options||{},vm),vm._renderProxy=vm,vm._self=vm,function(vm){var options=vm.$options,parent=options.parent;if(parent&&!options.abstract){for(;parent.$options.abstract&&parent.$parent;)parent=parent.$parent;parent.$children.push(vm)}vm.$parent=parent,vm.$root=parent?parent.$root:vm,vm.$children=[],vm.$refs={},vm._watcher=null,vm._inactive=null,vm._directInactive=!1,vm._isMounted=!1,vm._isDestroyed=!1,vm._isBeingDestroyed=!1}(vm),function(vm){vm._events=Object.create(null),vm._hasHookEvent=!1;var listeners=vm.$options._parentListeners;listeners&&updateComponentListeners(vm,listeners)}(vm),function(vm){vm._vnode=null,vm._staticTrees=null;var options=vm.$options,parentVnode=vm.$vnode=options._parentVnode,renderContext=parentVnode&&parentVnode.context;vm.$slots=resolveSlots(options._renderChildren,renderContext),vm.$scopedSlots=emptyObject,vm._c=function(a,b,c,d){return createElement(vm,a,b,c,d,!1)},vm.$createElement=function(a,b,c,d){return createElement(vm,a,b,c,d,!0)};var parentData=parentVnode&&parentVnode.data;defineReactive$$1(vm,"$attrs",parentData&&parentData.attrs||emptyObject,null,!0),defineReactive$$1(vm,"$listeners",options._parentListeners||emptyObject,null,!0)}(vm),callHook(vm,"beforeCreate"),function(vm){var result=resolveInject(vm.$options.inject,vm);result&&(toggleObserving(!1),Object.keys(result).forEach(function(key){defineReactive$$1(vm,key,result[key])}),toggleObserving(!0))}(vm),initState(vm),function(vm){var provide=vm.$options.provide;provide&&(vm._provided="function"==typeof provide?provide.call(vm):provide)}(vm),callHook(vm,"created"),vm.$options.el&&vm.$mount(vm.$options.el)}}(Vue),function(Vue){var dataDef={get:function(){return this._data}},propsDef={get:function(){return this._props}};Object.defineProperty(Vue.prototype,"$data",dataDef),Object.defineProperty(Vue.prototype,"$props",propsDef),Vue.prototype.$set=set,Vue.prototype.$delete=del,Vue.prototype.$watch=function(expOrFn,cb,options){if(isPlainObject(cb))return createWatcher(this,expOrFn,cb,options);(options=options||{}).user=!0;var watcher=new Watcher(this,expOrFn,cb,options);if(options.immediate)try{cb.call(this,watcher.value)}catch(error){handleError(error,this,'callback for immediate watcher "'+watcher.expression+'"')}return function(){watcher.teardown()}}}(Vue),function(Vue){var hookRE=/^hook:/;Vue.prototype.$on=function(event,fn){var vm=this;if(Array.isArray(event))for(var i=0,l=event.length;i<l;i++)vm.$on(event[i],fn);else(vm._events[event]||(vm._events[event]=[])).push(fn),hookRE.test(event)&&(vm._hasHookEvent=!0);return vm},Vue.prototype.$once=function(event,fn){var vm=this;function on(){vm.$off(event,on),fn.apply(vm,arguments)}return on.fn=fn,vm.$on(event,on),vm},Vue.prototype.$off=function(event,fn){var vm=this;if(!arguments.length)return vm._events=Object.create(null),vm;if(Array.isArray(event)){for(var i$1=0,l=event.length;i$1<l;i$1++)vm.$off(event[i$1],fn);return vm}var cb,cbs=vm._events[event];if(!cbs)return vm;if(!fn)return vm._events[event]=null,vm;for(var i=cbs.length;i--;)if((cb=cbs[i])===fn||cb.fn===fn){cbs.splice(i,1);break}return vm},Vue.prototype.$emit=function(event){var cbs=this._events[event];if(cbs){cbs=cbs.length>1?toArray(cbs):cbs;for(var args=toArray(arguments,1),info='event handler for "'+event+'"',i=0,l=cbs.length;i<l;i++)invokeWithErrorHandling(cbs[i],this,args,this,info)}return this}}(Vue),function(Vue){Vue.prototype._update=function(vnode,hydrating){var vm=this,prevEl=vm.$el,prevVnode=vm._vnode,restoreActiveInstance=setActiveInstance(vm);vm._vnode=vnode,vm.$el=prevVnode?vm.__patch__(prevVnode,vnode):vm.__patch__(vm.$el,vnode,hydrating,!1),restoreActiveInstance(),prevEl&&(prevEl.__vue__=null),vm.$el&&(vm.$el.__vue__=vm),vm.$vnode&&vm.$parent&&vm.$vnode===vm.$parent._vnode&&(vm.$parent.$el=vm.$el)},Vue.prototype.$forceUpdate=function(){this._watcher&&this._watcher.update()},Vue.prototype.$destroy=function(){var vm=this;if(!vm._isBeingDestroyed){callHook(vm,"beforeDestroy"),vm._isBeingDestroyed=!0;var parent=vm.$parent;!parent||parent._isBeingDestroyed||vm.$options.abstract||remove(parent.$children,vm),vm._watcher&&vm._watcher.teardown();for(var i=vm._watchers.length;i--;)vm._watchers[i].teardown();vm._data.__ob__&&vm._data.__ob__.vmCount--,vm._isDestroyed=!0,vm.__patch__(vm._vnode,null),callHook(vm,"destroyed"),vm.$off(),vm.$el&&(vm.$el.__vue__=null),vm.$vnode&&(vm.$vnode.parent=null)}}}(Vue),function(Vue){installRenderHelpers(Vue.prototype),Vue.prototype.$nextTick=function(fn){return nextTick(fn,this)},Vue.prototype._render=function(){var vnode,vm=this,ref=vm.$options,render=ref.render,_parentVnode=ref._parentVnode;_parentVnode&&(vm.$scopedSlots=normalizeScopedSlots(_parentVnode.data.scopedSlots,vm.$slots,vm.$scopedSlots)),vm.$vnode=_parentVnode;try{currentRenderingInstance=vm,vnode=render.call(vm._renderProxy,vm.$createElement)}catch(e){handleError(e,vm,"render"),vnode=vm._vnode}finally{currentRenderingInstance=null}return Array.isArray(vnode)&&1===vnode.length&&(vnode=vnode[0]),vnode instanceof VNode||(vnode=createEmptyVNode()),vnode.parent=_parentVnode,vnode}}(Vue);var patternTypes=[String,RegExp,Array],builtInComponents={KeepAlive:{name:"keep-alive",abstract:!0,props:{include:patternTypes,exclude:patternTypes,max:[String,Number]},created:function(){this.cache=Object.create(null),this.keys=[]},destroyed:function(){for(var key in this.cache)pruneCacheEntry(this.cache,key,this.keys)},mounted:function(){var this$1=this;this.$watch("include",function(val){pruneCache(this$1,function(name){return matches(val,name)})}),this.$watch("exclude",function(val){pruneCache(this$1,function(name){return!matches(val,name)})})},render:function(){var slot=this.$slots.default,vnode=getFirstComponentChild(slot),componentOptions=vnode&&vnode.componentOptions;if(componentOptions){var name=getComponentName(componentOptions),include=this.include,exclude=this.exclude;if(include&&(!name||!matches(include,name))||exclude&&name&&matches(exclude,name))return vnode;var cache=this.cache,keys=this.keys,key=null==vnode.key?componentOptions.Ctor.cid+(componentOptions.tag?"::"+componentOptions.tag:""):vnode.key;cache[key]?(vnode.componentInstance=cache[key].componentInstance,remove(keys,key),keys.push(key)):(cache[key]=vnode,keys.push(key),this.max&&keys.length>parseInt(this.max)&&pruneCacheEntry(cache,keys[0],keys,this._vnode)),vnode.data.keepAlive=!0}return vnode||slot&&slot[0]}}};!function(Vue){var configDef={get:function(){return config}};Object.defineProperty(Vue,"config",configDef),Vue.util={warn:warn,extend:extend,mergeOptions:mergeOptions,defineReactive:defineReactive$$1},Vue.set=set,Vue.delete=del,Vue.nextTick=nextTick,Vue.observable=function(obj){return observe(obj),obj},Vue.options=Object.create(null),ASSET_TYPES.forEach(function(type){Vue.options[type+"s"]=Object.create(null)}),Vue.options._base=Vue,extend(Vue.options.components,builtInComponents),function(Vue){Vue.use=function(plugin){var installedPlugins=this._installedPlugins||(this._installedPlugins=[]);if(installedPlugins.indexOf(plugin)>-1)return this;var args=toArray(arguments,1);return args.unshift(this),"function"==typeof plugin.install?plugin.install.apply(plugin,args):"function"==typeof plugin&&plugin.apply(null,args),installedPlugins.push(plugin),this}}(Vue),function(Vue){Vue.mixin=function(mixin){return this.options=mergeOptions(this.options,mixin),this}}(Vue),initExtend(Vue),function(Vue){ASSET_TYPES.forEach(function(type){Vue[type]=function(id,definition){return definition?("component"===type&&isPlainObject(definition)&&(definition.name=definition.name||id,definition=this.options._base.extend(definition)),"directive"===type&&"function"==typeof definition&&(definition={bind:definition,update:definition}),this.options[type+"s"][id]=definition,definition):this.options[type+"s"][id]}})}(Vue)}(Vue),Object.defineProperty(Vue.prototype,"$isServer",{get:isServerRendering}),Object.defineProperty(Vue.prototype,"$ssrContext",{get:function(){return this.$vnode&&this.$vnode.ssrContext}}),Object.defineProperty(Vue,"FunctionalRenderContext",{value:FunctionalRenderContext}),Vue.version="2.6.4";var isReservedAttr=makeMap("style,class"),acceptValue=makeMap("input,textarea,option,select,progress"),isEnumeratedAttr=makeMap("contenteditable,draggable,spellcheck"),isValidContentEditableValue=makeMap("events,caret,typing,plaintext-only"),convertEnumeratedValue=function(key,value){return isFalsyAttrValue(value)||"false"===value?"false":"contenteditable"===key&&isValidContentEditableValue(value)?value:"true"},isBooleanAttr=makeMap("allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,default,defaultchecked,defaultmuted,defaultselected,defer,disabled,enabled,formnovalidate,hidden,indeterminate,inert,ismap,itemscope,loop,multiple,muted,nohref,noresize,noshade,novalidate,nowrap,open,pauseonexit,readonly,required,reversed,scoped,seamless,selected,sortable,translate,truespeed,typemustmatch,visible"),xlinkNS="http://www.w3.org/1999/xlink",isXlink=function(name){return":"===name.charAt(5)&&"xlink"===name.slice(0,5)},getXlinkProp=function(name){return isXlink(name)?name.slice(6,name.length):""},isFalsyAttrValue=function(val){return null==val||!1===val};function genClassForVnode(vnode){for(var data=vnode.data,parentNode=vnode,childNode=vnode;isDef(childNode.componentInstance);)(childNode=childNode.componentInstance._vnode)&&childNode.data&&(data=mergeClassData(childNode.data,data));for(;isDef(parentNode=parentNode.parent);)parentNode&&parentNode.data&&(data=mergeClassData(data,parentNode.data));return function(staticClass,dynamicClass){if(isDef(staticClass)||isDef(dynamicClass))return concat(staticClass,stringifyClass(dynamicClass));return""}(data.staticClass,data.class)}function mergeClassData(child,parent){return{staticClass:concat(child.staticClass,parent.staticClass),class:isDef(child.class)?[child.class,parent.class]:parent.class}}function concat(a,b){return a?b?a+" "+b:a:b||""}function stringifyClass(value){return Array.isArray(value)?function(value){for(var stringified,res="",i=0,l=value.length;i<l;i++)isDef(stringified=stringifyClass(value[i]))&&""!==stringified&&(res&&(res+=" "),res+=stringified);return res}(value):isObject(value)?function(value){var res="";for(var key in value)value[key]&&(res&&(res+=" "),res+=key);return res}(value):"string"==typeof value?value:""}var namespaceMap={svg:"http://www.w3.org/2000/svg",math:"http://www.w3.org/1998/Math/MathML"},isHTMLTag=makeMap("html,body,base,head,link,meta,style,title,address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,menuitem,summary,content,element,shadow,template,blockquote,iframe,tfoot"),isSVG=makeMap("svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font-face,foreignObject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view",!0),isReservedTag=function(tag){return isHTMLTag(tag)||isSVG(tag)};var unknownElementCache=Object.create(null);var isTextInputType=makeMap("text,number,password,search,email,tel,url");var nodeOps=Object.freeze({createElement:function(tagName,vnode){var elm=document.createElement(tagName);return"select"!==tagName?elm:(vnode.data&&vnode.data.attrs&&void 0!==vnode.data.attrs.multiple&&elm.setAttribute("multiple","multiple"),elm)},createElementNS:function(namespace,tagName){return document.createElementNS(namespaceMap[namespace],tagName)},createTextNode:function(text){return document.createTextNode(text)},createComment:function(text){return document.createComment(text)},insertBefore:function(parentNode,newNode,referenceNode){parentNode.insertBefore(newNode,referenceNode)},removeChild:function(node,child){node.removeChild(child)},appendChild:function(node,child){node.appendChild(child)},parentNode:function(node){return node.parentNode},nextSibling:function(node){return node.nextSibling},tagName:function(node){return node.tagName},setTextContent:function(node,text){node.textContent=text},setStyleScope:function(node,scopeId){node.setAttribute(scopeId,"")}}),ref={create:function(_,vnode){registerRef(vnode)},update:function(oldVnode,vnode){oldVnode.data.ref!==vnode.data.ref&&(registerRef(oldVnode,!0),registerRef(vnode))},destroy:function(vnode){registerRef(vnode,!0)}};function registerRef(vnode,isRemoval){var key=vnode.data.ref;if(isDef(key)){var vm=vnode.context,ref=vnode.componentInstance||vnode.elm,refs=vm.$refs;isRemoval?Array.isArray(refs[key])?remove(refs[key],ref):refs[key]===ref&&(refs[key]=void 0):vnode.data.refInFor?Array.isArray(refs[key])?refs[key].indexOf(ref)<0&&refs[key].push(ref):refs[key]=[ref]:refs[key]=ref}}var emptyNode=new VNode("",{},[]),hooks=["create","activate","update","remove","destroy"];function sameVnode(a,b){return a.key===b.key&&(a.tag===b.tag&&a.isComment===b.isComment&&isDef(a.data)===isDef(b.data)&&function(a,b){if("input"!==a.tag)return!0;var i,typeA=isDef(i=a.data)&&isDef(i=i.attrs)&&i.type,typeB=isDef(i=b.data)&&isDef(i=i.attrs)&&i.type;return typeA===typeB||isTextInputType(typeA)&&isTextInputType(typeB)}(a,b)||isTrue(a.isAsyncPlaceholder)&&a.asyncFactory===b.asyncFactory&&isUndef(b.asyncFactory.error))}function createKeyToOldIdx(children,beginIdx,endIdx){var i,key,map={};for(i=beginIdx;i<=endIdx;++i)isDef(key=children[i].key)&&(map[key]=i);return map}var directives={create:updateDirectives,update:updateDirectives,destroy:function(vnode){updateDirectives(vnode,emptyNode)}};function updateDirectives(oldVnode,vnode){(oldVnode.data.directives||vnode.data.directives)&&function(oldVnode,vnode){var key,oldDir,dir,isCreate=oldVnode===emptyNode,isDestroy=vnode===emptyNode,oldDirs=normalizeDirectives$1(oldVnode.data.directives,oldVnode.context),newDirs=normalizeDirectives$1(vnode.data.directives,vnode.context),dirsWithInsert=[],dirsWithPostpatch=[];for(key in newDirs)oldDir=oldDirs[key],dir=newDirs[key],oldDir?(dir.oldValue=oldDir.value,dir.oldArg=oldDir.arg,callHook$1(dir,"update",vnode,oldVnode),dir.def&&dir.def.componentUpdated&&dirsWithPostpatch.push(dir)):(callHook$1(dir,"bind",vnode,oldVnode),dir.def&&dir.def.inserted&&dirsWithInsert.push(dir));if(dirsWithInsert.length){var callInsert=function(){for(var i=0;i<dirsWithInsert.length;i++)callHook$1(dirsWithInsert[i],"inserted",vnode,oldVnode)};isCreate?mergeVNodeHook(vnode,"insert",callInsert):callInsert()}dirsWithPostpatch.length&&mergeVNodeHook(vnode,"postpatch",function(){for(var i=0;i<dirsWithPostpatch.length;i++)callHook$1(dirsWithPostpatch[i],"componentUpdated",vnode,oldVnode)});if(!isCreate)for(key in oldDirs)newDirs[key]||callHook$1(oldDirs[key],"unbind",oldVnode,oldVnode,isDestroy)}(oldVnode,vnode)}var emptyModifiers=Object.create(null);function normalizeDirectives$1(dirs,vm){var i,dir,res=Object.create(null);if(!dirs)return res;for(i=0;i<dirs.length;i++)(dir=dirs[i]).modifiers||(dir.modifiers=emptyModifiers),res[getRawDirName(dir)]=dir,dir.def=resolveAsset(vm.$options,"directives",dir.name);return res}function getRawDirName(dir){return dir.rawName||dir.name+"."+Object.keys(dir.modifiers||{}).join(".")}function callHook$1(dir,hook,vnode,oldVnode,isDestroy){var fn=dir.def&&dir.def[hook];if(fn)try{fn(vnode.elm,dir,vnode,oldVnode,isDestroy)}catch(e){handleError(e,vnode.context,"directive "+dir.name+" "+hook+" hook")}}var baseModules=[ref,directives];function updateAttrs(oldVnode,vnode){var opts=vnode.componentOptions;if(!(isDef(opts)&&!1===opts.Ctor.options.inheritAttrs||isUndef(oldVnode.data.attrs)&&isUndef(vnode.data.attrs))){var key,cur,elm=vnode.elm,oldAttrs=oldVnode.data.attrs||{},attrs=vnode.data.attrs||{};for(key in isDef(attrs.__ob__)&&(attrs=vnode.data.attrs=extend({},attrs)),attrs)cur=attrs[key],oldAttrs[key]!==cur&&setAttr(elm,key,cur);for(key in(isIE||isEdge)&&attrs.value!==oldAttrs.value&&setAttr(elm,"value",attrs.value),oldAttrs)isUndef(attrs[key])&&(isXlink(key)?elm.removeAttributeNS(xlinkNS,getXlinkProp(key)):isEnumeratedAttr(key)||elm.removeAttribute(key))}}function setAttr(el,key,value){el.tagName.indexOf("-")>-1?baseSetAttr(el,key,value):isBooleanAttr(key)?isFalsyAttrValue(value)?el.removeAttribute(key):(value="allowfullscreen"===key&&"EMBED"===el.tagName?"true":key,el.setAttribute(key,value)):isEnumeratedAttr(key)?el.setAttribute(key,convertEnumeratedValue(key,value)):isXlink(key)?isFalsyAttrValue(value)?el.removeAttributeNS(xlinkNS,getXlinkProp(key)):el.setAttributeNS(xlinkNS,key,value):baseSetAttr(el,key,value)}function baseSetAttr(el,key,value){if(isFalsyAttrValue(value))el.removeAttribute(key);else{if(isIE&&!isIE9&&"TEXTAREA"===el.tagName&&"placeholder"===key&&""!==value&&!el.__ieph){var blocker=function(e){e.stopImmediatePropagation(),el.removeEventListener("input",blocker)};el.addEventListener("input",blocker),el.__ieph=!0}el.setAttribute(key,value)}}var attrs={create:updateAttrs,update:updateAttrs};function updateClass(oldVnode,vnode){var el=vnode.elm,data=vnode.data,oldData=oldVnode.data;if(!(isUndef(data.staticClass)&&isUndef(data.class)&&(isUndef(oldData)||isUndef(oldData.staticClass)&&isUndef(oldData.class)))){var cls=genClassForVnode(vnode),transitionClass=el._transitionClasses;isDef(transitionClass)&&(cls=concat(cls,stringifyClass(transitionClass))),cls!==el._prevClass&&(el.setAttribute("class",cls),el._prevClass=cls)}}var target$1,klass={create:updateClass,update:updateClass},RANGE_TOKEN="__r",CHECKBOX_RADIO_TOKEN="__c";function createOnceHandler$1(event,handler,capture){var _target=target$1;return function onceHandler(){null!==handler.apply(null,arguments)&&remove$2(event,onceHandler,capture,_target)}}var useMicrotaskFix=isUsingMicroTask&&!(isFF&&Number(isFF[1])<=53);function add$1(name,handler,capture,passive){if(useMicrotaskFix){var attachedTimestamp=currentFlushTimestamp,original=handler;handler=original._wrapper=function(e){if(e.timeStamp>=attachedTimestamp||e.target.ownerDocument!==document)return original.apply(this,arguments)}}target$1.addEventListener(name,handler,supportsPassive?{capture:capture,passive:passive}:capture)}function remove$2(name,handler,capture,_target){(_target||target$1).removeEventListener(name,handler._wrapper||handler,capture)}function updateDOMListeners(oldVnode,vnode){if(!isUndef(oldVnode.data.on)||!isUndef(vnode.data.on)){var on=vnode.data.on||{},oldOn=oldVnode.data.on||{};target$1=vnode.elm,function(on){if(isDef(on[RANGE_TOKEN])){var event=isIE?"change":"input";on[event]=[].concat(on[RANGE_TOKEN],on[event]||[]),delete on[RANGE_TOKEN]}isDef(on[CHECKBOX_RADIO_TOKEN])&&(on.change=[].concat(on[CHECKBOX_RADIO_TOKEN],on.change||[]),delete on[CHECKBOX_RADIO_TOKEN])}(on),updateListeners(on,oldOn,add$1,remove$2,createOnceHandler$1,vnode.context),target$1=void 0}}var svgContainer,events={create:updateDOMListeners,update:updateDOMListeners};function updateDOMProps(oldVnode,vnode){if(!isUndef(oldVnode.data.domProps)||!isUndef(vnode.data.domProps)){var key,cur,elm=vnode.elm,oldProps=oldVnode.data.domProps||{},props=vnode.data.domProps||{};for(key in isDef(props.__ob__)&&(props=vnode.data.domProps=extend({},props)),oldProps)isUndef(props[key])&&(elm[key]="");for(key in props){if(cur=props[key],"textContent"===key||"innerHTML"===key){if(vnode.children&&(vnode.children.length=0),cur===oldProps[key])continue;1===elm.childNodes.length&&elm.removeChild(elm.childNodes[0])}if("value"===key||cur!==oldProps[key])if("value"===key){elm._value=cur;var strCur=isUndef(cur)?"":String(cur);shouldUpdateValue(elm,strCur)&&(elm.value=strCur)}else if("innerHTML"===key&&isSVG(elm.tagName)&&isUndef(elm.innerHTML)){(svgContainer=svgContainer||document.createElement("div")).innerHTML="<svg>"+cur+"</svg>";for(var svg=svgContainer.firstChild;elm.firstChild;)elm.removeChild(elm.firstChild);for(;svg.firstChild;)elm.appendChild(svg.firstChild)}else elm[key]=cur}}}function shouldUpdateValue(elm,checkVal){return!elm.composing&&("OPTION"===elm.tagName||function(elm,checkVal){var notInFocus=!0;try{notInFocus=document.activeElement!==elm}catch(e){}return notInFocus&&elm.value!==checkVal}(elm,checkVal)||function(elm,newVal){var value=elm.value,modifiers=elm._vModifiers;if(isDef(modifiers)){if(modifiers.number)return toNumber(value)!==toNumber(newVal);if(modifiers.trim)return value.trim()!==newVal.trim()}return value!==newVal}(elm,checkVal))}var domProps={create:updateDOMProps,update:updateDOMProps},parseStyleText=cached(function(cssText){var res={},propertyDelimiter=/:(.+)/;return cssText.split(/;(?![^(]*\))/g).forEach(function(item){if(item){var tmp=item.split(propertyDelimiter);tmp.length>1&&(res[tmp[0].trim()]=tmp[1].trim())}}),res});function normalizeStyleData(data){var style=normalizeStyleBinding(data.style);return data.staticStyle?extend(data.staticStyle,style):style}function normalizeStyleBinding(bindingStyle){return Array.isArray(bindingStyle)?toObject(bindingStyle):"string"==typeof bindingStyle?parseStyleText(bindingStyle):bindingStyle}var emptyStyle,cssVarRE=/^--/,importantRE=/\s*!important$/,setProp=function(el,name,val){if(cssVarRE.test(name))el.style.setProperty(name,val);else if(importantRE.test(val))el.style.setProperty(hyphenate(name),val.replace(importantRE,""),"important");else{var normalizedName=normalize(name);if(Array.isArray(val))for(var i=0,len=val.length;i<len;i++)el.style[normalizedName]=val[i];else el.style[normalizedName]=val}},vendorNames=["Webkit","Moz","ms"],normalize=cached(function(prop){if(emptyStyle=emptyStyle||document.createElement("div").style,"filter"!==(prop=camelize(prop))&&prop in emptyStyle)return prop;for(var capName=prop.charAt(0).toUpperCase()+prop.slice(1),i=0;i<vendorNames.length;i++){var name=vendorNames[i]+capName;if(name in emptyStyle)return name}});function updateStyle(oldVnode,vnode){var data=vnode.data,oldData=oldVnode.data;if(!(isUndef(data.staticStyle)&&isUndef(data.style)&&isUndef(oldData.staticStyle)&&isUndef(oldData.style))){var cur,name,el=vnode.elm,oldStaticStyle=oldData.staticStyle,oldStyleBinding=oldData.normalizedStyle||oldData.style||{},oldStyle=oldStaticStyle||oldStyleBinding,style=normalizeStyleBinding(vnode.data.style)||{};vnode.data.normalizedStyle=isDef(style.__ob__)?extend({},style):style;var newStyle=function(vnode,checkChild){var styleData,res={};if(checkChild)for(var childNode=vnode;childNode.componentInstance;)(childNode=childNode.componentInstance._vnode)&&childNode.data&&(styleData=normalizeStyleData(childNode.data))&&extend(res,styleData);(styleData=normalizeStyleData(vnode.data))&&extend(res,styleData);for(var parentNode=vnode;parentNode=parentNode.parent;)parentNode.data&&(styleData=normalizeStyleData(parentNode.data))&&extend(res,styleData);return res}(vnode,!0);for(name in oldStyle)isUndef(newStyle[name])&&setProp(el,name,"");for(name in newStyle)(cur=newStyle[name])!==oldStyle[name]&&setProp(el,name,null==cur?"":cur)}}var style={create:updateStyle,update:updateStyle},whitespaceRE=/\s+/;function addClass(el,cls){if(cls&&(cls=cls.trim()))if(el.classList)cls.indexOf(" ")>-1?cls.split(whitespaceRE).forEach(function(c){return el.classList.add(c)}):el.classList.add(cls);else{var cur=" "+(el.getAttribute("class")||"")+" ";cur.indexOf(" "+cls+" ")<0&&el.setAttribute("class",(cur+cls).trim())}}function removeClass(el,cls){if(cls&&(cls=cls.trim()))if(el.classList)cls.indexOf(" ")>-1?cls.split(whitespaceRE).forEach(function(c){return el.classList.remove(c)}):el.classList.remove(cls),el.classList.length||el.removeAttribute("class");else{for(var cur=" "+(el.getAttribute("class")||"")+" ",tar=" "+cls+" ";cur.indexOf(tar)>=0;)cur=cur.replace(tar," ");(cur=cur.trim())?el.setAttribute("class",cur):el.removeAttribute("class")}}function resolveTransition(def$$1){if(def$$1){if("object"==typeof def$$1){var res={};return!1!==def$$1.css&&extend(res,autoCssTransition(def$$1.name||"v")),extend(res,def$$1),res}return"string"==typeof def$$1?autoCssTransition(def$$1):void 0}}var autoCssTransition=cached(function(name){return{enterClass:name+"-enter",enterToClass:name+"-enter-to",enterActiveClass:name+"-enter-active",leaveClass:name+"-leave",leaveToClass:name+"-leave-to",leaveActiveClass:name+"-leave-active"}}),hasTransition=inBrowser&&!isIE9,TRANSITION="transition",ANIMATION="animation",transitionProp="transition",transitionEndEvent="transitionend",animationProp="animation",animationEndEvent="animationend";hasTransition&&(void 0===window.ontransitionend&&void 0!==window.onwebkittransitionend&&(transitionProp="WebkitTransition",transitionEndEvent="webkitTransitionEnd"),void 0===window.onanimationend&&void 0!==window.onwebkitanimationend&&(animationProp="WebkitAnimation",animationEndEvent="webkitAnimationEnd"));var raf=inBrowser?window.requestAnimationFrame?window.requestAnimationFrame.bind(window):setTimeout:function(fn){return fn()};function nextFrame(fn){raf(function(){raf(fn)})}function addTransitionClass(el,cls){var transitionClasses=el._transitionClasses||(el._transitionClasses=[]);transitionClasses.indexOf(cls)<0&&(transitionClasses.push(cls),addClass(el,cls))}function removeTransitionClass(el,cls){el._transitionClasses&&remove(el._transitionClasses,cls),removeClass(el,cls)}function whenTransitionEnds(el,expectedType,cb){var ref=getTransitionInfo(el,expectedType),type=ref.type,timeout=ref.timeout,propCount=ref.propCount;if(!type)return cb();var event=type===TRANSITION?transitionEndEvent:animationEndEvent,ended=0,end=function(){el.removeEventListener(event,onEnd),cb()},onEnd=function(e){e.target===el&&++ended>=propCount&&end()};setTimeout(function(){ended<propCount&&end()},timeout+1),el.addEventListener(event,onEnd)}var transformRE=/\b(transform|all)(,|$)/;function getTransitionInfo(el,expectedType){var type,styles=window.getComputedStyle(el),transitionDelays=(styles[transitionProp+"Delay"]||"").split(", "),transitionDurations=(styles[transitionProp+"Duration"]||"").split(", "),transitionTimeout=getTimeout(transitionDelays,transitionDurations),animationDelays=(styles[animationProp+"Delay"]||"").split(", "),animationDurations=(styles[animationProp+"Duration"]||"").split(", "),animationTimeout=getTimeout(animationDelays,animationDurations),timeout=0,propCount=0;return expectedType===TRANSITION?transitionTimeout>0&&(type=TRANSITION,timeout=transitionTimeout,propCount=transitionDurations.length):expectedType===ANIMATION?animationTimeout>0&&(type=ANIMATION,timeout=animationTimeout,propCount=animationDurations.length):propCount=(type=(timeout=Math.max(transitionTimeout,animationTimeout))>0?transitionTimeout>animationTimeout?TRANSITION:ANIMATION:null)?type===TRANSITION?transitionDurations.length:animationDurations.length:0,{type:type,timeout:timeout,propCount:propCount,hasTransform:type===TRANSITION&&transformRE.test(styles[transitionProp+"Property"])}}function getTimeout(delays,durations){for(;delays.length<durations.length;)delays=delays.concat(delays);return Math.max.apply(null,durations.map(function(d,i){return toMs(d)+toMs(delays[i])}))}function toMs(s){return 1e3*Number(s.slice(0,-1).replace(",","."))}function enter(vnode,toggleDisplay){var el=vnode.elm;isDef(el._leaveCb)&&(el._leaveCb.cancelled=!0,el._leaveCb());var data=resolveTransition(vnode.data.transition);if(!isUndef(data)&&!isDef(el._enterCb)&&1===el.nodeType){for(var css=data.css,type=data.type,enterClass=data.enterClass,enterToClass=data.enterToClass,enterActiveClass=data.enterActiveClass,appearClass=data.appearClass,appearToClass=data.appearToClass,appearActiveClass=data.appearActiveClass,beforeEnter=data.beforeEnter,enter=data.enter,afterEnter=data.afterEnter,enterCancelled=data.enterCancelled,beforeAppear=data.beforeAppear,appear=data.appear,afterAppear=data.afterAppear,appearCancelled=data.appearCancelled,duration=data.duration,context=activeInstance,transitionNode=activeInstance.$vnode;transitionNode&&transitionNode.parent;)context=(transitionNode=transitionNode.parent).context;var isAppear=!context._isMounted||!vnode.isRootInsert;if(!isAppear||appear||""===appear){var startClass=isAppear&&appearClass?appearClass:enterClass,activeClass=isAppear&&appearActiveClass?appearActiveClass:enterActiveClass,toClass=isAppear&&appearToClass?appearToClass:enterToClass,beforeEnterHook=isAppear&&beforeAppear||beforeEnter,enterHook=isAppear&&"function"==typeof appear?appear:enter,afterEnterHook=isAppear&&afterAppear||afterEnter,enterCancelledHook=isAppear&&appearCancelled||enterCancelled,explicitEnterDuration=toNumber(isObject(duration)?duration.enter:duration);0;var expectsCSS=!1!==css&&!isIE9,userWantsControl=getHookArgumentsLength(enterHook),cb=el._enterCb=once(function(){expectsCSS&&(removeTransitionClass(el,toClass),removeTransitionClass(el,activeClass)),cb.cancelled?(expectsCSS&&removeTransitionClass(el,startClass),enterCancelledHook&&enterCancelledHook(el)):afterEnterHook&&afterEnterHook(el),el._enterCb=null});vnode.data.show||mergeVNodeHook(vnode,"insert",function(){var parent=el.parentNode,pendingNode=parent&&parent._pending&&parent._pending[vnode.key];pendingNode&&pendingNode.tag===vnode.tag&&pendingNode.elm._leaveCb&&pendingNode.elm._leaveCb(),enterHook&&enterHook(el,cb)}),beforeEnterHook&&beforeEnterHook(el),expectsCSS&&(addTransitionClass(el,startClass),addTransitionClass(el,activeClass),nextFrame(function(){removeTransitionClass(el,startClass),cb.cancelled||(addTransitionClass(el,toClass),userWantsControl||(isValidDuration(explicitEnterDuration)?setTimeout(cb,explicitEnterDuration):whenTransitionEnds(el,type,cb)))})),vnode.data.show&&(toggleDisplay&&toggleDisplay(),enterHook&&enterHook(el,cb)),expectsCSS||userWantsControl||cb()}}}function leave(vnode,rm){var el=vnode.elm;isDef(el._enterCb)&&(el._enterCb.cancelled=!0,el._enterCb());var data=resolveTransition(vnode.data.transition);if(isUndef(data)||1!==el.nodeType)return rm();if(!isDef(el._leaveCb)){var css=data.css,type=data.type,leaveClass=data.leaveClass,leaveToClass=data.leaveToClass,leaveActiveClass=data.leaveActiveClass,beforeLeave=data.beforeLeave,leave=data.leave,afterLeave=data.afterLeave,leaveCancelled=data.leaveCancelled,delayLeave=data.delayLeave,duration=data.duration,expectsCSS=!1!==css&&!isIE9,userWantsControl=getHookArgumentsLength(leave),explicitLeaveDuration=toNumber(isObject(duration)?duration.leave:duration);0;var cb=el._leaveCb=once(function(){el.parentNode&&el.parentNode._pending&&(el.parentNode._pending[vnode.key]=null),expectsCSS&&(removeTransitionClass(el,leaveToClass),removeTransitionClass(el,leaveActiveClass)),cb.cancelled?(expectsCSS&&removeTransitionClass(el,leaveClass),leaveCancelled&&leaveCancelled(el)):(rm(),afterLeave&&afterLeave(el)),el._leaveCb=null});delayLeave?delayLeave(performLeave):performLeave()}function performLeave(){cb.cancelled||(!vnode.data.show&&el.parentNode&&((el.parentNode._pending||(el.parentNode._pending={}))[vnode.key]=vnode),beforeLeave&&beforeLeave(el),expectsCSS&&(addTransitionClass(el,leaveClass),addTransitionClass(el,leaveActiveClass),nextFrame(function(){removeTransitionClass(el,leaveClass),cb.cancelled||(addTransitionClass(el,leaveToClass),userWantsControl||(isValidDuration(explicitLeaveDuration)?setTimeout(cb,explicitLeaveDuration):whenTransitionEnds(el,type,cb)))})),leave&&leave(el,cb),expectsCSS||userWantsControl||cb())}}function isValidDuration(val){return"number"==typeof val&&!isNaN(val)}function getHookArgumentsLength(fn){if(isUndef(fn))return!1;var invokerFns=fn.fns;return isDef(invokerFns)?getHookArgumentsLength(Array.isArray(invokerFns)?invokerFns[0]:invokerFns):(fn._length||fn.length)>1}function _enter(_,vnode){!0!==vnode.data.show&&enter(vnode)}var patch=function(backend){var i,j,cbs={},modules=backend.modules,nodeOps=backend.nodeOps;for(i=0;i<hooks.length;++i)for(cbs[hooks[i]]=[],j=0;j<modules.length;++j)isDef(modules[j][hooks[i]])&&cbs[hooks[i]].push(modules[j][hooks[i]]);function removeNode(el){var parent=nodeOps.parentNode(el);isDef(parent)&&nodeOps.removeChild(parent,el)}function createElm(vnode,insertedVnodeQueue,parentElm,refElm,nested,ownerArray,index){if(isDef(vnode.elm)&&isDef(ownerArray)&&(vnode=ownerArray[index]=cloneVNode(vnode)),vnode.isRootInsert=!nested,!function(vnode,insertedVnodeQueue,parentElm,refElm){var i=vnode.data;if(isDef(i)){var isReactivated=isDef(vnode.componentInstance)&&i.keepAlive;if(isDef(i=i.hook)&&isDef(i=i.init)&&i(vnode,!1),isDef(vnode.componentInstance))return initComponent(vnode,insertedVnodeQueue),insert(parentElm,vnode.elm,refElm),isTrue(isReactivated)&&function(vnode,insertedVnodeQueue,parentElm,refElm){for(var i,innerNode=vnode;innerNode.componentInstance;)if(innerNode=innerNode.componentInstance._vnode,isDef(i=innerNode.data)&&isDef(i=i.transition)){for(i=0;i<cbs.activate.length;++i)cbs.activate[i](emptyNode,innerNode);insertedVnodeQueue.push(innerNode);break}insert(parentElm,vnode.elm,refElm)}(vnode,insertedVnodeQueue,parentElm,refElm),!0}}(vnode,insertedVnodeQueue,parentElm,refElm)){var data=vnode.data,children=vnode.children,tag=vnode.tag;isDef(tag)?(vnode.elm=vnode.ns?nodeOps.createElementNS(vnode.ns,tag):nodeOps.createElement(tag,vnode),setScope(vnode),createChildren(vnode,children,insertedVnodeQueue),isDef(data)&&invokeCreateHooks(vnode,insertedVnodeQueue),insert(parentElm,vnode.elm,refElm)):isTrue(vnode.isComment)?(vnode.elm=nodeOps.createComment(vnode.text),insert(parentElm,vnode.elm,refElm)):(vnode.elm=nodeOps.createTextNode(vnode.text),insert(parentElm,vnode.elm,refElm))}}function initComponent(vnode,insertedVnodeQueue){isDef(vnode.data.pendingInsert)&&(insertedVnodeQueue.push.apply(insertedVnodeQueue,vnode.data.pendingInsert),vnode.data.pendingInsert=null),vnode.elm=vnode.componentInstance.$el,isPatchable(vnode)?(invokeCreateHooks(vnode,insertedVnodeQueue),setScope(vnode)):(registerRef(vnode),insertedVnodeQueue.push(vnode))}function insert(parent,elm,ref$$1){isDef(parent)&&(isDef(ref$$1)?nodeOps.parentNode(ref$$1)===parent&&nodeOps.insertBefore(parent,elm,ref$$1):nodeOps.appendChild(parent,elm))}function createChildren(vnode,children,insertedVnodeQueue){if(Array.isArray(children))for(var i=0;i<children.length;++i)createElm(children[i],insertedVnodeQueue,vnode.elm,null,!0,children,i);else isPrimitive(vnode.text)&&nodeOps.appendChild(vnode.elm,nodeOps.createTextNode(String(vnode.text)))}function isPatchable(vnode){for(;vnode.componentInstance;)vnode=vnode.componentInstance._vnode;return isDef(vnode.tag)}function invokeCreateHooks(vnode,insertedVnodeQueue){for(var i$1=0;i$1<cbs.create.length;++i$1)cbs.create[i$1](emptyNode,vnode);isDef(i=vnode.data.hook)&&(isDef(i.create)&&i.create(emptyNode,vnode),isDef(i.insert)&&insertedVnodeQueue.push(vnode))}function setScope(vnode){var i;if(isDef(i=vnode.fnScopeId))nodeOps.setStyleScope(vnode.elm,i);else for(var ancestor=vnode;ancestor;)isDef(i=ancestor.context)&&isDef(i=i.$options._scopeId)&&nodeOps.setStyleScope(vnode.elm,i),ancestor=ancestor.parent;isDef(i=activeInstance)&&i!==vnode.context&&i!==vnode.fnContext&&isDef(i=i.$options._scopeId)&&nodeOps.setStyleScope(vnode.elm,i)}function addVnodes(parentElm,refElm,vnodes,startIdx,endIdx,insertedVnodeQueue){for(;startIdx<=endIdx;++startIdx)createElm(vnodes[startIdx],insertedVnodeQueue,parentElm,refElm,!1,vnodes,startIdx)}function invokeDestroyHook(vnode){var i,j,data=vnode.data;if(isDef(data))for(isDef(i=data.hook)&&isDef(i=i.destroy)&&i(vnode),i=0;i<cbs.destroy.length;++i)cbs.destroy[i](vnode);if(isDef(i=vnode.children))for(j=0;j<vnode.children.length;++j)invokeDestroyHook(vnode.children[j])}function removeVnodes(parentElm,vnodes,startIdx,endIdx){for(;startIdx<=endIdx;++startIdx){var ch=vnodes[startIdx];isDef(ch)&&(isDef(ch.tag)?(removeAndInvokeRemoveHook(ch),invokeDestroyHook(ch)):removeNode(ch.elm))}}function removeAndInvokeRemoveHook(vnode,rm){if(isDef(rm)||isDef(vnode.data)){var i,listeners=cbs.remove.length+1;for(isDef(rm)?rm.listeners+=listeners:rm=function(childElm,listeners){function remove$$1(){0==--remove$$1.listeners&&removeNode(childElm)}return remove$$1.listeners=listeners,remove$$1}(vnode.elm,listeners),isDef(i=vnode.componentInstance)&&isDef(i=i._vnode)&&isDef(i.data)&&removeAndInvokeRemoveHook(i,rm),i=0;i<cbs.remove.length;++i)cbs.remove[i](vnode,rm);isDef(i=vnode.data.hook)&&isDef(i=i.remove)?i(vnode,rm):rm()}else removeNode(vnode.elm)}function findIdxInOld(node,oldCh,start,end){for(var i=start;i<end;i++){var c=oldCh[i];if(isDef(c)&&sameVnode(node,c))return i}}function patchVnode(oldVnode,vnode,insertedVnodeQueue,ownerArray,index,removeOnly){if(oldVnode!==vnode){isDef(vnode.elm)&&isDef(ownerArray)&&(vnode=ownerArray[index]=cloneVNode(vnode));var elm=vnode.elm=oldVnode.elm;if(isTrue(oldVnode.isAsyncPlaceholder))isDef(vnode.asyncFactory.resolved)?hydrate(oldVnode.elm,vnode,insertedVnodeQueue):vnode.isAsyncPlaceholder=!0;else if(isTrue(vnode.isStatic)&&isTrue(oldVnode.isStatic)&&vnode.key===oldVnode.key&&(isTrue(vnode.isCloned)||isTrue(vnode.isOnce)))vnode.componentInstance=oldVnode.componentInstance;else{var i,data=vnode.data;isDef(data)&&isDef(i=data.hook)&&isDef(i=i.prepatch)&&i(oldVnode,vnode);var oldCh=oldVnode.children,ch=vnode.children;if(isDef(data)&&isPatchable(vnode)){for(i=0;i<cbs.update.length;++i)cbs.update[i](oldVnode,vnode);isDef(i=data.hook)&&isDef(i=i.update)&&i(oldVnode,vnode)}isUndef(vnode.text)?isDef(oldCh)&&isDef(ch)?oldCh!==ch&&function(parentElm,oldCh,newCh,insertedVnodeQueue,removeOnly){for(var oldKeyToIdx,idxInOld,vnodeToMove,oldStartIdx=0,newStartIdx=0,oldEndIdx=oldCh.length-1,oldStartVnode=oldCh[0],oldEndVnode=oldCh[oldEndIdx],newEndIdx=newCh.length-1,newStartVnode=newCh[0],newEndVnode=newCh[newEndIdx],canMove=!removeOnly;oldStartIdx<=oldEndIdx&&newStartIdx<=newEndIdx;)isUndef(oldStartVnode)?oldStartVnode=oldCh[++oldStartIdx]:isUndef(oldEndVnode)?oldEndVnode=oldCh[--oldEndIdx]:sameVnode(oldStartVnode,newStartVnode)?(patchVnode(oldStartVnode,newStartVnode,insertedVnodeQueue,newCh,newStartIdx),oldStartVnode=oldCh[++oldStartIdx],newStartVnode=newCh[++newStartIdx]):sameVnode(oldEndVnode,newEndVnode)?(patchVnode(oldEndVnode,newEndVnode,insertedVnodeQueue,newCh,newEndIdx),oldEndVnode=oldCh[--oldEndIdx],newEndVnode=newCh[--newEndIdx]):sameVnode(oldStartVnode,newEndVnode)?(patchVnode(oldStartVnode,newEndVnode,insertedVnodeQueue,newCh,newEndIdx),canMove&&nodeOps.insertBefore(parentElm,oldStartVnode.elm,nodeOps.nextSibling(oldEndVnode.elm)),oldStartVnode=oldCh[++oldStartIdx],newEndVnode=newCh[--newEndIdx]):sameVnode(oldEndVnode,newStartVnode)?(patchVnode(oldEndVnode,newStartVnode,insertedVnodeQueue,newCh,newStartIdx),canMove&&nodeOps.insertBefore(parentElm,oldEndVnode.elm,oldStartVnode.elm),oldEndVnode=oldCh[--oldEndIdx],newStartVnode=newCh[++newStartIdx]):(isUndef(oldKeyToIdx)&&(oldKeyToIdx=createKeyToOldIdx(oldCh,oldStartIdx,oldEndIdx)),isUndef(idxInOld=isDef(newStartVnode.key)?oldKeyToIdx[newStartVnode.key]:findIdxInOld(newStartVnode,oldCh,oldStartIdx,oldEndIdx))?createElm(newStartVnode,insertedVnodeQueue,parentElm,oldStartVnode.elm,!1,newCh,newStartIdx):sameVnode(vnodeToMove=oldCh[idxInOld],newStartVnode)?(patchVnode(vnodeToMove,newStartVnode,insertedVnodeQueue,newCh,newStartIdx),oldCh[idxInOld]=void 0,canMove&&nodeOps.insertBefore(parentElm,vnodeToMove.elm,oldStartVnode.elm)):createElm(newStartVnode,insertedVnodeQueue,parentElm,oldStartVnode.elm,!1,newCh,newStartIdx),newStartVnode=newCh[++newStartIdx]);oldStartIdx>oldEndIdx?addVnodes(parentElm,isUndef(newCh[newEndIdx+1])?null:newCh[newEndIdx+1].elm,newCh,newStartIdx,newEndIdx,insertedVnodeQueue):newStartIdx>newEndIdx&&removeVnodes(0,oldCh,oldStartIdx,oldEndIdx)}(elm,oldCh,ch,insertedVnodeQueue,removeOnly):isDef(ch)?(isDef(oldVnode.text)&&nodeOps.setTextContent(elm,""),addVnodes(elm,null,ch,0,ch.length-1,insertedVnodeQueue)):isDef(oldCh)?removeVnodes(0,oldCh,0,oldCh.length-1):isDef(oldVnode.text)&&nodeOps.setTextContent(elm,""):oldVnode.text!==vnode.text&&nodeOps.setTextContent(elm,vnode.text),isDef(data)&&isDef(i=data.hook)&&isDef(i=i.postpatch)&&i(oldVnode,vnode)}}}function invokeInsertHook(vnode,queue,initial){if(isTrue(initial)&&isDef(vnode.parent))vnode.parent.data.pendingInsert=queue;else for(var i=0;i<queue.length;++i)queue[i].data.hook.insert(queue[i])}var isRenderedModule=makeMap("attrs,class,staticClass,staticStyle,key");function hydrate(elm,vnode,insertedVnodeQueue,inVPre){var i,tag=vnode.tag,data=vnode.data,children=vnode.children;if(inVPre=inVPre||data&&data.pre,vnode.elm=elm,isTrue(vnode.isComment)&&isDef(vnode.asyncFactory))return vnode.isAsyncPlaceholder=!0,!0;if(isDef(data)&&(isDef(i=data.hook)&&isDef(i=i.init)&&i(vnode,!0),isDef(i=vnode.componentInstance)))return initComponent(vnode,insertedVnodeQueue),!0;if(isDef(tag)){if(isDef(children))if(elm.hasChildNodes())if(isDef(i=data)&&isDef(i=i.domProps)&&isDef(i=i.innerHTML)){if(i!==elm.innerHTML)return!1}else{for(var childrenMatch=!0,childNode=elm.firstChild,i$1=0;i$1<children.length;i$1++){if(!childNode||!hydrate(childNode,children[i$1],insertedVnodeQueue,inVPre)){childrenMatch=!1;break}childNode=childNode.nextSibling}if(!childrenMatch||childNode)return!1}else createChildren(vnode,children,insertedVnodeQueue);if(isDef(data)){var fullInvoke=!1;for(var key in data)if(!isRenderedModule(key)){fullInvoke=!0,invokeCreateHooks(vnode,insertedVnodeQueue);break}!fullInvoke&&data.class&&traverse(data.class)}}else elm.data!==vnode.text&&(elm.data=vnode.text);return!0}return function(oldVnode,vnode,hydrating,removeOnly){if(!isUndef(vnode)){var elm,isInitialPatch=!1,insertedVnodeQueue=[];if(isUndef(oldVnode))isInitialPatch=!0,createElm(vnode,insertedVnodeQueue);else{var isRealElement=isDef(oldVnode.nodeType);if(!isRealElement&&sameVnode(oldVnode,vnode))patchVnode(oldVnode,vnode,insertedVnodeQueue,null,null,removeOnly);else{if(isRealElement){if(1===oldVnode.nodeType&&oldVnode.hasAttribute(SSR_ATTR)&&(oldVnode.removeAttribute(SSR_ATTR),hydrating=!0),isTrue(hydrating)&&hydrate(oldVnode,vnode,insertedVnodeQueue))return invokeInsertHook(vnode,insertedVnodeQueue,!0),oldVnode;elm=oldVnode,oldVnode=new VNode(nodeOps.tagName(elm).toLowerCase(),{},[],void 0,elm)}var oldElm=oldVnode.elm,parentElm=nodeOps.parentNode(oldElm);if(createElm(vnode,insertedVnodeQueue,oldElm._leaveCb?null:parentElm,nodeOps.nextSibling(oldElm)),isDef(vnode.parent))for(var ancestor=vnode.parent,patchable=isPatchable(vnode);ancestor;){for(var i=0;i<cbs.destroy.length;++i)cbs.destroy[i](ancestor);if(ancestor.elm=vnode.elm,patchable){for(var i$1=0;i$1<cbs.create.length;++i$1)cbs.create[i$1](emptyNode,ancestor);var insert=ancestor.data.hook.insert;if(insert.merged)for(var i$2=1;i$2<insert.fns.length;i$2++)insert.fns[i$2]()}else registerRef(ancestor);ancestor=ancestor.parent}isDef(parentElm)?removeVnodes(0,[oldVnode],0,0):isDef(oldVnode.tag)&&invokeDestroyHook(oldVnode)}}return invokeInsertHook(vnode,insertedVnodeQueue,isInitialPatch),vnode.elm}isDef(oldVnode)&&invokeDestroyHook(oldVnode)}}({nodeOps:nodeOps,modules:[attrs,klass,events,domProps,style,inBrowser?{create:_enter,activate:_enter,remove:function(vnode,rm){!0!==vnode.data.show?leave(vnode,rm):rm()}}:{}].concat(baseModules)});isIE9&&document.addEventListener("selectionchange",function(){var el=document.activeElement;el&&el.vmodel&&trigger(el,"input")});var directive={inserted:function(el,binding,vnode,oldVnode){"select"===vnode.tag?(oldVnode.elm&&!oldVnode.elm._vOptions?mergeVNodeHook(vnode,"postpatch",function(){directive.componentUpdated(el,binding,vnode)}):setSelected(el,binding,vnode.context),el._vOptions=[].map.call(el.options,getValue)):("textarea"===vnode.tag||isTextInputType(el.type))&&(el._vModifiers=binding.modifiers,binding.modifiers.lazy||(el.addEventListener("compositionstart",onCompositionStart),el.addEventListener("compositionend",onCompositionEnd),el.addEventListener("change",onCompositionEnd),isIE9&&(el.vmodel=!0)))},componentUpdated:function(el,binding,vnode){if("select"===vnode.tag){setSelected(el,binding,vnode.context);var prevOptions=el._vOptions,curOptions=el._vOptions=[].map.call(el.options,getValue);if(curOptions.some(function(o,i){return!looseEqual(o,prevOptions[i])}))(el.multiple?binding.value.some(function(v){return hasNoMatchingOption(v,curOptions)}):binding.value!==binding.oldValue&&hasNoMatchingOption(binding.value,curOptions))&&trigger(el,"change")}}};function setSelected(el,binding,vm){actuallySetSelected(el,binding,vm),(isIE||isEdge)&&setTimeout(function(){actuallySetSelected(el,binding,vm)},0)}function actuallySetSelected(el,binding,vm){var value=binding.value,isMultiple=el.multiple;if(!isMultiple||Array.isArray(value)){for(var selected,option,i=0,l=el.options.length;i<l;i++)if(option=el.options[i],isMultiple)selected=looseIndexOf(value,getValue(option))>-1,option.selected!==selected&&(option.selected=selected);else if(looseEqual(getValue(option),value))return void(el.selectedIndex!==i&&(el.selectedIndex=i));isMultiple||(el.selectedIndex=-1)}}function hasNoMatchingOption(value,options){return options.every(function(o){return!looseEqual(o,value)})}function getValue(option){return"_value"in option?option._value:option.value}function onCompositionStart(e){e.target.composing=!0}function onCompositionEnd(e){e.target.composing&&(e.target.composing=!1,trigger(e.target,"input"))}function trigger(el,type){var e=document.createEvent("HTMLEvents");e.initEvent(type,!0,!0),el.dispatchEvent(e)}function locateNode(vnode){return!vnode.componentInstance||vnode.data&&vnode.data.transition?vnode:locateNode(vnode.componentInstance._vnode)}var platformDirectives={model:directive,show:{bind:function(el,ref,vnode){var value=ref.value,transition$$1=(vnode=locateNode(vnode)).data&&vnode.data.transition,originalDisplay=el.__vOriginalDisplay="none"===el.style.display?"":el.style.display;value&&transition$$1?(vnode.data.show=!0,enter(vnode,function(){el.style.display=originalDisplay})):el.style.display=value?originalDisplay:"none"},update:function(el,ref,vnode){var value=ref.value;!value!=!ref.oldValue&&((vnode=locateNode(vnode)).data&&vnode.data.transition?(vnode.data.show=!0,value?enter(vnode,function(){el.style.display=el.__vOriginalDisplay}):leave(vnode,function(){el.style.display="none"})):el.style.display=value?el.__vOriginalDisplay:"none")},unbind:function(el,binding,vnode,oldVnode,isDestroy){isDestroy||(el.style.display=el.__vOriginalDisplay)}}},transitionProps={name:String,appear:Boolean,css:Boolean,mode:String,type:String,enterClass:String,leaveClass:String,enterToClass:String,leaveToClass:String,enterActiveClass:String,leaveActiveClass:String,appearClass:String,appearActiveClass:String,appearToClass:String,duration:[Number,String,Object]};function getRealChild(vnode){var compOptions=vnode&&vnode.componentOptions;return compOptions&&compOptions.Ctor.options.abstract?getRealChild(getFirstComponentChild(compOptions.children)):vnode}function extractTransitionData(comp){var data={},options=comp.$options;for(var key in options.propsData)data[key]=comp[key];var listeners=options._parentListeners;for(var key$1 in listeners)data[camelize(key$1)]=listeners[key$1];return data}function placeholder(h,rawChild){if(/\d-keep-alive$/.test(rawChild.tag))return h("keep-alive",{props:rawChild.componentOptions.propsData})}var isNotTextNode=function(c){return c.tag||isAsyncPlaceholder(c)},isVShowDirective=function(d){return"show"===d.name},Transition={name:"transition",props:transitionProps,abstract:!0,render:function(h){var this$1=this,children=this.$slots.default;if(children&&(children=children.filter(isNotTextNode)).length){0;var mode=this.mode;0;var rawChild=children[0];if(function(vnode){for(;vnode=vnode.parent;)if(vnode.data.transition)return!0}(this.$vnode))return rawChild;var child=getRealChild(rawChild);if(!child)return rawChild;if(this._leaving)return placeholder(h,rawChild);var id="__transition-"+this._uid+"-";child.key=null==child.key?child.isComment?id+"comment":id+child.tag:isPrimitive(child.key)?0===String(child.key).indexOf(id)?child.key:id+child.key:child.key;var data=(child.data||(child.data={})).transition=extractTransitionData(this),oldRawChild=this._vnode,oldChild=getRealChild(oldRawChild);if(child.data.directives&&child.data.directives.some(isVShowDirective)&&(child.data.show=!0),oldChild&&oldChild.data&&!function(child,oldChild){return oldChild.key===child.key&&oldChild.tag===child.tag}(child,oldChild)&&!isAsyncPlaceholder(oldChild)&&(!oldChild.componentInstance||!oldChild.componentInstance._vnode.isComment)){var oldData=oldChild.data.transition=extend({},data);if("out-in"===mode)return this._leaving=!0,mergeVNodeHook(oldData,"afterLeave",function(){this$1._leaving=!1,this$1.$forceUpdate()}),placeholder(h,rawChild);if("in-out"===mode){if(isAsyncPlaceholder(child))return oldRawChild;var delayedLeave,performLeave=function(){delayedLeave()};mergeVNodeHook(data,"afterEnter",performLeave),mergeVNodeHook(data,"enterCancelled",performLeave),mergeVNodeHook(oldData,"delayLeave",function(leave){delayedLeave=leave})}}return rawChild}}},props=extend({tag:String,moveClass:String},transitionProps);function callPendingCbs(c){c.elm._moveCb&&c.elm._moveCb(),c.elm._enterCb&&c.elm._enterCb()}function recordPosition(c){c.data.newPos=c.elm.getBoundingClientRect()}function applyTranslation(c){var oldPos=c.data.pos,newPos=c.data.newPos,dx=oldPos.left-newPos.left,dy=oldPos.top-newPos.top;if(dx||dy){c.data.moved=!0;var s=c.elm.style;s.transform=s.WebkitTransform="translate("+dx+"px,"+dy+"px)",s.transitionDuration="0s"}}delete props.mode;var platformComponents={Transition:Transition,TransitionGroup:{props:props,beforeMount:function(){var this$1=this,update=this._update;this._update=function(vnode,hydrating){var restoreActiveInstance=setActiveInstance(this$1);this$1.__patch__(this$1._vnode,this$1.kept,!1,!0),this$1._vnode=this$1.kept,restoreActiveInstance(),update.call(this$1,vnode,hydrating)}},render:function(h){for(var tag=this.tag||this.$vnode.data.tag||"span",map=Object.create(null),prevChildren=this.prevChildren=this.children,rawChildren=this.$slots.default||[],children=this.children=[],transitionData=extractTransitionData(this),i=0;i<rawChildren.length;i++){var c=rawChildren[i];if(c.tag)if(null!=c.key&&0!==String(c.key).indexOf("__vlist"))children.push(c),map[c.key]=c,(c.data||(c.data={})).transition=transitionData;else;}if(prevChildren){for(var kept=[],removed=[],i$1=0;i$1<prevChildren.length;i$1++){var c$1=prevChildren[i$1];c$1.data.transition=transitionData,c$1.data.pos=c$1.elm.getBoundingClientRect(),map[c$1.key]?kept.push(c$1):removed.push(c$1)}this.kept=h(tag,null,kept),this.removed=removed}return h(tag,null,children)},updated:function(){var children=this.prevChildren,moveClass=this.moveClass||(this.name||"v")+"-move";children.length&&this.hasMove(children[0].elm,moveClass)&&(children.forEach(callPendingCbs),children.forEach(recordPosition),children.forEach(applyTranslation),this._reflow=document.body.offsetHeight,children.forEach(function(c){if(c.data.moved){var el=c.elm,s=el.style;addTransitionClass(el,moveClass),s.transform=s.WebkitTransform=s.transitionDuration="",el.addEventListener(transitionEndEvent,el._moveCb=function cb(e){e&&e.target!==el||e&&!/transform$/.test(e.propertyName)||(el.removeEventListener(transitionEndEvent,cb),el._moveCb=null,removeTransitionClass(el,moveClass))})}}))},methods:{hasMove:function(el,moveClass){if(!hasTransition)return!1;if(this._hasMove)return this._hasMove;var clone=el.cloneNode();el._transitionClasses&&el._transitionClasses.forEach(function(cls){removeClass(clone,cls)}),addClass(clone,moveClass),clone.style.display="none",this.$el.appendChild(clone);var info=getTransitionInfo(clone);return this.$el.removeChild(clone),this._hasMove=info.hasTransform}}}};Vue.config.mustUseProp=function(tag,type,attr){return"value"===attr&&acceptValue(tag)&&"button"!==type||"selected"===attr&&"option"===tag||"checked"===attr&&"input"===tag||"muted"===attr&&"video"===tag},Vue.config.isReservedTag=isReservedTag,Vue.config.isReservedAttr=isReservedAttr,Vue.config.getTagNamespace=function(tag){return isSVG(tag)?"svg":"math"===tag?"math":void 0},Vue.config.isUnknownElement=function(tag){if(!inBrowser)return!0;if(isReservedTag(tag))return!1;if(tag=tag.toLowerCase(),null!=unknownElementCache[tag])return unknownElementCache[tag];var el=document.createElement(tag);return tag.indexOf("-")>-1?unknownElementCache[tag]=el.constructor===window.HTMLUnknownElement||el.constructor===window.HTMLElement:unknownElementCache[tag]=/HTMLUnknownElement/.test(el.toString())},extend(Vue.options.directives,platformDirectives),extend(Vue.options.components,platformComponents),Vue.prototype.__patch__=inBrowser?patch:noop,Vue.prototype.$mount=function(el,hydrating){return function(vm,el,hydrating){var updateComponent;return vm.$el=el,vm.$options.render||(vm.$options.render=createEmptyVNode),callHook(vm,"beforeMount"),updateComponent=function(){vm._update(vm._render(),hydrating)},new Watcher(vm,updateComponent,noop,{before:function(){vm._isMounted&&!vm._isDestroyed&&callHook(vm,"beforeUpdate")}},!0),hydrating=!1,null==vm.$vnode&&(vm._isMounted=!0,callHook(vm,"mounted")),vm}(this,el=el&&inBrowser?function(el){if("string"==typeof el){var selected=document.querySelector(el);return selected||document.createElement("div")}return el}(el):void 0,hydrating)},inBrowser&&setTimeout(function(){config.devtools&&devtools&&devtools.emit("init",Vue)},0),__webpack_exports__.a=Vue}).call(this,__webpack_require__("./node_modules/webpack/buildin/global.js"),__webpack_require__("./node_modules/timers-browserify/main.js").setImmediate)},"./node_modules/webpack/buildin/global.js":function(module,exports){var g;g=function(){return this}();try{g=g||new Function("return this")()}catch(e){"object"==typeof window&&(g=window)}module.exports=g},"./src/GanttElastic.vue?vue&type=style&index=0&lang=css&":function(module,__webpack_exports__,__webpack_require__){"use strict";var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/GanttElastic.vue?vue&type=style&index=0&lang=css&");__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__).a},"./src/bundle.js":function(module,__webpack_exports__,__webpack_require__){"use strict";__webpack_require__.r(__webpack_exports__);var vue_runtime_esm=__webpack_require__("./node_modules/vue/dist/vue.runtime.esm.js"),render=function(){var _h=this.$createElement,_c=this._self._c||_h;return _c("div",{staticClass:"gantt-elastic"},[this._t("header"),this._v(" "),_c("main-view",{attrs:{tasks:this.tasks,options:this.options}}),this._v(" "),this._t("footer")],2)};render._withStripped=!0;var MS="millisecond",S="second",MIN="minute",H="hour",D="day",W="week",M="month",Y="year",REGEX_PARSE=/^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,REGEX_FORMAT=/\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,en={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},padStart=function(string,length,pad){var s=String(string);return!s||s.length>=length?string:""+Array(length+1-s.length).join(pad)+string},utils={padStart:padStart,padZoneStr:function(negMinuts){var minutes=Math.abs(negMinuts),hourOffset=Math.floor(minutes/60),minuteOffset=minutes%60;return(negMinuts<=0?"+":"-")+padStart(hourOffset,2,"0")+":"+padStart(minuteOffset,2,"0")},monthDiff:function(a,b){var wholeMonthDiff=12*(b.year()-a.year())+(b.month()-a.month()),anchor=a.clone().add(wholeMonthDiff,"months"),c=b-anchor<0,anchor2=a.clone().add(wholeMonthDiff+(c?-1:1),"months");return Number(-(wholeMonthDiff+(b-anchor)/(c?anchor-anchor2:anchor2-anchor))||0)},absFloor:function(n){return n<0?Math.ceil(n)||0:Math.floor(n)},prettyUnit:function(u){return{M:M,y:Y,w:W,d:D,h:H,m:MIN,s:S,ms:MS}[u]||String(u||"").toLowerCase().replace(/s$/,"")},isUndefined:function(s){return void 0===s}},L="en",Ls={};Ls[L]=en;var isDayjs=function(d){return d instanceof esm_Dayjs},parseLocale=function(preset,object,isLocal){var l;if(!preset)return null;if("string"==typeof preset)Ls[preset]&&(l=preset),object&&(Ls[preset]=object,l=preset);else{var name=preset.name;Ls[name]=preset,l=name}return isLocal||(L=l),l},dayjs=function(date,c){if(isDayjs(date))return date.clone();var cfg=c?"string"==typeof c?{format:c}:c:{};return cfg.date=date,new esm_Dayjs(cfg)},wrapper=function(date,instance){return dayjs(date,{locale:instance.$L})},Utils=utils;Utils.parseLocale=parseLocale,Utils.isDayjs=isDayjs,Utils.wrapper=wrapper;var esm_Dayjs=function(){function Dayjs(cfg){this.parse(cfg)}var _proto=Dayjs.prototype;return _proto.parse=function(cfg){var date,reg;this.$d=null===(date=cfg.date)?new Date(NaN):Utils.isUndefined(date)?new Date:date instanceof Date?date:"string"==typeof date&&/.*[^Z]$/i.test(date)&&(reg=date.match(REGEX_PARSE))?new Date(reg[1],reg[2]-1,reg[3]||1,reg[4]||0,reg[5]||0,reg[6]||0,reg[7]||0):new Date(date),this.init(cfg)},_proto.init=function(cfg){var $d=this.$d;this.$y=$d.getFullYear(),this.$M=$d.getMonth(),this.$D=$d.getDate(),this.$W=$d.getDay(),this.$H=$d.getHours(),this.$m=$d.getMinutes(),this.$s=$d.getSeconds(),this.$ms=$d.getMilliseconds(),this.$L=this.$L||parseLocale(cfg.locale,null,!0)||L},_proto.$utils=function(){return Utils},_proto.isValid=function(){return!("Invalid Date"===this.$d.toString())},_proto.isSame=function(that,units){var other=dayjs(that);return this.startOf(units)<=other&&other<=this.endOf(units)},_proto.isAfter=function(that,units){return dayjs(that)<this.startOf(units)},_proto.isBefore=function(that,units){return this.endOf(units)<dayjs(that)},_proto.year=function(){return this.$y},_proto.month=function(){return this.$M},_proto.day=function(){return this.$W},_proto.date=function(){return this.$D},_proto.hour=function(){return this.$H},_proto.minute=function(){return this.$m},_proto.second=function(){return this.$s},_proto.millisecond=function(){return this.$ms},_proto.unix=function(){return Math.floor(this.valueOf()/1e3)},_proto.valueOf=function(){return this.$d.getTime()},_proto.startOf=function(units,_startOf){var _this=this,isStartOf=!!Utils.isUndefined(_startOf)||_startOf,instanceFactory=function(d,m){var ins=wrapper(new Date(_this.$y,m,d),_this);return isStartOf?ins:ins.endOf(D)},instanceFactorySet=function(method,slice){return wrapper(_this.toDate()[method].apply(_this.toDate(),(isStartOf?[0,0,0,0]:[23,59,59,999]).slice(slice)),_this)};switch(Utils.prettyUnit(units)){case Y:return isStartOf?instanceFactory(1,0):instanceFactory(31,11);case M:return isStartOf?instanceFactory(1,this.$M):instanceFactory(0,this.$M+1);case W:var weekStart=this.$locale().weekStart||0;return instanceFactory(isStartOf?this.$D-(this.$W-weekStart):this.$D+(6-(this.$W-weekStart)),this.$M);case D:case"date":return instanceFactorySet("setHours",0);case H:return instanceFactorySet("setMinutes",1);case MIN:return instanceFactorySet("setSeconds",2);case S:return instanceFactorySet("setMilliseconds",3);default:return this.clone()}},_proto.endOf=function(arg){return this.startOf(arg,!1)},_proto.$set=function(units,int){var _C$D$C$DATE$C$M$C$Y$C,unit=Utils.prettyUnit(units),name=(_C$D$C$DATE$C$M$C$Y$C={},_C$D$C$DATE$C$M$C$Y$C[D]="setDate",_C$D$C$DATE$C$M$C$Y$C.date="setDate",_C$D$C$DATE$C$M$C$Y$C[M]="setMonth",_C$D$C$DATE$C$M$C$Y$C[Y]="setFullYear",_C$D$C$DATE$C$M$C$Y$C[H]="setHours",_C$D$C$DATE$C$M$C$Y$C[MIN]="setMinutes",_C$D$C$DATE$C$M$C$Y$C[S]="setSeconds",_C$D$C$DATE$C$M$C$Y$C[MS]="setMilliseconds",_C$D$C$DATE$C$M$C$Y$C)[unit],arg=unit===D?this.$D+(int-this.$W):int;return this.$d[name]&&this.$d[name](arg),this.init(),this},_proto.set=function(string,int){return this.clone().$set(string,int)},_proto.add=function(number,units){var _C$MIN$C$H$C$S$unit,_this2=this;number=Number(number);var unit=Utils.prettyUnit(units),instanceFactory=function(u,n){var date=_this2.set("date",1).set(u,n+number);return date.set("date",Math.min(_this2.$D,date.daysInMonth()))},instanceFactorySet=function(n){var date=new Date(_this2.$d);return date.setDate(date.getDate()+n*number),wrapper(date,_this2)};if(unit===M)return instanceFactory(M,this.$M);if(unit===Y)return instanceFactory(Y,this.$y);if(unit===D)return instanceFactorySet(1);if(unit===W)return instanceFactorySet(7);var step=(_C$MIN$C$H$C$S$unit={},_C$MIN$C$H$C$S$unit[MIN]=6e4,_C$MIN$C$H$C$S$unit[H]=36e5,_C$MIN$C$H$C$S$unit[S]=1e3,_C$MIN$C$H$C$S$unit)[unit]||1,nextTimeStamp=this.valueOf()+number*step;return wrapper(nextTimeStamp,this)},_proto.subtract=function(number,string){return this.add(-1*number,string)},_proto.format=function(formatStr){var _this3=this;if(!this.isValid())return"Invalid Date";var str=formatStr||"YYYY-MM-DDTHH:mm:ssZ",zoneStr=Utils.padZoneStr(this.$d.getTimezoneOffset()),locale=this.$locale(),weekdays=locale.weekdays,months=locale.months,getShort=function(arr,index,full,length){return arr&&arr[index]||full[index].substr(0,length)},get$H=function(match){return 0===_this3.$H?12:Utils.padStart(_this3.$H<13?_this3.$H:_this3.$H-12,"hh"===match?2:1,"0")},matches={YY:String(this.$y).slice(-2),YYYY:String(this.$y),M:String(this.$M+1),MM:Utils.padStart(this.$M+1,2,"0"),MMM:getShort(locale.monthsShort,this.$M,months,3),MMMM:months[this.$M],D:String(this.$D),DD:Utils.padStart(this.$D,2,"0"),d:String(this.$W),dd:getShort(locale.weekdaysMin,this.$W,weekdays,2),ddd:getShort(locale.weekdaysShort,this.$W,weekdays,3),dddd:weekdays[this.$W],H:String(this.$H),HH:Utils.padStart(this.$H,2,"0"),h:get$H("h"),hh:get$H("hh"),a:this.$H<12?"am":"pm",A:this.$H<12?"AM":"PM",m:String(this.$m),mm:Utils.padStart(this.$m,2,"0"),s:String(this.$s),ss:Utils.padStart(this.$s,2,"0"),SSS:Utils.padStart(this.$ms,3,"0"),Z:zoneStr};return str.replace(REGEX_FORMAT,function(match){return match.indexOf("[")>-1?match.replace(/\[|\]/g,""):matches[match]||zoneStr.replace(":","")})},_proto.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},_proto.diff=function(input,units,float){var _C$Y$C$M$C$Q$C$W$C$D$,unit=Utils.prettyUnit(units),that=dayjs(input),zoneDelta=6e4*(that.utcOffset()-this.utcOffset()),diff=this-that,result=Utils.monthDiff(this,that);return result=(_C$Y$C$M$C$Q$C$W$C$D$={},_C$Y$C$M$C$Q$C$W$C$D$[Y]=result/12,_C$Y$C$M$C$Q$C$W$C$D$[M]=result,_C$Y$C$M$C$Q$C$W$C$D$.quarter=result/3,_C$Y$C$M$C$Q$C$W$C$D$[W]=(diff-zoneDelta)/6048e5,_C$Y$C$M$C$Q$C$W$C$D$[D]=(diff-zoneDelta)/864e5,_C$Y$C$M$C$Q$C$W$C$D$[H]=diff/36e5,_C$Y$C$M$C$Q$C$W$C$D$[MIN]=diff/6e4,_C$Y$C$M$C$Q$C$W$C$D$[S]=diff/1e3,_C$Y$C$M$C$Q$C$W$C$D$)[unit]||diff,float?result:Utils.absFloor(result)},_proto.daysInMonth=function(){return this.endOf(M).$D},_proto.$locale=function(){return Ls[this.$L]},_proto.locale=function(preset,object){var that=this.clone();return that.$L=parseLocale(preset,object,!0),that},_proto.clone=function(){return wrapper(this.toDate(),this)},_proto.toDate=function(){return new Date(this.$d)},_proto.toArray=function(){return[this.$y,this.$M,this.$D,this.$H,this.$m,this.$s,this.$ms]},_proto.toJSON=function(){return this.toISOString()},_proto.toISOString=function(){return this.$d.toISOString()},_proto.toObject=function(){return{years:this.$y,months:this.$M,date:this.$D,hours:this.$H,minutes:this.$m,seconds:this.$s,milliseconds:this.$ms}},_proto.toString=function(){return this.$d.toUTCString()},Dayjs}();dayjs.prototype=esm_Dayjs.prototype,dayjs.extend=function(plugin,option){return plugin(option,esm_Dayjs,dayjs),dayjs},dayjs.locale=parseLocale,dayjs.isDayjs=isDayjs,dayjs.unix=function(timestamp){return dayjs(1e3*timestamp)},dayjs.en=Ls[L];var esm=dayjs,MainViewvue_type_template_id_0bc4212e_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{staticClass:"gantt-elastic__main-view",style:_vm.root.style("main-view")},[_c("div",{staticClass:"gantt-elastic__main-container-wrapper",style:_vm.root.style("main-container-wrapper",{height:_vm.root.state.height+"px"})},[_c("div",{ref:"mainView",staticClass:"gantt-elastic__main-container",style:_vm.root.style("main-container",{width:_vm.getWidth+"px",height:_vm.root.state.height+"px"})},[_c("div",{staticClass:"gantt-elastic__container",style:_vm.root.style("container"),on:{mousemove:_vm.mouseMove,mouseup:_vm.mouseUp}},[_c("div",{directives:[{name:"show",rawName:"v-show",value:_vm.root.state.taskList.display,expression:"root.state.taskList.display"}],ref:"taskList",staticClass:"gantt-elastic__task-list-container",style:_vm.root.style("task-list-container",{width:_vm.root.state.taskList.finalWidth+"px",height:_vm.root.state.height+"px"})},[_c("task-list")],1),_vm._v(" "),_c("div",{ref:"chartContainer",staticClass:"gantt-elastic__main-view-container",on:{mousedown:_vm.chartMouseDown,touchstart:_vm.chartMouseDown,mouseup:_vm.chartMouseUp,touchend:_vm.chartMouseUp,mousemove:function($event){return $event.preventDefault(),_vm.chartMouseMove($event)},touchmove:function($event){return $event.preventDefault(),_vm.chartMouseMove($event)},wheel:function($event){return $event.preventDefault(),_vm.chartWheel($event)}}},[_c("chart")],1)])]),_vm._v(" "),_c("div",{ref:"chartScrollContainerVertical",staticClass:"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",style:_vm.root.style("chart-scroll-container","chart-scroll-container--vertical",_vm.verticalStyle),on:{scroll:_vm.onVerticalScroll}},[_c("div",{staticClass:"gantt-elastic__chart-scroll--vertical",style:{width:"1px",height:_vm.root.state.allVisibleTasksHeight+"px"}})])]),_vm._v(" "),_c("div",{ref:"chartScrollContainerHorizontal",staticClass:"gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",style:_vm.root.style("chart-scroll-container","chart-scroll-container--horizontal",{marginLeft:_vm.getMarginLeft}),on:{scroll:_vm.onHorizontalScroll}},[_c("div",{staticClass:"gantt-elastic__chart-scroll--horizontal",style:{height:"1px",width:_vm.root.state.width+"px"}})])])};MainViewvue_type_template_id_0bc4212e_render._withStripped=!0;var TaskListvue_type_template_id_6e11f12f_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{directives:[{name:"show",rawName:"v-show",value:_vm.root.state.taskList.display,expression:"root.state.taskList.display"}],ref:"taskListWrapper",staticClass:"gantt-elastic__task-list-wrapper",style:_vm.root.style("task-list-wrapper",{width:"100%",height:"100%"})},[_c("div",{ref:"taskList",staticClass:"gantt-elastic__task-list",style:_vm.root.style("task-list")},[_c("task-list-header"),_vm._v(" "),_c("div",{ref:"taskListItems",staticClass:"gantt-elastic__task-list-items",style:_vm.root.style("task-list-items",{height:_vm.root.state.rowsHeight+"px"})},_vm._l(_vm.root.state.tasks,function(task){return _c("task-list-item",{directives:[{name:"show",rawName:"v-show",value:task.visible,expression:"task.visible"}],key:task.id,attrs:{task:task,"expander-style":_vm.getListExpanderStyle(task)}})}),1)],1)])};TaskListvue_type_template_id_6e11f12f_render._withStripped=!0;var TaskListHeadervue_type_template_id_aefdd7c8_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{staticClass:"gantt-elastic__task-list-header",style:_vm.root.style("task-list-header",{height:_vm.root.state.calendar.height+"px","margin-bottom":_vm.root.state.calendar.gap+"px"})},_vm._l(_vm.root.getTaskListColumns,function(column){return _c("div",{key:column._id,staticClass:"gantt-elastic__task-list-header-column",style:_vm.root.style("task-list-header-column",column.style["task-list-header-column"],_vm.getStyle(column))},[column.expander?_c("task-list-expander",{attrs:{tasks:_vm.collapsible,options:_vm.root.state.taskList.expander}}):_vm._e(),_vm._v(" "),_c("div",{staticClass:"gantt-elastic__task-list-header-label",style:_vm.root.style("task-list-header-label",column.style["task-list-header-label"]),attrs:{column:column},on:{mouseup:_vm.resizerMouseUp}},[_vm._v(_vm._s(column.label))]),_vm._v(" "),_c("div",{staticClass:"gantt-elastic__task-list-header-resizer-wrapper",style:_vm.root.style("task-list-header-resizer-wrapper",column.style["task-list-header-resizer-wrapper"]),attrs:{column:column},on:{mousedown:function($event){return _vm.resizerMouseDown($event,column)}}},[_c("div",{staticClass:"gantt-elastic__task-list-header-resizer",style:_vm.root.style("task-list-header-resizer",column.style["task-list-header-resizer"])},[_c("div",{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:_vm.root.style("task-list-header-resizer-dot",column.style["task-list-header-resizer-dot"])}),_vm._v(" "),_c("div",{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:_vm.root.style("task-list-header-resizer-dot",column.style["task-list-header-resizer-dot"])}),_vm._v(" "),_c("div",{staticClass:"gantt-elastic__task-list-header-resizer-dot",style:_vm.root.style("task-list-header-resizer-dot",column.style["task-list-header-resizer-dot"])})])])],1)}),0)};TaskListHeadervue_type_template_id_aefdd7c8_render._withStripped=!0;var Expandervue_type_template_id_09a21177_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{class:_vm.getClassPrefix()+"-wrapper",style:_vm.root.style(_vm.getClassPrefix(!1)+"-wrapper")},[_vm.allChildren.length?_c("svg",{class:_vm.getClassPrefix()+"-content",style:_vm.root.style(_vm.getClassPrefix(!1)+"-content"),attrs:{width:_vm.options.size,height:_vm.options.size}},[_c("rect",{class:_vm.getClassPrefix()+"-border",style:_vm.root.style(_vm.getClassPrefix(!1)+"-border",_vm.borderStyle),attrs:{x:_vm.border,y:_vm.border,width:_vm.options.size-2*_vm.border,height:_vm.options.size-2*_vm.border,rx:"2",ry:"2"},on:{click:_vm.toggle}}),_vm._v(" "),_vm.allChildren.length?_c("line",{class:_vm.getClassPrefix()+"-line",style:_vm.root.style(_vm.getClassPrefix(!1)+"-line"),attrs:{x1:_vm.lineOffset,y1:_vm.options.size/2,x2:_vm.options.size-_vm.lineOffset,y2:_vm.options.size/2},on:{click:_vm.toggle}}):_vm._e(),_vm._v(" "),_vm.collapsed?_c("line",{class:_vm.getClassPrefix()+"-line",style:_vm.root.style(_vm.getClassPrefix(!1)+"-line"),attrs:{x1:_vm.options.size/2,y1:_vm.lineOffset,x2:_vm.options.size/2,y2:_vm.options.size-_vm.lineOffset},on:{click:_vm.toggle}}):_vm._e()]):_vm._e()])};function normalizeComponent(scriptExports,render,staticRenderFns,functionalTemplate,injectStyles,scopeId,moduleIdentifier,shadowMode){var hook,options="function"==typeof scriptExports?scriptExports.options:scriptExports;if(render&&(options.render=render,options.staticRenderFns=staticRenderFns,options._compiled=!0),functionalTemplate&&(options.functional=!0),scopeId&&(options._scopeId="data-v-"+scopeId),moduleIdentifier?(hook=function(context){(context=context||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(context=__VUE_SSR_CONTEXT__),injectStyles&&injectStyles.call(this,context),context&&context._registeredComponents&&context._registeredComponents.add(moduleIdentifier)},options._ssrRegister=hook):injectStyles&&(hook=shadowMode?function(){injectStyles.call(this,this.$root.$options.shadowRoot)}:injectStyles),hook)if(options.functional){options._injectStyles=hook;var originalRender=options.render;options.render=function(h,context){return hook.call(context),originalRender(h,context)}}else{var existing=options.beforeCreate;options.beforeCreate=existing?[].concat(existing,hook):[hook]}return{exports:scriptExports,options:options}}Expandervue_type_template_id_09a21177_render._withStripped=!0;var component=normalizeComponent({inject:["root"],props:["tasks","options"],data:()=>({border:.5,borderStyle:{"stroke-width":.5},lineOffset:5}),computed:{allChildren(){const children=[];return this.tasks.forEach(task=>{task.allChildren.forEach(child=>{children.push(child)})}),children},collapsed(){if(0===this.tasks.length)return!1;let collapsed=0;for(let i=0,len=this.tasks.length;i<len;i++)this.tasks[i].collapsed&&collapsed++;return collapsed===this.tasks.length}},methods:{getClassPrefix(full=!0){return`${full?"gantt-elastic__":""}${this.options.type}-expander`},toggle(){if(0===this.allChildren.length)return;const collapsed=!this.collapsed;this.tasks.forEach(task=>{task.collapsed=collapsed,task.allChildren.forEach(child=>{child.visible=!collapsed&&!child.parent.collapsed})})}}},Expandervue_type_template_id_09a21177_render,[],!1,null,null,null);component.options.__file="src/components/Expander.vue";var Expander=component.exports,TaskListHeader_component=normalizeComponent({components:{TaskListExpander:Expander},inject:["root"],data:()=>({resizer:{moving:!1,x:0}}),computed:{getStyle(){return column=>{return{height:this.root.state.calendar.height+this.root.style("calendar-row-rect")["border-width"]+"px",width:column.finalWidth+"px"}}},collapsible(){return this.root.state.tasks.filter(task=>task.allChildren.length>0)}},methods:{resizerMouseDown(event,column){this.resizerMoving||(this.resizer.moving=column,this.resizer.x=event.clientX,this.resizer.initialWidth=column.width,this.root.$emit("taskList-column-width-change-start",this.resizer.moving))},resizerMouseMove(event){this.resizer.moving&&(this.resizer.moving.width=this.resizer.initialWidth+event.clientX-this.resizer.x,this.resizer.moving.width<this.root.state.taskList.minWidth&&(this.resizer.moving.width=this.root.state.taskList.minWidth),this.root.$emit("taskList-column-width-change",this.resizer.moving))},resizerMouseUp(event){this.resizer.moving&&(this.root.$emit("taskList-column-width-change",this.resizer.moving),this.root.$emit("taskList-column-width-change-stop",this.resizer.moving),this.resizer.moving=!1)}},created(){this.mouseUpListener=document.addEventListener("mouseup",this.resizerMouseUp.bind(this)),this.mouseMoveListener=document.addEventListener("mousemove",this.resizerMouseMove.bind(this)),this.root.$on("main-view-mousemove",this.resizerMouseMove),this.root.$on("main-view-mouseup",this.resizerMouseUp)},beforeDestroy(){document.removeEventListener("mouseup",this.resizerMouseUp),document.removeEventListener("mousemove",this.resizerMouseMove)}},TaskListHeadervue_type_template_id_aefdd7c8_render,[],!1,null,null,null);TaskListHeader_component.options.__file="src/components/TaskList/TaskListHeader.vue";var TaskListHeader=TaskListHeader_component.exports,TaskListItemvue_type_template_id_9716293c_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{staticClass:"gantt-elastic__task-list-item",style:_vm.root.style("task-list-item")},_vm._l(_vm.root.state.taskList.columns,function(column){return _c("item-column",{key:column._id,attrs:{column:column,task:_vm.task}},[column.expander?_c("task-list-expander",{style:_vm.expanderStyle,attrs:{tasks:[_vm.task],options:_vm.root.state.taskList.expander}}):_vm._e()],1)}),1)};TaskListItemvue_type_template_id_9716293c_render._withStripped=!0;var ItemColumnvue_type_template_id_cb5a6c96_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{staticClass:"gantt-elastic__task-list-item-column",style:_vm.root.style("task-list-item-column",_vm.column.style["task-list-item-column"],{width:_vm.column.finalWidth+"px",height:_vm.column.height+"px"})},[_c("div",{staticClass:"gantt-elastic__task-list-item-value-wrapper",style:_vm.root.style("task-list-item-value-wrapper",_vm.column.style["task-list-item-value-wrapper"])},[_vm._t("default"),_vm._v(" "),_c("div",{staticClass:"gantt-elastic__task-list-item-value-container",style:_vm.root.style("task-list-item-value-container",_vm.column.style["task-list-item-value-container"])},[_vm.html?_vm._e():_c("div",{staticClass:"gantt-elastic__task-list-item-value",style:_vm.root.style("task-list-item-value",_vm.column.style["task-list-item-value"]),on:{click:function($event){return _vm.emitEvent("click",$event)},mouseenter:function($event){return _vm.emitEvent("mouseenter",$event)},mouseover:function($event){return _vm.emitEvent("mouseover",$event)},mouseout:function($event){return _vm.emitEvent("mouseout",$event)},mousemove:function($event){return _vm.emitEvent("mousemove",$event)},mousedown:function($event){return _vm.emitEvent("mousedown",$event)},mouseup:function($event){return _vm.emitEvent("mouseup",$event)},mousewheel:function($event){return _vm.emitEvent("mousewheel",$event)},touchstart:function($event){return _vm.emitEvent("touchstart",$event)},touchmove:function($event){return _vm.emitEvent("touchmove",$event)},touchend:function($event){return _vm.emitEvent("touchend",$event)}}},[_vm._v("\n        "+_vm._s(_vm.value)+"\n      ")]),_vm._v(" "),_vm.html?_c("div",{staticClass:"gantt-elastic__task-list-item-value",style:_vm.root.style("task-list-item-value",_vm.column.style["task-list-item-value"]),domProps:{innerHTML:_vm._s(_vm.value)},on:{click:function($event){return _vm.emitEvent("click",$event)},mouseenter:function($event){return _vm.emitEvent("mouseenter",$event)},mouseover:function($event){return _vm.emitEvent("mouseover",$event)},mouseout:function($event){return _vm.emitEvent("mouseout",$event)},mousemove:function($event){return _vm.emitEvent("mousemove",$event)},mousedown:function($event){return _vm.emitEvent("mousedown",$event)},mouseup:function($event){return _vm.emitEvent("mouseup",$event)},mousewheel:function($event){return _vm.emitEvent("mousewheel",$event)},touchstart:function($event){return _vm.emitEvent("touchstart",$event)},touchmove:function($event){return _vm.emitEvent("touchmove",$event)},touchend:function($event){return _vm.emitEvent("touchend",$event)}}}):_vm._e()])],2)])};ItemColumnvue_type_template_id_cb5a6c96_render._withStripped=!0;var ItemColumn_component=normalizeComponent({inject:["root"],props:["column","task"],data:()=>({}),methods:{emitEvent(eventName,event){void 0!==this.column.events&&"function"==typeof this.column.events[eventName]&&this.column.events[eventName]({event:event,data:this.task,column:this.column}),this.root.$emit(`taskList-${this.task.type}-${eventName}`,{event:event,data:this.task,column:this.column})}},computed:{html(){return void 0!==this.column.html&&!0===this.column.html},value(){return"function"==typeof this.column.value?this.column.value(this.task):this.task[this.column.value]}}},ItemColumnvue_type_template_id_cb5a6c96_render,[],!1,null,null,null);ItemColumn_component.options.__file="src/components/TaskList/ItemColumn.vue";var TaskListItem_component=normalizeComponent({components:{TaskListExpander:Expander,ItemColumn:ItemColumn_component.exports},inject:["root"],props:["task","expanderStyle"],data:()=>({})},TaskListItemvue_type_template_id_9716293c_render,[],!1,null,null,null);TaskListItem_component.options.__file="src/components/TaskList/TaskListItem.vue";var TaskList_component=normalizeComponent({components:{TaskListHeader:TaskListHeader,TaskListItem:TaskListItem_component.exports},inject:["root"],data:()=>({}),mounted(){this.root.state.refs.taskListWrapper=this.$refs.taskListWrapper,this.root.state.refs.taskList=this.$refs.taskList,this.root.state.refs.taskListItems=this.$refs.taskListItems},computed:{getListExpanderStyle(){return task=>{const state=this.root.state;return{"padding-left":(task.parents.length-1)*state.taskList.expander.padding+state.taskList.expander.margin+"px",margin:"auto 0"}}}}},TaskListvue_type_template_id_6e11f12f_render,[],!1,null,null,null);TaskList_component.options.__file="src/components/TaskList/TaskList.vue";var TaskList=TaskList_component.exports,Chartvue_type_template_id_67c3f5cd_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{ref:"chart",staticClass:"gantt-elastic__chart",style:_vm.root.style("chart",{width:_vm.getWidth+"px",height:_vm.getHeight+"px"})},[_c("calendar"),_vm._v(" "),_c("div",{style:_vm.root.style("chart-area",{width:"100%",height:_vm.root.state.rowsHeight+"px"})},[_c("div",{ref:"chartGraph",staticClass:"gantt-elastic__chart-graph",style:_vm.root.style("chart-graph",{height:"100%"})},[_c("svg",{ref:"chart",staticClass:"gantt-elastic__chart",style:_vm.root.style("chart"),attrs:{x:"0",y:"0",width:_vm.getWidth+"px",height:_vm.root.state.allVisibleTasksHeight+"px",xmlns:"http://www.w3.org/2000/svg"}},[_c("days-highlight"),_vm._v(" "),_c("grid"),_vm._v(" "),_c("dependency-lines",{attrs:{tasks:_vm.root.state.tasks}}),_vm._v(" "),_vm._l(_vm.root.state.tasks,function(task){return _c("g",{directives:[{name:"show",rawName:"v-show",value:task.visible,expression:"task.visible"}],key:task.id,staticClass:"gantt-elastic__chart-row-wrapper",style:_vm.root.style("chart-row-wrapper"),attrs:{task:task}},[_c(task.type,{tag:"component",attrs:{task:task}})],1)})],2)])])],1)};Chartvue_type_template_id_67c3f5cd_render._withStripped=!0;var Gridvue_type_template_id_2bf979a7_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("svg",{ref:"chart",staticClass:"gantt-elastic__grid-lines-wrapper",style:_vm.root.style("grid-lines-wrapper"),attrs:{x:"0",y:"0",width:_vm.root.state.width,height:_vm.root.state.allVisibleTasksHeight,xmlns:"http://www.w3.org/2000/svg"}},[_c("g",{staticClass:"gantt-elastic__grid-lines",style:_vm.root.style("grid-lines")},[_vm._l(_vm.horizontalLines,function(line){return _c("line",{key:line.key,staticClass:"gantt-elastic__grid-line-horizontal",style:_vm.root.style("grid-line-horizontal"),attrs:{x1:line.x1,y1:line.y1,x2:line.x2,y2:line.y2}})}),_vm._v(" "),_vm._l(_vm.verticalLines,function(line){return _c("line",{key:line.key,staticClass:"gantt-elastic__grid-line-vertical",style:_vm.root.style("grid-line-vertical"),attrs:{x1:line.x1,y1:line.y1,x2:line.x2,y2:line.y2}})}),_vm._v(" "),_c("line",{staticClass:"gantt-elastic__grid-line-time",style:_vm.root.style("grid-line-time"),attrs:{x1:_vm.timeLinePosition.x,y1:_vm.timeLinePosition.y1,x2:_vm.timeLinePosition.x,y2:_vm.timeLinePosition.y2}})],2)])};Gridvue_type_template_id_2bf979a7_render._withStripped=!0;var Grid_component=normalizeComponent({inject:["root"],data:()=>({}),created(){this.root.$on("recenterPosition",this.recenterPosition)},mounted(){this.$nextTick(()=>{this.$nextTick(()=>{this.root.scrollToTime(this.timeLinePosition.time)})})},methods:{recenterPosition(){this.root.scrollToTime(this.timeLinePosition.time)}},computed:{verticalLines(){let lines=[];const state=this.root.state;return state.times.steps.forEach(step=>{this.root.isInsideViewPort(step.offset.px,1)&&lines.push({key:step.date.valueOf(),x1:step.offset.px,y1:0,x2:step.offset.px,y2:state.tasks.length*(state.row.height+2*state.chart.grid.horizontal.gap)+this.root.style("grid-line-vertical")["stroke-width"]})}),lines},horizontalLines(){let lines=[];const state=this.root.state;for(let index=0,len=this.root.visibleTasks.length;index<=len;index++){const y=index*(state.row.height+2*state.chart.grid.horizontal.gap)+this.root.style("grid-line-vertical")["stroke-width"]/2;lines.push({key:"hl"+index,x1:0,y1:y,x2:"100%",y2:y})}return lines},inViewPort(){return line=>{const state=this.root.state;return line.x1>=state.scroll.chart.left&&line.x1<=state.scroll.chart.right}},timeLinePosition(){const d=new Date,current=d.getTime(),currentOffset=this.root.timeToPixelOffsetX(current),timeLine={x:0,y1:0,y2:"100%",dateTime:"",time:current};return timeLine.x=currentOffset,timeLine.dateTime=d.toLocaleDateString(),timeLine}}},Gridvue_type_template_id_2bf979a7_render,[],!1,null,null,null);Grid_component.options.__file="src/components/Chart/Grid.vue";var Grid=Grid_component.exports,DaysHighlightvue_type_template_id_1bfe64e8_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _vm.showWorkingDays?_c("g",{staticClass:"gantt-elastic__chart-days-highlight-container",style:_vm.root.style("chart-days-highlight-container")},_vm._l(_vm.workingDays,function(day){return _c("rect",{key:_vm.getKey(day),staticClass:"gantt-elastic__chart-days-highlight-rect",style:_vm.root.style("chart-days-highlight-rect"),attrs:{x:day.offset.px,y:"0",width:day.width.px,height:"100%"}})}),0):_vm._e()};DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped=!0;var DaysHighlight_component=normalizeComponent({inject:["root"],data:()=>({}),methods:{getKey:day=>day.date.format("YYYY-MM-DD")},computed:{workingDays(){return this.root.state.times.steps.filter(step=>-1===this.root.state.calendar.workingDays.indexOf(step.date.day()))},showWorkingDays(){const calendar=this.root.state.calendar;return!(void 0===calendar.workingDays||!Array.isArray(calendar.workingDays)||!calendar.workingDays.length)}}},DaysHighlightvue_type_template_id_1bfe64e8_render,[],!1,null,null,null);DaysHighlight_component.options.__file="src/components/Chart/DaysHighlight.vue";var DaysHighlight=DaysHighlight_component.exports,Calendarvue_type_template_id_dee108e2_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{staticClass:"gantt-elastic__calendar-wrapper",style:_vm.root.style("calendar-wrapper",{"margin-bottom":_vm.root.state.calendar.gap+"px"})},[_c("div",{staticClass:"gantt-elastic__calendar",style:_vm.root.style("calendar",{width:_vm.getWidth+"px"})},[_vm.root.state.calendar.month.display?_c("calendar-row",{attrs:{items:_vm.root.state.calendar.months,which:"month"}}):_vm._e(),_vm._v(" "),_vm.root.state.calendar.day.display?_c("calendar-row",{attrs:{items:_vm.root.state.calendar.days,which:"day"}}):_vm._e(),_vm._v(" "),_vm.root.state.calendar.hour.display?_c("calendar-row",{attrs:{items:_vm.root.state.calendar.hours,which:"hour"}}):_vm._e()],1)])};Calendarvue_type_template_id_dee108e2_render._withStripped=!0;var CalendarRowvue_type_template_id_0daf06fb_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("div",{class:"gantt-elastic__calendar-row gantt-elastic__calendar-row-"+_vm.which,style:_vm.root.style("calendar-row","calendar-row-"+_vm.which)},_vm._l(_vm.items,function(item){return _c("div",{key:item.key,class:"gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--"+_vm.which,style:_vm.root.style("calendar-row-rect","calendar-row-rect--"+_vm.which,{width:item.width+"px",height:item.height+"px"})},[_c("div",{class:"gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--"+_vm.which,style:_vm.root.style("calendar-row-text","calendar-row-text--"+_vm.which,_vm.getStyle(item))},[_vm._v(_vm._s(item.label))])])}),0)};CalendarRowvue_type_template_id_0daf06fb_render._withStripped=!0;var CalendarRow_component=normalizeComponent({inject:["root"],props:["items","which"],data:()=>({anchor:"middle"}),computed:{getTextX(){let x=this.item.x+this.item.width/2;if("month"===this.which&&this.root.isInsideViewPort(this.item.x,this.item.width,0)){this.anchor="start";let scrollWidth=this.root.state.scroll.chart.right-this.root.state.scroll.chart.left;(x=this.root.state.scroll.chart.left+scrollWidth/2-this.item.textWidth/2+2)+this.item.textWidth+2>this.item.x+this.item.width?x=this.item.x+this.item.width-this.item.textWidth-2:x<this.item.x&&(x=this.item.x+2)}return x},getTextY(){return this.item.y+this.item.height/2},getStyle(){return item=>({"line-height":item.height-2*parseFloat(this.root.style("calendar-row-rect","calendar-row-rect--"+this.which)["border-width"])+"px"})}}},CalendarRowvue_type_template_id_0daf06fb_render,[],!1,null,null,null);CalendarRow_component.options.__file="src/components/Calendar/CalendarRow.vue";var Calendar_component=normalizeComponent({components:{CalendarRow:CalendarRow_component.exports},inject:["root"],data:()=>({}),created(){this.root.$on("scope-change",this.regenerate),this.root.$on("times-timeZoom-change",this.regenerate),this.root.$on("tasks-changed",this.regenerate),this.root.$on("options-changed",this.regenerate),this.regenerate()},methods:{howManyHoursFit(dayIndex){const additionalSpace=2*parseFloat(this.root.style("calendar-row-rect")["border-width"])+2;let fullCellWidth=this.root.state.times.steps[dayIndex].width.px,formatNames=Object.keys(this.root.state.calendar.hour.format);for(let hours=24;hours>1;hours=Math.ceil(hours/2))for(let formatName of formatNames)if((this.root.state.calendar.hour.maxWidths[formatName]+additionalSpace)*hours<=fullCellWidth&&hours>1)return{count:hours,type:formatName};return{count:0,type:""}},howManyDaysFit(){const additionalSpace=2*parseFloat(this.root.style("calendar-row-rect")["border-width"])+2;let fullWidth=this.root.state.width,formatNames=Object.keys(this.root.state.calendar.day.format);for(let days=this.root.state.times.steps.length;days>1;days=Math.ceil(days/2))for(let formatName of formatNames)if((this.root.state.calendar.day.maxWidths[formatName]+additionalSpace)*days<=fullWidth&&days>1)return{count:days,type:formatName};return{count:0,type:""}},howManyMonthsFit(){const additionalSpace=2*parseFloat(this.root.style("calendar-row-rect")["border-width"])+2;let fullWidth=this.root.state.width,formatNames=Object.keys(this.root.state.calendar.month.format),currentMonth=esm(this.root.state.times.firstDate),previousMonth=currentMonth.clone();const lastTime=this.root.state.times.lastTime;let monthsCount=1;for(;currentMonth.valueOf()<=lastTime;)currentMonth=currentMonth.add(1,"day"),previousMonth.month()!==currentMonth.month()&&monthsCount++,previousMonth=currentMonth.clone();for(let months=monthsCount;months>1;months=Math.ceil(months/2))for(let formatName of formatNames)if((this.root.state.calendar.month.maxWidths[formatName]+additionalSpace)*months<=fullWidth&&months>1)return{count:months,type:formatName};return{count:1,type:formatNames[0]}},hourTextStyle(){return"font-family:"+this.root.state.calendar.hour.fontFamily+";font-size:"+this.root.state.calendar.hour.fontSize},dayTextStyle(){return"font-family:"+this.root.state.calendar.day.fontFamily+";font-size:"+this.root.state.calendar.day.fontSize},generateHours(){let hours=[];if(!this.root.state.calendar.hour.display)return this.root.state.calendar.hours=hours;for(let hourIndex=0,len=this.root.state.times.steps.length;hourIndex<len;hourIndex++){const hoursCount=this.howManyHoursFit(hourIndex),hourStep=24/hoursCount.count,hourWidthPx=this.root.state.times.steps[hourIndex].width.px/hoursCount.count;for(let i=0,len=hoursCount.count;i<len;i++){const date=esm(this.root.state.times.steps[hourIndex].date).add(i*hourStep,"hour");let textWidth=0;void 0!==this.root.state.calendar.hour.widths[hourIndex]&&(textWidth=this.root.state.calendar.hour.widths[hourIndex][hoursCount.type]);let x=this.root.state.times.steps[hourIndex].offset.px+hourWidthPx*i;hours.push({index:hourIndex,key:this.root.state.times.steps[hourIndex].date.valueOf()+"h"+i,x:x,y:this.root.state.calendar.day.height+this.root.state.calendar.month.height,width:hourWidthPx,textWidth:textWidth,height:this.root.state.calendar.hour.height,label:this.root.state.calendar.hour.format[hoursCount.type](date)})}}return this.root.state.calendar.hours=hours},generateDays(){let days=[];if(!this.root.state.calendar.day.display)return this.root.state.calendar.days=days;const daysCount=this.howManyDaysFit(),dayStep=Math.ceil(this.root.state.times.steps.length/daysCount.count);for(let dayIndex=0,len=this.root.state.times.steps.length;dayIndex<len;dayIndex+=dayStep){let dayWidthPx=0;for(let currentStep=0;currentStep<dayStep;currentStep++)void 0!==this.root.state.times.steps[dayIndex+currentStep]&&(dayWidthPx+=this.root.state.times.steps[dayIndex+currentStep].width.px);const date=esm(this.root.state.times.steps[dayIndex].date);let textWidth=0;void 0!==this.root.state.calendar.day.widths[dayIndex]&&(textWidth=this.root.state.calendar.day.widths[dayIndex][daysCount.type]);let x=this.root.state.times.steps[dayIndex].offset.px;days.push({index:dayIndex,key:this.root.state.times.steps[dayIndex].date.valueOf()+"d",x:x,y:this.root.state.calendar.month.height,width:dayWidthPx,textWidth:textWidth,height:this.root.state.calendar.day.height,label:this.root.state.calendar.day.format[daysCount.type](date)})}return this.root.state.calendar.days=days},generateMonths(){let months=[];if(!this.root.state.calendar.month.display)return this.root.state.calendar.months=months;const monthsCount=this.howManyMonthsFit();let formatNames=Object.keys(this.root.state.calendar.month.format),currentDate=esm(this.root.state.times.firstDate);for(let monthIndex=0;monthIndex<monthsCount.count;monthIndex++){let monthWidth=0,monthOffset=Number.MAX_SAFE_INTEGER,finalDate=esm(currentDate).add(1,"month").startOf("month");finalDate.valueOf()>this.root.state.times.lastDate.valueOf()&&(finalDate=esm(this.root.state.times.lastDate));for(let step=0,len=this.root.state.times.steps.length;step<len;step++){let currentStep=this.root.state.times.steps[step];currentStep.date.valueOf()>=currentDate.valueOf()&&currentStep.date.valueOf()<finalDate.valueOf()&&(monthWidth+=currentStep.width.px,currentStep.offset.px<monthOffset&&(monthOffset=currentStep.offset.px))}let choosenFormatName,label="";for(let formatName of formatNames)this.root.state.calendar.month.maxWidths[formatName]+2<=monthWidth&&(label=this.root.state.calendar.month.format[formatName](currentDate),choosenFormatName=formatName);let textWidth=0;void 0!==this.root.state.calendar.month.widths[monthIndex]&&(textWidth=this.root.state.calendar.month.widths[monthIndex][choosenFormatName]);let x=monthOffset;months.push({index:monthIndex,key:monthIndex+"m",x:x,y:0,width:monthWidth,textWidth:textWidth,choosenFormatName:choosenFormatName,height:this.root.state.calendar.month.height,label:label}),(currentDate=currentDate.add(1,"month").startOf("month")).valueOf()>this.root.state.times.lastDate.valueOf()&&(currentDate=esm(this.root.state.times.lastDate))}return this.root.state.calendar.months=months},regenerate(){this.generateHours(),this.generateDays(),this.generateMonths(),this.root.calculateCalendarDimensions()}},computed:{getWidth(){return this.root.state.width},monthsStyle(){return this.root.mergeDeep({},this.root.state.calendar.styles.row,this.root.state.calendar.month.style)},daysStyle(){return this.root.mergeDeep({},this.root.state.calendar.styles.row,this.root.state.calendar.day.style)},hoursStyle(){return this.root.mergeDeep({},this.root.state.calendar.styles.row,this.root.state.calendar.hour.style)},getDays(){return this.days.filter(day=>this.root.isInsideViewPort(day.x,day.width))},getHours(){return this.hours.filter(hour=>this.root.isInsideViewPort(hour.x,hour.width))},getMonths(){return this.months.filter(month=>this.root.isInsideViewPort(month.x,month.width))}}},Calendarvue_type_template_id_dee108e2_render,[],!1,null,null,null);Calendar_component.options.__file="src/components/Calendar/Calendar.vue";var Calendar=Calendar_component.exports,DependencyLinesvue_type_template_id_f1cbf6ba_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("svg",{staticClass:"gantt-elastic__chart-dependency-lines-container",style:_vm.root.style("chart-dependency-lines-container"),attrs:{x:"0",y:"0",width:"100%",height:"100%"}},_vm._l(_vm.dependencyTasks,function(task){return _c("g",{directives:[{name:"show",rawName:"v-show",value:task.visible,expression:"task.visible"}],key:task.id,attrs:{task:task}},_vm._l(task.dependencyLines,function(dependencyLine){return _c("path",{key:dependencyLine.id,staticClass:"gantt-elastic__chart-dependency-lines-path",style:_vm.root.style("chart-dependency-lines-path",task.style["chart-dependency-lines-path"]),attrs:{task:task,d:dependencyLine.points}})}),0)}),0)};DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped=!0;var DependencyLines_component=normalizeComponent({inject:["root"],props:["tasks"],data:()=>({}),methods:{getPoints(fromTaskId,toTaskId){const fromTask=this.root.getTask(fromTaskId),toTask=this.root.getTask(toTaskId);if(null===fromTask||null===toTask||!toTask.visible||!fromTask.visible)return null;const startX=fromTask.x+fromTask.width,startY=fromTask.y+fromTask.height/2,stopX=toTask.x,stopY=toTask.y+toTask.height/2,distanceX=stopX-startX;let distanceY,yMultiplier=1;stopY>=startY?distanceY=stopY-startY:(distanceY=startY-stopY,yMultiplier=-1);let points=`M ${startX} ${startY}\n          L ${startX+10},${startY} `;return points+=distanceX<=14?`Q ${startX+10+4},${startY} ${startX+10+4},${startY+4*yMultiplier}\n            L ${startX+10+4},${startY+distanceY*yMultiplier/2-4*yMultiplier}\n            Q ${startX+10+4},${startY+distanceY*yMultiplier/2} ${startX+10},${startY+distanceY*yMultiplier/2}\n            L ${startX-10+distanceX},${startY+distanceY*yMultiplier/2}\n            Q ${startX-10+distanceX-4},${startY+distanceY*yMultiplier/2} ${startX-10+distanceX-4},${startY+distanceY*yMultiplier/2+4*yMultiplier}\n            L ${startX-10+distanceX-4},${stopY-4*yMultiplier}\n            Q ${startX-10+distanceX-4},${stopY} ${startX-10+distanceX},${stopY}\n            L ${stopX},${stopY}`:`L ${startX+distanceX/2-4},${startY}\n            Q ${startX+distanceX/2},${startY} ${startX+distanceX/2},${startY+4*yMultiplier}\n            L ${startX+distanceX/2},${stopY-4*yMultiplier}\n            Q ${startX+distanceX/2},${stopY} ${startX+distanceX/2+4},${stopY}\n            L ${stopX},${stopY}`}},computed:{dependencyTasks(){return this.tasks.filter(task=>void 0!==task.dependentOn).map(task=>(task.dependencyLines=task.dependentOn.map(id=>({points:this.getPoints(id,task.id)})),task)).filter(task=>null!==task.dependencyLines.points)}}},DependencyLinesvue_type_template_id_f1cbf6ba_render,[],!1,null,null,null);DependencyLines_component.options.__file="src/components/Chart/DependencyLines.vue";var DependencyLines=DependencyLines_component.exports,Taskvue_type_template_id_e9c23eca_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("g",{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper",style:_vm.root.style("chart-row-bar-wrapper","chart-row-task-wrapper",_vm.task.style["chart-row-bar-wrapper"])},[_vm.displayExpander?_c("foreignObject",{staticClass:"gantt-elastic__chart-expander gantt-elastic__chart-expander--task",style:_vm.root.style("chart-expander","chart-expander--task",_vm.task.style["chart-expander"]),attrs:{x:_vm.task.x-_vm.root.state.chart.expander.offset-_vm.root.state.chart.expander.size,y:_vm.task.y+(_vm.root.state.row.height-_vm.root.state.chart.expander.size)/2,width:_vm.root.state.chart.expander.size,height:_vm.root.state.chart.expander.size}},[_c("expander",{attrs:{tasks:[_vm.task],options:_vm.root.state.chart.expander}})],1):_vm._e(),_vm._v(" "),_c("svg",{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-task",style:_vm.root.style("chart-row-bar","chart-row-task",_vm.task.style["chart-row-bar"]),attrs:{x:_vm.task.x,y:_vm.task.y,width:_vm.task.width,height:_vm.task.height,viewBox:"0 0 "+_vm.task.width+" "+_vm.task.height,xmlns:"http://www.w3.org/2000/svg"},on:{click:function($event){return _vm.emitEvent("click",$event)},mouseenter:function($event){return _vm.emitEvent("mouseenter",$event)},mouseover:function($event){return _vm.emitEvent("mouseover",$event)},mouseout:function($event){return _vm.emitEvent("mouseout",$event)},mousemove:function($event){return _vm.emitEvent("mousemove",$event)},mousedown:function($event){return _vm.emitEvent("mousedown",$event)},mouseup:function($event){return _vm.emitEvent("mouseup",$event)},mousewheel:function($event){return _vm.emitEvent("mousewheel",$event)},touchstart:function($event){return _vm.emitEvent("touchstart",$event)},touchmove:function($event){return _vm.emitEvent("touchmove",$event)},touchend:function($event){return _vm.emitEvent("touchend",$event)}}},[_c("defs",[_c("clipPath",{attrs:{id:_vm.clipPathId}},[_c("polygon",{attrs:{points:_vm.getPoints}})])]),_vm._v(" "),_c("polygon",{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon",style:_vm.root.style("chart-row-bar-polygon","chart-row-task-polygon",_vm.task.style.base,_vm.task.style["chart-row-bar-polygon"]),attrs:{points:_vm.getPoints}}),_vm._v(" "),_c("progress-bar",{attrs:{task:_vm.task,"clip-path":"url(#"+_vm.clipPathId+")"}})],1),_vm._v(" "),_vm.root.state.chart.text.display?_c("chart-text",{attrs:{task:_vm.task}}):_vm._e()],1)};Taskvue_type_template_id_e9c23eca_render._withStripped=!0;var Textvue_type_template_id_459c2fe4_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("svg",{staticClass:"gantt-elastic__chart-row-text-wrapper",style:_vm.root.style("chart-row-text-wrapper"),attrs:{x:_vm.task.x+_vm.task.width+_vm.root.state.chart.text.offset,y:_vm.task.y-_vm.root.state.chart.grid.horizontal.gap,width:_vm.getWidth,height:_vm.getHeight}},[_c("foreignObject",{attrs:{x:"0",y:"0",width:"100%",height:_vm.getHeight}},[_c("div",{staticClass:"gantt-elastic__chart-row-text",style:_vm.root.style("chart-row-text"),attrs:{xmlns:"http://www.w3.org/1999/xhtml"}},[_vm.html?_vm._e():_c("div",{staticClass:"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text",style:Object.assign({},_vm.root.style("chart-row-text-content","chart-row-text-content--text"),_vm.contentStyle)},[_c("div",[_vm._v(_vm._s(_vm.task.label))])]),_vm._v(" "),_vm.html?_c("div",{staticClass:"gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html",style:Object.assign({},_vm.root.style("chart-row-text-content","chart-row-text-content--html"),_vm.contentStyle),domProps:{innerHTML:_vm._s(_vm.task.label)}}):_vm._e()])])],1)};Textvue_type_template_id_459c2fe4_render._withStripped=!0;var Text_component=normalizeComponent({inject:["root"],props:["task"],data:()=>({}),computed:{getWidth(){const textStyle=this.root.style("chart-row-text");return this.root.state.ctx.font=`${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`,this.root.state.ctx.measureText(this.task.label).width+2*this.root.state.chart.text.xPadding},getHeight(){return this.task.height+2*this.root.state.chart.grid.horizontal.gap},contentStyle(){return{height:"100%","line-height":this.getHeight+"px"}},html(){const cols=this.root.state.taskList.columns;for(let i=0,len=cols.length;i<len;i++){const col=cols[i];if("label"===col.value&&void 0!==col.html&&col.html)return!0}return!1}}},Textvue_type_template_id_459c2fe4_render,[],!1,null,null,null);Text_component.options.__file="src/components/Chart/Text.vue";var Text=Text_component.exports,ProgressBarvue_type_template_id_4bc39355_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("g",{staticClass:"gantt-elastic__chart-row-progress-bar-wrapper",style:_vm.root.style("chart-row-progress-bar-wrapper",_vm.task.style["chart-row-progress-bar-wrapper"])},[_c("defs",[_c("pattern",{attrs:{id:"diagonalHatch",width:_vm.root.state.chart.progress.width,height:_vm.root.state.chart.progress.width,patternTransform:"rotate(45 0 0)",patternUnits:"userSpaceOnUse"}},[_c("line",{staticClass:"chart-row-progress-bar-line",style:_vm.root.style("chart-row-progress-bar-line",_vm.task.style["chart-row-progress-bar-line"]),attrs:{x1:"0",y1:"0",x2:"0",y2:_vm.root.state.chart.progress.width}})])]),_vm._v(" "),_vm.root.state.chart.progress.bar?_c("rect",{staticClass:"gantt-elastic__chart-row-progress-bar-solid",style:_vm.root.style("chart-row-progress-bar-solid",_vm.task.style["chart-row-progress-bar-solid"]),attrs:{x:"0",y:"0",width:_vm.getProgressWidth}}):_vm._e(),_vm._v(" "),_vm.root.state.chart.progress.pattern?_c("g",[_c("rect",{staticClass:"gantt-elastic__chart-row-progress-bar-pattern",style:_vm.root.style("chart-row-progress-bar-pattern",_vm.task.style["chart-row-progress-bar-pattern"]),attrs:{x:_vm.getProgressWidth,y:"0",width:100-_vm.task.progress+"%",height:"100%"}}),_vm._v(" "),_c("path",{staticClass:"gantt-elastic__chart-row-progress-bar-outline",style:_vm.root.style("chart-row-progress-bar-outline",_vm.task.style.base,_vm.task.style["chart-row-progress-bar-outline"]),attrs:{d:_vm.getLinePoints}})]):_vm._e()])};ProgressBarvue_type_template_id_4bc39355_render._withStripped=!0;var ProgressBar_component=normalizeComponent({inject:["root"],props:["task"],data:()=>({}),computed:{getProgressWidth(){return this.task.progress+"%"},getLinePoints(){const start=this.task.width/100*this.task.progress;return`M ${start} 0 L ${start} ${this.task.height}`},getSolidStyle(){return Object.assign({},this.root.state.chart.progress.styles.bar.solid,this.task.progressBarStyle.bar)},getLineStyle(){return Object.assign({},{stroke:this.root.state.row.styles.bar.stroke+"a0","stroke-width":this.root.state.row.styles.bar["stroke-width"]/2},this.task.style)}}},ProgressBarvue_type_template_id_4bc39355_render,[],!1,null,null,null);ProgressBar_component.options.__file="src/components/Chart/ProgressBar.vue";var ProgressBar=ProgressBar_component.exports,Task_component=normalizeComponent({components:{ChartText:Text,ProgressBar:ProgressBar,Expander:Expander},inject:["root"],props:["task"],data:()=>({}),computed:{clipPathId(){return"gantt-elastic__task-clip-path-"+this.task.id},getViewBox(){const task=this.task;return`0 0 ${task.width} ${task.height}`},getGroupTransform(){return`translate(${this.task.x} ${this.task.y})`},getPoints(){const task=this.task;return`0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`},displayExpander(){const expander=this.root.state.chart.expander;return expander.display||expander.displayIfTaskListHidden&&!this.root.state.taskList.display}},methods:{emitEvent(eventName,event){this.root.state.scroll.scrolling||this.root.$emit(`chart-${this.task.type}-${eventName}`,{event:event,data:this.task})}}},Taskvue_type_template_id_e9c23eca_render,[],!1,null,null,null);Task_component.options.__file="src/components/Chart/Row/Task.vue";var Task=Task_component.exports,Milestonevue_type_template_id_3013006c_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("g",{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper",style:_vm.root.style("chart-row-bar-wrapper","chart-row-milestone-wrapper",_vm.task.style["chart-row-bar-wrapper"])},[_vm.displayExpander?_c("foreignObject",{staticClass:"gantt-elastic__chart-expander gantt-elastic__chart-expander--milestone",style:_vm.root.style("chart-expander","chart-expander--milestone",_vm.task.style["chart-expander"]),attrs:{x:_vm.task.x-_vm.root.state.chart.expander.offset-_vm.root.state.chart.expander.size,y:_vm.task.y+(_vm.root.state.row.height-_vm.root.state.chart.expander.size)/2,width:_vm.root.state.chart.expander.size,height:_vm.root.state.chart.expander.size}},[_c("expander",{attrs:{tasks:[_vm.task],options:_vm.root.state.chart.expander}})],1):_vm._e(),_vm._v(" "),_c("svg",{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone",style:_vm.root.style("chart-row-bar","chart-row-milestone",_vm.task.style["chart-row-bar"]),attrs:{x:_vm.task.x,y:_vm.task.y,width:_vm.task.width,height:_vm.task.height,viewBox:"0 0 "+_vm.task.width+" "+_vm.task.height,xmlns:"http://www.w3.org/2000/svg"},on:{click:function($event){return _vm.emitEvent("click",$event)},mouseenter:function($event){return _vm.emitEvent("mouseenter",$event)},mouseover:function($event){return _vm.emitEvent("mouseover",$event)},mouseout:function($event){return _vm.emitEvent("mouseout",$event)},mousemove:function($event){return _vm.emitEvent("mousemove",$event)},mousedown:function($event){return _vm.emitEvent("mousedown",$event)},mouseup:function($event){return _vm.emitEvent("mouseup",$event)},mousewheel:function($event){return _vm.emitEvent("mousewheel",$event)},touchstart:function($event){return _vm.emitEvent("touchstart",$event)},touchmove:function($event){return _vm.emitEvent("touchmove",$event)},touchend:function($event){return _vm.emitEvent("touchend",$event)}}},[_c("defs",[_c("clipPath",{attrs:{id:_vm.clipPathId}},[_c("polygon",{attrs:{points:_vm.getPoints}})])]),_vm._v(" "),_c("polygon",{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon",style:_vm.root.style("chart-row-bar-polygon","chart-row-milestone-polygon",_vm.task.style.base,_vm.task.style["chart-row-bar-polygon"]),attrs:{points:_vm.getPoints}}),_vm._v(" "),_c("progress-bar",{attrs:{task:_vm.task,"clip-path":"url(#"+_vm.clipPathId+")"}})],1),_vm._v(" "),_vm.root.state.chart.text.display?_c("chart-text",{attrs:{task:_vm.task}}):_vm._e()],1)};Milestonevue_type_template_id_3013006c_render._withStripped=!0;var Milestone_component=normalizeComponent({components:{ChartText:Text,ProgressBar:ProgressBar,Expander:Expander},inject:["root"],props:["task"],data:()=>({}),computed:{clipPathId(){return"gantt-elastic__milestone-clip-path-"+this.task.id},getViewBox(){return`0 0 ${this.task.width} ${this.task.height}`},getGroupTransform(){return`translate(${this.task.x} ${this.task.y})`},getPoints(){const task=this.task,fifty=task.height/2;let offset=fifty;return task.width/2-offset<0&&(offset=task.width/2),`0,${fifty}\n        ${offset},0\n        ${task.width-offset},0\n        ${task.width},${fifty}\n        ${task.width-offset},${task.height}\n        ${offset},${task.height}`},displayExpander(){const expander=this.root.state.chart.expander;return expander.display||expander.displayIfTaskListHidden&&!this.root.state.taskList.display}},methods:{emitEvent(eventName,event){this.root.state.scroll.scrolling||this.root.$emit(`chart-${this.task.type}-${eventName}`,{event:event,data:this.task})}}},Milestonevue_type_template_id_3013006c_render,[],!1,null,null,null);Milestone_component.options.__file="src/components/Chart/Row/Milestone.vue";var Milestone=Milestone_component.exports,Projectvue_type_template_id_077bbd73_render=function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("g",{staticClass:"gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper",style:_vm.root.style("chart-row-bar-wrapper",_vm.root.style("chart-row-project-wrapper"),_vm.task.style["chart-row-bar-wrapper"])},[_vm.displayExpander?_c("foreignObject",{staticClass:"gantt-elastic__chart-expander gantt-elastic__chart-expander--project",style:_vm.root.style("chart-expander","chart-expander--project",_vm.task.style["chart-expander"]),attrs:{x:_vm.task.x-_vm.root.state.chart.expander.offset-_vm.root.state.chart.expander.size,y:_vm.task.y+(_vm.root.state.row.height-_vm.root.state.chart.expander.size)/2,width:_vm.root.state.chart.expander.size,height:_vm.root.state.chart.expander.size}},[_c("expander",{attrs:{tasks:[_vm.task],options:_vm.root.state.chart.expander}})],1):_vm._e(),_vm._v(" "),_c("svg",{staticClass:"gantt-elastic__chart-row-bar gantt-elastic__chart-row-project",style:_vm.root.style("chart-row-bar","chart-row-project",_vm.task.style["chart-row-bar"]),attrs:{x:_vm.task.x,y:_vm.task.y,width:_vm.task.width,height:_vm.task.height,viewBox:"0 0 "+_vm.task.width+" "+_vm.task.height,xmlns:"http://www.w3.org/2000/svg"},on:{click:function($event){return _vm.emitEvent("click",$event)},mouseenter:function($event){return _vm.emitEvent("mouseenter",$event)},mouseover:function($event){return _vm.emitEvent("mouseover",$event)},mouseout:function($event){return _vm.emitEvent("mouseout",$event)},mousemove:function($event){return _vm.emitEvent("mousemove",$event)},mousedown:function($event){return _vm.emitEvent("mousedown",$event)},mouseup:function($event){return _vm.emitEvent("mouseup",$event)},mousewheel:function($event){return _vm.emitEvent("mousewheel",$event)},touchstart:function($event){return _vm.emitEvent("touchstart",$event)},touchmove:function($event){return _vm.emitEvent("touchmove",$event)},touchend:function($event){return _vm.emitEvent("touchend",$event)}}},[_c("defs",[_c("clipPath",{attrs:{id:_vm.clipPathId}},[_c("path",{attrs:{d:_vm.getPoints}})])]),_vm._v(" "),_c("path",{staticClass:"gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon",style:_vm.root.style("chart-row-bar-polygon","chart-row-project-polygon",_vm.task.style.base,_vm.task.style["chart-row-bar-polygon"]),attrs:{d:_vm.getPoints}}),_vm._v(" "),_c("progress-bar",{attrs:{task:_vm.task,"clip-path":"url(#"+_vm.clipPathId+")"}})],1),_vm._v(" "),_vm.root.state.chart.text.display?_c("chart-text",{attrs:{task:_vm.task}}):_vm._e()],1)};Projectvue_type_template_id_077bbd73_render._withStripped=!0;var Project_component=normalizeComponent({components:{ChartText:Text,ProgressBar:ProgressBar,Expander:Expander},inject:["root"],props:["task"],data:()=>({}),computed:{clipPathId(){return"gantt-elastic__project-clip-path-"+this.task.id},getViewBox(){return`0 0 ${this.task.width} ${this.task.height}`},getGroupTransform(){return`translate(${this.task.x} ${this.task.y})`},getPoints(){const task=this.task,bottom=task.height-task.height/4,corner=task.height/6,smallCorner=task.height/8;return`M ${smallCorner},0\n                L ${task.width-smallCorner} 0\n                L ${task.width} ${smallCorner}\n                L ${task.width} ${bottom}\n                L ${task.width-corner} ${task.height}\n                L ${task.width-2*corner} ${bottom}\n                L ${2*corner} ${bottom}\n                L ${corner} ${task.height}\n                L 0 ${bottom}\n                L 0 ${smallCorner}\n                Z\n        `},displayExpander(){const expander=this.root.state.chart.expander;return expander.display||expander.displayIfTaskListHidden&&!this.root.state.taskList.display}},methods:{emitEvent(eventName,event){this.root.state.scroll.scrolling||this.root.$emit(`chart-${this.task.type}-${eventName}`,{event:event,data:this.task})}}},Projectvue_type_template_id_077bbd73_render,[],!1,null,null,null);Project_component.options.__file="src/components/Chart/Row/Project.vue";var Chart_component=normalizeComponent({components:{Grid:Grid,DependencyLines:DependencyLines,Calendar:Calendar,Task:Task,Milestone:Milestone,Project:Project_component.exports,DaysHighlight:DaysHighlight},inject:["root"],data:()=>({moving:!1}),mounted(){this.root.state.refs.chart=this.$refs.chart,this.root.state.refs.chartGraph=this.$refs.chartGraph},computed:{getWidth(){return this.root.state.width},getHeight(){return this.root.state.height},getViewBox(){return`0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`}}},Chartvue_type_template_id_67c3f5cd_render,[],!1,null,null,null);Chart_component.options.__file="src/components/Chart/Chart.vue";var MainView_component=normalizeComponent({components:{TaskList:TaskList,Chart:Chart_component.exports},inject:["root"],props:["tasks","options"],data:()=>({defs:"",mousePos:{x:0,y:0,movementX:0,movementY:0,lastX:0,lastY:0,positiveX:0,positiveY:0,currentX:0,currentY:0}}),mounted(){this.viewBoxWidth=this.$el.clientWidth,this.root.state.refs.mainView=this.$refs.mainView,this.root.state.refs.svgChart=this.$refs.svgChart,this.root.state.refs.chartContainer=this.$refs.chartContainer,this.root.state.refs.taskList=this.$refs.taskList,this.root.state.refs.chartScrollContainerHorizontal=this.$refs.chartScrollContainerHorizontal,this.root.state.refs.chartScrollContainerVertical=this.$refs.chartScrollContainerVertical,document.addEventListener("mouseup",this.chartMouseUp.bind(this)),document.addEventListener("mousemove",this.chartMouseMove.bind(this)),document.addEventListener("touchmove",this.chartMouseMove.bind(this)),document.addEventListener("touchend",this.chartMouseUp.bind(this))},computed:{getWidth(){let width=this.root.state.clientWidth-this.root.state.scrollBarHeight;return width<0?0:width},getMarginLeft(){return this.root.state.taskList.display?this.root.state.taskList.finalWidth+"px":"0px"},verticalStyle(){return{width:this.root.state.scrollBarHeight+"px",height:this.root.state.rowsHeight+"px","margin-top":this.root.state.calendar.height+this.root.state.calendar.gap+"px"}},getViewBox(){return this.root.state.clientWidth?`0 0 ${this.root.state.clientWidth-this.root.state.scrollBarHeight} ${this.root.state.height}`:`0 0 0 ${this.root.state.height}`}},methods:{mouseMove(event){this.root.$emit("main-view-mousemove",event)},mouseUp(event){this.root.$emit("main-view-mouseup",event)},onHorizontalScroll(ev){this.root.$emit("chart-scroll-horizontal",ev)},onVerticalScroll(ev){this.root.$emit("chart-scroll-vertical",ev)},chartWheel(ev){this.root.$emit("chart-wheel",ev)},chartMouseDown(ev){void 0!==ev.touches&&(this.mousePos.x=this.mousePos.lastX=ev.touches[0].screenX,this.mousePos.y=this.mousePos.lastY=ev.touches[0].screenY,this.mousePos.movementX=0,this.mousePos.movementY=0,this.mousePos.currentX=this.$refs.chartScrollContainerHorizontal.scrollLeft,this.mousePos.currentY=this.$refs.chartScrollContainerVertical.scrollTop),this.root.state.scroll.scrolling=!0},chartMouseUp(ev){this.root.state.scroll.scrolling=!1},chartMouseMove(ev){if(this.root.state.scroll.scrolling){ev.preventDefault(),ev.stopImmediatePropagation(),ev.stopPropagation();const touch=void 0!==ev.touches;let movementX,movementY;if(touch){const screenX=ev.touches[0].screenX,screenY=ev.touches[0].screenY;movementX=this.mousePos.x-screenX,movementY=this.mousePos.y-screenY,this.mousePos.lastX=screenX,this.mousePos.lastY=screenY}else movementX=ev.movementX,movementY=ev.movementY;const horizontal=this.$refs.chartScrollContainerHorizontal,vertical=this.$refs.chartScrollContainerVertical;let x=0,y=0;x=touch?this.mousePos.currentX+movementX*this.root.state.scroll.dragXMoveMultiplier:horizontal.scrollLeft-movementX*this.root.state.scroll.dragXMoveMultiplier,horizontal.scrollLeft=x,y=touch?this.mousePos.currentY+movementY*this.root.state.scroll.dragYMoveMultiplier:vertical.scrollTop-movementY*this.root.state.scroll.dragYMoveMultiplier,vertical.scrollTop=y}}},beforeDestroy(){document.removeEventListener("mouseup",this.chartMouseUp),document.removeEventListener("mousemove",this.chartMouseMove),document.removeEventListener("touchmove",this.chartMouseMove),document.removeEventListener("touchend",this.chartMouseUp)}},MainViewvue_type_template_id_0bc4212e_render,[],!1,null,null,null);MainView_component.options.__file="src/components/MainView.vue";var MainView=MainView_component.exports;
-/**
-* @fileoverview Styles for gantt-elastic
-* @license MIT
-* @author Rafal Pospiech <neuronet.io@gmail.com>
-* @package GanttElastic
-*/const fontFamily="Arial, sans-serif";var src_style={"*":{"box-sizing":"border-box"},"main-view":{background:"#FFFFFF"},"main-container-wrapper":{overflow:"hidden"},"main-container":{float:"left","max-width":"100%"},container:{display:"flex","max-width":"100%",height:"100%"},header:{"font-family":fontFamily,margin:"0px auto",background:"#f3f5f747",padding:"10px",overflow:"hidden",clear:"both",display:"flex","justify-content":"space-between"},"header-title":{float:"left"},"header-options":{float:"right"},"header-title--text":{"font-size":"20px","vertical-align":"middle","font-weight":"400","line-height":"35px","padding-left":"22px","letter-spacing":"1px"},"header-title--html":{"font-size":"20px","vertical-align":"middle","font-weight":"400","line-height":"35px","padding-left":"22px","letter-spacing":"1px"},"header-btn-recenter":{background:"#95A5A6",border:"none",outline:"none",cursor:"pointer",color:"white","border-radius":"3px","margin-right":"27px","font-size":"16px",padding:"8px 12px"},"header-slider":{},"header-slider-wrapper":{display:"inline-block","vertical-align":"middle"},"header-slider--slider":{},"header-slider--process":{background:"#ccc"},"header-task-list-switch--label":{},"header-task-list-switch":{margin:"0px 15px","vertical-align":"middle"},"header-label":{},"calendar-wrapper":{"user-select":"none"},calendar:{width:"100%",background:"#f3f5f7",display:"block"},"calendar-row":{display:"flex"},"calendar-row--month":{},"calendar-row--day":{},"calendar-row--hour":{},"calendar-row-rect":{background:"transparent","border-width":"0.5px","border-color":"#dadada","border-style":"solid"},"calendar-row-text":{"font-family":fontFamily,"font-size":"12px",color:"#606060","text-align":"center"},"calendar-row-rect--month":{},"calendar-row-text--month":{},"calendar-row-rect--day":{},"calendar-row-text--day":{},"calendar-row-rect--hour":{},"calendar-row-text--hour":{},"task-list-wrapper":{},"task-list":{background:"transparent","border-color":"#eee"},"task-list-header":{display:"flex","user-select":"none","vertical-align":"middle"},"task-list-header-column":{border:"1px solid #00000050","border-top":"none","border-right":"none","box-sizing":"border-box",display:"flex",background:"#f3f5f7","border-color":"transparent"},"task-list-expander-wrapper":{display:"inline-flex","flex-shrink":"0","box-sizing":"border-box",margin:"0 0 0 10px"},"task-list-expander-content":{display:"inline-flex",cursor:"pointer",margin:"auto 0px","box-sizing":"border-box","user-select":"none"},"task-list-expander-line":{fill:"transparent",stroke:"#000000","stroke-width":"1","stroke-linecap":"round"},"task-list-expander-border":{fill:"#ffffffa0",stroke:"#000000"},"chart-expander-wrapper":{display:"block","line-height":"1","box-sizing":"border-box",margin:"0"},"chart-expander-content":{display:"inline-flex",cursor:"pointer",margin:"auto 0px","box-sizing":"border-box","user-select":"none"},"chart-expander-line":{fill:"transparent",stroke:"#000000","stroke-width":"1","stroke-linecap":"round"},"chart-expander-border":{fill:"#ffffffa0",stroke:"#000000"},"task-list-container":{},"task-list-header-label":{overflow:"hidden","text-overflow":"ellipsis","font-family":fontFamily,"font-size":"12px","box-sizing":"border-box",margin:"auto 6px","flex-grow":"1","vertical-align":"middle"},"task-list-header-resizer-wrapper":{background:"transparent",height:"100%",width:"6px",cursor:"col-resize",display:"inline-flex","vertical-align":"center"},"task-list-header-resizer":{margin:"auto 0px"},"task-list-header-resizer-dot":{width:"3px",height:"3px",background:"#ddd","border-radius":"100%",margin:"4px 0px"},"task-list-items":{overflow:"hidden"},"task-list-item":{"border-top":"1px solid #eee","border-right":"1px solid #eee","box-sizing":"border-box",display:"flex",background:"transparent"},"task-list-item-column":{display:"inline-flex","flex-shrink":"0","border-left":"1px solid #00000050","box-sizing":"border-box","border-color":"#eee"},"task-list-item-value-wrapper":{overflow:"hidden",display:"flex",width:"100%"},"task-list-item-value-container":{margin:"auto 0px",overflow:"hidden"},"task-list-item-value":{display:"block","flex-shrink":"100","font-family":fontFamily,"font-size":"12px","margin-top":"auto","margin-bottom":"auto","margin-left":"6px","margin-right":"6px",overflow:"hidden","text-overflow":"ellipsis","line-height":"1.5em","word-break":"keep-all","white-space":"nowrap",color:"#606060",background:"#FFFFFF"},"grid-lines":{},"grid-line-horizontal":{stroke:"#00000010","stroke-width":1},"grid-line-vertical":{stroke:"#00000010","stroke-width":1},"grid-line-time":{stroke:"#FF000080","stroke-width":1},chart:{"user-select":"none",overflow:"hidden"},"chart-area":{},"chart-graph":{overflow:"hidden"},"chart-row-text-wrapper":{},"chart-row-text":{background:"#ffffffa0","border-radius":"10px","font-family":fontFamily,"font-size":"12px","font-weight":"normal",color:"#000000a0",height:"100%",display:"inline-block"},"chart-row-text-content":{padding:"0px 6px"},"chart-row-text-content--text":{},"chart-row-text-content--html":{},"chart-row-wrapper":{},"chart-row-bar-wrapper":{},"chart-row-bar":{},"chart-row-bar-polygon":{stroke:"#E74C3C","stroke-width":1,fill:"#F75C4C"},"chart-row-project-wrapper":{},"chart-row-project":{},"chart-row-project-polygon":{},"chart-row-milestone-wrapper":{},"chart-row-milestone":{},"chart-row-milestone-polygon":{},"chart-row-task-wrapper":{},"chart-row-task":{},"chart-row-task-polygon":{},"chart-row-progress-bar-wrapper":{},"chart-row-progress-bar":{},"chart-row-progress-bar-line":{stroke:"#ffffff25","stroke-width":20},"chart-row-progress-bar-solid":{fill:"#0EAC51",height:"20%"},"chart-row-progress-bar-pattern":{fill:"url(#diagonalHatch)",transform:"translateY(0.1) scaleY(0.8)"},"chart-row-progress-bar-outline":{stroke:"#E74C3C","stroke-width":1},"chart-dependency-lines-wrapper":{},"chart-dependency-lines-path":{fill:"transparent",stroke:"#FFa00090","stroke-width":2},"chart-scroll-container":{},"chart-scroll-container--horizontal":{overflow:"auto","max-width":"100%"},"chart-scroll-container--vertical":{"overflow-y":"auto","overflow-x":"hidden","max-height":"100%",float:"right"},"chart-days-highlight-rect":{fill:"#f3f5f780"},chart:{overflow:"hidden"},"slot-header-beforeOptions":{display:"inline-block"}};function isObject(item){return item&&"object"==typeof item&&!Array.isArray(item)}function mergeDeep(target,...sources){if(!sources.length)return target;const source=sources.shift();if(isObject(target)&&isObject(source))for(const key in source)isObject(source[key])?(void 0===target[key]&&Object.assign(target,{[key]:{}}),mergeDeep(target[key],source[key])):Object.assign(target,{[key]:source[key]});return mergeDeep(target,...sources)}const styleCache={};var src_GanttElasticvue_type_script_lang_js_={components:{MainView:MainView},props:["tasks","options"],provide(){const provider={},self=this;return Object.defineProperty(provider,"root",{enumerable:!0,get:()=>self}),provider},data:()=>({state:{tasks:[],scrollBarHeight:0,allVisibleTasksHeight:0,refs:{},tasksById:{}}}),methods:{mergeDeep:mergeDeep,mergeDeepReactive:function mergeDeepReactive(component,target,...sources){if(!sources.length)return target;const source=sources.shift();if(isObject(target)&&isObject(source))for(const key in source)isObject(source[key])?(void 0===target[key]&&component.$set(target,key,{}),mergeDeepReactive(component,target[key],source[key])):component.$set(target,key,source[key]);return mergeDeepReactive(component,target,...sources)},getScrollBarHeight(){const outer=document.createElement("div");outer.style.visibility="hidden",outer.style.height="100px",outer.style.msOverflowStyle="scrollbar",document.body.appendChild(outer);var noScroll=outer.offsetHeight;outer.style.overflow="scroll";var inner=document.createElement("div");inner.style.height="100%",outer.appendChild(inner);var withScroll=inner.offsetHeight;return outer.parentNode.removeChild(outer),this.state.scrollBarHeight=noScroll-withScroll},style(...mergeWith){const index=JSON.stringify(mergeWith);if(void 0!==styleCache[index])return styleCache[index];let merged=this.state.style["*"];return mergeWith.forEach(objOrClassName=>{"string"==typeof objOrClassName?merged=Object.assign({},merged,this.state.style[objOrClassName]):"object"==typeof objOrClassName?merged=Object.assign({},merged,objOrClassName):"function"==typeof objOrClassName&&(merged=Object.assign({},objOrClassName()))}),styleCache[index]=merged,merged},refreshTasks(){this.state.tasks=this.state.tasks.map(task=>(void 0===task.x&&this.$set(task,"x",0),void 0===task.y&&this.$set(task,"y",0),void 0===task.width&&this.$set(task,"width",0),void 0===task.height&&this.$set(task,"height",0),void 0===task.tooltip&&this.mergeDeepReactive(this,task,{tooltip:{visible:!1}}),void 0===task.tooltip.visible&&(task.tooltip.visible=!1),void 0===task.mouseOver&&this.$set(task,"mouseOver",!1),void 0===task.visible&&this.$set(task,"visible",!0),void 0===task.collapsed&&this.$set(task,"collapsed",!1),void 0===task.dependentOn&&this.$set(task,"dependentOn",[]),void 0===task.parentId&&this.$set(task,"parentId",null),void 0===task.style&&this.$set(task,"style",{}),void 0===task.children&&this.$set(task,"children",[]),void 0===task.allChildren&&this.$set(task,"allChildren",[]),void 0===task.parents&&this.$set(task,"parents",[]),void 0===task.parent&&this.$set(task,"parent",null),void 0===task.durationMs&&this.$set(task,"durationMs",[]),task))},mapTasks:(tasks,options)=>tasks.map(task=>({...task,id:task[options.taskMapping.id],start:task[options.taskMapping.start],label:task[options.taskMapping.label],duration:task[options.taskMapping.duration],progress:task[options.taskMapping.progress],type:task[options.taskMapping.type],style:task[options.taskMapping.style],collapsed:task[options.taskMapping.collapsed]})),initialize(itsUpdate=""){const options=this.mergeDeep({},(userOptions=this.options,{style:src_style,slots:{header:{}},title:{label:"gantt-elastic",html:!1},taskMapping:{id:"id",start:"start",label:"label",duration:"duration",progress:"progress",type:"type",style:"style",collapsed:"collapsed"},width:0,height:0,clientWidth:0,rowsHeight:0,allVisibleTasksHeight:0,scroll:{scrolling:!1,dragXMoveMultiplier:3,dragYMoveMultiplier:2,top:0,taskList:{left:0,right:0,top:0,bottom:0},chart:{left:0,right:0,percent:0,timePercent:0,top:0,bottom:0,time:0,timeCenter:0,dateTime:{left:"",right:""}}},scope:{before:1,after:1},times:{timeScale:6e4,timeZoom:17,timePerPixel:0,firstDate:null,firstTime:null,lastDate:null,lastTime:null,firstTaskDate:null,firstTaskTime:0,lastTaskDate:null,lastTaskTime:0,totalViewDurationMs:0,totalViewDurationPx:0,stepDuration:"day",steps:[]},row:{height:24},maxRows:20,maxHeight:0,chart:{grid:{horizontal:{gap:6}},progress:{width:20,height:6,pattern:!0,bar:!1},text:{offset:0,xPadding:10,display:!0},expander:{type:"chart",display:!1,displayIfTaskListHidden:!0,offset:4,size:18}},taskList:{display:!0,resizeAfterThreshold:!0,widthThreshold:75,columns:[{id:0,label:"ID",value:"id",width:40}],resizerWidth:0,percent:100,width:0,finalWidth:0,widthFromPercentage:0,minWidth:18,expander:{type:"task-list",size:16,columnWidth:24,padding:16,margin:10,straight:!1}},calendar:{hours:[],days:[],months:[],workingDays:[1,2,3,4,5],gap:6,height:0,hour:{height:20,display:!0,widths:[],maxWidths:{},format:{long:date=>esm(date).locale(userOptions.locale.code).format("HH:mm"),medium:date=>esm(date).locale(userOptions.locale.code).format("HH:mm"),short:date=>esm(date).locale(userOptions.locale.code).format("HH")}},day:{height:20,display:!0,widths:[],maxWidths:{},format:{long:date=>esm(date).locale(userOptions.locale.code).format("DD dddd"),medium:date=>esm(date).locale(userOptions.locale.code).format("DD ddd"),short:date=>esm(date).locale(userOptions.locale.code).format("DD")}},month:{height:20,display:!0,widths:[],maxWidths:{},format:{short:date=>esm(date).locale(userOptions.locale.code).format("MM"),medium:date=>esm(date).locale(userOptions.locale.code).format("MMM 'YY"),long:date=>esm(date).locale(userOptions.locale.code).format("MMMM YYYY")}}},locale:{code:"en",Now:"Now","X-Scale":"Zoom-X","Y-Scale":"Zoom-Y","Task list width":"Task list","Before/After":"Expand","Display task list":"Show task list"}}),this.options);var userOptions;switch(itsUpdate){case"tasks":this.mergeDeepReactive(this,this.state,{tasks:this.mapTasks(this.tasks,options)});break;case"options":this.mergeDeepReactive(this,this.state,this.options);break;default:this.mergeDeepReactive(this,this.state,options,{tasks:this.mapTasks(this.tasks,options)})}""!==itsUpdate&&"tasks"!==itsUpdate||(this.state.tasks=this.state.tasks.map(task=>(this.$set(task,"start",esm(task.start).format("YYYY-MM-DD HH:mm:ss")),task))),esm.locale(this.options.locale,null,!0),esm.locale(this.options.locale.name),void 0===this.state.taskList&&this.$set(this.state,"taskList",{}),void 0===this.state.taskList.columns&&this.$set(this.state.taskList,"columns",[]),this.state.taskList.columns=this.state.taskList.columns.map((column,index)=>(this.$set(column,"thresholdPercent",100),this.$set(column,"widthFromPercentage",0),this.$set(column,"finalWidth",0),void 0===column.height&&this.$set(column,"height",0),void 0===column.style&&this.$set(column,"style",{}),this.$set(column,"_id",`${index}-${column.label}`),column)),""!==itsUpdate&&"tasks"!==itsUpdate||(this.refreshTasks(),this.state.rootTask={id:null,label:"root",children:[],allChildren:[],parents:[],parent:null},this.resetTaskTree(),this.state.taskTree=this.makeTaskTree(this.state.rootTask),this.state.tasks=this.state.taskTree.allChildren),""===itsUpdate&&(this.state.ctx=document.createElement("canvas").getContext("2d")),this.globalOnResize(),this.calculateTaskListColumnsDimensions(),this.state.scrollBarHeight=this.getScrollBarHeight(),this.state.outerHeight=this.state.height+this.state.scrollBarHeight},getCalendarHeight(){return this.state.calendar.height+this.style("calendar-row")["border-width"]+this.state.calendar.gap},calculateCalendarDimensions(){this.state.calendar.height=0,this.state.calendar.hour.display&&this.state.calendar.hours.length>0&&(this.state.calendar.height+=this.state.calendar.hour.height),this.state.calendar.day.display&&this.state.calendar.days.length>0&&(this.state.calendar.height+=this.state.calendar.day.height),this.state.calendar.month.display&&this.state.calendar.months.length>0&&(this.state.calendar.height+=this.state.calendar.month.height)},getMaximalLevel(){let maximalLevel=0;return this.state.tasks.forEach(task=>{task.parents.length>maximalLevel&&(maximalLevel=task.parents.length)}),maximalLevel-1},getMaximalExpanderWidth(){return this.getMaximalLevel()*this.state.taskList.expander.padding+this.state.taskList.expander.margin},syncScrollTop(){this.state.refs.taskListItems&&(this.state.scroll.top=this.state.refs.taskListItems.scrollTop=this.state.refs.chartScrollContainerVertical.scrollTop=this.state.refs.chartGraph.scrollTop)},calculateTaskListColumnsDimensions(){let final=0,percentage=0;this.state.taskList.columns.forEach(column=>{column.expander?column.widthFromPercentage=(this.getMaximalExpanderWidth()+column.width)/100*this.state.taskList.percent:column.widthFromPercentage=column.width/100*this.state.taskList.percent,percentage+=column.widthFromPercentage,column.finalWidth=column.thresholdPercent*column.widthFromPercentage/100,final+=column.finalWidth,column.height=this.getTaskHeight()-this.style("grid-line-horizontal")["stroke-width"]}),this.state.taskList.widthFromPercentage=percentage,this.state.taskList.finalWidth=final,this.syncScrollTop()},resetTaskTree(){this.state.rootTask.children=[],this.state.rootTask.allChildren=[],this.state.rootTask.parent=null,this.state.rootTask.parents=[],this.state.tasksById={};for(let i=0,len=this.state.tasks.length;i<len;i++){let current=this.state.tasks[i];current.children=[],current.allChildren=[],current.parent=null,current.parents=[],this.state.tasksById[current.id]=current}},makeTaskTree(task,collapsed=!1){collapsed=collapsed||task.collapsed;for(let i=0,len=this.state.tasks.length;i<len;i++){let current=this.state.tasks[i];current.parentId===task.id&&(task.parents.length&&task.parents.forEach(parent=>current.parents.push(parent)),task!==this.root?(current.parents.push(task),current.parent=task):(current.parents=[],current.parent=null),(current=this.makeTaskTree(current,collapsed||current.collapsed)).visible=!collapsed,current.children.forEach(child=>{child.visible=!(collapsed||current.collapsed)}),task.allChildren.push(current),task.children.push(current),current.allChildren.forEach(child=>task.allChildren.push(child)))}return task},getTask(taskId){return void 0!==this.state.tasksById[taskId]?this.state.tasksById[taskId]:null},getChildren(taskId){return this.state.tasks.filter(task=>task.parent===taskId)},getSVG(){return this.state.mainView.outerHTML},getImage(type="image/png"){return new Promise((resolve,reject)=>{const img=new Image;img.onload=(()=>{const canvas=document.createElement("canvas");canvas.width=this.state.mainView.clientWidth,canvas.height=this.state.rowsHeight,canvas.getContext("2d").drawImage(img,0,0),resolve(canvas.toDataURL(type))}),img.src="data:image/svg+xml,"+encodeURIComponent(this.getSVG())})},getHeight(visibleTasks,outer=!1){let height=visibleTasks.length*(this.state.row.height+2*this.state.chart.grid.horizontal.gap)+this.state.calendar.height+2*parseFloat(this.style("calendar-row-rect")["border-width"])+this.state.calendar.gap;return outer&&(height+=this.state.scrollBarHeight),height},getTaskHeight(withStroke=!1){return withStroke?this.state.row.height+2*this.state.chart.grid.horizontal.gap+this.style("grid-line-horizontal")["stroke-width"]:this.state.row.height+2*this.state.chart.grid.horizontal.gap},getTasksHeight(visibleTasks,outer=!1){return visibleTasks.length*this.getTaskHeight()},timeToPixelOffsetX(ms){let x=ms-this.state.times.firstTime;return x&&(x/=this.state.times.timePerPixel),x},pixelOffsetXToTime(pixelOffsetX){return(pixelOffsetX+this.style("grid-line-vertical")["stroke-width"]/2)*this.state.times.timePerPixel+this.state.times.firstTime},isInsideViewPort(x,width,buffer=5e3){return x+width+buffer>=this.state.scroll.chart.left&&x-buffer<=this.state.scroll.chart.right||x-buffer<=this.state.scroll.chart.left&&x+width+buffer>=this.state.scroll.chart.right},onScrollChart(ev){const horizontal=this.state.refs.chartScrollContainerHorizontal,vertical=this.state.refs.chartScrollContainerVertical;this._onScrollChart(horizontal.scrollLeft,vertical.scrollTop)},_onScrollChart(left,top){const chartContainerWidth=this.state.refs.chartContainer.clientWidth;this.state.scroll.chart.left=left,this.state.scroll.chart.right=left+chartContainerWidth,this.state.scroll.chart.percent=left/this.state.times.totalViewDurationPx*100,this.state.scroll.chart.top=top,this.state.scroll.chart.time=this.pixelOffsetXToTime(left),this.state.scroll.chart.timeCenter=this.pixelOffsetXToTime(left+chartContainerWidth/2),this.state.scroll.chart.dateTime.left=esm(this.state.scroll.chart.time),this.state.scroll.chart.dateTime.right=esm(this.pixelOffsetXToTime(left+this.state.refs.chart.clientWidth)),this.scrollTo(left,top)},scrollToTime(time){let pos=this.timeToPixelOffsetX(time);const chartContainerWidth=this.state.refs.chartContainer.clientWidth;(pos-=chartContainerWidth/2)>this.state.width&&(pos=this.state.width-chartContainerWidth),this.scrollTo(pos)},scrollTo(left=null,top=null){null!==left&&(this.state.refs.chartContainer.scrollLeft=left,this.state.refs.chartScrollContainerHorizontal.scrollLeft=left,this.state.scroll.left=left),null!==top&&(this.state.refs.chartScrollContainerVertical.scrollTop=top,this.state.refs.chartGraph.scrollTop=top,this.state.refs.taskListItems.scrollTop=top,this.state.scroll.top=top)},fixScrollPos(){this.$nextTick(()=>{this.scrollToTime(this.state.scroll.chart.timeCenter)})},onWheelChart(ev){if(ev.shiftKey){let left=this.state.scroll.left+ev.deltaY;const chartClientWidth=this.state.refs.chartScrollContainerHorizontal.clientWidth,scrollWidth=this.state.refs.chartScrollContainerHorizontal.scrollWidth-chartClientWidth;left<0?left=0:left>scrollWidth&&(left=scrollWidth),this.scrollTo(left)}else{let top=this.state.scroll.top+ev.deltaY;const chartClientHeight=this.state.rowsHeight,scrollHeight=this.state.refs.chartGraph.scrollHeight-chartClientHeight;top<0?top=0:top>scrollHeight&&(top=scrollHeight),this.scrollTo(null,top)}},onTimeZoomChange(timeZoom){this.state.times.timeZoom=timeZoom,this.recalculateTimes(),this.calculateSteps(),this.calculateCalendarDimensions(),this.fixScrollPos()},onRowHeightChange(height){this.state.row.height=height,this.calculateTaskListColumnsDimensions()},onScopeChange(value){this.state.scope.before=value,this.state.scope.after=value,this.initTimes(),this.calculateSteps(),this.computeCalendarWidths(),this.fixScrollPos()},onTaskListWidthChange(value){this.state.taskList.percent=value,this.calculateTaskListColumnsDimensions(),this.fixScrollPos()},onTaskListColumnWidthChange(value){this.calculateTaskListColumnsDimensions(),this.fixScrollPos()},initializeEvents(){this.$on("chart-scroll-horizontal",this.onScrollChart),this.$on("chart-scroll-vertical",this.onScrollChart),this.$on("chart-wheel",this.onWheelChart),this.$on("times-timeZoom-change",this.onTimeZoomChange),this.$on("row-height-change",this.onRowHeightChange),this.$on("scope-change",this.onScopeChange),this.$on("taskList-width-change",this.onTaskListWidthChange),this.$on("taskList-column-width-change",this.onTaskListColumnWidthChange)},recalculateTimes(){let steps=60*this.state.times.timeScale/this.state.times.timeScale,percent=this.state.times.timeZoom/100;this.state.times.timePerPixel=this.state.times.timeScale*steps*percent+Math.pow(2,this.state.times.timeZoom),this.state.times.totalViewDurationMs=this.state.times.lastDate.diff(this.state.times.firstDate,"milisecods"),this.state.times.totalViewDurationPx=this.state.times.totalViewDurationMs/this.state.times.timePerPixel,this.state.width=this.state.times.totalViewDurationPx+this.style("grid-line-vertical")["stroke-width"]},initTimes(){this.state.times.firstDate=esm(this.state.times.firstTaskDate).locale(this.locale).startOf("day").subtract(this.state.scope.before,"days").startOf("day"),this.state.times.lastDate=esm(this.state.times.lastTaskDate).locale(this.locale).endOf("day").add(this.state.scope.after,"days").endOf("day"),this.state.times.firstTime=this.state.times.firstDate.valueOf(),this.state.times.lastTime=this.state.times.lastDate.valueOf(),this.recalculateTimes()},calculateSteps(){const steps=[],lastMs=esm(this.state.times.lastDate).valueOf(),currentDate=esm(this.state.times.firstDate);steps.push({date:currentDate,offset:{ms:0,px:0}});for(let currentDate=esm(this.state.times.firstDate).add(1,this.state.times.stepDuration).startOf("day");currentDate.valueOf()<=lastMs;currentDate=currentDate.add(1,this.state.times.stepDuration).startOf("day")){const offsetMs=currentDate.diff(this.state.times.firstDate,"milisecods"),offsetPx=offsetMs/this.state.times.timePerPixel,step={date:currentDate,offset:{ms:offsetMs,px:offsetPx}},previousStep=steps[steps.length-1];previousStep.width={ms:offsetMs-previousStep.offset.ms,px:offsetPx-previousStep.offset.px},steps.push(step)}const lastStep=steps[steps.length-1];lastStep.width={ms:this.state.times.totalViewDurationMs-lastStep.offset.ms,px:this.state.times.totalViewDurationPx-lastStep.offset.px},this.state.times.steps=steps},computeCalendarWidths(){this.computeDayWidths(),this.computeHourWidths(),this.computeMonthWidths()},computeHourWidths(){const state=this.state,style=this.style("calendar-row-text","calendar-row-text--hour");state.ctx.font=style["font-size"]+" "+style["font-family"];let currentDate=esm("2018-01-01T00:00:00"),maxWidths={};state.calendar.hour.widths=[],Object.keys(state.calendar.hour.format).forEach(formatName=>{maxWidths[formatName]=0});for(let hour=0;hour<24;hour++){const widths={hour:hour};Object.keys(state.calendar.hour.format).forEach(formatName=>{widths[formatName]=state.ctx.measureText(state.calendar.hour.format[formatName](currentDate.toDate())).width}),state.calendar.hour.widths.push(widths),Object.keys(state.calendar.hour.format).forEach(formatName=>{widths[formatName]>maxWidths[formatName]&&(maxWidths[formatName]=widths[formatName])}),currentDate=currentDate.add(1,"hour")}state.calendar.hour.maxWidths=maxWidths},computeDayWidths(){const state=this.state,style=this.style("calendar-row-text","calendar-row-text--day");state.ctx.font=style["font-size"]+" "+style["font-family"];let currentDate=esm(state.times.steps[0].date),maxWidths={};state.calendar.day.widths=[],Object.keys(state.calendar.day.format).forEach(formatName=>{maxWidths[formatName]=0});for(let day=0,daysLen=state.times.steps.length;day<daysLen;day++){const widths={day:day};Object.keys(state.calendar.day.format).forEach(formatName=>{widths[formatName]=state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width}),state.calendar.day.widths.push(widths),Object.keys(state.calendar.day.format).forEach(formatName=>{widths[formatName]>maxWidths[formatName]&&(maxWidths[formatName]=widths[formatName])}),currentDate=currentDate.add(1,"day")}state.calendar.day.maxWidths=maxWidths},computeMonthWidths(){const state=this.state,style=this.style("calendar-row-text","calendar-row-text--month");state.ctx.font=style["font-size"]+" "+style["font-family"];let maxWidths={};state.calendar.month.widths=[],Object.keys(state.calendar.month.format).forEach(formatName=>{maxWidths[formatName]=0});let currentDate=esm(this.state.times.firstDate);const monthsCount=Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate,"months",!0));for(let month=0;month<monthsCount;month++){const widths={month:month};Object.keys(state.calendar.month.format).forEach(formatName=>{widths[formatName]=state.ctx.measureText(state.calendar.month.format[formatName](currentDate.toDate())).width}),state.calendar.month.widths.push(widths),Object.keys(state.calendar.month.format).forEach(formatName=>{widths[formatName]>maxWidths[formatName]&&(maxWidths[formatName]=widths[formatName])}),currentDate=currentDate.add(1,"month")}state.calendar.month.maxWidths=maxWidths},prepareDates(){let firstTaskDate,lastTaskDate,firstTaskTime=Number.MAX_SAFE_INTEGER,lastTaskTime=0;for(let index=0,len=this.state.tasks.length;index<len;index++){let task=this.state.tasks[index];task.startDate=esm(task.start),task.startTime=task.startDate.valueOf(),task.durationMs=1e3*task.duration,task.startTime<firstTaskTime&&(firstTaskTime=task.startTime,firstTaskDate=task.startDate),task.startTime+task.durationMs>lastTaskTime&&(lastTaskTime=task.startTime+task.durationMs,lastTaskDate=esm(task.startTime+task.durationMs))}this.state.times.firstTaskTime=firstTaskTime,this.state.times.lastTaskTime=lastTaskTime,this.state.times.firstTaskDate=firstTaskDate,this.state.times.lastTaskDate=lastTaskDate,this.state.times.firstDate=esm(firstTaskDate).locale(this.locale).startOf("day").subtract(this.state.scope.before,"days").startOf("day"),this.state.times.lastDate=esm(lastTaskDate).locale(this.locale).endOf("day").add(this.state.scope.after,"days").endOf("day")},setup(itsUpdate=""){this.initialize(itsUpdate),this.state.tasksById={},this.state.tasks.forEach(task=>this.state.tasksById[task.id]=task),this.prepareDates(),this.initTimes(),this.calculateSteps(),this.computeCalendarWidths(),this.calculateCalendarDimensions(),this.state.taskList.width=this.state.taskList.columns.reduce((prev,current)=>({width:prev.width+current.width}),{width:0}).width},globalOnResize(ev){if(void 0!==this.$el&&this.$el){if(this.state.clientWidth=this.$el.clientWidth,this.state.taskList.widthFromPercentage>this.state.clientWidth/100*this.state.taskList.widthThreshold){let diffPercent=100-(this.state.taskList.widthFromPercentage-this.state.clientWidth/100*this.state.taskList.widthThreshold)/this.state.taskList.widthFromPercentage*100;diffPercent<0&&(diffPercent=0),this.state.taskList.columns.forEach(column=>{column.thresholdPercent=diffPercent})}else this.state.taskList.columns.forEach(column=>{column.thresholdPercent=100});this.calculateTaskListColumnsDimensions()}}},computed:{visibleTasks(){const visibleTasks=this.state.tasks.filter(task=>task.visible),maxRows=visibleTasks.slice(0,this.state.maxRows);this.state.rowsHeight=this.getTasksHeight(maxRows);let heightCompensation=0;this.state.maxHeight&&this.state.rowsHeight>this.state.maxHeight&&(heightCompensation=this.state.rowsHeight-this.state.maxHeight,this.state.rowsHeight=this.state.maxHeight),this.state.height=this.getHeight(maxRows)-heightCompensation,this.state.allVisibleTasksHeight=this.getTasksHeight(visibleTasks),this.state.outerHeight=this.getHeight(maxRows,!0)-heightCompensation;let len=visibleTasks.length;for(let index=0;index<len;index++){let task=visibleTasks[index];task.width=task.durationMs/this.state.times.timePerPixel-this.style("grid-line-vertical")["stroke-width"],task.width<0&&(task.width=0),task.height=this.state.row.height,task.x=this.timeToPixelOffsetX(task.startTime),task.y=(this.state.row.height+2*this.state.chart.grid.horizontal.gap)*index+this.state.chart.grid.horizontal.gap}return this.$nextTick(()=>{this.syncScrollTop()}),visibleTasks},getTaskListColumns(){return this.calculateTaskListColumnsDimensions(),this.state.taskList.columns}},created(){this.$watch("tasks",tasks=>{this.setup("tasks"),this.$emit("tasks-changed",tasks)}),this.$watch("options",opts=>{this.setup("options"),this.$emit("options-changed",opts)}),this.initializeEvents(),this.setup(),this.$root.$emit("gantt-elastic-created",this)},beforeMount(){this.$emit("before-mount",this)},mounted(){this.state.clientWidth=this.$el.clientWidth,window.addEventListener("resize",this.globalOnResize),this.globalOnResize(),this.$root.$emit("gantt-elastic-mounted",this),this.$emit("mounted"),this.$root.$emit("gantt-elastic-ready",this)},beforeUpdate(){this.$emit("before-update")},updated(){this.$nextTick(()=>{this.$emit("updated")})},beforeDestroy(){window.removeEventListener("resize",this.globalOnResize),this.$emit("before-destroy")},destroyed(){this.$emit("destroyed")}},GanttElastic_component=(__webpack_require__("./src/GanttElastic.vue?vue&type=style&index=0&lang=css&"),normalizeComponent(src_GanttElasticvue_type_script_lang_js_,render,[],!1,null,null,null));GanttElastic_component.options.__file="src/GanttElastic.vue";var src_GanttElastic=GanttElastic_component.exports,GanttElastic_standalonevue_type_template_id_47914d89_render=function(){var _h=this.$createElement,_c=this._self._c||_h;return _c("gantt-elastic",{attrs:{tasks:this.tasks,options:this.options}},[_c("gantt-header",{attrs:{slot:"header"},slot:"header"}),this._v(" "),_c("gantt-footer",{attrs:{slot:"footer"},slot:"footer"})],1)};GanttElastic_standalonevue_type_template_id_47914d89_render._withStripped=!0;var GanttElastic_standalone_component=normalizeComponent({components:{"gantt-header":{template:""},"gantt-elastic":src_GanttElastic,"gantt-footer":{template:""}},props:["header","footer"],data:{tasks:[],options:{}}},GanttElastic_standalonevue_type_template_id_47914d89_render,[],!1,null,null,null);GanttElastic_standalone_component.options.__file="src/GanttElastic.standalone.vue";var GanttElastic_standalone=GanttElastic_standalone_component.exports;
-/**
-* @fileoverview Bundle main entry file
-* @license MIT
-* @author Rafal Pospiech <neuronet.io@gmail.com>
-* @package GanttElastic
-*/window.GanttElastic={component:GanttElastic_standalone,mount(config){let{el:el,tasks:tasks,options:options}=config;const ganttElastic=mergeDeep({},GanttElastic_standalone);return ganttElastic.data=mergeDeep({},ganttElastic.data),ganttElastic.data.tasks=tasks,ganttElastic.data.options=options,new vue_runtime_esm.a(ganttElastic).$on("gantt-elastic-ready",ganttInstance=>{"function"==typeof config.ready&&config.ready(ganttInstance)}).$mount(el)}};__webpack_exports__.default=GanttElastic_standalone}})});
+!(function(modules) {
+  var installedModules = {};
+  function __webpack_require__(moduleId) {
+    if (installedModules[moduleId]) return installedModules[moduleId].exports;
+    var module = (installedModules[moduleId] = { i: moduleId, l: !1, exports: {} });
+    return (
+      modules[moduleId].call(module.exports, module, module.exports, __webpack_require__),
+      (module.l = !0),
+      module.exports
+    );
+  }
+  (__webpack_require__.m = modules),
+    (__webpack_require__.c = installedModules),
+    (__webpack_require__.d = function(exports, name, getter) {
+      __webpack_require__.o(exports, name) || Object.defineProperty(exports, name, { enumerable: !0, get: getter });
+    }),
+    (__webpack_require__.r = function(exports) {
+      'undefined' != typeof Symbol &&
+        Symbol.toStringTag &&
+        Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' }),
+        Object.defineProperty(exports, '__esModule', { value: !0 });
+    }),
+    (__webpack_require__.t = function(value, mode) {
+      if ((1 & mode && (value = __webpack_require__(value)), 8 & mode)) return value;
+      if (4 & mode && 'object' == typeof value && value && value.__esModule) return value;
+      var ns = Object.create(null);
+      if (
+        (__webpack_require__.r(ns),
+        Object.defineProperty(ns, 'default', { enumerable: !0, value: value }),
+        2 & mode && 'string' != typeof value)
+      )
+        for (var key in value)
+          __webpack_require__.d(
+            ns,
+            key,
+            function(key) {
+              return value[key];
+            }.bind(null, key)
+          );
+      return ns;
+    }),
+    (__webpack_require__.n = function(module) {
+      var getter =
+        module && module.__esModule
+          ? function() {
+              return module.default;
+            }
+          : function() {
+              return module;
+            };
+      return __webpack_require__.d(getter, 'a', getter), getter;
+    }),
+    (__webpack_require__.o = function(object, property) {
+      return Object.prototype.hasOwnProperty.call(object, property);
+    }),
+    (__webpack_require__.p = ''),
+    __webpack_require__((__webpack_require__.s = 14));
+})([
+  function(module, exports, __webpack_require__) {
+    module.exports = (function() {
+      'use strict';
+      var t = 'millisecond',
+        n = 'second',
+        e = 'minute',
+        i = 'hour',
+        r = 'day',
+        s = 'week',
+        u = 'month',
+        o = 'year',
+        a = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,
+        h = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,
+        c = function(t, n, e) {
+          var i = String(t);
+          return !i || i.length >= n ? t : '' + Array(n + 1 - i.length).join(e) + t;
+        },
+        f = {
+          s: c,
+          z: function(t) {
+            var n = -t.utcOffset(),
+              e = Math.abs(n),
+              i = Math.floor(e / 60),
+              r = e % 60;
+            return (n <= 0 ? '+' : '-') + c(i, 2, '0') + ':' + c(r, 2, '0');
+          },
+          m: function(t, n) {
+            var e = 12 * (n.year() - t.year()) + (n.month() - t.month()),
+              i = t.clone().add(e, u),
+              r = n - i < 0,
+              s = t.clone().add(e + (r ? -1 : 1), u);
+            return Number(-(e + (n - i) / (r ? i - s : s - i)) || 0);
+          },
+          a: function(t) {
+            return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);
+          },
+          p: function(a) {
+            return (
+              { M: u, y: o, w: s, d: r, h: i, m: e, s: n, ms: t }[a] ||
+              String(a || '')
+                .toLowerCase()
+                .replace(/s$/, '')
+            );
+          },
+          u: function(t) {
+            return void 0 === t;
+          }
+        },
+        d = {
+          name: 'en',
+          weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+          months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+        },
+        $ = 'en',
+        l = {};
+      l[$] = d;
+      var m = function(t) {
+          return t instanceof S;
+        },
+        y = function(t, n, e) {
+          var i;
+          if (!t) return null;
+          if ('string' == typeof t) l[t] && (i = t), n && ((l[t] = n), (i = t));
+          else {
+            var r = t.name;
+            (l[r] = t), (i = r);
+          }
+          return e || ($ = i), i;
+        },
+        M = function(t, n, e) {
+          if (m(t)) return t.clone();
+          var i = n ? ('string' == typeof n ? { format: n, pl: e } : n) : {};
+          return (i.date = t), new S(i);
+        },
+        D = f;
+      (D.l = y),
+        (D.i = m),
+        (D.w = function(t, n) {
+          return M(t, { locale: n.$L, utc: n.$u });
+        });
+      var S = (function() {
+        function c(t) {
+          (this.$L = this.$L || y(t.locale, null, !0) || $), this.parse(t);
+        }
+        var f = c.prototype;
+        return (
+          (f.parse = function(t) {
+            (this.$d = (function(t) {
+              var n = t.date,
+                e = t.utc;
+              if (null === n) return new Date(NaN);
+              if (D.u(n)) return new Date();
+              if (n instanceof Date) return new Date(n);
+              if ('string' == typeof n && !/Z$/i.test(n)) {
+                var i = n.match(a);
+                if (i)
+                  return e
+                    ? new Date(Date.UTC(i[1], i[2] - 1, i[3] || 1, i[4] || 0, i[5] || 0, i[6] || 0, i[7] || 0))
+                    : new Date(i[1], i[2] - 1, i[3] || 1, i[4] || 0, i[5] || 0, i[6] || 0, i[7] || 0);
+              }
+              return new Date(n);
+            })(t)),
+              this.init();
+          }),
+          (f.init = function() {
+            var t = this.$d;
+            (this.$y = t.getFullYear()),
+              (this.$M = t.getMonth()),
+              (this.$D = t.getDate()),
+              (this.$W = t.getDay()),
+              (this.$H = t.getHours()),
+              (this.$m = t.getMinutes()),
+              (this.$s = t.getSeconds()),
+              (this.$ms = t.getMilliseconds());
+          }),
+          (f.$utils = function() {
+            return D;
+          }),
+          (f.isValid = function() {
+            return !('Invalid Date' === this.$d.toString());
+          }),
+          (f.isSame = function(t, n) {
+            var e = M(t);
+            return this.startOf(n) <= e && e <= this.endOf(n);
+          }),
+          (f.isAfter = function(t, n) {
+            return M(t) < this.startOf(n);
+          }),
+          (f.isBefore = function(t, n) {
+            return this.endOf(n) < M(t);
+          }),
+          (f.year = function() {
+            return this.$y;
+          }),
+          (f.month = function() {
+            return this.$M;
+          }),
+          (f.day = function() {
+            return this.$W;
+          }),
+          (f.date = function() {
+            return this.$D;
+          }),
+          (f.hour = function() {
+            return this.$H;
+          }),
+          (f.minute = function() {
+            return this.$m;
+          }),
+          (f.second = function() {
+            return this.$s;
+          }),
+          (f.millisecond = function() {
+            return this.$ms;
+          }),
+          (f.unix = function() {
+            return Math.floor(this.valueOf() / 1e3);
+          }),
+          (f.valueOf = function() {
+            return this.$d.getTime();
+          }),
+          (f.startOf = function(t, a) {
+            var h = this,
+              c = !!D.u(a) || a,
+              f = D.p(t),
+              d = function(t, n) {
+                var e = D.w(h.$u ? Date.UTC(h.$y, n, t) : new Date(h.$y, n, t), h);
+                return c ? e : e.endOf(r);
+              },
+              $ = function(t, n) {
+                return D.w(h.toDate()[t].apply(h.toDate(), (c ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(n)), h);
+              },
+              l = this.$W,
+              m = this.$M,
+              y = this.$D,
+              M = 'set' + (this.$u ? 'UTC' : '');
+            switch (f) {
+              case o:
+                return c ? d(1, 0) : d(31, 11);
+              case u:
+                return c ? d(1, m) : d(0, m + 1);
+              case s:
+                var S = this.$locale().weekStart || 0,
+                  g = (l < S ? l + 7 : l) - S;
+                return d(c ? y - g : y + (6 - g), m);
+              case r:
+              case 'date':
+                return $(M + 'Hours', 0);
+              case i:
+                return $(M + 'Minutes', 1);
+              case e:
+                return $(M + 'Seconds', 2);
+              case n:
+                return $(M + 'Milliseconds', 3);
+              default:
+                return this.clone();
+            }
+          }),
+          (f.endOf = function(t) {
+            return this.startOf(t, !1);
+          }),
+          (f.$set = function(s, a) {
+            var h,
+              c = D.p(s),
+              f = 'set' + (this.$u ? 'UTC' : ''),
+              d = ((h = {}),
+              (h[r] = f + 'Date'),
+              (h.date = f + 'Date'),
+              (h[u] = f + 'Month'),
+              (h[o] = f + 'FullYear'),
+              (h[i] = f + 'Hours'),
+              (h[e] = f + 'Minutes'),
+              (h[n] = f + 'Seconds'),
+              (h[t] = f + 'Milliseconds'),
+              h)[c],
+              $ = c === r ? this.$D + (a - this.$W) : a;
+            return this.$d[d] && this.$d[d]($), this.init(), this;
+          }),
+          (f.set = function(t, n) {
+            return this.clone().$set(t, n);
+          }),
+          (f.add = function(t, a) {
+            var h,
+              c = this;
+            t = Number(t);
+            var f = D.p(a),
+              d = function(n, e) {
+                var i = c.set('date', 1).set(n, e + t);
+                return i.set('date', Math.min(c.$D, i.daysInMonth()));
+              },
+              $ = function(n) {
+                var e = new Date(c.$d);
+                return e.setDate(e.getDate() + n * t), D.w(e, c);
+              };
+            if (f === u) return d(u, this.$M);
+            if (f === o) return d(o, this.$y);
+            if (f === r) return $(1);
+            if (f === s) return $(7);
+            var l = ((h = {}), (h[e] = 6e4), (h[i] = 36e5), (h[n] = 1e3), h)[f] || 1,
+              m = this.valueOf() + t * l;
+            return D.w(m, this);
+          }),
+          (f.subtract = function(t, n) {
+            return this.add(-1 * t, n);
+          }),
+          (f.format = function(t) {
+            var n = this;
+            if (!this.isValid()) return 'Invalid Date';
+            var e = t || 'YYYY-MM-DDTHH:mm:ssZ',
+              i = D.z(this),
+              r = this.$locale(),
+              s = r.weekdays,
+              u = r.months,
+              o = function(t, n, e, i) {
+                return (t && t[n]) || e[n].substr(0, i);
+              },
+              a = function(t) {
+                return D.s(n.$H % 12 || 12, t, '0');
+              },
+              c = {
+                YY: String(this.$y).slice(-2),
+                YYYY: String(this.$y),
+                M: String(this.$M + 1),
+                MM: D.s(this.$M + 1, 2, '0'),
+                MMM: o(r.monthsShort, this.$M, u, 3),
+                MMMM: u[this.$M],
+                D: String(this.$D),
+                DD: D.s(this.$D, 2, '0'),
+                d: String(this.$W),
+                dd: o(r.weekdaysMin, this.$W, s, 2),
+                ddd: o(r.weekdaysShort, this.$W, s, 3),
+                dddd: s[this.$W],
+                H: String(this.$H),
+                HH: D.s(this.$H, 2, '0'),
+                h: a(1),
+                hh: a(2),
+                a: this.$H < 12 ? 'am' : 'pm',
+                A: this.$H < 12 ? 'AM' : 'PM',
+                m: String(this.$m),
+                mm: D.s(this.$m, 2, '0'),
+                s: String(this.$s),
+                ss: D.s(this.$s, 2, '0'),
+                SSS: D.s(this.$ms, 3, '0'),
+                Z: i
+              };
+            return e.replace(h, function(t) {
+              return t.indexOf('[') > -1 ? t.replace(/\[|\]/g, '') : c[t] || i.replace(':', '');
+            });
+          }),
+          (f.utcOffset = function() {
+            return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+          }),
+          (f.diff = function(t, a, h) {
+            var c,
+              f = D.p(a),
+              d = M(t),
+              $ = 6e4 * (d.utcOffset() - this.utcOffset()),
+              l = this - d,
+              m = D.m(this, d);
+            return (
+              (m =
+                ((c = {}),
+                (c[o] = m / 12),
+                (c[u] = m),
+                (c.quarter = m / 3),
+                (c[s] = (l - $) / 6048e5),
+                (c[r] = (l - $) / 864e5),
+                (c[i] = l / 36e5),
+                (c[e] = l / 6e4),
+                (c[n] = l / 1e3),
+                c)[f] || l),
+              h ? m : D.a(m)
+            );
+          }),
+          (f.daysInMonth = function() {
+            return this.endOf(u).$D;
+          }),
+          (f.$locale = function() {
+            return l[this.$L];
+          }),
+          (f.locale = function(t, n) {
+            var e = this.clone();
+            return (e.$L = y(t, n, !0)), e;
+          }),
+          (f.clone = function() {
+            return D.w(this.toDate(), this);
+          }),
+          (f.toDate = function() {
+            return new Date(this.$d);
+          }),
+          (f.toArray = function() {
+            return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];
+          }),
+          (f.toJSON = function() {
+            return this.toISOString();
+          }),
+          (f.toISOString = function() {
+            return this.$d.toISOString();
+          }),
+          (f.toObject = function() {
+            return {
+              years: this.$y,
+              months: this.$M,
+              date: this.$D,
+              hours: this.$H,
+              minutes: this.$m,
+              seconds: this.$s,
+              milliseconds: this.$ms
+            };
+          }),
+          (f.toString = function() {
+            return this.$d.toUTCString();
+          }),
+          c
+        );
+      })();
+      return (
+        (M.prototype = S.prototype),
+        (M.extend = function(t, n) {
+          return t(n, S, M), M;
+        }),
+        (M.locale = y),
+        (M.isDayjs = m),
+        (M.unix = function(t) {
+          return M(1e3 * t);
+        }),
+        (M.en = l[$]),
+        (M.Ls = l),
+        M
+      );
+    })();
+  },
+  function(module, exports, __webpack_require__) {
+    var content = __webpack_require__(12);
+    'string' == typeof content && (content = [[module.i, content, '']]),
+      content.locals && (module.exports = content.locals);
+    (0, __webpack_require__(15).default)('c3e5085c', content, !1, {});
+  },
+  function(module, exports) {
+    module.exports = Vue;
+  },
+  function(module, exports) {
+    module.exports = Vuex;
+  },
+  function(module, exports) {
+    module.exports = function(useSourceMap) {
+      var list = [];
+      return (
+        (list.toString = function() {
+          return this.map(function(item) {
+            var content = (function(item, useSourceMap) {
+              var content = item[1] || '',
+                cssMapping = item[3];
+              if (!cssMapping) return content;
+              if (useSourceMap && 'function' == typeof btoa) {
+                var sourceMapping = ((sourceMap = cssMapping),
+                  '/*# sourceMappingURL=data:application/json;charset=utf-8;base64,' +
+                    btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) +
+                    ' */'),
+                  sourceURLs = cssMapping.sources.map(function(source) {
+                    return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+                  });
+                return [content]
+                  .concat(sourceURLs)
+                  .concat([sourceMapping])
+                  .join('\n');
+              }
+              var sourceMap;
+              return [content].join('\n');
+            })(item, useSourceMap);
+            return item[2] ? '@media ' + item[2] + '{' + content + '}' : content;
+          }).join('');
+        }),
+        (list.i = function(modules, mediaQuery) {
+          'string' == typeof modules && (modules = [[null, modules, '']]);
+          for (var alreadyImportedModules = {}, i = 0; i < this.length; i++) {
+            var id = this[i][0];
+            'number' == typeof id && (alreadyImportedModules[id] = !0);
+          }
+          for (i = 0; i < modules.length; i++) {
+            var item = modules[i];
+            ('number' == typeof item[0] && alreadyImportedModules[item[0]]) ||
+              (mediaQuery && !item[2]
+                ? (item[2] = mediaQuery)
+                : mediaQuery && (item[2] = '(' + item[2] + ') and (' + mediaQuery + ')'),
+              list.push(item));
+          }
+        }),
+        list
+      );
+    };
+  },
+  function(module, exports, __webpack_require__) {
+    'use strict';
+    (function(global) {
+      /*!
+       * The buffer module from node.js, for the browser.
+       *
+       * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+       * @license  MIT
+       */
+      function compare(a, b) {
+        if (a === b) return 0;
+        for (var x = a.length, y = b.length, i = 0, len = Math.min(x, y); i < len; ++i)
+          if (a[i] !== b[i]) {
+            (x = a[i]), (y = b[i]);
+            break;
+          }
+        return x < y ? -1 : y < x ? 1 : 0;
+      }
+      function isBuffer(b) {
+        return global.Buffer && 'function' == typeof global.Buffer.isBuffer
+          ? global.Buffer.isBuffer(b)
+          : !(null == b || !b._isBuffer);
+      }
+      var util = __webpack_require__(7),
+        hasOwn = Object.prototype.hasOwnProperty,
+        pSlice = Array.prototype.slice,
+        functionsHaveNames = 'foo' === function() {}.name;
+      function pToString(obj) {
+        return Object.prototype.toString.call(obj);
+      }
+      function isView(arrbuf) {
+        return (
+          !isBuffer(arrbuf) &&
+          ('function' == typeof global.ArrayBuffer &&
+            ('function' == typeof ArrayBuffer.isView
+              ? ArrayBuffer.isView(arrbuf)
+              : !!arrbuf && (arrbuf instanceof DataView || !!(arrbuf.buffer && arrbuf.buffer instanceof ArrayBuffer))))
+        );
+      }
+      var assert = (module.exports = ok),
+        regex = /\s*function\s+([^\(\s]*)\s*/;
+      function getName(func) {
+        if (util.isFunction(func)) {
+          if (functionsHaveNames) return func.name;
+          var match = func.toString().match(regex);
+          return match && match[1];
+        }
+      }
+      function truncate(s, n) {
+        return 'string' == typeof s ? (s.length < n ? s : s.slice(0, n)) : s;
+      }
+      function inspect(something) {
+        if (functionsHaveNames || !util.isFunction(something)) return util.inspect(something);
+        var rawname = getName(something);
+        return '[Function' + (rawname ? ': ' + rawname : '') + ']';
+      }
+      function fail(actual, expected, message, operator, stackStartFunction) {
+        throw new assert.AssertionError({
+          message: message,
+          actual: actual,
+          expected: expected,
+          operator: operator,
+          stackStartFunction: stackStartFunction
+        });
+      }
+      function ok(value, message) {
+        value || fail(value, !0, message, '==', assert.ok);
+      }
+      function _deepEqual(actual, expected, strict, memos) {
+        if (actual === expected) return !0;
+        if (isBuffer(actual) && isBuffer(expected)) return 0 === compare(actual, expected);
+        if (util.isDate(actual) && util.isDate(expected)) return actual.getTime() === expected.getTime();
+        if (util.isRegExp(actual) && util.isRegExp(expected))
+          return (
+            actual.source === expected.source &&
+            actual.global === expected.global &&
+            actual.multiline === expected.multiline &&
+            actual.lastIndex === expected.lastIndex &&
+            actual.ignoreCase === expected.ignoreCase
+          );
+        if ((null !== actual && 'object' == typeof actual) || (null !== expected && 'object' == typeof expected)) {
+          if (
+            isView(actual) &&
+            isView(expected) &&
+            pToString(actual) === pToString(expected) &&
+            !(actual instanceof Float32Array || actual instanceof Float64Array)
+          )
+            return 0 === compare(new Uint8Array(actual.buffer), new Uint8Array(expected.buffer));
+          if (isBuffer(actual) !== isBuffer(expected)) return !1;
+          var actualIndex = (memos = memos || { actual: [], expected: [] }).actual.indexOf(actual);
+          return (
+            (-1 !== actualIndex && actualIndex === memos.expected.indexOf(expected)) ||
+            (memos.actual.push(actual),
+            memos.expected.push(expected),
+            (function(a, b, strict, actualVisitedObjects) {
+              if (null == a || null == b) return !1;
+              if (util.isPrimitive(a) || util.isPrimitive(b)) return a === b;
+              if (strict && Object.getPrototypeOf(a) !== Object.getPrototypeOf(b)) return !1;
+              var aIsArgs = isArguments(a),
+                bIsArgs = isArguments(b);
+              if ((aIsArgs && !bIsArgs) || (!aIsArgs && bIsArgs)) return !1;
+              if (aIsArgs) return (a = pSlice.call(a)), (b = pSlice.call(b)), _deepEqual(a, b, strict);
+              var key,
+                i,
+                ka = objectKeys(a),
+                kb = objectKeys(b);
+              if (ka.length !== kb.length) return !1;
+              for (ka.sort(), kb.sort(), i = ka.length - 1; i >= 0; i--) if (ka[i] !== kb[i]) return !1;
+              for (i = ka.length - 1; i >= 0; i--)
+                if (((key = ka[i]), !_deepEqual(a[key], b[key], strict, actualVisitedObjects))) return !1;
+              return !0;
+            })(actual, expected, strict, memos))
+          );
+        }
+        return strict ? actual === expected : actual == expected;
+      }
+      function isArguments(object) {
+        return '[object Arguments]' == Object.prototype.toString.call(object);
+      }
+      function expectedException(actual, expected) {
+        if (!actual || !expected) return !1;
+        if ('[object RegExp]' == Object.prototype.toString.call(expected)) return expected.test(actual);
+        try {
+          if (actual instanceof expected) return !0;
+        } catch (e) {}
+        return !Error.isPrototypeOf(expected) && !0 === expected.call({}, actual);
+      }
+      function _throws(shouldThrow, block, expected, message) {
+        var actual;
+        if ('function' != typeof block) throw new TypeError('"block" argument must be a function');
+        'string' == typeof expected && ((message = expected), (expected = null)),
+          (actual = (function(block) {
+            var error;
+            try {
+              block();
+            } catch (e) {
+              error = e;
+            }
+            return error;
+          })(block)),
+          (message = (expected && expected.name ? ' (' + expected.name + ').' : '.') + (message ? ' ' + message : '.')),
+          shouldThrow && !actual && fail(actual, expected, 'Missing expected exception' + message);
+        var userProvidedMessage = 'string' == typeof message,
+          isUnexpectedException = !shouldThrow && actual && !expected;
+        if (
+          (((!shouldThrow && util.isError(actual) && userProvidedMessage && expectedException(actual, expected)) ||
+            isUnexpectedException) &&
+            fail(actual, expected, 'Got unwanted exception' + message),
+          (shouldThrow && actual && expected && !expectedException(actual, expected)) || (!shouldThrow && actual))
+        )
+          throw actual;
+      }
+      (assert.AssertionError = function(options) {
+        var self;
+        (this.name = 'AssertionError'),
+          (this.actual = options.actual),
+          (this.expected = options.expected),
+          (this.operator = options.operator),
+          options.message
+            ? ((this.message = options.message), (this.generatedMessage = !1))
+            : ((this.message =
+                truncate(inspect((self = this).actual), 128) +
+                ' ' +
+                self.operator +
+                ' ' +
+                truncate(inspect(self.expected), 128)),
+              (this.generatedMessage = !0));
+        var stackStartFunction = options.stackStartFunction || fail;
+        if (Error.captureStackTrace) Error.captureStackTrace(this, stackStartFunction);
+        else {
+          var err = new Error();
+          if (err.stack) {
+            var out = err.stack,
+              fn_name = getName(stackStartFunction),
+              idx = out.indexOf('\n' + fn_name);
+            if (idx >= 0) {
+              var next_line = out.indexOf('\n', idx + 1);
+              out = out.substring(next_line + 1);
+            }
+            this.stack = out;
+          }
+        }
+      }),
+        util.inherits(assert.AssertionError, Error),
+        (assert.fail = fail),
+        (assert.ok = ok),
+        (assert.equal = function(actual, expected, message) {
+          actual != expected && fail(actual, expected, message, '==', assert.equal);
+        }),
+        (assert.notEqual = function(actual, expected, message) {
+          actual == expected && fail(actual, expected, message, '!=', assert.notEqual);
+        }),
+        (assert.deepEqual = function(actual, expected, message) {
+          _deepEqual(actual, expected, !1) || fail(actual, expected, message, 'deepEqual', assert.deepEqual);
+        }),
+        (assert.deepStrictEqual = function(actual, expected, message) {
+          _deepEqual(actual, expected, !0) ||
+            fail(actual, expected, message, 'deepStrictEqual', assert.deepStrictEqual);
+        }),
+        (assert.notDeepEqual = function(actual, expected, message) {
+          _deepEqual(actual, expected, !1) && fail(actual, expected, message, 'notDeepEqual', assert.notDeepEqual);
+        }),
+        (assert.notDeepStrictEqual = function notDeepStrictEqual(actual, expected, message) {
+          _deepEqual(actual, expected, !0) && fail(actual, expected, message, 'notDeepStrictEqual', notDeepStrictEqual);
+        }),
+        (assert.strictEqual = function(actual, expected, message) {
+          actual !== expected && fail(actual, expected, message, '===', assert.strictEqual);
+        }),
+        (assert.notStrictEqual = function(actual, expected, message) {
+          actual === expected && fail(actual, expected, message, '!==', assert.notStrictEqual);
+        }),
+        (assert.throws = function(block, error, message) {
+          _throws(!0, block, error, message);
+        }),
+        (assert.doesNotThrow = function(block, error, message) {
+          _throws(!1, block, error, message);
+        }),
+        (assert.ifError = function(err) {
+          if (err) throw err;
+        });
+      var objectKeys =
+        Object.keys ||
+        function(obj) {
+          var keys = [];
+          for (var key in obj) hasOwn.call(obj, key) && keys.push(key);
+          return keys;
+        };
+    }.call(this, __webpack_require__(6)));
+  },
+  function(module, exports) {
+    var g;
+    g = (function() {
+      return this;
+    })();
+    try {
+      g = g || new Function('return this')();
+    } catch (e) {
+      'object' == typeof window && (g = window);
+    }
+    module.exports = g;
+  },
+  function(module, exports, __webpack_require__) {
+    (function(process) {
+      var getOwnPropertyDescriptors =
+          Object.getOwnPropertyDescriptors ||
+          function(obj) {
+            for (var keys = Object.keys(obj), descriptors = {}, i = 0; i < keys.length; i++)
+              descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
+            return descriptors;
+          },
+        formatRegExp = /%[sdj%]/g;
+      (exports.format = function(f) {
+        if (!isString(f)) {
+          for (var objects = [], i = 0; i < arguments.length; i++) objects.push(inspect(arguments[i]));
+          return objects.join(' ');
+        }
+        i = 1;
+        for (
+          var args = arguments,
+            len = args.length,
+            str = String(f).replace(formatRegExp, function(x) {
+              if ('%%' === x) return '%';
+              if (i >= len) return x;
+              switch (x) {
+                case '%s':
+                  return String(args[i++]);
+                case '%d':
+                  return Number(args[i++]);
+                case '%j':
+                  try {
+                    return JSON.stringify(args[i++]);
+                  } catch (_) {
+                    return '[Circular]';
+                  }
+                default:
+                  return x;
+              }
+            }),
+            x = args[i];
+          i < len;
+          x = args[++i]
+        )
+          isNull(x) || !isObject(x) ? (str += ' ' + x) : (str += ' ' + inspect(x));
+        return str;
+      }),
+        (exports.deprecate = function(fn, msg) {
+          if (void 0 !== process && !0 === process.noDeprecation) return fn;
+          if (void 0 === process)
+            return function() {
+              return exports.deprecate(fn, msg).apply(this, arguments);
+            };
+          var warned = !1;
+          return function() {
+            if (!warned) {
+              if (process.throwDeprecation) throw new Error(msg);
+              process.traceDeprecation ? console.trace(msg) : console.error(msg), (warned = !0);
+            }
+            return fn.apply(this, arguments);
+          };
+        });
+      var debugEnviron,
+        debugs = {};
+      function inspect(obj, opts) {
+        var ctx = { seen: [], stylize: stylizeNoColor };
+        return (
+          arguments.length >= 3 && (ctx.depth = arguments[2]),
+          arguments.length >= 4 && (ctx.colors = arguments[3]),
+          isBoolean(opts) ? (ctx.showHidden = opts) : opts && exports._extend(ctx, opts),
+          isUndefined(ctx.showHidden) && (ctx.showHidden = !1),
+          isUndefined(ctx.depth) && (ctx.depth = 2),
+          isUndefined(ctx.colors) && (ctx.colors = !1),
+          isUndefined(ctx.customInspect) && (ctx.customInspect = !0),
+          ctx.colors && (ctx.stylize = stylizeWithColor),
+          formatValue(ctx, obj, ctx.depth)
+        );
+      }
+      function stylizeWithColor(str, styleType) {
+        var style = inspect.styles[styleType];
+        return style ? '[' + inspect.colors[style][0] + 'm' + str + '[' + inspect.colors[style][1] + 'm' : str;
+      }
+      function stylizeNoColor(str, styleType) {
+        return str;
+      }
+      function formatValue(ctx, value, recurseTimes) {
+        if (
+          ctx.customInspect &&
+          value &&
+          isFunction(value.inspect) &&
+          value.inspect !== exports.inspect &&
+          (!value.constructor || value.constructor.prototype !== value)
+        ) {
+          var ret = value.inspect(recurseTimes, ctx);
+          return isString(ret) || (ret = formatValue(ctx, ret, recurseTimes)), ret;
+        }
+        var primitive = (function(ctx, value) {
+          if (isUndefined(value)) return ctx.stylize('undefined', 'undefined');
+          if (isString(value)) {
+            var simple =
+              "'" +
+              JSON.stringify(value)
+                .replace(/^"|"$/g, '')
+                .replace(/'/g, "\\'")
+                .replace(/\\"/g, '"') +
+              "'";
+            return ctx.stylize(simple, 'string');
+          }
+          if (isNumber(value)) return ctx.stylize('' + value, 'number');
+          if (isBoolean(value)) return ctx.stylize('' + value, 'boolean');
+          if (isNull(value)) return ctx.stylize('null', 'null');
+        })(ctx, value);
+        if (primitive) return primitive;
+        var keys = Object.keys(value),
+          visibleKeys = (function(array) {
+            var hash = {};
+            return (
+              array.forEach(function(val, idx) {
+                hash[val] = !0;
+              }),
+              hash
+            );
+          })(keys);
+        if (
+          (ctx.showHidden && (keys = Object.getOwnPropertyNames(value)),
+          isError(value) && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0))
+        )
+          return formatError(value);
+        if (0 === keys.length) {
+          if (isFunction(value)) {
+            var name = value.name ? ': ' + value.name : '';
+            return ctx.stylize('[Function' + name + ']', 'special');
+          }
+          if (isRegExp(value)) return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+          if (isDate(value)) return ctx.stylize(Date.prototype.toString.call(value), 'date');
+          if (isError(value)) return formatError(value);
+        }
+        var output,
+          base = '',
+          array = !1,
+          braces = ['{', '}'];
+        (isArray(value) && ((array = !0), (braces = ['[', ']'])), isFunction(value)) &&
+          (base = ' [Function' + (value.name ? ': ' + value.name : '') + ']');
+        return (
+          isRegExp(value) && (base = ' ' + RegExp.prototype.toString.call(value)),
+          isDate(value) && (base = ' ' + Date.prototype.toUTCString.call(value)),
+          isError(value) && (base = ' ' + formatError(value)),
+          0 !== keys.length || (array && 0 != value.length)
+            ? recurseTimes < 0
+              ? isRegExp(value)
+                ? ctx.stylize(RegExp.prototype.toString.call(value), 'regexp')
+                : ctx.stylize('[Object]', 'special')
+              : (ctx.seen.push(value),
+                (output = array
+                  ? (function(ctx, value, recurseTimes, visibleKeys, keys) {
+                      for (var output = [], i = 0, l = value.length; i < l; ++i)
+                        hasOwnProperty(value, String(i))
+                          ? output.push(formatProperty(ctx, value, recurseTimes, visibleKeys, String(i), !0))
+                          : output.push('');
+                      return (
+                        keys.forEach(function(key) {
+                          key.match(/^\d+$/) ||
+                            output.push(formatProperty(ctx, value, recurseTimes, visibleKeys, key, !0));
+                        }),
+                        output
+                      );
+                    })(ctx, value, recurseTimes, visibleKeys, keys)
+                  : keys.map(function(key) {
+                      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+                    })),
+                ctx.seen.pop(),
+                (function(output, base, braces) {
+                  if (
+                    output.reduce(function(prev, cur) {
+                      return 0, cur.indexOf('\n') >= 0 && 0, prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
+                    }, 0) > 60
+                  )
+                    return braces[0] + ('' === base ? '' : base + '\n ') + ' ' + output.join(',\n  ') + ' ' + braces[1];
+                  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
+                })(output, base, braces))
+            : braces[0] + base + braces[1]
+        );
+      }
+      function formatError(value) {
+        return '[' + Error.prototype.toString.call(value) + ']';
+      }
+      function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+        var name, str, desc;
+        if (
+          ((desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] }).get
+            ? (str = desc.set ? ctx.stylize('[Getter/Setter]', 'special') : ctx.stylize('[Getter]', 'special'))
+            : desc.set && (str = ctx.stylize('[Setter]', 'special')),
+          hasOwnProperty(visibleKeys, key) || (name = '[' + key + ']'),
+          str ||
+            (ctx.seen.indexOf(desc.value) < 0
+              ? (str = isNull(recurseTimes)
+                  ? formatValue(ctx, desc.value, null)
+                  : formatValue(ctx, desc.value, recurseTimes - 1)).indexOf('\n') > -1 &&
+                (str = array
+                  ? str
+                      .split('\n')
+                      .map(function(line) {
+                        return '  ' + line;
+                      })
+                      .join('\n')
+                      .substr(2)
+                  : '\n' +
+                    str
+                      .split('\n')
+                      .map(function(line) {
+                        return '   ' + line;
+                      })
+                      .join('\n'))
+              : (str = ctx.stylize('[Circular]', 'special'))),
+          isUndefined(name))
+        ) {
+          if (array && key.match(/^\d+$/)) return str;
+          (name = JSON.stringify('' + key)).match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)
+            ? ((name = name.substr(1, name.length - 2)), (name = ctx.stylize(name, 'name')))
+            : ((name = name
+                .replace(/'/g, "\\'")
+                .replace(/\\"/g, '"')
+                .replace(/(^"|"$)/g, "'")),
+              (name = ctx.stylize(name, 'string')));
+        }
+        return name + ': ' + str;
+      }
+      function isArray(ar) {
+        return Array.isArray(ar);
+      }
+      function isBoolean(arg) {
+        return 'boolean' == typeof arg;
+      }
+      function isNull(arg) {
+        return null === arg;
+      }
+      function isNumber(arg) {
+        return 'number' == typeof arg;
+      }
+      function isString(arg) {
+        return 'string' == typeof arg;
+      }
+      function isUndefined(arg) {
+        return void 0 === arg;
+      }
+      function isRegExp(re) {
+        return isObject(re) && '[object RegExp]' === objectToString(re);
+      }
+      function isObject(arg) {
+        return 'object' == typeof arg && null !== arg;
+      }
+      function isDate(d) {
+        return isObject(d) && '[object Date]' === objectToString(d);
+      }
+      function isError(e) {
+        return isObject(e) && ('[object Error]' === objectToString(e) || e instanceof Error);
+      }
+      function isFunction(arg) {
+        return 'function' == typeof arg;
+      }
+      function objectToString(o) {
+        return Object.prototype.toString.call(o);
+      }
+      function pad(n) {
+        return n < 10 ? '0' + n.toString(10) : n.toString(10);
+      }
+      (exports.debuglog = function(set) {
+        if (
+          (isUndefined(debugEnviron) && (debugEnviron = process.env.NODE_DEBUG || ''),
+          (set = set.toUpperCase()),
+          !debugs[set])
+        )
+          if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
+            var pid = process.pid;
+            debugs[set] = function() {
+              var msg = exports.format.apply(exports, arguments);
+              console.error('%s %d: %s', set, pid, msg);
+            };
+          } else debugs[set] = function() {};
+        return debugs[set];
+      }),
+        (exports.inspect = inspect),
+        (inspect.colors = {
+          bold: [1, 22],
+          italic: [3, 23],
+          underline: [4, 24],
+          inverse: [7, 27],
+          white: [37, 39],
+          grey: [90, 39],
+          black: [30, 39],
+          blue: [34, 39],
+          cyan: [36, 39],
+          green: [32, 39],
+          magenta: [35, 39],
+          red: [31, 39],
+          yellow: [33, 39]
+        }),
+        (inspect.styles = {
+          special: 'cyan',
+          number: 'yellow',
+          boolean: 'yellow',
+          undefined: 'grey',
+          null: 'bold',
+          string: 'green',
+          date: 'magenta',
+          regexp: 'red'
+        }),
+        (exports.isArray = isArray),
+        (exports.isBoolean = isBoolean),
+        (exports.isNull = isNull),
+        (exports.isNullOrUndefined = function(arg) {
+          return null == arg;
+        }),
+        (exports.isNumber = isNumber),
+        (exports.isString = isString),
+        (exports.isSymbol = function(arg) {
+          return 'symbol' == typeof arg;
+        }),
+        (exports.isUndefined = isUndefined),
+        (exports.isRegExp = isRegExp),
+        (exports.isObject = isObject),
+        (exports.isDate = isDate),
+        (exports.isError = isError),
+        (exports.isFunction = isFunction),
+        (exports.isPrimitive = function(arg) {
+          return (
+            null === arg ||
+            'boolean' == typeof arg ||
+            'number' == typeof arg ||
+            'string' == typeof arg ||
+            'symbol' == typeof arg ||
+            void 0 === arg
+          );
+        }),
+        (exports.isBuffer = __webpack_require__(9));
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      function hasOwnProperty(obj, prop) {
+        return Object.prototype.hasOwnProperty.call(obj, prop);
+      }
+      (exports.log = function() {
+        var d, time;
+        console.log(
+          '%s - %s',
+          ((d = new Date()),
+          (time = [pad(d.getHours()), pad(d.getMinutes()), pad(d.getSeconds())].join(':')),
+          [d.getDate(), months[d.getMonth()], time].join(' ')),
+          exports.format.apply(exports, arguments)
+        );
+      }),
+        (exports.inherits = __webpack_require__(10)),
+        (exports._extend = function(origin, add) {
+          if (!add || !isObject(add)) return origin;
+          for (var keys = Object.keys(add), i = keys.length; i--; ) origin[keys[i]] = add[keys[i]];
+          return origin;
+        });
+      var kCustomPromisifiedSymbol = 'undefined' != typeof Symbol ? Symbol('util.promisify.custom') : void 0;
+      function callbackifyOnRejected(reason, cb) {
+        if (!reason) {
+          var newReason = new Error('Promise was rejected with a falsy value');
+          (newReason.reason = reason), (reason = newReason);
+        }
+        return cb(reason);
+      }
+      (exports.promisify = function(original) {
+        if ('function' != typeof original) throw new TypeError('The "original" argument must be of type Function');
+        if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
+          var fn;
+          if ('function' != typeof (fn = original[kCustomPromisifiedSymbol]))
+            throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+          return (
+            Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+              value: fn,
+              enumerable: !1,
+              writable: !1,
+              configurable: !0
+            }),
+            fn
+          );
+        }
+        function fn() {
+          for (
+            var promiseResolve,
+              promiseReject,
+              promise = new Promise(function(resolve, reject) {
+                (promiseResolve = resolve), (promiseReject = reject);
+              }),
+              args = [],
+              i = 0;
+            i < arguments.length;
+            i++
+          )
+            args.push(arguments[i]);
+          args.push(function(err, value) {
+            err ? promiseReject(err) : promiseResolve(value);
+          });
+          try {
+            original.apply(this, args);
+          } catch (err) {
+            promiseReject(err);
+          }
+          return promise;
+        }
+        return (
+          Object.setPrototypeOf(fn, Object.getPrototypeOf(original)),
+          kCustomPromisifiedSymbol &&
+            Object.defineProperty(fn, kCustomPromisifiedSymbol, {
+              value: fn,
+              enumerable: !1,
+              writable: !1,
+              configurable: !0
+            }),
+          Object.defineProperties(fn, getOwnPropertyDescriptors(original))
+        );
+      }),
+        (exports.promisify.custom = kCustomPromisifiedSymbol),
+        (exports.callbackify = function(original) {
+          if ('function' != typeof original) throw new TypeError('The "original" argument must be of type Function');
+          function callbackified() {
+            for (var args = [], i = 0; i < arguments.length; i++) args.push(arguments[i]);
+            var maybeCb = args.pop();
+            if ('function' != typeof maybeCb) throw new TypeError('The last argument must be of type Function');
+            var self = this,
+              cb = function() {
+                return maybeCb.apply(self, arguments);
+              };
+            original.apply(this, args).then(
+              function(ret) {
+                process.nextTick(cb, null, ret);
+              },
+              function(rej) {
+                process.nextTick(callbackifyOnRejected, rej, cb);
+              }
+            );
+          }
+          return (
+            Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original)),
+            Object.defineProperties(callbackified, getOwnPropertyDescriptors(original)),
+            callbackified
+          );
+        });
+    }.call(this, __webpack_require__(8)));
+  },
+  function(module, exports) {
+    var cachedSetTimeout,
+      cachedClearTimeout,
+      process = (module.exports = {});
+    function defaultSetTimout() {
+      throw new Error('setTimeout has not been defined');
+    }
+    function defaultClearTimeout() {
+      throw new Error('clearTimeout has not been defined');
+    }
+    function runTimeout(fun) {
+      if (cachedSetTimeout === setTimeout) return setTimeout(fun, 0);
+      if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout)
+        return (cachedSetTimeout = setTimeout), setTimeout(fun, 0);
+      try {
+        return cachedSetTimeout(fun, 0);
+      } catch (e) {
+        try {
+          return cachedSetTimeout.call(null, fun, 0);
+        } catch (e) {
+          return cachedSetTimeout.call(this, fun, 0);
+        }
+      }
+    }
+    !(function() {
+      try {
+        cachedSetTimeout = 'function' == typeof setTimeout ? setTimeout : defaultSetTimout;
+      } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+      }
+      try {
+        cachedClearTimeout = 'function' == typeof clearTimeout ? clearTimeout : defaultClearTimeout;
+      } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+      }
+    })();
+    var currentQueue,
+      queue = [],
+      draining = !1,
+      queueIndex = -1;
+    function cleanUpNextTick() {
+      draining &&
+        currentQueue &&
+        ((draining = !1),
+        currentQueue.length ? (queue = currentQueue.concat(queue)) : (queueIndex = -1),
+        queue.length && drainQueue());
+    }
+    function drainQueue() {
+      if (!draining) {
+        var timeout = runTimeout(cleanUpNextTick);
+        draining = !0;
+        for (var len = queue.length; len; ) {
+          for (currentQueue = queue, queue = []; ++queueIndex < len; ) currentQueue && currentQueue[queueIndex].run();
+          (queueIndex = -1), (len = queue.length);
+        }
+        (currentQueue = null),
+          (draining = !1),
+          (function(marker) {
+            if (cachedClearTimeout === clearTimeout) return clearTimeout(marker);
+            if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout)
+              return (cachedClearTimeout = clearTimeout), clearTimeout(marker);
+            try {
+              cachedClearTimeout(marker);
+            } catch (e) {
+              try {
+                return cachedClearTimeout.call(null, marker);
+              } catch (e) {
+                return cachedClearTimeout.call(this, marker);
+              }
+            }
+          })(timeout);
+      }
+    }
+    function Item(fun, array) {
+      (this.fun = fun), (this.array = array);
+    }
+    function noop() {}
+    (process.nextTick = function(fun) {
+      var args = new Array(arguments.length - 1);
+      if (arguments.length > 1) for (var i = 1; i < arguments.length; i++) args[i - 1] = arguments[i];
+      queue.push(new Item(fun, args)), 1 !== queue.length || draining || runTimeout(drainQueue);
+    }),
+      (Item.prototype.run = function() {
+        this.fun.apply(null, this.array);
+      }),
+      (process.title = 'browser'),
+      (process.browser = !0),
+      (process.env = {}),
+      (process.argv = []),
+      (process.version = ''),
+      (process.versions = {}),
+      (process.on = noop),
+      (process.addListener = noop),
+      (process.once = noop),
+      (process.off = noop),
+      (process.removeListener = noop),
+      (process.removeAllListeners = noop),
+      (process.emit = noop),
+      (process.prependListener = noop),
+      (process.prependOnceListener = noop),
+      (process.listeners = function(name) {
+        return [];
+      }),
+      (process.binding = function(name) {
+        throw new Error('process.binding is not supported');
+      }),
+      (process.cwd = function() {
+        return '/';
+      }),
+      (process.chdir = function(dir) {
+        throw new Error('process.chdir is not supported');
+      }),
+      (process.umask = function() {
+        return 0;
+      });
+  },
+  function(module, exports) {
+    module.exports = function(arg) {
+      return (
+        arg &&
+        'object' == typeof arg &&
+        'function' == typeof arg.copy &&
+        'function' == typeof arg.fill &&
+        'function' == typeof arg.readUInt8
+      );
+    };
+  },
+  function(module, exports) {
+    'function' == typeof Object.create
+      ? (module.exports = function(ctor, superCtor) {
+          (ctor.super_ = superCtor),
+            (ctor.prototype = Object.create(superCtor.prototype, {
+              constructor: { value: ctor, enumerable: !1, writable: !0, configurable: !0 }
+            }));
+        })
+      : (module.exports = function(ctor, superCtor) {
+          ctor.super_ = superCtor;
+          var TempCtor = function() {};
+          (TempCtor.prototype = superCtor.prototype),
+            (ctor.prototype = new TempCtor()),
+            (ctor.prototype.constructor = ctor);
+        });
+  },
+  function(module, __webpack_exports__, __webpack_require__) {
+    'use strict';
+    var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      1
+    );
+    __webpack_require__.n(
+      _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__
+    ).a;
+  },
+  function(module, exports, __webpack_require__) {
+    (exports = module.exports = __webpack_require__(4)(!1)).i(__webpack_require__(13), ''),
+      exports.push([module.i, '\n', '']);
+  },
+  function(module, exports, __webpack_require__) {
+    (module.exports = __webpack_require__(4)(!1)).push([
+      module.i,
+      '.gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n',
+      ''
+    ]);
+  },
+  function(module, __webpack_exports__, __webpack_require__) {
+    'use strict';
+    __webpack_require__.r(__webpack_exports__);
+    var external_Vue_ = __webpack_require__(2),
+      external_Vue_default = __webpack_require__.n(external_Vue_),
+      render = function() {
+        var _h = this.$createElement,
+          _c = this._self._c || _h;
+        return _c(
+          'gantt-elastic',
+          { attrs: { tasks: this.tasks, options: this.options } },
+          [
+            _c('gantt-header', { attrs: { slot: 'header' }, slot: 'header' }),
+            this._v(' '),
+            _c('gantt-footer', { attrs: { slot: 'footer' }, slot: 'footer' })
+          ],
+          1
+        );
+      };
+    render._withStripped = !0;
+    var external_Vuex_ = __webpack_require__(3),
+      external_Vuex_default = __webpack_require__.n(external_Vuex_),
+      GanttElasticvue_type_template_id_02c6304c_render = function() {
+        var _h = this.$createElement,
+          _c = this._self._c || _h;
+        return _c(
+          'div',
+          { staticClass: 'gantt-elastic' },
+          [
+            this._t('header'),
+            this._v(' '),
+            _c('main-view', { attrs: { tasks: this.tasks, options: this.options } }),
+            this._v(' '),
+            this._t('footer')
+          ],
+          2
+        );
+      };
+    GanttElasticvue_type_template_id_02c6304c_render._withStripped = !0;
+    var dayjs_min = __webpack_require__(0),
+      dayjs_min_default = __webpack_require__.n(dayjs_min),
+      MainViewvue_type_template_id_0bc4212e_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c('div', { staticClass: 'gantt-elastic__main-view', style: _vm.root.style('main-view') }, [
+          _c(
+            'div',
+            {
+              staticClass: 'gantt-elastic__main-container-wrapper',
+              style: _vm.root.style('main-container-wrapper', {
+                height: _vm.$store.state.GanttElastic.options.height + 'px'
+              })
+            },
+            [
+              _c(
+                'div',
+                {
+                  ref: 'mainView',
+                  staticClass: 'gantt-elastic__main-container',
+                  style: _vm.root.style('main-container', {
+                    width: _vm.getWidth + 'px',
+                    height: _vm.$store.state.GanttElastic.options.height + 'px'
+                  })
+                },
+                [
+                  _c(
+                    'div',
+                    {
+                      staticClass: 'gantt-elastic__container',
+                      style: _vm.root.style('container'),
+                      on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
+                    },
+                    [
+                      _c(
+                        'div',
+                        {
+                          directives: [
+                            {
+                              name: 'show',
+                              rawName: 'v-show',
+                              value: _vm.$store.state.GanttElastic.options.taskList.display,
+                              expression: '$store.state.GanttElastic.options.taskList.display'
+                            }
+                          ],
+                          ref: 'taskList',
+                          staticClass: 'gantt-elastic__task-list-container',
+                          style: _vm.root.style('task-list-container', {
+                            width: _vm.$store.state.GanttElastic.options.taskList.finalWidth + 'px',
+                            height: _vm.$store.state.GanttElastic.options.height + 'px'
+                          })
+                        },
+                        [_c('task-list')],
+                        1
+                      ),
+                      _vm._v(' '),
+                      _c(
+                        'div',
+                        {
+                          ref: 'chartContainer',
+                          staticClass: 'gantt-elastic__main-view-container',
+                          on: {
+                            mousedown: _vm.chartMouseDown,
+                            touchstart: _vm.chartMouseDown,
+                            mouseup: _vm.chartMouseUp,
+                            touchend: _vm.chartMouseUp,
+                            mousemove: function($event) {
+                              return $event.preventDefault(), _vm.chartMouseMove($event);
+                            },
+                            touchmove: function($event) {
+                              return $event.preventDefault(), _vm.chartMouseMove($event);
+                            },
+                            wheel: function($event) {
+                              return $event.preventDefault(), _vm.chartWheel($event);
+                            }
+                          }
+                        },
+                        [_c('chart')],
+                        1
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(' '),
+              _c(
+                'div',
+                {
+                  ref: 'chartScrollContainerVertical',
+                  staticClass: 'gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical',
+                  style: _vm.root.style(
+                    'chart-scroll-container',
+                    'chart-scroll-container--vertical',
+                    _vm.verticalStyle
+                  ),
+                  on: { scroll: _vm.onVerticalScroll }
+                },
+                [
+                  _c('div', {
+                    staticClass: 'gantt-elastic__chart-scroll--vertical',
+                    style: { width: '1px', height: _vm.$store.state.GanttElastic.options.allVisibleTasksHeight + 'px' }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(' '),
+          _c(
+            'div',
+            {
+              ref: 'chartScrollContainerHorizontal',
+              staticClass: 'gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal',
+              style: _vm.root.style('chart-scroll-container', 'chart-scroll-container--horizontal', {
+                marginLeft: _vm.getMarginLeft
+              }),
+              on: { scroll: _vm.onHorizontalScroll }
+            },
+            [
+              _c('div', {
+                staticClass: 'gantt-elastic__chart-scroll--horizontal',
+                style: { height: '1px', width: _vm.$store.state.GanttElastic.options.width + 'px' }
+              })
+            ]
+          )
+        ]);
+      };
+    MainViewvue_type_template_id_0bc4212e_render._withStripped = !0;
+    var TaskListvue_type_template_id_6e11f12f_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'div',
+        {
+          directives: [
+            {
+              name: 'show',
+              rawName: 'v-show',
+              value: _vm.$store.state.GanttElastic.options.taskList.display,
+              expression: '$store.state.GanttElastic.options.taskList.display'
+            }
+          ],
+          ref: 'taskListWrapper',
+          staticClass: 'gantt-elastic__task-list-wrapper',
+          style: _vm.root.style('task-list-wrapper', { width: '100%', height: '100%' })
+        },
+        [
+          _c(
+            'div',
+            { ref: 'taskList', staticClass: 'gantt-elastic__task-list', style: _vm.root.style('task-list') },
+            [
+              _c('task-list-header'),
+              _vm._v(' '),
+              _c(
+                'div',
+                {
+                  ref: 'taskListItems',
+                  staticClass: 'gantt-elastic__task-list-items',
+                  style: _vm.root.style('task-list-items', {
+                    height: _vm.$store.state.GanttElastic.options.rowsHeight + 'px'
+                  })
+                },
+                _vm._l(_vm.root.visibleTasks, function(task) {
+                  return _c('task-list-item', {
+                    key: task.id,
+                    attrs: { task: task, 'expander-style': _vm.getListExpanderStyle(task) }
+                  });
+                }),
+                1
+              )
+            ],
+            1
+          )
+        ]
+      );
+    };
+    TaskListvue_type_template_id_6e11f12f_render._withStripped = !0;
+    var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'div',
+        {
+          staticClass: 'gantt-elastic__task-list-header',
+          style: _vm.root.style('task-list-header', {
+            height: _vm.$store.state.GanttElastic.options.calendar.height + 'px',
+            'margin-bottom': _vm.$store.state.GanttElastic.options.calendar.gap + 'px'
+          })
+        },
+        _vm._l(_vm.root.getTaskListColumns, function(column) {
+          return _c(
+            'div',
+            {
+              key: column._id,
+              staticClass: 'gantt-elastic__task-list-header-column',
+              style: _vm.root.style(
+                'task-list-header-column',
+                column.style['task-list-header-column'],
+                _vm.getStyle(column)
+              )
+            },
+            [
+              column.expander
+                ? _c('task-list-expander', {
+                    attrs: { tasks: _vm.collapsible, options: _vm.$store.state.GanttElastic.options.taskList.expander }
+                  })
+                : _vm._e(),
+              _vm._v(' '),
+              _c(
+                'div',
+                {
+                  staticClass: 'gantt-elastic__task-list-header-label',
+                  style: _vm.root.style('task-list-header-label', column.style['task-list-header-label']),
+                  attrs: { column: column },
+                  on: { mouseup: _vm.resizerMouseUp }
+                },
+                [_vm._v(_vm._s(column.label))]
+              ),
+              _vm._v(' '),
+              _c(
+                'div',
+                {
+                  staticClass: 'gantt-elastic__task-list-header-resizer-wrapper',
+                  style: _vm.root.style(
+                    'task-list-header-resizer-wrapper',
+                    column.style['task-list-header-resizer-wrapper']
+                  ),
+                  attrs: { column: column },
+                  on: {
+                    mousedown: function($event) {
+                      return _vm.resizerMouseDown($event, column);
+                    }
+                  }
+                },
+                [
+                  _c(
+                    'div',
+                    {
+                      staticClass: 'gantt-elastic__task-list-header-resizer',
+                      style: _vm.root.style('task-list-header-resizer', column.style['task-list-header-resizer'])
+                    },
+                    [
+                      _c('div', {
+                        staticClass: 'gantt-elastic__task-list-header-resizer-dot',
+                        style: _vm.root.style(
+                          'task-list-header-resizer-dot',
+                          column.style['task-list-header-resizer-dot']
+                        )
+                      }),
+                      _vm._v(' '),
+                      _c('div', {
+                        staticClass: 'gantt-elastic__task-list-header-resizer-dot',
+                        style: _vm.root.style(
+                          'task-list-header-resizer-dot',
+                          column.style['task-list-header-resizer-dot']
+                        )
+                      }),
+                      _vm._v(' '),
+                      _c('div', {
+                        staticClass: 'gantt-elastic__task-list-header-resizer-dot',
+                        style: _vm.root.style(
+                          'task-list-header-resizer-dot',
+                          column.style['task-list-header-resizer-dot']
+                        )
+                      })
+                    ]
+                  )
+                ]
+              )
+            ],
+            1
+          );
+        }),
+        0
+      );
+    };
+    TaskListHeadervue_type_template_id_aefdd7c8_render._withStripped = !0;
+    var Expandervue_type_template_id_09a21177_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'div',
+        { class: _vm.getClassPrefix() + '-wrapper', style: this.root.style(this.getClassPrefix(!1) + '-wrapper') },
+        [
+          _vm.allChildren.length
+            ? _c(
+                'svg',
+                {
+                  class: _vm.getClassPrefix() + '-content',
+                  style: _vm.root.style(_vm.getClassPrefix(!1) + '-content'),
+                  attrs: { width: _vm.options.size, height: _vm.options.size }
+                },
+                [
+                  _c('rect', {
+                    class: _vm.getClassPrefix() + '-border',
+                    style: _vm.root.style(_vm.getClassPrefix(!1) + '-border', _vm.borderStyle),
+                    attrs: {
+                      x: _vm.border,
+                      y: _vm.border,
+                      width: _vm.options.size - 2 * _vm.border,
+                      height: _vm.options.size - 2 * _vm.border,
+                      rx: '2',
+                      ry: '2'
+                    },
+                    on: { click: _vm.toggle }
+                  }),
+                  _vm._v(' '),
+                  _vm.allChildren.length
+                    ? _c('line', {
+                        class: _vm.getClassPrefix() + '-line',
+                        style: _vm.root.style(_vm.getClassPrefix(!1) + '-line'),
+                        attrs: {
+                          x1: _vm.lineOffset,
+                          y1: _vm.options.size / 2,
+                          x2: _vm.options.size - _vm.lineOffset,
+                          y2: _vm.options.size / 2
+                        },
+                        on: { click: _vm.toggle }
+                      })
+                    : _vm._e(),
+                  _vm._v(' '),
+                  _vm.collapsed
+                    ? _c('line', {
+                        class: _vm.getClassPrefix() + '-line',
+                        style: _vm.root.style(_vm.getClassPrefix(!1) + '-line'),
+                        attrs: {
+                          x1: _vm.options.size / 2,
+                          y1: _vm.lineOffset,
+                          x2: _vm.options.size / 2,
+                          y2: _vm.options.size - _vm.lineOffset
+                        },
+                        on: { click: _vm.toggle }
+                      })
+                    : _vm._e()
+                ]
+              )
+            : _vm._e()
+        ]
+      );
+    };
+    function normalizeComponent(
+      scriptExports,
+      render,
+      staticRenderFns,
+      functionalTemplate,
+      injectStyles,
+      scopeId,
+      moduleIdentifier,
+      shadowMode
+    ) {
+      var hook,
+        options = 'function' == typeof scriptExports ? scriptExports.options : scriptExports;
+      if (
+        (render && ((options.render = render), (options.staticRenderFns = staticRenderFns), (options._compiled = !0)),
+        functionalTemplate && (options.functional = !0),
+        scopeId && (options._scopeId = 'data-v-' + scopeId),
+        moduleIdentifier
+          ? ((hook = function(context) {
+              (context =
+                context ||
+                (this.$vnode && this.$vnode.ssrContext) ||
+                (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext)) ||
+                'undefined' == typeof __VUE_SSR_CONTEXT__ ||
+                (context = __VUE_SSR_CONTEXT__),
+                injectStyles && injectStyles.call(this, context),
+                context && context._registeredComponents && context._registeredComponents.add(moduleIdentifier);
+            }),
+            (options._ssrRegister = hook))
+          : injectStyles &&
+            (hook = shadowMode
+              ? function() {
+                  injectStyles.call(this, this.$root.$options.shadowRoot);
+                }
+              : injectStyles),
+        hook)
+      )
+        if (options.functional) {
+          options._injectStyles = hook;
+          var originalRender = options.render;
+          options.render = function(h, context) {
+            return hook.call(context), originalRender(h, context);
+          };
+        } else {
+          var existing = options.beforeCreate;
+          options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        }
+      return { exports: scriptExports, options: options };
+    }
+    Expandervue_type_template_id_09a21177_render._withStripped = !0;
+    var component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['tasks', 'options'],
+        data: () => ({ border: 0.5, borderStyle: { 'stroke-width': 0.5 }, lineOffset: 5 }),
+        computed: {
+          allChildren() {
+            const children = [];
+            return (
+              this.tasks.forEach(task => {
+                task.children.forEach(child => {
+                  children.push(child);
+                });
+              }),
+              children
+            );
+          },
+          collapsed() {
+            if (0 === this.tasks.length) return !1;
+            let collapsed = 0;
+            for (let i = 0, len = this.tasks.length; i < len; i++) this.tasks[i].collapsed && collapsed++;
+            return collapsed === this.tasks.length;
+          }
+        },
+        methods: {
+          getClassPrefix(full = !0) {
+            return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
+          },
+          toggle() {
+            if (0 === this.allChildren.length) return;
+            const collapsed = !this.collapsed;
+            this.tasks.forEach(task => {
+              this.$store.commit(this.root.updateTaskMut, { id: task.id, collapsed: collapsed });
+            });
+          }
+        }
+      },
+      Expandervue_type_template_id_09a21177_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    component.options.__file = 'src/components/Expander.vue';
+    var Expander = component.exports,
+      TaskListHeader_component = normalizeComponent(
+        {
+          components: { TaskListExpander: Expander },
+          inject: ['root'],
+          data: () => ({ resizer: { moving: !1, x: 0 } }),
+          computed: {
+            getStyle() {
+              return column => {
+                return {
+                  height:
+                    this.$store.state.GanttElastic.options.calendar.height +
+                    this.root.style('calendar-row-rect')['border-width'] +
+                    'px',
+                  width: column.finalWidth + 'px'
+                };
+              };
+            },
+            collapsible() {
+              return this.$store.state.GanttElastic.tasks.filter(task => task.children.length > 0);
+            }
+          },
+          methods: {
+            resizerMouseDown(event, column) {
+              this.resizerMoving ||
+                ((this.resizer.moving = column),
+                (this.resizer.x = event.clientX),
+                (this.resizer.initialWidth = column.width),
+                this.root.$emit('taskList-column-width-change-start', this.resizer.moving));
+            },
+            resizerMouseMove(event) {
+              this.resizer.moving &&
+                ((this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x),
+                this.resizer.moving.width < this.$store.state.GanttElastic.options.taskList.minWidth &&
+                  (this.resizer.moving.width = this.$store.state.GanttElastic.options.taskList.minWidth),
+                this.root.$emit('taskList-column-width-change', this.resizer.moving));
+            },
+            resizerMouseUp(event) {
+              this.resizer.moving &&
+                (this.root.$emit('taskList-column-width-change', this.resizer.moving),
+                this.root.$emit('taskList-column-width-change-stop', this.resizer.moving),
+                (this.resizer.moving = !1));
+            }
+          },
+          created() {
+            (this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this))),
+              (this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this))),
+              this.root.$on('main-view-mousemove', this.resizerMouseMove),
+              this.root.$on('main-view-mouseup', this.resizerMouseUp);
+          },
+          beforeDestroy() {
+            document.removeEventListener('mouseup', this.resizerMouseUp),
+              document.removeEventListener('mousemove', this.resizerMouseMove);
+          }
+        },
+        TaskListHeadervue_type_template_id_aefdd7c8_render,
+        [],
+        !1,
+        null,
+        null,
+        null
+      );
+    TaskListHeader_component.options.__file = 'src/components/TaskList/TaskListHeader.vue';
+    var TaskListHeader = TaskListHeader_component.exports,
+      TaskListItemvue_type_template_id_9716293c_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'div',
+          { staticClass: 'gantt-elastic__task-list-item', style: _vm.root.style('task-list-item') },
+          _vm._l(_vm.$store.state.GanttElastic.options.taskList.columns, function(column) {
+            return _c(
+              'item-column',
+              { key: column._id, attrs: { column: column, task: _vm.task } },
+              [
+                column.expander
+                  ? _c('task-list-expander', {
+                      style: _vm.expanderStyle,
+                      attrs: { tasks: [_vm.task], options: _vm.$store.state.GanttElastic.options.taskList.expander }
+                    })
+                  : _vm._e()
+              ],
+              1
+            );
+          }),
+          1
+        );
+      };
+    TaskListItemvue_type_template_id_9716293c_render._withStripped = !0;
+    var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'div',
+        {
+          staticClass: 'gantt-elastic__task-list-item-column',
+          style: _vm.root.style('task-list-item-column', _vm.column.style['task-list-item-column'], {
+            width: _vm.column.finalWidth + 'px',
+            height: _vm.column.height + 'px'
+          })
+        },
+        [
+          _c(
+            'div',
+            {
+              staticClass: 'gantt-elastic__task-list-item-value-wrapper',
+              style: _vm.root.style('task-list-item-value-wrapper', _vm.column.style['task-list-item-value-wrapper'])
+            },
+            [
+              _vm._t('default'),
+              _vm._v(' '),
+              _c(
+                'div',
+                {
+                  staticClass: 'gantt-elastic__task-list-item-value-container',
+                  style: _vm.root.style(
+                    'task-list-item-value-container',
+                    _vm.column.style['task-list-item-value-container']
+                  )
+                },
+                [
+                  _vm.html
+                    ? _vm._e()
+                    : _c(
+                        'div',
+                        {
+                          staticClass: 'gantt-elastic__task-list-item-value',
+                          style: _vm.root.style('task-list-item-value', _vm.column.style['task-list-item-value'])
+                        },
+                        [_vm._v(_vm._s(_vm.value))]
+                      ),
+                  _vm._v(' '),
+                  _vm.html
+                    ? _c('div', {
+                        staticClass: 'gantt-elastic__task-list-item-value',
+                        style: _vm.root.style('task-list-item-value', _vm.column.style['task-list-item-value']),
+                        domProps: { innerHTML: _vm._s(_vm.value) }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ],
+            2
+          )
+        ]
+      );
+    };
+    ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = !0;
+    var ItemColumn_component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['column', 'task'],
+        data: () => ({}),
+        computed: {
+          html() {
+            return void 0 !== this.column.html && !0 === this.column.html;
+          },
+          value() {
+            return 'function' == typeof this.column.value ? this.column.value(this.task) : this.task[this.column.value];
+          }
+        }
+      },
+      ItemColumnvue_type_template_id_cb5a6c96_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    ItemColumn_component.options.__file = 'src/components/TaskList/ItemColumn.vue';
+    var TaskListItem_component = normalizeComponent(
+      {
+        components: { TaskListExpander: Expander, ItemColumn: ItemColumn_component.exports },
+        inject: ['root'],
+        props: ['task', 'expanderStyle'],
+        data: () => ({})
+      },
+      TaskListItemvue_type_template_id_9716293c_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    TaskListItem_component.options.__file = 'src/components/TaskList/TaskListItem.vue';
+    var TaskList_component = normalizeComponent(
+      {
+        components: { TaskListHeader: TaskListHeader, TaskListItem: TaskListItem_component.exports },
+        inject: ['root'],
+        data: () => ({}),
+        mounted() {
+          this.$store.commit(this.root.updateOptionsMut, {
+            refs: {
+              taskListWrapper: this.$refs.taskListWrapper,
+              taskList: this.$refs.taskList,
+              taskListItems: this.$refs.taskListItems
+            }
+          });
+        },
+        computed: {
+          getListExpanderStyle() {
+            return task => {
+              const options = this.$store.state.GanttElastic.options;
+              return {
+                'padding-left':
+                  (task.parents.length - 1) * options.taskList.expander.padding +
+                  options.taskList.expander.margin +
+                  'px',
+                margin: 'auto 0px auto 10px'
+              };
+            };
+          }
+        }
+      },
+      TaskListvue_type_template_id_6e11f12f_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    TaskList_component.options.__file = 'src/components/TaskList/TaskList.vue';
+    var TaskList = TaskList_component.exports,
+      Chartvue_type_template_id_67c3f5cd_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'div',
+          {
+            ref: 'chart',
+            staticClass: 'gantt-elastic__chart',
+            style: _vm.root.style('chart', { width: _vm.getWidth + 'px', height: _vm.getHeight + 'px' })
+          },
+          [
+            _c('calendar'),
+            _vm._v(' '),
+            _c(
+              'div',
+              {
+                style: _vm.root.style('chart-area', {
+                  width: '100%',
+                  height: _vm.$store.state.GanttElastic.options.rowsHeight + 'px'
+                })
+              },
+              [
+                _c(
+                  'div',
+                  {
+                    ref: 'chartGraph',
+                    staticClass: 'gantt-elastic__chart-graph',
+                    style: _vm.root.style('chart-graph', { height: '100%' })
+                  },
+                  [
+                    _c(
+                      'svg',
+                      {
+                        ref: 'chart',
+                        staticClass: 'gantt-elastic__chart',
+                        style: _vm.root.style('chart'),
+                        attrs: {
+                          x: '0',
+                          y: '0',
+                          width: _vm.getWidth + 'px',
+                          height: _vm.$store.state.GanttElastic.options.allVisibleTasksHeight + 'px',
+                          xmlns: 'http://www.w3.org/2000/svg'
+                        }
+                      },
+                      [
+                        _c('days-highlight'),
+                        _vm._v(' '),
+                        _c('grid'),
+                        _vm._v(' '),
+                        _c('dependency-lines', { attrs: { tasks: _vm.root.visibleTasks } }),
+                        _vm._v(' '),
+                        _vm._l(_vm.root.visibleTasks, function(task) {
+                          return _c(
+                            'g',
+                            {
+                              key: task.id,
+                              staticClass: 'gantt-elastic__chart-row-wrapper',
+                              style: _vm.root.style('chart-row-wrapper'),
+                              attrs: { task: task }
+                            },
+                            [_c(task.type, { tag: 'component', attrs: { task: task } })],
+                            1
+                          );
+                        })
+                      ],
+                      2
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        );
+      };
+    Chartvue_type_template_id_67c3f5cd_render._withStripped = !0;
+    var Gridvue_type_template_id_2bf979a7_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'svg',
+        {
+          ref: 'chart',
+          staticClass: 'gantt-elastic__grid-lines-wrapper',
+          style: _vm.root.style('grid-lines-wrapper'),
+          attrs: {
+            x: '0',
+            y: '0',
+            width: _vm.$store.state.GanttElastic.options.width,
+            height: _vm.$store.state.GanttElastic.options.allVisibleTasksHeight,
+            xmlns: 'http://www.w3.org/2000/svg'
+          }
+        },
+        [
+          _c(
+            'g',
+            { staticClass: 'gantt-elastic__grid-lines', style: _vm.root.style('grid-lines') },
+            [
+              _vm._l(_vm.horizontalLines, function(line) {
+                return _c('line', {
+                  key: line.key,
+                  staticClass: 'gantt-elastic__grid-line-horizontal',
+                  style: _vm.root.style('grid-line-horizontal'),
+                  attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+                });
+              }),
+              _vm._v(' '),
+              _vm._l(_vm.verticalLines, function(line) {
+                return _c('line', {
+                  key: line.key,
+                  staticClass: 'gantt-elastic__grid-line-vertical',
+                  style: _vm.root.style('grid-line-vertical'),
+                  attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
+                });
+              }),
+              _vm._v(' '),
+              _c('line', {
+                staticClass: 'gantt-elastic__grid-line-time',
+                style: _vm.root.style('grid-line-time'),
+                attrs: {
+                  x1: _vm.timeLinePosition.x,
+                  y1: _vm.timeLinePosition.y1,
+                  x2: _vm.timeLinePosition.x,
+                  y2: _vm.timeLinePosition.y2
+                }
+              })
+            ],
+            2
+          )
+        ]
+      );
+    };
+    Gridvue_type_template_id_2bf979a7_render._withStripped = !0;
+    var Grid_component = normalizeComponent(
+      {
+        inject: ['root'],
+        data: () => ({}),
+        created() {
+          this.root.$on('recenterPosition', this.recenterPosition);
+        },
+        mounted() {
+          this.$nextTick(() => {
+            this.$nextTick(() => {
+              this.root.scrollToTime(this.timeLinePosition.time);
+            });
+          });
+        },
+        methods: {
+          recenterPosition() {
+            this.root.scrollToTime(this.timeLinePosition.time);
+          }
+        },
+        computed: {
+          verticalLines() {
+            let lines = [];
+            const options = this.$store.state.GanttElastic.options;
+            return (
+              options.times.steps.forEach(step => {
+                this.root.isInsideViewPort(step.offset.px, 1) &&
+                  lines.push({
+                    key: step.time,
+                    x1: step.offset.px,
+                    y1: 0,
+                    x2: step.offset.px,
+                    y2:
+                      this.$store.state.GanttElastic.tasks.length *
+                        (options.row.height + 2 * options.chart.grid.horizontal.gap) +
+                      this.root.style('grid-line-vertical')['stroke-width']
+                  });
+              }),
+              lines
+            );
+          },
+          horizontalLines() {
+            let lines = [];
+            const options = this.$store.state.GanttElastic.options;
+            for (let index = 0, len = this.root.visibleTasks.length; index <= len; index++) {
+              const y =
+                index * (options.row.height + 2 * options.chart.grid.horizontal.gap) +
+                this.root.style('grid-line-vertical')['stroke-width'] / 2;
+              lines.push({ key: 'hl' + index, x1: 0, y1: y, x2: '100%', y2: y });
+            }
+            return lines;
+          },
+          inViewPort() {
+            return line => {
+              const options = this.$store.state.GanttElastic.options;
+              return line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right;
+            };
+          },
+          timeLinePosition() {
+            const d = new Date(),
+              current = d.getTime(),
+              currentOffset = this.root.timeToPixelOffsetX(current),
+              timeLine = { x: 0, y1: 0, y2: '100%', dateTime: '', time: current };
+            return (timeLine.x = currentOffset), (timeLine.dateTime = d.toLocaleDateString()), timeLine;
+          }
+        }
+      },
+      Gridvue_type_template_id_2bf979a7_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Grid_component.options.__file = 'src/components/Chart/Grid.vue';
+    var Grid = Grid_component.exports,
+      DaysHighlightvue_type_template_id_1bfe64e8_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _vm.showWorkingDays
+          ? _c(
+              'g',
+              {
+                staticClass: 'gantt-elastic__chart-days-highlight-container',
+                style: _vm.root.style('chart-days-highlight-container')
+              },
+              _vm._l(_vm.workingDays, function(day) {
+                return _c('rect', {
+                  key: _vm.getKey(day),
+                  staticClass: 'gantt-elastic__chart-days-highlight-rect',
+                  style: _vm.root.style('chart-days-highlight-rect'),
+                  attrs: { x: day.offset.px, y: '0', width: day.width.px, height: '100%' }
+                });
+              }),
+              0
+            )
+          : _vm._e();
+      };
+    DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = !0;
+    var DaysHighlight_component = normalizeComponent(
+      {
+        inject: ['root'],
+        data: () => ({}),
+        methods: { getKey: day => dayjs_min_default()(day.time).format('YYYY-MM-DD') },
+        computed: {
+          workingDays() {
+            return this.$store.state.GanttElastic.options.times.steps.filter(
+              step =>
+                -1 ===
+                this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(
+                  dayjs_min_default()(step.time).day()
+                )
+            );
+          },
+          showWorkingDays() {
+            const calendar = this.$store.state.GanttElastic.options.calendar;
+            return !(
+              void 0 === calendar.workingDays ||
+              !Array.isArray(calendar.workingDays) ||
+              !calendar.workingDays.length
+            );
+          }
+        }
+      },
+      DaysHighlightvue_type_template_id_1bfe64e8_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    DaysHighlight_component.options.__file = 'src/components/Chart/DaysHighlight.vue';
+    var DaysHighlight = DaysHighlight_component.exports,
+      Calendarvue_type_template_id_dee108e2_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'div',
+          {
+            staticClass: 'gantt-elastic__calendar-wrapper',
+            style: _vm.root.style('calendar-wrapper', {
+              'margin-bottom': _vm.$store.state.GanttElastic.options.calendar.gap + 'px'
+            })
+          },
+          [
+            _c(
+              'div',
+              {
+                staticClass: 'gantt-elastic__calendar',
+                style: _vm.root.style('calendar', { width: _vm.getWidth + 'px' })
+              },
+              [
+                _vm.$store.state.GanttElastic.options.calendar.month.display
+                  ? _c('calendar-row', {
+                      attrs: { items: _vm.$store.state.GanttElastic.options.calendar.months, which: 'month' }
+                    })
+                  : _vm._e(),
+                _vm._v(' '),
+                _vm.$store.state.GanttElastic.options.calendar.day.display
+                  ? _c('calendar-row', {
+                      attrs: { items: _vm.$store.state.GanttElastic.options.calendar.days, which: 'day' }
+                    })
+                  : _vm._e(),
+                _vm._v(' '),
+                _vm.$store.state.GanttElastic.options.calendar.hour.display
+                  ? _c('calendar-row', {
+                      attrs: { items: _vm.$store.state.GanttElastic.options.calendar.hours, which: 'hour' }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ]
+        );
+      };
+    Calendarvue_type_template_id_dee108e2_render._withStripped = !0;
+    var CalendarRowvue_type_template_id_0daf06fb_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'div',
+        {
+          class: 'gantt-elastic__calendar-row gantt-elastic__calendar-row-' + _vm.which,
+          style: _vm.root.style('calendar-row', 'calendar-row-' + _vm.which)
+        },
+        _vm._l(_vm.items, function(item) {
+          return _c(
+            'div',
+            {
+              key: item.key,
+              class: 'gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--' + _vm.which,
+              style: _vm.root.style('calendar-row-rect', 'calendar-row-rect--' + _vm.which, {
+                width: item.width + 'px',
+                height: item.height + 'px'
+              })
+            },
+            [
+              _c(
+                'div',
+                {
+                  class: 'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + _vm.which,
+                  style: _vm.root.style('calendar-row-text', 'calendar-row-text--' + _vm.which, _vm.getStyle(item))
+                },
+                [_vm._v(_vm._s(item.label))]
+              )
+            ]
+          );
+        }),
+        0
+      );
+    };
+    CalendarRowvue_type_template_id_0daf06fb_render._withStripped = !0;
+    var CalendarRow_component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['items', 'which'],
+        data: () => ({ anchor: 'middle' }),
+        computed: {
+          getTextX() {
+            let x = this.item.x + this.item.width / 2;
+            if ('month' === this.which && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
+              this.anchor = 'start';
+              let scrollWidth =
+                this.$store.state.GanttElastic.options.scroll.chart.right -
+                this.$store.state.GanttElastic.options.scroll.chart.left;
+              (x =
+                this.$store.state.GanttElastic.options.scroll.chart.left +
+                scrollWidth / 2 -
+                this.item.textWidth / 2 +
+                2) +
+                this.item.textWidth +
+                2 >
+              this.item.x + this.item.width
+                ? (x = this.item.x + this.item.width - this.item.textWidth - 2)
+                : x < this.item.x && (x = this.item.x + 2);
+            }
+            return x;
+          },
+          getTextY() {
+            return this.item.y + this.item.height / 2;
+          },
+          getStyle() {
+            return item => ({
+              'line-height':
+                item.height -
+                2 *
+                  parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) +
+                'px'
+            });
+          }
+        }
+      },
+      CalendarRowvue_type_template_id_0daf06fb_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    CalendarRow_component.options.__file = 'src/components/Calendar/CalendarRow.vue';
+    var Calendar_component = normalizeComponent(
+      {
+        components: { CalendarRow: CalendarRow_component.exports },
+        inject: ['root'],
+        data: () => ({}),
+        created() {
+          this.root.$on('scope-change', this.regenerate),
+            this.root.$on('times-timeZoom-change', this.regenerate),
+            this.root.$on('tasks-updated', this.regenerate),
+            this.root.$on('options-updated', this.regenerate),
+            this.root.$on('calendar-recalculate', this.regenerate);
+        },
+        mounted() {
+          this.regenerate();
+        },
+        methods: {
+          howManyHoursFit(dayIndex) {
+            const additionalSpace = 2 * parseFloat(this.root.style('calendar-row-rect')['border-width']) + 2;
+            let fullCellWidth = this.$store.state.GanttElastic.options.times.steps[dayIndex].width.px,
+              formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.hour.format);
+            for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2))
+              for (let formatName of formatNames)
+                if (
+                  (this.$store.state.GanttElastic.options.calendar.hour.maxWidths[formatName] + additionalSpace) *
+                    hours <=
+                    fullCellWidth &&
+                  hours > 1
+                )
+                  return { count: hours, type: formatName };
+            return { count: 0, type: '' };
+          },
+          howManyDaysFit() {
+            const additionalSpace = 2 * parseFloat(this.root.style('calendar-row-rect')['border-width']) + 2;
+            let fullWidth = this.$store.state.GanttElastic.options.width,
+              formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.day.format);
+            for (
+              let days = this.$store.state.GanttElastic.options.times.steps.length;
+              days > 1;
+              days = Math.ceil(days / 2)
+            )
+              for (let formatName of formatNames)
+                if (
+                  (this.$store.state.GanttElastic.options.calendar.day.maxWidths[formatName] + additionalSpace) *
+                    days <=
+                    fullWidth &&
+                  days > 1
+                )
+                  return { count: days, type: formatName };
+            return { count: 0, type: '' };
+          },
+          howManyMonthsFit() {
+            const additionalSpace = 2 * parseFloat(this.root.style('calendar-row-rect')['border-width']) + 2;
+            let fullWidth = this.$store.state.GanttElastic.options.width,
+              formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format),
+              currentMonth = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime),
+              previousMonth = currentMonth.clone();
+            const lastTime = this.$store.state.GanttElastic.options.times.lastTime;
+            let monthsCount = 1;
+            for (; currentMonth.valueOf() <= lastTime; )
+              (currentMonth = currentMonth.add(1, 'day')),
+                previousMonth.month() !== currentMonth.month() && monthsCount++,
+                (previousMonth = currentMonth.clone());
+            for (let months = monthsCount; months > 1; months = Math.ceil(months / 2))
+              for (let formatName of formatNames)
+                if (
+                  (this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + additionalSpace) *
+                    months <=
+                    fullWidth &&
+                  months > 1
+                )
+                  return { count: months, type: formatName };
+            return { count: 1, type: formatNames[0] };
+          },
+          hourTextStyle() {
+            return (
+              'font-family:' +
+              this.$store.state.GanttElastic.options.calendar.hour.fontFamily +
+              ';font-size:' +
+              this.$store.state.GanttElastic.options.calendar.hour.fontSize
+            );
+          },
+          dayTextStyle() {
+            return (
+              'font-family:' +
+              this.$store.state.GanttElastic.options.calendar.day.fontFamily +
+              ';font-size:' +
+              this.$store.state.GanttElastic.options.calendar.day.fontSize
+            );
+          },
+          generateHours() {
+            let hours = [];
+            if (!this.$store.state.GanttElastic.options.calendar.hour.display)
+              return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: [] } });
+            for (
+              let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
+              hourIndex < len;
+              hourIndex++
+            ) {
+              const hoursCount = this.howManyHoursFit(hourIndex);
+              if (0 === hoursCount.count)
+                return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: hours } });
+              const hourStep = 24 / hoursCount.count,
+                hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
+              for (let i = 0, len = hoursCount.count; i < len; i++) {
+                const date = dayjs_min_default()(
+                  this.$store.state.GanttElastic.options.times.steps[hourIndex].time
+                ).add(i * hourStep, 'hour');
+                let textWidth = 0;
+                void 0 !== this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex] &&
+                  (textWidth = this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex][hoursCount.type]);
+                let x = this.$store.state.GanttElastic.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
+                hours.push({
+                  index: hourIndex,
+                  key: this.$store.state.GanttElastic.options.times.steps[hourIndex].time + 'h' + i,
+                  x: x,
+                  y:
+                    this.$store.state.GanttElastic.options.calendar.day.height +
+                    this.$store.state.GanttElastic.options.calendar.month.height,
+                  width: hourWidthPx,
+                  textWidth: textWidth,
+                  height: this.$store.state.GanttElastic.options.calendar.hour.height,
+                  label: this.$store.state.GanttElastic.options.calendar.hour.format[hoursCount.type](date),
+                  type: hoursCount.type
+                });
+              }
+            }
+            return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: hours } });
+          },
+          generateDays() {
+            let days = [];
+            if (!this.$store.state.GanttElastic.options.calendar.day.display)
+              return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: [] } });
+            const daysCount = this.howManyDaysFit();
+            if (0 === daysCount.count)
+              return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: days } });
+            const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
+            for (
+              let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
+              dayIndex < len;
+              dayIndex += dayStep
+            ) {
+              let dayWidthPx = 0;
+              for (let currentStep = 0; currentStep < dayStep; currentStep++)
+                void 0 !== this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep] &&
+                  (dayWidthPx += this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep].width.px);
+              const date = dayjs_min_default()(this.$store.state.GanttElastic.options.times.steps[dayIndex].time);
+              let textWidth = 0;
+              void 0 !== this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex] &&
+                (textWidth = this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex][daysCount.type]);
+              let x = this.$store.state.GanttElastic.options.times.steps[dayIndex].offset.px;
+              days.push({
+                index: dayIndex,
+                key: this.$store.state.GanttElastic.options.times.steps[dayIndex].time + 'd',
+                x: x,
+                y: this.$store.state.GanttElastic.options.calendar.month.height,
+                width: dayWidthPx,
+                textWidth: textWidth,
+                height: this.$store.state.GanttElastic.options.calendar.day.height,
+                label: this.$store.state.GanttElastic.options.calendar.day.format[daysCount.type](date),
+                type: daysCount.type
+              });
+            }
+            return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: days } });
+          },
+          generateMonths() {
+            let months = [];
+            if (!this.$store.state.GanttElastic.options.calendar.month.display)
+              return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: [] } });
+            const monthsCount = this.howManyMonthsFit();
+            let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format),
+              currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
+            for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
+              let monthWidth = 0,
+                monthOffset = Number.MAX_SAFE_INTEGER,
+                finalDate = dayjs_min_default()(currentDate)
+                  .add(1, 'month')
+                  .startOf('month');
+              finalDate.valueOf() > this.$store.state.GanttElastic.options.times.lastTime &&
+                (finalDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime));
+              for (let step = 0, len = this.$store.state.GanttElastic.options.times.steps.length; step < len; step++) {
+                let currentStep = this.$store.state.GanttElastic.options.times.steps[step];
+                currentStep.time >= currentDate.valueOf() &&
+                  currentStep.time < finalDate.valueOf() &&
+                  ((monthWidth += currentStep.width.px),
+                  currentStep.offset.px < monthOffset && (monthOffset = currentStep.offset.px));
+              }
+              let choosenFormatName,
+                label = '';
+              for (let formatName of formatNames)
+                this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth &&
+                  ((label = this.$store.state.GanttElastic.options.calendar.month.format[formatName](
+                    currentDate.toDate()
+                  )),
+                  (choosenFormatName = formatName));
+              let textWidth = 0;
+              void 0 !== this.$store.state.GanttElastic.options.calendar.month.widths[monthIndex] &&
+                (textWidth = this.$store.state.GanttElastic.options.calendar.month.widths[monthIndex][
+                  choosenFormatName
+                ]);
+              let x = monthOffset;
+              months.push({
+                index: monthIndex,
+                key: monthIndex + 'm',
+                x: x,
+                y: 0,
+                width: monthWidth,
+                textWidth: textWidth,
+                type: choosenFormatName,
+                height: this.$store.state.GanttElastic.options.calendar.month.height,
+                label: label
+              }),
+                (currentDate = currentDate.add(1, 'month').startOf('month')).valueOf() >
+                  this.$store.state.GanttElastic.options.times.lastDate &&
+                  (currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastDate));
+            }
+            return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: months } });
+          },
+          regenerate() {
+            this.generateHours(), this.generateDays(), this.generateMonths(), this.root.calculateCalendarDimensions();
+          }
+        },
+        computed: {
+          getWidth() {
+            return this.$store.state.GanttElastic.options.width;
+          },
+          monthsStyle() {
+            return this.root.mergeDeep(
+              {},
+              this.$store.state.GanttElastic.options.calendar.styles.row,
+              this.$store.state.GanttElastic.options.calendar.month.style
+            );
+          },
+          daysStyle() {
+            return this.root.mergeDeep(
+              {},
+              this.$store.state.GanttElastic.options.calendar.styles.row,
+              this.$store.state.GanttElastic.options.calendar.day.style
+            );
+          },
+          hoursStyle() {
+            return this.root.mergeDeep(
+              {},
+              this.$store.state.GanttElastic.options.calendar.styles.row,
+              this.$store.state.GanttElastic.options.calendar.hour.style
+            );
+          },
+          getDays() {
+            return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+          },
+          getHours() {
+            return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+          },
+          getMonths() {
+            return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+          }
+        }
+      },
+      Calendarvue_type_template_id_dee108e2_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Calendar_component.options.__file = 'src/components/Calendar/Calendar.vue';
+    var Calendar = Calendar_component.exports,
+      DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'svg',
+          {
+            staticClass: 'gantt-elastic__chart-dependency-lines-container',
+            style: _vm.root.style('chart-dependency-lines-container'),
+            attrs: { x: '0', y: '0', width: '100%', height: '100%' }
+          },
+          _vm._l(_vm.dependencyTasks, function(task) {
+            return _c(
+              'g',
+              { key: task.id, attrs: { task: task } },
+              _vm._l(task.dependencyLines, function(dependencyLine) {
+                return _c('path', {
+                  key: dependencyLine.id,
+                  staticClass: 'gantt-elastic__chart-dependency-lines-path',
+                  style: _vm.root.style('chart-dependency-lines-path', task.style['chart-dependency-lines-path']),
+                  attrs: { task: task, d: dependencyLine.points }
+                });
+              }),
+              0
+            );
+          }),
+          0
+        );
+      };
+    DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = !0;
+    var DependencyLines_component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['tasks'],
+        data: () => ({}),
+        methods: {
+          getPoints(fromTaskId, toTaskId) {
+            const fromTask = this.root.getTask(fromTaskId),
+              toTask = this.root.getTask(toTaskId);
+            if (
+              null === fromTask ||
+              null === toTask ||
+              !this.root.isTaskVisible(toTask) ||
+              !this.root.isTaskVisible(fromTask)
+            )
+              return null;
+            const startX = fromTask.x + fromTask.width,
+              startY = fromTask.y + fromTask.height / 2,
+              stopX = toTask.x,
+              stopY = toTask.y + toTask.height / 2,
+              distanceX = stopX - startX;
+            let distanceY,
+              yMultiplier = 1;
+            stopY >= startY ? (distanceY = stopY - startY) : ((distanceY = startY - stopY), (yMultiplier = -1));
+            let points = `M ${startX} ${startY}\n          L ${startX + 10},${startY} `;
+            return (points +=
+              distanceX <= 14
+                ? `Q ${startX + 10 + 4},${startY} ${startX + 10 + 4},${startY +
+                    4 * yMultiplier}\n            L ${startX + 10 + 4},${startY +
+                    (distanceY * yMultiplier) / 2 -
+                    4 * yMultiplier}\n            Q ${startX + 10 + 4},${startY +
+                    (distanceY * yMultiplier) / 2} ${startX + 10},${startY +
+                    (distanceY * yMultiplier) / 2}\n            L ${startX - 10 + distanceX},${startY +
+                    (distanceY * yMultiplier) / 2}\n            Q ${startX - 10 + distanceX - 4},${startY +
+                    (distanceY * yMultiplier) / 2} ${startX - 10 + distanceX - 4},${startY +
+                    (distanceY * yMultiplier) / 2 +
+                    4 * yMultiplier}\n            L ${startX - 10 + distanceX - 4},${stopY -
+                    4 * yMultiplier}\n            Q ${startX - 10 + distanceX - 4},${stopY} ${startX -
+                    10 +
+                    distanceX},${stopY}\n            L ${stopX},${stopY}`
+                : `L ${startX + distanceX / 2 - 4},${startY}\n            Q ${startX +
+                    distanceX / 2},${startY} ${startX + distanceX / 2},${startY +
+                    4 * yMultiplier}\n            L ${startX + distanceX / 2},${stopY -
+                    4 * yMultiplier}\n            Q ${startX + distanceX / 2},${stopY} ${startX +
+                    distanceX / 2 +
+                    4},${stopY}\n            L ${stopX},${stopY}`);
+          }
+        },
+        computed: {
+          dependencyTasks() {
+            return this.tasks
+              .filter(task => void 0 !== task.dependentOn)
+              .map(task => {
+                const props = { id: task.id };
+                return (
+                  (props.dependencyLines = task.dependentOn.map(id => ({ points: this.getPoints(id, task.id) }))),
+                  this.$store.commit(this.root.updateTaskMut, props),
+                  task
+                );
+              })
+              .filter(task => null !== task.dependencyLines.points);
+          }
+        }
+      },
+      DependencyLinesvue_type_template_id_f1cbf6ba_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    DependencyLines_component.options.__file = 'src/components/Chart/DependencyLines.vue';
+    var DependencyLines = DependencyLines_component.exports,
+      Taskvue_type_template_id_e9c23eca_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'g',
+          {
+            staticClass: 'gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper',
+            style: _vm.root.style(
+              'chart-row-bar-wrapper',
+              'chart-row-task-wrapper',
+              _vm.task.style['chart-row-bar-wrapper']
+            )
+          },
+          [
+            _vm.displayExpander
+              ? _c(
+                  'foreignObject',
+                  {
+                    staticClass: 'gantt-elastic__chart-expander gantt-elastic__chart-expander--task',
+                    style: _vm.root.style('chart-expander', 'chart-expander--task', _vm.task.style['chart-expander']),
+                    attrs: {
+                      x:
+                        _vm.task.x -
+                        _vm.$store.state.GanttElastic.options.chart.expander.offset -
+                        _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      y:
+                        _vm.task.y +
+                        (_vm.$store.state.GanttElastic.options.row.height -
+                          _vm.$store.state.GanttElastic.options.chart.expander.size) /
+                          2,
+                      width: _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      height: _vm.$store.state.GanttElastic.options.chart.expander.size
+                    }
+                  },
+                  [
+                    _c('expander', {
+                      attrs: { tasks: [_vm.task], options: _vm.$store.state.GanttElastic.options.chart.expander }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(' '),
+            _c(
+              'svg',
+              {
+                staticClass: 'gantt-elastic__chart-row-bar gantt-elastic__chart-row-task',
+                style: _vm.root.style('chart-row-bar', 'chart-row-task', _vm.task.style['chart-row-bar']),
+                attrs: {
+                  x: _vm.task.x,
+                  y: _vm.task.y,
+                  width: _vm.task.width,
+                  height: _vm.task.height,
+                  viewBox: '0 0 ' + _vm.task.width + ' ' + _vm.task.height,
+                  xmlns: 'http://www.w3.org/2000/svg'
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.emitEvent('click', $event);
+                  },
+                  mouseenter: function($event) {
+                    return _vm.emitEvent('mouseenter', $event);
+                  },
+                  mouseover: function($event) {
+                    return _vm.emitEvent('mouseover', $event);
+                  },
+                  mouseout: function($event) {
+                    return _vm.emitEvent('mouseout', $event);
+                  },
+                  mousemove: function($event) {
+                    return _vm.emitEvent('mousemove', $event);
+                  },
+                  mousedown: function($event) {
+                    return _vm.emitEvent('mousedown', $event);
+                  },
+                  mouseup: function($event) {
+                    return _vm.emitEvent('mouseup', $event);
+                  },
+                  mousewheel: function($event) {
+                    return _vm.emitEvent('mousewheel', $event);
+                  },
+                  touchstart: function($event) {
+                    return _vm.emitEvent('touchstart', $event);
+                  },
+                  touchmove: function($event) {
+                    return _vm.emitEvent('touchmove', $event);
+                  },
+                  touchend: function($event) {
+                    return _vm.emitEvent('touchend', $event);
+                  }
+                }
+              },
+              [
+                _c('defs', [
+                  _c('clipPath', { attrs: { id: _vm.clipPathId } }, [
+                    _c('polygon', { attrs: { points: _vm.getPoints } })
+                  ])
+                ]),
+                _vm._v(' '),
+                _c('polygon', {
+                  staticClass: 'gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon',
+                  style: _vm.root.style(
+                    'chart-row-bar-polygon',
+                    'chart-row-task-polygon',
+                    _vm.task.style.base,
+                    _vm.task.style['chart-row-bar-polygon']
+                  ),
+                  attrs: { points: _vm.getPoints }
+                }),
+                _vm._v(' '),
+                _c('progress-bar', { attrs: { task: _vm.task, 'clip-path': 'url(#' + _vm.clipPathId + ')' } })
+              ],
+              1
+            ),
+            _vm._v(' '),
+            _vm.$store.state.GanttElastic.options.chart.text.display
+              ? _c('chart-text', { attrs: { task: _vm.task } })
+              : _vm._e()
+          ],
+          1
+        );
+      };
+    Taskvue_type_template_id_e9c23eca_render._withStripped = !0;
+    var Textvue_type_template_id_459c2fe4_render = function() {
+      var _vm = this,
+        _h = _vm.$createElement,
+        _c = _vm._self._c || _h;
+      return _c(
+        'svg',
+        {
+          staticClass: 'gantt-elastic__chart-row-text-wrapper',
+          style: _vm.root.style('chart-row-text-wrapper'),
+          attrs: {
+            x: _vm.task.x + _vm.task.width + _vm.$store.state.GanttElastic.options.chart.text.offset,
+            y: _vm.task.y - _vm.$store.state.GanttElastic.options.chart.grid.horizontal.gap,
+            width: _vm.getWidth,
+            height: _vm.getHeight
+          }
+        },
+        [
+          _c('foreignObject', { attrs: { x: '0', y: '0', width: '100%', height: _vm.getHeight } }, [
+            _c(
+              'div',
+              {
+                staticClass: 'gantt-elastic__chart-row-text',
+                style: _vm.root.style('chart-row-text'),
+                attrs: { xmlns: 'http://www.w3.org/1999/xhtml' }
+              },
+              [
+                _vm.html
+                  ? _vm._e()
+                  : _c(
+                      'div',
+                      {
+                        staticClass:
+                          'gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text',
+                        style: Object.assign(
+                          {},
+                          _vm.root.style('chart-row-text-content', 'chart-row-text-content--text'),
+                          _vm.contentStyle
+                        )
+                      },
+                      [_c('div', [_vm._v(_vm._s(_vm.task.label))])]
+                    ),
+                _vm._v(' '),
+                _vm.html
+                  ? _c('div', {
+                      staticClass: 'gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html',
+                      style: Object.assign(
+                        {},
+                        _vm.root.style('chart-row-text-content', 'chart-row-text-content--html'),
+                        _vm.contentStyle
+                      ),
+                      domProps: { innerHTML: _vm._s(_vm.task.label) }
+                    })
+                  : _vm._e()
+              ]
+            )
+          ])
+        ],
+        1
+      );
+    };
+    Textvue_type_template_id_459c2fe4_render._withStripped = !0;
+    var Text_component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['task'],
+        data: () => ({}),
+        computed: {
+          getWidth() {
+            const textStyle = this.root.style('chart-row-text');
+            return (
+              (this.$store.state.GanttElastic.options.ctx.font = `${textStyle['font-weight']} ${
+                textStyle['font-size']
+              } ${textStyle['font-family']}`),
+              this.$store.state.GanttElastic.options.ctx.measureText(this.task.label).width +
+                2 * this.$store.state.GanttElastic.options.chart.text.xPadding
+            );
+          },
+          getHeight() {
+            return this.task.height + 2 * this.$store.state.GanttElastic.options.chart.grid.horizontal.gap;
+          },
+          contentStyle() {
+            return { height: '100%', 'line-height': this.getHeight + 'px' };
+          },
+          html() {
+            const cols = this.$store.state.GanttElastic.options.taskList.columns;
+            for (let i = 0, len = cols.length; i < len; i++) {
+              const col = cols[i];
+              if ('label' === col.value && void 0 !== col.html && col.html) return !0;
+            }
+            return !1;
+          }
+        }
+      },
+      Textvue_type_template_id_459c2fe4_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Text_component.options.__file = 'src/components/Chart/Text.vue';
+    var Text = Text_component.exports,
+      ProgressBarvue_type_template_id_4bc39355_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'g',
+          {
+            staticClass: 'gantt-elastic__chart-row-progress-bar-wrapper',
+            style: _vm.root.style('chart-row-progress-bar-wrapper', _vm.task.style['chart-row-progress-bar-wrapper'])
+          },
+          [
+            _c('defs', [
+              _c(
+                'pattern',
+                {
+                  attrs: {
+                    id: 'diagonalHatch',
+                    width: _vm.$store.state.GanttElastic.options.chart.progress.width,
+                    height: _vm.$store.state.GanttElastic.options.chart.progress.width,
+                    patternTransform: 'rotate(45 0 0)',
+                    patternUnits: 'userSpaceOnUse'
+                  }
+                },
+                [
+                  _c('line', {
+                    staticClass: 'chart-row-progress-bar-line',
+                    style: _vm.root.style('chart-row-progress-bar-line', _vm.task.style['chart-row-progress-bar-line']),
+                    attrs: { x1: '0', y1: '0', x2: '0', y2: _vm.$store.state.GanttElastic.options.chart.progress.width }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(' '),
+            _vm.$store.state.GanttElastic.options.chart.progress.bar
+              ? _c('rect', {
+                  staticClass: 'gantt-elastic__chart-row-progress-bar-solid',
+                  style: _vm.root.style('chart-row-progress-bar-solid', _vm.task.style['chart-row-progress-bar-solid']),
+                  attrs: { x: '0', y: '0', width: _vm.getProgressWidth }
+                })
+              : _vm._e(),
+            _vm._v(' '),
+            _vm.$store.state.GanttElastic.options.chart.progress.pattern
+              ? _c('g', [
+                  _c('rect', {
+                    staticClass: 'gantt-elastic__chart-row-progress-bar-pattern',
+                    style: _vm.root.style(
+                      'chart-row-progress-bar-pattern',
+                      _vm.task.style['chart-row-progress-bar-pattern']
+                    ),
+                    attrs: { x: _vm.getProgressWidth, y: '0', width: 100 - _vm.task.progress + '%', height: '100%' }
+                  }),
+                  _vm._v(' '),
+                  _c('path', {
+                    staticClass: 'gantt-elastic__chart-row-progress-bar-outline',
+                    style: _vm.root.style(
+                      'chart-row-progress-bar-outline',
+                      _vm.task.style.base,
+                      _vm.task.style['chart-row-progress-bar-outline']
+                    ),
+                    attrs: { d: _vm.getLinePoints }
+                  })
+                ])
+              : _vm._e()
+          ]
+        );
+      };
+    ProgressBarvue_type_template_id_4bc39355_render._withStripped = !0;
+    var ProgressBar_component = normalizeComponent(
+      {
+        inject: ['root'],
+        props: ['task'],
+        data: () => ({}),
+        computed: {
+          getProgressWidth() {
+            return this.task.progress + '%';
+          },
+          getLinePoints() {
+            const start = (this.task.width / 100) * this.task.progress;
+            return `M ${start} 0 L ${start} ${this.task.height}`;
+          },
+          getSolidStyle() {
+            return Object.assign(
+              {},
+              this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid,
+              this.task.progressBarStyle.bar
+            );
+          },
+          getLineStyle() {
+            return Object.assign(
+              {},
+              {
+                stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + 'a0',
+                'stroke-width': this.$store.state.GanttElastic.options.row.styles.bar['stroke-width'] / 2
+              },
+              this.task.style
+            );
+          }
+        }
+      },
+      ProgressBarvue_type_template_id_4bc39355_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    ProgressBar_component.options.__file = 'src/components/Chart/ProgressBar.vue';
+    var ProgressBar = ProgressBar_component.exports,
+      Task_component = normalizeComponent(
+        {
+          components: { ChartText: Text, ProgressBar: ProgressBar, Expander: Expander },
+          inject: ['root'],
+          props: ['task'],
+          data: () => ({}),
+          computed: {
+            clipPathId() {
+              return 'gantt-elastic__task-clip-path-' + this.task.id;
+            },
+            getViewBox() {
+              const task = this.task;
+              return `0 0 ${task.width} ${task.height}`;
+            },
+            getGroupTransform() {
+              return `translate(${this.task.x} ${this.task.y})`;
+            },
+            getPoints() {
+              const task = this.task;
+              return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
+            },
+            displayExpander() {
+              const expander = this.$store.state.GanttElastic.options.chart.expander;
+              return (
+                expander.display ||
+                (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+              );
+            }
+          },
+          methods: {
+            emitEvent(eventName, event) {
+              this.$store.state.GanttElastic.options.scroll.scrolling ||
+                this.root.$emit(`chart-${this.task.type}-${eventName}`, { event: event, data: this.task });
+            }
+          }
+        },
+        Taskvue_type_template_id_e9c23eca_render,
+        [],
+        !1,
+        null,
+        null,
+        null
+      );
+    Task_component.options.__file = 'src/components/Chart/Row/Task.vue';
+    var Task = Task_component.exports,
+      Milestonevue_type_template_id_3013006c_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'g',
+          {
+            staticClass: 'gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper',
+            style: _vm.root.style(
+              'chart-row-bar-wrapper',
+              'chart-row-milestone-wrapper',
+              _vm.task.style['chart-row-bar-wrapper']
+            )
+          },
+          [
+            _vm.displayExpander
+              ? _c(
+                  'foreignObject',
+                  {
+                    staticClass: 'gantt-elastic__chart-expander gantt-elastic__chart-expander--milestone',
+                    style: _vm.root.style(
+                      'chart-expander',
+                      'chart-expander--milestone',
+                      _vm.task.style['chart-expander']
+                    ),
+                    attrs: {
+                      x:
+                        _vm.task.x -
+                        _vm.$store.state.GanttElastic.options.chart.expander.offset -
+                        _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      y:
+                        _vm.task.y +
+                        (_vm.$store.state.GanttElastic.options.row.height -
+                          _vm.$store.state.GanttElastic.options.chart.expander.size) /
+                          2,
+                      width: _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      height: _vm.$store.state.GanttElastic.options.chart.expander.size
+                    }
+                  },
+                  [
+                    _c('expander', {
+                      attrs: { tasks: [_vm.task], options: _vm.$store.state.GanttElastic.options.chart.expander }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(' '),
+            _c(
+              'svg',
+              {
+                staticClass: 'gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone',
+                style: _vm.root.style('chart-row-bar', 'chart-row-milestone', _vm.task.style['chart-row-bar']),
+                attrs: {
+                  x: _vm.task.x,
+                  y: _vm.task.y,
+                  width: _vm.task.width,
+                  height: _vm.task.height,
+                  viewBox: '0 0 ' + _vm.task.width + ' ' + _vm.task.height,
+                  xmlns: 'http://www.w3.org/2000/svg'
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.emitEvent('click', $event);
+                  },
+                  mouseenter: function($event) {
+                    return _vm.emitEvent('mouseenter', $event);
+                  },
+                  mouseover: function($event) {
+                    return _vm.emitEvent('mouseover', $event);
+                  },
+                  mouseout: function($event) {
+                    return _vm.emitEvent('mouseout', $event);
+                  },
+                  mousemove: function($event) {
+                    return _vm.emitEvent('mousemove', $event);
+                  },
+                  mousedown: function($event) {
+                    return _vm.emitEvent('mousedown', $event);
+                  },
+                  mouseup: function($event) {
+                    return _vm.emitEvent('mouseup', $event);
+                  },
+                  mousewheel: function($event) {
+                    return _vm.emitEvent('mousewheel', $event);
+                  },
+                  touchstart: function($event) {
+                    return _vm.emitEvent('touchstart', $event);
+                  },
+                  touchmove: function($event) {
+                    return _vm.emitEvent('touchmove', $event);
+                  },
+                  touchend: function($event) {
+                    return _vm.emitEvent('touchend', $event);
+                  }
+                }
+              },
+              [
+                _c('defs', [
+                  _c('clipPath', { attrs: { id: _vm.clipPathId } }, [
+                    _c('polygon', { attrs: { points: _vm.getPoints } })
+                  ])
+                ]),
+                _vm._v(' '),
+                _c('polygon', {
+                  staticClass: 'gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon',
+                  style: _vm.root.style(
+                    'chart-row-bar-polygon',
+                    'chart-row-milestone-polygon',
+                    _vm.task.style.base,
+                    _vm.task.style['chart-row-bar-polygon']
+                  ),
+                  attrs: { points: _vm.getPoints }
+                }),
+                _vm._v(' '),
+                _c('progress-bar', { attrs: { task: _vm.task, 'clip-path': 'url(#' + _vm.clipPathId + ')' } })
+              ],
+              1
+            ),
+            _vm._v(' '),
+            _vm.$store.state.GanttElastic.options.chart.text.display
+              ? _c('chart-text', { attrs: { task: _vm.task } })
+              : _vm._e()
+          ],
+          1
+        );
+      };
+    Milestonevue_type_template_id_3013006c_render._withStripped = !0;
+    var Milestone_component = normalizeComponent(
+      {
+        components: { ChartText: Text, ProgressBar: ProgressBar, Expander: Expander },
+        inject: ['root'],
+        props: ['task'],
+        data: () => ({}),
+        computed: {
+          clipPathId() {
+            return 'gantt-elastic__milestone-clip-path-' + this.task.id;
+          },
+          getViewBox() {
+            return `0 0 ${this.task.width} ${this.task.height}`;
+          },
+          getGroupTransform() {
+            return `translate(${this.task.x} ${this.task.y})`;
+          },
+          getPoints() {
+            const task = this.task,
+              fifty = task.height / 2;
+            let offset = fifty;
+            return (
+              task.width / 2 - offset < 0 && (offset = task.width / 2),
+              `0,${fifty}\n        ${offset},0\n        ${task.width - offset},0\n        ${
+                task.width
+              },${fifty}\n        ${task.width - offset},${task.height}\n        ${offset},${task.height}`
+            );
+          },
+          displayExpander() {
+            const expander = this.$store.state.GanttElastic.options.chart.expander;
+            return (
+              expander.display ||
+              (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+            );
+          }
+        },
+        methods: {
+          emitEvent(eventName, event) {
+            this.$store.state.GanttElastic.options.scroll.scrolling ||
+              this.root.$emit(`chart-${this.task.type}-${eventName}`, { event: event, data: this.task });
+          }
+        }
+      },
+      Milestonevue_type_template_id_3013006c_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Milestone_component.options.__file = 'src/components/Chart/Row/Milestone.vue';
+    var Milestone = Milestone_component.exports,
+      Projectvue_type_template_id_077bbd73_render = function() {
+        var _vm = this,
+          _h = _vm.$createElement,
+          _c = _vm._self._c || _h;
+        return _c(
+          'g',
+          {
+            staticClass: 'gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper',
+            style: _vm.root.style(
+              'chart-row-bar-wrapper',
+              _vm.root.style('chart-row-project-wrapper'),
+              _vm.task.style['chart-row-bar-wrapper']
+            )
+          },
+          [
+            _vm.displayExpander
+              ? _c(
+                  'foreignObject',
+                  {
+                    staticClass: 'gantt-elastic__chart-expander gantt-elastic__chart-expander--project',
+                    style: _vm.root.style(
+                      'chart-expander',
+                      'chart-expander--project',
+                      _vm.task.style['chart-expander']
+                    ),
+                    attrs: {
+                      x:
+                        _vm.task.x -
+                        _vm.$store.state.GanttElastic.options.chart.expander.offset -
+                        _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      y:
+                        _vm.task.y +
+                        (_vm.$store.state.GanttElastic.options.row.height -
+                          _vm.$store.state.GanttElastic.options.chart.expander.size) /
+                          2,
+                      width: _vm.$store.state.GanttElastic.options.chart.expander.size,
+                      height: _vm.$store.state.GanttElastic.options.chart.expander.size
+                    }
+                  },
+                  [
+                    _c('expander', {
+                      attrs: { tasks: [_vm.task], options: _vm.$store.state.GanttElastic.options.chart.expander }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(' '),
+            _c(
+              'svg',
+              {
+                staticClass: 'gantt-elastic__chart-row-bar gantt-elastic__chart-row-project',
+                style: _vm.root.style('chart-row-bar', 'chart-row-project', _vm.task.style['chart-row-bar']),
+                attrs: {
+                  x: _vm.task.x,
+                  y: _vm.task.y,
+                  width: _vm.task.width,
+                  height: _vm.task.height,
+                  viewBox: '0 0 ' + _vm.task.width + ' ' + _vm.task.height,
+                  xmlns: 'http://www.w3.org/2000/svg'
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.emitEvent('click', $event);
+                  },
+                  mouseenter: function($event) {
+                    return _vm.emitEvent('mouseenter', $event);
+                  },
+                  mouseover: function($event) {
+                    return _vm.emitEvent('mouseover', $event);
+                  },
+                  mouseout: function($event) {
+                    return _vm.emitEvent('mouseout', $event);
+                  },
+                  mousemove: function($event) {
+                    return _vm.emitEvent('mousemove', $event);
+                  },
+                  mousedown: function($event) {
+                    return _vm.emitEvent('mousedown', $event);
+                  },
+                  mouseup: function($event) {
+                    return _vm.emitEvent('mouseup', $event);
+                  },
+                  mousewheel: function($event) {
+                    return _vm.emitEvent('mousewheel', $event);
+                  },
+                  touchstart: function($event) {
+                    return _vm.emitEvent('touchstart', $event);
+                  },
+                  touchmove: function($event) {
+                    return _vm.emitEvent('touchmove', $event);
+                  },
+                  touchend: function($event) {
+                    return _vm.emitEvent('touchend', $event);
+                  }
+                }
+              },
+              [
+                _c('defs', [
+                  _c('clipPath', { attrs: { id: _vm.clipPathId } }, [_c('path', { attrs: { d: _vm.getPoints } })])
+                ]),
+                _vm._v(' '),
+                _c('path', {
+                  staticClass: 'gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon',
+                  style: _vm.root.style(
+                    'chart-row-bar-polygon',
+                    'chart-row-project-polygon',
+                    _vm.task.style.base,
+                    _vm.task.style['chart-row-bar-polygon']
+                  ),
+                  attrs: { d: _vm.getPoints }
+                }),
+                _vm._v(' '),
+                _c('progress-bar', { attrs: { task: _vm.task, 'clip-path': 'url(#' + _vm.clipPathId + ')' } })
+              ],
+              1
+            ),
+            _vm._v(' '),
+            _vm.$store.state.GanttElastic.options.chart.text.display
+              ? _c('chart-text', { attrs: { task: _vm.task } })
+              : _vm._e()
+          ],
+          1
+        );
+      };
+    Projectvue_type_template_id_077bbd73_render._withStripped = !0;
+    var Project_component = normalizeComponent(
+      {
+        components: { ChartText: Text, ProgressBar: ProgressBar, Expander: Expander },
+        inject: ['root'],
+        props: ['task'],
+        data: () => ({}),
+        computed: {
+          clipPathId() {
+            return 'gantt-elastic__project-clip-path-' + this.task.id;
+          },
+          getViewBox() {
+            return `0 0 ${this.task.width} ${this.task.height}`;
+          },
+          getGroupTransform() {
+            return `translate(${this.task.x} ${this.task.y})`;
+          },
+          getPoints() {
+            const task = this.task,
+              bottom = task.height - task.height / 4,
+              corner = task.height / 6,
+              smallCorner = task.height / 8;
+            return `M ${smallCorner},0\n                L ${task.width - smallCorner} 0\n                L ${
+              task.width
+            } ${smallCorner}\n                L ${task.width} ${bottom}\n                L ${task.width - corner} ${
+              task.height
+            }\n                L ${task.width - 2 * corner} ${bottom}\n                L ${2 *
+              corner} ${bottom}\n                L ${corner} ${
+              task.height
+            }\n                L 0 ${bottom}\n                L 0 ${smallCorner}\n                Z\n        `;
+          },
+          displayExpander() {
+            const expander = this.$store.state.GanttElastic.options.chart.expander;
+            return (
+              expander.display ||
+              (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+            );
+          }
+        },
+        methods: {
+          emitEvent(eventName, event) {
+            this.$store.state.GanttElastic.options.scroll.scrolling ||
+              this.root.$emit(`chart-${this.task.type}-${eventName}`, { event: event, data: this.task });
+          }
+        }
+      },
+      Projectvue_type_template_id_077bbd73_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Project_component.options.__file = 'src/components/Chart/Row/Project.vue';
+    var Chart_component = normalizeComponent(
+      {
+        components: {
+          Grid: Grid,
+          DependencyLines: DependencyLines,
+          Calendar: Calendar,
+          Task: Task,
+          Milestone: Milestone,
+          Project: Project_component.exports,
+          DaysHighlight: DaysHighlight
+        },
+        inject: ['root'],
+        data: () => ({ moving: !1 }),
+        mounted() {
+          this.$store.commit(this.root.updateOptionsMut, {
+            refs: { chart: this.$refs.chart, chartGraph: this.$refs.chartGraph }
+          });
+        },
+        computed: {
+          getWidth() {
+            return this.$store.state.GanttElastic.options.width;
+          },
+          getHeight() {
+            return this.$store.state.GanttElastic.options.height;
+          },
+          getViewBox() {
+            return `0 0 ${Math.round(this.getWidth)} ${this.$store.state.GanttElastic.options.allVisibleTasksHeight}`;
+          }
+        }
+      },
+      Chartvue_type_template_id_67c3f5cd_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    Chart_component.options.__file = 'src/components/Chart/Chart.vue';
+    var MainView_component = normalizeComponent(
+      {
+        components: { TaskList: TaskList, Chart: Chart_component.exports },
+        inject: ['root'],
+        props: ['tasks', 'options'],
+        data: () => ({
+          defs: '',
+          mousePos: {
+            x: 0,
+            y: 0,
+            movementX: 0,
+            movementY: 0,
+            lastX: 0,
+            lastY: 0,
+            positiveX: 0,
+            positiveY: 0,
+            currentX: 0,
+            currentY: 0
+          }
+        }),
+        mounted() {
+          (this.viewBoxWidth = this.$el.clientWidth),
+            this.$store.commit(this.root.updateOptionsMut, {
+              refs: {
+                mainView: this.$refs.mainView,
+                svgChart: this.$refs.svgChart,
+                chartContainer: this.$refs.chartContainer,
+                taskList: this.$refs.taskList,
+                chartScrollContainerHorizontal: this.$refs.chartScrollContainerHorizontal,
+                chartScrollContainerVertical: this.$refs.chartScrollContainerVertical
+              }
+            }),
+            document.addEventListener('mouseup', this.chartMouseUp.bind(this)),
+            document.addEventListener('mousemove', this.chartMouseMove.bind(this)),
+            document.addEventListener('touchmove', this.chartMouseMove.bind(this)),
+            document.addEventListener('touchend', this.chartMouseUp.bind(this));
+        },
+        computed: {
+          getWidth() {
+            let width = this.$store.state.GanttElastic.options.clientWidth;
+            return width < 0 ? 0 : width;
+          },
+          getMarginLeft() {
+            return this.$store.state.GanttElastic.options.taskList.display
+              ? this.$store.state.GanttElastic.options.taskList.finalWidth + 'px'
+              : '0px';
+          },
+          verticalStyle() {
+            return {
+              width: this.$store.state.GanttElastic.options.scrollBarHeight + 'px',
+              'margin-left': -this.$store.state.GanttElastic.options.scrollBarHeight + 'px',
+              height: this.$store.state.GanttElastic.options.rowsHeight + 'px',
+              'margin-top':
+                this.$store.state.GanttElastic.options.calendar.height +
+                this.$store.state.GanttElastic.options.calendar.gap +
+                'px'
+            };
+          },
+          getViewBox() {
+            return this.$store.state.GanttElastic.options.clientWidth
+              ? `0 0 ${this.$store.state.GanttElastic.options.clientWidth -
+                  this.$store.state.GanttElastic.options.scrollBarHeight} ${
+                  this.$store.state.GanttElastic.options.height
+                }`
+              : `0 0 0 ${this.$store.state.GanttElastic.options.height}`;
+          }
+        },
+        methods: {
+          mouseMove(event) {
+            this.root.$emit('main-view-mousemove', event);
+          },
+          mouseUp(event) {
+            this.root.$emit('main-view-mouseup', event);
+          },
+          onHorizontalScroll(ev) {
+            this.root.$emit('chart-scroll-horizontal', ev);
+          },
+          onVerticalScroll(ev) {
+            this.root.$emit('chart-scroll-vertical', ev);
+          },
+          chartWheel(ev) {
+            this.root.$emit('chart-wheel', ev);
+          },
+          chartMouseDown(ev) {
+            void 0 !== ev.touches &&
+              ((this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX),
+              (this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY),
+              (this.mousePos.movementX = 0),
+              (this.mousePos.movementY = 0),
+              (this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft),
+              (this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop)),
+              this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: !0 } });
+          },
+          chartMouseUp(ev) {
+            this.$store.commit(this.root.updateOptionsMut, { scroll: { scrolling: !1 } });
+          },
+          chartMouseMove(ev) {
+            if (this.$store.state.GanttElastic.options.scroll.scrolling) {
+              ev.preventDefault(), ev.stopImmediatePropagation(), ev.stopPropagation();
+              const touch = void 0 !== ev.touches;
+              let movementX, movementY;
+              if (touch) {
+                const screenX = ev.touches[0].screenX,
+                  screenY = ev.touches[0].screenY;
+                (movementX = this.mousePos.x - screenX),
+                  (movementY = this.mousePos.y - screenY),
+                  (this.mousePos.lastX = screenX),
+                  (this.mousePos.lastY = screenY);
+              } else (movementX = ev.movementX), (movementY = ev.movementY);
+              const horizontal = this.$refs.chartScrollContainerHorizontal,
+                vertical = this.$refs.chartScrollContainerVertical;
+              let x = 0,
+                y = 0;
+              (x = touch
+                ? this.mousePos.currentX + movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier
+                : horizontal.scrollLeft -
+                  movementX * this.$store.state.GanttElastic.options.scroll.dragXMoveMultiplier),
+                (horizontal.scrollLeft = x),
+                (y = touch
+                  ? this.mousePos.currentY +
+                    movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier
+                  : vertical.scrollTop - movementY * this.$store.state.GanttElastic.options.scroll.dragYMoveMultiplier),
+                (vertical.scrollTop = y);
+            }
+          }
+        },
+        beforeDestroy() {
+          document.removeEventListener('mouseup', this.chartMouseUp),
+            document.removeEventListener('mousemove', this.chartMouseMove),
+            document.removeEventListener('touchmove', this.chartMouseMove),
+            document.removeEventListener('touchend', this.chartMouseUp);
+        }
+      },
+      MainViewvue_type_template_id_0bc4212e_render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    MainView_component.options.__file = 'src/components/MainView.vue';
+    var MainView = MainView_component.exports;
+    /**
+     * @fileoverview Styles for gantt-elastic
+     * @license MIT
+     * @author Rafal Pospiech <neuronet.io@gmail.com>
+     * @package GanttElastic
+     */ const fontFamily = 'Arial, sans-serif';
+    var src_style = {
+      '*': { 'box-sizing': 'border-box' },
+      'main-view': { background: '#FFFFFF' },
+      'main-container-wrapper': { overflow: 'hidden' },
+      'main-container': { float: 'left', 'max-width': '100%' },
+      container: { display: 'flex', 'max-width': '100%', height: '100%' },
+      header: {
+        'font-family': fontFamily,
+        margin: '0px auto',
+        background: '#f3f5f747',
+        padding: '10px',
+        overflow: 'hidden',
+        clear: 'both',
+        display: 'flex',
+        'justify-content': 'space-between'
+      },
+      'header-title': { float: 'left' },
+      'header-options': { float: 'right' },
+      'header-title--text': {
+        'font-size': '20px',
+        'vertical-align': 'middle',
+        'font-weight': '400',
+        'line-height': '35px',
+        'padding-left': '22px',
+        'letter-spacing': '1px'
+      },
+      'header-title--html': {
+        'font-size': '20px',
+        'vertical-align': 'middle',
+        'font-weight': '400',
+        'line-height': '35px',
+        'padding-left': '22px',
+        'letter-spacing': '1px'
+      },
+      'header-btn-recenter': {
+        background: '#95A5A6',
+        border: 'none',
+        outline: 'none',
+        cursor: 'pointer',
+        color: 'white',
+        'border-radius': '3px',
+        'margin-right': '27px',
+        'font-size': '16px',
+        padding: '8px 12px'
+      },
+      'header-slider': {},
+      'header-slider-wrapper': { display: 'inline-block', 'vertical-align': 'middle' },
+      'header-slider--slider': {},
+      'header-slider--process': { background: '#ccc' },
+      'header-task-list-switch--label': {},
+      'header-task-list-switch': { margin: '0px 15px', 'vertical-align': 'middle' },
+      'header-label': {},
+      'calendar-wrapper': { 'user-select': 'none' },
+      calendar: { width: '100%', background: '#f3f5f7', display: 'block' },
+      'calendar-row': { display: 'flex' },
+      'calendar-row--month': {},
+      'calendar-row--day': {},
+      'calendar-row--hour': {},
+      'calendar-row-rect': {
+        background: 'transparent',
+        'border-width': '0px',
+        'border-right-width': '1px',
+        'border-color': '#dadada',
+        'border-style': 'solid',
+        'flex-shrink': '0'
+      },
+      'calendar-row-text': { 'font-family': fontFamily, 'font-size': '12px', color: '#606060', 'text-align': 'center' },
+      'calendar-row-rect--month': { 'border-top': '1px solid #dadada' },
+      'calendar-row-text--month': {},
+      'calendar-row-rect--day': {},
+      'calendar-row-text--day': {},
+      'calendar-row-rect--hour': { 'border-bottom': '1px solid #dadada' },
+      'calendar-row-text--hour': {},
+      'task-list-wrapper': {},
+      'task-list': { background: 'transparent', 'border-color': '#eee' },
+      'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },
+      'task-list-header-column': {
+        border: '1px solid #00000050',
+        'border-top': 'none',
+        'border-right': 'none',
+        'box-sizing': 'border-box',
+        display: 'flex',
+        background: '#f3f5f7',
+        'border-color': 'transparent'
+      },
+      'task-list-expander-wrapper': {
+        display: 'inline-flex',
+        'flex-shrink': '0',
+        'box-sizing': 'border-box',
+        margin: '0px 0px 0px 10px'
+      },
+      'task-list-expander-content': {
+        display: 'inline-flex',
+        cursor: 'pointer',
+        margin: 'auto 0px',
+        'box-sizing': 'border-box',
+        'user-select': 'none'
+      },
+      'task-list-expander-line': {
+        fill: 'transparent',
+        stroke: '#000000',
+        'stroke-width': '1',
+        'stroke-linecap': 'round'
+      },
+      'task-list-expander-border': { fill: '#ffffffa0', stroke: '#000000' },
+      'chart-expander-wrapper': { display: 'block', 'line-height': '1', 'box-sizing': 'border-box', margin: '0' },
+      'chart-expander-content': {
+        display: 'inline-flex',
+        cursor: 'pointer',
+        margin: 'auto 0px',
+        'box-sizing': 'border-box',
+        'user-select': 'none'
+      },
+      'chart-expander-line': { fill: 'transparent', stroke: '#000000', 'stroke-width': '1', 'stroke-linecap': 'round' },
+      'chart-expander-border': { fill: '#ffffffa0', stroke: '#000000' },
+      'task-list-container': {},
+      'task-list-header-label': {
+        overflow: 'hidden',
+        'text-overflow': 'ellipsis',
+        'font-family': fontFamily,
+        'font-size': '12px',
+        'box-sizing': 'border-box',
+        margin: 'auto 6px',
+        'flex-grow': '1',
+        'vertical-align': 'middle'
+      },
+      'task-list-header-resizer-wrapper': {
+        background: 'transparent',
+        height: '100%',
+        width: '6px',
+        cursor: 'col-resize',
+        display: 'inline-flex',
+        'vertical-align': 'center'
+      },
+      'task-list-header-resizer': { margin: 'auto 0px' },
+      'task-list-header-resizer-dot': {
+        width: '3px',
+        height: '3px',
+        background: '#ddd',
+        'border-radius': '100%',
+        margin: '4px 0px'
+      },
+      'task-list-items': { overflow: 'hidden' },
+      'task-list-item': {
+        'border-top': '1px solid #eee',
+        'border-right': '1px solid #eee',
+        'box-sizing': 'border-box',
+        display: 'flex',
+        background: 'transparent'
+      },
+      'task-list-item-column': {
+        display: 'inline-flex',
+        'flex-shrink': '0',
+        'border-left': '1px solid #00000050',
+        'box-sizing': 'border-box',
+        'border-color': '#eee'
+      },
+      'task-list-item-value-wrapper': { overflow: 'hidden', display: 'flex', width: '100%' },
+      'task-list-item-value-container': { margin: 'auto 0px', overflow: 'hidden' },
+      'task-list-item-value': {
+        display: 'block',
+        'flex-shrink': '100',
+        'font-family': fontFamily,
+        'font-size': '12px',
+        'margin-top': 'auto',
+        'margin-bottom': 'auto',
+        'margin-left': '6px',
+        'margin-right': '6px',
+        overflow: 'hidden',
+        'text-overflow': 'ellipsis',
+        'line-height': '1.5em',
+        'word-break': 'keep-all',
+        'white-space': 'nowrap',
+        color: '#606060',
+        background: '#FFFFFF'
+      },
+      'grid-lines': {},
+      'grid-line-horizontal': { stroke: '#00000010', 'stroke-width': 1 },
+      'grid-line-vertical': { stroke: '#00000010', 'stroke-width': 1 },
+      'grid-line-time': { stroke: '#FF000080', 'stroke-width': 1 },
+      chart: { 'user-select': 'none', overflow: 'hidden' },
+      'chart-area': {},
+      'chart-graph': { overflow: 'hidden' },
+      'chart-row-text-wrapper': {},
+      'chart-row-text': {
+        background: '#ffffffa0',
+        'border-radius': '10px',
+        'font-family': fontFamily,
+        'font-size': '12px',
+        'font-weight': 'normal',
+        color: '#000000a0',
+        height: '100%',
+        display: 'inline-block'
+      },
+      'chart-row-text-content': { padding: '0px 6px' },
+      'chart-row-text-content--text': {},
+      'chart-row-text-content--html': {},
+      'chart-row-wrapper': {},
+      'chart-row-bar-wrapper': {},
+      'chart-row-bar': {},
+      'chart-row-bar-polygon': { stroke: '#E74C3C', 'stroke-width': 1, fill: '#F75C4C' },
+      'chart-row-project-wrapper': {},
+      'chart-row-project': {},
+      'chart-row-project-polygon': {},
+      'chart-row-milestone-wrapper': {},
+      'chart-row-milestone': {},
+      'chart-row-milestone-polygon': {},
+      'chart-row-task-wrapper': {},
+      'chart-row-task': {},
+      'chart-row-task-polygon': {},
+      'chart-row-progress-bar-wrapper': {},
+      'chart-row-progress-bar': {},
+      'chart-row-progress-bar-line': { stroke: '#ffffff25', 'stroke-width': 20 },
+      'chart-row-progress-bar-solid': { fill: '#0EAC51', height: '20%' },
+      'chart-row-progress-bar-pattern': { fill: 'url(#diagonalHatch)', transform: 'translateY(0.1) scaleY(0.8)' },
+      'chart-row-progress-bar-outline': { stroke: '#E74C3C', 'stroke-width': 1 },
+      'chart-dependency-lines-wrapper': {},
+      'chart-dependency-lines-path': { fill: 'transparent', stroke: '#FFa00090', 'stroke-width': 2 },
+      'chart-scroll-container': {},
+      'chart-scroll-container--horizontal': { overflow: 'auto', 'max-width': '100%' },
+      'chart-scroll-container--vertical': {
+        'overflow-y': 'auto',
+        'overflow-x': 'hidden',
+        'max-height': '100%',
+        float: 'right'
+      },
+      'chart-days-highlight-rect': { fill: '#f3f5f780' },
+      'slot-header-beforeOptions': { display: 'inline-block' }
+    };
+    const GanttElasticVuexModule = {
+      state: {
+        tasks: [],
+        options: { scrollBarHeight: 0, allVisibleTasksHeight: 0, refs: {}, tasksById: {}, times: {} }
+      },
+      mutations: {
+        'GanttElastic/updateTasks'(state, tasks) {
+          state.tasks = tasks.map(task => mergeDeepReactive({}, task));
+        },
+        'GanttElastic/updateTask'(state, task) {
+          for (let index = 0, len = state.tasks.length; index < len; index++) {
+            state.tasks[index].id === task.id && mergeDeepReactive(state.tasks[index], task);
+          }
+        },
+        'GanttElastic/updateOptions'(state, payload) {
+          state.options = mergeDeepReactive(state.options, payload);
+        }
+      }
+    };
+    window.GanttElasticVuexModule = GanttElasticVuexModule;
+    var GanttElastic_vuex = GanttElasticVuexModule;
+    __webpack_require__(5);
+    function isObject(item) {
+      return (
+        item &&
+        'object' == typeof item &&
+        !Array.isArray(item) &&
+        !(item instanceof HTMLElement) &&
+        !(item instanceof CanvasRenderingContext2D) &&
+        'function' != typeof item
+      );
+    }
+    function mergeDeep(target, ...sources) {
+      if (!sources.length) return target;
+      const source = sources.shift();
+      if (isObject(target) && isObject(source))
+        for (const key in source)
+          isObject(source[key])
+            ? (void 0 === target[key] && Object.assign(target, { [key]: {} }), mergeDeep(target[key], source[key]))
+            : Array.isArray(source[key])
+            ? (target[key] = source[key].map(item => (isObject(item) ? mergeDeep({}, item) : item)))
+            : 'function' == typeof source[key]
+            ? -1 === source[key].toString().indexOf('[native code]') && (target[key] = source[key])
+            : Object.assign(target, { [key]: source[key] });
+      return mergeDeep(target, ...sources);
+    }
+    function isObservable(obj) {
+      return obj.hasOwnProperty('__ob__');
+    }
+    function mergeDeepReactive(target, ...sources) {
+      if (!sources.length) return isObservable(target) ? target : Vue.observable(target);
+      isObservable(target) || (target = Vue.observable(target));
+      const source = sources.shift();
+      if (isObject(target) && isObject(source))
+        for (const key in source)
+          isObject(source[key])
+            ? (void 0 === target[key] && (isObservable(source[key]) ? (target[key] = source[key]) : (target[key] = {})),
+              mergeDeepReactive(target[key], source[key]))
+            : Array.isArray(source[key])
+            ? Vue.set(target, key, source[key])
+            : 'function' == typeof source[key]
+            ? -1 === source[key].toString().indexOf('[native code]') && (target[key] = source[key])
+            : Vue.set(target, key, source[key]);
+      return mergeDeepReactive(target, ...sources);
+    }
+    function equalDeep(left, right) {
+      if (typeof right != typeof left) return !1;
+      if (Array.isArray(left)) {
+        if (left.length !== right.length) return !1;
+        for (let [index, value] of left.entries()) {
+          if (typeof value != typeof right[index]) return !1;
+          if (isObject(value) || Array.isArray(value)) {
+            if (!equalDeep(value, right[index])) return !1;
+          } else if (value !== right[index]) return !1;
+        }
+      } else
+        for (let key in left) {
+          if (typeof left[key] != typeof right[key]) return !1;
+          if (isObject(left[key]) || Array.isArray(left[key])) {
+            if (!equalDeep(left[key], right[key])) return !1;
+          } else if (left[key] !== right[key]) return !1;
+        }
+      return !0;
+    }
+    function synchronizeDeep(left, right) {
+      for (let key in left)
+        isObject(right[key])
+          ? (left[key] = synchronizeDeep(left[key], right[key]))
+          : Array.isArray(right[key])
+          ? (left[key] = right[key].map(
+              (item, index) => (isObject(item) && (item = synchronizeDeep(mergeDeep({}, left[key][index]), item)), item)
+            ))
+          : (left[key] = right[key]);
+      return left;
+    }
+    const styleCache = {};
+    var src_GanttElasticvue_type_script_lang_js_ = {
+        components: { MainView: MainView },
+        props: ['tasks', 'options'],
+        provide() {
+          const provider = {},
+            self = this;
+          return Object.defineProperty(provider, 'root', { enumerable: !0, get: () => self }), provider;
+        },
+        data: () => ({
+          updateTasksMut: 'GanttElastic/updateTasks',
+          updateTaskMut: 'GanttElastic/updateTask',
+          updateOptionsMut: 'GanttElastic/updateOptions'
+        }),
+        methods: {
+          mergeDeep: mergeDeep,
+          mergeDeepReactive: mergeDeepReactive,
+          getScrollBarHeight() {
+            const outer = document.createElement('div');
+            (outer.style.visibility = 'hidden'),
+              (outer.style.height = '100px'),
+              (outer.style.msOverflowStyle = 'scrollbar'),
+              document.body.appendChild(outer);
+            var noScroll = outer.offsetHeight;
+            outer.style.overflow = 'scroll';
+            var inner = document.createElement('div');
+            (inner.style.height = '100%'), outer.appendChild(inner);
+            var withScroll = inner.offsetHeight;
+            return (
+              outer.parentNode.removeChild(outer),
+              this.$store.commit(this.updateOptionsMut, { scrollBarHeight: noScroll - withScroll })
+            );
+          },
+          style(...mergeWith) {
+            const index = JSON.stringify(mergeWith);
+            if (void 0 !== styleCache[index]) return styleCache[index];
+            let merged = this.$store.state.GanttElastic.options.style['*'];
+            return (
+              mergeWith.forEach(objOrClassName => {
+                'string' == typeof objOrClassName
+                  ? (merged = Object.assign({}, merged, this.$store.state.GanttElastic.options.style[objOrClassName]))
+                  : 'object' == typeof objOrClassName
+                  ? (merged = Object.assign({}, merged, objOrClassName))
+                  : 'function' == typeof objOrClassName && (merged = Object.assign({}, objOrClassName()));
+              }),
+              (styleCache[index] = merged),
+              merged
+            );
+          },
+          refreshTasks: tasks =>
+            (tasks = tasks.map(
+              task => (
+                void 0 === task.x && (task.x = 0),
+                void 0 === task.y && (task.y = 0),
+                void 0 === task.width && (task.width = 0),
+                void 0 === task.height && (task.height = 0),
+                void 0 === task.mouseOver && (task.mouseOver = !1),
+                void 0 === task.collapsed && (task.collapsed = !1),
+                void 0 === task.dependentOn && (task.dependentOn = []),
+                void 0 === task.parentId && (task.parentId = null),
+                void 0 === task.style && (task.style = {}),
+                void 0 === task.children && (task.children = []),
+                void 0 === task.parents && (task.parents = []),
+                void 0 === task.parent && (task.parent = null),
+                void 0 === task.durationMs && (task.durationMs = 1e3 * task.duration),
+                task
+              )
+            )),
+          initialize(itsUpdate = '', data = null) {
+            let tasks, options;
+            if ('' === itsUpdate || 'tasks' === itsUpdate) {
+              (tasks = (tasks = Vue.observable(this.tasks.map(task => this.mergeDeepReactive({}, task)))).map(
+                task => (
+                  (task.startTime = dayjs_min_default()(task.start).valueOf()),
+                  (task.durationMs = 1e3 * task.duration),
+                  (task.endTime = task.startTime + task.durationMs),
+                  task
+                )
+              )),
+                (tasks = this.refreshTasks(tasks));
+              const rootTask = { id: null, parent: null, root: !0, parents: [], children: [], allChildren: [] };
+              (tasks = this.resetTaskTree(tasks)),
+                (tasks = this.makeTaskTree(rootTask, tasks).allChildren.map(
+                  taskId => tasks[tasks.findIndex(task => task.id === taskId)]
+                )),
+                this.$store.commit(this.updateTasksMut, tasks);
+            }
+            '' === itsUpdate
+              ? (options = this.mergeDeep(
+                  {},
+                  (function(userOptions) {
+                    let localeCode = 'en';
+                    return (
+                      void 0 !== userOptions.locale &&
+                        'string' == typeof userOptions.locale.code &&
+                        (localeCode = userOptions.locale.code),
+                      {
+                        style: src_style,
+                        slots: { header: {} },
+                        title: { label: 'gantt-elastic', html: !1 },
+                        width: 0,
+                        height: 0,
+                        clientWidth: 0,
+                        rowsHeight: 0,
+                        allVisibleTasksHeight: 0,
+                        scroll: {
+                          scrolling: !1,
+                          dragXMoveMultiplier: 3,
+                          dragYMoveMultiplier: 2,
+                          top: 0,
+                          taskList: { left: 0, right: 0, top: 0, bottom: 0 },
+                          chart: {
+                            left: 0,
+                            right: 0,
+                            percent: 0,
+                            timePercent: 0,
+                            top: 0,
+                            bottom: 0,
+                            time: 0,
+                            timeCenter: 0,
+                            dateTime: { left: '', right: '' }
+                          }
+                        },
+                        scope: { before: 1, after: 1 },
+                        times: {
+                          timeScale: 6e4,
+                          timeZoom: 17,
+                          timePerPixel: 0,
+                          firstTime: 0,
+                          lastTime: 0,
+                          firstTaskTime: 0,
+                          lastTaskTime: 0,
+                          totalViewDurationMs: 0,
+                          totalViewDurationPx: 0,
+                          stepDuration: 'day',
+                          steps: []
+                        },
+                        row: { height: 24 },
+                        maxRows: 20,
+                        maxHeight: 0,
+                        chart: {
+                          grid: { horizontal: { gap: 6 } },
+                          progress: { width: 20, height: 6, pattern: !0, bar: !1 },
+                          text: { offset: 0, xPadding: 10, display: !0 },
+                          expander: { type: 'chart', display: !1, displayIfTaskListHidden: !0, offset: 4, size: 18 }
+                        },
+                        taskList: {
+                          display: !0,
+                          resizeAfterThreshold: !0,
+                          widthThreshold: 75,
+                          columns: [{ id: 0, label: 'ID', value: 'id', width: 40 }],
+                          resizerWidth: 0,
+                          percent: 100,
+                          width: 0,
+                          finalWidth: 0,
+                          widthFromPercentage: 0,
+                          minWidth: 18,
+                          expander: {
+                            type: 'task-list',
+                            size: 16,
+                            columnWidth: 24,
+                            padding: 16,
+                            margin: 10,
+                            straight: !1
+                          }
+                        },
+                        calendar: {
+                          hours: [],
+                          days: [],
+                          months: [],
+                          workingDays: [1, 2, 3, 4, 5],
+                          gap: 6,
+                          height: 0,
+                          hour: {
+                            height: 20,
+                            display: !0,
+                            widths: [],
+                            maxWidths: {},
+                            format: {
+                              long: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('HH:mm'),
+                              medium: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('HH:mm'),
+                              short: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('HH')
+                            }
+                          },
+                          day: {
+                            height: 20,
+                            display: !0,
+                            widths: [],
+                            maxWidths: {},
+                            format: {
+                              long: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('DD dddd'),
+                              medium: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('DD ddd'),
+                              short: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('DD')
+                            }
+                          },
+                          month: {
+                            height: 20,
+                            display: !0,
+                            widths: [],
+                            maxWidths: {},
+                            format: {
+                              short: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('MM'),
+                              medium: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format("MMM 'YY"),
+                              long: date =>
+                                dayjs_min_default()(date)
+                                  .locale(localeCode)
+                                  .format('MMMM YYYY')
+                            }
+                          }
+                        },
+                        locale: {
+                          code: 'en',
+                          Now: 'Now',
+                          'X-Scale': 'Zoom-X',
+                          'Y-Scale': 'Zoom-Y',
+                          'Task list width': 'Task list',
+                          'Before/After': 'Expand',
+                          'Display task list': 'Show task list'
+                        }
+                      }
+                    );
+                  })(this.options),
+                  this.options
+                ))
+              : 'options' === itsUpdate &&
+                (options = this.mergeDeep({}, this.$store.state.GanttElastic.options, this.options)),
+              ('' !== itsUpdate && 'options' !== itsUpdate) ||
+                ((options.tasksById = {}),
+                dayjs_min_default.a.locale(options.locale, null, !0),
+                (options.taskList.columns = options.taskList.columns.map((column, index) => {
+                  const columnOptions = { thresholdPercent: 100, widthFromPercentage: 0, finalWidth: 0 };
+                  return (
+                    void 0 === column.height && (columnOptions.height = 0),
+                    void 0 === column.style && (columnOptions.style = {}),
+                    (columnOptions._id = `${index}-${column.label}`),
+                    this.mergeDeep({}, column, columnOptions)
+                  );
+                })),
+                '' === itsUpdate && (options.ctx = document.createElement('canvas').getContext('2d')),
+                this.$store.commit(this.updateOptionsMut, options),
+                this.calculateTaskListColumnsDimensions(),
+                this.getScrollBarHeight(),
+                this.$store.commit(this.updateOptionsMut, {
+                  outerHeight:
+                    this.$store.state.GanttElastic.options.height +
+                    this.$store.state.GanttElastic.options.scrollBarHeight
+                })),
+              this.globalOnResize();
+          },
+          getCalendarHeight() {
+            return (
+              this.$store.state.GanttElastic.options.calendar.height +
+              this.style('calendar-row')['border-width'] +
+              this.$store.state.GanttElastic.options.calendar.gap
+            );
+          },
+          calculateCalendarDimensions() {
+            let height = 0;
+            return (
+              this.$store.state.GanttElastic.options.calendar.hour.display &&
+                this.$store.state.GanttElastic.options.calendar.hours.length > 0 &&
+                (height += this.$store.state.GanttElastic.options.calendar.hour.height),
+              this.$store.state.GanttElastic.options.calendar.day.display &&
+                this.$store.state.GanttElastic.options.calendar.days.length > 0 &&
+                (height += this.$store.state.GanttElastic.options.calendar.day.height),
+              this.$store.state.GanttElastic.options.calendar.month.display &&
+                this.$store.state.GanttElastic.options.calendar.months.length > 0 &&
+                (height += this.$store.state.GanttElastic.options.calendar.month.height),
+              this.$store.commit(this.updateOptionsMut, { calendar: { height: height } }),
+              height
+            );
+          },
+          getMaximalLevel() {
+            let maximalLevel = 0;
+            return (
+              this.$store.state.GanttElastic.tasks.forEach(task => {
+                task.parents.length > maximalLevel && (maximalLevel = task.parents.length);
+              }),
+              maximalLevel - 1
+            );
+          },
+          getMaximalExpanderWidth() {
+            return (
+              this.getMaximalLevel() * this.$store.state.GanttElastic.options.taskList.expander.padding +
+              this.$store.state.GanttElastic.options.taskList.expander.margin
+            );
+          },
+          syncScrollTop() {
+            if (this.$store.state.GanttElastic.options.refs.taskListItems) {
+              const scrollTop = this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop;
+              this.$store.commit(this.updateOptionsMut, { scroll: { top: scrollTop } }),
+                (this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = scrollTop),
+                (this.$store.state.GanttElastic.options.refs.chartScrollContainerVertical.scrollTop = scrollTop);
+            }
+          },
+          calculateTaskListColumnsDimensions(columns) {
+            let final = 0,
+              percentage = 0;
+            this.$store.state.GanttElastic.options.taskList.columns.forEach(column => {
+              column.expander
+                ? (column.widthFromPercentage =
+                    ((this.getMaximalExpanderWidth() + column.width) / 100) *
+                    this.$store.state.GanttElastic.options.taskList.percent)
+                : (column.widthFromPercentage =
+                    (column.width / 100) * this.$store.state.GanttElastic.options.taskList.percent),
+                (percentage += column.widthFromPercentage),
+                (column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100),
+                (final += column.finalWidth),
+                (column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width']);
+            }),
+              this.$store.commit(this.updateOptionsMut, {
+                taskList: { widthFromPercentage: percentage, finalWidth: final }
+              }),
+              this.syncScrollTop();
+          },
+          resetTaskTree(tasks) {
+            for (let i = 0, len = tasks.length; i < len; i++) {
+              let task = tasks[i];
+              tasks[i] = Object.assign(task, { children: [], allChildren: [], parent: null, parents: [] });
+            }
+            return tasks;
+          },
+          makeTaskTree(parent, tasks) {
+            return (
+              tasks.forEach(current => {
+                current.parentId === parent.id &&
+                  (parent.parents.length && (current.parents = parent.parents.map(parentId => parentId)),
+                  void 0 === parent.root
+                    ? (current.parents.push(parent.id), (current.parent = parent.id))
+                    : ((current.parents = []), (current.parent = null)),
+                  (current = this.makeTaskTree(current, tasks)),
+                  parent.allChildren.push(current.id),
+                  parent.children.push(current.id),
+                  current.allChildren.forEach(childId => parent.allChildren.push(childId)));
+              }),
+              parent
+            );
+          },
+          getTask(taskId) {
+            for (let i = 0, len = this.$store.state.GanttElastic.tasks.length; i < len; i++) {
+              const current = this.$store.state.GanttElastic.tasks[i];
+              if (current.id === taskId) return current;
+            }
+            return null;
+          },
+          getChildren(taskId) {
+            return this.$store.state.GanttElastic.tasks.filter(task => task.parent === taskId);
+          },
+          isTaskVisible(task) {
+            ('number' != typeof task && 'string' != typeof task) || (task = this.getTask(task));
+            for (let i = 0, len = task.parents.length; i < len; i++)
+              if (this.getTask(task.parents[i]).collapsed) return !1;
+            return !0;
+          },
+          getSVG() {
+            return this.$store.state.GanttElastic.options.mainView.outerHTML;
+          },
+          getImage(type = 'image/png') {
+            return new Promise((resolve, reject) => {
+              const img = new Image();
+              (img.onload = () => {
+                const canvas = document.createElement('canvas');
+                (canvas.width = this.$store.state.GanttElastic.options.mainView.clientWidth),
+                  (canvas.height = this.$store.state.GanttElastic.options.rowsHeight),
+                  canvas.getContext('2d').drawImage(img, 0, 0),
+                  resolve(canvas.toDataURL(type));
+              }),
+                (img.src = 'data:image/svg+xml,' + encodeURIComponent(this.getSVG()));
+            });
+          },
+          getHeight(visibleTasks, outer = !1) {
+            let height =
+              visibleTasks.length *
+                (this.$store.state.GanttElastic.options.row.height +
+                  2 * this.$store.state.GanttElastic.options.chart.grid.horizontal.gap) +
+              this.$store.state.GanttElastic.options.calendar.height +
+              2 * parseFloat(this.style('calendar-row-rect')['border-width']) +
+              this.$store.state.GanttElastic.options.calendar.gap;
+            return outer && (height += this.$store.state.GanttElastic.options.scrollBarHeight), height;
+          },
+          getTaskHeight(withStroke = !1) {
+            return withStroke
+              ? this.$store.state.GanttElastic.options.row.height +
+                  2 * this.$store.state.GanttElastic.options.chart.grid.horizontal.gap +
+                  this.style('grid-line-horizontal')['stroke-width']
+              : this.$store.state.GanttElastic.options.row.height +
+                  2 * this.$store.state.GanttElastic.options.chart.grid.horizontal.gap;
+          },
+          getTasksHeight(visibleTasks, outer = !1) {
+            return visibleTasks.length * this.getTaskHeight();
+          },
+          timeToPixelOffsetX(ms) {
+            let x = ms - this.$store.state.GanttElastic.options.times.firstTime;
+            return x && (x /= this.$store.state.GanttElastic.options.times.timePerPixel), x;
+          },
+          pixelOffsetXToTime(pixelOffsetX) {
+            return (
+              (pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2) *
+                this.$store.state.GanttElastic.options.times.timePerPixel +
+              this.$store.state.GanttElastic.options.times.firstTime
+            );
+          },
+          isInsideViewPort(x, width, buffer = 5e3) {
+            return (
+              (x + width + buffer >= this.$store.state.GanttElastic.options.scroll.chart.left &&
+                x - buffer <= this.$store.state.GanttElastic.options.scroll.chart.right) ||
+              (x - buffer <= this.$store.state.GanttElastic.options.scroll.chart.left &&
+                x + width + buffer >= this.$store.state.GanttElastic.options.scroll.chart.right)
+            );
+          },
+          onScrollChart(ev) {
+            const horizontal = this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal,
+              vertical = this.$store.state.GanttElastic.options.refs.chartScrollContainerVertical;
+            this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
+          },
+          _onScrollChart(left, top) {
+            const chartContainerWidth = this.$store.state.GanttElastic.options.refs.chartContainer.clientWidth,
+              options = {
+                scroll: {
+                  chart: {
+                    left: left,
+                    right: left + chartContainerWidth,
+                    percent: (left / this.$store.state.GanttElastic.options.times.totalViewDurationPx) * 100,
+                    top: top,
+                    time: this.pixelOffsetXToTime(left),
+                    timeCenter: this.pixelOffsetXToTime(left + chartContainerWidth / 2),
+                    dateTime: {
+                      left: this.$store.state.GanttElastic.options.scroll.chart.time,
+                      right: this.pixelOffsetXToTime(
+                        left + this.$store.state.GanttElastic.options.refs.chart.clientWidth
+                      )
+                    }
+                  }
+                }
+              };
+            this.$store.commit(this.updateOptionsMut, options), this.scrollTo(left, top);
+          },
+          scrollToTime(time) {
+            let pos = this.timeToPixelOffsetX(time);
+            const chartContainerWidth = this.$store.state.GanttElastic.options.refs.chartContainer.clientWidth;
+            (pos -= chartContainerWidth / 2) > this.$store.state.GanttElastic.options.width &&
+              (pos = this.$store.state.GanttElastic.options.width - chartContainerWidth),
+              this.scrollTo(pos);
+          },
+          scrollTo(left = null, top = null) {
+            null !== left &&
+              ((this.$store.state.GanttElastic.options.refs.chartContainer.scrollLeft = left),
+              (this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal.scrollLeft = left),
+              this.$store.commit(this.updateOptionsMut, { scroll: { left: left } })),
+              null !== top &&
+                ((this.$store.state.GanttElastic.options.refs.chartScrollContainerVertical.scrollTop = top),
+                (this.$store.state.GanttElastic.options.refs.chartGraph.scrollTop = top),
+                (this.$store.state.GanttElastic.options.refs.taskListItems.scrollTop = top),
+                this.$store.commit(this.updateOptionsMut, { scroll: { top: top } }));
+          },
+          fixScrollPos() {
+            this.$nextTick(() => {
+              this.scrollToTime(this.$store.state.GanttElastic.options.scroll.chart.timeCenter);
+            });
+          },
+          onWheelChart(ev) {
+            if (ev.shiftKey) {
+              let left = this.$store.state.GanttElastic.options.scroll.left + ev.deltaY;
+              const chartClientWidth = this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal
+                  .clientWidth,
+                scrollWidth =
+                  this.$store.state.GanttElastic.options.refs.chartScrollContainerHorizontal.scrollWidth -
+                  chartClientWidth;
+              left < 0 ? (left = 0) : left > scrollWidth && (left = scrollWidth), this.scrollTo(left);
+            } else {
+              let top = this.$store.state.GanttElastic.options.scroll.top + ev.deltaY;
+              const chartClientHeight = this.$store.state.GanttElastic.options.rowsHeight,
+                scrollHeight = this.$store.state.GanttElastic.options.refs.chartGraph.scrollHeight - chartClientHeight;
+              top < 0 ? (top = 0) : top > scrollHeight && (top = scrollHeight), this.scrollTo(null, top);
+            }
+          },
+          onTimeZoomChange(timeZoom) {
+            this.$store.commit(this.updateOptionsMut, { times: { timeZoom: timeZoom } }),
+              this.recalculateTimes(),
+              this.calculateSteps(),
+              this.calculateCalendarDimensions(),
+              this.fixScrollPos();
+          },
+          onRowHeightChange(height) {
+            this.$store.commit(this.updateOptionsMut, { row: { height: height } }),
+              this.calculateTaskListColumnsDimensions();
+          },
+          onScopeChange(value) {
+            this.$store.commit(this.updateOptionsMut, { scope: { before: value, after: value } }),
+              this.initTimes(),
+              this.calculateSteps(),
+              this.computeCalendarWidths(),
+              this.fixScrollPos();
+          },
+          onTaskListWidthChange(value) {
+            this.$store.commit(this.updateOptionsMut, { taskList: { percent: value } }),
+              this.calculateTaskListColumnsDimensions(),
+              this.fixScrollPos();
+          },
+          onTaskListColumnWidthChange(value) {
+            this.calculateTaskListColumnsDimensions(), this.fixScrollPos();
+          },
+          initializeEvents() {
+            this.$on('chart-scroll-horizontal', this.onScrollChart),
+              this.$on('chart-scroll-vertical', this.onScrollChart),
+              this.$on('chart-wheel', this.onWheelChart),
+              this.$on('times-timeZoom-change', this.onTimeZoomChange),
+              this.$on('row-height-change', this.onRowHeightChange),
+              this.$on('scope-change', this.onScopeChange),
+              this.$on('taskList-width-change', this.onTaskListWidthChange),
+              this.$on('taskList-column-width-change', this.onTaskListColumnWidthChange);
+          },
+          recalculateTimes() {
+            let steps =
+                (60 * this.$store.state.GanttElastic.options.times.timeScale) /
+                this.$store.state.GanttElastic.options.times.timeScale,
+              percent = this.$store.state.GanttElastic.options.times.timeZoom / 100;
+            const timePerPixel =
+                this.$store.state.GanttElastic.options.times.timeScale * steps * percent +
+                Math.pow(2, this.$store.state.GanttElastic.options.times.timeZoom),
+              totalViewDurationMs = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime).diff(
+                dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime),
+                'milisecods'
+              ),
+              totalViewDurationPx = totalViewDurationMs / timePerPixel;
+            this.$store.commit(this.updateOptionsMut, {
+              times: {
+                timePerPixel: timePerPixel,
+                totalViewDurationMs: totalViewDurationMs,
+                totalViewDurationPx: totalViewDurationPx
+              },
+              width: totalViewDurationPx + this.style('grid-line-vertical')['stroke-width']
+            });
+          },
+          initTimes() {
+            const firstTime = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTaskTime)
+                .locale(this.locale)
+                .startOf('day')
+                .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
+                .startOf('day')
+                .valueOf(),
+              lastTime = dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTaskTime)
+                .locale(this.locale)
+                .endOf('day')
+                .add(this.$store.state.GanttElastic.options.scope.after, 'days')
+                .endOf('day')
+                .valueOf();
+            this.$store.commit(this.updateOptionsMut, { times: { firstTime: firstTime, lastTime: lastTime } }),
+              this.recalculateTimes();
+          },
+          calculateSteps() {
+            const steps = [],
+              lastMs = this.$store.state.GanttElastic.options.times.lastTime,
+              currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
+            steps.push({ time: currentDate.valueOf(), offset: { ms: 0, px: 0 } });
+            for (
+              let currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime)
+                .add(1, this.$store.state.GanttElastic.options.times.stepDuration)
+                .startOf('day');
+              currentDate.valueOf() <= lastMs;
+              currentDate = currentDate.add(1, this.$store.state.GanttElastic.options.times.stepDuration).startOf('day')
+            ) {
+              const offsetMs = currentDate.diff(this.$store.state.GanttElastic.options.times.firstTime, 'milisecods'),
+                offsetPx = offsetMs / this.$store.state.GanttElastic.options.times.timePerPixel,
+                step = { time: currentDate.valueOf(), offset: { ms: offsetMs, px: offsetPx } },
+                previousStep = steps[steps.length - 1];
+              (previousStep.width = { ms: offsetMs - previousStep.offset.ms, px: offsetPx - previousStep.offset.px }),
+                steps.push(step);
+            }
+            const lastStep = steps[steps.length - 1];
+            (lastStep.width = {
+              ms: this.$store.state.GanttElastic.options.times.totalViewDurationMs - lastStep.offset.ms,
+              px: this.$store.state.GanttElastic.options.times.totalViewDurationPx - lastStep.offset.px
+            }),
+              this.$store.commit(this.updateOptionsMut, { times: { steps: steps } });
+          },
+          computeCalendarWidths() {
+            this.computeDayWidths(), this.computeHourWidths(), this.computeMonthWidths();
+          },
+          computeHourWidths() {
+            const options = this.$store.state.GanttElastic.options,
+              newOptions = { calendar: { hour: { widths: [] } } },
+              style = this.style('calendar-row-text', 'calendar-row-text--hour');
+            options.ctx.font = style['font-size'] + ' ' + style['font-family'];
+            let currentDate = dayjs_min_default()('2018-01-01T00:00:00'),
+              maxWidths = {};
+            Object.keys(options.calendar.hour.format).forEach(formatName => {
+              maxWidths[formatName] = 0;
+            });
+            for (let hour = 0; hour < 24; hour++) {
+              const widths = { hour: hour };
+              Object.keys(options.calendar.hour.format).forEach(formatName => {
+                widths[formatName] = options.ctx.measureText(
+                  options.calendar.hour.format[formatName](currentDate.toDate())
+                ).width;
+              }),
+                newOptions.calendar.hour.widths.push(widths),
+                Object.keys(options.calendar.hour.format).forEach(formatName => {
+                  widths[formatName] > maxWidths[formatName] && (maxWidths[formatName] = widths[formatName]);
+                }),
+                (currentDate = currentDate.add(1, 'hour'));
+            }
+            (newOptions.calendar.hour.maxWidths = maxWidths), this.$store.commit(this.updateOptionsMut, newOptions);
+          },
+          computeDayWidths() {
+            const options = this.$store.state.GanttElastic.options,
+              newOptions = { calendar: { day: { widths: [] } } },
+              style = this.style('calendar-row-text', 'calendar-row-text--day');
+            options.ctx.font = style['font-size'] + ' ' + style['font-family'];
+            let currentDate = dayjs_min_default()(options.times.steps[0].date),
+              maxWidths = {};
+            Object.keys(options.calendar.day.format).forEach(formatName => {
+              maxWidths[formatName] = 0;
+            });
+            for (let day = 0, daysLen = options.times.steps.length; day < daysLen; day++) {
+              const widths = { day: day };
+              Object.keys(options.calendar.day.format).forEach(formatName => {
+                widths[formatName] = options.ctx.measureText(
+                  options.calendar.day.format[formatName](currentDate.toDate())
+                ).width;
+              }),
+                newOptions.calendar.day.widths.push(widths),
+                Object.keys(options.calendar.day.format).forEach(formatName => {
+                  widths[formatName] > maxWidths[formatName] && (maxWidths[formatName] = widths[formatName]);
+                }),
+                (currentDate = currentDate.add(1, 'day'));
+            }
+            (newOptions.calendar.day.maxWidths = maxWidths), this.$store.commit(this.updateOptionsMut, newOptions);
+          },
+          computeMonthWidths() {
+            const options = this.$store.state.GanttElastic.options,
+              newOptions = { calendar: { month: { widths: [] } } },
+              style = this.style('calendar-row-text', 'calendar-row-text--month');
+            options.ctx.font = style['font-size'] + ' ' + style['font-family'];
+            let maxWidths = {};
+            Object.keys(options.calendar.month.format).forEach(formatName => {
+              maxWidths[formatName] = 0;
+            });
+            let currentDate = dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime);
+            const monthsCount = Math.ceil(
+              dayjs_min_default()(this.$store.state.GanttElastic.options.times.lastTime).diff(
+                dayjs_min_default()(this.$store.state.GanttElastic.options.times.firstTime),
+                'months',
+                !0
+              )
+            );
+            for (let month = 0; month < monthsCount; month++) {
+              const widths = { month: month };
+              Object.keys(options.calendar.month.format).forEach(formatName => {
+                widths[formatName] = options.ctx.measureText(
+                  options.calendar.month.format[formatName](currentDate.toDate())
+                ).width;
+              }),
+                newOptions.calendar.month.widths.push(widths),
+                Object.keys(options.calendar.month.format).forEach(formatName => {
+                  widths[formatName] > maxWidths[formatName] && (maxWidths[formatName] = widths[formatName]);
+                }),
+                (currentDate = currentDate.add(1, 'month'));
+            }
+            (newOptions.calendar.month.maxWidths = maxWidths), this.$store.commit(this.updateOptionsMut, newOptions);
+          },
+          prepareDates() {
+            let firstTaskTime = Number.MAX_SAFE_INTEGER,
+              lastTaskTime = 0;
+            for (let index = 0, len = this.$store.state.GanttElastic.tasks.length; index < len; index++) {
+              let task = this.$store.state.GanttElastic.tasks[index];
+              const newProps = { id: task.id };
+              (newProps.startTime = dayjs_min_default()(task.start).valueOf()),
+                (newProps.durationMs = 1e3 * task.duration),
+                task.startTime < firstTaskTime && (firstTaskTime = task.startTime),
+                newProps.startTime + newProps.durationMs > lastTaskTime &&
+                  (lastTaskTime = newProps.startTime + newProps.durationMs),
+                this.$store.commit(this.updateTaskMut, newProps);
+            }
+            const firstTime = dayjs_min_default()(firstTaskTime)
+                .locale(this.locale)
+                .startOf('day')
+                .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
+                .startOf('day')
+                .valueOf(),
+              lastTime = dayjs_min_default()(lastTaskTime)
+                .locale(this.locale)
+                .endOf('day')
+                .add(this.$store.state.GanttElastic.options.scope.after, 'days')
+                .endOf('day')
+                .valueOf();
+            this.$store.commit(this.updateOptionsMut, {
+              times: {
+                firstTaskTime: firstTaskTime,
+                lastTaskTime: lastTaskTime,
+                firstTime: firstTime,
+                lastTime: lastTime
+              }
+            });
+          },
+          setup(itsUpdate = '', data = null) {
+            this.initialize(itsUpdate, data),
+              this.prepareDates(),
+              this.initTimes(),
+              this.calculateSteps(),
+              this.computeCalendarWidths(),
+              this.$emit('calendar-recalculate');
+            const width = this.$store.state.GanttElastic.options.taskList.columns.reduce(
+              (prev, current) => ({ width: prev.width + current.width }),
+              { width: 0 }
+            ).width;
+            this.$store.commit(this.updateOptionsMut, { taskList: { width: width } });
+          },
+          globalOnResize(ev) {
+            if (void 0 === this.$el || !this.$el) return;
+            const options = { clientWidth: this.$el.clientWidth, taskList: { columns: [] } };
+            if (
+              this.$store.state.GanttElastic.options.taskList.widthFromPercentage >
+              (this.$store.state.GanttElastic.options.clientWidth / 100) *
+                this.$store.state.GanttElastic.options.taskList.widthThreshold
+            ) {
+              let diffPercent =
+                100 -
+                ((this.$store.state.GanttElastic.options.taskList.widthFromPercentage -
+                  (this.$store.state.GanttElastic.options.clientWidth / 100) *
+                    this.$store.state.GanttElastic.options.taskList.widthThreshold) /
+                  this.$store.state.GanttElastic.options.taskList.widthFromPercentage) *
+                  100;
+              diffPercent < 0 && (diffPercent = 0),
+                (options.taskList.columns = this.$store.state.GanttElastic.options.taskList.columns.map(
+                  column => ((column.thresholdPercent = diffPercent), column)
+                ));
+            } else
+              options.taskList.columns = this.$store.state.GanttElastic.options.taskList.columns.map(
+                column => ((column.thresholdPercent = 100), column)
+              );
+            this.$store.commit(this.updateOptionsMut, options), this.calculateTaskListColumnsDimensions();
+          }
+        },
+        computed: {
+          internalTasks() {
+            return this.$store.state.GanttElastic.tasks.map(task => task);
+          },
+          internalOptions() {
+            return mergeDeep({}, this.$store.state.GanttElastic.options);
+          },
+          visibleTasks() {
+            const visibleTasks = this.$store.state.GanttElastic.tasks.filter(task => this.isTaskVisible(task)),
+              maxRows = visibleTasks.slice(0, this.$store.state.GanttElastic.options.maxRows),
+              options = {};
+            options.rowsHeight = this.getTasksHeight(maxRows);
+            let heightCompensation = 0;
+            this.$store.state.GanttElastic.options.maxHeight &&
+              options.rowsHeight > this.$store.state.GanttElastic.options.maxHeight &&
+              ((heightCompensation = options.rowsHeight - this.$store.state.GanttElastic.options.maxHeight),
+              (options.rowsHeight = this.$store.state.GanttElastic.options.maxHeight)),
+              (options.height = this.getHeight(maxRows) - heightCompensation),
+              (options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks)),
+              (options.outerHeight = this.getHeight(maxRows, !0) - heightCompensation);
+            let len = visibleTasks.length;
+            for (let index = 0; index < len; index++) {
+              let task = visibleTasks[index];
+              const props = { id: task.id };
+              (props.width =
+                task.durationMs / this.$store.state.GanttElastic.options.times.timePerPixel -
+                this.style('grid-line-vertical')['stroke-width']),
+                props.width < 0 && (props.width = 0),
+                (props.height = this.$store.state.GanttElastic.options.row.height),
+                (props.x = this.timeToPixelOffsetX(task.startTime)),
+                (props.y =
+                  (this.$store.state.GanttElastic.options.row.height +
+                    2 * this.$store.state.GanttElastic.options.chart.grid.horizontal.gap) *
+                    index +
+                  this.$store.state.GanttElastic.options.chart.grid.horizontal.gap),
+                this.$store.commit(this.updateTaskMut, props);
+            }
+            return (
+              this.$store.commit(this.updateOptionsMut, options),
+              this.$nextTick(() => {
+                this.syncScrollTop();
+              }),
+              visibleTasks
+            );
+          },
+          getTaskListColumns() {
+            return this.calculateTaskListColumnsDimensions(), this.$store.state.GanttElastic.options.taskList.columns;
+          }
+        },
+        created() {
+          this.$store.registerModule('GanttElastic', GanttElastic_vuex),
+            this.$watch('internalTasks', tasks => {
+              const newTasks = tasks.map(task => {
+                return synchronizeDeep(mergeDeep({}, this.tasks.find(sourceTask => sourceTask.id === task.id)), task);
+              });
+              equalDeep(this.tasks, newTasks) || this.$emit('tasks-updated', newTasks);
+            }),
+            this.$watch('tasks', tasks => {
+              const oldTasks = this.$store.state.GanttElastic.tasks.map((task, index) =>
+                  synchronizeDeep(mergeDeep({}, this.tasks[index]), task)
+                ),
+                newTasks = tasks.map(task => mergeDeep({}, task));
+              equalDeep(newTasks, oldTasks) || this.setup('tasks', newTasks);
+            }),
+            this.$watch('internalOptions', options => {
+              const newOptions = synchronizeDeep(mergeDeep({}, this.options), this.$store.state.GanttElastic.options);
+              equalDeep(this.options, newOptions) || this.$emit('options-updated', newOptions);
+            }),
+            this.$watch(
+              'options',
+              options => {
+                const newOptions = mergeDeep({}, options);
+                equalDeep(newOptions, mergeDeep({}, this.$store.state.GanttElastic.options)) ||
+                  this.setup('options', newOptions);
+              },
+              { deep: !0 }
+            ),
+            this.$root.$emit('gantt-elastic-created', this),
+            this.$emit('created', this),
+            this.initializeEvents(),
+            this.setup();
+        },
+        beforeMount() {
+          this.$emit('before-mount', this);
+        },
+        mounted() {
+          this.$store.commit(this.updateOptionsMut, { clientWidth: this.$el.clientWidth }),
+            window.addEventListener('resize', this.globalOnResize),
+            this.globalOnResize(),
+            this.$root.$emit('gantt-elastic-mounted', this),
+            this.$emit('mounted'),
+            this.$root.$emit('gantt-elastic-ready', this);
+        },
+        beforeUpdate() {
+          this.$emit('before-update');
+        },
+        updated() {
+          this.$nextTick(() => {
+            this.$emit('updated');
+          });
+        },
+        beforeDestroy() {
+          window.removeEventListener('resize', this.globalOnResize), this.$emit('before-destroy');
+        },
+        destroyed() {
+          this.$emit('destroyed');
+        }
+      },
+      GanttElastic_component = (__webpack_require__(11),
+      normalizeComponent(
+        src_GanttElasticvue_type_script_lang_js_,
+        GanttElasticvue_type_template_id_02c6304c_render,
+        [],
+        !1,
+        null,
+        null,
+        null
+      ));
+    GanttElastic_component.options.__file = 'src/GanttElastic.vue';
+    var src_GanttElastic = GanttElastic_component.exports;
+    external_Vue_default.a.use(external_Vuex_default.a);
+    var GanttElastic_standalone_component = normalizeComponent(
+      {
+        components: {
+          'gantt-header': { template: '<div></div>' },
+          'gantt-elastic': src_GanttElastic,
+          'gantt-footer': { template: '<div></div>' }
+        },
+        store: new external_Vuex_default.a.Store({}),
+        props: ['header', 'footer'],
+        data: { tasks: [], options: {} }
+      },
+      render,
+      [],
+      !1,
+      null,
+      null,
+      null
+    );
+    GanttElastic_standalone_component.options.__file = 'src/GanttElastic.standalone.vue';
+    var GanttElastic_standalone = GanttElastic_standalone_component.exports;
+    /**
+     * @fileoverview Bundle main entry file
+     * @license MIT
+     * @author Rafal Pospiech <neuronet.io@gmail.com>
+     * @package GanttElasticStandalone
+     */ window.GanttElastic = {
+      component: GanttElastic_standalone,
+      mount(config) {
+        let { el: el, tasks: tasks, options: options } = config;
+        const ganttElastic = GanttElastic_standalone;
+        return (
+          (ganttElastic.data = { tasks: tasks, options: options }),
+          console.log('mounting', ganttElastic),
+          new external_Vue_default.a(ganttElastic)
+            .$on('gantt-elastic-ready', ganttInstance => {
+              console.log(ganttInstance), 'function' == typeof config.ready && config.ready(ganttInstance);
+            })
+            .$mount(el)
+        );
+      }
+    };
+    __webpack_exports__.default = GanttElastic_standalone;
+  },
+  function(module, __webpack_exports__, __webpack_require__) {
+    'use strict';
+    function listToStyles(parentId, list) {
+      for (var styles = [], newStyles = {}, i = 0; i < list.length; i++) {
+        var item = list[i],
+          id = item[0],
+          part = { id: parentId + ':' + i, css: item[1], media: item[2], sourceMap: item[3] };
+        newStyles[id] ? newStyles[id].parts.push(part) : styles.push((newStyles[id] = { id: id, parts: [part] }));
+      }
+      return styles;
+    }
+    __webpack_require__.r(__webpack_exports__),
+      __webpack_require__.d(__webpack_exports__, 'default', function() {
+        return addStylesClient;
+      });
+    var hasDocument = 'undefined' != typeof document;
+    if ('undefined' != typeof DEBUG && DEBUG && !hasDocument)
+      throw new Error(
+        "vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+      );
+    var stylesInDom = {},
+      head = hasDocument && (document.head || document.getElementsByTagName('head')[0]),
+      singletonElement = null,
+      singletonCounter = 0,
+      isProduction = !1,
+      noop = function() {},
+      options = null,
+      ssrIdKey = 'data-vue-ssr-id',
+      isOldIE = 'undefined' != typeof navigator && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase());
+    function addStylesClient(parentId, list, _isProduction, _options) {
+      (isProduction = _isProduction), (options = _options || {});
+      var styles = listToStyles(parentId, list);
+      return (
+        addStylesToDom(styles),
+        function(newList) {
+          for (var mayRemove = [], i = 0; i < styles.length; i++) {
+            var item = styles[i];
+            (domStyle = stylesInDom[item.id]).refs--, mayRemove.push(domStyle);
+          }
+          newList ? addStylesToDom((styles = listToStyles(parentId, newList))) : (styles = []);
+          for (i = 0; i < mayRemove.length; i++) {
+            var domStyle;
+            if (0 === (domStyle = mayRemove[i]).refs) {
+              for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+              delete stylesInDom[domStyle.id];
+            }
+          }
+        }
+      );
+    }
+    function addStylesToDom(styles) {
+      for (var i = 0; i < styles.length; i++) {
+        var item = styles[i],
+          domStyle = stylesInDom[item.id];
+        if (domStyle) {
+          domStyle.refs++;
+          for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j](item.parts[j]);
+          for (; j < item.parts.length; j++) domStyle.parts.push(addStyle(item.parts[j]));
+          domStyle.parts.length > item.parts.length && (domStyle.parts.length = item.parts.length);
+        } else {
+          var parts = [];
+          for (j = 0; j < item.parts.length; j++) parts.push(addStyle(item.parts[j]));
+          stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts };
+        }
+      }
+    }
+    function createStyleElement() {
+      var styleElement = document.createElement('style');
+      return (styleElement.type = 'text/css'), head.appendChild(styleElement), styleElement;
+    }
+    function addStyle(obj) {
+      var update,
+        remove,
+        styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]');
+      if (styleElement) {
+        if (isProduction) return noop;
+        styleElement.parentNode.removeChild(styleElement);
+      }
+      if (isOldIE) {
+        var styleIndex = singletonCounter++;
+        (styleElement = singletonElement || (singletonElement = createStyleElement())),
+          (update = applyToSingletonTag.bind(null, styleElement, styleIndex, !1)),
+          (remove = applyToSingletonTag.bind(null, styleElement, styleIndex, !0));
+      } else
+        (styleElement = createStyleElement()),
+          (update = function(styleElement, obj) {
+            var css = obj.css,
+              media = obj.media,
+              sourceMap = obj.sourceMap;
+            media && styleElement.setAttribute('media', media);
+            options.ssrId && styleElement.setAttribute(ssrIdKey, obj.id);
+            sourceMap &&
+              ((css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'),
+              (css +=
+                '\n/*# sourceMappingURL=data:application/json;base64,' +
+                btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) +
+                ' */'));
+            if (styleElement.styleSheet) styleElement.styleSheet.cssText = css;
+            else {
+              for (; styleElement.firstChild; ) styleElement.removeChild(styleElement.firstChild);
+              styleElement.appendChild(document.createTextNode(css));
+            }
+          }.bind(null, styleElement)),
+          (remove = function() {
+            styleElement.parentNode.removeChild(styleElement);
+          });
+      return (
+        update(obj),
+        function(newObj) {
+          if (newObj) {
+            if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) return;
+            update((obj = newObj));
+          } else remove();
+        }
+      );
+    }
+    var textStore,
+      replaceText = ((textStore = []),
+      function(index, replacement) {
+        return (textStore[index] = replacement), textStore.filter(Boolean).join('\n');
+      });
+    function applyToSingletonTag(styleElement, index, remove, obj) {
+      var css = remove ? '' : obj.css;
+      if (styleElement.styleSheet) styleElement.styleSheet.cssText = replaceText(index, css);
+      else {
+        var cssNode = document.createTextNode(css),
+          childNodes = styleElement.childNodes;
+        childNodes[index] && styleElement.removeChild(childNodes[index]),
+          childNodes.length ? styleElement.insertBefore(cssNode, childNodes[index]) : styleElement.appendChild(cssNode);
+      }
+    }
+  }
+]);
