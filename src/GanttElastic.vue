@@ -16,6 +16,7 @@
 
 <script>
 import dayjs from 'dayjs';
+import Vue from 'vue';
 import MainView from './components/MainView.vue';
 import style from './style.js';
 import GanttElasticVuex from './GanttElastic.vuex.js';

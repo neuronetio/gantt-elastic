@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'Text',
+  name: 'ChartText',
   inject: ['root'],
   props: ['task'],
   data() {

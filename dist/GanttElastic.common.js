@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -94,22 +94,28 @@ module.exports =
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("Vue");
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(4);
+var content = __webpack_require__(5);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
+var add = __webpack_require__(8).default
 var update = add("c3e5085c", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -191,22 +197,22 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
-exports.i(__webpack_require__(5), "");
+exports.i(__webpack_require__(6), "");
 
 // module
 exports.push([module.i, "\n", ""]);
@@ -215,10 +221,10 @@ exports.push([module.i, "\n", ""]);
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
@@ -229,7 +235,7 @@ exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -262,6 +268,10 @@ render._withStripped = true
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
 var dayjs_min = __webpack_require__(0);
 var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
+
+// EXTERNAL MODULE: external "Vue"
+var external_Vue_ = __webpack_require__(1);
+var external_Vue_default = /*#__PURE__*/__webpack_require__.n(external_Vue_);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
 var MainViewvue_type_template_id_0bc4212e_render = function() {
@@ -538,7 +548,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
               attrs: { column: column },
               on: { mouseup: _vm.resizerMouseUp }
             },
-            [_vm._v(_vm._s(column.label))]
+            [_vm._v("\n      " + _vm._s(column.label) + "\n    ")]
           ),
           _vm._v(" "),
           _c(
@@ -739,6 +749,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 //
 
 /* harmony default export */ var Expandervue_type_script_lang_js_ = ({
+  name: 'Expander',
   inject: ['root'],
   props: ['tasks', 'options'],
   data() {
@@ -983,9 +994,21 @@ component.options.__file = "src/components/Expander.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
+  name: 'TaskListHeader',
   components: {
     TaskListExpander: Expander
   },
@@ -998,7 +1021,7 @@ component.options.__file = "src/components/Expander.vue"
         moving: false,
         x: 0
       }
-    }
+    };
   },
 
   computed: {
@@ -1009,12 +1032,12 @@ component.options.__file = "src/components/Expander.vue"
      */
     getStyle() {
       return column => {
-        const options = this.$store.state.GanttElastic.options
+        const options = this.$store.state.GanttElastic.options;
         return {
           height: options.calendar.height + this.root.style('calendar-row-rect')['border-width'] + 'px',
           width: column.finalWidth + 'px'
-        }
-      }
+        };
+      };
     },
 
     /**
@@ -1023,7 +1046,7 @@ component.options.__file = "src/components/Expander.vue"
      * @returns {bool}
      */
     collapsible() {
-      return this.$store.state.GanttElastic.tasks.filter(task => task.children.length > 0)
+      return this.$store.state.GanttElastic.tasks.filter(task => task.children.length > 0);
     }
   },
 
@@ -1033,10 +1056,10 @@ component.options.__file = "src/components/Expander.vue"
      */
     resizerMouseDown(event, column) {
       if (!this.resizerMoving) {
-        this.resizer.moving = column
-        this.resizer.x = event.clientX
-        this.resizer.initialWidth = column.width
-        this.root.$emit('taskList-column-width-change-start', this.resizer.moving)
+        this.resizer.moving = column;
+        this.resizer.x = event.clientX;
+        this.resizer.initialWidth = column.width;
+        this.root.$emit('taskList-column-width-change-start', this.resizer.moving);
       }
     },
 
@@ -1045,11 +1068,11 @@ component.options.__file = "src/components/Expander.vue"
      */
     resizerMouseMove(event) {
       if (this.resizer.moving) {
-        this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x
+        this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
         if (this.resizer.moving.width < this.$store.state.GanttElastic.options.taskList.minWidth) {
-          this.resizer.moving.width = this.$store.state.GanttElastic.options.taskList.minWidth
+          this.resizer.moving.width = this.$store.state.GanttElastic.options.taskList.minWidth;
         }
-        this.root.$emit('taskList-column-width-change', this.resizer.moving)
+        this.root.$emit('taskList-column-width-change', this.resizer.moving);
       }
     },
 
@@ -1058,9 +1081,9 @@ component.options.__file = "src/components/Expander.vue"
      */
     resizerMouseUp(event) {
       if (this.resizer.moving) {
-        this.root.$emit('taskList-column-width-change', this.resizer.moving)
-        this.root.$emit('taskList-column-width-change-stop', this.resizer.moving)
-        this.resizer.moving = false
+        this.root.$emit('taskList-column-width-change', this.resizer.moving);
+        this.root.$emit('taskList-column-width-change-stop', this.resizer.moving);
+        this.resizer.moving = false;
       }
     }
   },
@@ -1069,18 +1092,18 @@ component.options.__file = "src/components/Expander.vue"
    * Created
    */
   created() {
-    this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this))
-    this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this))
-    this.root.$on('main-view-mousemove', this.resizerMouseMove)
-    this.root.$on('main-view-mouseup', this.resizerMouseUp)
+    this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this));
+    this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this));
+    this.root.$on('main-view-mousemove', this.resizerMouseMove);
+    this.root.$on('main-view-mouseup', this.resizerMouseUp);
   },
 
   /**
    * Before destroy event - clear all event listeners
    */
   beforeDestroy() {
-    document.removeEventListener('mouseup', this.resizerMouseUp)
-    document.removeEventListener('mousemove', this.resizerMouseMove)
+    document.removeEventListener('mouseup', this.resizerMouseUp);
+    document.removeEventListener('mousemove', this.resizerMouseMove);
   }
 });
 
@@ -1461,18 +1484,24 @@ ItemColumn_component.options.__file = "src/components/TaskList/ItemColumn.vue"
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var TaskListItemvue_type_script_lang_js_ = ({
+  name: 'TaskListItem',
   components: {
     TaskListExpander: Expander,
     ItemColumn: ItemColumn
   },
-  inject: ["root"],
-  props: ["task", "expanderStyle"],
-  data () {
+  inject: ['root'],
+  props: ['task', 'expanderStyle'],
+  data() {
     return {};
   }
 });
@@ -1540,6 +1569,7 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
 
 
 /* harmony default export */ var TaskListvue_type_script_lang_js_ = ({
+  name: 'TaskList',
   components: {
     TaskListHeader: TaskListHeader,
     TaskListItem: TaskListItem
@@ -1823,21 +1853,22 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
 //
 
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  data () {
+  name: 'Grid',
+  inject: ['root'],
+  data() {
     return {};
   },
   /**
    * Created
    */
-  created () {
-    this.root.$on("recenterPosition", this.recenterPosition);
+  created() {
+    this.root.$on('recenterPosition', this.recenterPosition);
   },
 
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       this.$nextTick(() => {
         // because of stupid slider :/
@@ -1850,9 +1881,9 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
     /**
      * Recenter position - go to current time line
      */
-    recenterPosition () {
+    recenterPosition() {
       this.root.scrollToTime(this.timeLinePosition.time);
-    },
+    }
   },
 
   computed: {
@@ -1861,7 +1892,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {array}
      */
-    verticalLines () {
+    verticalLines() {
       let lines = [];
       const options = this.$store.state.GanttElastic.options;
       options.times.steps.forEach(step => {
@@ -1871,7 +1902,10 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: this.$store.state.GanttElastic.tasks.length * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2:
+              this.$store.state.GanttElastic.tasks.length *
+                (options.row.height + options.chart.grid.horizontal.gap * 2) +
+              this.root.style('grid-line-vertical')['stroke-width']
           });
         }
       });
@@ -1883,17 +1917,19 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {array}
      */
-    horizontalLines () {
+    horizontalLines() {
       let lines = [];
       const options = this.$store.state.GanttElastic.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        const y = (index * (options.row.height + options.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        const y =
+          index * (options.row.height + options.chart.grid.horizontal.gap * 2) +
+          this.root.style('grid-line-vertical')['stroke-width'] / 2;
         lines.push({
-          key: "hl" + index,
+          key: 'hl' + index,
           x1: 0,
           y1: y,
-          x2: "100%",
+          x2: '100%',
           y2: y
         });
       }
@@ -1905,10 +1941,10 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {function}
      */
-    inViewPort () {
+    inViewPort() {
       return line => {
         const options = this.$store.state.GanttElastic.options;
-        return (line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right);
+        return line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right;
       };
     },
 
@@ -1917,21 +1953,21 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {object}
      */
-    timeLinePosition () {
+    timeLinePosition() {
       const d = new Date();
       const current = d.getTime();
       const currentOffset = this.root.timeToPixelOffsetX(current);
       const timeLine = {
         x: 0,
         y1: 0,
-        y2: "100%",
-        dateTime: "",
+        y2: '100%',
+        dateTime: '',
         time: current
       };
       timeLine.x = currentOffset;
       timeLine.dateTime = d.toLocaleDateString();
       return timeLine;
-    },
+    }
   }
 });
 
@@ -2027,8 +2063,9 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
 
 
 /* harmony default export */ var DaysHighlightvue_type_script_lang_js_ = ({
+  name: 'DaysHighlight',
   inject: ['root'],
-  data () {
+  data() {
     return {};
   },
   methods: {
@@ -2038,7 +2075,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
-    getKey (day) {
+    getKey(day) {
       return dayjs_min_default()(day.time).format('YYYY-MM-DD');
     }
   },
@@ -2048,7 +2085,7 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      *
      * @returns {array}
      */
-    workingDays () {
+    workingDays() {
       return this.$store.state.GanttElastic.options.times.steps.filter(step => {
         return this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(dayjs_min_default()(step.time).day()) === -1;
       });
@@ -2059,9 +2096,13 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      *
      * @returns {bool}
      */
-    showWorkingDays () {
+    showWorkingDays() {
       const calendar = this.$store.state.GanttElastic.options.calendar;
-      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+      if (
+        typeof calendar.workingDays !== 'undefined' &&
+        Array.isArray(calendar.workingDays) &&
+        calendar.workingDays.length
+      ) {
         return true;
       }
       return false;
@@ -2177,7 +2218,10 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
           style: _vm.root.style(
             "calendar-row-rect",
             "calendar-row-rect--" + _vm.which,
-            { width: item.width + "px", height: item.height + "px" }
+            {
+              width: item.width + "px",
+              height: item.height + "px"
+            }
           )
         },
         [
@@ -2193,7 +2237,7 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
                 _vm.getStyle(item)
               )
             },
-            [_vm._v(_vm._s(item.label))]
+            [_vm._v("\n      " + _vm._s(item.label) + "\n    ")]
           )
         ]
       )
@@ -2235,11 +2279,19 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ var CalendarRowvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["items", "which"],
-  data () {
+  name: 'CalendarRow',
+  inject: ['root'],
+  props: ['items', 'which'],
+  data() {
     return {
       anchor: 'middle'
     };
@@ -2250,12 +2302,14 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
      *
      * @returns {number}
      */
-    getTextX () {
+    getTextX() {
       let x = this.item.x + this.item.width / 2;
       if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
         this.anchor = 'start';
-        let scrollWidth = this.$store.state.GanttElastic.options.scroll.chart.right - this.$store.state.GanttElastic.options.scroll.chart.left;
-        x = this.$store.state.GanttElastic.options.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
+        let scrollWidth =
+          this.$store.state.GanttElastic.options.scroll.chart.right -
+          this.$store.state.GanttElastic.options.scroll.chart.left;
+        x = this.$store.state.GanttElastic.options.scroll.chart.left + scrollWidth / 2 - this.item.textWidth / 2 + 2;
         if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
           x = this.item.x + this.item.width - this.item.textWidth - 2;
         } else if (x < this.item.x) {
@@ -2270,7 +2324,7 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
      *
      * @returns {number}
      */
-    getTextY () {
+    getTextY() {
       return this.item.y + this.item.height / 2;
     },
 
@@ -2279,12 +2333,15 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
      *
      * @returns {function}
      */
-    getStyle () {
-      return (item) => {
+    getStyle() {
+      return item => {
         return {
-          'line-height': (item.height - parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2) + 'px'
+          'line-height':
+            item.height -
+            parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2 +
+            'px'
         };
-      }
+      };
     }
   }
 });
@@ -2352,6 +2409,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
 
 /* harmony default export */ var Calendarvue_type_script_lang_js_ = ({
+  name: 'Calendar',
   components: {
     CalendarRow: CalendarRow
   },
@@ -2856,6 +2914,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
 //
 
 /* harmony default export */ var DependencyLinesvue_type_script_lang_js_ = ({
+  name: 'DependencyLines',
   inject: ['root'],
   props: ['tasks'],
   data() {
@@ -3248,9 +3307,10 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
 //
 
 /* harmony default export */ var Textvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ChartText',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -3259,9 +3319,11 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {number}
      */
-    getWidth () {
+    getWidth() {
       const textStyle = this.root.style('chart-row-text');
-      this.$store.state.GanttElastic.options.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      this.$store.state.GanttElastic.options.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${
+        textStyle['font-family']
+      }`;
       const textWidth = this.$store.state.GanttElastic.options.ctx.measureText(this.task.label).width;
       return textWidth + this.$store.state.GanttElastic.options.chart.text.xPadding * 2;
     },
@@ -3271,7 +3333,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {number}
      */
-    getHeight () {
+    getHeight() {
       return this.task.height + this.$store.state.GanttElastic.options.chart.grid.horizontal.gap * 2;
     },
 
@@ -3280,7 +3342,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {object}
      */
-    contentStyle () {
+    contentStyle() {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
     },
 
@@ -3289,16 +3351,16 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {boolean}
      */
-    html () {
+    html() {
       const cols = this.$store.state.GanttElastic.options.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
-        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+        if (col.value === 'label' && typeof col.html !== 'undefined' && col.html) {
           return true;
         }
       }
       return false;
-    },
+    }
   }
 });
 
@@ -3478,11 +3540,14 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
 //
 //
 //
+//
+//
 
 /* harmony default export */ var ProgressBarvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ProgressBar',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
 
@@ -3492,8 +3557,8 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {string}
      */
-    getProgressWidth () {
-      return this.task.progress + "%";
+    getProgressWidth() {
+      return this.task.progress + '%';
     },
 
     /**
@@ -3501,7 +3566,7 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {string}
      */
-    getLinePoints () {
+    getLinePoints() {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
@@ -3511,8 +3576,12 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {object}
      */
-    getSolidStyle () {
-      return Object.assign({}, this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+    getSolidStyle() {
+      return Object.assign(
+        {},
+        this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid,
+        this.task.progressBarStyle.bar
+      );
     },
 
     /**
@@ -3520,11 +3589,15 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {object}
      */
-    getLineStyle () {
-      return Object.assign({}, {
-        stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + "a0",
-        "stroke-width": this.$store.state.GanttElastic.options.row.styles.bar["stroke-width"] / 2
-      }, this.task.style);
+    getLineStyle() {
+      return Object.assign(
+        {},
+        {
+          stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + 'a0',
+          'stroke-width': this.$store.state.GanttElastic.options.row.styles.bar['stroke-width'] / 2
+        },
+        this.task.style
+      );
     }
   }
 });
@@ -3616,30 +3689,44 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Taskvue_type_script_lang_js_ = ({
+  name: 'Task',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
-
     /**
      * Get clip path id
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__task-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__task-clip-path-' + this.task.id;
     },
 
     /**
@@ -3647,7 +3734,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       const task = this.task;
       return `0 0 ${task.width} ${task.height}`;
     },
@@ -3657,7 +3744,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -3666,11 +3753,9 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
-      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${
-        task.height
-        }`;
+      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
     },
 
     /**
@@ -3678,9 +3763,12 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {boolean}
      */
-    displayExpander () {
+    displayExpander() {
       const expander = this.$store.state.GanttElastic.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display);
+      return (
+        expander.display ||
+        (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+      );
     }
   },
   methods: {
@@ -3690,7 +3778,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
+    emitEvent(eventName, event) {
       if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
@@ -3937,19 +4025,34 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
+  name: 'Milestone',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -3958,8 +4061,8 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__milestone-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__milestone-clip-path-' + this.task.id;
     },
 
     /**
@@ -3967,7 +4070,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
 
@@ -3976,7 +4079,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -3985,7 +4088,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
       const fifty = task.height / 2;
       let offset = fifty;
@@ -4005,9 +4108,12 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {boolean}
      */
-    displayExpander () {
+    displayExpander() {
       const expander = this.$store.state.GanttElastic.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display);
+      return (
+        expander.display ||
+        (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+      );
     }
   },
   methods: {
@@ -4017,7 +4123,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
+    emitEvent(eventName, event) {
       if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
@@ -4264,19 +4370,36 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Projectvue_type_script_lang_js_ = ({
+  name: 'Project',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -4285,8 +4408,8 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__project-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__project-clip-path-' + this.task.id;
     },
 
     /**
@@ -4294,7 +4417,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
 
@@ -4303,7 +4426,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -4312,7 +4435,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
       const bottom = task.height - task.height / 4;
       const corner = task.height / 6;
@@ -4336,9 +4459,12 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {boolean}
      */
-    displayExpander () {
+    displayExpander() {
       const expander = this.$store.state.GanttElastic.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display);
+      return (
+        expander.display ||
+        (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+      );
     }
   },
   methods: {
@@ -4348,7 +4474,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
+    emitEvent(eventName, event) {
       if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
@@ -4438,6 +4564,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 
 
 /* harmony default export */ var Chartvue_type_script_lang_js_ = ({
+  name: 'Chart',
   components: {
     Grid: Grid,
     DependencyLines: DependencyLines,
@@ -4610,6 +4737,7 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 
 
 /* harmony default export */ var MainViewvue_type_script_lang_js_ = ({
+  name: 'MainView',
   components: {
     TaskList: TaskList,
     Chart: Chart
@@ -5251,6 +5379,7 @@ window.GanttElasticVuexModule = GanttElasticVuexModule;
 
 
 
+
 /**
  * Helper function to fill out empty options in user settings
  *
@@ -5570,12 +5699,12 @@ function isObservable(obj) {
 function mergeDeepReactive(target, ...sources) {
   if (!sources.length) {
     if (!isObservable(target)) {
-      return Vue.observable(target);
+      return external_Vue_default.a.observable(target);
     }
     return target;
   }
   if (!isObservable(target)) {
-    target = Vue.observable(target);
+    target = external_Vue_default.a.observable(target);
   }
   const source = sources.shift();
   if (isObject(target) && isObject(source)) {
@@ -5590,13 +5719,13 @@ function mergeDeepReactive(target, ...sources) {
         }
         mergeDeepReactive(target[key], source[key]);
       } else if (Array.isArray(source[key])) {
-        Vue.set(target, key, source[key]);
+        external_Vue_default.a.set(target, key, source[key]);
       } else if (typeof source[key] === 'function') {
         if (source[key].toString().indexOf('[native code]') === -1) {
           target[key] = source[key];
         }
       } else {
-        Vue.set(target, key, source[key]);
+        external_Vue_default.a.set(target, key, source[key]);
       }
     }
   }
@@ -5683,6 +5812,7 @@ let globalVisibleTasks = [];
  * Main vue component
  */
 const GanttElastic = {
+  name: 'GanttElastic',
   components: {
     MainView: MainView
   },
@@ -5830,7 +5960,7 @@ const GanttElastic = {
     initialize(itsUpdate = '', data = null) {
       let tasks;
       if (itsUpdate === '' || itsUpdate === 'tasks') {
-        tasks = Vue.observable(
+        tasks = external_Vue_default.a.observable(
           this.tasks.map(task => {
             return this.mergeDeepReactive({}, task);
           })
@@ -6903,7 +7033,7 @@ const GanttElastic = {
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
-var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(3);
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
@@ -6935,7 +7065,7 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
