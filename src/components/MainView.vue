@@ -87,6 +87,7 @@ import TaskList from './TaskList/TaskList.vue';
 import Chart from './Chart/Chart.vue';
 
 export default {
+  name: 'MainView',
   components: {
     TaskList,
     Chart

@@ -43,12 +43,14 @@
         :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
         :x="getProgressWidth"
         y="0"
-        :width="100-task.progress+'%'"
+        :width="100 - task.progress + '%'"
         height="100%"
       ></rect>
       <path
         class="gantt-elastic__chart-row-progress-bar-outline"
-        :style="root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])"
+        :style="
+          root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])
+        "
         :d="getLinePoints"
       ></path>
     </g>
@@ -57,9 +59,10 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ProgressBar',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
 
@@ -69,8 +72,8 @@ export default {
      *
      * @returns {string}
      */
-    getProgressWidth () {
-      return this.task.progress + "%";
+    getProgressWidth() {
+      return this.task.progress + '%';
     },
 
     /**
@@ -78,7 +81,7 @@ export default {
      *
      * @returns {string}
      */
-    getLinePoints () {
+    getLinePoints() {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
@@ -88,8 +91,12 @@ export default {
      *
      * @returns {object}
      */
-    getSolidStyle () {
-      return Object.assign({}, this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+    getSolidStyle() {
+      return Object.assign(
+        {},
+        this.$store.state.GanttElastic.options.chart.progress.styles.bar.solid,
+        this.task.progressBarStyle.bar
+      );
     },
 
     /**
@@ -97,11 +104,15 @@ export default {
      *
      * @returns {object}
      */
-    getLineStyle () {
-      return Object.assign({}, {
-        stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + "a0",
-        "stroke-width": this.$store.state.GanttElastic.options.row.styles.bar["stroke-width"] / 2
-      }, this.task.style);
+    getLineStyle() {
+      return Object.assign(
+        {},
+        {
+          stroke: this.$store.state.GanttElastic.options.row.styles.bar.stroke + 'a0',
+          'stroke-width': this.$store.state.GanttElastic.options.row.styles.bar['stroke-width'] / 2
+        },
+        this.task.style
+      );
     }
   }
 };

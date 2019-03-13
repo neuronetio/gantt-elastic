@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  name: 'Expander',
   inject: ['root'],
   props: ['tasks', 'options'],
   data() {

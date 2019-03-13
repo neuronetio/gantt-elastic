@@ -8,7 +8,12 @@
 -->
 <template>
   <div class="gantt-elastic__task-list-item" :style="root.style('task-list-item')">
-    <item-column v-for="column in $store.state.GanttElastic.options.taskList.columns" :key="column._id" :column="column" :task="task">
+    <item-column
+      v-for="column in $store.state.GanttElastic.options.taskList.columns"
+      :key="column._id"
+      :column="column"
+      :task="task"
+    >
       <task-list-expander
         v-if="column.expander"
         :tasks="[task]"
@@ -19,17 +24,18 @@
   </div>
 </template>
 <script>
-import TaskListExpander from "../Expander.vue";
-import ItemColumn from "./ItemColumn.vue";
+import TaskListExpander from '../Expander.vue';
+import ItemColumn from './ItemColumn.vue';
 
 export default {
+  name: 'TaskListItem',
   components: {
     TaskListExpander,
     ItemColumn
   },
-  inject: ["root"],
-  props: ["task", "expanderStyle"],
-  data () {
+  inject: ['root'],
+  props: ['task', 'expanderStyle'],
+  data() {
     return {};
   }
 };

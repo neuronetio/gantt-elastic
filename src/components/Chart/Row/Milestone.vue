@@ -13,9 +13,16 @@
   >
     <foreignObject
       class="gantt-elastic__chart-expander gantt-elastic__chart-expander--milestone"
-      :style="root.style('chart-expander','chart-expander--milestone',task.style['chart-expander'])"
-      :x="task.x - $store.state.GanttElastic.options.chart.expander.offset - $store.state.GanttElastic.options.chart.expander.size"
-      :y="task.y + ($store.state.GanttElastic.options.row.height - $store.state.GanttElastic.options.chart.expander.size)/2 "
+      :style="root.style('chart-expander', 'chart-expander--milestone', task.style['chart-expander'])"
+      :x="
+        task.x -
+          $store.state.GanttElastic.options.chart.expander.offset -
+          $store.state.GanttElastic.options.chart.expander.size
+      "
+      :y="
+        task.y +
+          ($store.state.GanttElastic.options.row.height - $store.state.GanttElastic.options.chart.expander.size) / 2
+      "
       :width="$store.state.GanttElastic.options.chart.expander.size"
       :height="$store.state.GanttElastic.options.chart.expander.size"
       v-if="displayExpander"
@@ -50,28 +57,36 @@
       </defs>
       <polygon
         class="gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon"
-        :style="root.style('chart-row-bar-polygon','chart-row-milestone-polygon', task.style['base'], task.style['chart-row-bar-polygon'])"
+        :style="
+          root.style(
+            'chart-row-bar-polygon',
+            'chart-row-milestone-polygon',
+            task.style['base'],
+            task.style['chart-row-bar-polygon']
+          )
+        "
         :points="getPoints"
       ></polygon>
-      <progress-bar :task="task" :clip-path="'url(#'+clipPathId+')'"></progress-bar>
+      <progress-bar :task="task" :clip-path="'url(#' + clipPathId + ')'"></progress-bar>
     </svg>
     <chart-text :task="task" v-if="$store.state.GanttElastic.options.chart.text.display"></chart-text>
   </g>
 </template>
 
 <script>
-import ChartText from "../Text.vue";
-import ProgressBar from "../ProgressBar.vue";
-import Expander from "../../Expander.vue";
+import ChartText from '../Text.vue';
+import ProgressBar from '../ProgressBar.vue';
+import Expander from '../../Expander.vue';
 export default {
+  name: 'Milestone',
   components: {
     ChartText,
     ProgressBar,
     Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -80,8 +95,8 @@ export default {
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__milestone-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__milestone-clip-path-' + this.task.id;
     },
 
     /**
@@ -89,7 +104,7 @@ export default {
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
 
@@ -98,7 +113,7 @@ export default {
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -107,7 +122,7 @@ export default {
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
       const fifty = task.height / 2;
       let offset = fifty;
@@ -127,9 +142,12 @@ export default {
      *
      * @returns {boolean}
      */
-    displayExpander () {
+    displayExpander() {
       const expander = this.$store.state.GanttElastic.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display);
+      return (
+        expander.display ||
+        (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
+      );
     }
   },
   methods: {
@@ -139,7 +157,7 @@ export default {
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
+    emitEvent(eventName, event) {
       if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }

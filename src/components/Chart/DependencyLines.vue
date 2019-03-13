@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'DependencyLines',
   inject: ['root'],
   props: ['tasks'],
   data() {

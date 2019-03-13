@@ -35,6 +35,7 @@
 import TaskListHeader from './TaskListHeader.vue';
 import TaskListItem from './TaskListItem.vue';
 export default {
+  name: 'TaskList',
   components: {
     TaskListHeader,
     TaskListItem

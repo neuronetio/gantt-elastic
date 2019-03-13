@@ -29,8 +29,9 @@
 <script>
 import dayjs from 'dayjs';
 export default {
+  name: 'DaysHighlight',
   inject: ['root'],
-  data () {
+  data() {
     return {};
   },
   methods: {
@@ -40,7 +41,7 @@ export default {
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
-    getKey (day) {
+    getKey(day) {
       return dayjs(day.time).format('YYYY-MM-DD');
     }
   },
@@ -50,7 +51,7 @@ export default {
      *
      * @returns {array}
      */
-    workingDays () {
+    workingDays() {
       return this.$store.state.GanttElastic.options.times.steps.filter(step => {
         return this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(dayjs(step.time).day()) === -1;
       });
@@ -61,13 +62,17 @@ export default {
      *
      * @returns {bool}
      */
-    showWorkingDays () {
+    showWorkingDays() {
       const calendar = this.$store.state.GanttElastic.options.calendar;
-      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+      if (
+        typeof calendar.workingDays !== 'undefined' &&
+        Array.isArray(calendar.workingDays) &&
+        calendar.workingDays.length
+      ) {
         return true;
       }
       return false;
     }
   }
-}
+};
 </script>

@@ -54,6 +54,7 @@ import Task from './Row/Task.vue';
 import Milestone from './Row/Milestone.vue';
 import Project from './Row/Project.vue';
 export default {
+  name: 'Chart',
   components: {
     Grid,
     DependencyLines,

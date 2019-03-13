@@ -452,6 +452,7 @@ let globalVisibleTasks = [];
  * Main vue component
  */
 const GanttElastic = {
+  name: 'GanttElastic',
   components: {
     MainView
   },

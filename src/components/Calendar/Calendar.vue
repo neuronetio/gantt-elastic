@@ -35,6 +35,7 @@
 import dayjs from 'dayjs';
 import CalendarRow from './CalendarRow.vue';
 export default {
+  name: 'Calendar',
   components: {
     CalendarRow
   },
