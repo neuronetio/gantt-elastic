@@ -235,13 +235,14 @@ function getOptions(userOptions) {
     },
     locale: {
       code: 'en',
+      name: 'en',
       Now: 'Now',
       'X-Scale': 'Zoom-X',
       'Y-Scale': 'Zoom-Y',
       'Task list width': 'Task list',
       'Before/After': 'Expand',
-      'Display task list': 'Show task list'
-      /*weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
+      'Display task list': 'Show task list',
+      weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
       weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
       weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
       months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split(
@@ -263,7 +264,7 @@ function getOptions(userOptions) {
         MM: '%d miesięcy',
         y: 'rok',
         yy: '%d lat'
-      }*/
+      }
     }
   };
 }
@@ -1190,13 +1191,13 @@ const GanttElastic = {
      */
     initTimes() {
       const firstTime = dayjs(this.$store.state.GanttElastic.options.times.firstTaskTime)
-        .locale(this.locale)
+        .locale(this.$store.state.GanttElastic.options.locale.code)
         .startOf('day')
         .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
         .startOf('day')
         .valueOf();
       const lastTime = dayjs(this.$store.state.GanttElastic.options.times.lastTaskTime)
-        .locale(this.locale)
+        .locale(this.$store.state.GanttElastic.options.locale.code)
         .endOf('day')
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
@@ -1415,13 +1416,13 @@ const GanttElastic = {
         this.$store.commit(this.updateTaskMut, newProps);
       }
       const firstTime = dayjs(firstTaskTime)
-        .locale(this.locale)
+        .locale(this.$store.state.GanttElastic.options.locale.code)
         .startOf('day')
         .subtract(this.$store.state.GanttElastic.options.scope.before, 'days')
         .startOf('day')
         .valueOf();
       const lastTime = dayjs(lastTaskTime)
-        .locale(this.locale)
+        .locale(this.$store.state.GanttElastic.options.locale.code)
         .endOf('day')
         .add(this.$store.state.GanttElastic.options.scope.after, 'days')
         .endOf('day')
