@@ -38,6 +38,7 @@
       oninput="progressChange()"
       id="progress"
     />
+    <input type="range" min="-10" max="10" oninput="startChange()" id="start" />
     <br />
     <button onclick="addTask()">Add task</button>
     <button onclick="changeOptions()">Change options</button>
@@ -421,6 +422,20 @@
           store.state.tasks.map(task => {
             if (task.id === id) {
               task.progress = percent;
+            }
+            return task;
+          })
+        );
+      }
+
+      function startChange() {
+        const id = Number(document.getElementById('progId').value);
+        const start = Number(document.getElementById('start').value);
+        store.commit(
+          'updateTasks',
+          store.state.tasks.map(task => {
+            if (task.id === id) {
+              task.start = getDate(24 * start);
             }
             return task;
           })
