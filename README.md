@@ -228,6 +228,8 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
 Take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples) file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
 
+There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
+
 You can also import gantt-elastic as compiled js component in commonjs or umd format ([examples](https://github.com/neuronetio/gantt-elastic/tree/master/examples) folder) or just grab GanttElastic.vue from src directory and add to your existing vue project.
 
 ```javascript
