@@ -16,7 +16,7 @@
         class="gantt-elastic__main-container"
         :style="
           root.style('main-container', {
-            width: getWidth + 'px',
+            width: $store.state.GanttElastic.options.clientWidth + 'px',
             height: $store.state.GanttElastic.options.height + 'px'
           })
         "
@@ -132,19 +132,6 @@ export default {
     document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth() {
-      let width = this.$store.state.GanttElastic.options.clientWidth;
-      if (width < 0) {
-        return 0;
-      }
-      return width;
-    },
-
     /**
      * Get margin left
      *

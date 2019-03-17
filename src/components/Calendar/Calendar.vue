@@ -11,21 +11,24 @@
     class="gantt-elastic__calendar-wrapper"
     :style="root.style('calendar-wrapper', { 'margin-bottom': $store.state.GanttElastic.options.calendar.gap + 'px' })"
   >
-    <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: getWidth + 'px' })">
+    <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: width + 'px' })">
       <calendar-row
-        :items="$store.state.GanttElastic.options.calendar.months"
+        :items="months"
         which="month"
         v-if="$store.state.GanttElastic.options.calendar.month.display"
+        :style="root.style('calendar-row--month')"
       ></calendar-row>
       <calendar-row
-        :items="$store.state.GanttElastic.options.calendar.days"
+        :items="days"
         which="day"
         v-if="$store.state.GanttElastic.options.calendar.day.display"
+        :style="root.style('calendar-row--day')"
       ></calendar-row>
       <calendar-row
-        :items="$store.state.GanttElastic.options.calendar.hours"
+        :items="hours"
         which="hour"
         v-if="$store.state.GanttElastic.options.calendar.hour.display"
+        :style="root.style('calendar-row--hour')"
       ></calendar-row>
     </div>
   </div>
@@ -34,6 +37,7 @@
 <script>
 import dayjs from 'dayjs';
 import CalendarRow from './CalendarRow.vue';
+import { mapState } from 'vuex';
 export default {
   name: 'Calendar',
   components: {
@@ -53,13 +57,6 @@ export default {
     this.root.$on('tasks-updated', this.regenerate);
     this.root.$on('options-updated', this.regenerate);
     this.root.$on('calendar-recalculate', this.regenerate);
-  },
-
-  /**
-   * Mounted
-   */
-  mounted() {
-    this.regenerate();
   },
 
   methods: {
@@ -159,7 +156,7 @@ export default {
         }
       }
       return {
-        count: 1,
+        count: 0,
         type: formatNames[0]
       };
     },
@@ -200,7 +197,7 @@ export default {
     generateHours() {
       let hours = [];
       if (!this.$store.state.GanttElastic.options.calendar.hour.display) {
-        return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours: [] } });
+        return hours;
       }
       for (
         let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
@@ -209,7 +206,7 @@ export default {
       ) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
-          return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
+          return hours;
         }
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
@@ -238,7 +235,7 @@ export default {
           });
         }
       }
-      return this.$store.commit(this.root.updateOptionsMut, { calendar: { hours } });
+      return hours;
     },
 
     /**
@@ -249,11 +246,11 @@ export default {
     generateDays() {
       let days = [];
       if (!this.$store.state.GanttElastic.options.calendar.day.display) {
-        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days: [] } });
+        return days;
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
+        return days;
       }
       const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
       for (
@@ -286,7 +283,7 @@ export default {
           type: daysCount.type
         });
       }
-      return this.$store.commit(this.root.updateOptionsMut, { calendar: { days } });
+      return days;
     },
 
     /**
@@ -297,7 +294,7 @@ export default {
     generateMonths() {
       let months = [];
       if (!this.$store.state.GanttElastic.options.calendar.month.display) {
-        return this.$store.commit(this.root.updateOptionsMut, { calendar: { months: [] } });
+        return months;
       }
       const monthsCount = this.howManyMonthsFit();
       let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
@@ -350,95 +347,36 @@ export default {
           currentDate = dayjs(this.$store.state.GanttElastic.options.times.lastDate);
         }
       }
-      return this.$store.commit(this.root.updateOptionsMut, { calendar: { months } });
+      return months;
     },
 
     /**
      * Regenerate dates
      */
     regenerate() {
-      this.generateHours();
-      this.generateDays();
-      this.generateMonths();
+      const hours = this.generateHours();
+      const days = this.generateDays();
+      const months = this.generateMonths();
+      this.$store.commit(this.root.updateOptionsMut, { calendar: { hours, days, months } });
       this.root.calculateCalendarDimensions();
     }
   },
 
   computed: {
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth() {
-      let width = this.$store.state.GanttElastic.options.width;
-      return width;
+    options() {
+      return this.$store.getters['GanttElastic/options'];
     },
-
-    /**
-     * Get month style
-     *
-     * @returns {object}
-     */
-    monthsStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.$store.state.GanttElastic.options.calendar.styles.row,
-        this.$store.state.GanttElastic.options.calendar.month.style
-      );
+    width() {
+      return this.options.clientWidth;
     },
-
-    /**
-     * Get day style
-     *
-     * @returns {object}
-     */
-    daysStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.$store.state.GanttElastic.options.calendar.styles.row,
-        this.$store.state.GanttElastic.options.calendar.day.style
-      );
+    days() {
+      return this.options.calendar.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
     },
-
-    /**
-     * Get hour styke
-     *
-     * @returns {object}
-     */
-    hoursStyle() {
-      return this.root.mergeDeep(
-        {},
-        this.$store.state.GanttElastic.options.calendar.styles.row,
-        this.$store.state.GanttElastic.options.calendar.hour.style
-      );
+    hours() {
+      return this.options.calendar.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
     },
-
-    /**
-     * Get visible days
-     *
-     * @returns {array}
-     */
-    getDays() {
-      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
-    },
-
-    /**
-     * Get visible hours
-     *
-     * @returns {array}
-     */
-    getHours() {
-      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
-    },
-
-    /**
-     * Get visible months
-     *
-     * @returns {array}
-     */
-    getMonths() {
-      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+    months() {
+      return this.options.calendar.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
     }
   }
 };

@@ -1,4 +1,4 @@
-import { mergeDeepReactive } from './GanttElastic.vue';
+import { mergeDeepReactive, mergeDeep } from './GanttElastic.vue';
 const GanttElasticVuexModule = {
   state: {
     tasks: [],
@@ -7,7 +7,8 @@ const GanttElasticVuexModule = {
       allVisibleTasksHeight: 0,
       refs: {},
       tasksById: {},
-      times: {}
+      times: {},
+      clientWidth: 0
     }
   },
   mutations: {
@@ -36,7 +37,19 @@ const GanttElasticVuexModule = {
     ['GanttElastic/updateOptions'](state, payload) {
       state.options = mergeDeepReactive(state.options, payload);
     }
+  },
+  getters: {
+    ['GanttElastic/options'](state) {
+      return state.options;
+    },
+    ['GanttElastic/tasks'](state) {
+      return state.tasks;
+    }
   }
 };
-window.GanttElasticVuexModule = GanttElasticVuexModule;
-export default GanttElasticVuexModule;
+const getStore = state => {
+  GanttElasticVuexModule.state = state;
+  return GanttElasticVuexModule;
+};
+export default getStore;
+window.GanttElasticVuexModule = getStore;

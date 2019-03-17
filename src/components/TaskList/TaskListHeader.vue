@@ -137,7 +137,7 @@ export default {
     /**
      * Resizer mouse up event handler
      */
-    resizerMouseUp(event) {
+    resizerMouseUp() {
       if (this.resizer.moving) {
         this.root.$emit('taskList-column-width-change', this.resizer.moving);
         this.root.$emit('taskList-column-width-change-stop', this.resizer.moving);
