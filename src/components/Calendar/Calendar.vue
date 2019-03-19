@@ -252,7 +252,7 @@ export default {
       if (daysCount.count === 0) {
         return days;
       }
-      const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
+      const dayStep = this.$store.state.GanttElastic.options.times.steps.length / daysCount.count;
       for (
         let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
         dayIndex < len;
@@ -339,7 +339,9 @@ export default {
           width: monthWidth,
           textWidth,
           type: choosenFormatName,
-          height: this.$store.state.GanttElastic.options.calendar.month.height,
+          height:
+            this.$store.state.GanttElastic.options.calendar.month.height -
+            parseFloat(this.root.style('calendar')['border-bottom-width']),
           label
         });
         currentDate = currentDate.add(1, 'month').startOf('month');
@@ -370,13 +372,13 @@ export default {
       return this.options.width;
     },
     days() {
-      return this.options.calendar.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+      return this.options.calendar.days;
     },
     hours() {
-      return this.options.calendar.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+      return this.options.calendar.hours;
     },
     months() {
-      return this.options.calendar.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+      return this.options.calendar.months;
     }
   }
 };

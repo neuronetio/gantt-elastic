@@ -2629,7 +2629,7 @@ var external_Vuex_ = __webpack_require__(4);
       if (daysCount.count === 0) {
         return days;
       }
-      const dayStep = Math.ceil(this.$store.state.GanttElastic.options.times.steps.length / daysCount.count);
+      const dayStep = this.$store.state.GanttElastic.options.times.steps.length / daysCount.count;
       for (
         let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
         dayIndex < len;
@@ -2716,7 +2716,9 @@ var external_Vuex_ = __webpack_require__(4);
           width: monthWidth,
           textWidth,
           type: choosenFormatName,
-          height: this.$store.state.GanttElastic.options.calendar.month.height,
+          height:
+            this.$store.state.GanttElastic.options.calendar.month.height -
+            parseFloat(this.root.style('calendar')['border-bottom-width']),
           label
         });
         currentDate = currentDate.add(1, 'month').startOf('month');
@@ -2747,13 +2749,13 @@ var external_Vuex_ = __webpack_require__(4);
       return this.options.width;
     },
     days() {
-      return this.options.calendar.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
+      return this.options.calendar.days;
     },
     hours() {
-      return this.options.calendar.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
+      return this.options.calendar.hours;
     },
     months() {
-      return this.options.calendar.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
+      return this.options.calendar.months;
     }
   }
 });
@@ -4983,10 +4985,14 @@ const fontFamily = 'Arial, sans-serif';
   calendar: {
     width: '100%',
     background: '#f3f5f7',
-    display: 'block'
+    display: 'block',
+    'border-bottom-width': '1px', // Calendar
+    'border-bottom-color': '#dadada',
+    'border-bottom-style': 'solid'
   },
   'calendar-row': {
-    display: 'flex'
+    display: 'flex',
+    'justify-content': 'space-between'
   },
   'calendar-row--month': {},
   'calendar-row--day': {},
@@ -4994,10 +5000,11 @@ const fontFamily = 'Arial, sans-serif';
   'calendar-row-rect': {
     background: 'transparent',
     'border-width': '0px', // Calendar
-    'border-right-width': '1px',
+    'border-right-width': '1px', // Calendar
     'border-color': '#dadada',
     'border-style': 'solid',
-    'flex-shrink': '0'
+    'flex-shrink': 0,
+    'flex-grow': 0
   },
   'calendar-row-text': {
     'font-family': fontFamily, // GanttElastic
@@ -5011,9 +5018,7 @@ const fontFamily = 'Arial, sans-serif';
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {
-    'border-bottom': '1px solid #dadada'
-  },
+  'calendar-row-rect--hour': {},
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },

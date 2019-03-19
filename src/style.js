@@ -77,10 +77,14 @@ export default {
   calendar: {
     width: '100%',
     background: '#f3f5f7',
-    display: 'block'
+    display: 'block',
+    'border-bottom-width': '1px', // Calendar
+    'border-bottom-color': '#dadada',
+    'border-bottom-style': 'solid'
   },
   'calendar-row': {
-    display: 'flex'
+    display: 'flex',
+    'justify-content': 'space-between'
   },
   'calendar-row--month': {},
   'calendar-row--day': {},
@@ -88,10 +92,11 @@ export default {
   'calendar-row-rect': {
     background: 'transparent',
     'border-width': '0px', // Calendar
-    'border-right-width': '1px',
+    'border-right-width': '1px', // Calendar
     'border-color': '#dadada',
     'border-style': 'solid',
-    'flex-shrink': '0'
+    'flex-shrink': 0,
+    'flex-grow': 0
   },
   'calendar-row-text': {
     'font-family': fontFamily, // GanttElastic
@@ -105,9 +110,7 @@ export default {
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {
-    'border-bottom': '1px solid #dadada'
-  },
+  'calendar-row-rect--hour': {},
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
