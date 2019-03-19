@@ -2753,7 +2753,7 @@ var external_Vuex_ = __webpack_require__(4);
       return this.$store.getters['GanttElastic/options'];
     },
     width() {
-      return this.options.clientWidth;
+      return this.options.width;
     },
     days() {
       return this.options.calendar.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
@@ -5338,9 +5338,9 @@ const ctx = document.createElement('canvas').getContext('2d');
  * @returns {object} merged options
  */
 function getOptions(userOptions) {
-  let localeCode = 'en';
-  if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.code === 'string') {
-    localeCode = userOptions.locale.code;
+  let localeName = 'en';
+  if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.name === 'string') {
+    localeName = userOptions.locale.name;
   }
   return {
     style: src_style,
@@ -5483,17 +5483,17 @@ function getOptions(userOptions) {
         format: {
           long(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('HH:mm');
           },
           medium(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('HH:mm');
           },
           short(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('HH');
           }
         }
@@ -5506,17 +5506,17 @@ function getOptions(userOptions) {
         format: {
           long(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('DD dddd');
           },
           medium(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('DD ddd');
           },
           short(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('DD');
           }
         }
@@ -5529,53 +5529,63 @@ function getOptions(userOptions) {
         format: {
           short(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('MM');
           },
           medium(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format("MMM 'YY");
           },
           long(date) {
             return dayjs_min_default()(date)
-              .locale(localeCode)
+              .locale(localeName)
               .format('MMMM YYYY');
           }
         }
       }
     },
     locale: {
-      code: 'en',
-      name: 'en',
+      name: 'en-gb',
       Now: 'Now',
       'X-Scale': 'Zoom-X',
       'Y-Scale': 'Zoom-Y',
       'Task list width': 'Task list',
       'Before/After': 'Expand',
       'Display task list': 'Show task list',
-      weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
-      weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
-      weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
-      months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split(
-        '_'
-      ),
-      ordinal: n => `${n}.`,
+      weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+      weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+      weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+      months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+      monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
       weekStart: 1,
       relativeTime: {
-        future: 'za %s',
-        past: 'po %s',
-        s: 'kilka sekund',
-        m: 'minuta',
-        mm: '%d minut',
-        h: 'godzina',
-        hh: '%d godzin',
-        d: 'tydzień',
-        dd: '%d tygodni',
-        M: 'miesiąc',
-        MM: '%d miesięcy',
-        y: 'rok',
-        yy: '%d lat'
+        future: 'in %s',
+        past: '%s ago',
+        s: 'a few seconds',
+        m: 'a minute',
+        mm: '%d minutes',
+        h: 'an hour',
+        hh: '%d hours',
+        d: 'a day',
+        dd: '%d days',
+        M: 'a month',
+        MM: '%d months',
+        y: 'a year',
+        yy: '%d years'
+      },
+      formats: {
+        LT: 'HH:mm',
+        LTS: 'HH:mm:ss',
+        L: 'DD/MM/YYYY',
+        LL: 'D MMMM YYYY',
+        LLL: 'D MMMM YYYY HH:mm',
+        LLLL: 'dddd, D MMMM YYYY HH:mm'
+      },
+      ordinal: n => {
+        const s = ['th', 'st', 'nd', 'rd'];
+        const v = n % 100;
+        return `[${n}${s[(v - 20) % 10] || s[v] || s[0]}]`;
       }
     }
   };
@@ -6476,13 +6486,13 @@ const GanttElastic = {
      */
     initTimes() {
       const firstTime = dayjs_min_default()(this.internalOptions.times.firstTaskTime)
-        .locale(this.internalOptions.locale.code)
+        .locale(this.internalOptions.locale.name)
         .startOf('day')
         .subtract(this.internalOptions.scope.before, 'days')
         .startOf('day')
         .valueOf();
       const lastTime = dayjs_min_default()(this.internalOptions.times.lastTaskTime)
-        .locale(this.internalOptions.locale.code)
+        .locale(this.internalOptions.locale.name)
         .endOf('day')
         .add(this.internalOptions.scope.after, 'days')
         .endOf('day')
@@ -6701,13 +6711,13 @@ const GanttElastic = {
         lastTaskTime = new Date().getTime() + 24 * 60 * 1000;
       }
       const firstTime = dayjs_min_default()(firstTaskTime)
-        .locale(this.internalOptions.locale.code)
+        .locale(this.internalOptions.locale.name)
         .startOf('day')
         .subtract(this.internalOptions.scope.before, 'days')
         .startOf('day')
         .valueOf();
       const lastTime = dayjs_min_default()(lastTaskTime)
-        .locale(this.internalOptions.locale.code)
+        .locale(this.internalOptions.locale.name)
         .endOf('day')
         .add(this.internalOptions.scope.after, 'days')
         .endOf('day')
