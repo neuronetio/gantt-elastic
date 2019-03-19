@@ -12,8 +12,13 @@
     "@vue/cli-plugin-eslint": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
     "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.5.0",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.15.1",
+    "jest": "^24.5.0",
+    "puppeteer": "^1.13.0",
     "vue-loader": "^15.7.0",
     "vue-slider-component": "^2.8.14",
     "vue-switches": "^2.0.1",
@@ -23,7 +28,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --detectOpenHandles",
     "build": "webpack",
     "dev": "webpack --config webpack.dev.js --watch"
   },
