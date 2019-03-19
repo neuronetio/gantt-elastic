@@ -30,6 +30,7 @@ gantt-elastic is not fully finished yet and may change (not released yet)
 ### Full documentation soon (for now take a look at examples folder)
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
+There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
 
 ### Installation
 
@@ -45,7 +46,11 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
     <title>gantt-elastic demo</title>
   </head>
   <body>
-    <div id="gantt" style="width:100%;height:100%;"></div>
+    <div id="app" style="width:100%;height:100%;">
+      <gantt-elastic :tasks="$store.state.tasks" :options="$store.state.options">
+        <gantt-header slot="header"></gantt-header>
+      </gantt-elastic>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
@@ -148,7 +153,7 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
           ]
         },
         locale: {
-          code: 'en',
+          name: 'en',
           Now: 'Now',
           'X-Scale': 'Zoom-X',
           'Y-Scale': 'Zoom-Y',
@@ -228,7 +233,7 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
 Take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples) file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
 
-There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
+Demo project: https://github.com/neuronetio/vue-gantt-elastic
 
 You can also import gantt-elastic as compiled js component in commonjs or umd format ([examples](https://github.com/neuronetio/gantt-elastic/tree/master/examples) folder) or just grab GanttElastic.vue from src directory and add to your existing vue project.
 
