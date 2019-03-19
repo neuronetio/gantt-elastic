@@ -367,7 +367,7 @@ export default {
       return this.$store.getters['GanttElastic/options'];
     },
     width() {
-      return this.options.clientWidth;
+      return this.options.width;
     },
     days() {
       return this.options.calendar.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
