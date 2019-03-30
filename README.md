@@ -25,7 +25,7 @@ is a vue component but it could be used in other frameworks or even with jQuery 
 
 gantt-elastic is not fully finished yet and may change (not released yet)
 
-### If you want more activity in this repo give it a :star:
+### Thank you all for so many :star:
 
 ### Full documentation soon (for now take a look at examples folder)
 
