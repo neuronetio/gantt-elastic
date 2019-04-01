@@ -10,8 +10,8 @@
   <svg
     class="gantt-elastic__chart-row-text-wrapper"
     :style="root.style('chart-row-text-wrapper')"
-    :x="task.x+task.width + root.state.chart.text.offset"
-    :y="task.y-root.state.chart.grid.horizontal.gap"
+    :x="task.x + task.width + root.state.options.chart.text.offset"
+    :y="task.y - root.state.options.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
   >
@@ -23,14 +23,14 @@
       >
         <div
           class="gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text"
-          :style="Object.assign({},root.style('chart-row-text-content','chart-row-text-content--text'),contentStyle)"
+          :style="Object.assign({}, root.style('chart-row-text-content', 'chart-row-text-content--text'), contentStyle)"
           v-if="!html"
         >
-          <div>{{task.label}}</div>
+          <div>{{ task.label }}</div>
         </div>
         <div
           class="gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html"
-          :style="Object.assign({},root.style('chart-row-text-content','chart-row-text-content--html'),contentStyle)"
+          :style="Object.assign({}, root.style('chart-row-text-content', 'chart-row-text-content--html'), contentStyle)"
           v-if="html"
           v-html="task.label"
         ></div>
@@ -41,9 +41,10 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ChartText',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -52,11 +53,11 @@ export default {
      *
      * @returns {number}
      */
-    getWidth () {
+    getWidth() {
       const textStyle = this.root.style('chart-row-text');
-      this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      this.root.state.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.chart.text.xPadding * 2;
+      return textWidth + this.root.state.options.chart.text.xPadding * 2;
     },
 
     /**
@@ -64,8 +65,8 @@ export default {
      *
      * @returns {number}
      */
-    getHeight () {
-      return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
+    getHeight() {
+      return this.task.height + this.root.state.options.chart.grid.horizontal.gap * 2;
     },
 
     /**
@@ -73,7 +74,7 @@ export default {
      *
      * @returns {object}
      */
-    contentStyle () {
+    contentStyle() {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
     },
 
@@ -82,16 +83,16 @@ export default {
      *
      * @returns {boolean}
      */
-    html () {
-      const cols = this.root.state.taskList.columns;
+    html() {
+      const cols = this.root.state.options.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
-        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+        if (col.value === 'label' && typeof col.html !== 'undefined' && col.html) {
           return true;
         }
       }
       return false;
-    },
+    }
   }
 };
 </script>

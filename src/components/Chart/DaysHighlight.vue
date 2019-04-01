@@ -27,9 +27,11 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 export default {
+  name: 'DaysHighlight',
   inject: ['root'],
-  data () {
+  data() {
     return {};
   },
   methods: {
@@ -39,8 +41,8 @@ export default {
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
-    getKey (day) {
-      return day.date.format('YYYY-MM-DD');
+    getKey(day) {
+      return dayjs(day.time).format('YYYY-MM-DD');
     }
   },
   computed: {
@@ -49,9 +51,9 @@ export default {
      *
      * @returns {array}
      */
-    workingDays () {
-      return this.root.state.times.steps.filter(step => {
-        return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
+    workingDays() {
+      return this.root.state.options.times.steps.filter(step => {
+        return this.root.state.options.calendar.workingDays.indexOf(dayjs(step.time).day()) === -1;
       });
     },
 
@@ -60,13 +62,17 @@ export default {
      *
      * @returns {bool}
      */
-    showWorkingDays () {
-      const calendar = this.root.state.calendar;
-      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+    showWorkingDays() {
+      const calendar = this.root.state.options.calendar;
+      if (
+        typeof calendar.workingDays !== 'undefined' &&
+        Array.isArray(calendar.workingDays) &&
+        calendar.workingDays.length
+      ) {
         return true;
       }
       return false;
     }
   }
-}
+};
 </script>

@@ -30,13 +30,13 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["tasks"],
-  data () {
+  name: 'DependencyLines',
+  inject: ['root'],
+  props: ['tasks'],
+  data() {
     return {};
   },
   methods: {
-
     /**
      * Get path points
      *
@@ -44,7 +44,7 @@ export default {
      * @param {any} toTaskId
      * @returns {string}
      */
-    getPoints (fromTaskId, toTaskId) {
+    getPoints(fromTaskId, toTaskId) {
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
       if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {
@@ -69,11 +69,16 @@ export default {
       let points = `M ${startX} ${startY}
           L ${startX + offset},${startY} `;
       if (isBefore) {
-        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}
+        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY +
+          roundness * yMultiplier}
             L ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2 - roundness * yMultiplier}
-            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY + (distanceY * yMultiplier) / 2}
+            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY +
+          (distanceY * yMultiplier) / 2}
             L ${startX - offset + distanceX},${startY + (distanceY * yMultiplier) / 2}
-            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
+            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX -
+          offset +
+          distanceX -
+          roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
             L ${startX - offset + distanceX - roundness},${stopY - roundness * yMultiplier}
             Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}
             L ${stopX},${stopY}`;
@@ -93,15 +98,16 @@ export default {
      *
      * @returns {array}
      */
-    dependencyTasks () {
+    dependencyTasks() {
       return this.tasks
-        .filter(task => typeof task.dependentOn !== "undefined")
+        .filter(task => typeof task.dependentOn !== 'undefined')
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
             return { points: this.getPoints(id, task.id) };
           });
           return task;
-        }).filter(task => task.dependencyLines.points !== null);
+        })
+        .filter(task => task.dependencyLines.points !== null);
     }
   }
 };

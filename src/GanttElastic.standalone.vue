@@ -15,6 +15,7 @@
 <script>
 import GanttElastic from './GanttElastic.vue';
 export default {
+  name: 'GanttElasticStandalone',
   components: {
     'gantt-header': { template: `` },
     'gantt-elastic': GanttElastic,
@@ -23,7 +24,7 @@ export default {
   props: ['header', 'footer'],
   data: {
     tasks: [],
-    options: {},
-  },
+    options: {}
+  }
 };
 </script>

@@ -82,27 +82,34 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+!function(t,n){ true?module.exports=n():undefined}(this,function(){"use strict";var t="millisecond",n="second",e="minute",r="hour",i="day",s="week",u="month",a="quarter",o="year",h=/^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,f=/\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,c=function(t,n,e){var r=String(t);return!r||r.length>=n?t:""+Array(n+1-r.length).join(e)+t},d={s:c,z:function(t){var n=-t.utcOffset(),e=Math.abs(n),r=Math.floor(e/60),i=e%60;return(n<=0?"+":"-")+c(r,2,"0")+":"+c(i,2,"0")},m:function(t,n){var e=12*(n.year()-t.year())+(n.month()-t.month()),r=t.clone().add(e,u),i=n-r<0,s=t.clone().add(e+(i?-1:1),u);return Number(-(e+(n-r)/(i?r-s:s-r))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:o,w:s,d:i,h:r,m:e,s:n,ms:t,Q:a}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},$={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},l="en",m={};m[l]=$;var y=function(t){return t instanceof S},M=function(t,n,e){var r;if(!t)return null;if("string"==typeof t)m[t]&&(r=t),n&&(m[t]=n,r=t);else{var i=t.name;m[i]=t,r=i}return e||(l=r),r},g=function(t,n,e){if(y(t))return t.clone();var r=n?"string"==typeof n?{format:n,pl:e}:n:{};return r.date=t,new S(r)},D=d;D.l=M,D.i=y,D.w=function(t,n){return g(t,{locale:n.$L,utc:n.$u})};var S=function(){function c(t){this.$L=this.$L||M(t.locale,null,!0)||l,this.parse(t)}var d=c.prototype;return d.parse=function(t){this.$d=function(t){var n=t.date,e=t.utc;if(null===n)return new Date(NaN);if(D.u(n))return new Date;if(n instanceof Date)return new Date(n);if("string"==typeof n&&!/Z$/i.test(n)){var r=n.match(h);if(r)return e?new Date(Date.UTC(r[1],r[2]-1,r[3]||1,r[4]||0,r[5]||0,r[6]||0,r[7]||0)):new Date(r[1],r[2]-1,r[3]||1,r[4]||0,r[5]||0,r[6]||0,r[7]||0)}return new Date(n)}(t),this.init()},d.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},d.$utils=function(){return D},d.isValid=function(){return!("Invalid Date"===this.$d.toString())},d.isSame=function(t,n){var e=g(t);return this.startOf(n)<=e&&e<=this.endOf(n)},d.isAfter=function(t,n){return g(t)<this.startOf(n)},d.isBefore=function(t,n){return this.endOf(n)<g(t)},d.$g=function(t,n,e){return D.u(t)?this[n]:this.set(e,t)},d.year=function(t){return this.$g(t,"$y",o)},d.month=function(t){return this.$g(t,"$M",u)},d.day=function(t){return this.$g(t,"$W",i)},d.date=function(t){return this.$g(t,"$D","date")},d.hour=function(t){return this.$g(t,"$H",r)},d.minute=function(t){return this.$g(t,"$m",e)},d.second=function(t){return this.$g(t,"$s",n)},d.millisecond=function(n){return this.$g(n,"$ms",t)},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,a){var h=this,f=!!D.u(a)||a,c=D.p(t),d=function(t,n){var e=D.w(h.$u?Date.UTC(h.$y,n,t):new Date(h.$y,n,t),h);return f?e:e.endOf(i)},$=function(t,n){return D.w(h.toDate()[t].apply(h.toDate(),(f?[0,0,0,0]:[23,59,59,999]).slice(n)),h)},l=this.$W,m=this.$M,y=this.$D,M="set"+(this.$u?"UTC":"");switch(c){case o:return f?d(1,0):d(31,11);case u:return f?d(1,m):d(0,m+1);case s:var g=this.$locale().weekStart||0,S=(l<g?l+7:l)-g;return d(f?y-S:y+(6-S),m);case i:case"date":return $(M+"Hours",0);case r:return $(M+"Minutes",1);case e:return $(M+"Seconds",2);case n:return $(M+"Milliseconds",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(s,a){var h,f=D.p(s),c="set"+(this.$u?"UTC":""),d=(h={},h[i]=c+"Date",h.date=c+"Date",h[u]=c+"Month",h[o]=c+"FullYear",h[r]=c+"Hours",h[e]=c+"Minutes",h[n]=c+"Seconds",h[t]=c+"Milliseconds",h)[f],$=f===i?this.$D+(a-this.$W):a;return this.$d[d]&&this.$d[d]($),this.init(),this},d.set=function(t,n){return this.clone().$set(t,n)},d.add=function(t,a){var h,f=this;t=Number(t);var c=D.p(a),d=function(n,e){var r=f.clone().set("date",1).set(n,e+t);return r.set("date",Math.min(f.$D,r.daysInMonth()))},$=function(n){var e=new Date(f.$d);return e.setDate(e.getDate()+n*t),D.w(e,f)};if(c===u)return d(u,this.$M);if(c===o)return d(o,this.$y);if(c===i)return $(1);if(c===s)return $(7);var l=(h={},h[e]=6e4,h[r]=36e5,h[n]=1e3,h)[c]||1,m=this.valueOf()+t*l;return D.w(m,this)},d.subtract=function(t,n){return this.add(-1*t,n)},d.format=function(t){var n=this;if(!this.isValid())return"Invalid Date";var e=t||"YYYY-MM-DDTHH:mm:ssZ",r=D.z(this),i=this.$locale(),s=i.weekdays,u=i.months,a=function(t,n,e,r){return t&&t[n]||e[n].substr(0,r)},o=function(t){return D.s(n.$H%12||12,t,"0")},h={YY:String(this.$y).slice(-2),YYYY:String(this.$y),M:String(this.$M+1),MM:D.s(this.$M+1,2,"0"),MMM:a(i.monthsShort,this.$M,u,3),MMMM:u[this.$M],D:String(this.$D),DD:D.s(this.$D,2,"0"),d:String(this.$W),dd:a(i.weekdaysMin,this.$W,s,2),ddd:a(i.weekdaysShort,this.$W,s,3),dddd:s[this.$W],H:String(this.$H),HH:D.s(this.$H,2,"0"),h:o(1),hh:o(2),a:this.$H<12?"am":"pm",A:this.$H<12?"AM":"PM",m:String(this.$m),mm:D.s(this.$m,2,"0"),s:String(this.$s),ss:D.s(this.$s,2,"0"),SSS:D.s(this.$ms,3,"0"),Z:r};return e.replace(f,function(t){return t.indexOf("[")>-1?t.replace(/\[|\]/g,""):h[t]||r.replace(":","")})},d.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},d.diff=function(t,h,f){var c,d=D.p(h),$=g(t),l=6e4*($.utcOffset()-this.utcOffset()),m=this-$,y=D.m(this,$);return y=(c={},c[o]=y/12,c[u]=y,c[a]=y/3,c[s]=(m-l)/6048e5,c[i]=(m-l)/864e5,c[r]=m/36e5,c[e]=m/6e4,c[n]=m/1e3,c)[d]||m,f?y:D.a(y)},d.daysInMonth=function(){return this.endOf(u).$D},d.$locale=function(){return m[this.$L]},d.locale=function(t,n){if(!t)return this.$L;var e=this.clone();return e.$L=M(t,n,!0),e},d.clone=function(){return D.w(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.$d.toISOString()},d.toString=function(){return this.$d.toUTCString()},c}();return g.prototype=S.prototype,g.extend=function(t,n){return t(n,S,g),g},g.locale=M,g.isDayjs=y,g.unix=function(t){return g(1e3*t)},g.en=m[l],g.Ls=m,g});
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(3);
+var content = __webpack_require__(5);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(6).default
+var add = __webpack_require__(8).default
 var update = add("c3e5085c", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -184,22 +191,28 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("Vue");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
-exports.i(__webpack_require__(4), "");
+exports.i(__webpack_require__(6), "");
 
 // module
 exports.push([module.i, "\n", ""]);
@@ -208,10 +221,10 @@ exports.push([module.i, "\n", ""]);
 
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -222,7 +235,7 @@ exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.
 
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -239,7 +252,7 @@ var render = function() {
     [
       _vm._t("header"),
       _vm._v(" "),
-      _c("main-view", { attrs: { tasks: _vm.tasks, options: _vm.options } }),
+      _c("main-view"),
       _vm._v(" "),
       _vm._t("footer")
     ],
@@ -252,519 +265,14 @@ render._withStripped = true
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/constant.js
-var SECONDS_A_MINUTE = 60;
-var SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;
-var SECONDS_A_DAY = SECONDS_A_HOUR * 24;
-var SECONDS_A_WEEK = SECONDS_A_DAY * 7;
-var MILLISECONDS_A_SECOND = 1e3;
-var MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND;
-var MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND; // English locales
+// EXTERNAL MODULE: external "Vue"
+var external_Vue_ = __webpack_require__(3);
+var external_Vue_default = /*#__PURE__*/__webpack_require__.n(external_Vue_);
 
-var MS = 'millisecond';
-var S = 'second';
-var MIN = 'minute';
-var H = 'hour';
-var D = 'day';
-var W = 'week';
-var M = 'month';
-var Q = 'quarter';
-var Y = 'year';
-var DATE = 'date';
-var FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ';
-var INVALID_DATE_STRING = 'Invalid Date'; // regex
+// EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
+var dayjs_min = __webpack_require__(0);
+var dayjs_min_default = /*#__PURE__*/__webpack_require__.n(dayjs_min);
 
-var REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
-var REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
-var en = {
-  name: 'en',
-  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
-};
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/utils.js
-
-
-var padStart = function padStart(string, length, pad) {
-  var s = String(string);
-  if (!s || s.length >= length) return string;
-  return "" + Array(length + 1 - s.length).join(pad) + string;
-};
-
-var padZoneStr = function padZoneStr(negMinuts) {
-  var minutes = Math.abs(negMinuts);
-  var hourOffset = Math.floor(minutes / 60);
-  var minuteOffset = minutes % 60;
-  return "" + (negMinuts <= 0 ? '+' : '-') + padStart(hourOffset, 2, '0') + ":" + padStart(minuteOffset, 2, '0');
-};
-
-var monthDiff = function monthDiff(a, b) {
-  // function from moment.js in order to keep the same result
-  var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month());
-  var anchor = a.clone().add(wholeMonthDiff, 'months');
-  var c = b - anchor < 0;
-  var anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months');
-  return Number(-(wholeMonthDiff + (b - anchor) / (c ? anchor - anchor2 : anchor2 - anchor)) || 0);
-};
-
-var absFloor = function absFloor(n) {
-  return n < 0 ? Math.ceil(n) || 0 : Math.floor(n);
-};
-
-var utils_prettyUnit = function prettyUnit(u) {
-  var special = {
-    M: M,
-    y: Y,
-    w: W,
-    d: D,
-    h: H,
-    m: MIN,
-    s: S,
-    ms: MS
-  };
-  return special[u] || String(u || '').toLowerCase().replace(/s$/, '');
-};
-
-var isUndefined = function isUndefined(s) {
-  return s === undefined;
-};
-
-/* harmony default export */ var utils = ({
-  padStart: padStart,
-  padZoneStr: padZoneStr,
-  monthDiff: monthDiff,
-  absFloor: absFloor,
-  prettyUnit: utils_prettyUnit,
-  isUndefined: isUndefined
-});
-// CONCATENATED MODULE: ./node_modules/dayjs/esm/index.js
-
-
-var L = 'en'; // global locale
-
-var Ls = {}; // global loaded locale
-
-Ls[L] = en;
-
-var isDayjs = function isDayjs(d) {
-  return d instanceof esm_Dayjs;
-}; // eslint-disable-line no-use-before-define
-
-
-var parseLocale = function parseLocale(preset, object, isLocal) {
-  var l;
-  if (!preset) return null;
-
-  if (typeof preset === 'string') {
-    if (Ls[preset]) {
-      l = preset;
-    }
-
-    if (object) {
-      Ls[preset] = object;
-      l = preset;
-    }
-  } else {
-    var name = preset.name;
-    Ls[name] = preset;
-    l = name;
-  }
-
-  if (!isLocal) L = l;
-  return l;
-};
-
-var dayjs = function dayjs(date, c) {
-  if (isDayjs(date)) {
-    return date.clone();
-  } // eslint-disable-next-line no-nested-ternary
-
-
-  var cfg = c ? typeof c === 'string' ? {
-    format: c
-  } : c : {};
-  cfg.date = date;
-  return new esm_Dayjs(cfg); // eslint-disable-line no-use-before-define
-};
-
-var wrapper = function wrapper(date, instance) {
-  return dayjs(date, {
-    locale: instance.$L
-  });
-};
-
-var Utils = utils; // for plugin use
-
-Utils.parseLocale = parseLocale;
-Utils.isDayjs = isDayjs;
-Utils.wrapper = wrapper;
-
-var esm_parseDate = function parseDate(date) {
-  var reg;
-  if (date === null) return new Date(NaN); // Treat null as an invalid date
-
-  if (Utils.isUndefined(date)) return new Date();
-  if (date instanceof Date) return date; // eslint-disable-next-line no-cond-assign
-
-  if (typeof date === 'string' && /.*[^Z]$/i.test(date) // looking for a better way
-  && (reg = date.match(REGEX_PARSE))) {
-    // 2018-08-08 or 20180808
-    return new Date(reg[1], reg[2] - 1, reg[3] || 1, reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0);
-  }
-
-  return new Date(date); // timestamp
-};
-
-var esm_Dayjs =
-/*#__PURE__*/
-function () {
-  function Dayjs(cfg) {
-    this.parse(cfg); // for plugin
-  }
-
-  var _proto = Dayjs.prototype;
-
-  _proto.parse = function parse(cfg) {
-    this.$d = esm_parseDate(cfg.date);
-    this.init(cfg);
-  };
-
-  _proto.init = function init(cfg) {
-    var $d = this.$d;
-    this.$y = $d.getFullYear();
-    this.$M = $d.getMonth();
-    this.$D = $d.getDate();
-    this.$W = $d.getDay();
-    this.$H = $d.getHours();
-    this.$m = $d.getMinutes();
-    this.$s = $d.getSeconds();
-    this.$ms = $d.getMilliseconds();
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L;
-  }; // eslint-disable-next-line class-methods-use-this
-
-
-  _proto.$utils = function $utils() {
-    return Utils;
-  };
-
-  _proto.isValid = function isValid() {
-    return !(this.$d.toString() === INVALID_DATE_STRING);
-  };
-
-  _proto.isSame = function isSame(that, units) {
-    var other = dayjs(that);
-    return this.startOf(units) <= other && other <= this.endOf(units);
-  };
-
-  _proto.isAfter = function isAfter(that, units) {
-    return dayjs(that) < this.startOf(units);
-  };
-
-  _proto.isBefore = function isBefore(that, units) {
-    return this.endOf(units) < dayjs(that);
-  };
-
-  _proto.year = function year() {
-    return this.$y;
-  };
-
-  _proto.month = function month() {
-    return this.$M;
-  };
-
-  _proto.day = function day() {
-    return this.$W;
-  };
-
-  _proto.date = function date() {
-    return this.$D;
-  };
-
-  _proto.hour = function hour() {
-    return this.$H;
-  };
-
-  _proto.minute = function minute() {
-    return this.$m;
-  };
-
-  _proto.second = function second() {
-    return this.$s;
-  };
-
-  _proto.millisecond = function millisecond() {
-    return this.$ms;
-  };
-
-  _proto.unix = function unix() {
-    return Math.floor(this.valueOf() / 1000);
-  };
-
-  _proto.valueOf = function valueOf() {
-    // timezone(hour) * 60 * 60 * 1000 => ms
-    return this.$d.getTime();
-  };
-
-  _proto.startOf = function startOf(units, _startOf) {
-    var _this = this;
-
-    // startOf -> endOf
-    var isStartOf = !Utils.isUndefined(_startOf) ? _startOf : true;
-    var unit = Utils.prettyUnit(units);
-
-    var instanceFactory = function instanceFactory(d, m) {
-      var ins = wrapper(new Date(_this.$y, m, d), _this);
-      return isStartOf ? ins : ins.endOf(D);
-    };
-
-    var instanceFactorySet = function instanceFactorySet(method, slice) {
-      var argumentStart = [0, 0, 0, 0];
-      var argumentEnd = [23, 59, 59, 999];
-      return wrapper(_this.toDate()[method].apply( // eslint-disable-line prefer-spread
-      _this.toDate(), (isStartOf ? argumentStart : argumentEnd).slice(slice)), _this);
-    };
-
-    switch (unit) {
-      case Y:
-        return isStartOf ? instanceFactory(1, 0) : instanceFactory(31, 11);
-
-      case M:
-        return isStartOf ? instanceFactory(1, this.$M) : instanceFactory(0, this.$M + 1);
-
-      case W:
-        {
-          var weekStart = this.$locale().weekStart || 0;
-          return isStartOf ? instanceFactory(this.$D - (this.$W - weekStart), this.$M) : instanceFactory(this.$D + (6 - (this.$W - weekStart)), this.$M);
-        }
-
-      case D:
-      case DATE:
-        return instanceFactorySet('setHours', 0);
-
-      case H:
-        return instanceFactorySet('setMinutes', 1);
-
-      case MIN:
-        return instanceFactorySet('setSeconds', 2);
-
-      case S:
-        return instanceFactorySet('setMilliseconds', 3);
-
-      default:
-        return this.clone();
-    }
-  };
-
-  _proto.endOf = function endOf(arg) {
-    return this.startOf(arg, false);
-  };
-
-  _proto.$set = function $set(units, int) {
-    var _C$D$C$DATE$C$M$C$Y$C;
-
-    // private set
-    var unit = Utils.prettyUnit(units);
-    var name = (_C$D$C$DATE$C$M$C$Y$C = {}, _C$D$C$DATE$C$M$C$Y$C[D] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[DATE] = 'setDate', _C$D$C$DATE$C$M$C$Y$C[M] = 'setMonth', _C$D$C$DATE$C$M$C$Y$C[Y] = 'setFullYear', _C$D$C$DATE$C$M$C$Y$C[H] = 'setHours', _C$D$C$DATE$C$M$C$Y$C[MIN] = 'setMinutes', _C$D$C$DATE$C$M$C$Y$C[S] = 'setSeconds', _C$D$C$DATE$C$M$C$Y$C[MS] = 'setMilliseconds', _C$D$C$DATE$C$M$C$Y$C)[unit];
-    var arg = unit === D ? this.$D + (int - this.$W) : int;
-    if (this.$d[name]) this.$d[name](arg);
-    this.init();
-    return this;
-  };
-
-  _proto.set = function set(string, int) {
-    return this.clone().$set(string, int);
-  };
-
-  _proto.add = function add(number, units) {
-    var _this2 = this,
-        _C$MIN$C$H$C$S$unit;
-
-    number = Number(number); // eslint-disable-line no-param-reassign
-
-    var unit = Utils.prettyUnit(units);
-
-    var instanceFactory = function instanceFactory(u, n) {
-      var date = _this2.set(DATE, 1).set(u, n + number);
-
-      return date.set(DATE, Math.min(_this2.$D, date.daysInMonth()));
-    };
-
-    var instanceFactorySet = function instanceFactorySet(n) {
-      var date = new Date(_this2.$d);
-      date.setDate(date.getDate() + n * number);
-      return wrapper(date, _this2);
-    };
-
-    if (unit === M) {
-      return instanceFactory(M, this.$M);
-    }
-
-    if (unit === Y) {
-      return instanceFactory(Y, this.$y);
-    }
-
-    if (unit === D) {
-      return instanceFactorySet(1);
-    }
-
-    if (unit === W) {
-      return instanceFactorySet(7);
-    }
-
-    var step = (_C$MIN$C$H$C$S$unit = {}, _C$MIN$C$H$C$S$unit[MIN] = MILLISECONDS_A_MINUTE, _C$MIN$C$H$C$S$unit[H] = MILLISECONDS_A_HOUR, _C$MIN$C$H$C$S$unit[S] = MILLISECONDS_A_SECOND, _C$MIN$C$H$C$S$unit)[unit] || 1; // ms
-
-    var nextTimeStamp = this.valueOf() + number * step;
-    return wrapper(nextTimeStamp, this);
-  };
-
-  _proto.subtract = function subtract(number, string) {
-    return this.add(number * -1, string);
-  };
-
-  _proto.format = function format(formatStr) {
-    var _this3 = this;
-
-    if (!this.isValid()) return INVALID_DATE_STRING;
-    var str = formatStr || FORMAT_DEFAULT;
-    var zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset());
-    var locale = this.$locale();
-    var weekdays = locale.weekdays,
-        months = locale.months;
-
-    var getShort = function getShort(arr, index, full, length) {
-      return arr && arr[index] || full[index].substr(0, length);
-    };
-
-    var get$H = function get$H(match) {
-      if (_this3.$H === 0) return 12;
-      return Utils.padStart(_this3.$H < 13 ? _this3.$H : _this3.$H - 12, match === 'hh' ? 2 : 1, '0');
-    };
-
-    var matches = {
-      YY: String(this.$y).slice(-2),
-      YYYY: String(this.$y),
-      M: String(this.$M + 1),
-      MM: Utils.padStart(this.$M + 1, 2, '0'),
-      MMM: getShort(locale.monthsShort, this.$M, months, 3),
-      MMMM: months[this.$M],
-      D: String(this.$D),
-      DD: Utils.padStart(this.$D, 2, '0'),
-      d: String(this.$W),
-      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
-      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
-      dddd: weekdays[this.$W],
-      H: String(this.$H),
-      HH: Utils.padStart(this.$H, 2, '0'),
-      h: get$H('h'),
-      hh: get$H('hh'),
-      a: this.$H < 12 ? 'am' : 'pm',
-      A: this.$H < 12 ? 'AM' : 'PM',
-      m: String(this.$m),
-      mm: Utils.padStart(this.$m, 2, '0'),
-      s: String(this.$s),
-      ss: Utils.padStart(this.$s, 2, '0'),
-      SSS: Utils.padStart(this.$ms, 3, '0'),
-      Z: zoneStr
-    };
-    return str.replace(REGEX_FORMAT, function (match) {
-      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '');
-      return matches[match] || zoneStr.replace(':', ''); // 'ZZ'
-    });
-  };
-
-  _proto.utcOffset = function utcOffset() {
-    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
-    // https://github.com/moment/moment/pull/1871
-    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15;
-  };
-
-  _proto.diff = function diff(input, units, float) {
-    var _C$Y$C$M$C$Q$C$W$C$D$;
-
-    var unit = Utils.prettyUnit(units);
-    var that = dayjs(input);
-    var zoneDelta = (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE;
-    var diff = this - that;
-    var result = Utils.monthDiff(this, that);
-    result = (_C$Y$C$M$C$Q$C$W$C$D$ = {}, _C$Y$C$M$C$Q$C$W$C$D$[Y] = result / 12, _C$Y$C$M$C$Q$C$W$C$D$[M] = result, _C$Y$C$M$C$Q$C$W$C$D$[Q] = result / 3, _C$Y$C$M$C$Q$C$W$C$D$[W] = (diff - zoneDelta) / MILLISECONDS_A_WEEK, _C$Y$C$M$C$Q$C$W$C$D$[D] = (diff - zoneDelta) / MILLISECONDS_A_DAY, _C$Y$C$M$C$Q$C$W$C$D$[H] = diff / MILLISECONDS_A_HOUR, _C$Y$C$M$C$Q$C$W$C$D$[MIN] = diff / MILLISECONDS_A_MINUTE, _C$Y$C$M$C$Q$C$W$C$D$[S] = diff / MILLISECONDS_A_SECOND, _C$Y$C$M$C$Q$C$W$C$D$)[unit] || diff; // milliseconds
-
-    return float ? result : Utils.absFloor(result);
-  };
-
-  _proto.daysInMonth = function daysInMonth() {
-    return this.endOf(M).$D;
-  };
-
-  _proto.$locale = function $locale() {
-    // get locale object
-    return Ls[this.$L];
-  };
-
-  _proto.locale = function locale(preset, object) {
-    var that = this.clone();
-    that.$L = parseLocale(preset, object, true);
-    return that;
-  };
-
-  _proto.clone = function clone() {
-    return wrapper(this.toDate(), this);
-  };
-
-  _proto.toDate = function toDate() {
-    return new Date(this.$d);
-  };
-
-  _proto.toArray = function toArray() {
-    return [this.$y, this.$M, this.$D, this.$H, this.$m, this.$s, this.$ms];
-  };
-
-  _proto.toJSON = function toJSON() {
-    return this.toISOString();
-  };
-
-  _proto.toISOString = function toISOString() {
-    // ie 8 return
-    // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
-    // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
-    return this.$d.toISOString();
-  };
-
-  _proto.toObject = function toObject() {
-    return {
-      years: this.$y,
-      months: this.$M,
-      date: this.$D,
-      hours: this.$H,
-      minutes: this.$m,
-      seconds: this.$s,
-      milliseconds: this.$ms
-    };
-  };
-
-  _proto.toString = function toString() {
-    return this.$d.toUTCString();
-  };
-
-  return Dayjs;
-}();
-
-dayjs.prototype = esm_Dayjs.prototype;
-
-dayjs.extend = function (plugin, option) {
-  plugin(option, esm_Dayjs, dayjs);
-  return dayjs;
-};
-
-dayjs.locale = parseLocale;
-dayjs.isDayjs = isDayjs;
-
-dayjs.unix = function (timestamp) {
-  return dayjs(timestamp * 1e3);
-};
-
-dayjs.en = Ls[L];
-/* harmony default export */ var esm = (dayjs);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=template&id=0bc4212e&
 var MainViewvue_type_template_id_0bc4212e_render = function() {
   var _vm = this
@@ -782,7 +290,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
         {
           staticClass: "gantt-elastic__main-container-wrapper",
           style: _vm.root.style("main-container-wrapper", {
-            height: _vm.root.state.height + "px"
+            height: _vm.root.state.options.height + "px"
           })
         },
         [
@@ -792,8 +300,8 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
               ref: "mainView",
               staticClass: "gantt-elastic__main-container",
               style: _vm.root.style("main-container", {
-                width: _vm.getWidth + "px",
-                height: _vm.root.state.height + "px"
+                width: _vm.root.state.options.clientWidth + "px",
+                height: _vm.root.state.options.height + "px"
               })
             },
             [
@@ -812,15 +320,16 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.root.state.taskList.display,
-                          expression: "root.state.taskList.display"
+                          value: _vm.root.state.options.taskList.display,
+                          expression: "root.state.options.taskList.display"
                         }
                       ],
                       ref: "taskList",
                       staticClass: "gantt-elastic__task-list-container",
                       style: _vm.root.style("task-list-container", {
-                        width: _vm.root.state.taskList.finalWidth + "px",
-                        height: _vm.root.state.height + "px"
+                        width:
+                          _vm.root.state.options.taskList.finalWidth + "px",
+                        height: _vm.root.state.options.height + "px"
                       })
                     },
                     [_c("task-list")],
@@ -877,7 +386,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                 staticClass: "gantt-elastic__chart-scroll--vertical",
                 style: {
                   width: "1px",
-                  height: _vm.root.state.allVisibleTasksHeight + "px"
+                  height: _vm.root.state.options.allVisibleTasksHeight + "px"
                 }
               })
             ]
@@ -901,7 +410,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
         [
           _c("div", {
             staticClass: "gantt-elastic__chart-scroll--horizontal",
-            style: { height: "1px", width: _vm.root.state.width + "px" }
+            style: { height: "1px", width: _vm.root.state.options.width + "px" }
           })
         ]
       )
@@ -926,8 +435,8 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value: _vm.root.state.taskList.display,
-          expression: "root.state.taskList.display"
+          value: _vm.root.state.options.taskList.display,
+          expression: "root.state.options.taskList.display"
         }
       ],
       ref: "taskListWrapper",
@@ -953,9 +462,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
             {
               ref: "taskListItems",
               staticClass: "gantt-elastic__task-list-items",
-              style: _vm.root.style("task-list-items", {
-                height: _vm.root.state.rowsHeight + "px"
-              })
+              style: _vm.root.style("task-list-items")
             },
             _vm._l(_vm.root.state.tasks, function(task) {
               return _c("task-list-item", {
@@ -968,10 +475,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
                   }
                 ],
                 key: task.id,
-                attrs: {
-                  task: task,
-                  "expander-style": _vm.getListExpanderStyle(task)
-                }
+                attrs: { task: task }
               })
             }),
             1
@@ -998,8 +502,8 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     {
       staticClass: "gantt-elastic__task-list-header",
       style: _vm.root.style("task-list-header", {
-        height: _vm.root.state.calendar.height + "px",
-        "margin-bottom": _vm.root.state.calendar.gap + "px"
+        height: this.root.state.options.calendar.height + "px",
+        "margin-bottom": this.root.state.options.calendar.gap + "px"
       })
     },
     _vm._l(_vm.root.getTaskListColumns, function(column) {
@@ -1019,7 +523,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
             ? _c("task-list-expander", {
                 attrs: {
                   tasks: _vm.collapsible,
-                  options: _vm.root.state.taskList.expander
+                  options: _vm.root.state.options.taskList.expander
                 }
               })
             : _vm._e(),
@@ -1035,7 +539,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
               attrs: { column: column },
               on: { mouseup: _vm.resizerMouseUp }
             },
-            [_vm._v(_vm._s(column.label))]
+            [_vm._v("\n      " + _vm._s(column.label) + "\n    ")]
           ),
           _vm._v(" "),
           _c(
@@ -1113,7 +617,10 @@ var Expandervue_type_template_id_09a21177_render = function() {
     "div",
     {
       class: _vm.getClassPrefix() + "-wrapper",
-      style: _vm.root.style(_vm.getClassPrefix(false) + "-wrapper")
+      style: _vm.root.style(
+        _vm.getClassPrefix(false) + "-wrapper",
+        this.type === "taskList" ? _vm.style : {}
+      )
     },
     [
       _vm.allChildren.length
@@ -1234,27 +741,39 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ var Expandervue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
+  name: 'Expander',
+  inject: ['root'],
+  props: ['tasks', 'options', 'type'],
+  data() {
     const border = 0.5;
     return {
       border,
       borderStyle: {
-        "stroke-width": border
+        'stroke-width': border
       },
       lineOffset: 5
     };
   },
   computed: {
+    style() {
+      const margin = this.root.state.options.taskList.expander.margin;
+      const padding = (this.tasks[0].parents.length - 1) * this.root.state.options.taskList.expander.padding;
+      return {
+        'padding-left': padding + margin + 'px',
+        margin: 'auto 0'
+      };
+    },
     /**
      * Get all tasks
      *
      * @returns {array}
      */
-    allChildren () {
+    allChildren() {
       const children = [];
       this.tasks.forEach(task => {
         task.allChildren.forEach(child => {
@@ -1269,7 +788,7 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
      *
      * @returns {boolean}
      */
-    collapsed () {
+    collapsed() {
       if (this.tasks.length === 0) {
         return false;
       }
@@ -1288,14 +807,14 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
      *
      * @returns {string}
      */
-    getClassPrefix (full = true) {
+    getClassPrefix(full = true) {
       return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
     },
 
     /**
      * Toggle expander
      */
-    toggle () {
+    toggle() {
       if (this.allChildren.length === 0) {
         return;
       }
@@ -1485,17 +1004,28 @@ component.options.__file = "src/components/Expander.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
-
+  name: 'TaskListHeader',
   components: {
     TaskListExpander: Expander
   },
 
-  inject: ["root"],
+  inject: ['root'],
 
-  data () {
+  data() {
     return {
       resizer: {
         moving: false,
@@ -1505,84 +1035,87 @@ component.options.__file = "src/components/Expander.vue"
   },
 
   computed: {
-
-    /**
-     * Get style
-     *
-     * @returns {object}
-     */
-    getStyle () {
-      return column => {
-        const state = this.root.state;
-        return {
-          "height": state.calendar.height + this.root.style('calendar-row-rect')['border-width'] + "px",
-          "width": column.finalWidth + "px"
-        };
+    headerStyle() {
+      console.log(this.root.state.options.calendar);
+      console.log(this.root.state.options.calendar.height);
+      return {
+        height: `${this.root.state.options.calendar.height}px`,
+        'margin-bottom': `${this.root.state.options.calendar.gap}px`
       };
     },
-
     /**
      * Is this row collapsible?
      *
      * @returns {bool}
      */
-    collapsible () {
+    collapsible() {
       return this.root.state.tasks.filter(task => task.allChildren.length > 0);
-    },
+    }
   },
 
   methods: {
     /**
+     * Get style
+     *
+     * @returns {object}
+     */
+    getStyle(column) {
+      return {
+        height: this.root.state.options.calendar.height + this.root.style('calendar-row-rect')['border-width'] + 'px',
+        width: column.finalWidth + 'px'
+      };
+    },
+    /**
      * Resizer mouse down event handler
      */
-    resizerMouseDown (event, column) {
+    resizerMouseDown(event, column) {
       if (!this.resizerMoving) {
         this.resizer.moving = column;
         this.resizer.x = event.clientX;
         this.resizer.initialWidth = column.width;
-        this.root.$emit("taskList-column-width-change-start", this.resizer.moving);
+        this.root.$emit('taskList-column-width-change-start', this.resizer.moving);
       }
     },
 
     /**
      * Resizer mouse move event handler
      */
-    resizerMouseMove (event) {
+    resizerMouseMove(event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        if (this.resizer.moving.width < this.root.state.taskList.minWidth) {
-          this.resizer.moving.width = this.root.state.taskList.minWidth;
+        if (this.resizer.moving.width < this.root.state.options.taskList.minWidth) {
+          this.resizer.moving.width = this.root.state.options.taskList.minWidth;
         }
-        this.root.$emit("taskList-column-width-change", this.resizer.moving);
+        this.root.$emit('taskList-column-width-change', this.resizer.moving);
       }
     },
 
     /**
      * Resizer mouse up event handler
      */
-    resizerMouseUp (event) {
+    resizerMouseUp(event) {
       if (this.resizer.moving) {
-        this.root.$emit("taskList-column-width-change", this.resizer.moving);
-        this.root.$emit("taskList-column-width-change-stop", this.resizer.moving);
+        this.root.$emit('taskList-column-width-change', this.resizer.moving);
+        this.root.$emit('taskList-column-width-change-stop', this.resizer.moving);
         this.resizer.moving = false;
       }
-    },
+    }
   },
 
   /**
    * Created
    */
-  created () {
+  created() {
     this.mouseUpListener = document.addEventListener('mouseup', this.resizerMouseUp.bind(this));
     this.mouseMoveListener = document.addEventListener('mousemove', this.resizerMouseMove.bind(this));
-    this.root.$on("main-view-mousemove", this.resizerMouseMove);
-    this.root.$on("main-view-mouseup", this.resizerMouseUp);
+    this.root.$on('main-view-mousemove', this.resizerMouseMove);
+    this.root.$on('main-view-mouseup', this.resizerMouseUp);
   },
 
   /**
    * Before destroy event - clear all event listeners
    */
-  beforeDestroy () {
+  beforeDestroy() {
     document.removeEventListener('mouseup', this.resizerMouseUp);
     document.removeEventListener('mousemove', this.resizerMouseMove);
   }
@@ -1624,17 +1157,17 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
       staticClass: "gantt-elastic__task-list-item",
       style: _vm.root.style("task-list-item")
     },
-    _vm._l(_vm.root.state.taskList.columns, function(column) {
+    _vm._l(_vm.columns, function(column) {
       return _c(
         "item-column",
         { key: column._id, attrs: { column: column, task: _vm.task } },
         [
           column.expander
             ? _c("task-list-expander", {
-                style: _vm.expanderStyle,
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.taskList.expander
+                  options: _vm.root.state.options.taskList.expander,
+                  type: "taskList"
                 }
               })
             : _vm._e()
@@ -1739,10 +1272,7 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
                     },
                     [_vm._v("\n        " + _vm._s(_vm.value) + "\n      ")]
                   )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.html
-                ? _c("div", {
+                : _c("div", {
                     staticClass: "gantt-elastic__task-list-item-value",
                     style: _vm.root.style(
                       "task-list-item-value",
@@ -1785,7 +1315,6 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
                       }
                     }
                   })
-                : _vm._e()
             ]
           )
         ],
@@ -1870,6 +1399,7 @@ ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
 //
 
 /* harmony default export */ var ItemColumnvue_type_script_lang_js_ = ({
+  name: 'ItemColumn',
   inject: ['root'],
   props: ['column', 'task'],
   data() {
@@ -1967,14 +1497,20 @@ ItemColumn_component.options.__file = "src/components/TaskList/ItemColumn.vue"
 
 
 /* harmony default export */ var TaskListItemvue_type_script_lang_js_ = ({
+  name: 'TaskListItem',
   components: {
     TaskListExpander: Expander,
     ItemColumn: ItemColumn
   },
-  inject: ["root"],
-  props: ["task", "expanderStyle"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
+  },
+  computed: {
+    columns() {
+      return this.root.state.options.taskList.columns;
+    }
   }
 });
 
@@ -2033,49 +1569,27 @@ TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vu
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ var TaskListvue_type_script_lang_js_ = ({
+  name: 'TaskList',
   components: {
     TaskListHeader: TaskListHeader,
     TaskListItem: TaskListItem
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {};
   },
+
   /**
    * Mounted
    */
-  mounted () {
-    this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
-    this.root.state.refs.taskList = this.$refs.taskList;
-    this.root.state.refs.taskListItems = this.$refs.taskListItems;
-  },
-
-  computed: {
-    /**
-     * Calculate task list expander style
-     *
-     * @returns {object}
-     */
-    getListExpanderStyle () {
-      return task => {
-        const state = this.root.state;
-        const padding = (task.parents.length - 1) * state.taskList.expander.padding;
-        const style = {
-          "padding-left": padding + state.taskList.expander.margin + "px",
-          margin: "auto 0",
-        };
-        return style;
-      };
-    }
+  mounted() {
+    this.root.state.options.refs.taskListWrapper = this.$refs.taskListWrapper;
+    this.root.state.options.refs.taskList = this.$refs.taskList;
+    this.root.state.options.refs.taskListItems = this.$refs.taskListItems;
   }
 });
 
@@ -2115,8 +1629,8 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
       ref: "chart",
       staticClass: "gantt-elastic__chart",
       style: _vm.root.style("chart", {
-        width: _vm.getWidth + "px",
-        height: _vm.getHeight + "px"
+        width: _vm.root.state.options.width + "px",
+        height: _vm.root.state.options.height + "px"
       })
     },
     [
@@ -2127,7 +1641,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         {
           style: _vm.root.style("chart-area", {
             width: "100%",
-            height: _vm.root.state.rowsHeight + "px"
+            height: _vm.root.state.options.rowsHeight + "px"
           })
         },
         [
@@ -2148,8 +1662,8 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                   attrs: {
                     x: "0",
                     y: "0",
-                    width: _vm.getWidth + "px",
-                    height: _vm.root.state.allVisibleTasksHeight + "px",
+                    width: _vm.root.state.options.width + "px",
+                    height: _vm.root.state.options.allVisibleTasksHeight + "px",
                     xmlns: "http://www.w3.org/2000/svg"
                   }
                 },
@@ -2219,8 +1733,8 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
       attrs: {
         x: "0",
         y: "0",
-        width: _vm.root.state.width,
-        height: _vm.root.state.allVisibleTasksHeight,
+        width: _vm.root.state.options.width,
+        height: _vm.root.state.options.allVisibleTasksHeight,
         xmlns: "http://www.w3.org/2000/svg"
       }
     },
@@ -2327,21 +1841,22 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
 //
 
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  data () {
+  name: 'Grid',
+  inject: ['root'],
+  data() {
     return {};
   },
   /**
    * Created
    */
-  created () {
-    this.root.$on("recenterPosition", this.recenterPosition);
+  created() {
+    this.root.$on('recenterPosition', this.recenterPosition);
   },
 
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       this.$nextTick(() => {
         // because of stupid slider :/
@@ -2354,9 +1869,9 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
     /**
      * Recenter position - go to current time line
      */
-    recenterPosition () {
+    recenterPosition() {
       this.root.scrollToTime(this.timeLinePosition.time);
-    },
+    }
   },
 
   computed: {
@@ -2365,17 +1880,19 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {array}
      */
-    verticalLines () {
+    verticalLines() {
       let lines = [];
       const state = this.root.state;
-      state.times.steps.forEach(step => {
+      state.options.times.steps.forEach(step => {
         if (this.root.isInsideViewPort(step.offset.px, 1)) {
           lines.push({
-            key: step.date.valueOf(),
+            key: step.time,
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: state.tasks.length * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2:
+              state.tasks.length * (state.options.row.height + state.options.chart.grid.horizontal.gap * 2) +
+              this.root.style('grid-line-vertical')['stroke-width']
           });
         }
       });
@@ -2387,17 +1904,19 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {array}
      */
-    horizontalLines () {
+    horizontalLines() {
       let lines = [];
-      const state = this.root.state;
+      const state = this.root.state.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        const y = (index * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        const y =
+          index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
+          this.root.style('grid-line-vertical')['stroke-width'] / 2;
         lines.push({
-          key: "hl" + index,
+          key: 'hl' + index,
           x1: 0,
           y1: y,
-          x2: "100%",
+          x2: '100%',
           y2: y
         });
       }
@@ -2409,10 +1928,10 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {function}
      */
-    inViewPort () {
+    inViewPort() {
       return line => {
-        const state = this.root.state;
-        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
+        const state = this.root.state.options;
+        return line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right;
       };
     },
 
@@ -2421,21 +1940,21 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
      *
      * @returns {object}
      */
-    timeLinePosition () {
+    timeLinePosition() {
       const d = new Date();
       const current = d.getTime();
       const currentOffset = this.root.timeToPixelOffsetX(current);
       const timeLine = {
         x: 0,
         y1: 0,
-        y2: "100%",
-        dateTime: "",
+        y2: '100%',
+        dateTime: '',
         time: current
       };
       timeLine.x = currentOffset;
       timeLine.dateTime = d.toLocaleDateString();
       return timeLine;
-    },
+    }
   }
 });
 
@@ -2529,9 +2048,11 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
 //
 //
 
+
 /* harmony default export */ var DaysHighlightvue_type_script_lang_js_ = ({
+  name: 'DaysHighlight',
   inject: ['root'],
-  data () {
+  data() {
     return {};
   },
   methods: {
@@ -2541,8 +2062,8 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      * @param {object} day
      * @returns {string} key ideintifier for loop
      */
-    getKey (day) {
-      return day.date.format('YYYY-MM-DD');
+    getKey(day) {
+      return dayjs_min_default()(day.time).format('YYYY-MM-DD');
     }
   },
   computed: {
@@ -2551,9 +2072,9 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      *
      * @returns {array}
      */
-    workingDays () {
-      return this.root.state.times.steps.filter(step => {
-        return this.root.state.calendar.workingDays.indexOf(step.date.day()) === -1;
+    workingDays() {
+      return this.root.state.options.times.steps.filter(step => {
+        return this.root.state.options.calendar.workingDays.indexOf(dayjs_min_default()(step.time).day()) === -1;
       });
     },
 
@@ -2562,9 +2083,13 @@ DaysHighlightvue_type_template_id_1bfe64e8_render._withStripped = true
      *
      * @returns {bool}
      */
-    showWorkingDays () {
-      const calendar = this.root.state.calendar;
-      if (typeof calendar.workingDays !== 'undefined' && Array.isArray(calendar.workingDays) && calendar.workingDays.length) {
+    showWorkingDays() {
+      const calendar = this.root.state.options.calendar;
+      if (
+        typeof calendar.workingDays !== 'undefined' &&
+        Array.isArray(calendar.workingDays) &&
+        calendar.workingDays.length
+      ) {
         return true;
       }
       return false;
@@ -2607,7 +2132,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
     {
       staticClass: "gantt-elastic__calendar-wrapper",
       style: _vm.root.style("calendar-wrapper", {
-        "margin-bottom": _vm.root.state.calendar.gap + "px"
+        "margin-bottom": _vm.root.state.options.calendar.gap + "px"
       })
     },
     [
@@ -2615,25 +2140,23 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
         "div",
         {
           staticClass: "gantt-elastic__calendar",
-          style: _vm.root.style("calendar", { width: _vm.getWidth + "px" })
+          style: _vm.root.style("calendar", {
+            width: _vm.root.state.options.width + "px"
+          })
         },
         [
-          _vm.root.state.calendar.month.display
+          _vm.root.state.options.calendar.month.display
             ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.months, which: "month" }
+                attrs: { items: _vm.months, which: "month" }
               })
             : _vm._e(),
           _vm._v(" "),
-          _vm.root.state.calendar.day.display
-            ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.days, which: "day" }
-              })
+          _vm.root.state.options.calendar.day.display
+            ? _c("calendar-row", { attrs: { items: _vm.days, which: "day" } })
             : _vm._e(),
           _vm._v(" "),
-          _vm.root.state.calendar.hour.display
-            ? _c("calendar-row", {
-                attrs: { items: _vm.root.state.calendar.hours, which: "hour" }
-              })
+          _vm.root.state.options.calendar.hour.display
+            ? _c("calendar-row", { attrs: { items: _vm.hours, which: "hour" } })
             : _vm._e()
         ],
         1
@@ -2670,7 +2193,10 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
           style: _vm.root.style(
             "calendar-row-rect",
             "calendar-row-rect--" + _vm.which,
-            { width: item.width + "px", height: item.height + "px" }
+            {
+              width: item.width + "px",
+              height: item.height + "px"
+            }
           )
         },
         [
@@ -2682,11 +2208,10 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
                 _vm.which,
               style: _vm.root.style(
                 "calendar-row-text",
-                "calendar-row-text--" + _vm.which,
-                _vm.getStyle(item)
+                "calendar-row-text--" + _vm.which
               )
             },
-            [_vm._v(_vm._s(item.label))]
+            [_vm._v("\n      " + _vm._s(item.label) + "\n    ")]
           )
         ]
       )
@@ -2728,56 +2253,41 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ var CalendarRowvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["items", "which"],
-  data () {
-    return {
-      anchor: 'middle'
-    };
+  name: 'CalendarRow',
+  inject: ['root'],
+  props: ['items', 'which'],
+  data() {
+    return {};
   },
-  computed: {
+  methods: {
     /**
      * Get x position
      *
      * @returns {number}
      */
-    getTextX () {
-      let x = this.item.x + this.item.width / 2;
-      if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
+    getTextX(item) {
+      let x = item.x + item.width / 2;
+      if (this.which === 'month' && this.root.isInsideViewPort(item.x, item.width, 0)) {
         this.anchor = 'start';
-        let scrollWidth = this.root.state.scroll.chart.right - this.root.state.scroll.chart.left;
-        x = this.root.state.scroll.chart.left + (scrollWidth / 2) - (this.item.textWidth / 2) + 2;
-        if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
-          x = this.item.x + this.item.width - this.item.textWidth - 2;
-        } else if (x < this.item.x) {
-          x = this.item.x + 2;
+        let scrollWidth = this.root.state.options.scroll.chart.right - this.root.state.options.scroll.chart.left;
+        x = this.root.state.options.scroll.chart.left + scrollWidth / 2 - item.textWidth / 2 + 2;
+        if (x + item.textWidth + 2 > item.x + item.width) {
+          x = item.x + item.width - item.textWidth - 2;
+        } else if (x < item.x) {
+          x = item.x + 2;
         }
       }
+      console.log('x', x);
       return x;
-    },
-
-    /**
-     * Get y position
-     *
-     * @returns {number}
-     */
-    getTextY () {
-      return this.item.y + this.item.height / 2;
-    },
-
-    /**
-     * Get style for an item
-     *
-     * @returns {function}
-     */
-    getStyle () {
-      return (item) => {
-        return {
-          'line-height': (item.height - parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2) + 'px'
-        };
-      }
     }
   }
 });
@@ -2833,23 +2343,28 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
 
 /* harmony default export */ var Calendarvue_type_script_lang_js_ = ({
+  name: 'Calendar',
   components: {
     CalendarRow: CalendarRow
   },
-  inject: ["root"],
-  data () {
-    return {};
+  inject: ['root'],
+  data() {
+    return {
+      months: [],
+      days: [],
+      hours: []
+    };
   },
 
   /**
    * Created
    */
-  created () {
-    this.root.$on("scope-change", this.regenerate);
-    this.root.$on("times-timeZoom-change", this.regenerate);
-    this.root.$on("tasks-changed", this.regenerate);
-    this.root.$on("options-changed", this.regenerate);
-    this.regenerate();
+  created() {
+    this.root.$on('scope-change', this.regenerate);
+    this.root.$on('times-timeZoom-change', this.regenerate);
+    this.root.$on('tasks-changed', this.regenerate);
+    this.root.$on('options-changed', this.regenerate);
+    this.root.$on('calendar-recalculate', this.regenerate);
   },
 
   methods: {
@@ -2858,14 +2373,17 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyHoursFit (dayIndex) {
+    howManyHoursFit(dayIndex) {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullCellWidth = this.root.state.times.steps[dayIndex].width.px;
-      let formatNames = Object.keys(this.root.state.calendar.hour.format);
+      let fullCellWidth = this.root.state.options.times.steps[dayIndex].width.px;
+      let formatNames = Object.keys(this.root.state.options.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth && hours > 1) {
+          if (
+            (this.root.state.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth &&
+            hours > 1
+          ) {
             return {
               count: hours,
               type: formatName
@@ -2875,7 +2393,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ""
+        type: ''
       };
     },
 
@@ -2884,15 +2402,17 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyDaysFit () {
+    howManyDaysFit() {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.root.state.width;
-      let formatNames = Object.keys(this.root.state.calendar.day.format);
-      for (let days = this.root.state.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
+      let fullWidth = this.root.state.options.width;
+      let formatNames = Object.keys(this.root.state.options.calendar.day.format);
+      for (let days = this.root.state.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.root.state.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth && days > 1) {
+            (this.root.state.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth &&
+            days > 1
+          ) {
             return {
               count: days,
               type: formatName
@@ -2902,7 +2422,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       return {
         count: 0,
-        type: ""
+        type: ''
       };
     },
 
@@ -2911,17 +2431,17 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {object}
      */
-    howManyMonthsFit () {
+    howManyMonthsFit() {
       const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
       const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.root.state.width;
-      let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentMonth = esm(this.root.state.times.firstDate);
+      let fullWidth = this.root.state.options.width;
+      let formatNames = Object.keys(this.root.state.options.calendar.month.format);
+      let currentMonth = dayjs_min_default()(this.root.state.options.times.firstTime);
       let previousMonth = currentMonth.clone();
-      const lastTime = this.root.state.times.lastTime;
+      const lastTime = this.root.state.options.times.lastTime;
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
-        currentMonth = currentMonth.add(1, "day");
+        currentMonth = currentMonth.add(1, 'day');
         if (previousMonth.month() !== currentMonth.month()) {
           monthsCount++;
         }
@@ -2929,7 +2449,10 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       }
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
-          if ((this.root.state.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth && months > 1) {
+          if (
+            (this.root.state.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth &&
+            months > 1
+          ) {
             return {
               count: months,
               type: formatName
@@ -2944,57 +2467,42 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     },
 
     /**
-     * Get hour text style
-     *
-     * @returns {string}
-     */
-    hourTextStyle () {
-      return ("font-family:" + this.root.state.calendar.hour.fontFamily + ";font-size:" + this.root.state.calendar.hour.fontSize);
-    },
-
-    /**
-     * Get text style
-     *
-     * @returns {string}
-     */
-    dayTextStyle () {
-      return ("font-family:" + this.root.state.calendar.day.fontFamily + ";font-size:" + this.root.state.calendar.day.fontSize);
-    },
-
-    /**
      * Generate hours
      *
      * @returns {array}
      */
-    generateHours () {
+    generateHours() {
       let hours = [];
-      if (!this.root.state.calendar.hour.display) {
-        return this.root.state.calendar.hours = hours;
+      if (!this.root.state.options.calendar.hour.display) {
+        return (this.root.state.options.calendar.hours = hours);
       }
-      for (let hourIndex = 0, len = this.root.state.times.steps.length; hourIndex < len; hourIndex++) {
+      for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
+        if (hoursCount.count === 0) {
+          continue;
+        }
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.root.state.times.steps[hourIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.root.state.options.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = esm(this.root.state.times.steps[hourIndex].date).add(i * hourStep, "hour");
+          const date = dayjs_min_default()(this.root.state.options.times.steps[hourIndex].time).add(i * hourStep, 'hour');
           let textWidth = 0;
-          if (typeof this.root.state.calendar.hour.widths[hourIndex] !== 'undefined') {
-            textWidth = this.root.state.calendar.hour.widths[hourIndex][hoursCount.type];
+          if (typeof this.root.state.options.calendar.hour.widths[hourIndex] !== 'undefined') {
+            textWidth = this.root.state.options.calendar.hour.widths[hourIndex][hoursCount.type];
           }
-          let x = this.root.state.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = this.root.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
           hours.push({
             index: hourIndex,
-            key: this.root.state.times.steps[hourIndex].date.valueOf() + "h" + i,
+            key: this.root.state.options.times.steps[hourIndex].time + 'h' + i,
             x,
-            y: this.root.state.calendar.day.height + this.root.state.calendar.month.height,
+            y: this.root.state.options.calendar.day.height + this.root.state.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
-            height: this.root.state.calendar.hour.height,
-            label: this.root.state.calendar.hour.format[hoursCount.type](date)
+            height: this.root.state.options.calendar.hour.height,
+            label: this.root.state.options.calendar.hour.format[hoursCount.type](date.toDate())
           });
         }
       }
-      return this.root.state.calendar.hours = hours;
+      return (this.root.state.options.calendar.hours = this.hours = hours);
     },
 
     /**
@@ -3002,39 +2510,42 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    generateDays () {
+    generateDays() {
       let days = [];
-      if (!this.root.state.calendar.day.display) {
-        return this.root.state.calendar.days = days;
+      if (!this.root.state.options.calendar.day.display) {
+        return (this.root.state.options.calendar.days = days);
       }
       const daysCount = this.howManyDaysFit();
-      const dayStep = Math.ceil(this.root.state.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.root.state.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      if (daysCount.count === 0) {
+        return;
+      }
+      const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.root.state.times.steps[dayIndex + currentStep] !== "undefined") {
-            dayWidthPx += this.root.state.times.steps[dayIndex + currentStep].width.px;
+          if (typeof this.root.state.options.times.steps[dayIndex + currentStep] !== 'undefined') {
+            dayWidthPx += this.root.state.options.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = esm(this.root.state.times.steps[dayIndex].date);
+        const date = dayjs_min_default()(this.root.state.options.times.steps[dayIndex].time);
         let textWidth = 0;
-        if (typeof this.root.state.calendar.day.widths[dayIndex] !== 'undefined') {
-          textWidth = this.root.state.calendar.day.widths[dayIndex][daysCount.type];
+        if (typeof this.root.state.options.calendar.day.widths[dayIndex] !== 'undefined') {
+          textWidth = this.root.state.options.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.state.times.steps[dayIndex].offset.px;
+        let x = this.root.state.options.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.root.state.times.steps[dayIndex].date.valueOf() + "d",
+          key: this.root.state.options.times.steps[dayIndex].time + 'd',
           x,
-          y: this.root.state.calendar.month.height,
+          y: this.root.state.options.calendar.month.height,
           width: dayWidthPx,
           textWidth,
-          height: this.root.state.calendar.day.height,
-          label: this.root.state.calendar.day.format[daysCount.type](date)
+          height: this.root.state.options.calendar.day.height,
+          label: this.root.state.options.calendar.day.format[daysCount.type](date.toDate())
         });
       }
-      return this.root.state.calendar.days = days;
+      return (this.root.state.options.calendar.days = this.days = days);
     },
 
     /**
@@ -3042,140 +2553,77 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
      *
      * @returns {array}
      */
-    generateMonths () {
+    generateMonths() {
       let months = [];
-      if (!this.root.state.calendar.month.display) {
-        return this.root.state.calendar.months = months;
+      if (!this.root.state.options.calendar.month.display) {
+        return (this.root.state.options.calendar.months = months);
       }
       const monthsCount = this.howManyMonthsFit();
-      let formatNames = Object.keys(this.root.state.calendar.month.format);
-      let currentDate = esm(this.root.state.times.firstDate);
+      if (monthsCount.count === 0) {
+        return;
+      }
+      let formatNames = Object.keys(this.root.state.options.calendar.month.format);
+      let currentDate = dayjs_min_default()(this.root.state.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
-        let finalDate = esm(currentDate).add(1, "month").startOf("month");
-        if (finalDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          finalDate = esm(this.root.state.times.lastDate);
+        let finalDate = dayjs_min_default()(currentDate)
+          .add(1, 'month')
+          .startOf('month');
+        if (finalDate.valueOf() > this.root.state.options.times.lastTime) {
+          finalDate = dayjs_min_default()(this.root.state.options.times.lastTime);
         }
         // we must find first and last step to get the offsets / widths
-        for (let step = 0, len = this.root.state.times.steps.length; step < len; step++) {
-          let currentStep = this.root.state.times.steps[step];
-          if (currentStep.date.valueOf() >= currentDate.valueOf() && currentStep.date.valueOf() < finalDate.valueOf()) {
+        for (let step = 0, len = this.root.state.options.times.steps.length; step < len; step++) {
+          let currentStep = this.root.state.options.times.steps[step];
+          if (currentStep.time >= currentDate.valueOf() && currentStep.time < finalDate.valueOf()) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
               monthOffset = currentStep.offset.px;
             }
           }
         }
-        let label = "";
+        let label = '';
         let choosenFormatName;
         for (let formatName of formatNames) {
-          if (this.root.state.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
-            label = this.root.state.calendar.month.format[formatName](currentDate);
+          if (this.root.state.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.root.state.options.calendar.month.format[formatName](currentDate.toDate());
             choosenFormatName = formatName;
           }
         }
         let textWidth = 0;
-        if (typeof this.root.state.calendar.month.widths[monthIndex] !== 'undefined') {
-          textWidth = this.root.state.calendar.month.widths[monthIndex][choosenFormatName];
+        if (typeof this.root.state.options.calendar.month.widths[monthIndex] !== 'undefined') {
+          textWidth = this.root.state.options.calendar.month.widths[monthIndex][choosenFormatName];
         }
         let x = monthOffset;
         months.push({
           index: monthIndex,
-          key: monthIndex + "m",
+          key: monthIndex + 'm',
           x,
           y: 0,
           width: monthWidth,
           textWidth,
           choosenFormatName,
-          height: this.root.state.calendar.month.height,
+          height: this.root.state.options.calendar.month.height,
           label
         });
-        currentDate = currentDate.add(1, "month").startOf("month");
-        if (currentDate.valueOf() > this.root.state.times.lastDate.valueOf()) {
-          currentDate = esm(this.root.state.times.lastDate);
+        currentDate = currentDate.add(1, 'month').startOf('month');
+        if (currentDate.valueOf() > this.root.state.options.times.lastTime) {
+          currentDate = dayjs_min_default()(this.root.state.options.times.lastTime);
         }
       }
-      return this.root.state.calendar.months = months;
+      return (this.root.state.options.calendar.months = this.months = months);
     },
 
     /**
      * Regenerate dates
      */
-    regenerate () {
+    regenerate() {
       this.generateHours();
       this.generateDays();
       this.generateMonths();
       this.root.calculateCalendarDimensions();
     }
-
-  },
-
-  computed: {
-
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth () {
-      let width = this.root.state.width;
-      return width;
-    },
-
-    /**
-     * Get month style
-     *
-     * @returns {object}
-     */
-    monthsStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.month.style);
-    },
-
-    /**
-     * Get day style
-     *
-     * @returns {object}
-     */
-    daysStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.day.style);
-    },
-
-    /**
-     * Get hour styke
-     *
-     * @returns {object}
-     */
-    hoursStyle () {
-      return this.root.mergeDeep({}, this.root.state.calendar.styles.row, this.root.state.calendar.hour.style);
-    },
-
-    /**
-     * Get visible days
-     *
-     * @returns {array}
-     */
-    getDays () {
-      return this.days.filter(day => this.root.isInsideViewPort(day.x, day.width));
-    },
-
-    /**
-     * Get visible hours
-     *
-     * @returns {array}
-     */
-    getHours () {
-      return this.hours.filter(hour => this.root.isInsideViewPort(hour.x, hour.width));
-    },
-
-    /**
-     * Get visible months
-     *
-     * @returns {array}
-     */
-    getMonths () {
-      return this.months.filter(month => this.root.isInsideViewPort(month.x, month.width));
-    },
   }
 });
 
@@ -3287,13 +2735,13 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
 //
 
 /* harmony default export */ var DependencyLinesvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["tasks"],
-  data () {
+  name: 'DependencyLines',
+  inject: ['root'],
+  props: ['tasks'],
+  data() {
     return {};
   },
   methods: {
-
     /**
      * Get path points
      *
@@ -3301,7 +2749,7 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
      * @param {any} toTaskId
      * @returns {string}
      */
-    getPoints (fromTaskId, toTaskId) {
+    getPoints(fromTaskId, toTaskId) {
       const fromTask = this.root.getTask(fromTaskId);
       const toTask = this.root.getTask(toTaskId);
       if (fromTask === null || toTask === null || !toTask.visible || !fromTask.visible) {
@@ -3326,11 +2774,16 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
       let points = `M ${startX} ${startY}
           L ${startX + offset},${startY} `;
       if (isBefore) {
-        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY + roundness * yMultiplier}
+        points += `Q ${startX + offset + roundness},${startY} ${startX + offset + roundness},${startY +
+          roundness * yMultiplier}
             L ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2 - roundness * yMultiplier}
-            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY + (distanceY * yMultiplier) / 2}
+            Q ${startX + offset + roundness},${startY + (distanceY * yMultiplier) / 2} ${startX + offset},${startY +
+          (distanceY * yMultiplier) / 2}
             L ${startX - offset + distanceX},${startY + (distanceY * yMultiplier) / 2}
-            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
+            Q ${startX - offset + distanceX - roundness},${startY + (distanceY * yMultiplier) / 2} ${startX -
+          offset +
+          distanceX -
+          roundness},${startY + (distanceY * yMultiplier) / 2 + roundness * yMultiplier}
             L ${startX - offset + distanceX - roundness},${stopY - roundness * yMultiplier}
             Q ${startX - offset + distanceX - roundness},${stopY} ${startX - offset + distanceX},${stopY}
             L ${stopX},${stopY}`;
@@ -3350,15 +2803,16 @@ DependencyLinesvue_type_template_id_f1cbf6ba_render._withStripped = true
      *
      * @returns {array}
      */
-    dependencyTasks () {
+    dependencyTasks() {
       return this.tasks
-        .filter(task => typeof task.dependentOn !== "undefined")
+        .filter(task => typeof task.dependentOn !== 'undefined')
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
             return { points: this.getPoints(id, task.id) };
           });
           return task;
-        }).filter(task => task.dependencyLines.points !== null);
+        })
+        .filter(task => task.dependencyLines.points !== null);
     }
   }
 });
@@ -3419,22 +2873,23 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.root.state.options.chart.expander.offset -
+                  _vm.root.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.root.state.options.row.height -
+                    _vm.root.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.root.state.options.chart.expander.size,
+                height: _vm.root.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.root.state.options.chart.expander,
+                  type: "chart"
                 }
               })
             ],
@@ -3525,7 +2980,7 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.root.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -3549,8 +3004,11 @@ var Textvue_type_template_id_459c2fe4_render = function() {
       staticClass: "gantt-elastic__chart-row-text-wrapper",
       style: _vm.root.style("chart-row-text-wrapper"),
       attrs: {
-        x: _vm.task.x + _vm.task.width + _vm.root.state.chart.text.offset,
-        y: _vm.task.y - _vm.root.state.chart.grid.horizontal.gap,
+        x:
+          _vm.task.x +
+          _vm.task.width +
+          _vm.root.state.options.chart.text.offset,
+        y: _vm.task.y - _vm.root.state.options.chart.grid.horizontal.gap,
         width: _vm.getWidth,
         height: _vm.getHeight
       }
@@ -3660,9 +3118,10 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
 //
 
 /* harmony default export */ var Textvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ChartText',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -3671,11 +3130,11 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {number}
      */
-    getWidth () {
+    getWidth() {
       const textStyle = this.root.style('chart-row-text');
-      this.root.state.ctx.font = `${textStyle["font-weight"]} ${textStyle["font-size"]} ${textStyle["font-family"]}`;
+      this.root.state.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
-      return textWidth + this.root.state.chart.text.xPadding * 2;
+      return textWidth + this.root.state.options.chart.text.xPadding * 2;
     },
 
     /**
@@ -3683,8 +3142,8 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {number}
      */
-    getHeight () {
-      return this.task.height + this.root.state.chart.grid.horizontal.gap * 2;
+    getHeight() {
+      return this.task.height + this.root.state.options.chart.grid.horizontal.gap * 2;
     },
 
     /**
@@ -3692,7 +3151,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {object}
      */
-    contentStyle () {
+    contentStyle() {
       return { height: '100%', 'line-height': this.getHeight + 'px' };
     },
 
@@ -3701,16 +3160,16 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      *
      * @returns {boolean}
      */
-    html () {
-      const cols = this.root.state.taskList.columns;
+    html() {
+      const cols = this.root.state.options.taskList.columns;
       for (let i = 0, len = cols.length; i < len; i++) {
         const col = cols[i];
-        if (col.value === 'label' && typeof col.html !== "undefined" && col.html) {
+        if (col.value === 'label' && typeof col.html !== 'undefined' && col.html) {
           return true;
         }
       }
       return false;
-    },
+    }
   }
 });
 
@@ -3760,8 +3219,8 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           {
             attrs: {
               id: "diagonalHatch",
-              width: _vm.root.state.chart.progress.width,
-              height: _vm.root.state.chart.progress.width,
+              width: _vm.root.state.options.chart.progress.width,
+              height: _vm.root.state.options.chart.progress.width,
               patternTransform: "rotate(45 0 0)",
               patternUnits: "userSpaceOnUse"
             }
@@ -3777,14 +3236,14 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
                 x1: "0",
                 y1: "0",
                 x2: "0",
-                y2: _vm.root.state.chart.progress.width
+                y2: _vm.root.state.options.chart.progress.width
               }
             })
           ]
         )
       ]),
       _vm._v(" "),
-      _vm.root.state.chart.progress.bar
+      _vm.root.state.options.chart.progress.bar
         ? _c("rect", {
             staticClass: "gantt-elastic__chart-row-progress-bar-solid",
             style: _vm.root.style(
@@ -3795,7 +3254,7 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm.root.state.chart.progress.pattern
+      _vm.root.state.options.chart.progress.pattern
         ? _c("g", [
             _c("rect", {
               staticClass: "gantt-elastic__chart-row-progress-bar-pattern",
@@ -3889,11 +3348,14 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
 //
 //
 //
+//
+//
 
 /* harmony default export */ var ProgressBarvue_type_script_lang_js_ = ({
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ProgressBar',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
 
@@ -3903,8 +3365,8 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {string}
      */
-    getProgressWidth () {
-      return this.task.progress + "%";
+    getProgressWidth() {
+      return this.task.progress + '%';
     },
 
     /**
@@ -3912,7 +3374,7 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {string}
      */
-    getLinePoints () {
+    getLinePoints() {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
@@ -3922,8 +3384,8 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {object}
      */
-    getSolidStyle () {
-      return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+    getSolidStyle() {
+      return Object.assign({}, this.root.state.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
 
     /**
@@ -3931,11 +3393,15 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
      *
      * @returns {object}
      */
-    getLineStyle () {
-      return Object.assign({}, {
-        stroke: this.root.state.row.styles.bar.stroke + "a0",
-        "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
-      }, this.task.style);
+    getLineStyle() {
+      return Object.assign(
+        {},
+        {
+          stroke: this.root.state.options.row.styles.bar.stroke + 'a0',
+          'stroke-width': this.root.state.options.row.styles.bar['stroke-width'] / 2
+        },
+        this.task.style
+      );
     }
   }
 });
@@ -4027,30 +3493,37 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Taskvue_type_script_lang_js_ = ({
+  name: 'Task',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
-
     /**
      * Get clip path id
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__task-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__task-clip-path-' + this.task.id;
     },
 
     /**
@@ -4058,7 +3531,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       const task = this.task;
       return `0 0 ${task.width} ${task.height}`;
     },
@@ -4068,7 +3541,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -4077,11 +3550,9 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
-      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${
-        task.height
-        }`;
+      return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
     },
 
     /**
@@ -4089,9 +3560,9 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      *
      * @returns {boolean}
      */
-    displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    displayExpander() {
+      const expander = this.root.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
     }
   },
   methods: {
@@ -4101,8 +3572,8 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+    emitEvent(eventName, event) {
+      if (!this.root.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4165,22 +3636,23 @@ var Milestonevue_type_template_id_3013006c_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.root.state.options.chart.expander.offset -
+                  _vm.root.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.root.state.options.row.height -
+                    _vm.root.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.root.state.options.chart.expander.size,
+                height: _vm.root.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.root.state.options.chart.expander,
+                  type: "chart"
                 }
               })
             ],
@@ -4271,7 +3743,7 @@ var Milestonevue_type_template_id_3013006c_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.root.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4346,19 +3818,27 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
+  name: 'Milestone',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -4367,8 +3847,8 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__milestone-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__milestone-clip-path-' + this.task.id;
     },
 
     /**
@@ -4376,7 +3856,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
 
@@ -4385,7 +3865,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -4394,7 +3874,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
       const fifty = task.height / 2;
       let offset = fifty;
@@ -4414,9 +3894,9 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      *
      * @returns {boolean}
      */
-    displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    displayExpander() {
+      const expander = this.root.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
     }
   },
   methods: {
@@ -4426,8 +3906,8 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+    emitEvent(eventName, event) {
+      if (!this.root.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4490,22 +3970,23 @@ var Projectvue_type_template_id_077bbd73_render = function() {
               attrs: {
                 x:
                   _vm.task.x -
-                  _vm.root.state.chart.expander.offset -
-                  _vm.root.state.chart.expander.size,
+                  _vm.root.state.options.chart.expander.offset -
+                  _vm.root.state.options.chart.expander.size,
                 y:
                   _vm.task.y +
-                  (_vm.root.state.row.height -
-                    _vm.root.state.chart.expander.size) /
+                  (_vm.root.state.options.row.height -
+                    _vm.root.state.options.chart.expander.size) /
                     2,
-                width: _vm.root.state.chart.expander.size,
-                height: _vm.root.state.chart.expander.size
+                width: _vm.root.state.options.chart.expander.size,
+                height: _vm.root.state.options.chart.expander.size
               }
             },
             [
               _c("expander", {
                 attrs: {
                   tasks: [_vm.task],
-                  options: _vm.root.state.chart.expander
+                  options: _vm.root.state.options.chart.expander,
+                  type: "chart"
                 }
               })
             ],
@@ -4596,7 +4077,7 @@ var Projectvue_type_template_id_077bbd73_render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.root.state.chart.text.display
+      _vm.root.state.options.chart.text.display
         ? _c("chart-text", { attrs: { task: _vm.task } })
         : _vm._e()
     ],
@@ -4671,19 +4152,29 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var Projectvue_type_script_lang_js_ = ({
+  name: 'Project',
   components: {
     ChartText: Text,
     ProgressBar: ProgressBar,
     Expander: Expander
   },
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
   computed: {
@@ -4692,8 +4183,8 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    clipPathId () {
-      return "gantt-elastic__project-clip-path-" + this.task.id;
+    clipPathId() {
+      return 'gantt-elastic__project-clip-path-' + this.task.id;
     },
 
     /**
@@ -4701,7 +4192,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getViewBox () {
+    getViewBox() {
       return `0 0 ${this.task.width} ${this.task.height}`;
     },
 
@@ -4710,7 +4201,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getGroupTransform () {
+    getGroupTransform() {
       return `translate(${this.task.x} ${this.task.y})`;
     },
 
@@ -4719,7 +4210,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {string}
      */
-    getPoints () {
+    getPoints() {
       const task = this.task;
       const bottom = task.height - task.height / 4;
       const corner = task.height / 6;
@@ -4743,9 +4234,9 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      *
      * @returns {boolean}
      */
-    displayExpander () {
-      const expander = this.root.state.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.taskList.display);
+    displayExpander() {
+      const expander = this.root.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
     }
   },
   methods: {
@@ -4755,8 +4246,8 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      * @param {string} eventName
      * @param {Event} event
      */
-    emitEvent (eventName, event) {
-      if (!this.root.state.scroll.scrolling) {
+    emitEvent(eventName, event) {
+      if (!this.root.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }
@@ -4844,6 +4335,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 
 
 /* harmony default export */ var Chartvue_type_script_lang_js_ = ({
+  name: 'Chart',
   components: {
     Grid: Grid,
     DependencyLines: DependencyLines,
@@ -4853,8 +4345,8 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
     Project: Project,
     DaysHighlight: DaysHighlight
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {
       moving: false
     };
@@ -4862,41 +4354,21 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
   /**
    * Mounted
    */
-  mounted () {
-    this.root.state.refs.chart = this.$refs.chart;
-    this.root.state.refs.chartGraph = this.$refs.chartGraph;
+  mounted() {
+    this.root.state.options.refs.chart = this.$refs.chart;
+    this.root.state.options.refs.chartGraph = this.$refs.chartGraph;
   },
 
   computed: {
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth () {
-      const state = this.root.state;
-      return state.width;
-    },
-
-    /**
-     * Get height
-     *
-     * @returns {number}
-     */
-    getHeight () {
-      const state = this.root.state;
-      return state.height;
-    },
-
     /**
      * Get view box
      *
      * @returns {string}
      */
-    getViewBox () {
-      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
+    getViewBox() {
+      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.options.allVisibleTasksHeight}`;
     }
-  },
+  }
 });
 
 // CONCATENATED MODULE: ./src/components/Chart/Chart.vue?vue&type=script&lang=js&
@@ -4996,20 +4468,33 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ var MainViewvue_type_script_lang_js_ = ({
+  name: 'MainView',
   components: {
     TaskList: TaskList,
     Chart: Chart
   },
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
+  inject: ['root'],
+  data() {
     return {
-      defs: "",
+      defs: '',
       mousePos: {
         x: 0,
         y: 0,
@@ -5020,51 +4505,37 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         positiveX: 0,
         positiveY: 0,
         currentX: 0,
-        currentY: 0,
+        currentY: 0
       }
     };
   },
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.viewBoxWidth = this.$el.clientWidth;
-    this.root.state.refs.mainView = this.$refs.mainView;
-    this.root.state.refs.svgChart = this.$refs.svgChart;
-    this.root.state.refs.chartContainer = this.$refs.chartContainer;
-    this.root.state.refs.taskList = this.$refs.taskList;
-    this.root.state.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
-    this.root.state.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
+    this.root.state.options.refs.mainView = this.$refs.mainView;
+    this.root.state.options.refs.svgChart = this.$refs.svgChart;
+    this.root.state.options.refs.chartContainer = this.$refs.chartContainer;
+    this.root.state.options.refs.taskList = this.$refs.taskList;
+    this.root.state.options.refs.chartScrollContainerHorizontal = this.$refs.chartScrollContainerHorizontal;
+    this.root.state.options.refs.chartScrollContainerVertical = this.$refs.chartScrollContainerVertical;
     document.addEventListener('mouseup', this.chartMouseUp.bind(this));
     document.addEventListener('mousemove', this.chartMouseMove.bind(this));
     document.addEventListener('touchmove', this.chartMouseMove.bind(this));
     document.addEventListener('touchend', this.chartMouseUp.bind(this));
   },
   computed: {
-
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth () {
-      let width = this.root.state.clientWidth - this.root.state.scrollBarHeight;
-      if (width < 0) {
-        return 0;
-      }
-      return width;
-    },
-
     /**
      * Get margin left
      *
      * @returns {string}
      */
-    getMarginLeft () {
-      if (!this.root.state.taskList.display) {
-        return "0px";
+    getMarginLeft() {
+      if (!this.root.state.options.taskList.display) {
+        return '0px';
       }
-      return this.root.state.taskList.finalWidth + "px";
+      return this.root.state.options.taskList.finalWidth + 'px';
     },
 
     /**
@@ -5072,67 +4543,69 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
      *
      * @returns {object}
      */
-    verticalStyle () {
+    verticalStyle() {
       return {
-        width: this.root.state.scrollBarHeight + 'px',
-        height: this.root.state.rowsHeight + 'px',
-        "margin-top": (this.root.state.calendar.height + this.root.state.calendar.gap) + 'px'
+        width: this.root.state.options.scrollBarHeight + 'px',
+        height: this.root.state.options.rowsHeight + 'px',
+        'margin-top': this.root.state.options.calendar.height + this.root.state.options.calendar.gap + 'px'
       };
     },
 
     /**
-    * Get view box
-    *
-    * @returns {string}
-    */
-    getViewBox () {
-      if (this.root.state.clientWidth) {
-        return `0 0 ${this.root.state.clientWidth - this.root.state.scrollBarHeight} ${this.root.state.height}`;
+     * Get view box
+     *
+     * @returns {string}
+     */
+    getViewBox() {
+      if (this.root.state.options.clientWidth) {
+        return `0 0 ${this.root.state.options.clientWidth - this.root.state.options.scrollBarHeight} ${
+          this.root.state.options.height
+        }`;
       }
-      return `0 0 0 ${this.root.state.height}`;
+      return `0 0 0 ${this.root.state.options.height}`;
     }
   },
   methods: {
     /**
      * Emit event when mouse is moving inside main view
      */
-    mouseMove (event) {
-      this.root.$emit("main-view-mousemove", event);
+    mouseMove(event) {
+      this.root.$emit('main-view-mousemove', event);
     },
 
     /**
      * Emit mouseup event inside main view
      */
-    mouseUp (event) {
-      this.root.$emit("main-view-mouseup", event);
+    mouseUp(event) {
+      this.root.$emit('main-view-mouseup', event);
     },
 
     /**
      * Horizontal scroll event handler
      */
-    onHorizontalScroll (ev) {
-      this.root.$emit("chart-scroll-horizontal", ev);
+    onHorizontalScroll(ev) {
+      this.root.$emit('chart-scroll-horizontal', ev);
     },
 
     /**
      * Vertical scroll event handler
      */
-    onVerticalScroll (ev) {
-      this.root.$emit("chart-scroll-vertical", ev);
+    onVerticalScroll(ev) {
+      this.root.$emit('chart-scroll-vertical', ev);
     },
 
     /**
      * Mouse wheel event handler
      */
-    chartWheel (ev) {
-      this.root.$emit("chart-wheel", ev);
+    chartWheel(ev) {
+      this.root.$emit('chart-wheel', ev);
     },
 
     /**
      * Chart mousedown event handler
      * Initiates drag scrolling mode
      */
-    chartMouseDown (ev) {
+    chartMouseDown(ev) {
       if (typeof ev.touches !== 'undefined') {
         this.mousePos.x = this.mousePos.lastX = ev.touches[0].screenX;
         this.mousePos.y = this.mousePos.lastY = ev.touches[0].screenY;
@@ -5141,23 +4614,23 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         this.mousePos.currentX = this.$refs.chartScrollContainerHorizontal.scrollLeft;
         this.mousePos.currentY = this.$refs.chartScrollContainerVertical.scrollTop;
       }
-      this.root.state.scroll.scrolling = true;
+      this.root.state.options.scroll.scrolling = true;
     },
 
     /**
      * Chart mouseup event handler
      * Deactivates drag scrolling mode
      */
-    chartMouseUp (ev) {
-      this.root.state.scroll.scrolling = false;
+    chartMouseUp(ev) {
+      this.root.state.options.scroll.scrolling = false;
     },
 
     /**
      * Chart mousemove event handler
      * When in drag scrolling mode this method calculate scroll movement
      */
-    chartMouseMove (ev) {
-      if (this.root.state.scroll.scrolling) {
+    chartMouseMove(ev) {
+      if (this.root.state.options.scroll.scrolling) {
         ev.preventDefault();
         ev.stopImmediatePropagation();
         ev.stopPropagation();
@@ -5176,28 +4649,28 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
         }
         const horizontal = this.$refs.chartScrollContainerHorizontal;
         const vertical = this.$refs.chartScrollContainerVertical;
-        let x = 0, y = 0;
+        let x = 0,
+          y = 0;
         if (touch) {
-          x = this.mousePos.currentX + (movementX * this.root.state.scroll.dragXMoveMultiplier);
+          x = this.mousePos.currentX + movementX * this.root.state.options.scroll.dragXMoveMultiplier;
         } else {
-          x = horizontal.scrollLeft - (movementX * this.root.state.scroll.dragXMoveMultiplier);
+          x = horizontal.scrollLeft - movementX * this.root.state.options.scroll.dragXMoveMultiplier;
         }
         horizontal.scrollLeft = x;
         if (touch) {
-          y = this.mousePos.currentY + (movementY * this.root.state.scroll.dragYMoveMultiplier);
+          y = this.mousePos.currentY + movementY * this.root.state.options.scroll.dragYMoveMultiplier;
         } else {
-          y = vertical.scrollTop - (movementY * this.root.state.scroll.dragYMoveMultiplier);
+          y = vertical.scrollTop - movementY * this.root.state.options.scroll.dragYMoveMultiplier;
         }
         vertical.scrollTop = y;
       }
-    },
-
+    }
   },
 
   /**
    * Before destroy event - clean up
    */
-  beforeDestroy () {
+  beforeDestroy() {
     document.removeEventListener('mouseup', this.chartMouseUp);
     document.removeEventListener('mousemove', this.chartMouseMove);
     document.removeEventListener('touchmove', this.chartMouseMove);
@@ -5586,6 +5059,14 @@ const fontFamily = "Arial, sans-serif";
 
 
 
+const ctx = document.createElement('canvas').getContext('2d');
+let VueInst = external_Vue_default.a;
+function initVue() {
+  if (typeof Vue !== 'undefined' && typeof VueInst === 'undefined') {
+    VueInst = Vue;
+  }
+}
+initVue();
 /**
  * Helper function to fill out empty options in user settings
  *
@@ -5593,6 +5074,10 @@ const fontFamily = "Arial, sans-serif";
  * @returns {object} merged options
  */
 function getOptions(userOptions) {
+  const localeName = 'en';
+  if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.name !== 'undefined') {
+    localeName = userOptions.locale.name;
+  }
   return {
     style: src_style,
     slots: {
@@ -5615,8 +5100,10 @@ function getOptions(userOptions) {
     width: 0,
     height: 0,
     clientWidth: 0,
+    outerHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
+    refs: {},
     scroll: {
       scrolling: false,
       dragXMoveMultiplier: 3,
@@ -5651,13 +5138,9 @@ function getOptions(userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      firstDate: null,
       firstTime: null, // firstDate getTime()
-      lastDate: null,
       lastTime: null, // last date getTime()
-      firstTaskDate: null,
       firstTaskTime: 0,
-      lastTaskDate: null,
       lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
@@ -5732,21 +5215,21 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         widths: [],
-        maxWidths: {},
+        maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           long(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('HH:mm');
           },
           medium(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('HH:mm');
           },
           short(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('HH');
           }
         }
@@ -5755,21 +5238,21 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         widths: [],
-        maxWidths: {},
+        maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           long(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('DD dddd');
           },
           medium(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('DD ddd');
           },
           short(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('DD');
           }
         }
@@ -5778,35 +5261,35 @@ function getOptions(userOptions) {
         height: 20,
         display: true,
         widths: [],
-        maxWidths: {},
+        maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           short(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('MM');
           },
           medium(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format("MMM 'YY");
           },
           long(date) {
-            return esm(date)
-              .locale(userOptions.locale.code)
+            return dayjs_min_default()(date)
+              .locale(localeName)
               .format('MMMM YYYY');
           }
         }
       }
     },
     locale: {
-      code: 'en',
+      name: 'en',
       Now: 'Now',
       'X-Scale': 'Zoom-X',
       'Y-Scale': 'Zoom-Y',
       'Task list width': 'Task list',
       'Before/After': 'Expand',
-      'Display task list': 'Show task list'
-      /*weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
+      'Display task list': 'Show task list',
+      weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
       weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
       weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
       months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split(
@@ -5828,7 +5311,7 @@ function getOptions(userOptions) {
         MM: '%d miesięcy',
         y: 'rok',
         yy: '%d lat'
-      }*/
+      }
     }
   };
 }
@@ -5839,7 +5322,14 @@ function getOptions(userOptions) {
  * @returns {boolean}
  */
 function isObject(item) {
-  return item && typeof item === 'object' && !Array.isArray(item);
+  return (
+    item &&
+    typeof item === 'object' &&
+    !Array.isArray(item) &&
+    !(item instanceof HTMLElement) &&
+    !(item instanceof CanvasRenderingContext2D) &&
+    typeof item !== 'function'
+  );
 }
 /**
  * Helper function which will merge objects recursively - creating brand new one - like clone
@@ -5859,7 +5349,18 @@ function mergeDeep(target, ...sources) {
         if (typeof target[key] === 'undefined') {
           Object.assign(target, { [key]: {} });
         }
-        mergeDeep(target[key], source[key]);
+        target[key] = mergeDeep(target[key], source[key]);
+      } else if (Array.isArray(source[key])) {
+        target[key] = source[key].map(item => {
+          if (isObject(item)) {
+            return mergeDeep({}, item);
+          }
+          return item;
+        });
+      } else if (typeof source[key] === 'function') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key];
+        }
       } else {
         Object.assign(target, { [key]: source[key] });
       }
@@ -5868,33 +5369,130 @@ function mergeDeep(target, ...sources) {
   return mergeDeep(target, ...sources);
 }
 /**
+ * Detect if object or array is observable
+ *
+ * @param {object|array} obj
+ */
+function isObservable(obj) {
+  return typeof obj === 'object' && obj.hasOwnProperty('__ob__');
+}
+/**
  * Same as above but with reactivity in mind
  *
- * @param {Vue.component} component
  * @param {object} target
  * @params {object} sources
  * @returns {object}
  */
-function mergeDeepReactive(component, target, ...sources) {
+function mergeDeepReactive(target, ...sources) {
   if (!sources.length) {
+    if (!isObservable(target)) {
+      return VueInst.observable(target);
+    }
     return target;
+  }
+  if (!isObservable(target)) {
+    target = VueInst.observable(target);
   }
   const source = sources.shift();
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          component.$set(target, key, {});
+          if (isObservable(source[key])) {
+            target[key] = source[key];
+          } else {
+            target[key] = VueInst.observable({});
+          }
         }
-        mergeDeepReactive(component, target[key], source[key]);
+        target[key] = mergeDeepReactive(target[key], source[key]);
+      } else if (Array.isArray(source[key])) {
+        if (isObservable(source[key])) {
+          target[key] = source[key];
+        } else {
+          VueInst.set(target, key, source[key]);
+        }
+      } else if (typeof source[key] === 'function') {
+        if (source[key].toString().indexOf('[native code]') === -1) {
+          target[key] = source[key];
+        }
       } else {
-        component.$set(target, key, source[key]);
+        VueInst.set(target, key, source[key]);
       }
     }
   }
-  return mergeDeepReactive(component, target, ...sources);
+  return mergeDeepReactive(target, ...sources);
 }
-const styleCache = {};
+/**
+ * Check if objects or arrays are equal by comparing nested values
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {boolean}
+ */
+function equalDeep(left, right) {
+  if (typeof right !== typeof left) {
+    return false;
+  }
+  if (Array.isArray(left)) {
+    if (left.length !== right.length) {
+      return false;
+    }
+    for (let [index, value] of left.entries()) {
+      if (typeof value !== typeof right[index]) {
+        return false;
+      }
+      if (isObject(value) || Array.isArray(value)) {
+        if (!equalDeep(value, right[index])) {
+          return false;
+        }
+      } else if (value !== right[index]) {
+        return false;
+      }
+    }
+  } else {
+    for (let key in left) {
+      if (typeof left[key] !== typeof right[key]) {
+        return false;
+      }
+      if (isObject(left[key]) || Array.isArray(left[key])) {
+        if (!equalDeep(left[key], right[key])) {
+          return false;
+        }
+      } else if (left[key] !== right[key]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+/**
+ * Synchronize properties that exist in left object with values from right
+ *
+ * @param {object|array} left
+ * @param {object|array} right
+ *
+ * @returns {object|array}
+ */
+function synchronizeDeep(left, right) {
+  for (let key in left) {
+    if (isObject(right[key])) {
+      left[key] = synchronizeDeep(left[key], right[key]);
+    } else if (Array.isArray(right[key])) {
+      left[key] = right[key].map((item, index) => {
+        if (isObject(item)) {
+          // we predict that array want change inside gantt elastic itself
+          item = synchronizeDeep(mergeDeep({}, left[key][index]), item);
+        }
+        return item;
+      });
+    } else {
+      left[key] = right[key];
+    }
+  }
+  return left;
+}
+
 let globalVisibleTasks = [];
 
 /**
@@ -5902,6 +5500,7 @@ let globalVisibleTasks = [];
  * Main vue component
  */
 const GanttElastic = {
+  name: 'GanttElastic',
   components: {
     MainView: MainView
   },
@@ -5919,10 +5518,13 @@ const GanttElastic = {
     return {
       state: {
         tasks: [],
-        scrollBarHeight: 0,
-        allVisibleTasksHeight: 0,
-        refs: {},
-        tasksById: {}
+        options: {
+          scrollBarHeight: 0,
+          allVisibleTasksHeight: 0,
+          refs: {}
+        },
+        tasksById: {},
+        ctx
       }
     };
   },
@@ -5948,7 +5550,9 @@ const GanttElastic = {
       outer.appendChild(inner);
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
-      return (this.state.scrollBarHeight = noScroll - withScroll);
+      const height = noScroll - withScroll;
+      this.state.options.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
+      return (this.state.options.scrollBarHeight = height);
     },
 
     /**
@@ -5958,21 +5562,16 @@ const GanttElastic = {
      * @returns {object}
      */
     style(...mergeWith) {
-      const index = JSON.stringify(mergeWith);
-      if (typeof styleCache[index] !== 'undefined') {
-        return styleCache[index];
-      }
-      let merged = this.state.style['*'];
+      let merged = this.state.options.style['*'];
       mergeWith.forEach(objOrClassName => {
         if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.style[objOrClassName]);
+          merged = Object.assign({}, merged, this.state.options.style[objOrClassName]);
         } else if (typeof objOrClassName === 'object') {
           merged = Object.assign({}, merged, objOrClassName);
         } else if (typeof objOrClassName === 'function') {
           merged = Object.assign({}, objOrClassName());
         }
       });
-      styleCache[index] = merged;
       return merged;
     },
 
@@ -5994,7 +5593,7 @@ const GanttElastic = {
           this.$set(task, 'height', 0);
         }
         if (typeof task.tooltip === 'undefined') {
-          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
+          this.mergeDeepReactive(task, { tooltip: { visible: false } });
         }
         if (typeof task.tooltip.visible === 'undefined') {
           task.tooltip.visible = false;
@@ -6065,31 +5664,29 @@ const GanttElastic = {
       const options = this.mergeDeep({}, getOptions(this.options), this.options);
       switch (itsUpdate) {
         case 'tasks':
-          this.mergeDeepReactive(this, this.state, { tasks: this.mapTasks(this.tasks, options) });
+          this.mergeDeepReactive(this.state, { tasks: this.mapTasks(this.tasks, options) });
           break;
         case 'options':
-          this.mergeDeepReactive(this, this.state, this.options);
+          this.mergeDeepReactive(this.state, { options });
           break;
         default:
-          this.mergeDeepReactive(this, this.state, options, {
-            tasks: this.mapTasks(this.tasks, options)
-          });
+          this.mergeDeepReactive(
+            this.state,
+            { options },
+            {
+              tasks: this.mapTasks(this.tasks, options)
+            }
+          );
       }
-      if (itsUpdate === '' || itsUpdate === 'tasks') {
-        this.state.tasks = this.state.tasks.map(task => {
-          this.$set(task, 'start', esm(task.start).format('YYYY-MM-DD HH:mm:ss'));
-          return task;
-        });
+      dayjs_min_default.a.locale(this.state.options.locale, null, true);
+      dayjs_min_default.a.locale(this.state.options.locale.name);
+      if (typeof this.state.options.taskList === 'undefined') {
+        this.$set(this.state.options, 'taskList', {});
       }
-      esm.locale(this.options.locale, null, true);
-      esm.locale(this.options.locale.name);
-      if (typeof this.state.taskList === 'undefined') {
-        this.$set(this.state, 'taskList', {});
+      if (typeof this.state.options.taskList.columns === 'undefined') {
+        this.$set(this.state.options.taskList, 'columns', []);
       }
-      if (typeof this.state.taskList.columns === 'undefined') {
-        this.$set(this.state.taskList, 'columns', []);
-      }
-      this.state.taskList.columns = this.state.taskList.columns.map((column, index) => {
+      this.state.options.taskList.columns = this.state.options.taskList.columns.map((column, index) => {
         this.$set(column, 'thresholdPercent', 100);
         this.$set(column, 'widthFromPercentage', 0);
         this.$set(column, 'finalWidth', 0);
@@ -6117,13 +5714,11 @@ const GanttElastic = {
         this.state.taskTree = this.makeTaskTree(this.state.rootTask);
         this.state.tasks = this.state.taskTree.allChildren;
       }
-      if (itsUpdate === '') {
-        this.state.ctx = document.createElement('canvas').getContext('2d');
-      }
-      this.globalOnResize();
       this.calculateTaskListColumnsDimensions();
-      this.state.scrollBarHeight = this.getScrollBarHeight();
-      this.state.outerHeight = this.state.height + this.state.scrollBarHeight;
+      this.getScrollBarHeight();
+      this.state.options.scrollBarHeight = this.getScrollBarHeight();
+      this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
+      this.globalOnResize();
     },
 
     /**
@@ -6132,7 +5727,7 @@ const GanttElastic = {
      * @returns {int}
      */
     getCalendarHeight() {
-      return this.state.calendar.height + this.style('calendar-row')['border-width'] + this.state.calendar.gap;
+      return this.state.options.calendar.height + parseFloat(this.style('calendar-row-rect')['border-width']);
     },
 
     /**
@@ -6141,15 +5736,15 @@ const GanttElastic = {
      * @returns {int}
      */
     calculateCalendarDimensions() {
-      this.state.calendar.height = 0;
-      if (this.state.calendar.hour.display && this.state.calendar.hours.length > 0) {
-        this.state.calendar.height += this.state.calendar.hour.height;
+      this.state.options.calendar.height = 0;
+      if (this.state.options.calendar.hour.display && this.state.options.calendar.hours.length > 0) {
+        this.state.options.calendar.height += this.state.options.calendar.hour.height;
       }
-      if (this.state.calendar.day.display && this.state.calendar.days.length > 0) {
-        this.state.calendar.height += this.state.calendar.day.height;
+      if (this.state.options.calendar.day.display && this.state.options.calendar.days.length > 0) {
+        this.state.options.calendar.height += this.state.options.calendar.day.height;
       }
-      if (this.state.calendar.month.display && this.state.calendar.months.length > 0) {
-        this.state.calendar.height += this.state.calendar.month.height;
+      if (this.state.options.calendar.month.display && this.state.options.calendar.months.length > 0) {
+        this.state.options.calendar.height += this.state.options.calendar.month.height;
       }
     },
 
@@ -6174,15 +5769,18 @@ const GanttElastic = {
      * @returns {int}
      */
     getMaximalExpanderWidth() {
-      return this.getMaximalLevel() * this.state.taskList.expander.padding + this.state.taskList.expander.margin;
+      return (
+        this.getMaximalLevel() * this.state.options.taskList.expander.padding +
+        this.state.options.taskList.expander.margin
+      );
     },
 
     /**
      * Synchronize scrollTop property when row height is changed
      */
     syncScrollTop() {
-      if (this.state.refs.taskListItems) {
-        this.state.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
+      if (this.state.options.refs.taskListItems) {
+        this.state.options.scroll.top = this.state.options.refs.taskListItems.scrollTop = this.state.options.refs.chartScrollContainerVertical.scrollTop = this.state.options.refs.chartGraph.scrollTop;
       }
     },
 
@@ -6192,20 +5790,20 @@ const GanttElastic = {
     calculateTaskListColumnsDimensions() {
       let final = 0;
       let percentage = 0;
-      this.state.taskList.columns.forEach(column => {
+      this.state.options.taskList.columns.forEach(column => {
         if (column.expander) {
           column.widthFromPercentage =
-            ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.taskList.percent;
+            ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.options.taskList.percent;
         } else {
-          column.widthFromPercentage = (column.width / 100) * this.state.taskList.percent;
+          column.widthFromPercentage = (column.width / 100) * this.state.options.taskList.percent;
         }
         percentage += column.widthFromPercentage;
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width'];
       });
-      this.state.taskList.widthFromPercentage = percentage;
-      this.state.taskList.finalWidth = final;
+      this.state.options.taskList.widthFromPercentage = percentage;
+      this.state.options.taskList.finalWidth = final;
       this.syncScrollTop();
     },
 
@@ -6291,7 +5889,7 @@ const GanttElastic = {
      * @returns {string} html svg image of gantt
      */
     getSVG() {
-      return this.state.mainView.outerHTML;
+      return this.state.options.mainView.outerHTML;
     },
 
     /**
@@ -6305,8 +5903,8 @@ const GanttElastic = {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          canvas.width = this.state.mainView.clientWidth;
-          canvas.height = this.state.rowsHeight;
+          canvas.width = this.state.options.mainView.clientWidth;
+          canvas.height = this.state.options.rowsHeight;
           canvas.getContext('2d').drawImage(img, 0, 0);
           resolve(canvas.toDataURL(type));
         };
@@ -6321,12 +5919,12 @@ const GanttElastic = {
      */
     getHeight(visibleTasks, outer = false) {
       let height =
-        visibleTasks.length * (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) +
-        this.state.calendar.height +
+        visibleTasks.length * (this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2) +
+        this.state.options.calendar.height +
         parseFloat(this.style('calendar-row-rect')['border-width']) * 2 +
-        this.state.calendar.gap;
+        this.state.options.calendar.gap;
       if (outer) {
-        height += this.state.scrollBarHeight;
+        height += this.state.options.scrollBarHeight;
       }
       return height;
     },
@@ -6339,12 +5937,12 @@ const GanttElastic = {
     getTaskHeight(withStroke = false) {
       if (withStroke) {
         return (
-          this.state.row.height +
-          this.state.chart.grid.horizontal.gap * 2 +
+          this.state.options.row.height +
+          this.state.options.chart.grid.horizontal.gap * 2 +
           this.style('grid-line-horizontal')['stroke-width']
         );
       }
-      return this.state.row.height + this.state.chart.grid.horizontal.gap * 2;
+      return this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2;
     },
 
     /**
@@ -6363,9 +5961,9 @@ const GanttElastic = {
      * @returns {number}
      */
     timeToPixelOffsetX(ms) {
-      let x = ms - this.state.times.firstTime;
+      let x = ms - this.state.options.times.firstTime;
       if (x) {
-        x = x / this.state.times.timePerPixel;
+        x = x / this.state.options.times.timePerPixel;
       }
       return x;
     },
@@ -6378,7 +5976,7 @@ const GanttElastic = {
      */
     pixelOffsetXToTime(pixelOffsetX) {
       let offset = pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2;
-      return offset * this.state.times.timePerPixel + this.state.times.firstTime;
+      return offset * this.state.options.times.timePerPixel + this.state.options.times.firstTime;
     },
 
     /**
@@ -6391,8 +5989,10 @@ const GanttElastic = {
      */
     isInsideViewPort(x, width, buffer = 5000) {
       return (
-        (x + width + buffer >= this.state.scroll.chart.left && x - buffer <= this.state.scroll.chart.right) ||
-        (x - buffer <= this.state.scroll.chart.left && x + width + buffer >= this.state.scroll.chart.right)
+        (x + width + buffer >= this.state.options.scroll.chart.left &&
+          x - buffer <= this.state.options.scroll.chart.right) ||
+        (x - buffer <= this.state.options.scroll.chart.left &&
+          x + width + buffer >= this.state.options.scroll.chart.right)
       );
     },
 
@@ -6402,8 +6002,8 @@ const GanttElastic = {
      * @param {event} ev
      */
     onScrollChart(ev) {
-      const horizontal = this.state.refs.chartScrollContainerHorizontal;
-      const vertical = this.state.refs.chartScrollContainerVertical;
+      const horizontal = this.state.options.refs.chartScrollContainerHorizontal;
+      const vertical = this.state.options.refs.chartScrollContainerVertical;
       this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
     },
 
@@ -6414,15 +6014,17 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart(left, top) {
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
-      this.state.scroll.chart.left = left;
-      this.state.scroll.chart.right = left + chartContainerWidth;
-      this.state.scroll.chart.percent = (left / this.state.times.totalViewDurationPx) * 100;
-      this.state.scroll.chart.top = top;
-      this.state.scroll.chart.time = this.pixelOffsetXToTime(left);
-      this.state.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.scroll.chart.dateTime.left = esm(this.state.scroll.chart.time);
-      this.state.scroll.chart.dateTime.right = esm(this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth));
+      const chartContainerWidth = this.state.options.refs.chartContainer.clientWidth;
+      this.state.options.scroll.chart.left = left;
+      this.state.options.scroll.chart.right = left + chartContainerWidth;
+      this.state.options.scroll.chart.percent = (left / this.state.options.times.totalViewDurationPx) * 100;
+      this.state.options.scroll.chart.top = top;
+      this.state.options.scroll.chart.time = this.pixelOffsetXToTime(left);
+      this.state.options.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
+      this.state.options.scroll.chart.dateTime.left = dayjs_min_default()(this.state.options.scroll.chart.time);
+      this.state.options.scroll.chart.dateTime.right = dayjs_min_default()(
+        this.pixelOffsetXToTime(left + this.state.options.refs.chart.clientWidth)
+      );
       this.scrollTo(left, top);
     },
 
@@ -6433,10 +6035,10 @@ const GanttElastic = {
      */
     scrollToTime(time) {
       let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
+      const chartContainerWidth = this.state.options.refs.chartContainer.clientWidth;
       pos = pos - chartContainerWidth / 2;
-      if (pos > this.state.width) {
-        pos = this.state.width - chartContainerWidth;
+      if (pos > this.state.options.width) {
+        pos = this.state.options.width - chartContainerWidth;
       }
       this.scrollTo(pos);
     },
@@ -6449,15 +6051,15 @@ const GanttElastic = {
      */
     scrollTo(left = null, top = null) {
       if (left !== null) {
-        this.state.refs.chartContainer.scrollLeft = left;
-        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
-        this.state.scroll.left = left;
+        this.state.options.refs.chartContainer.scrollLeft = left;
+        this.state.options.refs.chartScrollContainerHorizontal.scrollLeft = left;
+        this.state.options.scroll.left = left;
       }
       if (top !== null) {
-        this.state.refs.chartScrollContainerVertical.scrollTop = top;
-        this.state.refs.chartGraph.scrollTop = top;
-        this.state.refs.taskListItems.scrollTop = top;
-        this.state.scroll.top = top;
+        this.state.options.refs.chartScrollContainerVertical.scrollTop = top;
+        this.state.options.refs.chartGraph.scrollTop = top;
+        this.state.options.refs.taskListItems.scrollTop = top;
+        this.state.options.scroll.top = top;
       }
     },
 
@@ -6467,7 +6069,7 @@ const GanttElastic = {
      */
     fixScrollPos() {
       this.$nextTick(() => {
-        this.scrollToTime(this.state.scroll.chart.timeCenter);
+        this.scrollToTime(this.state.options.scroll.chart.timeCenter);
       });
     },
 
@@ -6476,9 +6078,9 @@ const GanttElastic = {
      */
     onWheelChart(ev) {
       if (!ev.shiftKey) {
-        let top = this.state.scroll.top + ev.deltaY;
-        const chartClientHeight = this.state.rowsHeight;
-        const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
+        let top = this.state.options.scroll.top + ev.deltaY;
+        const chartClientHeight = this.state.options.rowsHeight;
+        const scrollHeight = this.state.options.refs.chartGraph.scrollHeight - chartClientHeight;
         if (top < 0) {
           top = 0;
         } else if (top > scrollHeight) {
@@ -6486,9 +6088,9 @@ const GanttElastic = {
         }
         this.scrollTo(null, top);
       } else {
-        let left = this.state.scroll.left + ev.deltaY;
-        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
-        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        let left = this.state.options.scroll.left + ev.deltaY;
+        const chartClientWidth = this.state.options.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.options.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
           left = 0;
         } else if (left > scrollWidth) {
@@ -6502,7 +6104,7 @@ const GanttElastic = {
      * Time zoom change event handler
      */
     onTimeZoomChange(timeZoom) {
-      this.state.times.timeZoom = timeZoom;
+      this.state.options.times.timeZoom = timeZoom;
       this.recalculateTimes();
       this.calculateSteps();
       this.calculateCalendarDimensions();
@@ -6513,7 +6115,7 @@ const GanttElastic = {
      * Row height change event handler
      */
     onRowHeightChange(height) {
-      this.state.row.height = height;
+      this.state.options.row.height = height;
       this.calculateTaskListColumnsDimensions();
     },
 
@@ -6521,8 +6123,8 @@ const GanttElastic = {
      * Scope change event handler
      */
     onScopeChange(value) {
-      this.state.scope.before = value;
-      this.state.scope.after = value;
+      this.state.options.scope.before = value;
+      this.state.options.scope.after = value;
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
@@ -6533,7 +6135,7 @@ const GanttElastic = {
      * Task list width change event handler
      */
     onTaskListWidthChange(value) {
-      this.state.taskList.percent = value;
+      this.state.options.taskList.percent = value;
       this.calculateTaskListColumnsDimensions();
       this.fixScrollPos();
     },
@@ -6564,33 +6166,38 @@ const GanttElastic = {
      * When some action was performed (scale change for example) - recalculate time variables
      */
     recalculateTimes() {
-      let max = this.state.times.timeScale * 60;
-      let min = this.state.times.timeScale;
+      let max = this.state.options.times.timeScale * 60;
+      let min = this.state.options.times.timeScale;
       let steps = max / min;
-      let percent = this.state.times.timeZoom / 100;
-      this.state.times.timePerPixel =
-        this.state.times.timeScale * steps * percent + Math.pow(2, this.state.times.timeZoom);
-      this.state.times.totalViewDurationMs = this.state.times.lastDate.diff(this.state.times.firstDate, 'milisecods');
-      this.state.times.totalViewDurationPx = this.state.times.totalViewDurationMs / this.state.times.timePerPixel;
-      this.state.width = this.state.times.totalViewDurationPx + this.style('grid-line-vertical')['stroke-width'];
+      let percent = this.state.options.times.timeZoom / 100;
+      this.state.options.times.timePerPixel =
+        this.state.options.times.timeScale * steps * percent + Math.pow(2, this.state.options.times.timeZoom);
+      this.state.options.times.totalViewDurationMs = dayjs_min_default()(this.state.options.times.lastTime).diff(
+        this.state.options.times.firstTime,
+        'milisecods'
+      );
+      this.state.options.times.totalViewDurationPx =
+        this.state.options.times.totalViewDurationMs / this.state.options.times.timePerPixel;
+      this.state.options.width =
+        this.state.options.times.totalViewDurationPx + this.style('grid-line-vertical')['stroke-width'];
     },
 
     /**
      * Initialize time variables
      */
     initTimes() {
-      this.state.times.firstDate = esm(this.state.times.firstTaskDate)
-        .locale(this.locale)
+      this.state.options.times.firstTime = dayjs_min_default()(this.state.options.times.firstTaskTime)
+        .locale(this.state.options.locale.name)
         .startOf('day')
-        .subtract(this.state.scope.before, 'days')
-        .startOf('day');
-      this.state.times.lastDate = esm(this.state.times.lastTaskDate)
-        .locale(this.locale)
+        .subtract(this.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf();
+      this.state.options.times.lastTime = dayjs_min_default()(this.state.options.times.lastTaskTime)
+        .locale(this.state.options.locale.name)
         .endOf('day')
-        .add(this.state.scope.after, 'days')
-        .endOf('day');
-      this.state.times.firstTime = this.state.times.firstDate.valueOf();
-      this.state.times.lastTime = this.state.times.lastDate.valueOf();
+        .add(this.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf();
       this.recalculateTimes();
     },
 
@@ -6601,26 +6208,26 @@ const GanttElastic = {
      */
     calculateSteps() {
       const steps = [];
-      const lastMs = esm(this.state.times.lastDate).valueOf();
-      const currentDate = esm(this.state.times.firstDate);
+      const lastMs = dayjs_min_default()(this.state.options.times.lastTime).valueOf();
+      const currentDate = dayjs_min_default()(this.state.options.times.firstTime);
       steps.push({
-        date: currentDate,
+        time: currentDate.valueOf(),
         offset: {
           ms: 0,
           px: 0
         }
       });
       for (
-        let currentDate = esm(this.state.times.firstDate)
-          .add(1, this.state.times.stepDuration)
+        let currentDate = dayjs_min_default()(this.state.options.times.firstTime)
+          .add(1, this.state.options.times.stepDuration)
           .startOf('day');
         currentDate.valueOf() <= lastMs;
-        currentDate = currentDate.add(1, this.state.times.stepDuration).startOf('day')
+        currentDate = currentDate.add(1, this.state.options.times.stepDuration).startOf('day')
       ) {
-        const offsetMs = currentDate.diff(this.state.times.firstDate, 'milisecods');
-        const offsetPx = offsetMs / this.state.times.timePerPixel;
+        const offsetMs = currentDate.diff(this.state.options.times.firstTime, 'milisecods');
+        const offsetPx = offsetMs / this.state.options.times.timePerPixel;
         const step = {
-          date: currentDate,
+          time: currentDate.valueOf(),
           offset: {
             ms: offsetMs,
             px: offsetPx
@@ -6635,10 +6242,10 @@ const GanttElastic = {
       }
       const lastStep = steps[steps.length - 1];
       lastStep.width = {
-        ms: this.state.times.totalViewDurationMs - lastStep.offset.ms,
-        px: this.state.times.totalViewDurationPx - lastStep.offset.px
+        ms: this.state.options.times.totalViewDurationMs - lastStep.offset.ms,
+        px: this.state.options.times.totalViewDurationPx - lastStep.offset.px
       };
-      this.state.times.steps = steps;
+      this.state.options.times.steps = steps;
     },
 
     /**
@@ -6654,98 +6261,96 @@ const GanttElastic = {
      * Compute width of calendar hours column widths basing on text widths
      */
     computeHourWidths() {
-      const state = this.state;
       const style = this.style('calendar-row-text', 'calendar-row-text--hour');
-      state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = esm('2018-01-01T00:00:00'); // any date will be good for hours
-      let maxWidths = {};
-      state.calendar.hour.widths = [];
-      Object.keys(state.calendar.hour.format).forEach(formatName => {
+      this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
+      let currentDate = dayjs_min_default()('2018-01-01T00:00:00'); // any date will be good for hours
+      let maxWidths = this.state.options.calendar.hour.maxWidths;
+      this.state.options.calendar.hour.widths = [];
+      Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
       for (let hour = 0; hour < 24; hour++) {
         const widths = {
           hour
         };
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(
-            state.calendar.hour.format[formatName](currentDate.toDate())
+        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
+          widths[formatName] = this.state.ctx.measureText(
+            this.state.options.calendar.hour.format[formatName](currentDate.toDate())
           ).width;
         });
-        state.calendar.hour.widths.push(widths);
-        Object.keys(state.calendar.hour.format).forEach(formatName => {
+        this.state.options.calendar.hour.widths.push(widths);
+        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
         currentDate = currentDate.add(1, 'hour');
       }
-      state.calendar.hour.maxWidths = maxWidths;
     },
 
     /**
      * Compute calendar days column widths basing on text widths
      */
     computeDayWidths() {
-      const state = this.state;
       const style = this.style('calendar-row-text', 'calendar-row-text--day');
-      state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = esm(state.times.steps[0].date);
-      let maxWidths = {};
-      state.calendar.day.widths = [];
-      Object.keys(state.calendar.day.format).forEach(formatName => {
+      this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
+      let currentDate = dayjs_min_default()(this.state.options.times.steps[0].time);
+      let maxWidths = this.state.options.calendar.day.maxWidths;
+      this.state.options.calendar.day.widths = [];
+      Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      for (let day = 0, daysLen = state.times.steps.length; day < daysLen; day++) {
+      for (let day = 0, daysLen = this.state.options.times.steps.length; day < daysLen; day++) {
         const widths = {
           day
         };
-        Object.keys(state.calendar.day.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(state.calendar.day.format[formatName](currentDate.toDate())).width;
+        Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
+          widths[formatName] = this.state.ctx.measureText(
+            this.state.options.calendar.day.format[formatName](currentDate.toDate())
+          ).width;
         });
-        state.calendar.day.widths.push(widths);
-        Object.keys(state.calendar.day.format).forEach(formatName => {
+        this.state.options.calendar.day.widths.push(widths);
+        Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
         currentDate = currentDate.add(1, 'day');
       }
-      state.calendar.day.maxWidths = maxWidths;
     },
 
     /**
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
-      const state = this.state;
       const style = this.style('calendar-row-text', 'calendar-row-text--month');
-      state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let maxWidths = {};
-      state.calendar.month.widths = [];
-      Object.keys(state.calendar.month.format).forEach(formatName => {
+      this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
+      let maxWidths = this.state.options.calendar.month.maxWidths;
+      this.state.options.calendar.month.widths = [];
+      Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = esm(this.state.times.firstDate);
-      const monthsCount = Math.ceil(this.state.times.lastDate.diff(this.state.times.firstDate, 'months', true));
+      let currentDate = dayjs_min_default()(this.state.options.times.firstDate);
+      const monthsCount = Math.ceil(
+        dayjs_min_default()(this.state.options.times.lastTime).diff(this.state.options.times.firstTime, 'months', true)
+      );
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
         };
-        Object.keys(state.calendar.month.format).forEach(formatName => {
-          widths[formatName] = state.ctx.measureText(
-            state.calendar.month.format[formatName](currentDate.toDate())
+        Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
+          widths[formatName] = this.state.ctx.measureText(
+            this.state.options.calendar.month.format[formatName](currentDate.toDate())
           ).width;
         });
-        state.calendar.month.widths.push(widths);
-        Object.keys(state.calendar.month.format).forEach(formatName => {
+        this.state.options.calendar.month.widths.push(widths);
+        Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
         });
         currentDate = currentDate.add(1, 'month');
       }
-      state.calendar.month.maxWidths = maxWidths;
     },
 
     /**
@@ -6754,50 +6359,44 @@ const GanttElastic = {
     prepareDates() {
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
-      let firstTaskDate, lastTaskDate;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
-        task.startDate = esm(task.start);
-        task.startTime = task.startDate.valueOf();
+        task.startTime = dayjs_min_default()(task.start).valueOf();
         task.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
-          firstTaskDate = task.startDate;
         }
         if (task.startTime + task.durationMs > lastTaskTime) {
           lastTaskTime = task.startTime + task.durationMs;
-          lastTaskDate = esm(task.startTime + task.durationMs);
         }
       }
-      this.state.times.firstTaskTime = firstTaskTime;
-      this.state.times.lastTaskTime = lastTaskTime;
-      this.state.times.firstTaskDate = firstTaskDate;
-      this.state.times.lastTaskDate = lastTaskDate;
-      this.state.times.firstDate = esm(firstTaskDate)
-        .locale(this.locale)
+      this.state.options.times.firstTaskTime = firstTaskTime;
+      this.state.options.times.lastTaskTime = lastTaskTime;
+      this.state.options.times.firstTime = dayjs_min_default()(firstTaskTime)
+        .locale(this.state.options.locale.name)
         .startOf('day')
-        .subtract(this.state.scope.before, 'days')
-        .startOf('day');
-      this.state.times.lastDate = esm(lastTaskDate)
-        .locale(this.locale)
+        .subtract(this.state.options.scope.before, 'days')
+        .startOf('day')
+        .valueOf();
+      this.state.options.times.lastTime = dayjs_min_default()(lastTaskTime)
+        .locale(this.state.options.locale.name)
         .endOf('day')
-        .add(this.state.scope.after, 'days')
-        .endOf('day');
+        .add(this.state.options.scope.after, 'days')
+        .endOf('day')
+        .valueOf();
     },
 
     /**
-     * Setup and calulate everything
+     * Setup and calculate everything
      */
     setup(itsUpdate = '') {
       this.initialize(itsUpdate);
-      this.state.tasksById = {};
-      this.state.tasks.forEach(task => (this.state.tasksById[task.id] = task));
       this.prepareDates();
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
-      this.calculateCalendarDimensions();
-      this.state.taskList.width = this.state.taskList.columns.reduce(
+      this.globalOnResize();
+      this.state.options.taskList.width = this.state.options.taskList.columns.reduce(
         (prev, current) => {
           return { width: prev.width + current.width };
         },
@@ -6808,67 +6407,70 @@ const GanttElastic = {
     /**
      * Global resize event (from window.addEventListener)
      */
-    globalOnResize(ev) {
+    globalOnResize() {
       if (typeof this.$el === 'undefined' || !this.$el) {
         return;
       }
-      this.state.clientWidth = this.$el.clientWidth;
+      this.state.options.clientWidth = this.$el.clientWidth;
       if (
-        this.state.taskList.widthFromPercentage >
-        (this.state.clientWidth / 100) * this.state.taskList.widthThreshold
+        this.state.options.taskList.widthFromPercentage >
+        (this.state.options.clientWidth / 100) * this.state.options.taskList.widthThreshold
       ) {
         const diff =
-          this.state.taskList.widthFromPercentage - (this.state.clientWidth / 100) * this.state.taskList.widthThreshold;
-        let diffPercent = 100 - (diff / this.state.taskList.widthFromPercentage) * 100;
+          this.state.options.taskList.widthFromPercentage -
+          (this.state.options.clientWidth / 100) * this.state.options.taskList.widthThreshold;
+        let diffPercent = 100 - (diff / this.state.options.taskList.widthFromPercentage) * 100;
         if (diffPercent < 0) {
           diffPercent = 0;
         }
-        this.state.taskList.columns.forEach(column => {
+        this.state.options.taskList.columns.forEach(column => {
           column.thresholdPercent = diffPercent;
         });
       } else {
-        this.state.taskList.columns.forEach(column => {
+        this.state.options.taskList.columns.forEach(column => {
           column.thresholdPercent = 100;
         });
       }
       this.calculateTaskListColumnsDimensions();
+      this.calculateCalendarDimensions();
+      this.$emit('calendar-recalculate');
+      this.syncScrollTop();
     }
   },
 
   computed: {
     /**
      * Get visible tasks
-     * Very importan method which will bring us only those tasks that are visible inside gantt chart
+     * Very important method which will bring us only those tasks that are visible inside gantt chart
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
       const visibleTasks = this.state.tasks.filter(task => task.visible);
-      const maxRows = visibleTasks.slice(0, this.state.maxRows);
-      this.state.rowsHeight = this.getTasksHeight(maxRows);
+      const maxRows = visibleTasks.slice(0, this.state.options.maxRows);
+      this.state.options.rowsHeight = this.getTasksHeight(maxRows);
       let heightCompensation = 0;
-      if (this.state.maxHeight && this.state.rowsHeight > this.state.maxHeight) {
-        heightCompensation = this.state.rowsHeight - this.state.maxHeight;
-        this.state.rowsHeight = this.state.maxHeight;
+      if (this.state.options.maxHeight && this.state.options.rowsHeight > this.state.options.maxHeight) {
+        heightCompensation = this.state.options.rowsHeight - this.state.options.maxHeight;
+        this.state.options.rowsHeight = this.state.options.maxHeight;
       }
-      this.state.height = this.getHeight(maxRows) - heightCompensation;
-      this.state.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
-      this.state.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
+      this.state.options.height = this.getHeight(maxRows) - heightCompensation;
+      this.state.options.allVisibleTasksHeight = this.getTasksHeight(visibleTasks);
+      this.state.options.outerHeight = this.getHeight(maxRows, true) - heightCompensation;
       let len = visibleTasks.length;
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
-        task.width = task.durationMs / this.state.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
+        task.width =
+          task.durationMs / this.state.options.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
         if (task.width < 0) {
           task.width = 0;
         }
-        task.height = this.state.row.height;
+        task.height = this.state.options.row.height;
         task.x = this.timeToPixelOffsetX(task.startTime);
         task.y =
-          (this.state.row.height + this.state.chart.grid.horizontal.gap * 2) * index +
-          this.state.chart.grid.horizontal.gap;
+          (this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2) * index +
+          this.state.options.chart.grid.horizontal.gap;
       }
-      this.$nextTick(() => {
-        this.syncScrollTop();
-      });
+      this.globalOnResize();
       return visibleTasks;
     },
 
@@ -6877,7 +6479,7 @@ const GanttElastic = {
      */
     getTaskListColumns() {
       this.calculateTaskListColumnsDimensions();
-      return this.state.taskList.columns;
+      return this.state.options.taskList.columns;
     }
   },
 
@@ -6885,6 +6487,7 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
+    /*
     this.$watch('tasks', tasks => {
       this.setup('tasks');
       this.$emit('tasks-changed', tasks);
@@ -6892,7 +6495,7 @@ const GanttElastic = {
     this.$watch('options', opts => {
       this.setup('options');
       this.$emit('options-changed', opts);
-    });
+    });*/
     this.initializeEvents();
     this.setup();
     this.$root.$emit('gantt-elastic-created', this);
@@ -6909,7 +6512,7 @@ const GanttElastic = {
    * Emit ready/mounted events and deliver this gantt instance to outside world when needed
    */
   mounted() {
-    this.state.clientWidth = this.$el.clientWidth;
+    this.state.options.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);
@@ -6953,11 +6556,13 @@ const GanttElastic = {
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
-var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(2);
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
 /* concated harmony reexport mergeDeepReactive */__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return mergeDeepReactive; });
+/* concated harmony reexport equalDeep */__webpack_require__.d(__webpack_exports__, "equalDeep", function() { return equalDeep; });
+/* concated harmony reexport synchronizeDeep */__webpack_require__.d(__webpack_exports__, "synchronizeDeep", function() { return synchronizeDeep; });
 
 
 
@@ -6983,7 +6588,7 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7246,3 +6851,4 @@ function applyToTag (styleElement, obj) {
 
 /***/ })
 /******/ ])["default"];
+//# sourceMappingURL=GanttElastic.common.js.map

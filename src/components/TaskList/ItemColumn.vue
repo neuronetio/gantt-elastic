@@ -44,7 +44,7 @@
           {{ value }}
         </div>
         <div
-          v-if="html"
+          v-else
           class="gantt-elastic__task-list-item-value"
           :style="root.style('task-list-item-value', column.style['task-list-item-value'])"
           @click="emitEvent('click', $event)"
@@ -67,6 +67,7 @@
 
 <script>
 export default {
+  name: 'ItemColumn',
   inject: ['root'],
   props: ['column', 'task'],
   data() {

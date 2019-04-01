@@ -1,28 +1,36 @@
 {
   "name": "gantt-elastic",
-  "version": "0.9.6",
+  "version": "0.10.18",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
-    "dayjs": "^1.8.5"
+    "dayjs": "^1.8.11",
+    "vue": "^2.6.10",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.5.0",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.1",
-    "gulp-vueify2": "0.0.3",
-    "vue": "^2.6.4",
-    "vue-loader": "^15.6.2",
-    "vue-slider-component": "^2.8.7",
+    "eslint": "^5.15.3",
+    "jest": "^24.5.0",
+    "puppeteer": "^1.13.0",
+    "vue-loader": "^15.7.0",
+    "vue-slider-component": "^2.8.14",
     "vue-switches": "^2.0.1",
-    "vue-template-compiler": "^2.6.4",
-    "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --detectOpenHandles",
     "build": "webpack",
-    "dev": "webpack --watch",
-    "dev-fast": "webpack --watch --config webpack.dev.js"
+    "dev": "webpack --config webpack.dev.js --watch"
   },
   "repository": {
     "type": "git",
@@ -56,5 +64,10 @@
   "bugs": {
     "url": "https://github.com/neuronetio/gantt-elastic/issues"
   },
-  "homepage": "https://neuronetio.github.io/gantt-elastic/"
+  "homepage": "https://neuronetio.github.io/gantt-elastic/",
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  }
 }

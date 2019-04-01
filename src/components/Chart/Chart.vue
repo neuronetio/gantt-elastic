@@ -9,20 +9,20 @@
 <template>
   <div
     class="gantt-elastic__chart"
-    :style="root.style('chart',{width:getWidth+'px', height:getHeight+'px'})"
+    :style="root.style('chart', { width: root.state.options.width + 'px', height: root.state.options.height + 'px' })"
     ref="chart"
   >
     <calendar></calendar>
-    <div :style="root.style('chart-area', {width:'100%', height:root.state.rowsHeight+'px'})">
-      <div class="gantt-elastic__chart-graph" ref="chartGraph" :style="root.style('chart-graph',{height:'100%'})">
+    <div :style="root.style('chart-area', { width: '100%', height: root.state.options.rowsHeight + 'px' })">
+      <div class="gantt-elastic__chart-graph" ref="chartGraph" :style="root.style('chart-graph', { height: '100%' })">
         <svg
-          class="gantt-elastic__chart"
-          :style="root.style('chart')"
-          ref="chart"
+          class="gantt-elastic__chart-graph-svg"
+          :style="root.style('chart-graph-svg')"
+          ref="chartGraphSvg"
           x="0"
           y="0"
-          :width="getWidth+'px'"
-          :height="root.state.allVisibleTasksHeight+'px'"
+          :width="root.state.options.width + 'px'"
+          :height="root.state.options.allVisibleTasksHeight + 'px'"
           xmlns="http://www.w3.org/2000/svg"
         >
           <days-highlight></days-highlight>
@@ -45,14 +45,15 @@
 </template>
 
 <script>
-import Grid from "./Grid.vue";
-import DaysHighlight from "./DaysHighlight.vue";
-import Calendar from "../Calendar/Calendar.vue";
-import DependencyLines from "./DependencyLines.vue";
-import Task from "./Row/Task.vue";
-import Milestone from "./Row/Milestone.vue";
-import Project from "./Row/Project.vue";
+import Grid from './Grid.vue';
+import DaysHighlight from './DaysHighlight.vue';
+import Calendar from '../Calendar/Calendar.vue';
+import DependencyLines from './DependencyLines.vue';
+import Task from './Row/Task.vue';
+import Milestone from './Row/Milestone.vue';
+import Project from './Row/Project.vue';
 export default {
+  name: 'Chart',
   components: {
     Grid,
     DependencyLines,
@@ -62,8 +63,8 @@ export default {
     Project,
     DaysHighlight
   },
-  inject: ["root"],
-  data () {
+  inject: ['root'],
+  data() {
     return {
       moving: false
     };
@@ -71,40 +72,21 @@ export default {
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.root.state.refs.chart = this.$refs.chart;
     this.root.state.refs.chartGraph = this.$refs.chartGraph;
+    this.root.state.refs.chartGraphSvg = this.$refs.chartGraphSvg;
   },
 
   computed: {
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth () {
-      const state = this.root.state;
-      return state.width;
-    },
-
-    /**
-     * Get height
-     *
-     * @returns {number}
-     */
-    getHeight () {
-      const state = this.root.state;
-      return state.height;
-    },
-
     /**
      * Get view box
      *
      * @returns {string}
      */
-    getViewBox () {
-      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.allVisibleTasksHeight}`;
+    getViewBox() {
+      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.options.allVisibleTasksHeight}`;
     }
-  },
+  }
 };
 </script>

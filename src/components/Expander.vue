@@ -7,43 +7,46 @@
  */
 -->
 <template>
-  <div :class="getClassPrefix()+'-wrapper'" :style="root.style(getClassPrefix(false)+'-wrapper')">
+  <div
+    :class="getClassPrefix() + '-wrapper'"
+    :style="root.style(getClassPrefix(false) + '-wrapper', this.type === 'taskList' ? style : {})"
+  >
     <svg
-      :class="getClassPrefix()+'-content'"
-      :style="root.style(getClassPrefix(false)+'-content')"
+      :class="getClassPrefix() + '-content'"
+      :style="root.style(getClassPrefix(false) + '-content')"
       :width="options.size"
       :height="options.size"
       v-if="allChildren.length"
     >
       <rect
-        :class="getClassPrefix()+'-border'"
-        :style="root.style(getClassPrefix(false)+'-border',borderStyle)"
+        :class="getClassPrefix() + '-border'"
+        :style="root.style(getClassPrefix(false) + '-border', borderStyle)"
         :x="border"
         :y="border"
-        :width="options.size-border*2"
-        :height="options.size-border*2"
+        :width="options.size - border * 2"
+        :height="options.size - border * 2"
         rx="2"
         ry="2"
         @click="toggle"
       ></rect>
       <line
-        :class="getClassPrefix()+'-line'"
-        :style="root.style(getClassPrefix(false)+'-line')"
+        :class="getClassPrefix() + '-line'"
+        :style="root.style(getClassPrefix(false) + '-line')"
         v-if="allChildren.length"
         :x1="lineOffset"
-        :y1="options.size/2"
-        :x2="options.size-lineOffset"
-        :y2="options.size/2"
+        :y1="options.size / 2"
+        :x2="options.size - lineOffset"
+        :y2="options.size / 2"
         @click="toggle"
       ></line>
       <line
-        :class="getClassPrefix()+'-line'"
-        :style="root.style(getClassPrefix(false)+'-line')"
+        :class="getClassPrefix() + '-line'"
+        :style="root.style(getClassPrefix(false) + '-line')"
         v-if="collapsed"
-        :x1="options.size/2"
+        :x1="options.size / 2"
         :y1="lineOffset"
-        :x2="options.size/2"
-        :y2="options.size-lineOffset"
+        :x2="options.size / 2"
+        :y2="options.size - lineOffset"
         @click="toggle"
       ></line>
     </svg>
@@ -52,25 +55,34 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["tasks", "options"],
-  data () {
+  name: 'Expander',
+  inject: ['root'],
+  props: ['tasks', 'options', 'type'],
+  data() {
     const border = 0.5;
     return {
       border,
       borderStyle: {
-        "stroke-width": border
+        'stroke-width': border
       },
       lineOffset: 5
     };
   },
   computed: {
+    style() {
+      const margin = this.root.state.options.taskList.expander.margin;
+      const padding = (this.tasks[0].parents.length - 1) * this.root.state.options.taskList.expander.padding;
+      return {
+        'padding-left': padding + margin + 'px',
+        margin: 'auto 0'
+      };
+    },
     /**
      * Get all tasks
      *
      * @returns {array}
      */
-    allChildren () {
+    allChildren() {
       const children = [];
       this.tasks.forEach(task => {
         task.allChildren.forEach(child => {
@@ -85,7 +97,7 @@ export default {
      *
      * @returns {boolean}
      */
-    collapsed () {
+    collapsed() {
       if (this.tasks.length === 0) {
         return false;
       }
@@ -104,14 +116,14 @@ export default {
      *
      * @returns {string}
      */
-    getClassPrefix (full = true) {
+    getClassPrefix(full = true) {
       return `${full ? 'gantt-elastic__' : ''}${this.options.type}-expander`;
     },
 
     /**
      * Toggle expander
      */
-    toggle () {
+    toggle() {
       if (this.allChildren.length === 0) {
         return;
       }

@@ -19,8 +19,8 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
 ![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/grab-scroll.gif)
 
-
 ## Gantt-elastic
+
 is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
 gantt-elastic is not fully finished yet and may change (not released yet)
@@ -30,8 +30,10 @@ gantt-elastic is not fully finished yet and may change (not released yet)
 ### Full documentation soon (for now take a look at examples folder)
 
 For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
+There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
 
 ### Installation
+
 `npm install --save gantt-elastic` or download zip from github / clone repo
 
 ### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
@@ -39,134 +41,199 @@ For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 ```html
 <!DOCTYPE html>
 <html charset="utf-8">
-<head>
-  <meta charset="UTF-8">
-  <title>gantt-elastic demo</title>
-</head>
-<body>
-  <div id="gantt" style="width:100%;height:100%;"></div>
-
-  <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
-  <!-- or
+  <head>
+    <meta charset="UTF-8" />
+    <title>gantt-elastic demo</title>
+  </head>
+  <body>
+    <div id="app" style="width:100%;height:100%;">
+      <gantt-elastic :tasks="$store.state.tasks" :options="$store.state.options">
+        <gantt-header slot="header"></gantt-header>
+      </gantt-elastic>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/bundle.js"></script>
+    <!-- or
   <script src="../dist/bundle.js"></script>
   where  ../ is your path to gantt-elastic
   -->
-  <script>
-    // override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
-    // more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
-    // You can change anything! You have full control of components templates, events, data ... and so on!
-    // GanttElastic.component.components.MainView.components.TopHeader = CustomHeader;
+    <script>
+      // override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
+      // more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
+      // You can change anything! You have full control of components templates, events, data ... and so on!
 
-    // just helper to get current dates
-    function getDate(hours) {
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth() + 1;
-      const currentDay = currentDate.getDate();
-      const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-      return new Date(timeStamp + hours * 60 * 60 * 1000);
-    }
+      // just helper to get current dates
+      function getDate(hours) {
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentDay = currentDate.getDate();
+        const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
+        return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
+      }
 
-    const tasks = [
-      {
-        id: 1,
-        label: 'Make some noise',
-        user: '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
-        start: getDate(-24 * 5),
-        duration: 5 * 24 * 60 * 60,
-        progress: 85,
-        type: 'project'
-      }, {
-        id: 2,
-        label: 'With great power comes great responsibility',
-        user: '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
-        parentId: 1,
-        start: getDate(-24 * 4),
-        duration: 4 * 24 * 60 * 60,
-        progress: 50,
-        type: 'milestone',
-        style: {
-          base: {
-            fill: '#1EBC61',
-            stroke: '#0EAC51'
-          },
-          /*'tree-row-bar': {
+      const tasks = [
+        {
+          id: 1,
+          label: 'Make some noise',
+          user:
+            '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
+          start: getDate(-24 * 5),
+          duration: 5 * 24 * 60 * 60,
+          progress: 85,
+          type: 'project'
+        },
+        {
+          id: 2,
+          label: 'With great power comes great responsibility',
+          user:
+            '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
+          parentId: 1,
+          start: getDate(-24 * 4),
+          duration: 4 * 24 * 60 * 60,
+          progress: 50,
+          type: 'milestone',
+          style: {
+            base: {
+              fill: '#1EBC61',
+              stroke: '#0EAC51'
+            }
+            /*'tree-row-bar': {
             fill: '#1EBC61',
             stroke: '#0EAC51'
           },
           'tree-row-bar-polygon': {
             stroke: '#0EAC51'
           }*/
+          }
         },
-      }, {
-        id: 3,
-        label: 'Courage is being scared to death, but saddling up anyway.',
-        user: '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
-        parentId: 2,
-        start: getDate(-24 * 3),
-        duration: 2 * 24 * 60 * 60,
-        progress: 100,
-        type: 'task'
-      },
-      /* ... */
-    ];
+        {
+          id: 3,
+          label: 'Courage is being scared to death, but saddling up anyway.',
+          user:
+            '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
+          parentId: 2,
+          start: getDate(-24 * 3),
+          duration: 2 * 24 * 60 * 60,
+          progress: 100,
+          type: 'task'
+        }
+        /* ... */
+      ];
 
-    const options = {
-      title: {
-        label: 'Your project title as html (link or whatever...)',
-        html: false,
-      },
-      taskList: {
-        columns: [
-          { id: 1, label: 'ID', value: 'id', width: 40 },
-          { id: 2, label: 'Description', value: 'label', width: 200, expander: true },
-          { id: 3, label: 'Assigned to', value: 'user', width: 130, html: true },
-          { id: 3, label: 'Start', value: (task) => task.startDate.format('YYYY-MM-DD'), width: 78 },
-          { id: 4, label: 'Type', value: 'type', width: 68 },
-          { id: 5, label: '%', value: 'progress', width: 35,  style: {
-              "task-list-header-label": {
-                'text-align': 'center',
-                'width': '100%'
-              },
-              "task-list-item-value-container": {
-                'text-align': 'center',
+      const options = {
+        title: {
+          label: 'Your project title as html (link or whatever...)',
+          html: false
+        },
+        taskList: {
+          columns: [
+            { id: 1, label: 'ID', value: 'id', width: 40 },
+            { id: 2, label: 'Description', value: 'label', width: 200, expander: true },
+            { id: 3, label: 'Assigned to', value: 'user', width: 130, html: true },
+            { id: 3, label: 'Start', value: task => dayjs(task.start).format('YYYY-MM-DD'), width: 78 },
+            { id: 4, label: 'Type', value: 'type', width: 68 },
+            {
+              id: 5,
+              label: '%',
+              value: 'progress',
+              width: 35,
+              style: {
+                'task-list-header-label': {
+                  'text-align': 'center',
+                  width: '100%'
+                },
+                'task-list-item-value-container': {
+                  'text-align': 'center'
+                }
               }
             }
+          ]
+        },
+        locale: {
+          name: 'en',
+          Now: 'Now',
+          'X-Scale': 'Zoom-X',
+          'Y-Scale': 'Zoom-Y',
+          'Task list width': 'Task list',
+          'Before/After': 'Expand',
+          'Display task list': 'Task list'
+          // from now on locale settings are same as those from dayjs - https://github.com/iamkun/dayjs/blob/master/docs/en/I18n.md
+        }
+      };
+
+      Vue.use(Vuex);
+      const store = new Vuex.Store({
+        state: {
+          tasks,
+          options
+        },
+        mutations: {
+          updateTasks(state, tasks) {
+            state.tasks = tasks.map(task => task);
+          },
+          updateOptions(state, options) {
+            state.options = { ...options };
           }
-        ]
-      },
-      locale: {
-        code: 'en',
-        'Now': 'Now',
-        'X-Scale': 'Zoom-X',
-        'Y-Scale': 'Zoom-Y',
-        'Task list width': 'Task list',
-        'Before/After': 'Expand',
-        'Display task list': 'Task list'
-        // from now on locale settings are same as those from dayjs - https://github.com/iamkun/dayjs/blob/master/docs/en/I18n.md
-      },
-    };
+        }
+      });
 
-    let ganttInstance;
-    const app = GanttElastic.mount({
-      el: '#gantt', // <- your container id
-      tasks: tasks,
-      options: options,
-      ready(ganttInstance){
-        ganttInstance.$on('chart-task-click',({event, data})=>{
-          console.log('task clicked!', {event, data});
+      // create instance
+      const app = new Vue({
+        store,
+        components: {
+          'gantt-header': Header,
+          'gantt-elastic': GanttElastic,
+          'gantt-footer': {
+            template: `<span>this is a footer</span>`
+          }
+        }
+      });
+
+      let ganttInstance;
+
+      // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
+      // to get the gantt state for realtime modification
+      app.$on('gantt-elastic-created', ganttElasticInstance => {
+        ganttInstance = ganttElasticInstance;
+        // if you want to edit your tasks you must synchronize them
+        ganttInstance.$on('tasks-updated', tasks => {
+          console.log('tasks-updated', tasks);
+          store.commit('updateTasks', tasks);
         });
-      }
-    });
+        // if you need to change options you must synchronize them
+        ganttInstance.$on('options-updated', options => {
+          console.log('options-updated', options);
+          store.commit('updateOptions', options);
+        });
+        ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
+          console.log('task mouse enter', { data, event });
+        });
+        ganttInstance.$on('updated', () => {
+          console.log('gantt view was updated');
+        });
+        ganttInstance.$on('destroyed', () => {
+          console.log('gantt was destroyed');
+        });
+        ganttInstance.$on('times-timeZoom-change', () => {
+          console.log('time zoom changed');
+        });
+      });
 
-  </script>
-</body>
+      // mount gantt to DOM
+      app.$mount('#app');
+    </script>
+  </body>
 </html>
 ```
 
 ### gantt-elastic as vue component
 
-Take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples)  file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
+Take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples) file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
+
+Demo project: https://github.com/neuronetio/vue-gantt-elastic
 
 You can also import gantt-elastic as compiled js component in commonjs or umd format ([examples](https://github.com/neuronetio/gantt-elastic/tree/master/examples) folder) or just grab GanttElastic.vue from src directory and add to your existing vue project.
 
@@ -193,14 +260,16 @@ new Vue({
   }
 });
 ```
+
 or
+
 ```javascript
 import Vue from 'vue';
 import App from './App.vue'; // your app that uses gantt-elastic from 'gantt-elastic/src/GanttElastic.vue'
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(App)
 });
 ```
 

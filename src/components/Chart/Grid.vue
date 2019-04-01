@@ -13,8 +13,8 @@
     ref="chart"
     x="0"
     y="0"
-    :width="root.state.width"
-    :height="root.state.allVisibleTasksHeight"
+    :width="root.state.options.width"
+    :height="root.state.options.allVisibleTasksHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
@@ -52,21 +52,22 @@
 
 <script>
 export default {
-  inject: ["root"],
-  data () {
+  name: 'Grid',
+  inject: ['root'],
+  data() {
     return {};
   },
   /**
    * Created
    */
-  created () {
-    this.root.$on("recenterPosition", this.recenterPosition);
+  created() {
+    this.root.$on('recenterPosition', this.recenterPosition);
   },
 
   /**
    * Mounted
    */
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       this.$nextTick(() => {
         // because of stupid slider :/
@@ -79,9 +80,9 @@ export default {
     /**
      * Recenter position - go to current time line
      */
-    recenterPosition () {
+    recenterPosition() {
       this.root.scrollToTime(this.timeLinePosition.time);
-    },
+    }
   },
 
   computed: {
@@ -90,17 +91,19 @@ export default {
      *
      * @returns {array}
      */
-    verticalLines () {
+    verticalLines() {
       let lines = [];
       const state = this.root.state;
-      state.times.steps.forEach(step => {
+      state.options.times.steps.forEach(step => {
         if (this.root.isInsideViewPort(step.offset.px, 1)) {
           lines.push({
-            key: step.date.valueOf(),
+            key: step.time,
             x1: step.offset.px,
             y1: 0,
             x2: step.offset.px,
-            y2: state.tasks.length * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'],
+            y2:
+              state.tasks.length * (state.options.row.height + state.options.chart.grid.horizontal.gap * 2) +
+              this.root.style('grid-line-vertical')['stroke-width']
           });
         }
       });
@@ -112,17 +115,19 @@ export default {
      *
      * @returns {array}
      */
-    horizontalLines () {
+    horizontalLines() {
       let lines = [];
-      const state = this.root.state;
+      const state = this.root.state.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
-        const y = (index * (state.row.height + state.chart.grid.horizontal.gap * 2) + this.root.style('grid-line-vertical')['stroke-width'] / 2);
+        const y =
+          index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
+          this.root.style('grid-line-vertical')['stroke-width'] / 2;
         lines.push({
-          key: "hl" + index,
+          key: 'hl' + index,
           x1: 0,
           y1: y,
-          x2: "100%",
+          x2: '100%',
           y2: y
         });
       }
@@ -134,10 +139,10 @@ export default {
      *
      * @returns {function}
      */
-    inViewPort () {
+    inViewPort() {
       return line => {
-        const state = this.root.state;
-        return (line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right);
+        const state = this.root.state.options;
+        return line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right;
       };
     },
 
@@ -146,21 +151,21 @@ export default {
      *
      * @returns {object}
      */
-    timeLinePosition () {
+    timeLinePosition() {
       const d = new Date();
       const current = d.getTime();
       const currentOffset = this.root.timeToPixelOffsetX(current);
       const timeLine = {
         x: 0,
         y1: 0,
-        y2: "100%",
-        dateTime: "",
+        y2: '100%',
+        dateTime: '',
         time: current
       };
       timeLine.x = currentOffset;
       timeLine.dateTime = d.toLocaleDateString();
       return timeLine;
-    },
+    }
   }
 };
 </script>

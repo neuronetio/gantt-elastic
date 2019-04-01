@@ -14,8 +14,8 @@
     <defs>
       <pattern
         id="diagonalHatch"
-        :width="root.state.chart.progress.width"
-        :height="root.state.chart.progress.width"
+        :width="root.state.options.chart.progress.width"
+        :height="root.state.options.chart.progress.width"
         patternTransform="rotate(45 0 0)"
         patternUnits="userSpaceOnUse"
       >
@@ -25,30 +25,32 @@
           x1="0"
           y1="0"
           x2="0"
-          :y2="root.state.chart.progress.width"
+          :y2="root.state.options.chart.progress.width"
         />
       </pattern>
     </defs>
     <rect
-      v-if="root.state.chart.progress.bar"
+      v-if="root.state.options.chart.progress.bar"
       class="gantt-elastic__chart-row-progress-bar-solid"
       :style="root.style('chart-row-progress-bar-solid', task.style['chart-row-progress-bar-solid'])"
       x="0"
       y="0"
       :width="getProgressWidth"
     ></rect>
-    <g v-if="root.state.chart.progress.pattern">
+    <g v-if="root.state.options.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
         :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
         :x="getProgressWidth"
         y="0"
-        :width="100-task.progress+'%'"
+        :width="100 - task.progress + '%'"
         height="100%"
       ></rect>
       <path
         class="gantt-elastic__chart-row-progress-bar-outline"
-        :style="root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])"
+        :style="
+          root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])
+        "
         :d="getLinePoints"
       ></path>
     </g>
@@ -57,9 +59,10 @@
 
 <script>
 export default {
-  inject: ["root"],
-  props: ["task"],
-  data () {
+  name: 'ProgressBar',
+  inject: ['root'],
+  props: ['task'],
+  data() {
     return {};
   },
 
@@ -69,8 +72,8 @@ export default {
      *
      * @returns {string}
      */
-    getProgressWidth () {
-      return this.task.progress + "%";
+    getProgressWidth() {
+      return this.task.progress + '%';
     },
 
     /**
@@ -78,7 +81,7 @@ export default {
      *
      * @returns {string}
      */
-    getLinePoints () {
+    getLinePoints() {
       const start = (this.task.width / 100) * this.task.progress;
       return `M ${start} 0 L ${start} ${this.task.height}`;
     },
@@ -88,8 +91,8 @@ export default {
      *
      * @returns {object}
      */
-    getSolidStyle () {
-      return Object.assign({}, this.root.state.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
+    getSolidStyle() {
+      return Object.assign({}, this.root.state.options.chart.progress.styles.bar.solid, this.task.progressBarStyle.bar);
     },
 
     /**
@@ -97,11 +100,15 @@ export default {
      *
      * @returns {object}
      */
-    getLineStyle () {
-      return Object.assign({}, {
-        stroke: this.root.state.row.styles.bar.stroke + "a0",
-        "stroke-width": this.root.state.row.styles.bar["stroke-width"] / 2
-      }, this.task.style);
+    getLineStyle() {
+      return Object.assign(
+        {},
+        {
+          stroke: this.root.state.options.row.styles.bar.stroke + 'a0',
+          'stroke-width': this.root.state.options.row.styles.bar['stroke-width'] / 2
+        },
+        this.task.style
+      );
     }
   }
 };
