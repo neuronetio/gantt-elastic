@@ -166,12 +166,10 @@ function getOptions(userOptions) {
       }
     },
     calendar: {
-      hours: [],
-      days: [],
-      months: [],
       workingDays: [1, 2, 3, 4, 5],
       gap: 6,
       height: 0,
+      strokeWidth: 1,
       hour: {
         height: 20,
         display: true,
@@ -387,7 +385,7 @@ export function mergeDeepReactive(component, target, ...sources) {
  *
  * @returns {boolean}
  */
-export function equalDeep(left, right) {
+export function equalDeep(left, right, cache = []) {
   if (typeof right !== typeof left) {
     return false;
   } else if (Array.isArray(left) && !Array.isArray(right)) {
@@ -399,7 +397,7 @@ export function equalDeep(left, right) {
       return false;
     }
     for (let index = 0, len = left.length; index < len; index++) {
-      if (!equalDeep(left[index], right[index])) {
+      if (!equalDeep(left[index], right[index], cache)) {
         return false;
       }
     }
@@ -415,7 +413,7 @@ export function equalDeep(left, right) {
       if (typeof right[key] === 'undefined') {
         return false;
       }
-      if (!equalDeep(left[key], right[key])) {
+      if (!equalDeep(left[key], right[key], cache)) {
         return false;
       }
     }
@@ -649,11 +647,12 @@ const GanttElastic = {
           children: [],
           allChildren: [],
           parents: [],
-          parent: null
+          parent: null,
+          __root: true
         });
         this.resetTaskTree();
         this.$set(this.state, 'taskTree', this.makeTaskTree(this.state.rootTask));
-        this.$set(this.state, 'tasks', this.state.taskTree.allChildren);
+        this.$set(this.state, 'tasks', this.state.taskTree.allChildren.map(childId => this.getTask(childId)));
       }
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
@@ -668,25 +667,7 @@ const GanttElastic = {
      * @returns {int}
      */
     getCalendarHeight() {
-      return this.state.options.calendar.height + parseFloat(this.style('calendar-row-rect')['border-width']);
-    },
-
-    /**
-     * Sum all calendar rows height and return result
-     *
-     * @returns {int}
-     */
-    calculateCalendarDimensions() {
-      this.state.options.calendar.height = 0;
-      if (this.state.options.calendar.hour.display && this.state.options.calendar.hours.length > 0) {
-        this.state.options.calendar.height += this.state.options.calendar.hour.height;
-      }
-      if (this.state.options.calendar.day.display && this.state.options.calendar.days.length > 0) {
-        this.state.options.calendar.height += this.state.options.calendar.day.height;
-      }
-      if (this.state.options.calendar.month.display && this.state.options.calendar.months.length > 0) {
-        this.state.options.calendar.height += this.state.options.calendar.month.height;
-      }
+      return this.state.options.calendar.height + this.state.options.calendar.strokeWidth;
     },
 
     /**
@@ -781,21 +762,22 @@ const GanttElastic = {
           if (task.parents.length) {
             task.parents.forEach(parent => current.parents.push(parent));
           }
-          if (task !== this.root) {
-            current.parents.push(task);
-            current.parent = task;
+          if (!task.propertyIsEnumerable('__root')) {
+            current.parents.push(task.id);
+            current.parent = task.id;
           } else {
             current.parents = [];
             current.parent = null;
           }
           current = this.makeTaskTree(current, collapsed || current.collapsed);
           current.visible = !collapsed;
-          current.children.forEach(child => {
+          current.children.forEach(childId => {
+            const child = this.getTask(childId);
             child.visible = !(collapsed || current.collapsed);
           });
-          task.allChildren.push(current);
-          task.children.push(current);
-          current.allChildren.forEach(child => task.allChildren.push(child));
+          task.allChildren.push(current.id);
+          task.children.push(current.id);
+          current.allChildren.forEach(childId => task.allChildren.push(childId));
         }
       }
       return task;
@@ -862,7 +844,7 @@ const GanttElastic = {
       let height =
         visibleTasks.length * (this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2) +
         this.state.options.calendar.height +
-        parseFloat(this.style('calendar-row-rect')['border-width']) * 2 +
+        this.state.options.calendar.strokeWidth +
         this.state.options.calendar.gap;
       if (outer) {
         height += this.state.options.scrollBarHeight;
@@ -1047,7 +1029,6 @@ const GanttElastic = {
       this.state.options.times.timeZoom = timeZoom;
       this.recalculateTimes();
       this.calculateSteps();
-      this.calculateCalendarDimensions();
       this.fixScrollPos();
     },
 
@@ -1372,7 +1353,6 @@ const GanttElastic = {
         });
       }
       this.calculateTaskListColumnsDimensions();
-      this.calculateCalendarDimensions();
       this.$emit('calendar-recalculate');
       this.syncScrollTop();
     }
@@ -1426,14 +1406,7 @@ const GanttElastic = {
      * Tasks used for communicate with parent component
      */
     outputTasks() {
-      return this.state.tasks.map(task => {
-        const outputTask = Object.assign({}, task);
-        delete outputTask.children;
-        delete outputTask.parent;
-        delete outputTask.allChildren;
-        delete outputTask.parents;
-        return mergeDeep({}, outputTask);
-      });
+      return this.state.tasks.map(task => mergeDeep({}, task));
     },
 
     /**
@@ -1458,6 +1431,7 @@ const GanttElastic = {
         this.setup('options');
       }
     });
+
     this.$watch('outputTasks', tasks => {
       if (!equalDeep(tasks, this.tasks)) {
         this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));

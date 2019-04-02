@@ -15,18 +15,25 @@
       v-for="item in items"
       :key="item.key"
       :class="'gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--' + which"
-      :style="
-        root.style('calendar-row-rect', 'calendar-row-rect--' + which, {
-          width: item.width + 'px',
-          height: item.height + 'px'
-        })
-      "
+      :style="root.style('calendar-row-rect', 'calendar-row-rect--' + which)"
     >
       <div
-        :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
-        :style="root.style('calendar-row-text', 'calendar-row-text--' + which)"
+        :class="'gantt-elastic__calendar-row-rect-child gantt-elastic__calendar-row-rect-child-' + which"
+        :style="
+          root.style('calendar-row-rect-child', 'calendar-row-rect-child-' + which, {
+            width: child.width + 'px',
+            height: child.height + 'px'
+          })
+        "
+        v-for="child in item.children"
+        :key="child.key"
       >
-        {{ item.label }}
+        <div
+          :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
+          :style="root.style('calendar-row-text', 'calendar-row-text--' + which, { left: getTextX(child) + 'px' })"
+        >
+          {{ child.label }}
+        </div>
       </div>
     </div>
   </div>
@@ -47,9 +54,8 @@ export default {
      * @returns {number}
      */
     getTextX(item) {
-      let x = item.x + item.width / 2;
+      let x = item.x + item.width / 2 - item.textWidth / 2;
       if (this.which === 'month' && this.root.isInsideViewPort(item.x, item.width, 0)) {
-        this.anchor = 'start';
         let scrollWidth = this.root.state.options.scroll.chart.right - this.root.state.options.scroll.chart.left;
         x = this.root.state.options.scroll.chart.left + scrollWidth / 2 - item.textWidth / 2 + 2;
         if (x + item.textWidth + 2 > item.x + item.width) {
@@ -58,8 +64,7 @@ export default {
           x = item.x + 2;
         }
       }
-      console.log('x', x);
-      return x;
+      return x - item.x;
     }
   }
 };

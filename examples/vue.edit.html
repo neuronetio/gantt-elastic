@@ -393,25 +393,22 @@
       // to get the gantt state for real time modification
       app.$on('gantt-elastic-ready', ganttElasticInstance => {
         ganttInstance = ganttElasticInstance;
-        ganttState = ganttElasticInstance.state;
-        console.log('gantt-elastic ready!', ganttState);
-        console.log('app this', app);
-        ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
-          console.log('task mouse enter', { data, event });
-        });
+
         ganttInstance.$on('tasks-updated', tasks => {
-          console.log('tasks updated', tasks);
           app.tasks = tasks;
         });
         ganttInstance.$on('options-updated', options => {
-          console.log('options updated', options);
           app.options = options;
         });
+
+        ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
+          console.log('task mouse enter', { data, event });
+        });
         ganttInstance.$on('updated', () => {
-          console.log('gantt view was updated');
+          //console.log('gantt view was updated');
         });
         ganttInstance.$on('destroyed', () => {
-          console.log('gantt was destroyed');
+          //console.log('gantt was destroyed');
         });
         ganttInstance.$on('times-timeZoom-updated', () => {
           console.log('time zoom changed');

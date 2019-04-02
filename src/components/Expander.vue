@@ -71,7 +71,7 @@ export default {
   computed: {
     style() {
       const margin = this.root.state.options.taskList.expander.margin;
-      const padding = (this.tasks[0].parents.length - 1) * this.root.state.options.taskList.expander.padding;
+      const padding = this.tasks[0].parents.length * this.root.state.options.taskList.expander.padding;
       return {
         'padding-left': padding + margin + 'px',
         margin: 'auto 0'
@@ -85,8 +85,8 @@ export default {
     allChildren() {
       const children = [];
       this.tasks.forEach(task => {
-        task.allChildren.forEach(child => {
-          children.push(child);
+        task.allChildren.forEach(childId => {
+          children.push(childId);
         });
       });
       return children;
@@ -130,8 +130,10 @@ export default {
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
-        task.allChildren.forEach(child => {
-          child.visible = !collapsed && !child.parent.collapsed;
+        task.allChildren.forEach(childId => {
+          const child = this.root.getTask(childId);
+          const parent = this.root.getTask(child.parent);
+          child.visible = !collapsed && !parent.collapsed;
         });
       });
     }

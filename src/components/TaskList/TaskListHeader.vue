@@ -101,7 +101,7 @@ export default {
      */
     getStyle(column) {
       return {
-        height: this.root.state.options.calendar.height + this.root.style('calendar-row-rect')['border-width'] + 'px',
+        height: this.root.state.options.calendar.height + this.root.state.options.calendar.strokeWidth + 'px',
         width: column.finalWidth + 'px'
       };
     },

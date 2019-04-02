@@ -12,9 +12,9 @@
     :style="root.style('calendar-wrapper', { 'margin-bottom': root.state.options.calendar.gap + 'px' })"
   >
     <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: root.state.options.width + 'px' })">
-      <calendar-row :items="months" which="month" v-if="root.state.options.calendar.month.display"></calendar-row>
-      <calendar-row :items="days" which="day" v-if="root.state.options.calendar.day.display"></calendar-row>
-      <calendar-row :items="hours" which="hour" v-if="root.state.options.calendar.hour.display"></calendar-row>
+      <calendar-row :items="dates.months" which="month" v-if="root.state.options.calendar.month.display"></calendar-row>
+      <calendar-row :items="dates.days" which="day" v-if="root.state.options.calendar.day.display"></calendar-row>
+      <calendar-row :items="dates.hours" which="hour" v-if="root.state.options.calendar.hour.display"></calendar-row>
     </div>
   </div>
 </template>
@@ -29,22 +29,7 @@ export default {
   },
   inject: ['root'],
   data() {
-    return {
-      months: [],
-      days: [],
-      hours: []
-    };
-  },
-
-  /**
-   * Created
-   */
-  created() {
-    this.root.$on('scope-change', this.regenerate);
-    this.root.$on('times-timeZoom-change', this.regenerate);
-    this.root.$on('tasks-changed', this.regenerate);
-    this.root.$on('options-changed', this.regenerate);
-    this.root.$on('calendar-recalculate', this.regenerate);
+    return {};
   },
 
   methods: {
@@ -54,8 +39,8 @@ export default {
      * @returns {object}
      */
     howManyHoursFit(dayIndex) {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
       let fullCellWidth = this.root.state.options.times.steps[dayIndex].width.px;
       let formatNames = Object.keys(this.root.state.options.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
@@ -83,8 +68,8 @@ export default {
      * @returns {object}
      */
     howManyDaysFit() {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
       let fullWidth = this.root.state.options.width;
       let formatNames = Object.keys(this.root.state.options.calendar.day.format);
       for (let days = this.root.state.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
@@ -112,8 +97,8 @@ export default {
      * @returns {object}
      */
     howManyMonthsFit() {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
       let fullWidth = this.root.state.options.width;
       let formatNames = Object.keys(this.root.state.options.calendar.month.format);
       let currentMonth = dayjs(this.root.state.options.times.firstTime);
@@ -152,7 +137,7 @@ export default {
      * @returns {array}
      */
     generateHours() {
-      let hours = [];
+      let allHours = [];
       if (!this.root.state.options.calendar.hour.display) {
         return (this.root.state.options.calendar.hours = hours);
       }
@@ -161,16 +146,21 @@ export default {
         if (hoursCount.count === 0) {
           continue;
         }
+        const hours = { key: hourIndex + 'step', children: [] };
         const hourStep = 24 / hoursCount.count;
         const hourWidthPx = this.root.state.options.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
           const date = dayjs(this.root.state.options.times.steps[hourIndex].time).add(i * hourStep, 'hour');
+          let index = hourIndex;
+          if (hourIndex > 0) {
+            index = hourIndex - Math.floor(hourIndex / 24) * 24;
+          }
           let textWidth = 0;
-          if (typeof this.root.state.options.calendar.hour.widths[hourIndex] !== 'undefined') {
-            textWidth = this.root.state.options.calendar.hour.widths[hourIndex][hoursCount.type];
+          if (typeof this.root.state.options.calendar.hour.widths[index] !== 'undefined') {
+            textWidth = this.root.state.options.calendar.hour.widths[index][hoursCount.type];
           }
           let x = this.root.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
-          hours.push({
+          hours.children.push({
             index: hourIndex,
             key: this.root.state.options.times.steps[hourIndex].time + 'h' + i,
             x,
@@ -181,8 +171,9 @@ export default {
             label: this.root.state.options.calendar.hour.format[hoursCount.type](date.toDate())
           });
         }
+        allHours.push(hours);
       }
-      return (this.root.state.options.calendar.hours = this.hours = hours);
+      return allHours;
     },
 
     /**
@@ -225,7 +216,10 @@ export default {
           label: this.root.state.options.calendar.day.format[daysCount.type](date.toDate())
         });
       }
-      return (this.root.state.options.calendar.days = this.days = days);
+      return days.map(item => ({
+        key: item.key,
+        children: [item]
+      }));
     },
 
     /**
@@ -292,17 +286,40 @@ export default {
           currentDate = dayjs(this.root.state.options.times.lastTime);
         }
       }
-      return (this.root.state.options.calendar.months = this.months = months);
+      return months.map(item => ({
+        key: item.key,
+        children: [item]
+      }));
     },
 
     /**
-     * Regenerate dates
+     * Sum all calendar rows height and return result
+     *
+     * @returns {int}
      */
-    regenerate() {
-      this.generateHours();
-      this.generateDays();
-      this.generateMonths();
-      this.root.calculateCalendarDimensions();
+    calculateCalendarDimensions({ hours, days, months }) {
+      let height = 0;
+      if (this.root.state.options.calendar.hour.display && hours.length > 0) {
+        height += this.root.state.options.calendar.hour.height;
+      }
+      if (this.root.state.options.calendar.day.display && days.length > 0) {
+        height += this.root.state.options.calendar.day.height;
+      }
+      if (this.root.state.options.calendar.month.display && months.length > 0) {
+        height += this.root.state.options.calendar.month.height;
+      }
+      this.root.state.options.calendar.height = height;
+    }
+  },
+
+  computed: {
+    dates() {
+      const hours = this.generateHours();
+      const days = this.generateDays();
+      const months = this.generateMonths();
+      const allDates = { hours, days, months };
+      this.calculateCalendarDimensions(allDates);
+      return allDates;
     }
   }
 };
