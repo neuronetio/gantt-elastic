@@ -114,11 +114,14 @@ export default {
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
-  'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },
+  'task-list-header': {
+    display: 'flex',
+    'user-select': 'none',
+    'vertical-align': 'middle',
+    border: '1px solid #dadada'
+  },
   'task-list-header-column': {
-    border: '1px solid #00000050',
-    'border-top': 'none',
-    'border-right': 'none',
+    'border-left': '1px solid #00000050',
     'box-sizing': 'border-box',
     display: 'flex',
     background: '#f3f5f7',

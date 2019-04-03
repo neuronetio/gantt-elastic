@@ -17244,7 +17244,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     {
       staticClass: "gantt-elastic__task-list-header",
       style: _vm.root.style("task-list-header", {
-        height: _vm.root.state.options.calendar.height + "px",
+        height: _vm.root.state.options.calendar.height + 2 + "px",
         "margin-bottom": _vm.root.state.options.calendar.gap + "px"
       })
     },
@@ -17795,7 +17795,6 @@ component.options.__file = "src/components/Expander.vue"
      */
     getStyle(column) {
       return {
-        height: this.root.state.options.calendar.height + this.root.state.options.calendar.strokeWidth + 'px',
         width: column.finalWidth + 'px'
       };
     },
@@ -21586,11 +21585,14 @@ const fontFamily = 'Arial, sans-serif';
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
-  'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },
+  'task-list-header': {
+    display: 'flex',
+    'user-select': 'none',
+    'vertical-align': 'middle',
+    border: '1px solid #dadada'
+  },
   'task-list-header-column': {
-    border: '1px solid #00000050',
-    'border-top': 'none',
-    'border-right': 'none',
+    'border-left': '1px solid #00000050',
     'box-sizing': 'border-box',
     display: 'flex',
     background: '#f3f5f7',

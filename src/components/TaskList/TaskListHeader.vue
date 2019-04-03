@@ -11,7 +11,7 @@
     class="gantt-elastic__task-list-header"
     :style="
       root.style('task-list-header', {
-        height: `${root.state.options.calendar.height}px`,
+        height: `${root.state.options.calendar.height + 2}px`,
         'margin-bottom': `${root.state.options.calendar.gap}px`
       })
     "
@@ -101,7 +101,6 @@ export default {
      */
     getStyle(column) {
       return {
-        height: this.root.state.options.calendar.height + this.root.state.options.calendar.strokeWidth + 'px',
         width: column.finalWidth + 'px'
       };
     },
