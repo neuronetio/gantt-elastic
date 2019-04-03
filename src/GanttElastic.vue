@@ -1464,19 +1464,6 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    const store = GanttElasticVuex({ options: getOptions(this.options), tasks: [] });
-    this.$store.registerModule('GanttElastic', store);
-    this.$watch('internalTasks', tasks => {
-      const newTasks = tasks.map(task => {
-        const source = this.tasks.find(sourceTask => sourceTask.id === task.id);
-        const dest = synchronizeDeep(mergeDeep({}, source), task);
-        return dest;
-      });
-      if (!equalDeep(this.tasks, newTasks)) {
-        this.$emit('tasks-updated', newTasks);
-      }
-    });
-
     this.$watch('tasks', tasks => {
       if (!equalDeep(this.outputTasks, tasks)) {
         this.setup('tasks');
@@ -1498,18 +1485,6 @@ const GanttElastic = {
         this.$emit('options-updated', mergeDeep({}, options));
       }
     });
-
-    this.$watch(
-      'options',
-      options => {
-        const newOptions = mergeDeep({}, options);
-        const oldOptions = mergeDeep({}, this.internalOptions);
-        if (!equalDeep(newOptions, oldOptions)) {
-          this.setup('options', newOptions);
-        }
-      },
-      { deep: true }
-    );
 
     this.initializeEvents();
     this.setup();
