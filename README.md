@@ -60,10 +60,6 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
   where  ../ is your path to gantt-elastic
   -->
     <script>
-      // override components - copy component from src directory modify as you like and replace proper branch of GanttElastic.components tree
-      // more info about vue components you can find here : https://vuejs.org/v2/guide/index.html
-      // You can change anything! You have full control of components templates, events, data ... and so on!
-
       // just helper to get current dates
       function getDate(hours) {
         const currentDate = new Date();
@@ -74,16 +70,17 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
         return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
       }
 
-      const tasks = [
+      let tasks = [
         {
           id: 1,
           label: 'Make some noise',
           user:
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
           start: getDate(-24 * 5),
-          duration: 5 * 24 * 60 * 60,
-          progress: 85,
+          duration: 15 * 24 * 60 * 60,
+          percent: 85,
           type: 'project'
+          //collapsed: true,
         },
         {
           id: 2,
@@ -93,20 +90,21 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
           parentId: 1,
           start: getDate(-24 * 4),
           duration: 4 * 24 * 60 * 60,
-          progress: 50,
+          percent: 50,
           type: 'milestone',
+          collapsed: true,
           style: {
             base: {
               fill: '#1EBC61',
               stroke: '#0EAC51'
             }
             /*'tree-row-bar': {
-            fill: '#1EBC61',
-            stroke: '#0EAC51'
-          },
-          'tree-row-bar-polygon': {
-            stroke: '#0EAC51'
-          }*/
+              fill: '#1EBC61',
+              stroke: '#0EAC51'
+            },
+            'tree-row-bar-polygon': {
+              stroke: '#0EAC51'
+            }*/
           }
         },
         {
@@ -117,24 +115,81 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
           parentId: 2,
           start: getDate(-24 * 3),
           duration: 2 * 24 * 60 * 60,
-          progress: 100,
+          percent: 100,
           type: 'task'
         }
         /* ... */
       ];
 
-      const options = {
+      let options = {
+        taskMapping: {
+          progress: 'percent'
+        },
+        maxRows: 100,
+        maxHeight: 300,
         title: {
           label: 'Your project title as html (link or whatever...)',
           html: false
         },
+        row: {
+          height: 24
+        },
+        calendar: {
+          hour: {
+            display: true
+          }
+        },
+        chart: {
+          progress: {
+            bar: false
+          },
+          expander: {
+            display: true
+          }
+        },
         taskList: {
+          expander: {
+            straight: false
+          },
           columns: [
-            { id: 1, label: 'ID', value: 'id', width: 40 },
-            { id: 2, label: 'Description', value: 'label', width: 200, expander: true },
-            { id: 3, label: 'Assigned to', value: 'user', width: 130, html: true },
-            { id: 3, label: 'Start', value: task => dayjs(task.start).format('YYYY-MM-DD'), width: 78 },
-            { id: 4, label: 'Type', value: 'type', width: 68 },
+            {
+              id: 1,
+              label: 'ID',
+              value: 'id',
+              width: 40
+            },
+            {
+              id: 2,
+              label: 'Description',
+              value: 'label',
+              width: 200,
+              expander: true,
+              html: true,
+              events: {
+                click({ data, column }) {
+                  alert('description clicked!\n' + data.label);
+                }
+              }
+            },
+            {
+              id: 3,
+              label: 'Assigned to',
+              value: 'user',
+              width: 130,
+              html: true
+            },
+            {
+              id: 3,
+              label: 'Start',
+              value: task => dayjs(task.start).format('YYYY-MM-DD'),
+              width: 78
+            },
+            {
+              id: 4,
+              label: 'Type',
+              value: 'type',
+              width: 68
+            },
             {
               id: 5,
               label: '%',
@@ -146,84 +201,71 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
                   width: '100%'
                 },
                 'task-list-item-value-container': {
-                  'text-align': 'center'
+                  'text-align': 'center',
+                  width: '100%'
                 }
               }
             }
           ]
         },
         locale: {
-          name: 'en',
+          code: 'en',
           Now: 'Now',
           'X-Scale': 'Zoom-X',
           'Y-Scale': 'Zoom-Y',
           'Task list width': 'Task list',
           'Before/After': 'Expand',
           'Display task list': 'Task list'
-          // from now on locale settings are same as those from dayjs - https://github.com/iamkun/dayjs/blob/master/docs/en/I18n.md
         }
       };
 
-      Vue.use(Vuex);
-      const store = new Vuex.Store({
-        state: {
-          tasks,
-          options
-        },
-        mutations: {
-          updateTasks(state, tasks) {
-            state.tasks = tasks.map(task => task);
-          },
-          updateOptions(state, options) {
-            state.options = { ...options };
-          }
-        }
-      });
-
       // create instance
       const app = new Vue({
-        store,
         components: {
           'gantt-header': Header,
           'gantt-elastic': GanttElastic,
           'gantt-footer': {
             template: `<span>this is a footer</span>`
           }
+        },
+        data: {
+          tasks: tasks.map(task => Object.assign({}, task)),
+          options,
+          destroy: false
         }
       });
 
-      let ganttInstance;
+      // gantt state which will be updated in realtime
+      let ganttState, ganttInstance;
 
       // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
-      // to get the gantt state for realtime modification
-      app.$on('gantt-elastic-created', ganttElasticInstance => {
+      // to get the gantt state for real time modification
+      app.$on('gantt-elastic-ready', ganttElasticInstance => {
         ganttInstance = ganttElasticInstance;
-        // if you want to edit your tasks you must synchronize them
+
         ganttInstance.$on('tasks-updated', tasks => {
-          console.log('tasks-updated', tasks);
-          store.commit('updateTasks', tasks);
+          app.tasks = tasks;
         });
-        // if you need to change options you must synchronize them
         ganttInstance.$on('options-updated', options => {
-          console.log('options-updated', options);
-          store.commit('updateOptions', options);
+          app.options = options;
         });
+
         ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
           console.log('task mouse enter', { data, event });
         });
         ganttInstance.$on('updated', () => {
-          console.log('gantt view was updated');
+          //console.log('gantt view was updated');
         });
         ganttInstance.$on('destroyed', () => {
-          console.log('gantt was destroyed');
+          //console.log('gantt was destroyed');
         });
-        ganttInstance.$on('times-timeZoom-change', () => {
+        ganttInstance.$on('times-timeZoom-updated', () => {
           console.log('time zoom changed');
         });
+        ganttInstance.$on('taskList-task-click', ({ event, data, column }) => {
+          console.log('task list clicked! (task)', { data, column });
+        });
       });
-
-      // mount gantt to DOM
-      app.$mount('#app');
     </script>
   </body>
 </html>

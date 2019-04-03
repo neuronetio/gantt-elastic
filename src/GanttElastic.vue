@@ -352,33 +352,16 @@ function isObservable(obj) {
  *
  * @returns {object}
  */
-export function mergeDeepReactive(target, ...sources) {
+export function mergeDeepReactive(component, target, ...sources) {
   if (!sources.length) {
-    if (!isObservable(target)) {
-      return Vue.observable(target);
-    }
     return target;
-  }
-  if (!isObservable(target)) {
-    target = Vue.observable(target);
   }
   const source = sources.shift();
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          if (isObservable(source[key])) {
-            target[key] = source[key];
-          } else {
-            target[key] = Vue.observable({});
-          }
-        }
-        mergeDeepReactive(target[key], source[key]);
-      } else if (Array.isArray(source[key])) {
-        Vue.set(target, key, source[key]);
-      } else if (typeof source[key] === 'function') {
-        if (source[key].toString().indexOf('[native code]') === -1) {
-          target[key] = source[key];
+          component.$set(target, key, {});
         }
         mergeDeepReactive(component, target[key], source[key]);
       } else if (Array.isArray(source[key])) {
@@ -388,11 +371,11 @@ export function mergeDeepReactive(target, ...sources) {
           target[key] = source[key];
         }
       } else {
-        Vue.set(target, key, source[key]);
+        component.$set(target, key, source[key]);
       }
     }
   }
-  return mergeDeepReactive(target, ...sources);
+  return mergeDeepReactive(component, target, ...sources);
 }
 /**
  * Check if objects or arrays are equal by comparing nested values
@@ -473,6 +456,7 @@ const GanttElastic = {
         },
         refs: {},
         tasksById: {},
+        taskTree: {},
         ctx
       }
     };
@@ -516,7 +500,7 @@ const GanttElastic = {
         if (typeof objOrClassName === 'string') {
           merged = Object.assign({}, merged, this.state.options.style[objOrClassName]);
         } else if (typeof objOrClassName === 'object') {
-          merged = this.mergeDeepReactive({}, merged, objOrClassName);
+          merged = this.mergeDeepReactive(this, {}, merged, objOrClassName);
         } else if (typeof objOrClassName === 'function') {
           merged = Object.assign({}, objOrClassName());
         }
@@ -527,50 +511,61 @@ const GanttElastic = {
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks(tasks) {
-      tasks = tasks.map(task => {
+    refreshTasks() {
+      this.state.tasks = this.state.tasks.map(task => {
         if (typeof task.x === 'undefined') {
-          task.x = 0;
+          this.$set(task, 'x', 0);
         }
         if (typeof task.y === 'undefined') {
-          task.y = 0;
+          this.$set(task, 'y', 0);
         }
         if (typeof task.width === 'undefined') {
-          task.width = 0;
+          this.$set(task, 'width', 0);
         }
         if (typeof task.height === 'undefined') {
-          task.height = 0;
+          this.$set(task, 'height', 0);
+        }
+        if (typeof task.tooltip === 'undefined') {
+          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
+        }
+        if (typeof task.tooltip.visible === 'undefined') {
+          task.tooltip.visible = false;
         }
         if (typeof task.mouseOver === 'undefined') {
-          task.mouseOver = false;
+          this.$set(task, 'mouseOver', false);
+        }
+        if (typeof task.visible === 'undefined') {
+          this.$set(task, 'visible', true);
         }
         if (typeof task.collapsed === 'undefined') {
-          task.collapsed = false;
+          this.$set(task, 'collapsed', false);
         }
         if (typeof task.dependentOn === 'undefined') {
-          task.dependentOn = [];
+          this.$set(task, 'dependentOn', []);
         }
         if (typeof task.parentId === 'undefined') {
-          task.parentId = null;
+          this.$set(task, 'parentId', null);
         }
         if (typeof task.style === 'undefined') {
-          task.style = {};
+          this.$set(task, 'style', {});
         }
         if (typeof task.children === 'undefined') {
-          task.children = [];
+          this.$set(task, 'children', []);
+        }
+        if (typeof task.allChildren === 'undefined') {
+          this.$set(task, 'allChildren', []);
         }
         if (typeof task.parents === 'undefined') {
-          task.parents = [];
+          this.$set(task, 'parents', []);
         }
         if (typeof task.parent === 'undefined') {
-          task.parent = null;
+          this.$set(task, 'parent', null);
         }
         if (typeof task.durationMs === 'undefined') {
-          task.durationMs = task.duration * 1000;
+          this.$set(task, 'durationMs', []);
         }
         return task;
       });
-      return tasks;
     },
 
     /**
@@ -649,8 +644,9 @@ const GanttElastic = {
         this.refreshTasks();
         this.$set(this.state, 'rootTask', {
           id: null,
-          parent: null,
-          root: true,
+          label: 'root',
+          children: [],
+          allChildren: [],
           parents: [],
           parent: null,
           __root: true
@@ -682,7 +678,7 @@ const GanttElastic = {
      */
     getMaximalLevel() {
       let maximalLevel = 0;
-      this.$store.state.GanttElastic.tasks.forEach(task => {
+      this.state.tasks.forEach(task => {
         if (task.parents.length > maximalLevel) {
           maximalLevel = task.parents.length;
         }
@@ -737,30 +733,35 @@ const GanttElastic = {
     /**
      * Reset task tree - which is used to create tree like structure inside task list
      */
-    resetTaskTree(tasks) {
-      for (let i = 0, len = tasks.length; i < len; i++) {
-        let task = tasks[i];
-        tasks[i] = Object.assign(task, {
-          children: [],
-          allChildren: [],
-          parent: null,
-          parents: []
-        });
+    resetTaskTree() {
+      this.state.rootTask.children = [];
+      this.state.rootTask.allChildren = [];
+      this.state.rootTask.parent = null;
+      this.state.rootTask.parents = [];
+      this.state.tasksById = {};
+      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+        let current = this.state.tasks[i];
+        current.children = [];
+        current.allChildren = [];
+        current.parent = null;
+        current.parents = [];
+        this.state.tasksById[current.id] = current;
       }
-      return tasks;
     },
 
     /**
      * Make task tree, after reset - look above
      *
-     * @param {object} parent
+     * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree(parent, tasks) {
-      tasks.forEach(current => {
-        if (current.parentId === parent.id) {
-          if (parent.parents.length) {
-            current.parents = parent.parents.map(parentId => parentId);
+    makeTaskTree(task, collapsed = false) {
+      collapsed = collapsed || task.collapsed;
+      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
+        let current = this.state.tasks[i];
+        if (current.parentId === task.id) {
+          if (task.parents.length) {
+            task.parents.forEach(parent => current.parents.push(parent));
           }
           if (!task.propertyIsEnumerable('__root')) {
             current.parents.push(task.id);
@@ -779,8 +780,8 @@ const GanttElastic = {
           task.children.push(current.id);
           current.allChildren.forEach(childId => task.allChildren.push(childId));
         }
-      });
-      return parent;
+      }
+      return task;
     },
 
     /**
@@ -790,11 +791,8 @@ const GanttElastic = {
      * @returns {object|null} task
      */
     getTask(taskId) {
-      for (let i = 0, len = this.$store.state.GanttElastic.tasks.length; i < len; i++) {
-        const current = this.$store.state.GanttElastic.tasks[i];
-        if (current.id === taskId) {
-          return current;
-        }
+      if (typeof this.state.tasksById[taskId] !== 'undefined') {
+        return this.state.tasksById[taskId];
       }
       return null;
     },
@@ -806,7 +804,7 @@ const GanttElastic = {
      * @returns {array} children
      */
     getChildren(taskId) {
-      return this.$store.state.GanttElastic.tasks.filter(task => task.parent === taskId);
+      return this.state.tasks.filter(task => task.parent === taskId);
     },
 
     /**
@@ -944,9 +942,9 @@ const GanttElastic = {
      *
      * @param {event} ev
      */
-    onScrollChart() {
-      const horizontal = this.internalOptions.refs.chartScrollContainerHorizontal;
-      const vertical = this.internalOptions.refs.chartScrollContainerVertical;
+    onScrollChart(ev) {
+      const horizontal = this.state.refs.chartScrollContainerHorizontal;
+      const vertical = this.state.refs.chartScrollContainerVertical;
       this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
     },
 
@@ -978,7 +976,7 @@ const GanttElastic = {
      */
     scrollToTime(time) {
       let pos = this.timeToPixelOffsetX(time);
-      const chartContainerWidth = this.internalOptions.refs.chartContainer.clientWidth;
+      const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       pos = pos - chartContainerWidth / 2;
       if (pos > this.state.options.width) {
         pos = this.state.options.width - chartContainerWidth;
@@ -1310,11 +1308,6 @@ const GanttElastic = {
         if (task.startTime + task.durationMs > lastTaskTime) {
           lastTaskTime = task.startTime + task.durationMs;
         }
-        this.$store.commit(this.updateTaskMut, newProps);
-      }
-      if (!this.$store.state.GanttElastic.tasks.length) {
-        firstTaskTime = new Date().getTime();
-        lastTaskTime = new Date().getTime() + 24 * 60 * 1000;
       }
       this.state.options.times.firstTaskTime = firstTaskTime;
       this.state.options.times.lastTaskTime = lastTaskTime;
@@ -1348,7 +1341,6 @@ const GanttElastic = {
         },
         { width: 0 }
       ).width;
-      this.$store.commit(this.updateOptionsMut, { taskList: { width } });
     },
 
     /**
@@ -1372,15 +1364,12 @@ const GanttElastic = {
         }
         this.state.options.taskList.columns.forEach(column => {
           column.thresholdPercent = diffPercent;
-          return column;
         });
       } else {
         this.state.options.taskList.columns.forEach(column => {
           column.thresholdPercent = 100;
-          return column;
         });
       }
-      this.$store.commit(this.updateOptionsMut, options);
       this.calculateTaskListColumnsDimensions();
       this.$emit('calendar-recalculate');
       this.syncScrollTop();
@@ -1388,20 +1377,6 @@ const GanttElastic = {
   },
 
   computed: {
-    /**
-     * Getter for watcher
-     */
-    internalTasks() {
-      return this.$store.getters['GanttElastic/tasks'];
-    },
-
-    /**
-     * Getter for watcher
-     */
-    internalOptions() {
-      return this.$store.getters['GanttElastic/options'];
-    },
-
     /**
      * Get visible tasks
      * Very important method which will bring us only those tasks that are visible inside gantt chart
@@ -1505,7 +1480,6 @@ const GanttElastic = {
   mounted() {
     this.state.options.clientWidth = this.$el.clientWidth;
     window.addEventListener('resize', this.globalOnResize);
-    this.$store.commit(this.updateOptionsMut, { clientWidth: this.$el.clientWidth });
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');

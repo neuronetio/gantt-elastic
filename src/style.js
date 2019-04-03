@@ -110,10 +110,10 @@ export default {
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {},
-  'calendar-row-text--hour': {
+  'calendar-row-rect--hour': {
     'border-bottom': '1px solid #dadada'
   },
+  'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
   'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },

@@ -107,11 +107,9 @@ export default {
       return this.tasks
         .filter(task => typeof task.dependentOn !== 'undefined')
         .map(task => {
-          const props = { id: task.id };
-          props.dependencyLines = task.dependentOn.map(id => {
+          task.dependencyLines = task.dependentOn.map(id => {
             return { points: this.getPoints(id, task.id) };
           });
-          this.$store.commit(this.root.updateTaskMut, props);
           return task;
         })
         .filter(task => task.dependencyLines.points !== null);
