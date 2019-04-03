@@ -52,8 +52,8 @@ export default {
      * @returns {array}
      */
     workingDays() {
-      return this.$store.state.GanttElastic.options.times.steps.filter(step => {
-        return this.$store.state.GanttElastic.options.calendar.workingDays.indexOf(dayjs(step.time).day()) === -1;
+      return this.root.state.options.times.steps.filter(step => {
+        return this.root.state.options.calendar.workingDays.indexOf(dayjs(step.time).day()) === -1;
       });
     },
 
@@ -63,7 +63,7 @@ export default {
      * @returns {bool}
      */
     showWorkingDays() {
-      const calendar = this.$store.state.GanttElastic.options.calendar;
+      const calendar = this.root.state.options.calendar;
       if (
         typeof calendar.workingDays !== 'undefined' &&
         Array.isArray(calendar.workingDays) &&

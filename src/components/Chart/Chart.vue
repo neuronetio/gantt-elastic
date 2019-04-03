@@ -9,22 +9,20 @@
 <template>
   <div
     class="gantt-elastic__chart"
-    :style="root.style('chart', { width: getWidth + 'px', height: getHeight + 'px' })"
+    :style="root.style('chart', { width: root.state.options.width + 'px', height: root.state.options.height + 'px' })"
     ref="chart"
   >
     <calendar></calendar>
-    <div
-      :style="root.style('chart-area', { width: '100%', height: $store.state.GanttElastic.options.rowsHeight + 'px' })"
-    >
+    <div :style="root.style('chart-area', { width: '100%', height: root.state.options.rowsHeight + 'px' })">
       <div class="gantt-elastic__chart-graph" ref="chartGraph" :style="root.style('chart-graph', { height: '100%' })">
         <svg
-          class="gantt-elastic__chart"
-          :style="root.style('chart')"
-          ref="chart"
+          class="gantt-elastic__chart-graph-svg"
+          :style="root.style('chart-graph-svg')"
+          ref="chartGraphSvg"
           x="0"
           y="0"
-          :width="getWidth + 'px'"
-          :height="$store.state.GanttElastic.options.allVisibleTasksHeight + 'px'"
+          :width="root.state.options.width + 'px'"
+          :height="root.state.options.allVisibleTasksHeight + 'px'"
           xmlns="http://www.w3.org/2000/svg"
         >
           <days-highlight></days-highlight>
@@ -74,40 +72,19 @@ export default {
    * Mounted
    */
   mounted() {
-    this.$store.commit(this.root.updateOptionsMut, {
-      refs: {
-        chart: this.$refs.chart,
-        chartGraph: this.$refs.chartGraph
-      }
-    });
+    this.root.state.refs.chart = this.$refs.chart;
+    this.root.state.refs.chartGraph = this.$refs.chartGraph;
+    this.root.state.refs.chartGraphSvg = this.$refs.chartGraphSvg;
   },
 
   computed: {
-    /**
-     * Get width
-     *
-     * @returns {number}
-     */
-    getWidth() {
-      return this.$store.state.GanttElastic.options.width;
-    },
-
-    /**
-     * Get height
-     *
-     * @returns {number}
-     */
-    getHeight() {
-      return this.$store.state.GanttElastic.options.height;
-    },
-
     /**
      * Get view box
      *
      * @returns {string}
      */
     getViewBox() {
-      return `0 0 ${Math.round(this.getWidth)} ${this.$store.state.GanttElastic.options.allVisibleTasksHeight}`;
+      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.options.allVisibleTasksHeight}`;
     }
   }
 };

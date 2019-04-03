@@ -7,7 +7,10 @@
  */
 -->
 <template>
-  <div :class="getClassPrefix() + '-wrapper'" :style="this.root.style(this.getClassPrefix(false) + '-wrapper')">
+  <div
+    :class="getClassPrefix() + '-wrapper'"
+    :style="root.style(getClassPrefix(false) + '-wrapper', this.type === 'taskList' ? style : {})"
+  >
     <svg
       :class="getClassPrefix() + '-content'"
       :style="root.style(getClassPrefix(false) + '-content')"
@@ -54,7 +57,7 @@
 export default {
   name: 'Expander',
   inject: ['root'],
-  props: ['tasks', 'options'],
+  props: ['tasks', 'options', 'type'],
   data() {
     const border = 0.5;
     return {
@@ -66,6 +69,14 @@ export default {
     };
   },
   computed: {
+    style() {
+      const margin = this.root.state.options.taskList.expander.margin;
+      const padding = this.tasks[0].parents.length * this.root.state.options.taskList.expander.padding;
+      return {
+        'padding-left': padding + margin + 'px',
+        margin: 'auto 0'
+      };
+    },
     /**
      * Get all tasks
      *
@@ -74,8 +85,8 @@ export default {
     allChildren() {
       const children = [];
       this.tasks.forEach(task => {
-        task.children.forEach(child => {
-          children.push(child);
+        task.allChildren.forEach(childId => {
+          children.push(childId);
         });
       });
       return children;
@@ -116,7 +127,12 @@ export default {
       }
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        this.$store.commit(this.root.updateTaskMut, { id: task.id, collapsed });
+        task.collapsed = collapsed;
+        task.allChildren.forEach(childId => {
+          const child = this.root.getTask(childId);
+          const parent = this.root.getTask(child.parent);
+          child.visible = !collapsed && !parent.collapsed;
+        });
       });
     }
   }

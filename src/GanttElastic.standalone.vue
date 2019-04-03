@@ -19,6 +19,7 @@ import GanttElastic from './GanttElastic.vue';
 Vue.use(Vuex);
 const store = new Vuex.Store({});
 export default {
+  name: 'GanttElasticStandalone',
   components: {
     'gantt-header': { template: `<div></div>` },
     'gantt-elastic': GanttElastic,

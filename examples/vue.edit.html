@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>GanttElastic editor demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
     <!--
     <script src="https://unpkg.com/gantt-elastic@0.10.2/dist/GanttElastic.umd.js"></script>
@@ -317,7 +316,7 @@
             {
               id: 3,
               label: 'Start',
-              value: task => dayjs(task.startTime).format('YYYY-MM-DD'),
+              value: task => dayjs(task.start).format('YYYY-MM-DD'),
               width: 78
             },
             {
@@ -386,17 +385,17 @@
       let ganttInstance;
 
       // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
-      // to get the gantt state for realtime modification
-      app.$on('gantt-elastic-created', ganttElasticInstance => {
+      // to get the gantt state for real time modification
+      app.$on('gantt-elastic-ready', ganttElasticInstance => {
         ganttInstance = ganttElasticInstance;
+
         ganttInstance.$on('tasks-updated', tasks => {
-          console.log('tasks-updated', tasks);
-          store.commit('updateTasks', tasks);
+          app.tasks = tasks;
         });
         ganttInstance.$on('options-updated', options => {
-          console.log('options-updated', options);
-          store.commit('updateOptions', options);
+          app.options = options;
         });
+
         ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
           console.log('task mouse enter', { data, event });
         });
@@ -404,9 +403,9 @@
           //console.log('gantt view was updated');
         });
         ganttInstance.$on('destroyed', () => {
-          console.log('gantt was destroyed');
+          //console.log('gantt was destroyed');
         });
-        ganttInstance.$on('times-timeZoom-change', () => {
+        ganttInstance.$on('times-timeZoom-updated', () => {
           console.log('time zoom changed');
         });
       });
@@ -453,7 +452,7 @@
           dependentOn: [1],
           start: getDate(24),
           duration: 1 * 24 * 60 * 60,
-          progress: 50,
+          percent: 50,
           type: 'project'
         };
         const tasks = store.state.tasks.map(task => task);

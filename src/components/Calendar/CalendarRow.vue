@@ -15,18 +15,25 @@
       v-for="item in items"
       :key="item.key"
       :class="'gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--' + which"
-      :style="
-        root.style('calendar-row-rect', 'calendar-row-rect--' + which, {
-          width: item.width + 'px',
-          height: item.height + 'px'
-        })
-      "
+      :style="root.style('calendar-row-rect', 'calendar-row-rect--' + which)"
     >
       <div
-        :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
-        :style="root.style('calendar-row-text', 'calendar-row-text--' + which, getStyle(item))"
+        :class="'gantt-elastic__calendar-row-rect-child gantt-elastic__calendar-row-rect-child-' + which"
+        :style="
+          root.style('calendar-row-rect-child', 'calendar-row-rect-child-' + which, {
+            width: child.width + 'px',
+            height: child.height + 'px'
+          })
+        "
+        v-for="child in item.children"
+        :key="child.key"
       >
-        {{ item.label }}
+        <div
+          :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
+          :style="root.style('calendar-row-text', 'calendar-row-text--' + which, { left: getTextX(child) + 'px' })"
+        >
+          {{ child.label }}
+        </div>
       </div>
     </div>
   </div>
@@ -38,56 +45,26 @@ export default {
   inject: ['root'],
   props: ['items', 'which'],
   data() {
-    return {
-      anchor: 'middle'
-    };
+    return {};
   },
-  computed: {
+  methods: {
     /**
      * Get x position
      *
      * @returns {number}
      */
-    getTextX() {
-      let x = this.item.x + this.item.width / 2;
-      if (this.which === 'month' && this.root.isInsideViewPort(this.item.x, this.item.width, 0)) {
-        this.anchor = 'start';
-        let scrollWidth =
-          this.$store.state.GanttElastic.options.scroll.chart.right -
-          this.$store.state.GanttElastic.options.scroll.chart.left;
-        x = this.$store.state.GanttElastic.options.scroll.chart.left + scrollWidth / 2 - this.item.textWidth / 2 + 2;
-        if (x + this.item.textWidth + 2 > this.item.x + this.item.width) {
-          x = this.item.x + this.item.width - this.item.textWidth - 2;
-        } else if (x < this.item.x) {
-          x = this.item.x + 2;
+    getTextX(item) {
+      let x = item.x + item.width / 2 - item.textWidth / 2;
+      if (this.which === 'month' && this.root.isInsideViewPort(item.x, item.width, 0)) {
+        let scrollWidth = this.root.state.options.scroll.chart.right - this.root.state.options.scroll.chart.left;
+        x = this.root.state.options.scroll.chart.left + scrollWidth / 2 - item.textWidth / 2 + 2;
+        if (x + item.textWidth + 2 > item.x + item.width) {
+          x = item.x + item.width - item.textWidth - 2;
+        } else if (x < item.x) {
+          x = item.x + 2;
         }
       }
-      return x;
-    },
-
-    /**
-     * Get y position
-     *
-     * @returns {number}
-     */
-    getTextY() {
-      return this.item.y + this.item.height / 2;
-    },
-
-    /**
-     * Get style for an item
-     *
-     * @returns {function}
-     */
-    getStyle() {
-      return item => {
-        return {
-          'line-height':
-            item.height -
-            parseFloat(this.root.style('calendar-row-rect', 'calendar-row-rect--' + this.which)['border-width']) * 2 +
-            'px'
-        };
-      };
+      return x - item.x;
     }
   }
 };

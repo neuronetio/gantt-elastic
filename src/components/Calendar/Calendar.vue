@@ -9,27 +9,12 @@
 <template>
   <div
     class="gantt-elastic__calendar-wrapper"
-    :style="root.style('calendar-wrapper', { 'margin-bottom': $store.state.GanttElastic.options.calendar.gap + 'px' })"
+    :style="root.style('calendar-wrapper', { 'margin-bottom': root.state.options.calendar.gap + 'px' })"
   >
-    <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: width + 'px' })">
-      <calendar-row
-        :items="months"
-        which="month"
-        v-if="$store.state.GanttElastic.options.calendar.month.display"
-        :style="root.style('calendar-row--month')"
-      ></calendar-row>
-      <calendar-row
-        :items="days"
-        which="day"
-        v-if="$store.state.GanttElastic.options.calendar.day.display"
-        :style="root.style('calendar-row--day')"
-      ></calendar-row>
-      <calendar-row
-        :items="hours"
-        which="hour"
-        v-if="$store.state.GanttElastic.options.calendar.hour.display"
-        :style="root.style('calendar-row--hour')"
-      ></calendar-row>
+    <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: root.state.options.width + 'px' })">
+      <calendar-row :items="dates.months" which="month" v-if="root.state.options.calendar.month.display"></calendar-row>
+      <calendar-row :items="dates.days" which="day" v-if="root.state.options.calendar.day.display"></calendar-row>
+      <calendar-row :items="dates.hours" which="hour" v-if="root.state.options.calendar.hour.display"></calendar-row>
     </div>
   </div>
 </template>
@@ -37,7 +22,6 @@
 <script>
 import dayjs from 'dayjs';
 import CalendarRow from './CalendarRow.vue';
-import { mapState } from 'vuex';
 export default {
   name: 'Calendar',
   components: {
@@ -48,17 +32,6 @@ export default {
     return {};
   },
 
-  /**
-   * Created
-   */
-  created() {
-    this.root.$on('scope-change', this.regenerate);
-    this.root.$on('times-timeZoom-change', this.regenerate);
-    this.root.$on('tasks-updated', this.regenerate);
-    this.root.$on('options-updated', this.regenerate);
-    this.root.$on('calendar-recalculate', this.regenerate);
-  },
-
   methods: {
     /**
      * How many hours will fit?
@@ -66,15 +39,14 @@ export default {
      * @returns {object}
      */
     howManyHoursFit(dayIndex) {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
-      let fullCellWidth = this.$store.state.GanttElastic.options.times.steps[dayIndex].width.px;
-      let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.hour.format);
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
+      let fullCellWidth = this.root.state.options.times.steps[dayIndex].width.px;
+      let formatNames = Object.keys(this.root.state.options.calendar.hour.format);
       for (let hours = 24; hours > 1; hours = Math.ceil(hours / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.$store.state.GanttElastic.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <=
-              fullCellWidth &&
+            (this.root.state.options.calendar.hour.maxWidths[formatName] + additionalSpace) * hours <= fullCellWidth &&
             hours > 1
           ) {
             return {
@@ -96,15 +68,14 @@ export default {
      * @returns {object}
      */
     howManyDaysFit() {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.$store.state.GanttElastic.options.width;
-      let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.day.format);
-      for (let days = this.$store.state.GanttElastic.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
+      let fullWidth = this.root.state.options.width;
+      let formatNames = Object.keys(this.root.state.options.calendar.day.format);
+      for (let days = this.root.state.options.times.steps.length; days > 1; days = Math.ceil(days / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.$store.state.GanttElastic.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <=
-              fullWidth &&
+            (this.root.state.options.calendar.day.maxWidths[formatName] + additionalSpace) * days <= fullWidth &&
             days > 1
           ) {
             return {
@@ -126,13 +97,13 @@ export default {
      * @returns {object}
      */
     howManyMonthsFit() {
-      const stroke = parseFloat(this.root.style('calendar-row-rect')['border-width']);
-      const additionalSpace = stroke * 2 + 2;
-      let fullWidth = this.$store.state.GanttElastic.options.width;
-      let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
-      let currentMonth = dayjs(this.$store.state.GanttElastic.options.times.firstTime);
+      const stroke = 1;
+      const additionalSpace = stroke + 2;
+      let fullWidth = this.root.state.options.width;
+      let formatNames = Object.keys(this.root.state.options.calendar.month.format);
+      let currentMonth = dayjs(this.root.state.options.times.firstTime);
       let previousMonth = currentMonth.clone();
-      const lastTime = this.$store.state.GanttElastic.options.times.lastTime;
+      const lastTime = this.root.state.options.times.lastTime;
       let monthsCount = 1;
       while (currentMonth.valueOf() <= lastTime) {
         currentMonth = currentMonth.add(1, 'day');
@@ -144,8 +115,7 @@ export default {
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
           if (
-            (this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <=
-              fullWidth &&
+            (this.root.state.options.calendar.month.maxWidths[formatName] + additionalSpace) * months <= fullWidth &&
             months > 1
           ) {
             return {
@@ -162,80 +132,48 @@ export default {
     },
 
     /**
-     * Get hour text style
-     *
-     * @returns {string}
-     */
-    hourTextStyle() {
-      return (
-        'font-family:' +
-        this.$store.state.GanttElastic.options.calendar.hour.fontFamily +
-        ';font-size:' +
-        this.$store.state.GanttElastic.options.calendar.hour.fontSize
-      );
-    },
-
-    /**
-     * Get text style
-     *
-     * @returns {string}
-     */
-    dayTextStyle() {
-      return (
-        'font-family:' +
-        this.$store.state.GanttElastic.options.calendar.day.fontFamily +
-        ';font-size:' +
-        this.$store.state.GanttElastic.options.calendar.day.fontSize
-      );
-    },
-
-    /**
      * Generate hours
      *
      * @returns {array}
      */
     generateHours() {
-      let hours = [];
-      if (!this.$store.state.GanttElastic.options.calendar.hour.display) {
-        return hours;
+      let allHours = [];
+      if (!this.root.state.options.calendar.hour.display) {
+        return (this.root.state.options.calendar.hours = hours);
       }
-      for (
-        let hourIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
-        hourIndex < len;
-        hourIndex++
-      ) {
+      for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
-          return hours;
+          continue;
         }
+        const hours = { key: hourIndex + 'step', children: [] };
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.$store.state.GanttElastic.options.times.steps[hourIndex].width.px / hoursCount.count;
+        const hourWidthPx = this.root.state.options.times.steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs(this.$store.state.GanttElastic.options.times.steps[hourIndex].time).add(
-            i * hourStep,
-            'hour'
-          );
-          let textWidth = 0;
-          if (typeof this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex] !== 'undefined') {
-            textWidth = this.$store.state.GanttElastic.options.calendar.hour.widths[hourIndex][hoursCount.type];
+          const date = dayjs(this.root.state.options.times.steps[hourIndex].time).add(i * hourStep, 'hour');
+          let index = hourIndex;
+          if (hourIndex > 0) {
+            index = hourIndex - Math.floor(hourIndex / 24) * 24;
           }
-          let x = this.$store.state.GanttElastic.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
-          hours.push({
+          let textWidth = 0;
+          if (typeof this.root.state.options.calendar.hour.widths[index] !== 'undefined') {
+            textWidth = this.root.state.options.calendar.hour.widths[index][hoursCount.type];
+          }
+          let x = this.root.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          hours.children.push({
             index: hourIndex,
-            key: this.$store.state.GanttElastic.options.times.steps[hourIndex].time + 'h' + i,
+            key: this.root.state.options.times.steps[hourIndex].time + 'h' + i,
             x,
-            y:
-              this.$store.state.GanttElastic.options.calendar.day.height +
-              this.$store.state.GanttElastic.options.calendar.month.height,
+            y: this.root.state.options.calendar.day.height + this.root.state.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
-            height: this.$store.state.GanttElastic.options.calendar.hour.height,
-            label: this.$store.state.GanttElastic.options.calendar.hour.format[hoursCount.type](date),
-            type: hoursCount.type
+            height: this.root.state.options.calendar.hour.height,
+            label: this.root.state.options.calendar.hour.format[hoursCount.type](date.toDate())
           });
         }
+        allHours.push(hours);
       }
-      return hours;
+      return allHours;
     },
 
     /**
@@ -245,45 +183,43 @@ export default {
      */
     generateDays() {
       let days = [];
-      if (!this.$store.state.GanttElastic.options.calendar.day.display) {
-        return days;
+      if (!this.root.state.options.calendar.day.display) {
+        return (this.root.state.options.calendar.days = days);
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return days;
+        return;
       }
-      const dayStep = this.$store.state.GanttElastic.options.times.steps.length / daysCount.count;
-      for (
-        let dayIndex = 0, len = this.$store.state.GanttElastic.options.times.steps.length;
-        dayIndex < len;
-        dayIndex += dayStep
-      ) {
+      const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
+      for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep] !== 'undefined') {
-            dayWidthPx += this.$store.state.GanttElastic.options.times.steps[dayIndex + currentStep].width.px;
+          if (typeof this.root.state.options.times.steps[dayIndex + currentStep] !== 'undefined') {
+            dayWidthPx += this.root.state.options.times.steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = dayjs(this.$store.state.GanttElastic.options.times.steps[dayIndex].time);
+        const date = dayjs(this.root.state.options.times.steps[dayIndex].time);
         let textWidth = 0;
-        if (typeof this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex] !== 'undefined') {
-          textWidth = this.$store.state.GanttElastic.options.calendar.day.widths[dayIndex][daysCount.type];
+        if (typeof this.root.state.options.calendar.day.widths[dayIndex] !== 'undefined') {
+          textWidth = this.root.state.options.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.$store.state.GanttElastic.options.times.steps[dayIndex].offset.px;
+        let x = this.root.state.options.times.steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.$store.state.GanttElastic.options.times.steps[dayIndex].time + 'd',
+          key: this.root.state.options.times.steps[dayIndex].time + 'd',
           x,
-          y: this.$store.state.GanttElastic.options.calendar.month.height,
+          y: this.root.state.options.calendar.month.height,
           width: dayWidthPx,
           textWidth,
-          height: this.$store.state.GanttElastic.options.calendar.day.height,
-          label: this.$store.state.GanttElastic.options.calendar.day.format[daysCount.type](date),
-          type: daysCount.type
+          height: this.root.state.options.calendar.day.height,
+          label: this.root.state.options.calendar.day.format[daysCount.type](date.toDate())
         });
       }
-      return days;
+      return days.map(item => ({
+        key: item.key,
+        children: [item]
+      }));
     },
 
     /**
@@ -293,24 +229,27 @@ export default {
      */
     generateMonths() {
       let months = [];
-      if (!this.$store.state.GanttElastic.options.calendar.month.display) {
-        return months;
+      if (!this.root.state.options.calendar.month.display) {
+        return (this.root.state.options.calendar.months = months);
       }
       const monthsCount = this.howManyMonthsFit();
-      let formatNames = Object.keys(this.$store.state.GanttElastic.options.calendar.month.format);
-      let currentDate = dayjs(this.$store.state.GanttElastic.options.times.firstTime);
+      if (monthsCount.count === 0) {
+        return;
+      }
+      let formatNames = Object.keys(this.root.state.options.calendar.month.format);
+      let currentDate = dayjs(this.root.state.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
         let monthWidth = 0;
         let monthOffset = Number.MAX_SAFE_INTEGER;
         let finalDate = dayjs(currentDate)
           .add(1, 'month')
           .startOf('month');
-        if (finalDate.valueOf() > this.$store.state.GanttElastic.options.times.lastTime) {
-          finalDate = dayjs(this.$store.state.GanttElastic.options.times.lastTime);
+        if (finalDate.valueOf() > this.root.state.options.times.lastTime) {
+          finalDate = dayjs(this.root.state.options.times.lastTime);
         }
         // we must find first and last step to get the offsets / widths
-        for (let step = 0, len = this.$store.state.GanttElastic.options.times.steps.length; step < len; step++) {
-          let currentStep = this.$store.state.GanttElastic.options.times.steps[step];
+        for (let step = 0, len = this.root.state.options.times.steps.length; step < len; step++) {
+          let currentStep = this.root.state.options.times.steps[step];
           if (currentStep.time >= currentDate.valueOf() && currentStep.time < finalDate.valueOf()) {
             monthWidth += currentStep.width.px;
             if (currentStep.offset.px < monthOffset) {
@@ -321,14 +260,14 @@ export default {
         let label = '';
         let choosenFormatName;
         for (let formatName of formatNames) {
-          if (this.$store.state.GanttElastic.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
-            label = this.$store.state.GanttElastic.options.calendar.month.format[formatName](currentDate.toDate());
+          if (this.root.state.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
+            label = this.root.state.options.calendar.month.format[formatName](currentDate.toDate());
             choosenFormatName = formatName;
           }
         }
         let textWidth = 0;
-        if (typeof this.$store.state.GanttElastic.options.calendar.month.widths[monthIndex] !== 'undefined') {
-          textWidth = this.$store.state.GanttElastic.options.calendar.month.widths[monthIndex][choosenFormatName];
+        if (typeof this.root.state.options.calendar.month.widths[monthIndex] !== 'undefined') {
+          textWidth = this.root.state.options.calendar.month.widths[monthIndex][choosenFormatName];
         }
         let x = monthOffset;
         months.push({
@@ -338,47 +277,49 @@ export default {
           y: 0,
           width: monthWidth,
           textWidth,
-          type: choosenFormatName,
-          height:
-            this.$store.state.GanttElastic.options.calendar.month.height -
-            parseFloat(this.root.style('calendar')['border-bottom-width']),
+          choosenFormatName,
+          height: this.root.state.options.calendar.month.height,
           label
         });
         currentDate = currentDate.add(1, 'month').startOf('month');
-        if (currentDate.valueOf() > this.$store.state.GanttElastic.options.times.lastDate) {
-          currentDate = dayjs(this.$store.state.GanttElastic.options.times.lastDate);
+        if (currentDate.valueOf() > this.root.state.options.times.lastTime) {
+          currentDate = dayjs(this.root.state.options.times.lastTime);
         }
       }
-      return months;
+      return months.map(item => ({
+        key: item.key,
+        children: [item]
+      }));
     },
 
     /**
-     * Regenerate dates
+     * Sum all calendar rows height and return result
+     *
+     * @returns {int}
      */
-    regenerate() {
-      const hours = this.generateHours();
-      const days = this.generateDays();
-      const months = this.generateMonths();
-      this.$store.commit(this.root.updateOptionsMut, { calendar: { hours, days, months } });
-      this.root.calculateCalendarDimensions();
+    calculateCalendarDimensions({ hours, days, months }) {
+      let height = 0;
+      if (this.root.state.options.calendar.hour.display && hours.length > 0) {
+        height += this.root.state.options.calendar.hour.height;
+      }
+      if (this.root.state.options.calendar.day.display && days.length > 0) {
+        height += this.root.state.options.calendar.day.height;
+      }
+      if (this.root.state.options.calendar.month.display && months.length > 0) {
+        height += this.root.state.options.calendar.month.height;
+      }
+      this.root.state.options.calendar.height = height;
     }
   },
 
   computed: {
-    options() {
-      return this.$store.getters['GanttElastic/options'];
-    },
-    width() {
-      return this.options.width;
-    },
-    days() {
-      return this.options.calendar.days;
-    },
-    hours() {
-      return this.options.calendar.hours;
-    },
-    months() {
-      return this.options.calendar.months;
+    dates() {
+      const hours = this.generateHours();
+      const days = this.generateDays();
+      const months = this.generateMonths();
+      const allDates = { hours, days, months };
+      this.calculateCalendarDimensions(allDates);
+      return allDates;
     }
   }
 };

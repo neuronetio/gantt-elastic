@@ -5,74 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = [
   {
     mode: 'production',
-    optimization: {
-      minimize: true,
-      namedModules: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            mangle: false
-          }
-        })
-      ]
-    },
-    entry: './src/GanttElastic.vuex.js',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'GanttElastic.vuex.umd.js',
-      libraryTarget: 'umd',
-      libraryExport: 'default'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.vue$/,
-          use: 'vue-loader'
-        },
-        {
-          test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader']
-        }
-      ]
-    },
-    plugins: [new VueLoaderPlugin()]
-  },
-  {
-    mode: 'production',
-    optimization: {
-      minimize: true,
-      namedModules: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            mangle: false
-          }
-        })
-      ]
-    },
-    entry: './src/GanttElastic.vuex.js',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'GanttElastic.vuex.common.js',
-      libraryTarget: 'commonjs2',
-      libraryExport: 'default'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.vue$/,
-          use: 'vue-loader'
-        },
-        {
-          test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader']
-        }
-      ]
-    },
-    plugins: [new VueLoaderPlugin()]
-  },
-  {
-    mode: 'production',
     entry: './src/bundle.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -80,8 +12,8 @@ module.exports = [
     },
     devtool: 'source-map',
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     optimization: {
@@ -136,8 +68,8 @@ module.exports = [
     },
     devtool: 'source-map',
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {
@@ -177,8 +109,8 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {
@@ -210,8 +142,8 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {
@@ -251,8 +183,8 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {
@@ -291,8 +223,8 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {
@@ -331,8 +263,8 @@ module.exports = [
       libraryExport: 'default'
     },
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex'
+      vue: 'Vue'
+      //vuex: 'Vuex'
       //dayjs: 'dayjs'
     },
     module: {

@@ -11,8 +11,8 @@
     class="gantt-elastic__task-list-header"
     :style="
       root.style('task-list-header', {
-        height: $store.state.GanttElastic.options.calendar.height + 'px',
-        'margin-bottom': $store.state.GanttElastic.options.calendar.gap + 'px'
+        height: `${root.state.options.calendar.height}px`,
+        'margin-bottom': `${root.state.options.calendar.gap}px`
       })
     "
   >
@@ -25,7 +25,7 @@
       <task-list-expander
         v-if="column.expander"
         :tasks="collapsible"
-        :options="$store.state.GanttElastic.options.taskList.expander"
+        :options="root.state.options.taskList.expander"
       ></task-list-expander>
       <div
         class="gantt-elastic__task-list-header-label"
@@ -84,31 +84,27 @@ export default {
 
   computed: {
     /**
-     * Get style
-     *
-     * @returns {object}
-     */
-    getStyle() {
-      return column => {
-        const options = this.$store.state.GanttElastic.options;
-        return {
-          height: options.calendar.height + this.root.style('calendar-row-rect')['border-width'] + 'px',
-          width: column.finalWidth + 'px'
-        };
-      };
-    },
-
-    /**
      * Is this row collapsible?
      *
      * @returns {bool}
      */
     collapsible() {
-      return this.$store.state.GanttElastic.tasks.filter(task => task.children.length > 0);
+      return this.root.state.tasks.filter(task => task.allChildren.length > 0);
     }
   },
 
   methods: {
+    /**
+     * Get style
+     *
+     * @returns {object}
+     */
+    getStyle(column) {
+      return {
+        height: this.root.state.options.calendar.height + this.root.state.options.calendar.strokeWidth + 'px',
+        width: column.finalWidth + 'px'
+      };
+    },
     /**
      * Resizer mouse down event handler
      */
@@ -127,8 +123,8 @@ export default {
     resizerMouseMove(event) {
       if (this.resizer.moving) {
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
-        if (this.resizer.moving.width < this.$store.state.GanttElastic.options.taskList.minWidth) {
-          this.resizer.moving.width = this.$store.state.GanttElastic.options.taskList.minWidth;
+        if (this.resizer.moving.width < this.root.state.options.taskList.minWidth) {
+          this.resizer.moving.width = this.root.state.options.taskList.minWidth;
         }
         this.root.$emit('taskList-column-width-change', this.resizer.moving);
       }
@@ -137,7 +133,7 @@ export default {
     /**
      * Resizer mouse up event handler
      */
-    resizerMouseUp() {
+    resizerMouseUp(event) {
       if (this.resizer.moving) {
         this.root.$emit('taskList-column-width-change', this.resizer.moving);
         this.root.$emit('taskList-column-width-change-stop', this.resizer.moving);

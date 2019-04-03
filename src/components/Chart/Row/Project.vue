@@ -16,20 +16,13 @@
     <foreignObject
       class="gantt-elastic__chart-expander gantt-elastic__chart-expander--project"
       :style="root.style('chart-expander', 'chart-expander--project', task.style['chart-expander'])"
-      :x="
-        task.x -
-          $store.state.GanttElastic.options.chart.expander.offset -
-          $store.state.GanttElastic.options.chart.expander.size
-      "
-      :y="
-        task.y +
-          ($store.state.GanttElastic.options.row.height - $store.state.GanttElastic.options.chart.expander.size) / 2
-      "
-      :width="$store.state.GanttElastic.options.chart.expander.size"
-      :height="$store.state.GanttElastic.options.chart.expander.size"
+      :x="task.x - root.state.options.chart.expander.offset - root.state.options.chart.expander.size"
+      :y="task.y + (root.state.options.row.height - root.state.options.chart.expander.size) / 2"
+      :width="root.state.options.chart.expander.size"
+      :height="root.state.options.chart.expander.size"
       v-if="displayExpander"
     >
-      <expander :tasks="[task]" :options="$store.state.GanttElastic.options.chart.expander"></expander>
+      <expander :tasks="[task]" :options="root.state.options.chart.expander" type="chart"></expander>
     </foreignObject>
     <svg
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-project"
@@ -71,7 +64,7 @@
       ></path>
       <progress-bar :task="task" :clip-path="'url(#' + clipPathId + ')'"></progress-bar>
     </svg>
-    <chart-text :task="task" v-if="$store.state.GanttElastic.options.chart.text.display"></chart-text>
+    <chart-text :task="task" v-if="root.state.options.chart.text.display"></chart-text>
   </g>
 </template>
 
@@ -149,11 +142,8 @@ export default {
      * @returns {boolean}
      */
     displayExpander() {
-      const expander = this.$store.state.GanttElastic.options.chart.expander;
-      return (
-        expander.display ||
-        (expander.displayIfTaskListHidden && !this.$store.state.GanttElastic.options.taskList.display)
-      );
+      const expander = this.root.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
     }
   },
   methods: {
@@ -164,7 +154,7 @@ export default {
      * @param {Event} event
      */
     emitEvent(eventName, event) {
-      if (!this.$store.state.GanttElastic.options.scroll.scrolling) {
+      if (!this.root.state.options.scroll.scrolling) {
         this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
       }
     }

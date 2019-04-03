@@ -13,8 +13,8 @@
     ref="chart"
     x="0"
     y="0"
-    :width="$store.state.GanttElastic.options.width"
-    :height="$store.state.GanttElastic.options.allVisibleTasksHeight"
+    :width="root.state.options.width"
+    :height="root.state.options.allVisibleTasksHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
@@ -93,8 +93,8 @@ export default {
      */
     verticalLines() {
       let lines = [];
-      const options = this.$store.state.GanttElastic.options;
-      options.times.steps.forEach(step => {
+      const state = this.root.state;
+      state.options.times.steps.forEach(step => {
         if (this.root.isInsideViewPort(step.offset.px, 1)) {
           lines.push({
             key: step.time,
@@ -102,8 +102,7 @@ export default {
             y1: 0,
             x2: step.offset.px,
             y2:
-              this.$store.state.GanttElastic.tasks.length *
-                (options.row.height + options.chart.grid.horizontal.gap * 2) +
+              state.tasks.length * (state.options.row.height + state.options.chart.grid.horizontal.gap * 2) +
               this.root.style('grid-line-vertical')['stroke-width']
           });
         }
@@ -118,11 +117,11 @@ export default {
      */
     horizontalLines() {
       let lines = [];
-      const options = this.$store.state.GanttElastic.options;
+      const state = this.root.state.options;
       let tasks = this.root.visibleTasks;
       for (let index = 0, len = tasks.length; index <= len; index++) {
         const y =
-          index * (options.row.height + options.chart.grid.horizontal.gap * 2) +
+          index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
           this.root.style('grid-line-vertical')['stroke-width'] / 2;
         lines.push({
           key: 'hl' + index,
@@ -142,8 +141,8 @@ export default {
      */
     inViewPort() {
       return line => {
-        const options = this.$store.state.GanttElastic.options;
-        return line.x1 >= options.scroll.chart.left && line.x1 <= options.scroll.chart.right;
+        const state = this.root.state.options;
+        return line.x1 >= state.scroll.chart.left && line.x1 <= state.scroll.chart.right;
       };
     },
 

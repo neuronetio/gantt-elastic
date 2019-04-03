@@ -77,32 +77,32 @@ export default {
   calendar: {
     width: '100%',
     background: '#f3f5f7',
-    display: 'block',
-    'border-bottom-width': '1px', // Calendar
-    'border-bottom-color': '#dadada',
-    'border-bottom-style': 'solid'
+    display: 'block'
   },
   'calendar-row': {
     display: 'flex',
-    'justify-content': 'space-between'
+    'justify-content': 'space-evenly'
   },
   'calendar-row--month': {},
   'calendar-row--day': {},
   'calendar-row--hour': {},
   'calendar-row-rect': {
     background: 'transparent',
-    'border-width': '0px', // Calendar
+    display: 'flex'
+  },
+  'calendar-row-rect-child': {
+    display: 'inline-block',
     'border-right-width': '1px', // Calendar
-    'border-color': '#dadada',
-    'border-style': 'solid',
-    'flex-shrink': 0,
-    'flex-grow': 0
+    'border-right-color': '#dadada',
+    'border-right-style': 'solid',
+    position: 'relative'
   },
   'calendar-row-text': {
     'font-family': fontFamily, // GanttElastic
     'font-size': fontSize, //GanttElastic
     color: '#606060',
-    'text-align': 'center'
+    display: 'inline-block',
+    position: 'relative'
   },
   'calendar-row-rect--month': {
     'border-top': '1px solid #dadada'
@@ -111,7 +111,9 @@ export default {
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
   'calendar-row-rect--hour': {},
-  'calendar-row-text--hour': {},
+  'calendar-row-text--hour': {
+    'border-bottom': '1px solid #dadada'
+  },
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
   'task-list-header': { display: 'flex', 'user-select': 'none', 'vertical-align': 'middle' },
@@ -128,7 +130,7 @@ export default {
     display: 'inline-flex',
     'flex-shrink': '0',
     'box-sizing': 'border-box',
-    margin: '0px 0px 0px 10px'
+    margin: '0 0 0 10px'
   },
   'task-list-expander-content': {
     display: 'inline-flex',
@@ -331,6 +333,9 @@ export default {
   },
   'chart-days-highlight-rect': {
     fill: '#f3f5f780'
+  },
+  chart: {
+    overflow: 'hidden'
   },
   'slot-header-beforeOptions': {
     display: 'inline-block'
