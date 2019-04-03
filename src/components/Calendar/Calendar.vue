@@ -139,7 +139,7 @@ export default {
     generateHours() {
       let allHours = [];
       if (!this.root.state.options.calendar.hour.display) {
-        return (this.root.state.options.calendar.hours = hours);
+        return allHours;
       }
       for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
@@ -184,11 +184,11 @@ export default {
     generateDays() {
       let days = [];
       if (!this.root.state.options.calendar.day.display) {
-        return (this.root.state.options.calendar.days = days);
+        return days;
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return;
+        return days;
       }
       const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -230,11 +230,11 @@ export default {
     generateMonths() {
       let months = [];
       if (!this.root.state.options.calendar.month.display) {
-        return (this.root.state.options.calendar.months = months);
+        return months;
       }
       const monthsCount = this.howManyMonthsFit();
       if (monthsCount.count === 0) {
-        return;
+        return months;
       }
       let formatNames = Object.keys(this.root.state.options.calendar.month.format);
       let currentDate = dayjs(this.root.state.options.times.firstTime);

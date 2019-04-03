@@ -8,8 +8,8 @@
 -->
 <template>
   <div
-    :class="'gantt-elastic__calendar-row gantt-elastic__calendar-row-' + which"
-    :style="root.style('calendar-row', 'calendar-row-' + which)"
+    :class="'gantt-elastic__calendar-row gantt-elastic__calendar-row--' + which"
+    :style="root.style('calendar-row', 'calendar-row--' + which)"
   >
     <div
       v-for="item in items"

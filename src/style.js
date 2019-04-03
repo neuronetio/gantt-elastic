@@ -83,9 +83,11 @@ export default {
     display: 'flex',
     'justify-content': 'space-evenly'
   },
-  'calendar-row--month': {},
+  'calendar-row--month': { 'border-top': '1px solid #dadada' },
   'calendar-row--day': {},
-  'calendar-row--hour': {},
+  'calendar-row--hour': {
+    'border-bottom': '1px solid #dadada'
+  },
   'calendar-row-rect': {
     background: 'transparent',
     display: 'flex'
@@ -104,15 +106,11 @@ export default {
     display: 'inline-block',
     position: 'relative'
   },
-  'calendar-row-rect--month': {
-    'border-top': '1px solid #dadada'
-  },
+  'calendar-row-rect--month': {},
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {
-    'border-bottom': '1px solid #dadada'
-  },
+  'calendar-row-rect--hour': {},
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },

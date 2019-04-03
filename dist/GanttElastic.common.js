@@ -18913,8 +18913,8 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
     "div",
     {
       class:
-        "gantt-elastic__calendar-row gantt-elastic__calendar-row-" + _vm.which,
-      style: _vm.root.style("calendar-row", "calendar-row-" + _vm.which)
+        "gantt-elastic__calendar-row gantt-elastic__calendar-row--" + _vm.which,
+      style: _vm.root.style("calendar-row", "calendar-row--" + _vm.which)
     },
     _vm._l(_vm.items, function(item) {
       return _c(
@@ -19215,7 +19215,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateHours() {
       let allHours = [];
       if (!this.root.state.options.calendar.hour.display) {
-        return (this.root.state.options.calendar.hours = hours);
+        return allHours;
       }
       for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
@@ -19260,11 +19260,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateDays() {
       let days = [];
       if (!this.root.state.options.calendar.day.display) {
-        return (this.root.state.options.calendar.days = days);
+        return days;
       }
       const daysCount = this.howManyDaysFit();
       if (daysCount.count === 0) {
-        return;
+        return days;
       }
       const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
       for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
@@ -19306,11 +19306,11 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
     generateMonths() {
       let months = [];
       if (!this.root.state.options.calendar.month.display) {
-        return (this.root.state.options.calendar.months = months);
+        return months;
       }
       const monthsCount = this.howManyMonthsFit();
       if (monthsCount.count === 0) {
-        return;
+        return months;
       }
       let formatNames = Object.keys(this.root.state.options.calendar.month.format);
       let currentDate = dayjs_min_default()(this.root.state.options.times.firstTime);
@@ -21555,9 +21555,11 @@ const fontFamily = 'Arial, sans-serif';
     display: 'flex',
     'justify-content': 'space-evenly'
   },
-  'calendar-row--month': {},
+  'calendar-row--month': { 'border-top': '1px solid #dadada' },
   'calendar-row--day': {},
-  'calendar-row--hour': {},
+  'calendar-row--hour': {
+    'border-bottom': '1px solid #dadada'
+  },
   'calendar-row-rect': {
     background: 'transparent',
     display: 'flex'
@@ -21576,15 +21578,11 @@ const fontFamily = 'Arial, sans-serif';
     display: 'inline-block',
     position: 'relative'
   },
-  'calendar-row-rect--month': {
-    'border-top': '1px solid #dadada'
-  },
+  'calendar-row-rect--month': {},
   'calendar-row-text--month': {},
   'calendar-row-rect--day': {},
   'calendar-row-text--day': {},
-  'calendar-row-rect--hour': {
-    'border-bottom': '1px solid #dadada'
-  },
+  'calendar-row-rect--hour': {},
   'calendar-row-text--hour': {},
   'task-list-wrapper': {},
   'task-list': { background: 'transparent', 'border-color': '#eee' },
