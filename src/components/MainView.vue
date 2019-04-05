@@ -43,6 +43,7 @@
           </div>
           <div
             class="gantt-elastic__main-view-container"
+            :style="root.style('main-view-container')"
             ref="chartContainer"
             @mousedown="chartMouseDown"
             @touchstart="chartMouseDown"

@@ -14,12 +14,15 @@ export default {
     background: '#FFFFFF'
   },
   'main-container-wrapper': {
-    overflow: 'hidden'
+    overflow: 'hidden',
+    'border-top': '1px solid #eee',
+    'border-bottom': '1px solid #eee'
   },
   'main-container': {
     float: 'left',
     'max-width': '100%'
   },
+  'main-view-container': {},
   container: {
     display: 'flex',
     'max-width': '100%',
@@ -83,10 +86,10 @@ export default {
     display: 'flex',
     'justify-content': 'space-evenly'
   },
-  'calendar-row--month': { 'border-top': '1px solid #dadada' },
+  'calendar-row--month': {},
   'calendar-row--day': {},
   'calendar-row--hour': {
-    'border-bottom': '1px solid #dadada'
+    'border-bottom': '1px solid #eee'
   },
   'calendar-row-rect': {
     background: 'transparent',
@@ -118,7 +121,8 @@ export default {
     display: 'flex',
     'user-select': 'none',
     'vertical-align': 'middle',
-    border: '1px solid #dadada'
+    'border-bottom': '1px solid #eee',
+    'border-left': '1px solid #eee'
   },
   'task-list-header-column': {
     'border-left': '1px solid #00000050',
@@ -260,6 +264,18 @@ export default {
     'user-select': 'none',
     overflow: 'hidden'
   },
+  'chart-calendar-container': {
+    'user-select': 'none',
+    overflow: 'hidden',
+    'max-width': '100%',
+    'border-right': '1px solid #eee'
+  },
+  'chart-graph-container': {
+    'user-select': 'none',
+    overflow: 'hidden',
+    'max-width': '100%',
+    'border-right': '1px solid #eee'
+  },
   'chart-area': {},
   'chart-graph': {
     overflow: 'hidden'
@@ -334,9 +350,6 @@ export default {
   },
   'chart-days-highlight-rect': {
     fill: '#f3f5f780'
-  },
-  chart: {
-    overflow: 'hidden'
   },
   'slot-header-beforeOptions': {
     display: 'inline-block'

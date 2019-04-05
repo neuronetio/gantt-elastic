@@ -11,7 +11,7 @@
     class="gantt-elastic__task-list-header"
     :style="
       root.style('task-list-header', {
-        height: `${root.state.options.calendar.height + 2}px`,
+        height: `${root.state.options.calendar.height + 1}px`,
         'margin-bottom': `${root.state.options.calendar.gap}px`
       })
     "

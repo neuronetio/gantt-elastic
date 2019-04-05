@@ -17,10 +17,9 @@
 <script>
 import VueInstance from 'vue';
 import dayjs from 'dayjs';
-import Vue from 'vue';
 import MainView from './components/MainView.vue';
 import style from './style.js';
-import { continueStatement } from '@babel/types';
+
 const ctx = document.createElement('canvas').getContext('2d');
 let VueInst = VueInstance;
 function initVue() {
@@ -249,28 +248,39 @@ function getOptions(userOptions) {
       'Task list width': 'Task list',
       'Before/After': 'Expand',
       'Display task list': 'Show task list',
-      weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
-      weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
-      weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
-      months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split(
-        '_'
-      ),
-      ordinal: n => `${n}.`,
+      weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+      weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+      weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+      months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+      monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
       weekStart: 1,
       relativeTime: {
-        future: 'za %s',
-        past: 'po %s',
-        s: 'kilka sekund',
-        m: 'minuta',
-        mm: '%d minut',
-        h: 'godzina',
-        hh: '%d godzin',
-        d: 'tydzień',
-        dd: '%d tygodni',
-        M: 'miesiąc',
-        MM: '%d miesięcy',
-        y: 'rok',
-        yy: '%d lat'
+        future: 'in %s',
+        past: '%s ago',
+        s: 'a few seconds',
+        m: 'a minute',
+        mm: '%d minutes',
+        h: 'an hour',
+        hh: '%d hours',
+        d: 'a day',
+        dd: '%d days',
+        M: 'a month',
+        MM: '%d months',
+        y: 'a year',
+        yy: '%d years'
+      },
+      formats: {
+        LT: 'HH:mm',
+        LTS: 'HH:mm:ss',
+        L: 'DD/MM/YYYY',
+        LL: 'D MMMM YYYY',
+        LLL: 'D MMMM YYYY HH:mm',
+        LLLL: 'dddd, D MMMM YYYY HH:mm'
+      },
+      ordinal: n => {
+        const s = ['th', 'st', 'nd', 'rd'];
+        const v = n % 100;
+        return `[${n}${s[(v - 20) % 10] || s[v] || s[0]}]`;
       }
     }
   };
@@ -457,7 +467,11 @@ const GanttElastic = {
         refs: {},
         tasksById: {},
         taskTree: {},
-        ctx
+        ctx,
+        unwatchTasks: null,
+        unwatchOptions: null,
+        unwatchOutputTasks: null,
+        unwatchOutputOptions: null
       }
     };
   },
@@ -992,7 +1006,8 @@ const GanttElastic = {
      */
     scrollTo(left = null, top = null) {
       if (left !== null) {
-        this.state.refs.chartContainer.scrollLeft = left;
+        this.state.refs.chartCalendarContainer.scrollLeft = left;
+        this.state.refs.chartGraphContainer.scrollLeft = left;
         this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.options.scroll.left = left;
       }
@@ -1439,23 +1454,23 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    this.$watch('tasks', tasks => {
+    this.state.unwatchTasks = this.$watch('tasks', tasks => {
       if (!equalDeep(this.outputTasks, tasks)) {
         this.setup('tasks');
       }
     });
-    this.$watch('options', opts => {
+    this.state.unwatchOptions = this.$watch('options', opts => {
       if (!equalDeep(this.outputOptions, opts)) {
         this.setup('options');
       }
     });
 
-    this.$watch('outputTasks', tasks => {
+    this.state.unwatchOutputTasks = this.$watch('outputTasks', tasks => {
       if (!equalDeep(tasks, this.tasks)) {
         this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
       }
     });
-    this.$watch('outputOptions', options => {
+    this.state.unwatchOutputOptions = this.$watch('outputOptions', options => {
       if (!equalDeep(options, this.options)) {
         this.$emit('options-updated', mergeDeep({}, options));
       }
@@ -1507,6 +1522,10 @@ const GanttElastic = {
    */
   beforeDestroy() {
     window.removeEventListener('resize', this.globalOnResize);
+    this.state.unwatchTasks();
+    this.state.unwatchOptions();
+    this.state.unwatchOutputTasks();
+    this.state.unwatchOutputOptions();
     this.$emit('before-destroy');
   },
 

@@ -9,7 +9,11 @@
 <template>
   <div
     class="gantt-elastic__calendar-wrapper"
-    :style="root.style('calendar-wrapper', { 'margin-bottom': root.state.options.calendar.gap + 'px' })"
+    :style="
+      root.style('calendar-wrapper', {
+        width: root.state.options.width + 'px'
+      })
+    "
   >
     <div class="gantt-elastic__calendar" :style="root.style('calendar', { width: root.state.options.width + 'px' })">
       <calendar-row :items="dates.months" which="month" v-if="root.state.options.calendar.month.display"></calendar-row>
