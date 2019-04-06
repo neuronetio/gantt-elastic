@@ -514,7 +514,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     {
       staticClass: "gantt-elastic__task-list-header",
       style: _vm.root.style("task-list-header", {
-        height: _vm.root.state.options.calendar.height + 1 + "px",
+        height: _vm.root.state.options.calendar.height + "px",
         "margin-bottom": _vm.root.state.options.calendar.gap + "px"
       })
     },
