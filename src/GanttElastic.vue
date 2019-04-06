@@ -19,6 +19,7 @@ import VueInstance from 'vue';
 import dayjs from 'dayjs';
 import MainView from './components/MainView.vue';
 import style from './style.js';
+import ResizeObserver from 'resize-observer-polyfill';
 
 const ctx = document.createElement('canvas').getContext('2d');
 let VueInst = VueInstance;
@@ -468,6 +469,7 @@ const GanttElastic = {
         tasksById: {},
         taskTree: {},
         ctx,
+        resizeObserver: null,
         unwatchTasks: null,
         unwatchOptions: null,
         unwatchOutputTasks: null,
@@ -1519,7 +1521,10 @@ const GanttElastic = {
    */
   mounted() {
     this.state.options.clientWidth = this.$el.clientWidth;
-    window.addEventListener('resize', this.globalOnResize);
+    this.state.resizeObserver = new ResizeObserver((entries, observer) => {
+      this.globalOnResize();
+    });
+    this.state.resizeObserver.observe(this.$el.parentNode);
     this.globalOnResize();
     this.$root.$emit('gantt-elastic-mounted', this);
     this.$emit('mounted');
@@ -1546,7 +1551,7 @@ const GanttElastic = {
    * Before destroy event - clean up
    */
   beforeDestroy() {
-    window.removeEventListener('resize', this.globalOnResize);
+    this.state.resizeObserver.unobserve(this.$el.parentNode);
     this.state.unwatchTasks();
     this.state.unwatchOptions();
     this.state.unwatchOutputTasks();
