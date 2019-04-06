@@ -2468,14 +2468,10 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       let currentMonth = dayjs_min_default()(this.root.state.options.times.firstTime);
       let previousMonth = currentMonth.clone();
       const lastTime = this.root.state.options.times.lastTime;
-      let monthsCount = 1;
-      while (currentMonth.valueOf() <= lastTime) {
-        currentMonth = currentMonth.add(1, 'day');
-        if (previousMonth.month() !== currentMonth.month()) {
-          monthsCount++;
-        }
-        previousMonth = currentMonth.clone();
-      }
+      let monthsCount = this.root.monthsCount(
+        this.root.state.options.times.firstTime,
+        this.root.state.options.times.lastTime
+      );
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
           if (
@@ -6420,6 +6416,33 @@ const GanttElastic = {
     },
 
     /**
+     * Months count
+     *
+     * @description Returns number of different months in specified time range
+     *
+     * @param {number} fromTime - date in ms
+     * @param {number} toTime - date in ms
+     *
+     * @returns {number} different months count
+     */
+    monthsCount(fromTime, toTime) {
+      if (fromTime > toTime) {
+        return 0;
+      }
+      let currentMonth = dayjs_min_default()(fromTime);
+      let previousMonth = currentMonth.clone();
+      let monthsCount = 1;
+      while (currentMonth.valueOf() <= toTime) {
+        currentMonth = currentMonth.add(1, 'day');
+        if (previousMonth.month() !== currentMonth.month()) {
+          monthsCount++;
+        }
+        previousMonth = currentMonth.clone();
+      }
+      return monthsCount;
+    },
+
+    /**
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
@@ -6430,10 +6453,8 @@ const GanttElastic = {
       Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = dayjs_min_default()(this.state.options.times.firstDate);
-      const monthsCount = Math.ceil(
-        dayjs_min_default()(this.state.options.times.lastTime).diff(this.state.options.times.firstTime, 'months', true)
-      );
+      let currentDate = dayjs_min_default()(this.state.options.times.firstTime);
+      const monthsCount = this.monthsCount(this.state.options.times.firstTime, this.state.options.times.lastTime);
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month

@@ -108,14 +108,10 @@ export default {
       let currentMonth = dayjs(this.root.state.options.times.firstTime);
       let previousMonth = currentMonth.clone();
       const lastTime = this.root.state.options.times.lastTime;
-      let monthsCount = 1;
-      while (currentMonth.valueOf() <= lastTime) {
-        currentMonth = currentMonth.add(1, 'day');
-        if (previousMonth.month() !== currentMonth.month()) {
-          monthsCount++;
-        }
-        previousMonth = currentMonth.clone();
-      }
+      let monthsCount = this.root.monthsCount(
+        this.root.state.options.times.firstTime,
+        this.root.state.options.times.lastTime
+      );
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
           if (

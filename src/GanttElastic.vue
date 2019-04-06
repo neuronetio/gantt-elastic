@@ -1274,6 +1274,33 @@ const GanttElastic = {
     },
 
     /**
+     * Months count
+     *
+     * @description Returns number of different months in specified time range
+     *
+     * @param {number} fromTime - date in ms
+     * @param {number} toTime - date in ms
+     *
+     * @returns {number} different months count
+     */
+    monthsCount(fromTime, toTime) {
+      if (fromTime > toTime) {
+        return 0;
+      }
+      let currentMonth = dayjs(fromTime);
+      let previousMonth = currentMonth.clone();
+      let monthsCount = 1;
+      while (currentMonth.valueOf() <= toTime) {
+        currentMonth = currentMonth.add(1, 'day');
+        if (previousMonth.month() !== currentMonth.month()) {
+          monthsCount++;
+        }
+        previousMonth = currentMonth.clone();
+      }
+      return monthsCount;
+    },
+
+    /**
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
@@ -1284,10 +1311,8 @@ const GanttElastic = {
       Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = dayjs(this.state.options.times.firstDate);
-      const monthsCount = Math.ceil(
-        dayjs(this.state.options.times.lastTime).diff(this.state.options.times.firstTime, 'months', true)
-      );
+      let currentDate = dayjs(this.state.options.times.firstTime);
+      const monthsCount = this.monthsCount(this.state.options.times.firstTime, this.state.options.times.lastTime);
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
           month
