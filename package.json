@@ -10,7 +10,9 @@
     "vuex": "^3.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
+    "@types/chai": "^4.1.7",
+    "@types/cypress": "^1.1.3",
+    "@types/mocha": "^5.2.6",
     "@vue/cli-plugin-eslint": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
     "@vue/eslint-config-prettier": "^4.0.1",
@@ -18,9 +20,10 @@
     "babel-jest": "^24.5.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.1",
+    "cypress": "^3.2.0",
+    "cypress-promise": "^1.0.2",
     "eslint": "^5.15.3",
-    "jest": "^24.5.0",
-    "puppeteer": "^1.13.0",
+    "eslint-plugin-cypress": "^2.2.1",
     "vue-loader": "^15.7.0",
     "vue-slider-component": "^2.8.14",
     "vue-switches": "^2.0.1",
@@ -30,7 +33,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "npx cypress run --browser chrome",
     "build": "webpack",
     "dev": "webpack --config webpack.dev.js --watch"
   },
