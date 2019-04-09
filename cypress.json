@@ -3,5 +3,6 @@
   "integrationFolder": "tests/integration",
   "pluginsFile": "tests/plugins",
   "supportFile": "tests/support/index.js",
+  "screenshotsFolder": "tests/screenshots",
   "video": false
 }

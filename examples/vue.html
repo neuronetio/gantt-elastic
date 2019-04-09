@@ -283,14 +283,11 @@
       }*/
       };
 
-      Vue.use(Vuex);
-      const store = new Vuex.Store({});
       new Vue({
         components: {
           'gantt-elastic-header': Header,
           'gantt-elastic': GanttElastic
         },
-        store,
         data: {
           tasks,
           options

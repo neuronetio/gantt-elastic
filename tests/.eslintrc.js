@@ -2,7 +2,8 @@ module.exports = {
   root: false,
   env: {
     node: true,
-    'cypress/globals': true
+    'cypress/globals': true,
+    jest: true
   },
   extends: ['plugin:vue/essential', 'plugin:prettier/recommended', '@vue/prettier', 'plugin:cypress/recommended'],
   rules: {
@@ -12,5 +13,11 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
-  plugins: ['cypress']
+  plugins: ['cypress'],
+  globals: {
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true
+  }
 };

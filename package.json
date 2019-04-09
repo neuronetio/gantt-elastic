@@ -21,9 +21,11 @@
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.1",
     "cypress": "^3.2.0",
-    "cypress-promise": "^1.0.2",
     "eslint": "^5.15.3",
     "eslint-plugin-cypress": "^2.2.1",
+    "jest": "^24.7.1",
+    "jest-puppeteer": "^4.1.0",
+    "puppeteer": "^1.14.0",
     "vue-loader": "^15.7.0",
     "vue-slider-component": "^2.8.14",
     "vue-switches": "^2.0.1",
@@ -33,7 +35,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "npx cypress run --browser chrome",
+    "test": "npx cypress run --browser chrome && jest",
     "build": "webpack",
     "dev": "webpack --config webpack.dev.js --watch"
   },

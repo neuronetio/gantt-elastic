@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    jest: true
   },
   extends: ['plugin:vue/essential', 'plugin:prettier/recommended', '@vue/prettier'],
   rules: {
@@ -10,5 +11,11 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint'
+  },
+  globals: {
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true
   }
-}
+};
