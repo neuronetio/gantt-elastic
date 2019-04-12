@@ -1,44 +1,3 @@
-<h1>Gantt-elastic - Javascript Gantt Chart (editable, responsive)</h1>
-<h2>Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
-
-<div style="display:block;text-align:center">
-<img src="https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a">
-<img src="https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg">
-<img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
-<img src="https://img.shields.io/npm/dm/gantt-elastic.svg">
-<img src="https://img.shields.io/npm/l/gantt-elastic.svg">
-</div>
-
-<p>
-Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager, responsive gantt ]
-</p>
-
-<h2><a href="http://neuronet.io" target="_blank">Gantt-elastic demo here</a></h2>
-
-![preview img](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.jpg)
-![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/gantt-elastic.gif)
-![preview gif](https://github.com/neuronetio/gantt-elastic/raw/master/grab-scroll.gif)
-
-## Gantt-elastic
-
-is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
-
-gantt-elastic is not fully finished yet and may change (not released yet)
-
-### If you want more activity in this repo give it a :star:
-
-### Full documentation soon (for now take a look at examples folder)
-
-For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
-There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
-
-### Installation
-
-`npm install --save gantt-elastic` or download zip from github / clone repo
-
-### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
-
-```html
 <!DOCTYPE html>
 <html charset="utf-8">
   <head>
@@ -50,6 +9,9 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
 
     <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
     <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+
+    <script src="../dist/GanttElastic.umd.js"></script>
+    <script src="../dist/Header.umd.js"></script>
   </head>
 
   <body>
@@ -282,68 +244,3 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
     </script>
   </body>
 </html>
-```
-
-### gantt-elastic as vue component
-
-Take a look at the `vue.html` inside [examples folder](https://github.com/neuronetio/gantt-elastic/tree/master/examples) file to see how you could add gantt-elastic inside `<script>` tag along with the Vue framework
-
-Demo project: https://github.com/neuronetio/vue-gantt-elastic
-
-You can also import gantt-elastic as compiled js component in commonjs or umd format ([examples](https://github.com/neuronetio/gantt-elastic/tree/master/examples) folder) or just grab GanttElastic.vue from src directory and add to your existing vue project.
-
-```javascript
-import Vue from 'vue';
-import GanttElastic from "gantt-elastic/src/GanttElastic.vue";
-import Header from "gantt-elastic/src/components/Header.vue"; // if you want standard header
-new Vue({
-  el:'#gantt',
-  template:`<gantt-elastic :tasks="tasks" :options="options">
-    <gantt-elastic-header slot="header"></gantt-elastic-header>
-    <gantt-elastic-footer slot="footer"></gantt-elastic-footer>
-  </gantt-elastic>`,
-  components: {
-    ganttElasticHeader: {template:`<span>your header</span>`},// or Header
-    ganttElastic: GanttElastic
-    ganttElasticFooter: {template:`<span>your footer</span>`},
-  },
-  data() {
-    return {
-      tasks: tasks,
-      options: options
-    };
-  }
-});
-```
-
-or
-
-```javascript
-import Vue from 'vue';
-import App from './App.vue'; // your app that uses gantt-elastic from 'gantt-elastic/src/GanttElastic.vue'
-
-new Vue({
-  el: '#app',
-  render: h => h(App)
-});
-```
-
-### For webpack usage (pure javascript, inside other frameworks or Vue App/Component)
-
-Take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack for other bundlers use umd or commonjs from dist folder.
-
-```javascript
-import GanttElastic from 'gant-elastic/dist/GantElastic.umd.js';
-import GanttElastic from 'gant-elastic/dist/GantElastic.common.js'; // same as import GanttElastic from 'gantt-elastic';
-import GanttElastic from 'gantt-elastic/src/GantElastic.vue'; // if you want vue component directly without compilation - look above
-// and the same with require
-const GanttElastic = require('gant-elastic/dist/GantElastic.common.js');
-```
-
-### uglifyjs
-
-If you are using uglifyjs in your project be sure to have es6 compatible version like [uglify-es](https://www.npmjs.com/package/uglify-es)
-
-### Licensce
-
-MIT
