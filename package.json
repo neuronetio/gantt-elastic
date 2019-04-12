@@ -32,7 +32,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "test": "npx cypress run --browser chrome && jest",
+    "test": "npx cypress run --browser chrome",
     "build": "webpack",
     "dev": "webpack --config webpack.dev.js --watch"
   },

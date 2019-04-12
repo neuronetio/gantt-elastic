@@ -4,17 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>GanttElastic editor demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
-    <!--
-    <script src="https://unpkg.com/gantt-elastic@0.9.5/dist/GanttElastic.umd.js"></script>
-    <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
--->
-    <!--
-  <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/GanttElastic.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/Header.umd.js"></script>
-	-->
-
     <script src="/dist/GanttElastic.umd.js"></script>
     <script src="/dist/Header.umd.js"></script>
   </head>
@@ -45,10 +36,10 @@
       id="progress"
     />
     <br />
-    <button onclick="addTask()">Add task</button>
-    <button onclick="addTasks()">Add tasks</button><br />
-    <button onclick="destroy()">Destroy</button><br />
-    <button onclick="changeOptions()">Change options</button>
+    <button id="btn-add" onclick="addTask()">Add task</button>
+    <button id="btn-reset" onclick="addTasks()">Add tasks</button><br />
+    <button id="btn-destroy" onclick="destroy()">Destroy</button><br />
+    <button id="btn-options" onclick="changeOptions()">Change options</button>
     <script>
       // just helper to get current dates
       function getDate(hours) {
@@ -355,7 +346,7 @@
           ]
         },
         locale: {
-          code: 'en',
+          name: 'en',
           Now: 'Now',
           'X-Scale': 'Zoom-X',
           'Y-Scale': 'Zoom-Y',

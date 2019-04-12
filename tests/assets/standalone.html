@@ -6,22 +6,16 @@
     <title>Gangtt-elastic demo</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
-    <!--
-  <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
-  <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
-  -->
-    <!--
-  <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/bundle.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gantt-elastic/dist/Header.umd.js"></script>
-  -->
-
     <script src="/dist/bundle.js"></script>
     <script src="/dist/Header.umd.js"></script>
   </head>
 
   <body>
     <div id="app" style="width:100%;height:100%;"></div>
-
+    <button id="btn-add" onclick="addTask()">Add task</button>
+    <button id="btn-reset" onclick="addTasks()">Add tasks</button><br />
+    <button id="btn-destroy" onclick="destroy()">Destroy</button><br />
+    <button id="btn-options" onclick="changeOptions()">Change options</button>
     <script>
       // just helper to get current dates
       function getDate(hours) {
@@ -33,16 +27,17 @@
         return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
       }
 
-      const tasks = [
+      let tasks = [
         {
           id: 1,
           label: 'Make some noise',
           user:
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
           start: getDate(-24 * 5),
-          duration: 5 * 24 * 60 * 60,
-          progress: 85,
+          duration: 15 * 24 * 60 * 60,
+          percent: 85,
           type: 'project'
+          //collapsed: true,
         },
         {
           id: 2,
@@ -52,20 +47,21 @@
           parentId: 1,
           start: getDate(-24 * 4),
           duration: 4 * 24 * 60 * 60,
-          progress: 50,
+          percent: 50,
           type: 'milestone',
+          collapsed: true,
           style: {
             base: {
               fill: '#1EBC61',
               stroke: '#0EAC51'
             }
             /*'tree-row-bar': {
-            fill: '#1EBC61',
-            stroke: '#0EAC51'
-          },
-          'tree-row-bar-polygon': {
-            stroke: '#0EAC51'
-          }*/
+              fill: '#1EBC61',
+              stroke: '#0EAC51'
+            },
+            'tree-row-bar-polygon': {
+              stroke: '#0EAC51'
+            }*/
           }
         },
         {
@@ -76,7 +72,7 @@
           parentId: 2,
           start: getDate(-24 * 3),
           duration: 2 * 24 * 60 * 60,
-          progress: 100,
+          percent: 100,
           type: 'task'
         },
         {
@@ -86,7 +82,7 @@
             '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
           start: getDate(-24 * 2),
           duration: 2 * 24 * 60 * 60,
-          progress: 50,
+          percent: 50,
           type: 'task',
           dependentOn: [3]
         },
@@ -98,7 +94,7 @@
           parentId: 4,
           start: getDate(0),
           duration: 2 * 24 * 60 * 60,
-          progress: 10,
+          percent: 10,
           type: 'milestone',
           style: {
             base: {
@@ -115,8 +111,9 @@
           parentId: 5,
           start: getDate(24),
           duration: 1 * 24 * 60 * 60,
-          progress: 50,
+          percent: 50,
           type: 'task',
+          collapsed: true,
           style: {
             base: {
               fill: '#8E44AD',
@@ -133,8 +130,9 @@
           dependentOn: [6],
           start: getDate(24 * 2),
           duration: 4 * 60 * 60,
-          progress: 20,
-          type: 'task'
+          percent: 20,
+          type: 'task',
+          collapsed: true
         },
         {
           id: 8,
@@ -145,7 +143,7 @@
           dependentOn: [7],
           start: getDate(24 * 3),
           duration: 1 * 24 * 60 * 60,
-          progress: 0,
+          percent: 0,
           type: 'task'
         },
         {
@@ -157,7 +155,7 @@
           dependentOn: [8, 7],
           start: getDate(24 * 4),
           duration: 4 * 60 * 60,
-          progress: 20,
+          percent: 20,
           type: 'task',
           style: {
             base: {
@@ -165,12 +163,12 @@
               stroke: '#7E349D'
             }
             /*'tree-row-bar-polygon': {
-            stroke: '#7E349D'
-          },
-          'tree-row-bar': {
-            fill: '#8E44AD',
-            stroke: '#7E349D'
-          }*/
+              stroke: '#7E349D'
+            },
+            'tree-row-bar': {
+              fill: '#8E44AD',
+              stroke: '#7E349D'
+            }*/
           }
         },
         {
@@ -180,17 +178,92 @@
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 5),
           duration: 24 * 60 * 60,
-          progress: 0,
+          percent: 0,
+          type: 'task'
+        },
+        {
+          id: 11,
+          label: 'test task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 6),
+          duration: 24 * 60 * 60,
+          percent: 0,
+          type: 'task'
+        },
+        {
+          id: 12,
+          label: 'test task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 7),
+          duration: 24 * 60 * 60,
+          percent: 0,
+          type: 'task',
+          parentId: 11
+        },
+        {
+          id: 13,
+          label: 'test task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 8),
+          duration: 24 * 60 * 60,
+          percent: 0,
+          type: 'task'
+        },
+        {
+          id: 14,
+          label: 'test task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 9),
+          duration: 24 * 60 * 60,
+          percent: 0,
+          type: 'task'
+        },
+        {
+          id: 15,
+          label: 'test task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 16),
+          duration: 24 * 60 * 60,
+          percent: 0,
           type: 'task'
         }
       ];
 
-      const options = {
+      let options = {
+        taskMapping: {
+          progress: 'percent'
+        },
+        maxRows: 100,
+        maxHeight: 300,
         title: {
           label: 'Your project title as html (link or whatever...)',
           html: false
         },
+        row: {
+          height: 24
+        },
+        calendar: {
+          hour: {
+            display: false
+          }
+        },
+        chart: {
+          progress: {
+            bar: false
+          },
+          expander: {
+            display: true
+          }
+        },
         taskList: {
+          expander: {
+            straight: false
+          },
           columns: [
             {
               id: 1,
@@ -203,7 +276,13 @@
               label: 'Description',
               value: 'label',
               width: 200,
-              expander: true
+              expander: true,
+              html: true,
+              events: {
+                click({ data, column }) {
+                  alert('description clicked!\n' + data.label);
+                }
+              }
             },
             {
               id: 3,
@@ -235,14 +314,15 @@
                   width: '100%'
                 },
                 'task-list-item-value-container': {
-                  'text-align': 'center'
+                  'text-align': 'center',
+                  width: '100%'
                 }
               }
             }
           ]
         },
         locale: {
-          code: 'en',
+          name: 'en',
           Now: 'Now',
           'X-Scale': 'Zoom-X',
           'Y-Scale': 'Zoom-Y',
@@ -250,42 +330,17 @@
           'Before/After': 'Expand',
           'Display task list': 'Task list'
         }
-        /*locale:{
-        code:'pl'
-        name: 'pl', // name String
-        weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
-        weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
-        weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
-        months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
-        monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
-        ordinal: n => `${n}`, // ordinal Function (number) => return number + output
-        relativeTime: { // relative time format strings, keep %s %d as the same
-          future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
-          past: '%s temu',
-          s: 'kilka sekund',
-          m: 'minutę',
-          mm: '%d minut',
-          h: 'godzinę',
-          hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
-          d: 'dzień',
-          dd: '%d dni',
-          M: 'miesiąc',
-          MM: '%d miesięcy',
-          y: 'rok',
-          yy: '%d lat'
-        }
-      }*/
       };
+
       GanttElastic.component.components['gantt-header'] = Header;
       const app = (window.app = GanttElastic.mount({
-        el: '#app', // <- your container id
-        tasks: tasks,
-        options: options,
+        el: '#app',
+        tasks,
+        options,
         ready(ganttInstance) {
           console.log('ready!', ganttInstance);
 
           ganttInstance.$on('tasks-updated', tasks => {
-            console.log('tasks-updated', tasks, app);
             app.tasks = tasks;
           });
           ganttInstance.$on('options-updated', options => {
@@ -309,6 +364,77 @@
           });
         }
       }));
+
+      function update() {
+        const row = document.getElementById('row').value;
+        const name = document.getElementById('name').value;
+        const value = document.getElementById('value').value;
+        app.tasks[row][name] = value;
+      }
+
+      function deleteRow() {
+        const row = Number(document.getElementById('delrow').value);
+        app.tasks = ganttState.tasks.filter((task, index) => {
+          if (index === row) {
+            console.log('removing task', task, index);
+          }
+          return index !== row;
+        });
+      }
+
+      function progressChange() {
+        const row = Number(document.getElementById('progRow').value);
+        const percent = Number(document.getElementById('progress').value);
+        app.tasks[row].progress = percent;
+      }
+
+      function addTask() {
+        const task = {
+          id: 88,
+          label:
+            '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Yeaahh! you have added a task bro!</a>',
+          user:
+            '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Awesome!</a>',
+          parentId: 7,
+          dependentOn: [7],
+          start: getDate(24 * 3),
+          duration: 1 * 24 * 60 * 60,
+          percent: 50,
+          type: 'project'
+        };
+        app.tasks.push(task);
+        console.log(app.tasks);
+      }
+
+      function addTasks() {
+        const newTasks = tasks.map(task => Object.assign({}, task));
+        app.tasks = newTasks;
+      }
+
+      function changeOptions() {
+        app.options.taskList.columns[0].label = 'Whooaa!';
+        app.options.taskList.columns[0].width = 100;
+        app.options.taskList.columns[0].style = {
+          'task-list-header-column': {
+            background: 'red',
+            color: 'white'
+          }
+        };
+        Vue.set(app.options.calendar, 'month', {
+          format: {
+            long: function() {
+              return ':P';
+            }
+          }
+        });
+        Vue.set(app.options, 'times', { timeZoom: 2 });
+        app.options.locale['Now'] = 'Center';
+        ganttInstance.fixScrollPos();
+      }
+
+      function destroy() {
+        app.destroy = true;
+      }
     </script>
   </body>
 </html>
