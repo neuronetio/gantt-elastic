@@ -18,7 +18,7 @@
 import VueInstance from 'vue';
 import dayjs from 'dayjs';
 import MainView from './components/MainView.vue';
-import style from './style.js';
+import getStyle from './style.js';
 import ResizeObserver from 'resize-observer-polyfill';
 
 const ctx = document.createElement('canvas').getContext('2d');
@@ -40,8 +40,21 @@ function getOptions(userOptions) {
   if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.name !== 'undefined') {
     localeName = userOptions.locale.name;
   }
+  let fontSize = '12px';
+  let fontFamily = document.body
+    .computedStyleMap()
+    .get('font-family')
+    .toString();
+  if (typeof userOptions.style !== 'undefined') {
+    if (typeof userOptions.style.fontSize !== 'undefined') {
+      fontSize = userOptions.fontSize;
+    }
+    if (typeof userOptions.style.fontFamily !== 'undefined') {
+      fontFamily = userOptions.style.fontFamily;
+    }
+  }
   return {
-    style,
+    style: getStyle(fontSize, fontFamily),
     slots: {
       header: {}
     },
