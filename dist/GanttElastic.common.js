@@ -6795,7 +6795,6 @@ const GanttElastic = {
       });
       this.state.options.taskList.widthFromPercentage = percentage;
       this.state.options.taskList.finalWidth = final;
-      this.syncScrollTop();
     },
 
     /**
