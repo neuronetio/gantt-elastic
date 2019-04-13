@@ -1109,7 +1109,7 @@ const GanttElastic = {
     },
 
     /**
-     * Listen to speciefied event names
+     * Listen to specified event names
      */
     initializeEvents() {
       this.$on('chart-scroll-horizontal', this.onScrollChart);
@@ -1380,7 +1380,6 @@ const GanttElastic = {
       this.initTimes();
       this.calculateSteps();
       this.computeCalendarWidths();
-      this.globalOnResize();
       this.state.options.taskList.width = this.state.options.taskList.columns.reduce(
         (prev, current) => {
           return { width: prev.width + current.width };
@@ -1454,7 +1453,6 @@ const GanttElastic = {
           (this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2) * index +
           this.state.options.chart.grid.horizontal.gap;
       }
-      this.globalOnResize();
       return visibleTasks;
     },
 
@@ -1470,14 +1468,14 @@ const GanttElastic = {
      * Tasks used for communicate with parent component
      */
     outputTasks() {
-      return this.state.tasks.map(task => mergeDeep({}, task));
+      return this.state.tasks;
     },
 
     /**
      * Options used to communicate with parent component
      */
     outputOptions() {
-      return mergeDeep({}, this.state.options);
+      return this.state.options;
     }
   },
 
