@@ -122,17 +122,11 @@ export default {
      * Toggle expander
      */
     toggle() {
-      if (this.allChildren.length === 0) {
+      if (this.tasks.length === 0) {
         return;
       }
-      const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        task.collapsed = collapsed;
-        task.allChildren.forEach(childId => {
-          const child = this.root.getTask(childId);
-          const parent = this.root.getTask(child.parent);
-          child.visible = !collapsed && !parent.collapsed;
-        });
+        task.collapsed = !this.collapsed;
       });
     }
   }

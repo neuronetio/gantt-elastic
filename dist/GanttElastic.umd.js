@@ -1440,14 +1440,6 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
             },
             _vm._l(_vm.root.visibleTasks, function(task) {
               return _c("task-list-item", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: task.visible,
-                    expression: "task.visible"
-                  }
-                ],
                 key: task.id,
                 attrs: { task: task }
               })
@@ -1787,17 +1779,11 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
      * Toggle expander
      */
     toggle() {
-      if (this.allChildren.length === 0) {
+      if (this.tasks.length === 0) {
         return;
       }
-      const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
-        task.collapsed = collapsed;
-        task.allChildren.forEach(childId => {
-          const child = this.root.getTask(childId);
-          const parent = this.root.getTask(child.parent);
-          child.visible = !collapsed && !parent.collapsed;
-        });
+        task.collapsed = !this.collapsed;
       });
     }
   }
@@ -2505,11 +2491,6 @@ if (false) { var TaskListItem_api; }
 TaskListItem_component.options.__file = "src/components/TaskList/TaskListItem.vue"
 /* harmony default export */ var TaskListItem = (TaskListItem_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/TaskList/TaskList.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4453,6 +4434,60 @@ var ProgressBar_component = normalizeComponent(
 if (false) { var ProgressBar_api; }
 ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 /* harmony default export */ var ProgressBar = (ProgressBar_component.exports);
+// CONCATENATED MODULE: ./src/components/Chart/Row/Task.mixin.js
+/**
+ * @fileoverview Task mixin
+ * @license MIT
+ * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @package GanttElastic
+ */
+
+/* harmony default export */ var Task_mixin = ({
+  computed: {
+    /**
+     * Get view box
+     *
+     * @returns {string}
+     */
+    getViewBox() {
+      const task = this.task;
+      return `0 0 ${task.width} ${task.height}`;
+    },
+
+    /**
+     * Get group transform
+     *
+     * @returns {string}
+     */
+    getGroupTransform() {
+      return `translate(${this.task.x} ${this.task.y})`;
+    },
+
+    /**
+     * Should we display expander?
+     *
+     * @returns {boolean}
+     */
+    displayExpander() {
+      const expander = this.root.state.options.chart.expander;
+      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
+    }
+  },
+  methods: {
+    /**
+     * Emit event
+     *
+     * @param {string} eventName
+     * @param {Event} event
+     */
+    emitEvent(eventName, event) {
+      if (!this.root.state.options.scroll.scrolling) {
+        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
+    }
+  }
+});
+
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Task.vue?vue&type=script&lang=js&
 //
 //
@@ -4526,6 +4561,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 
 
 
+
 /* harmony default export */ var Taskvue_type_script_lang_js_ = ({
   name: 'Task',
   components: {
@@ -4535,6 +4571,7 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
   },
   inject: ['root'],
   props: ['task'],
+  mixins: [Task_mixin],
   data() {
     return {};
   },
@@ -4549,25 +4586,6 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
     },
 
     /**
-     * Get view box
-     *
-     * @returns {string}
-     */
-    getViewBox() {
-      const task = this.task;
-      return `0 0 ${task.width} ${task.height}`;
-    },
-
-    /**
-     * Get group transform
-     *
-     * @returns {string}
-     */
-    getGroupTransform() {
-      return `translate(${this.task.x} ${this.task.y})`;
-    },
-
-    /**
      * Get points
      *
      * @returns {string}
@@ -4575,29 +4593,6 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
     getPoints() {
       const task = this.task;
       return `0,0 ${task.width},0 ${task.width},${task.height} 0,${task.height}`;
-    },
-
-    /**
-     * Should we display expander?
-     *
-     * @returns {boolean}
-     */
-    displayExpander() {
-      const expander = this.root.state.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
-    }
-  },
-  methods: {
-    /**
-     * Emit event
-     *
-     * @param {string} eventName
-     * @param {Event} event
-     */
-    emitEvent(eventName, event) {
-      if (!this.root.state.options.scroll.scrolling) {
-        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
-      }
     }
   }
 });
@@ -4851,6 +4846,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 
 
 
+
 /* harmony default export */ var Milestonevue_type_script_lang_js_ = ({
   name: 'Milestone',
   components: {
@@ -4860,6 +4856,7 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
   },
   inject: ['root'],
   props: ['task'],
+  mixins: [Task_mixin],
   data() {
     return {};
   },
@@ -4871,24 +4868,6 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
      */
     clipPathId() {
       return 'gantt-elastic__milestone-clip-path-' + this.task.id;
-    },
-
-    /**
-     * Get view box
-     *
-     * @returns {string}
-     */
-    getViewBox() {
-      return `0 0 ${this.task.width} ${this.task.height}`;
-    },
-
-    /**
-     * Get group transform
-     *
-     * @returns {string}
-     */
-    getGroupTransform() {
-      return `translate(${this.task.x} ${this.task.y})`;
     },
 
     /**
@@ -4909,29 +4888,6 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
         ${task.width},${fifty}
         ${task.width - offset},${task.height}
         ${offset},${task.height}`;
-    },
-
-    /**
-     * Should we display expander?
-     *
-     * @returns {boolean}
-     */
-    displayExpander() {
-      const expander = this.root.state.options.chart.expander;
-      return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
-    }
-  },
-  methods: {
-    /**
-     * Emit event
-     *
-     * @param {string} eventName
-     * @param {Event} event
-     */
-    emitEvent(eventName, event) {
-      if (!this.root.state.options.scroll.scrolling) {
-        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
-      }
     }
   }
 });
@@ -5187,6 +5143,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 
 
 
+
 /* harmony default export */ var Projectvue_type_script_lang_js_ = ({
   name: 'Project',
   components: {
@@ -5196,6 +5153,7 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
   },
   inject: ['root'],
   props: ['task'],
+  mixins: [Task_mixin],
   data() {
     return {};
   },
@@ -5207,24 +5165,6 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
      */
     clipPathId() {
       return 'gantt-elastic__project-clip-path-' + this.task.id;
-    },
-
-    /**
-     * Get view box
-     *
-     * @returns {string}
-     */
-    getViewBox() {
-      return `0 0 ${this.task.width} ${this.task.height}`;
-    },
-
-    /**
-     * Get group transform
-     *
-     * @returns {string}
-     */
-    getGroupTransform() {
-      return `translate(${this.task.x} ${this.task.y})`;
     },
 
     /**
@@ -5259,19 +5199,6 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
     displayExpander() {
       const expander = this.root.state.options.chart.expander;
       return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
-    }
-  },
-  methods: {
-    /**
-     * Emit event
-     *
-     * @param {string} eventName
-     * @param {Event} event
-     */
-    emitEvent(eventName, event) {
-      if (!this.root.state.options.scroll.scrolling) {
-        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
-      }
     }
   }
 });
@@ -6682,9 +6609,6 @@ const GanttElastic = {
         if (typeof task.mouseOver === 'undefined') {
           this.$set(task, 'mouseOver', false);
         }
-        if (typeof task.visible === 'undefined') {
-          this.$set(task, 'visible', true);
-        }
         if (typeof task.collapsed === 'undefined') {
           this.$set(task, 'collapsed', false);
         }
@@ -6903,8 +6827,7 @@ const GanttElastic = {
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree(task, collapsed = false) {
-      collapsed = collapsed || task.collapsed;
+    makeTaskTree(task) {
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         if (current.parentId === task.id) {
@@ -6918,12 +6841,7 @@ const GanttElastic = {
             current.parents = [];
             current.parent = null;
           }
-          current = this.makeTaskTree(current, collapsed || current.collapsed);
-          current.visible = !collapsed;
-          current.children.forEach(childId => {
-            const child = this.getTask(childId);
-            child.visible = !(collapsed || current.collapsed);
-          });
+          current = this.makeTaskTree(current);
           task.allChildren.push(current.id);
           task.children.push(current.id);
           current.allChildren.forEach(childId => task.allChildren.push(childId));
@@ -7557,7 +7475,7 @@ const GanttElastic = {
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const visibleTasks = this.state.tasks.filter(task => this.isTaskVisible(task));
       const maxRows = visibleTasks.slice(0, this.state.options.maxRows);
       this.state.options.rowsHeight = this.getTasksHeight(maxRows);
       let heightCompensation = 0;

@@ -20,12 +20,7 @@
         ref="taskListItems"
         :style="root.style('task-list-items', { height: root.state.options.rowsHeight + 'px' })"
       >
-        <task-list-item
-          v-for="task in root.visibleTasks"
-          :key="task.id"
-          :task="task"
-          v-show="task.visible"
-        ></task-list-item>
+        <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task"></task-list-item>
       </div>
     </div>
   </div>

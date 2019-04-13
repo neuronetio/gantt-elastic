@@ -563,9 +563,6 @@ const GanttElastic = {
         if (typeof task.mouseOver === 'undefined') {
           this.$set(task, 'mouseOver', false);
         }
-        if (typeof task.visible === 'undefined') {
-          this.$set(task, 'visible', true);
-        }
         if (typeof task.collapsed === 'undefined') {
           this.$set(task, 'collapsed', false);
         }
@@ -784,8 +781,7 @@ const GanttElastic = {
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree(task, collapsed = false) {
-      collapsed = collapsed || task.collapsed;
+    makeTaskTree(task) {
       for (let i = 0, len = this.state.tasks.length; i < len; i++) {
         let current = this.state.tasks[i];
         if (current.parentId === task.id) {
@@ -799,12 +795,7 @@ const GanttElastic = {
             current.parents = [];
             current.parent = null;
           }
-          current = this.makeTaskTree(current, collapsed || current.collapsed);
-          current.visible = !collapsed;
-          current.children.forEach(childId => {
-            const child = this.getTask(childId);
-            child.visible = !(collapsed || current.collapsed);
-          });
+          current = this.makeTaskTree(current);
           task.allChildren.push(current.id);
           task.children.push(current.id);
           current.allChildren.forEach(childId => task.allChildren.push(childId));
@@ -1438,7 +1429,7 @@ const GanttElastic = {
      * For example when task is collapsed - children of this task are not visible - we should not render them
      */
     visibleTasks() {
-      const visibleTasks = this.state.tasks.filter(task => task.visible);
+      const visibleTasks = this.state.tasks.filter(task => this.isTaskVisible(task));
       const maxRows = visibleTasks.slice(0, this.state.options.maxRows);
       this.state.options.rowsHeight = this.getTasksHeight(maxRows);
       let heightCompensation = 0;

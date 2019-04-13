@@ -72,6 +72,7 @@
 import ChartText from '../Text.vue';
 import ProgressBar from '../ProgressBar.vue';
 import Expander from '../../Expander.vue';
+import taskMixin from './Task.mixin.js';
 export default {
   name: 'Project',
   components: {
@@ -81,6 +82,7 @@ export default {
   },
   inject: ['root'],
   props: ['task'],
+  mixins: [taskMixin],
   data() {
     return {};
   },
@@ -92,24 +94,6 @@ export default {
      */
     clipPathId() {
       return 'gantt-elastic__project-clip-path-' + this.task.id;
-    },
-
-    /**
-     * Get view box
-     *
-     * @returns {string}
-     */
-    getViewBox() {
-      return `0 0 ${this.task.width} ${this.task.height}`;
-    },
-
-    /**
-     * Get group transform
-     *
-     * @returns {string}
-     */
-    getGroupTransform() {
-      return `translate(${this.task.x} ${this.task.y})`;
     },
 
     /**
@@ -144,19 +128,6 @@ export default {
     displayExpander() {
       const expander = this.root.state.options.chart.expander;
       return expander.display || (expander.displayIfTaskListHidden && !this.root.state.options.taskList.display);
-    }
-  },
-  methods: {
-    /**
-     * Emit event
-     *
-     * @param {string} eventName
-     * @param {Event} event
-     */
-    emitEvent(eventName, event) {
-      if (!this.root.state.options.scroll.scrolling) {
-        this.root.$emit(`chart-${this.task.type}-${eventName}`, { event, data: this.task });
-      }
     }
   }
 };
