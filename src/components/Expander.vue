@@ -17,6 +17,7 @@
       :width="options.size"
       :height="options.size"
       v-if="allChildren.length"
+      @click="toggle"
     >
       <rect
         :class="getClassPrefix() + '-border'"
@@ -27,7 +28,6 @@
         :height="options.size - border * 2"
         rx="2"
         ry="2"
-        @click="toggle"
       ></rect>
       <line
         :class="getClassPrefix() + '-line'"
@@ -37,7 +37,6 @@
         :y1="options.size / 2"
         :x2="options.size - lineOffset"
         :y2="options.size / 2"
-        @click="toggle"
       ></line>
       <line
         :class="getClassPrefix() + '-line'"
@@ -47,7 +46,6 @@
         :y1="lineOffset"
         :x2="options.size / 2"
         :y2="options.size - lineOffset"
-        @click="toggle"
       ></line>
     </svg>
   </div>

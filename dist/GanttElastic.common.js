@@ -1586,7 +1586,8 @@ var Expandervue_type_template_id_09a21177_render = function() {
             {
               class: _vm.getClassPrefix() + "-content",
               style: _vm.root.style(_vm.getClassPrefix(false) + "-content"),
-              attrs: { width: _vm.options.size, height: _vm.options.size }
+              attrs: { width: _vm.options.size, height: _vm.options.size },
+              on: { click: _vm.toggle }
             },
             [
               _c("rect", {
@@ -1602,8 +1603,7 @@ var Expandervue_type_template_id_09a21177_render = function() {
                   height: _vm.options.size - _vm.border * 2,
                   rx: "2",
                   ry: "2"
-                },
-                on: { click: _vm.toggle }
+                }
               }),
               _vm._v(" "),
               _vm.allChildren.length
@@ -1615,8 +1615,7 @@ var Expandervue_type_template_id_09a21177_render = function() {
                       y1: _vm.options.size / 2,
                       x2: _vm.options.size - _vm.lineOffset,
                       y2: _vm.options.size / 2
-                    },
-                    on: { click: _vm.toggle }
+                    }
                   })
                 : _vm._e(),
               _vm._v(" "),
@@ -1629,8 +1628,7 @@ var Expandervue_type_template_id_09a21177_render = function() {
                       y1: _vm.lineOffset,
                       x2: _vm.options.size / 2,
                       y2: _vm.options.size - _vm.lineOffset
-                    },
-                    on: { click: _vm.toggle }
+                    }
                   })
                 : _vm._e()
             ]
@@ -1646,8 +1644,6 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Expander.vue?vue&type=template&id=09a21177&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Expander.vue?vue&type=script&lang=js&
-//
-//
 //
 //
 //
