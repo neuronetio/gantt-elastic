@@ -395,6 +395,7 @@
         ganttInstance = ganttElasticInstance;
 
         ganttInstance.$on('tasks-updated', tasks => {
+          console.log('tasks updated', tasks);
           app.tasks = tasks;
         });
         ganttInstance.$on('options-updated', options => {

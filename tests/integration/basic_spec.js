@@ -39,7 +39,16 @@ function expectAddTask(url) {
     expect(task.children.length).to.equal(1);
     expect(task.allChildren.length).to.equal(2);
     expect(task.children[0]).to.equal(8);
-    cy.get('#btn-add')
+    expect(gantt.getTask(2).collapsed).to.equal(true);
+    cy.get(
+      'div.gantt-elastic__task-list-items > div:nth-child(2) > div:nth-child(2) > div > div.gantt-elastic__task-list-expander-wrapper > svg'
+    )
+      .click()
+      .wait(500)
+      .then(() => {
+        expect(gantt.getTask(2).collapsed).to.equal(false);
+        return cy.get('#btn-add');
+      })
       .click()
       .wait(1000)
       .then(() => {
@@ -47,6 +56,7 @@ function expectAddTask(url) {
         expect(task.children.length).to.equal(2);
         expect(task.allChildren.length).to.equal(3);
         expect(task.children[1]).to.equal(88);
+        expect(gantt.getTask(2).collapsed).to.equal(false);
       });
   });
 }

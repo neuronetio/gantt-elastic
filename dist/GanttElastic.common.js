@@ -7520,27 +7520,43 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
-    this.state.unwatchTasks = this.$watch('tasks', tasks => {
-      if (!equalDeep(this.outputTasks, tasks)) {
-        this.setup('tasks');
-      }
-    });
-    this.state.unwatchOptions = this.$watch('options', opts => {
-      if (!equalDeep(this.outputOptions, opts)) {
-        this.setup('options');
-      }
-    });
+    this.state.unwatchTasks = this.$watch(
+      'tasks',
+      tasks => {
+        if (!equalDeep(this.outputTasks, tasks)) {
+          this.setup('tasks');
+        }
+      },
+      { deep: true }
+    );
+    this.state.unwatchOptions = this.$watch(
+      'options',
+      opts => {
+        if (!equalDeep(this.outputOptions, opts)) {
+          this.setup('options');
+        }
+      },
+      { deep: true }
+    );
 
-    this.state.unwatchOutputTasks = this.$watch('outputTasks', tasks => {
-      if (!equalDeep(tasks, this.tasks)) {
-        this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
-      }
-    });
-    this.state.unwatchOutputOptions = this.$watch('outputOptions', options => {
-      if (!equalDeep(options, this.options)) {
-        this.$emit('options-updated', mergeDeep({}, options));
-      }
-    });
+    this.state.unwatchOutputTasks = this.$watch(
+      'outputTasks',
+      tasks => {
+        if (!equalDeep(tasks, this.tasks)) {
+          this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
+        }
+      },
+      { deep: true }
+    );
+    this.state.unwatchOutputOptions = this.$watch(
+      'outputOptions',
+      options => {
+        if (!equalDeep(options, this.options)) {
+          this.$emit('options-updated', mergeDeep({}, options));
+        }
+      },
+      { deep: true }
+    );
 
     this.initializeEvents();
     this.setup();
