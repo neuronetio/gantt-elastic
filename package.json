@@ -24,7 +24,7 @@
     "eslint": "^5.15.3",
     "eslint-plugin-cypress": "^2.2.1",
     "vue-loader": "^15.7.0",
-    "vue-slider-component": "^2.8.14",
+    "vue-slider-component": "^3.0.26",
     "vue-switches": "^2.0.1",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.29.6",

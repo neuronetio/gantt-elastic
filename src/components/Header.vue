@@ -43,7 +43,7 @@
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
-            tooltip="false"
+            tooltip="none"
             :process-style="root.style('header-slider--process')"
             :slider-style="root.style('header-slider--slider')"
             v-model="scale"
@@ -58,7 +58,7 @@
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
-            tooltip="false"
+            tooltip="none"
             :process-style="root.style('header-slider--process')"
             :slider-style="root.style('header-slider--slider')"
             v-model="height"
@@ -73,7 +73,7 @@
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
-            tooltip="false"
+            tooltip="none"
             :process-style="root.style('header-slider--process')"
             :slider-style="root.style('header-slider--slider')"
             v-model="scope"
@@ -88,7 +88,7 @@
         <div class="gantt-elastic__header-slider-wrapper" :style="root.style('header-slider-wrapper')">
           <vue-slider
             class="gantt-elastic__header-slider"
-            tooltip="false"
+            tooltip="none"
             :process-style="root.style('header-slider--process')"
             :slider-style="root.style('header-slider--slider')"
             v-model="divider"
@@ -114,7 +114,8 @@
 </template>
 
 <script>
-import vueSlider from 'vue-slider-component/src/vue2-slider.vue';
+import vueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
 import Switches from 'vue-switches';
 export default {
   name: 'GanttHeader',
