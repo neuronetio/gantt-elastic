@@ -36,6 +36,10 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
 
 `npm install --save gantt-elastic` or download zip from github / clone repo
 
+and if you want default header
+
+`npm install --save gantt-elastic-header`
+
 ### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
 
 ```html
@@ -44,23 +48,17 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>GanttElastic editor demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
+    <title>Gangtt-elastic demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
 
-    <script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>
-    <script src="https://unpkg.com/gantt-elastic/dist/Header.umd.js"></script>
+    <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
+    <script src="https://unpkg.com/gantt-elastic-header/dist/Header.umd.js"></script>
   </head>
 
   <body>
-    <div style="width:100%;height:100%">
-      <div id="app" v-if="!destroy">
-        <gantt-elastic :tasks="tasks" :options="options">
-          <gantt-header slot="header"></gantt-header>
-          <gantt-footer slot="footer"></gantt-footer>
-        </gantt-elastic>
-      </div>
-    </div>
+    <div id="app" style="width:100%;height:100%;"></div>
 
     <script>
       // just helper to get current dates
@@ -73,17 +71,16 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
         return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
       }
 
-      let tasks = [
+      const tasks = [
         {
           id: 1,
           label: 'Make some noise',
           user:
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
           start: getDate(-24 * 5),
-          duration: 15 * 24 * 60 * 60,
+          duration: 5 * 24 * 60 * 60,
           progress: 85,
           type: 'project'
-          //collapsed: true,
         },
         {
           id: 2,
@@ -95,19 +92,18 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
           duration: 4 * 24 * 60 * 60,
           progress: 50,
           type: 'milestone',
-          collapsed: true,
           style: {
             base: {
               fill: '#1EBC61',
               stroke: '#0EAC51'
             }
             /*'tree-row-bar': {
-              fill: '#1EBC61',
-              stroke: '#0EAC51'
-            },
-            'tree-row-bar-polygon': {
-              stroke: '#0EAC51'
-            }*/
+            fill: '#1EBC61',
+            stroke: '#0EAC51'
+          },
+          'tree-row-bar-polygon': {
+            stroke: '#0EAC51'
+          }*/
           }
         },
         {
@@ -131,36 +127,108 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
           progress: 50,
           type: 'task',
           dependentOn: [3]
+        },
+        {
+          id: 5,
+          label: 'One billion, gajillion, fafillion... shabadylu...mil...shabady......uh, Yen.',
+          user:
+            '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#0077c0;">Austin Powers</a>',
+          parentId: 4,
+          start: getDate(0),
+          duration: 2 * 24 * 60 * 60,
+          progress: 10,
+          type: 'milestone',
+          style: {
+            base: {
+              fill: '#0287D0',
+              stroke: '#0077C0'
+            }
+          }
+        },
+        {
+          id: 6,
+          label: 'Butch Mario and the Luigi Kid',
+          user:
+            '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank" style="color:#0077c0;">Mario Bros</a>',
+          parentId: 5,
+          start: getDate(24),
+          duration: 1 * 24 * 60 * 60,
+          progress: 50,
+          type: 'task',
+          style: {
+            base: {
+              fill: '#8E44AD',
+              stroke: '#7E349D'
+            }
+          }
+        },
+        {
+          id: 7,
+          label: 'Devon, the old man wanted me, it was his dying request',
+          user:
+            '<a href="https://www.google.com/search?q=Knight+Rider" target="_blank" style="color:#0077c0;">Knight Rider</a>',
+          parentId: 2,
+          dependentOn: [6],
+          start: getDate(24 * 2),
+          duration: 4 * 60 * 60,
+          progress: 20,
+          type: 'task'
+        },
+        {
+          id: 8,
+          label: 'Hey, Baby! Anybody ever tell you I have beautiful eyes?',
+          user:
+            '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank" style="color:#0077c0;">Johhny Bravo</a>',
+          parentId: 7,
+          dependentOn: [7],
+          start: getDate(24 * 3),
+          duration: 1 * 24 * 60 * 60,
+          progress: 0,
+          type: 'task'
+        },
+        {
+          id: 9,
+          label: 'This better be important, woman. You are interrupting my very delicate calculations.',
+          user:
+            '<a href="https://www.google.com/search?q=Dexter\'s+Laboratory" target="_blank" style="color:#0077c0;">Dexter\'s Laboratory</a>',
+          parentId: 8,
+          dependentOn: [8, 7],
+          start: getDate(24 * 4),
+          duration: 4 * 60 * 60,
+          progress: 20,
+          type: 'task',
+          style: {
+            base: {
+              fill: '#8E44AD',
+              stroke: '#7E349D'
+            }
+            /*'tree-row-bar-polygon': {
+            stroke: '#7E349D'
+          },
+          'tree-row-bar': {
+            fill: '#8E44AD',
+            stroke: '#7E349D'
+          }*/
+          }
+        },
+        {
+          id: 10,
+          label: 'current task',
+          user:
+            '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
+          start: getDate(24 * 5),
+          duration: 24 * 60 * 60,
+          progress: 0,
+          type: 'task'
         }
       ];
 
-      let options = {
-        maxRows: 100,
-        maxHeight: 300,
+      const options = {
         title: {
           label: 'Your project title as html (link or whatever...)',
           html: false
         },
-        row: {
-          height: 24
-        },
-        calendar: {
-          hour: {
-            display: false
-          }
-        },
-        chart: {
-          progress: {
-            bar: false
-          },
-          expander: {
-            display: true
-          }
-        },
         taskList: {
-          expander: {
-            straight: false
-          },
           columns: [
             {
               id: 1,
@@ -173,13 +241,7 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
               label: 'Description',
               value: 'label',
               width: 200,
-              expander: true,
-              html: true,
-              events: {
-                click({ data, column }) {
-                  alert('description clicked!\n' + data.label);
-                }
-              }
+              expander: true
             },
             {
               id: 3,
@@ -211,15 +273,14 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
                   width: '100%'
                 },
                 'task-list-item-value-container': {
-                  'text-align': 'center',
-                  width: '100%'
+                  'text-align': 'center'
                 }
               }
             }
           ]
         },
         locale: {
-          name: 'en',
+          code: 'en',
           Now: 'Now',
           'X-Scale': 'Zoom-X',
           'Y-Scale': 'Zoom-Y',
@@ -227,58 +288,64 @@ There is also full example vue project at https://github.com/neuronetio/vue-gant
           'Before/After': 'Expand',
           'Display task list': 'Task list'
         }
+        /*locale:{
+        name: 'pl', // name String
+        weekdays: 'Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota_Niedziela'.split('_'), // weekdays Array
+        weekdaysShort: 'Pon_Wto_Śro_Czw_Pią_Sob_Nie'.split('_'), // OPTIONAL, short weekdays Array, use first three letters if not provided
+        weekdaysMin: 'Pn_Wt_Śr_Cz_Pt_So_Ni'.split('_'), // OPTIONAL, min weekdays Array, use first two letters if not provided
+        months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'), // months Array
+        monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'), // OPTIONAL, short months Array, use first three letters if not provided
+        ordinal: n => `${n}`, // ordinal Function (number) => return number + output
+        relativeTime: { // relative time format strings, keep %s %d as the same
+          future: 'za %s', // e.g. in 2 hours, %s been replaced with 2hours
+          past: '%s temu',
+          s: 'kilka sekund',
+          m: 'minutę',
+          mm: '%d minut',
+          h: 'godzinę',
+          hh: '%d godzin', // e.g. 2 hours, %d been replaced with 2
+          d: 'dzień',
+          dd: '%d dni',
+          M: 'miesiąc',
+          MM: '%d miesięcy',
+          y: 'rok',
+          yy: '%d lat'
+        }
+      }*/
       };
+      GanttElastic.component.components['gantt-header'] = Header;
+      const app = GanttElastic.mount({
+        el: '#app', // <- your container id
+        tasks: tasks,
+        options: options,
+        ready(ganttInstance) {
+          console.log('ready!', ganttInstance);
 
-      // create instance
-      const app = new Vue({
-        components: {
-          'gantt-header': Header,
-          'gantt-elastic': GanttElastic,
-          'gantt-footer': {
-            template: `<span>this is a footer</span>`
-          }
-        },
-        data: {
-          tasks: tasks.map(task => Object.assign({}, task)),
-          options,
-          destroy: false
+          ganttInstance.$on('tasks-updated', tasks => {
+            console.log('tasks-updated', tasks, app);
+            app.tasks = tasks;
+          });
+          ganttInstance.$on('options-updated', options => {
+            app.options = options;
+          });
+
+          ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
+            console.log('task mouse enter', { data, event });
+          });
+          ganttInstance.$on('updated', () => {
+            //console.log('gantt view was updated');
+          });
+          ganttInstance.$on('destroyed', () => {
+            //console.log('gantt was destroyed');
+          });
+          ganttInstance.$on('times-timeZoom-updated', () => {
+            console.log('time zoom changed');
+          });
+          ganttInstance.$on('taskList-task-click', ({ event, data, column }) => {
+            console.log('task list clicked! (task)', { data, column });
+          });
         }
       });
-
-      // gantt state which will be updated in realtime
-      let ganttState, ganttInstance;
-
-      // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
-      // to get the gantt state for real time modification
-      app.$on('gantt-elastic-ready', ganttElasticInstance => {
-        ganttInstance = ganttElasticInstance;
-
-        ganttInstance.$on('tasks-updated', tasks => {
-          app.tasks = tasks;
-        });
-        ganttInstance.$on('options-updated', options => {
-          app.options = options;
-        });
-
-        ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
-          console.log('task mouse enter', { data, event });
-        });
-        ganttInstance.$on('updated', () => {
-          //console.log('gantt view was updated');
-        });
-        ganttInstance.$on('destroyed', () => {
-          //console.log('gantt was destroyed');
-        });
-        ganttInstance.$on('times-timeZoom-updated', () => {
-          console.log('time zoom changed');
-        });
-        ganttInstance.$on('taskList-task-click', ({ event, data, column }) => {
-          console.log('task list clicked! (task)', { data, column });
-        });
-      });
-
-      // mount gantt to DOM
-      app.$mount('#app');
     </script>
   </body>
 </html>
