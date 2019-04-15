@@ -360,8 +360,8 @@ You can also import gantt-elastic as compiled js component in commonjs or umd fo
 
 ```javascript
 import Vue from 'vue';
-import GanttElastic from "gantt-elastic/src/GanttElastic.vue";
-import Header from "gantt-elastic/src/components/Header.vue"; // if you want standard header
+import GanttElastic from "gantt-elastic";
+import Header from "gantt-elastic-header"; // if you want standard header (npm i -s gantt-elastic-header)
 new Vue({
   el:'#gantt',
   template:`<gantt-elastic :tasks="tasks" :options="options">
@@ -369,7 +369,7 @@ new Vue({
     <gantt-elastic-footer slot="footer"></gantt-elastic-footer>
   </gantt-elastic>`,
   components: {
-    ganttElasticHeader: {template:`<span>your header</span>`},// or Header
+    ganttElasticHeader: {template:`<span>your header</span>`}, // or Header
     ganttElastic: GanttElastic
     ganttElasticFooter: {template:`<span>your footer</span>`},
   },
