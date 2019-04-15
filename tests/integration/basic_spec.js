@@ -10,7 +10,7 @@ function expectIsMounted(url) {
 
 function expectTimeZoomChange(url) {
   cy.visit(url, { timeout: 10000 }).then(window => {
-    const timeZoomSelector = '.gantt-elastic__header-options > label:nth-child(2) .vue-slider-dot-handle';
+    const timeZoomSelector = '.gantt-elastic__header-options > label:nth-child(2) .vue-slider-dot';
     const $timeZoom = Cypress.$(timeZoomSelector);
     const offset = $timeZoom.offset();
     cy.wrap($timeZoom).as('timeZoom');
@@ -19,11 +19,44 @@ function expectTimeZoomChange(url) {
     const gantt = window.app.$children[0];
     expect(gantt.state.options.times.timeZoom).to.equal(17);
     cy.get('@timeZoom').should('be.visible');
-    cy.get('@timeZoom')
-      .trigger('mousedown')
-      .trigger('mousemove', { clientX: offset.left - 10, clientY: offset.top })
-      .trigger('mouseup')
-      .wait(1000)
+    cy.get(timeZoomSelector)
+      .then(el => {
+        // slider must have native MouseEvent
+        el.get(0).dispatchEvent(
+          new window.MouseEvent('mousedown', {
+            clientX: offset.left,
+            clientY: offset.top,
+            buttons: 1,
+            button: 0,
+            view: window,
+            bubbles: true,
+            cancelable: true
+          })
+        );
+        el.get(0).dispatchEvent(
+          new window.MouseEvent('mousemove', {
+            clientX: offset.left - 16,
+            clientY: offset.top,
+            buttons: 1,
+            button: 0,
+            view: window,
+            bubbles: true,
+            cancelable: true
+          })
+        );
+        el.get(0).dispatchEvent(
+          new window.MouseEvent('mouseup', {
+            buttons: 1,
+            button: 0,
+            view: window,
+            bubbles: true,
+            cancelable: true
+          })
+        );
+        console.log(MouseEvent);
+        return el;
+      })
+      .wait(500)
       .then(() => {
         expect(gantt.state.options.times.timeZoom).to.equal(12);
       });
