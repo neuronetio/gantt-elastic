@@ -14,7 +14,6 @@
 </template>
 <script>
 import Vue from 'vue';
-import Vuex from 'vuex';
 import GanttElastic from './GanttElastic.vue';
 Vue.use(Vuex);
 const store = new Vuex.Store({});

@@ -14,10 +14,8 @@ window.GanttElastic = {
     let { el, tasks, options } = config;
     const ganttElastic = GanttElasticStandalone; //mergeDeep({}, GanttElasticStandalone);
     ganttElastic.data = { tasks, options };
-    console.log('mounting', ganttElastic);
     return new Vue(ganttElastic)
       .$on('gantt-elastic-ready', ganttInstance => {
-        console.log(ganttInstance);
         if (typeof config.ready === 'function') {
           config.ready(ganttInstance);
         }
