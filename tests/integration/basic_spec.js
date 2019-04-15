@@ -53,7 +53,6 @@ function expectTimeZoomChange(url) {
             cancelable: true
           })
         );
-        console.log(MouseEvent);
         return el;
       })
       .wait(500)
