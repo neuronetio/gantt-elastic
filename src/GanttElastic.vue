@@ -1076,6 +1076,7 @@ const GanttElastic = {
     onRowHeightChange(height) {
       this.state.options.row.height = height;
       this.calculateTaskListColumnsDimensions();
+      this.fixScrollPos();
     },
 
     /**
