@@ -41,9 +41,9 @@ function getOptions(userOptions) {
     localeName = userOptions.locale.name;
   }
   let fontSize = '12px';
-  let fontFamily = document.body
-    .computedStyleMap()
-    .get('font-family')
+  let fontFamily = window
+    .getComputedStyle(document.body)
+    .getPropertyValue('font-family')
     .toString();
   if (typeof userOptions.style !== 'undefined') {
     if (typeof userOptions.style.fontSize !== 'undefined') {
