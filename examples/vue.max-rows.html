@@ -1,224 +1,233 @@
 <!DOCTYPE html>
 <html charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>GanttElastic editor demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
 
-<head>
-  <meta charset="utf-8">
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-  <title>GanttElastic editor demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
+    <!--<script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>-->
 
-  <!--<script src="https://unpkg.com/gantt-elastic/dist/GanttElastic.umd.js"></script>-->
+    <script src="../dist/GanttElastic.umd.js"></script>
+    <script src="https://unpkg.com/gantt-elastic-header/dist/Header.umd.js"></script>
+  </head>
 
-  <script src="../dist/GanttElastic.umd.js"></script>
-  <script src="https://unpkg.com/gantt-elastic-header/dist/Header.umd.js"></script>
-</head>
-
-<body>
-  <div style="width:100%;height:100%">
-    <div id="app">
-      <gantt-elastic :tasks="tasks" :options="options">
-        <gantt-elastic-header slot="header">
-          </gantt-elastic-heade>
-      </gantt-elastic>
+  <body>
+    <div style="width:100%;height:100%">
+      <div id="app">
+        <gantt-elastic :tasks="tasks" :options="options">
+          <gantt-elastic-header slot="header"></gantt-elastic-header>
+        </gantt-elastic>
+      </div>
     </div>
-  </div>
 
-  modify task<br>
-  <input type="number" value="0" id="row" placeholder="which row?">
-  <input type="text" id="name" placeholder="name" value="label">
-  <input type="text" id="value" value="test" placeholder="value" onkeyup="update()">
-  <br>
-  <input type="number" value="0" id="delrow" placeholder="which row?">
-  <button onclick="deleteRow()">Delete</button>
-  <br>
-  <input type="number" id="progRow" value="0"><input type="range" min="0" max="100" oninput="progressChange()"
-    id="progress">
-  <br>
-  <button onclick="addTask()">Add task</button>
-  <br>
-  <button onclick="changeStyle()">Change style</button>
-  <script>
-    // override components - copy component from src directory change it to object or compile *.vue to *.js
-    // more info about components you can find here : https://vuejs.org/v2/guide/index.html
-    // You can change anything! You have full control of components templates, events, data ... and so on!
-    // GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
+    modify task<br />
+    <input type="number" value="0" id="row" placeholder="which row?" />
+    <input type="text" id="name" placeholder="name" value="label" />
+    <input type="text" id="value" value="test" placeholder="value" onkeyup="update()" />
+    <br />
+    <input type="number" value="0" id="delrow" placeholder="which row?" />
+    <button onclick="deleteRow()">Delete</button>
+    <br />
+    <input type="number" id="progRow" value="0" /><input
+      type="range"
+      min="0"
+      max="100"
+      oninput="progressChange()"
+      id="progress"
+    />
+    <br />
+    <button onclick="addTask()">Add task</button>
+    <br />
+    <button onclick="changeStyle()">Change style</button>
+    <script>
+      // override components - copy component from src directory change it to object or compile *.vue to *.js
+      // more info about components you can find here : https://vuejs.org/v2/guide/index.html
+      // You can change anything! You have full control of components templates, events, data ... and so on!
+      // GanttElastic.component.components.EgMain.components.TopHeader = CustomHeader;
 
-    // just helper to get current dates
-    function getDate(hours) {
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth() + 1;
-      const currentDay = currentDate.getDate();
-      const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
-      return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
-    }
+      // just helper to get current dates
+      function getDate(hours) {
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentDay = currentDate.getDate();
+        const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
+        return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
+      }
 
-    let tasks = [];
-    let types = ['project', 'milestone', 'task'];
-    const rows = 200 / 2;
-    for (let i = -rows; i < rows; i++) {
-      tasks.push({
-        id: i + rows + 1,
-        label: 'task ' + (i + rows + 1),
-        user: 'test',
-        start: getDate(24 * i),
-        duration: 24 * 60 * 60,
-        progress: Math.floor(Math.random() * 100),
-        type: types[Math.floor(Math.random() * 3)],
-      });
-    }
+      let tasks = [];
+      let types = ['project', 'milestone', 'task'];
+      const rows = 200 / 2;
+      for (let i = -rows; i < rows; i++) {
+        tasks.push({
+          id: i + rows + 1,
+          label: 'task ' + (i + rows + 1),
+          user: 'test',
+          start: getDate(24 * i),
+          duration: 24 * 60 * 60 * 1000,
+          progress: Math.floor(Math.random() * 100),
+          type: types[Math.floor(Math.random() * 3)]
+        });
+      }
 
-    let options = {
-      title: {
-        label: 'Your project title as html (link or whatever...)',
-        html: false,
-      },
-      maxRows: 20,
-      taskList: {
-        columns: [
-          {
-            id: 1,
-            label: 'ID',
-            value: 'id',
-            width: 40
-          }, {
-            id: 2,
-            label: 'Description',
-            value: 'label',
-            width: 200,
-            expander: true,
-            html: true,
-          }, {
-            id: 3,
-            label: 'Assigned to',
-            value: 'user',
-            width: 130,
-            html: true
-          }, {
-            id: 3,
-            label: 'Start',
-            value: (task) => dayjs(task.startTime).format('YYYY-MM-DD'),
-            width: 78
-          }, {
-            id: 4,
-            label: 'Type',
-            value: 'type',
-            width: 68
-          }, {
-            id: 5,
-            label: '%',
-            value: 'progress',
-            width: 35,
-            style: {
-              "task-list-header-label": {
-                'text-align': 'center',
-                'width': '100%'
-              },
-              "task-list-item-value-container": {
-                'text-align': 'center',
+      let options = {
+        title: {
+          label: 'Your project title as html (link or whatever...)',
+          html: false
+        },
+        maxRows: 20,
+        taskList: {
+          columns: [
+            {
+              id: 1,
+              label: 'ID',
+              value: 'id',
+              width: 40
+            },
+            {
+              id: 2,
+              label: 'Description',
+              value: 'label',
+              width: 200,
+              expander: true,
+              html: true
+            },
+            {
+              id: 3,
+              label: 'Assigned to',
+              value: 'user',
+              width: 130,
+              html: true
+            },
+            {
+              id: 3,
+              label: 'Start',
+              value: task => dayjs(task.startTime).format('YYYY-MM-DD'),
+              width: 78
+            },
+            {
+              id: 4,
+              label: 'Type',
+              value: 'type',
+              width: 68
+            },
+            {
+              id: 5,
+              label: '%',
+              value: 'progress',
+              width: 35,
+              style: {
+                'task-list-header-label': {
+                  'text-align': 'center',
+                  width: '100%'
+                },
+                'task-list-item-value-container': {
+                  'text-align': 'center'
+                }
               }
             }
-          }
-        ]
-      },
-      locale: {
-        name: 'en',
-        'Now': 'Now',
-        'X-Scale': 'Zoom-X',
-        'Y-Scale': 'Zoom-Y',
-        'Task list width': 'Task list',
-        'Before/After': 'Expand',
-        'Display task list': 'Task list'
-      },
-    };
-
-    Vue.use(Vuex);
-    const store = new Vuex.Store({});
-    // create instance
-    const app = new Vue({
-      components: {
-        'gantt-elastic': GanttElastic,
-        'gantt-elastic-header': Header,
-      },
-      store,
-      data: {
-        tasks,
-        options
-      }
-    });
-
-    // gantt state which will be updated in realtime
-    let ganttState, ganttInstance;
-
-    // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
-    // to get the gantt state for realtime modification
-    app.$on('gantt-elastic-ready', (ganttElasticInstance) => {
-      ganttInstance = ganttElasticInstance;
-      ganttState = ganttElasticInstance.state;
-      ganttInstance.$on('gantt-elastic-chart-task-click', ({ event, data }) => {
-        console.log('task clicked!', { event, data })
-      });
-      ganttInstance.$on('gantt-elastic-chart-milestone-click', ({ event, data }) => {
-        console.log('milestone clicked!', { event, data })
-      });
-      ganttInstance.$on('gantt-elastic-chart-project-click', ({ event, data }) => {
-        console.log('project clicked!', { event, data })
-      });
-      console.log('gantt-elastic ready!', ganttState);
-    });
-
-    // mount gantt to DOM
-    app.$mount('#app');
-
-    function update() {
-      const row = document.getElementById('row').value;
-      const name = document.getElementById('name').value;
-      const value = document.getElementById('value').value;
-      ganttState.tasks[row][name] = value;
-    }
-
-    function deleteRow() {
-      const row = Number(document.getElementById('delrow').value);
-      ganttState.tasks = ganttState.tasks.filter((task, index) => {
-        if (index === row) {
-          console.log('removing task', task, index)
-        }
-        return index !== row;
-      });
-    }
-
-    function progressChange() {
-      const row = Number(document.getElementById('progRow').value);
-      const percent = Number(document.getElementById('progress').value);
-      ganttState.tasks[row].progress = percent;
-    }
-
-    function addTask() {
-      const task = {
-        id: 88,
-        label: '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Yeaahh! you have added a task bro!</a>',
-        user: '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Awesome!</a>',
-        parentId: 7,
-        dependentOn: [7],
-        start: getDate(24 * 3),
-        duration: 1 * 24 * 60 * 60,
-        progress: 50,
-        type: 'project',
-      };
-      ganttState.tasks.push(task);
-      //console.log(ganttState.tasks);
-    }
-
-    function changeStyle() {
-      ganttState.tasks[0].style = {
-        base: {
-          fill: '#8E44AD',
-          stroke: '#7E349D'
+          ]
         },
+        locale: {
+          name: 'en',
+          Now: 'Now',
+          'X-Scale': 'Zoom-X',
+          'Y-Scale': 'Zoom-Y',
+          'Task list width': 'Task list',
+          'Before/After': 'Expand',
+          'Display task list': 'Task list'
+        }
       };
-    }
-  </script>
-</body>
 
+      Vue.use(Vuex);
+      const store = new Vuex.Store({});
+      // create instance
+      const app = new Vue({
+        components: {
+          'gantt-elastic': GanttElastic,
+          'gantt-elastic-header': Header
+        },
+        store,
+        data: {
+          tasks,
+          options
+        }
+      });
+
+      // gantt state which will be updated in realtime
+      let ganttState, ganttInstance;
+
+      // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
+      // to get the gantt state for realtime modification
+      app.$on('gantt-elastic-ready', ganttElasticInstance => {
+        ganttInstance = ganttElasticInstance;
+        ganttState = ganttElasticInstance.state;
+        ganttInstance.$on('gantt-elastic-chart-task-click', ({ event, data }) => {
+          console.log('task clicked!', { event, data });
+        });
+        ganttInstance.$on('gantt-elastic-chart-milestone-click', ({ event, data }) => {
+          console.log('milestone clicked!', { event, data });
+        });
+        ganttInstance.$on('gantt-elastic-chart-project-click', ({ event, data }) => {
+          console.log('project clicked!', { event, data });
+        });
+        console.log('gantt-elastic ready!', ganttState);
+      });
+
+      // mount gantt to DOM
+      app.$mount('#app');
+
+      function update() {
+        const row = document.getElementById('row').value;
+        const name = document.getElementById('name').value;
+        const value = document.getElementById('value').value;
+        ganttState.tasks[row][name] = value;
+      }
+
+      function deleteRow() {
+        const row = Number(document.getElementById('delrow').value);
+        ganttState.tasks = ganttState.tasks.filter((task, index) => {
+          if (index === row) {
+            console.log('removing task', task, index);
+          }
+          return index !== row;
+        });
+      }
+
+      function progressChange() {
+        const row = Number(document.getElementById('progRow').value);
+        const percent = Number(document.getElementById('progress').value);
+        ganttState.tasks[row].progress = percent;
+      }
+
+      function addTask() {
+        const task = {
+          id: 88,
+          label:
+            '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Yeaahh! you have added a task bro!</a>',
+          user:
+            '<a href="https://images.pexels.com/photos/423364/pexels-photo-423364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" target="_blank" style="color:#0077c0;">Awesome!</a>',
+          parentId: 7,
+          dependentOn: [7],
+          start: getDate(24 * 3),
+          duration: 1 * 24 * 60 * 60,
+          progress: 50,
+          type: 'project'
+        };
+        ganttState.tasks.push(task);
+        //console.log(ganttState.tasks);
+      }
+
+      function changeStyle() {
+        ganttState.tasks[0].style = {
+          base: {
+            fill: '#8E44AD',
+            stroke: '#7E349D'
+          }
+        };
+      }
+    </script>
+  </body>
 </html>

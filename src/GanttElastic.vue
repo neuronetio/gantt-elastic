@@ -587,8 +587,8 @@ const GanttElastic = {
         if (typeof task.parent === 'undefined') {
           this.$set(task, 'parent', null);
         }
-        if (typeof task.durationMs === 'undefined') {
-          this.$set(task, 'durationMs', []);
+        if (typeof task.duration === 'undefined') {
+          this.$set(task, 'duration', 24 * 60 * 60 * 1000);
         }
         return task;
       });
@@ -1134,7 +1134,7 @@ const GanttElastic = {
         this.state.options.times.timeScale * steps * percent + Math.pow(2, this.state.options.times.timeZoom);
       this.state.options.times.totalViewDurationMs = dayjs(this.state.options.times.lastTime).diff(
         this.state.options.times.firstTime,
-        'milisecods'
+        'milliseconds'
       );
       this.state.options.times.totalViewDurationPx =
         this.state.options.times.totalViewDurationMs / this.state.options.times.timePerPixel;
@@ -1184,7 +1184,7 @@ const GanttElastic = {
         currentDate.valueOf() <= lastMs;
         currentDate = currentDate.add(1, this.state.options.times.stepDuration).startOf('day')
       ) {
-        const offsetMs = currentDate.diff(this.state.options.times.firstTime, 'milisecods');
+        const offsetMs = currentDate.diff(this.state.options.times.firstTime, 'milliseconds');
         const offsetPx = offsetMs / this.state.options.times.timePerPixel;
         const step = {
           time: currentDate.valueOf(),
@@ -1347,12 +1347,11 @@ const GanttElastic = {
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
         task.startTime = dayjs(task.start).valueOf();
-        task.durationMs = task.duration * 1000;
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
         }
-        if (task.startTime + task.durationMs > lastTaskTime) {
-          lastTaskTime = task.startTime + task.durationMs;
+        if (task.startTime + task.duration > lastTaskTime) {
+          lastTaskTime = task.startTime + task.duration;
         }
       }
       this.state.options.times.firstTaskTime = firstTaskTime;
@@ -1443,7 +1442,7 @@ const GanttElastic = {
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
         task.width =
-          task.durationMs / this.state.options.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
+          task.duration / this.state.options.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
         if (task.width < 0) {
           task.width = 0;
         }

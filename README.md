@@ -77,7 +77,7 @@ and if you want default header
           user:
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
           start: getDate(-24 * 5),
-          duration: 5 * 24 * 60 * 60,
+          duration: 5 * 24 * 60 * 60 * 1000,
           progress: 85,
           type: 'project'
         },
@@ -88,7 +88,7 @@ and if you want default header
             '<a href="https://www.google.com/search?q=Peter+Parker" target="_blank" style="color:#0077c0;">Peter Parker</a>',
           parentId: 1,
           start: getDate(-24 * 4),
-          duration: 4 * 24 * 60 * 60,
+          duration: 4 * 24 * 60 * 60 * 1000,
           progress: 50,
           type: 'milestone',
           style: {
@@ -112,7 +112,7 @@ and if you want default header
             '<a href="https://www.google.com/search?q=John+Wayne" target="_blank" style="color:#0077c0;">John Wayne</a>',
           parentId: 2,
           start: getDate(-24 * 3),
-          duration: 2 * 24 * 60 * 60,
+          duration: 2 * 24 * 60 * 60 * 1000,
           progress: 100,
           type: 'task'
         },
@@ -122,7 +122,7 @@ and if you want default header
           user:
             '<a href="https://www.google.com/search?q=Clark+Kent" target="_blank" style="color:#0077c0;">Clark Kent</a>',
           start: getDate(-24 * 2),
-          duration: 2 * 24 * 60 * 60,
+          duration: 2 * 24 * 60 * 60 * 1000,
           progress: 50,
           type: 'task',
           dependentOn: [3]
@@ -134,7 +134,7 @@ and if you want default header
             '<a href="https://www.google.com/search?q=Austin+Powers" target="_blank" style="color:#0077c0;">Austin Powers</a>',
           parentId: 4,
           start: getDate(0),
-          duration: 2 * 24 * 60 * 60,
+          duration: 2 * 24 * 60 * 60 * 1000,
           progress: 10,
           type: 'milestone',
           style: {
@@ -151,7 +151,7 @@ and if you want default header
             '<a href="https://www.google.com/search?q=Mario+Bros" target="_blank" style="color:#0077c0;">Mario Bros</a>',
           parentId: 5,
           start: getDate(24),
-          duration: 1 * 24 * 60 * 60,
+          duration: 1 * 24 * 60 * 60 * 1000,
           progress: 50,
           type: 'task',
           style: {
@@ -169,7 +169,7 @@ and if you want default header
           parentId: 2,
           dependentOn: [6],
           start: getDate(24 * 2),
-          duration: 4 * 60 * 60,
+          duration: 4 * 60 * 60 * 1000,
           progress: 20,
           type: 'task'
         },
@@ -181,7 +181,7 @@ and if you want default header
           parentId: 7,
           dependentOn: [7],
           start: getDate(24 * 3),
-          duration: 1 * 24 * 60 * 60,
+          duration: 1 * 24 * 60 * 60 * 1000,
           progress: 0,
           type: 'task'
         },
@@ -193,7 +193,7 @@ and if you want default header
           parentId: 8,
           dependentOn: [8, 7],
           start: getDate(24 * 4),
-          duration: 4 * 60 * 60,
+          duration: 4 * 60 * 60 * 1000,
           progress: 20,
           type: 'task',
           style: {
@@ -216,7 +216,7 @@ and if you want default header
           user:
             '<a href="https://www.google.com/search?q=Johnattan+Owens" target="_blank" style="color:#0077c0;">Johnattan Owens</a>',
           start: getDate(24 * 5),
-          duration: 24 * 60 * 60,
+          duration: 24 * 60 * 60 * 1000,
           progress: 0,
           type: 'task'
         }
