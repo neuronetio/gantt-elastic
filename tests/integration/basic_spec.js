@@ -19,42 +19,13 @@ function expectTimeZoomChange(url) {
     const gantt = window.app.$children[0];
     expect(gantt.state.options.times.timeZoom).to.equal(17);
     cy.get('@timeZoom').should('be.visible');
-    cy.get(timeZoomSelector)
-      .then(el => {
-        // slider must have native MouseEvent
-        el.get(0).dispatchEvent(
-          new window.MouseEvent('mousedown', {
-            clientX: offset.left,
-            clientY: offset.top,
-            buttons: 1,
-            button: 0,
-            view: window,
-            bubbles: true,
-            cancelable: true
-          })
-        );
-        el.get(0).dispatchEvent(
-          new window.MouseEvent('mousemove', {
-            clientX: offset.left - 16,
-            clientY: offset.top,
-            buttons: 1,
-            button: 0,
-            view: window,
-            bubbles: true,
-            cancelable: true
-          })
-        );
-        el.get(0).dispatchEvent(
-          new window.MouseEvent('mouseup', {
-            buttons: 1,
-            button: 0,
-            view: window,
-            bubbles: true,
-            cancelable: true
-          })
-        );
-        return el;
+    cy.get('@timeZoom')
+      .trigger('mousedown', 'center', { which: 1 })
+      .trigger('mousemove', {
+        clientX: offset.left - 10,
+        clientY: offset.top
       })
+      .trigger('mouseup', { which: 1, force: true })
       .wait(500)
       .then(() => {
         expect(gantt.state.options.times.timeZoom).to.equal(12);
