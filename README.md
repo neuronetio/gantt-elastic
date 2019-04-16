@@ -180,8 +180,10 @@ and if you want default header
             '<a href="https://www.google.com/search?q=Johhny+Bravo" target="_blank" style="color:#0077c0;">Johhny Bravo</a>',
           parentId: 7,
           dependentOn: [7],
-          start: getDate(24 * 3),
-          duration: 1 * 24 * 60 * 60 * 1000,
+          start: dayjs()
+            .startOf('day')
+            .valueOf(),
+          end: dayjs().add(1, 'day'),
           progress: 0,
           type: 'task'
         },

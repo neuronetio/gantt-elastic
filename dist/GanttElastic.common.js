@@ -6447,42 +6447,44 @@ function mergeDeepReactive(component, target, ...sources) {
  *
  * @returns {boolean}
  */
-function equalDeep(left, right, cache = []) {
+function notEqualDeep(left, right, cache = []) {
   if (typeof right !== typeof left) {
-    return false;
+    return { left, right, what: 'typeof' };
   } else if (Array.isArray(left) && !Array.isArray(right)) {
-    return false;
+    return { left, right, what: 'isArray' };
   } else if (Array.isArray(right) && !Array.isArray(left)) {
-    return false;
+    return { left, right, what: 'isArray' };
   } else if (Array.isArray(left) && Array.isArray(right)) {
     if (left.length !== right.length) {
-      return false;
+      return { left, right, what: 'length' };
     }
+    let what;
     for (let index = 0, len = left.length; index < len; index++) {
-      if (!equalDeep(left[index], right[index], cache)) {
-        return false;
+      if ((what = notEqualDeep(left[index], right[index], cache))) {
+        return what;
       }
     }
   } else if (isObject(left) && !isObject(right)) {
-    return false;
+    return { left, right, what: 'isObject' };
   } else if (isObject(right) && !isObject(left)) {
-    return false;
+    return { left, right, what: 'isObject' };
   } else if (isObject(left) && isObject(right)) {
     for (let key in left) {
       if (!left.hasOwnProperty(key) || !left.propertyIsEnumerable(key)) {
         continue;
       }
-      if (typeof right[key] === 'undefined') {
-        return false;
+      if (!right.hasOwnProperty(key)) {
+        return { left, right, what: key };
       }
-      if (!equalDeep(left[key], right[key], cache)) {
-        return false;
+      let what;
+      if ((what = notEqualDeep(left[key], right[key], cache))) {
+        return what;
       }
     }
   } else if (left !== right) {
-    return false;
+    return { left, right, what: '!==' };
   }
-  return true;
+  return false;
 }
 
 /**
@@ -6625,13 +6627,16 @@ const GanttElastic = {
         if (typeof task.parent === 'undefined') {
           this.$set(task, 'parent', null);
         }
-        if (typeof task.duration === 'undefined' && task.hasOwnProperty('end')) {
-          task.duration = dayjs_min_default()(task.end).valueOf() - task.start;
-        } else if (typeof task.duration === 'undefined') {
-          this.$set(task, 'duration', 24 * 60 * 60 * 1000);
+        if (typeof task.startTime === 'undefined') {
+          this.$set(task, 'startTime', dayjs_min_default()(task.start).valueOf());
         }
-        if (typeof task.end === 'undefined' && typeof task.duration === 'number') {
-          task.end = task.start + task.duration;
+        if (typeof task.endTime === 'undefined' && task.hasOwnProperty('end')) {
+          this.$set(task, 'endTime', dayjs_min_default()(task.end).valueOf());
+        } else if (typeof task.endTime === 'undefined' && task.hasOwnProperty('duration')) {
+          this.$set(task, 'endTime', task.startTime + task.duration);
+        }
+        if (typeof task.duration === 'undefined' && task.hasOwnProperty('endTime')) {
+          this.$set(task, 'duration', task.endTime - task.startTime);
         }
         return task;
       });
@@ -7389,7 +7394,6 @@ const GanttElastic = {
       let lastTaskTime = 0;
       for (let index = 0, len = this.state.tasks.length; index < len; index++) {
         let task = this.state.tasks[index];
-        task.startTime = dayjs_min_default()(task.start).valueOf();
         if (task.startTime < firstTaskTime) {
           firstTaskTime = task.startTime;
         }
@@ -7525,10 +7529,13 @@ const GanttElastic = {
    * Watch tasks after gantt instance is created and react when we have new kids on the block
    */
   created() {
+    this.initializeEvents();
+    this.setup();
     this.state.unwatchTasks = this.$watch(
       'tasks',
       tasks => {
-        if (!equalDeep(this.outputTasks, tasks)) {
+        const notEqual = notEqualDeep(tasks, this.outputTasks);
+        if (notEqual) {
           this.setup('tasks');
         }
       },
@@ -7537,7 +7544,8 @@ const GanttElastic = {
     this.state.unwatchOptions = this.$watch(
       'options',
       opts => {
-        if (!equalDeep(this.outputOptions, opts)) {
+        const notEqual = notEqualDeep(opts, this.outputOptions);
+        if (notEqual) {
           this.setup('options');
         }
       },
@@ -7547,7 +7555,8 @@ const GanttElastic = {
     this.state.unwatchOutputTasks = this.$watch(
       'outputTasks',
       tasks => {
-        if (!equalDeep(tasks, this.tasks)) {
+        const notEqual = notEqualDeep(this.tasks, tasks);
+        if (notEqual) {
           this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
         }
       },
@@ -7556,15 +7565,14 @@ const GanttElastic = {
     this.state.unwatchOutputOptions = this.$watch(
       'outputOptions',
       options => {
-        if (!equalDeep(options, this.options)) {
+        const notEqual = notEqualDeep(this.options, options);
+        if (notEqual) {
           this.$emit('options-updated', mergeDeep({}, options));
         }
       },
       { deep: true }
     );
 
-    this.initializeEvents();
-    this.setup();
     this.$root.$emit('gantt-elastic-created', this);
     this.$emit('created', this);
   },
@@ -7636,7 +7644,7 @@ var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(6);
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
 /* concated harmony reexport mergeDeepReactive */__webpack_require__.d(__webpack_exports__, "mergeDeepReactive", function() { return mergeDeepReactive; });
-/* concated harmony reexport equalDeep */__webpack_require__.d(__webpack_exports__, "equalDeep", function() { return equalDeep; });
+/* concated harmony reexport notEqualDeep */__webpack_require__.d(__webpack_exports__, "notEqualDeep", function() { return notEqualDeep; });
 
 
 
