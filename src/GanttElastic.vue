@@ -587,8 +587,8 @@ const GanttElastic = {
         if (typeof task.parent === 'undefined') {
           this.$set(task, 'parent', null);
         }
-        if (typeof task.duration === 'undefined' && typeof task.end === 'number') {
-          task.duration = task.end - task.start;
+        if (typeof task.duration === 'undefined' && task.hasOwnProperty('end')) {
+          task.duration = dayjs(task.end).valueOf() - task.start;
         } else if (typeof task.duration === 'undefined') {
           this.$set(task, 'duration', 24 * 60 * 60 * 1000);
         }
