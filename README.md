@@ -169,7 +169,7 @@ and if you want default header
           parentId: 2,
           dependentOn: [6],
           start: getDate(24 * 2),
-          duration: 4 * 60 * 60 * 1000,
+          end: getDate(24 * 3), // end time in ms instead of duration
           progress: 20,
           type: 'task'
         },
