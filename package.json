@@ -1,6 +1,6 @@
 {
   "name": "gantt-elastic",
-  "version": "0.13.6",
+  "version": "0.13.7",
   "description": "Gantt chart. Elastic javascript gantt chart. Vue gantt. Project manager responsive gantt. jquery gantt.",
   "main": "src/GanttElastic.vue",
   "dependencies": {
