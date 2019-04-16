@@ -15,8 +15,6 @@
 <script>
 import Vue from 'vue';
 import GanttElastic from './GanttElastic.vue';
-Vue.use(Vuex);
-const store = new Vuex.Store({});
 export default {
   name: 'GanttElasticStandalone',
   components: {
@@ -24,7 +22,6 @@ export default {
     'gantt-elastic': GanttElastic,
     'gantt-footer': { template: `<div></div>` }
   },
-  store,
   props: ['header', 'footer'],
   data: {
     tasks: [],
