@@ -6625,8 +6625,13 @@ const GanttElastic = {
         if (typeof task.parent === 'undefined') {
           this.$set(task, 'parent', null);
         }
-        if (typeof task.duration === 'undefined') {
+        if (typeof task.duration === 'undefined' && typeof task.end === 'number') {
+          task.duration = task.end - task.start;
+        } else if (typeof task.duration === 'undefined') {
           this.$set(task, 'duration', 24 * 60 * 60 * 1000);
+        }
+        if (typeof task.end === 'undefined' && typeof task.duration === 'number') {
+          task.end = task.start + task.duration;
         }
         return task;
       });
