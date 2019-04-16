@@ -19,13 +19,14 @@ function expectTimeZoomChange(url) {
     const gantt = window.app.$children[0];
     expect(gantt.state.options.times.timeZoom).to.equal(17);
     cy.get('@timeZoom').should('be.visible');
-    cy.get('@timeZoom')
-      .trigger('mousedown', 'center', { which: 1 })
+    cy.get(timeZoomSelector)
+      .trigger('mousedown', { which: 1 })
       .trigger('mousemove', {
-        clientX: offset.left - 10,
-        clientY: offset.top
+        which: 1,
+        pageX: offset.left - 16,
+        pageY: offset.top
       })
-      .trigger('mouseup', { which: 1, force: true })
+      .trigger('mouseup', { force: true })
       .wait(500)
       .then(() => {
         expect(gantt.state.options.times.timeZoom).to.equal(12);
