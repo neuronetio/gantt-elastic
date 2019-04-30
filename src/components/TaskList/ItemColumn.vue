@@ -9,26 +9,26 @@
 <template>
   <div
     class="gantt-elastic__task-list-item-column"
-    :style="
-      root.style('task-list-item-column', column.style['task-list-item-column'], {
-        width: column.finalWidth + 'px',
-        height: column.height + 'px'
-      })
-    "
+    :style="{
+      ...root.style['task-list-item-column'],
+      ...column.style['task-list-item-column'],
+      width: column.finalWidth + 'px',
+      height: column.height + 'px'
+    }"
   >
     <div
       class="gantt-elastic__task-list-item-value-wrapper"
-      :style="root.style('task-list-item-value-wrapper', column.style['task-list-item-value-wrapper'])"
+      :style="{ ...root.style['task-list-item-value-wrapper'], ...column.style['task-list-item-value-wrapper'] }"
     >
       <slot></slot>
       <div
         class="gantt-elastic__task-list-item-value-container"
-        :style="root.style('task-list-item-value-container', column.style['task-list-item-value-container'])"
+        :style="{ ...root.style['task-list-item-value-container'], ...column.style['task-list-item-value-container'] }"
       >
         <div
           v-if="!html"
           class="gantt-elastic__task-list-item-value"
-          :style="root.style('task-list-item-value', column.style['task-list-item-value'])"
+          :style="{ ...root.style['task-list-item-value'], ...column.style['task-list-item-value'] }"
           @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"
@@ -46,7 +46,7 @@
         <div
           v-else
           class="gantt-elastic__task-list-item-value"
-          :style="root.style('task-list-item-value', column.style['task-list-item-value'])"
+          :style="{ ...root.style['task-list-item-value'], ...column.style['task-list-item-value'] }"
           @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"

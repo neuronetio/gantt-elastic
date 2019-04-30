@@ -7,13 +7,10 @@
  */
 -->
 <template>
-  <div
-    :class="getClassPrefix() + '-wrapper'"
-    :style="root.style(getClassPrefix(false) + '-wrapper', this.type === 'taskList' ? style : {})"
-  >
+  <div :class="getClassPrefix() + '-wrapper'" :style="{ ...root.style[getClassPrefix(false) + '-wrapper'], ...style }">
     <svg
       :class="getClassPrefix() + '-content'"
-      :style="root.style(getClassPrefix(false) + '-content')"
+      :style="{ ...root.style[getClassPrefix(false) + '-content'] }"
       :width="options.size"
       :height="options.size"
       v-if="allChildren.length"
@@ -21,7 +18,7 @@
     >
       <rect
         :class="getClassPrefix() + '-border'"
-        :style="root.style(getClassPrefix(false) + '-border', borderStyle)"
+        :style="{ ...root.style[getClassPrefix(false) + '-border'], borderStyle }"
         :x="border"
         :y="border"
         :width="options.size - border * 2"
@@ -31,7 +28,7 @@
       ></rect>
       <line
         :class="getClassPrefix() + '-line'"
-        :style="root.style(getClassPrefix(false) + '-line')"
+        :style="{ ...root.style[getClassPrefix(false) + '-line'] }"
         v-if="allChildren.length"
         :x1="lineOffset"
         :y1="options.size / 2"
@@ -40,7 +37,7 @@
       ></line>
       <line
         :class="getClassPrefix() + '-line'"
-        :style="root.style(getClassPrefix(false) + '-line')"
+        :style="{ ...root.style[getClassPrefix(false) + '-line'] }"
         v-if="collapsed"
         :x1="options.size / 2"
         :y1="lineOffset"
@@ -68,6 +65,9 @@ export default {
   },
   computed: {
     style() {
+      if (this.type !== 'taskList') {
+        return {};
+      }
       const margin = this.root.state.options.taskList.expander.margin;
       const padding = this.tasks[0].parents.length * this.root.state.options.taskList.expander.padding;
       return {

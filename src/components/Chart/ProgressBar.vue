@@ -9,7 +9,7 @@
 <template>
   <g
     class="gantt-elastic__chart-row-progress-bar-wrapper"
-    :style="root.style('chart-row-progress-bar-wrapper', task.style['chart-row-progress-bar-wrapper'])"
+    :style="{ ...root.style['chart-row-progress-bar-wrapper'], ...task.style['chart-row-progress-bar-wrapper'] }"
   >
     <defs>
       <pattern
@@ -21,7 +21,7 @@
       >
         <line
           class="chart-row-progress-bar-line"
-          :style="root.style('chart-row-progress-bar-line', task.style['chart-row-progress-bar-line'])"
+          :style="{ ...root.style['chart-row-progress-bar-line'], ...task.style['chart-row-progress-bar-line'] }"
           x1="0"
           y1="0"
           x2="0"
@@ -32,7 +32,7 @@
     <rect
       v-if="root.state.options.chart.progress.bar"
       class="gantt-elastic__chart-row-progress-bar-solid"
-      :style="root.style('chart-row-progress-bar-solid', task.style['chart-row-progress-bar-solid'])"
+      :style="{ ...root.style['chart-row-progress-bar-solid'], ...task.style['chart-row-progress-bar-solid'] }"
       x="0"
       y="0"
       :width="getProgressWidth"
@@ -40,7 +40,7 @@
     <g v-if="root.state.options.chart.progress.pattern">
       <rect
         class="gantt-elastic__chart-row-progress-bar-pattern"
-        :style="root.style('chart-row-progress-bar-pattern', task.style['chart-row-progress-bar-pattern'])"
+        :style="{ ...root.style['chart-row-progress-bar-pattern'], ...task.style['chart-row-progress-bar-pattern'] }"
         :x="getProgressWidth"
         y="0"
         :width="100 - task.progress + '%'"
@@ -48,9 +48,11 @@
       ></rect>
       <path
         class="gantt-elastic__chart-row-progress-bar-outline"
-        :style="
-          root.style('chart-row-progress-bar-outline', task.style['base'], task.style['chart-row-progress-bar-outline'])
-        "
+        :style="{
+          ...root.style['chart-row-progress-bar-outline'],
+          ...task.style['base'],
+          ...task.style['chart-row-progress-bar-outline']
+        }"
         :d="getLinePoints"
       ></path>
     </g>

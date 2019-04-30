@@ -9,7 +9,7 @@
 <template>
   <svg
     class="gantt-elastic__grid-lines-wrapper"
-    :style="root.style('grid-lines-wrapper')"
+    :style="{ ...root.style['grid-lines-wrapper'] }"
     ref="chart"
     x="0"
     y="0"
@@ -17,10 +17,10 @@
     :height="root.state.options.allVisibleTasksHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g class="gantt-elastic__grid-lines" :style="root.style('grid-lines')">
+    <g class="gantt-elastic__grid-lines" :style="{ ...root.style['grid-lines'] }">
       <line
         class="gantt-elastic__grid-line-horizontal"
-        :style="root.style('grid-line-horizontal')"
+        :style="{ ...root.style['grid-line-horizontal'] }"
         v-for="line in horizontalLines"
         :key="line.key"
         :x1="line.x1"
@@ -30,7 +30,7 @@
       ></line>
       <line
         class="gantt-elastic__grid-line-vertical"
-        :style="root.style('grid-line-vertical')"
+        :style="{ ...root.style['grid-line-vertical'] }"
         v-for="line in verticalLines"
         :key="line.key"
         :x1="line.x1"
@@ -40,7 +40,7 @@
       ></line>
       <line
         class="gantt-elastic__grid-line-time"
-        :style="root.style('grid-line-time')"
+        :style="{ ...root.style['grid-line-time'] }"
         :x1="timeLinePosition.x"
         :y1="timeLinePosition.y1"
         :x2="timeLinePosition.x"
@@ -103,7 +103,7 @@ export default {
             x2: step.offset.px,
             y2:
               state.tasks.length * (state.options.row.height + state.options.chart.grid.horizontal.gap * 2) +
-              this.root.style('grid-line-vertical')['stroke-width']
+              this.root.style['grid-line-vertical']['stroke-width']
           });
         }
       });
@@ -122,7 +122,7 @@ export default {
       for (let index = 0, len = tasks.length; index <= len; index++) {
         const y =
           index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
-          this.root.style('grid-line-vertical')['stroke-width'] / 2;
+          this.root.style['grid-line-vertical']['stroke-width'] / 2;
         lines.push({
           key: 'hl' + index,
           x1: 0,

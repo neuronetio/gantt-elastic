@@ -9,13 +9,19 @@
 <template>
   <g
     class="gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper"
-    :style="
-      root.style('chart-row-bar-wrapper', root.style('chart-row-project-wrapper'), task.style['chart-row-bar-wrapper'])
-    "
+    :style="{
+      ...root.style['chart-row-bar-wrapper'],
+      ...root.style['chart-row-project-wrapper'],
+      ...task.style['chart-row-bar-wrapper']
+    }"
   >
     <foreignObject
       class="gantt-elastic__chart-expander gantt-elastic__chart-expander--project"
-      :style="root.style('chart-expander', 'chart-expander--project', task.style['chart-expander'])"
+      :style="{
+        ...root.style['chart-expander'],
+        ...root.style['chart-expander--project'],
+        ...task.style['chart-expander']
+      }"
       :x="task.x - root.state.options.chart.expander.offset - root.state.options.chart.expander.size"
       :y="task.y + (root.state.options.row.height - root.state.options.chart.expander.size) / 2"
       :width="root.state.options.chart.expander.size"
@@ -26,7 +32,7 @@
     </foreignObject>
     <svg
       class="gantt-elastic__chart-row-bar gantt-elastic__chart-row-project"
-      :style="root.style('chart-row-bar', 'chart-row-project', task.style['chart-row-bar'])"
+      :style="{ ...root.style['chart-row-bar'], ...root.style['chart-row-project'], ...task.style['chart-row-bar'] }"
       :x="task.x"
       :y="task.y"
       :width="task.width"
@@ -52,14 +58,12 @@
       </defs>
       <path
         class="gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon"
-        :style="
-          root.style(
-            'chart-row-bar-polygon',
-            'chart-row-project-polygon',
-            task.style['base'],
-            task.style['chart-row-bar-polygon']
-          )
-        "
+        :style="{
+          ...root.style['chart-row-bar-polygon'],
+          ...root.style['chart-row-project-polygon'],
+          ...task.style['base'],
+          ...task.style['chart-row-bar-polygon']
+        }"
         :d="getPoints"
       ></path>
       <progress-bar :task="task" :clip-path="'url(#' + clipPathId + ')'"></progress-bar>

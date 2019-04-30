@@ -10,7 +10,7 @@
 <template>
   <g
     class="gantt-elastic__chart-days-highlight-container"
-    :style="root.style('chart-days-highlight-container')"
+    :style="{ ...root.style['chart-days-highlight-container'] }"
     v-if="showWorkingDays"
   >
     <rect
@@ -21,7 +21,7 @@
       y="0"
       :width="day.width.px"
       height="100%"
-      :style="root.style('chart-days-highlight-rect')"
+      :style="{ ...root.style['chart-days-highlight-rect'] }"
     ></rect>
   </g>
 </template>

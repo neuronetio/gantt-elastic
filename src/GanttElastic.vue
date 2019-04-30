@@ -449,6 +449,8 @@ export function notEqualDeep(left, right, cache = []) {
   return false;
 }
 
+const styleCache = {};
+
 /**
  * GanttElastic
  * Main vue component
@@ -484,6 +486,8 @@ const GanttElastic = {
         tasksById: {},
         taskTree: {},
         ctx,
+        emitTasksChanges: true, // some operations may pause emitting changes to parent component
+        emitOptionsChanges: true, // some operations may pause emitting changes to parent component
         resizeObserver: null,
         unwatchTasks: null,
         unwatchOptions: null,
@@ -517,26 +521,6 @@ const GanttElastic = {
       const height = noScroll - withScroll;
       this.state.options.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
       return (this.state.options.scrollBarHeight = height);
-    },
-
-    /**
-     * Get style for specified class
-     *
-     * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
-     * @returns {object}
-     */
-    style(...mergeWith) {
-      let merged = this.state.options.style['*'];
-      mergeWith.forEach(objOrClassName => {
-        if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.options.style[objOrClassName]);
-        } else if (typeof objOrClassName === 'object') {
-          merged = this.mergeDeepReactive(this, {}, merged, objOrClassName);
-        } else if (typeof objOrClassName === 'function') {
-          merged = Object.assign({}, objOrClassName());
-        }
-      });
-      return merged;
     },
 
     /**
@@ -759,7 +743,7 @@ const GanttElastic = {
         percentage += column.widthFromPercentage;
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
         final += column.finalWidth;
-        column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width'];
+        column.height = this.getTaskHeight() - this.style['grid-line-horizontal']['stroke-width'];
       });
       this.state.options.taskList.widthFromPercentage = percentage;
       this.state.options.taskList.finalWidth = final;
@@ -909,7 +893,7 @@ const GanttElastic = {
         return (
           this.state.options.row.height +
           this.state.options.chart.grid.horizontal.gap * 2 +
-          this.style('grid-line-horizontal')['stroke-width']
+          this.style['grid-line-horizontal']['stroke-width']
         );
       }
       return this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2;
@@ -945,7 +929,7 @@ const GanttElastic = {
      * @returns {int} milliseconds
      */
     pixelOffsetXToTime(pixelOffsetX) {
-      let offset = pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2;
+      let offset = pixelOffsetX + this.style['grid-line-vertical']['stroke-width'] / 2;
       return offset * this.state.options.times.timePerPixel + this.state.options.times.firstTime;
     },
 
@@ -1149,7 +1133,7 @@ const GanttElastic = {
       this.state.options.times.totalViewDurationPx =
         this.state.options.times.totalViewDurationMs / this.state.options.times.timePerPixel;
       this.state.options.width =
-        this.state.options.times.totalViewDurationPx + this.style('grid-line-vertical')['stroke-width'];
+        this.state.options.times.totalViewDurationPx + this.style['grid-line-vertical']['stroke-width'];
     },
 
     /**
@@ -1231,7 +1215,7 @@ const GanttElastic = {
      * Compute width of calendar hours column widths basing on text widths
      */
     computeHourWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--hour');
+      const style = this.style[('calendar-row-text', 'calendar-row-text--hour')];
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
       let maxWidths = this.state.options.calendar.hour.maxWidths;
@@ -1262,7 +1246,7 @@ const GanttElastic = {
      * Compute calendar days column widths basing on text widths
      */
     computeDayWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--day');
+      const style = this.style[('calendar-row-text', 'calendar-row-text--day')];
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs(this.state.options.times.steps[0].time);
       let maxWidths = this.state.options.calendar.day.maxWidths;
@@ -1320,7 +1304,7 @@ const GanttElastic = {
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--month');
+      const style = this.style[('calendar-row-text', 'calendar-row-text--month')];
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let maxWidths = this.state.options.calendar.month.maxWidths;
       this.state.options.calendar.month.widths = [];
@@ -1451,7 +1435,7 @@ const GanttElastic = {
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
         task.width =
-          task.duration / this.state.options.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
+          task.duration / this.state.options.times.timePerPixel - this.style['grid-line-vertical']['stroke-width'];
         if (task.width < 0) {
           task.width = 0;
         }
@@ -1462,6 +1446,13 @@ const GanttElastic = {
           this.state.options.chart.grid.horizontal.gap;
       }
       return visibleTasks;
+    },
+
+    /**
+     * Style shortcut
+     */
+    style() {
+      return this.state.options.style;
     },
 
     /**
@@ -1518,8 +1509,8 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual) {
-          this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
+        if (notEqual && this.state.emitTasksChanges) {
+          this.$emit('tasks-updated', tasks);
         }
       },
       { deep: true }
@@ -1528,8 +1519,8 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual) {
-          this.$emit('options-updated', mergeDeep({}, options));
+        if (notEqual && this.state.emitOptionsChanges) {
+          this.$emit('options-updated', options);
         }
       },
       { deep: true }

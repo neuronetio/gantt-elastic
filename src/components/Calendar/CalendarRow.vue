@@ -9,28 +9,32 @@
 <template>
   <div
     :class="'gantt-elastic__calendar-row gantt-elastic__calendar-row--' + which"
-    :style="root.style('calendar-row', 'calendar-row--' + which)"
+    :style="{ ...root.style['calendar-row'], ...root.style['calendar-row--' + which] }"
   >
     <div
       v-for="item in items"
       :key="item.key"
       :class="'gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--' + which"
-      :style="root.style('calendar-row-rect', 'calendar-row-rect--' + which)"
+      :style="{ ...root.style['calendar-row-rect'], ...root.style['calendar-row-rect--' + which] }"
     >
       <div
         :class="'gantt-elastic__calendar-row-rect-child gantt-elastic__calendar-row-rect-child-' + which"
-        :style="
-          root.style('calendar-row-rect-child', 'calendar-row-rect-child-' + which, {
-            width: child.width + 'px',
-            height: child.height + 'px'
-          })
-        "
+        :style="{
+          ...root.style['calendar-row-rect-child'],
+          ...root.style['calendar-row-rect-child-' + which],
+          width: child.width + 'px',
+          height: child.height + 'px'
+        }"
         v-for="child in item.children"
         :key="child.key"
       >
         <div
           :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
-          :style="root.style('calendar-row-text', 'calendar-row-text--' + which, { left: getTextX(child) + 'px' })"
+          :style="{
+            ...root.style['calendar-row-text'],
+            ...root.style['calendar-row-text--' + which],
+            left: getTextX(child) + 'px'
+          }"
         >
           {{ child.label }}
         </div>

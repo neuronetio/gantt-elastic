@@ -10,15 +10,15 @@
   <div
     class="gantt-elastic__task-list-wrapper"
     ref="taskListWrapper"
-    :style="root.style('task-list-wrapper', { width: '100%', height: '100%' })"
+    :style="{ ...root.style['task-list-wrapper'], width: '100%', height: '100%' }"
     v-show="root.state.options.taskList.display"
   >
-    <div class="gantt-elastic__task-list" :style="root.style('task-list')" ref="taskList">
+    <div class="gantt-elastic__task-list" :style="{ ...root.style['task-list'] }" ref="taskList">
       <task-list-header></task-list-header>
       <div
         class="gantt-elastic__task-list-items"
         ref="taskListItems"
-        :style="root.style('task-list-items', { height: root.state.options.rowsHeight + 'px' })"
+        :style="{ ...root.style['task-list-items'], height: root.state.options.rowsHeight + 'px' }"
       >
         <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task"></task-list-item>
       </div>

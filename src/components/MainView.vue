@@ -7,43 +7,41 @@
  */
 -->
 <template>
-  <div class="gantt-elastic__main-view" :style="root.style('main-view')">
+  <div class="gantt-elastic__main-view" :style="{ ...root.style['main-view'] }">
     <div
       class="gantt-elastic__main-container-wrapper"
-      :style="root.style('main-container-wrapper', { height: root.state.options.height + 'px' })"
+      :style="{ ...root.style['main-container-wrapper'], height: root.state.options.height + 'px' }"
     >
       <div
         class="gantt-elastic__main-container"
-        :style="
-          root.style('main-container', {
-            width: root.state.options.clientWidth + 'px',
-            height: root.state.options.height + 'px'
-          })
-        "
+        :style="{
+          ...root.style['main-container'],
+          width: root.state.options.clientWidth + 'px',
+          height: root.state.options.height + 'px'
+        }"
         ref="mainView"
       >
         <div
           class="gantt-elastic__container"
-          :style="root.style('container')"
+          :style="{ ...root.style['container'] }"
           @mousemove="mouseMove"
           @mouseup="mouseUp"
         >
           <div
             ref="taskList"
             class="gantt-elastic__task-list-container"
-            :style="
-              root.style('task-list-container', {
-                width: root.state.options.taskList.finalWidth + 'px',
-                height: root.state.options.height + 'px'
-              })
-            "
+            :style="{
+              ...root.style['task-list-container'],
+              width: root.state.options.taskList.finalWidth + 'px',
+              height: root.state.options.height + 'px'
+            }"
             v-show="root.state.options.taskList.display"
           >
             <task-list></task-list>
           </div>
           <div
             class="gantt-elastic__main-view-container"
-            :style="root.style('main-view-container')"
+            :style="{ ...root.style['main-view-container'] }"
             ref="chartContainer"
             @mousedown="chartMouseDown"
             @touchstart="chartMouseDown"
@@ -59,7 +57,11 @@
       </div>
       <div
         class="gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical"
-        :style="root.style('chart-scroll-container', 'chart-scroll-container--vertical', verticalStyle)"
+        :style="{
+          ...root.style['chart-scroll-container'],
+          ...root.style['chart-scroll-container--vertical'],
+          verticalStyle
+        }"
         ref="chartScrollContainerVertical"
         @scroll="onVerticalScroll"
       >
@@ -71,7 +73,11 @@
     </div>
     <div
       class="gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal"
-      :style="root.style('chart-scroll-container', 'chart-scroll-container--horizontal', { marginLeft: getMarginLeft })"
+      :style="{
+        ...root.style['chart-scroll-container'],
+        ...root.style['chart-scroll-container--horizontal'],
+        marginLeft: getMarginLeft
+      }"
       @scroll="onHorizontalScroll"
       ref="chartScrollContainerHorizontal"
     >

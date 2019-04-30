@@ -13,12 +13,12 @@
     width="100%"
     height="100%"
     class="gantt-elastic__chart-dependency-lines-container"
-    :style="root.style('chart-dependency-lines-container')"
+    :style="{ ...root.style['chart-dependency-lines-container'] }"
   >
     <g v-for="task in dependencyTasks" :key="task.id" :task="task">
       <path
         class="gantt-elastic__chart-dependency-lines-path"
-        :style="root.style('chart-dependency-lines-path', task.style['chart-dependency-lines-path'])"
+        :style="{ ...root.style['chart-dependency-lines-path'], ...task.style['chart-dependency-lines-path'] }"
         v-for="dependencyLine in task.dependencyLines"
         :key="dependencyLine.id"
         :task="task"
