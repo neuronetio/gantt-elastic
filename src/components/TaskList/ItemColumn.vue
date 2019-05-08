@@ -7,28 +7,14 @@
  */
 -->
 <template>
-  <div
-    class="gantt-elastic__task-list-item-column"
-    :style="{
-      ...root.style['task-list-item-column'],
-      ...column.style['task-list-item-column'],
-      width: column.finalWidth + 'px',
-      height: column.height + 'px'
-    }"
-  >
-    <div
-      class="gantt-elastic__task-list-item-value-wrapper"
-      :style="{ ...root.style['task-list-item-value-wrapper'], ...column.style['task-list-item-value-wrapper'] }"
-    >
+  <div class="gantt-elastic__task-list-item-column" :style="itemColumnStyle">
+    <div class="gantt-elastic__task-list-item-value-wrapper" :style="wrapperStyle">
       <slot></slot>
-      <div
-        class="gantt-elastic__task-list-item-value-container"
-        :style="{ ...root.style['task-list-item-value-container'], ...column.style['task-list-item-value-container'] }"
-      >
+      <div class="gantt-elastic__task-list-item-value-container" :style="containerStyle">
         <div
           v-if="!html"
           class="gantt-elastic__task-list-item-value"
-          :style="{ ...root.style['task-list-item-value'], ...column.style['task-list-item-value'] }"
+          :style="valueStyle"
           @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"
@@ -46,7 +32,7 @@
         <div
           v-else
           class="gantt-elastic__task-list-item-value"
-          :style="{ ...root.style['task-list-item-value'], ...column.style['task-list-item-value'] }"
+          :style="valueStyle"
           @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"
@@ -110,6 +96,33 @@ export default {
         return this.column.value(this.task);
       }
       return this.task[this.column.value];
+    },
+
+    itemColumnStyle() {
+      return {
+        ...this.root.style['task-list-item-column'],
+        ...this.column.style['task-list-item-column'],
+        width: this.column.finalWidth + 'px',
+        height: this.column.height + 'px'
+      };
+    },
+
+    wrapperStyle() {
+      return {
+        ...this.root.style['task-list-item-value-wrapper'],
+        ...this.column.style['task-list-item-value-wrapper']
+      };
+    },
+
+    containerStyle() {
+      return {
+        ...this.root.style['task-list-item-value-container'],
+        ...this.column.style['task-list-item-value-container']
+      };
+    },
+
+    valueStyle() {
+      return { ...this.root.style['task-list-item-value'], ...this.column.style['task-list-item-value'] };
     }
   }
 };

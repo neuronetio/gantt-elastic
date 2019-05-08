@@ -97,13 +97,19 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       background: 'transparent',
       display: 'flex'
     },
+    'calendar-row-rect--month': {},
+    'calendar-row-rect--day': {},
+    'calendar-row-rect--hour': {},
     'calendar-row-rect-child': {
-      display: 'inline-block',
+      display: 'block',
       'border-right-width': '1px', // Calendar
       'border-right-color': '#dadada',
       'border-right-style': 'solid',
       position: 'relative'
     },
+    'calendar-row-rect-child--month': {},
+    'calendar-row-rect-child--day': { 'text-align': 'center' },
+    'calendar-row-rect-child--hour': { 'text-align': 'center' },
     'calendar-row-text': {
       'font-family': fontFamily, // GanttElastic
       'font-size': fontSize, //GanttElastic
@@ -111,11 +117,8 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       display: 'inline-block',
       position: 'relative'
     },
-    'calendar-row-rect--month': {},
     'calendar-row-text--month': {},
-    'calendar-row-rect--day': {},
     'calendar-row-text--day': {},
-    'calendar-row-rect--hour': {},
     'calendar-row-text--hour': {},
     'task-list-wrapper': {},
     'task-list': { background: 'transparent', 'border-color': '#eee' },

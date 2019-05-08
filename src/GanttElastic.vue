@@ -1215,7 +1215,7 @@ const GanttElastic = {
      * Compute width of calendar hours column widths basing on text widths
      */
     computeHourWidths() {
-      const style = this.style[('calendar-row-text', 'calendar-row-text--hour')];
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--hour'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
       let maxWidths = this.state.options.calendar.hour.maxWidths;
@@ -1246,7 +1246,7 @@ const GanttElastic = {
      * Compute calendar days column widths basing on text widths
      */
     computeDayWidths() {
-      const style = this.style[('calendar-row-text', 'calendar-row-text--day')];
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--day'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs(this.state.options.times.steps[0].time);
       let maxWidths = this.state.options.calendar.day.maxWidths;
@@ -1304,7 +1304,7 @@ const GanttElastic = {
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
-      const style = this.style[('calendar-row-text', 'calendar-row-text--month')];
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--month'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let maxWidths = this.state.options.calendar.month.maxWidths;
       this.state.options.calendar.month.widths = [];
@@ -1591,5 +1591,42 @@ export default GanttElastic;
 </script>
 
 <style>
-@import url('./styles/ganttElastic.css');
+.gantt-elastic * {
+  box-sizing: border-box;
+}
+.gantt-elastic__main-view svg {
+  display: block;
+}
+.gantt-elastic__grid-horizontal-line,
+.gantt-elastic__grid-vertical-line {
+  stroke: #a0a0a0;
+  stroke-width: 1;
+}
+foreignObject > * {
+  margin: 0px;
+}
+.gantt-elastic .p-2 {
+  padding: 10rem;
+}
+.gantt-elastic__main-view-main-container,
+.gantt-elastic__main-view-container {
+  overflow: hidden;
+  max-width: 100%;
+}
+.gantt-elastic__task-list-header-column:last-of-type {
+  border-right: 1px solid #00000050;
+}
+.gantt-elastic__task-list-item:last-of-type {
+  border-bottom: 1px solid #00000050;
+}
+.gantt-elastic__task-list-item-value-wrapper:hover {
+  overflow: visible !important;
+}
+.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {
+  position: relative;
+  overflow: visible !important;
+}
+.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {
+  position: absolute;
+}
 </style>
