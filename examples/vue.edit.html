@@ -20,7 +20,7 @@
     <div style="width:100%;height:100%">
       <div id="app" v-if="!destroy">
         <gantt-elastic :tasks="tasks" :options="options">
-          <gantt-header slot="header"></gantt-header>
+          <!--<gantt-header slot="header"></gantt-header>-->
           <gantt-footer slot="footer"></gantt-footer>
         </gantt-elastic>
       </div>
@@ -375,7 +375,7 @@
       // create instance
       const app = new Vue({
         components: {
-          'gantt-header': Header,
+          //'gantt-header': Header,
           'gantt-elastic': GanttElastic,
           'gantt-footer': {
             template: `<span>this is a footer</span>`
