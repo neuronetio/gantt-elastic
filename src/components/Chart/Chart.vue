@@ -111,7 +111,7 @@ export default {
      * @returns {string}
      */
     getViewBox() {
-      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.options.allVisibleTasksHeight}`;
+      return `0 0 ${this.root.state.options.width} ${this.root.state.options.allVisibleTasksHeight}`;
     }
   }
 };

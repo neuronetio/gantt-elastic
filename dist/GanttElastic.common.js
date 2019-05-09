@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -99,11 +99,11 @@ module.exports =
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(7);
+var content = __webpack_require__(6);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(10).default
+var add = __webpack_require__(9).default
 var update = add("c3e5085c", content, false, {});
 // Hot Module Replacement
 if(false) {}
@@ -112,92 +112,10 @@ if(false) {}
 /* 2 */
 /***/ (function(module, exports) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 module.exports = require("Vue");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1130,10 +1048,10 @@ var index = (function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1159,7 +1077,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1169,35 +1087,103 @@ module.exports = g;
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GanttElastic_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(7)(false);
 // imports
-exports.i(__webpack_require__(8), "");
+
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "\n.gantt-elastic * {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n", ""]);
 
 // exports
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
 
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".gantt-elastic__main-view svg{\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line, .gantt-elastic__grid-vertical-line{\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > *{\n  margin: 0px;\n}\n.gantt-elastic .p-2{\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container , .gantt-elastic__main-view-container{\n  overflow: hidden;\n  max-width:100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type{\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type{\n  border-bottom:1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container{\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value{\n  position: absolute;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1228,7 +1214,7 @@ render._withStripped = true
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=template&id=02c6304c&
 
 // EXTERNAL MODULE: external "Vue"
-var external_Vue_ = __webpack_require__(3);
+var external_Vue_ = __webpack_require__(2);
 var external_Vue_default = /*#__PURE__*/__webpack_require__.n(external_Vue_);
 
 // EXTERNAL MODULE: ./node_modules/dayjs/dayjs.min.js
@@ -1244,14 +1230,14 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__main-view",
-      style: _vm.root.style("main-view")
+      style: Object.assign({}, _vm.root.style["main-view"])
     },
     [
       _c(
         "div",
         {
           staticClass: "gantt-elastic__main-container-wrapper",
-          style: _vm.root.style("main-container-wrapper", {
+          style: Object.assign({}, _vm.root.style["main-container-wrapper"], {
             height: _vm.root.state.options.height + "px"
           })
         },
@@ -1261,7 +1247,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
             {
               ref: "mainView",
               staticClass: "gantt-elastic__main-container",
-              style: _vm.root.style("main-container", {
+              style: Object.assign({}, _vm.root.style["main-container"], {
                 width: _vm.root.state.options.clientWidth + "px",
                 height: _vm.root.state.options.height + "px"
               })
@@ -1271,7 +1257,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                 "div",
                 {
                   staticClass: "gantt-elastic__container",
-                  style: _vm.root.style("container"),
+                  style: Object.assign({}, _vm.root.style["container"]),
                   on: { mousemove: _vm.mouseMove, mouseup: _vm.mouseUp }
                 },
                 [
@@ -1288,11 +1274,15 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                       ],
                       ref: "taskList",
                       staticClass: "gantt-elastic__task-list-container",
-                      style: _vm.root.style("task-list-container", {
-                        width:
-                          _vm.root.state.options.taskList.finalWidth + "px",
-                        height: _vm.root.state.options.height + "px"
-                      })
+                      style: Object.assign(
+                        {},
+                        _vm.root.style["task-list-container"],
+                        {
+                          width:
+                            _vm.root.state.options.taskList.finalWidth + "px",
+                          height: _vm.root.state.options.height + "px"
+                        }
+                      )
                     },
                     [_c("task-list")],
                     1
@@ -1303,7 +1293,10 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                     {
                       ref: "chartContainer",
                       staticClass: "gantt-elastic__main-view-container",
-                      style: _vm.root.style("main-view-container"),
+                      style: Object.assign(
+                        {},
+                        _vm.root.style["main-view-container"]
+                      ),
                       on: {
                         mousedown: _vm.chartMouseDown,
                         touchstart: _vm.chartMouseDown,
@@ -1337,10 +1330,11 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
               ref: "chartScrollContainerVertical",
               staticClass:
                 "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--vertical",
-              style: _vm.root.style(
-                "chart-scroll-container",
-                "chart-scroll-container--vertical",
-                _vm.verticalStyle
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-scroll-container"],
+                _vm.root.style["chart-scroll-container--vertical"],
+                { verticalStyle: _vm.verticalStyle }
               ),
               on: { scroll: _vm.onVerticalScroll }
             },
@@ -1363,9 +1357,10 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
           ref: "chartScrollContainerHorizontal",
           staticClass:
             "gantt-elastic__chart-scroll-container gantt-elastic__chart-scroll-container--horizontal",
-          style: _vm.root.style(
-            "chart-scroll-container",
-            "chart-scroll-container--horizontal",
+          style: Object.assign(
+            {},
+            _vm.root.style["chart-scroll-container"],
+            _vm.root.style["chart-scroll-container--horizontal"],
             { marginLeft: _vm.getMarginLeft }
           ),
           on: { scroll: _vm.onHorizontalScroll }
@@ -1404,7 +1399,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
       ],
       ref: "taskListWrapper",
       staticClass: "gantt-elastic__task-list-wrapper",
-      style: _vm.root.style("task-list-wrapper", {
+      style: Object.assign({}, _vm.root.style["task-list-wrapper"], {
         width: "100%",
         height: "100%"
       })
@@ -1415,7 +1410,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
         {
           ref: "taskList",
           staticClass: "gantt-elastic__task-list",
-          style: _vm.root.style("task-list")
+          style: Object.assign({}, _vm.root.style["task-list"])
         },
         [
           _c("task-list-header"),
@@ -1425,7 +1420,7 @@ var TaskListvue_type_template_id_6e11f12f_render = function() {
             {
               ref: "taskListItems",
               staticClass: "gantt-elastic__task-list-items",
-              style: _vm.root.style("task-list-items", {
+              style: Object.assign({}, _vm.root.style["task-list-items"], {
                 height: _vm.root.state.options.rowsHeight + "px"
               })
             },
@@ -1458,7 +1453,7 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__task-list-header",
-      style: _vm.root.style("task-list-header", {
+      style: Object.assign({}, _vm.root.style["task-list-header"], {
         height: _vm.root.state.options.calendar.height + "px",
         "margin-bottom": _vm.root.state.options.calendar.gap + "px"
       })
@@ -1469,8 +1464,9 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
         {
           key: column._id,
           staticClass: "gantt-elastic__task-list-header-column",
-          style: _vm.root.style(
-            "task-list-header-column",
+          style: Object.assign(
+            {},
+            _vm.root.style["task-list-header-column"],
             column.style["task-list-header-column"],
             _vm.getStyle(column)
           )
@@ -1489,8 +1485,9 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
             "div",
             {
               staticClass: "gantt-elastic__task-list-header-label",
-              style: _vm.root.style(
-                "task-list-header-label",
+              style: Object.assign(
+                {},
+                _vm.root.style["task-list-header-label"],
                 column.style["task-list-header-label"]
               ),
               attrs: { column: column },
@@ -1503,8 +1500,9 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
             "div",
             {
               staticClass: "gantt-elastic__task-list-header-resizer-wrapper",
-              style: _vm.root.style(
-                "task-list-header-resizer-wrapper",
+              style: Object.assign(
+                {},
+                _vm.root.style["task-list-header-resizer-wrapper"],
                 column.style["task-list-header-resizer-wrapper"]
               ),
               attrs: { column: column },
@@ -1519,32 +1517,36 @@ var TaskListHeadervue_type_template_id_aefdd7c8_render = function() {
                 "div",
                 {
                   staticClass: "gantt-elastic__task-list-header-resizer",
-                  style: _vm.root.style(
-                    "task-list-header-resizer",
+                  style: Object.assign(
+                    {},
+                    _vm.root.style["task-list-header-resizer"],
                     column.style["task-list-header-resizer"]
                   )
                 },
                 [
                   _c("div", {
                     staticClass: "gantt-elastic__task-list-header-resizer-dot",
-                    style: _vm.root.style(
-                      "task-list-header-resizer-dot",
+                    style: Object.assign(
+                      {},
+                      _vm.root.style["task-list-header-resizer-dot"],
                       column.style["task-list-header-resizer-dot"]
                     )
                   }),
                   _vm._v(" "),
                   _c("div", {
                     staticClass: "gantt-elastic__task-list-header-resizer-dot",
-                    style: _vm.root.style(
-                      "task-list-header-resizer-dot",
+                    style: Object.assign(
+                      {},
+                      _vm.root.style["task-list-header-resizer-dot"],
                       column.style["task-list-header-resizer-dot"]
                     )
                   }),
                   _vm._v(" "),
                   _c("div", {
                     staticClass: "gantt-elastic__task-list-header-resizer-dot",
-                    style: _vm.root.style(
-                      "task-list-header-resizer-dot",
+                    style: Object.assign(
+                      {},
+                      _vm.root.style["task-list-header-resizer-dot"],
                       column.style["task-list-header-resizer-dot"]
                     )
                   })
@@ -1574,9 +1576,10 @@ var Expandervue_type_template_id_09a21177_render = function() {
     "div",
     {
       class: _vm.getClassPrefix() + "-wrapper",
-      style: _vm.root.style(
-        _vm.getClassPrefix(false) + "-wrapper",
-        this.type === "taskList" ? _vm.style : {}
+      style: Object.assign(
+        {},
+        _vm.root.style[_vm.getClassPrefix(false) + "-wrapper"],
+        _vm.style
       )
     },
     [
@@ -1585,16 +1588,20 @@ var Expandervue_type_template_id_09a21177_render = function() {
             "svg",
             {
               class: _vm.getClassPrefix() + "-content",
-              style: _vm.root.style(_vm.getClassPrefix(false) + "-content"),
+              style: Object.assign(
+                {},
+                _vm.root.style[_vm.getClassPrefix(false) + "-content"]
+              ),
               attrs: { width: _vm.options.size, height: _vm.options.size },
               on: { click: _vm.toggle }
             },
             [
               _c("rect", {
                 class: _vm.getClassPrefix() + "-border",
-                style: _vm.root.style(
-                  _vm.getClassPrefix(false) + "-border",
-                  _vm.borderStyle
+                style: Object.assign(
+                  {},
+                  _vm.root.style[_vm.getClassPrefix(false) + "-border"],
+                  { borderStyle: _vm.borderStyle }
                 ),
                 attrs: {
                   x: _vm.border,
@@ -1609,7 +1616,10 @@ var Expandervue_type_template_id_09a21177_render = function() {
               _vm.allChildren.length
                 ? _c("line", {
                     class: _vm.getClassPrefix() + "-line",
-                    style: _vm.root.style(_vm.getClassPrefix(false) + "-line"),
+                    style: Object.assign(
+                      {},
+                      _vm.root.style[_vm.getClassPrefix(false) + "-line"]
+                    ),
                     attrs: {
                       x1: _vm.lineOffset,
                       y1: _vm.options.size / 2,
@@ -1622,7 +1632,10 @@ var Expandervue_type_template_id_09a21177_render = function() {
               _vm.collapsed
                 ? _c("line", {
                     class: _vm.getClassPrefix() + "-line",
-                    style: _vm.root.style(_vm.getClassPrefix(false) + "-line"),
+                    style: Object.assign(
+                      {},
+                      _vm.root.style[_vm.getClassPrefix(false) + "-line"]
+                    ),
                     attrs: {
                       x1: _vm.options.size / 2,
                       y1: _vm.lineOffset,
@@ -1694,9 +1707,6 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ var Expandervue_type_script_lang_js_ = ({
   name: 'Expander',
@@ -1714,6 +1724,9 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
   },
   computed: {
     style() {
+      if (this.type !== 'taskList') {
+        return {};
+      }
       const margin = this.root.state.options.taskList.expander.margin;
       const padding = this.tasks[0].parents.length * this.root.state.options.taskList.expander.padding;
       return {
@@ -1967,6 +1980,12 @@ component.options.__file = "src/components/Expander.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ var TaskListHeadervue_type_script_lang_js_ = ({
@@ -2098,7 +2117,7 @@ var TaskListItemvue_type_template_id_9716293c_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__task-list-item",
-      style: _vm.root.style("task-list-item")
+      style: Object.assign({}, _vm.root.style["task-list-item"])
     },
     _vm._l(_vm.columns, function(column) {
       return _c(
@@ -2136,24 +2155,14 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__task-list-item-column",
-      style: _vm.root.style(
-        "task-list-item-column",
-        _vm.column.style["task-list-item-column"],
-        {
-          width: _vm.column.finalWidth + "px",
-          height: _vm.column.height + "px"
-        }
-      )
+      style: _vm.itemColumnStyle
     },
     [
       _c(
         "div",
         {
           staticClass: "gantt-elastic__task-list-item-value-wrapper",
-          style: _vm.root.style(
-            "task-list-item-value-wrapper",
-            _vm.column.style["task-list-item-value-wrapper"]
-          )
+          style: _vm.wrapperStyle
         },
         [
           _vm._t("default"),
@@ -2162,10 +2171,7 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
             "div",
             {
               staticClass: "gantt-elastic__task-list-item-value-container",
-              style: _vm.root.style(
-                "task-list-item-value-container",
-                _vm.column.style["task-list-item-value-container"]
-              )
+              style: _vm.containerStyle
             },
             [
               !_vm.html
@@ -2173,10 +2179,7 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
                     "div",
                     {
                       staticClass: "gantt-elastic__task-list-item-value",
-                      style: _vm.root.style(
-                        "task-list-item-value",
-                        _vm.column.style["task-list-item-value"]
-                      ),
+                      style: _vm.valueStyle,
                       on: {
                         click: function($event) {
                           return _vm.emitEvent("click", $event)
@@ -2217,10 +2220,7 @@ var ItemColumnvue_type_template_id_cb5a6c96_render = function() {
                   )
                 : _c("div", {
                     staticClass: "gantt-elastic__task-list-item-value",
-                    style: _vm.root.style(
-                      "task-list-item-value",
-                      _vm.column.style["task-list-item-value"]
-                    ),
+                    style: _vm.valueStyle,
                     domProps: { innerHTML: _vm._s(_vm.value) },
                     on: {
                       click: function($event) {
@@ -2326,20 +2326,6 @@ ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ var ItemColumnvue_type_script_lang_js_ = ({
   name: 'ItemColumn',
@@ -2385,6 +2371,33 @@ ItemColumnvue_type_template_id_cb5a6c96_render._withStripped = true
         return this.column.value(this.task);
       }
       return this.task[this.column.value];
+    },
+
+    itemColumnStyle() {
+      return {
+        ...this.root.style['task-list-item-column'],
+        ...this.column.style['task-list-item-column'],
+        width: this.column.finalWidth + 'px',
+        height: this.column.height + 'px'
+      };
+    },
+
+    wrapperStyle() {
+      return {
+        ...this.root.style['task-list-item-value-wrapper'],
+        ...this.column.style['task-list-item-value-wrapper']
+      };
+    },
+
+    containerStyle() {
+      return {
+        ...this.root.style['task-list-item-value-container'],
+        ...this.column.style['task-list-item-value-container']
+      };
+    },
+
+    valueStyle() {
+      return { ...this.root.style['task-list-item-value'], ...this.column.style['task-list-item-value'] };
     }
   }
 });
@@ -2570,7 +2583,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
     {
       ref: "chart",
       staticClass: "gantt-elastic__chart",
-      style: _vm.root.style("chart")
+      style: Object.assign({}, _vm.root.style["chart"])
     },
     [
       _c(
@@ -2578,7 +2591,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         {
           ref: "chartCalendarContainer",
           staticClass: "gant-elastic__chart-calendar-container",
-          style: _vm.root.style("chart-calendar-container", {
+          style: Object.assign({}, _vm.root.style["chart-calendar-container"], {
             height: _vm.root.state.options.calendar.height + "px",
             "margin-bottom": _vm.root.state.options.calendar.gap + "px"
           })
@@ -2592,7 +2605,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         {
           ref: "chartGraphContainer",
           staticClass: "gant-elastic__chart-graph-container",
-          style: _vm.root.style("chart-graph-container", {
+          style: Object.assign({}, _vm.root.style["chart-graph-container"], {
             height:
               _vm.root.state.options.height -
               _vm.root.state.options.calendar.height +
@@ -2603,7 +2616,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
           _c(
             "div",
             {
-              style: _vm.root.style("chart-area", {
+              style: Object.assign({}, _vm.root.style["chart-area"], {
                 width: _vm.root.state.options.width + "px",
                 height: _vm.root.state.options.rowsHeight + "px"
               })
@@ -2614,7 +2627,9 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                 {
                   ref: "chartGraph",
                   staticClass: "gantt-elastic__chart-graph",
-                  style: _vm.root.style("chart-graph", { height: "100%" })
+                  style: Object.assign({}, _vm.root.style["chart-graph"], {
+                    height: "100%"
+                  })
                 },
                 [
                   _c(
@@ -2622,7 +2637,10 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                     {
                       ref: "chartGraphSvg",
                       staticClass: "gantt-elastic__chart-graph-svg",
-                      style: _vm.root.style("chart-graph-svg"),
+                      style: Object.assign(
+                        {},
+                        _vm.root.style["chart-graph-svg"]
+                      ),
                       attrs: {
                         x: "0",
                         y: "0",
@@ -2647,7 +2665,10 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
                           {
                             key: task.id,
                             staticClass: "gantt-elastic__chart-row-wrapper",
-                            style: _vm.root.style("chart-row-wrapper"),
+                            style: Object.assign(
+                              {},
+                              _vm.root.style["chart-row-wrapper"]
+                            ),
                             attrs: { task: task }
                           },
                           [
@@ -2687,7 +2708,7 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
     {
       ref: "chart",
       staticClass: "gantt-elastic__grid-lines-wrapper",
-      style: _vm.root.style("grid-lines-wrapper"),
+      style: Object.assign({}, _vm.root.style["grid-lines-wrapper"]),
       attrs: {
         x: "0",
         y: "0",
@@ -2701,14 +2722,14 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
         "g",
         {
           staticClass: "gantt-elastic__grid-lines",
-          style: _vm.root.style("grid-lines")
+          style: Object.assign({}, _vm.root.style["grid-lines"])
         },
         [
           _vm._l(_vm.horizontalLines, function(line) {
             return _c("line", {
               key: line.key,
               staticClass: "gantt-elastic__grid-line-horizontal",
-              style: _vm.root.style("grid-line-horizontal"),
+              style: Object.assign({}, _vm.root.style["grid-line-horizontal"]),
               attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
             })
           }),
@@ -2717,14 +2738,14 @@ var Gridvue_type_template_id_2bf979a7_render = function() {
             return _c("line", {
               key: line.key,
               staticClass: "gantt-elastic__grid-line-vertical",
-              style: _vm.root.style("grid-line-vertical"),
+              style: Object.assign({}, _vm.root.style["grid-line-vertical"]),
               attrs: { x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2 }
             })
           }),
           _vm._v(" "),
           _c("line", {
             staticClass: "gantt-elastic__grid-line-time",
-            style: _vm.root.style("grid-line-time"),
+            style: Object.assign({}, _vm.root.style["grid-line-time"]),
             attrs: {
               x1: _vm.timeLinePosition.x,
               y1: _vm.timeLinePosition.y1,
@@ -2850,7 +2871,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
             x2: step.offset.px,
             y2:
               state.tasks.length * (state.options.row.height + state.options.chart.grid.horizontal.gap * 2) +
-              this.root.style('grid-line-vertical')['stroke-width']
+              this.root.style['grid-line-vertical']['stroke-width']
           });
         }
       });
@@ -2869,7 +2890,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
       for (let index = 0, len = tasks.length; index <= len; index++) {
         const y =
           index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
-          this.root.style('grid-line-vertical')['stroke-width'] / 2;
+          this.root.style['grid-line-vertical']['stroke-width'] / 2;
         lines.push({
           key: 'hl' + index,
           x1: 0,
@@ -2951,13 +2972,19 @@ var DaysHighlightvue_type_template_id_1bfe64e8_render = function() {
         "g",
         {
           staticClass: "gantt-elastic__chart-days-highlight-container",
-          style: _vm.root.style("chart-days-highlight-container")
+          style: Object.assign(
+            {},
+            _vm.root.style["chart-days-highlight-container"]
+          )
         },
         _vm._l(_vm.workingDays, function(day) {
           return _c("rect", {
             key: _vm.getKey(day),
             staticClass: "gantt-elastic__chart-days-highlight-rect",
-            style: _vm.root.style("chart-days-highlight-rect"),
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-days-highlight-rect"]
+            ),
             attrs: {
               x: day.offset.px,
               y: "0",
@@ -3089,7 +3116,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
     "div",
     {
       staticClass: "gantt-elastic__calendar-wrapper",
-      style: _vm.root.style("calendar-wrapper", {
+      style: Object.assign({}, _vm.root.style["calendar-wrapper"], {
         width: _vm.root.state.options.width + "px"
       })
     },
@@ -3098,7 +3125,7 @@ var Calendarvue_type_template_id_dee108e2_render = function() {
         "div",
         {
           staticClass: "gantt-elastic__calendar",
-          style: _vm.root.style("calendar", {
+          style: Object.assign({}, _vm.root.style["calendar"], {
             width: _vm.root.state.options.width + "px"
           })
         },
@@ -3142,9 +3169,9 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
     {
       class:
         "gantt-elastic__calendar-row gantt-elastic__calendar-row--" + _vm.which,
-      style: _vm.root.style("calendar-row", "calendar-row--" + _vm.which)
+      style: _vm.rowStyle
     },
-    _vm._l(_vm.items, function(item) {
+    _vm._l(_vm.items, function(item, itemIndex) {
       return _c(
         "div",
         {
@@ -3152,27 +3179,17 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
           class:
             "gantt-elastic__calendar-row-rect gantt-elastic__calendar-row-rect--" +
             _vm.which,
-          style: _vm.root.style(
-            "calendar-row-rect",
-            "calendar-row-rect--" + _vm.which
-          )
+          style: _vm.rectStyle
         },
-        _vm._l(item.children, function(child) {
+        _vm._l(item.children, function(child, childIndex) {
           return _c(
             "div",
             {
               key: child.key,
               class:
-                "gantt-elastic__calendar-row-rect-child gantt-elastic__calendar-row-rect-child-" +
+                "gantt-elastic__calendar-row-rect-child gantt-elastic__calendar-row-rect-child--" +
                 _vm.which,
-              style: _vm.root.style(
-                "calendar-row-rect-child",
-                "calendar-row-rect-child-" + _vm.which,
-                {
-                  width: child.width + "px",
-                  height: child.height + "px"
-                }
-              )
+              style: _vm.rectChildStyle[itemIndex][childIndex]
             },
             [
               _c(
@@ -3181,11 +3198,7 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
                   class:
                     "gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--" +
                     _vm.which,
-                  style: _vm.root.style(
-                    "calendar-row-text",
-                    "calendar-row-text--" + _vm.which,
-                    { left: _vm.getTextX(child) + "px" }
-                  )
+                  style: _vm.textStyle(item)
                 },
                 [_vm._v("\n        " + _vm._s(child.label) + "\n      ")]
               )
@@ -3205,14 +3218,6 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Calendar/CalendarRow.vue?vue&type=template&id=0daf06fb&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/CalendarRow.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3273,6 +3278,43 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
       }
       return x - item.x;
     }
+  },
+  computed: {
+    rowStyle() {
+      return { ...this.root.style['calendar-row'], ...this.root.style['calendar-row--' + this.which] };
+    },
+    rectStyle() {
+      return { ...this.root.style['calendar-row-rect'], ...this.root.style['calendar-row-rect--' + this.which] };
+    },
+    rectChildStyle() {
+      const basicStyle = {
+        ...this.root.style['calendar-row-rect-child'],
+        ...this.root.style['calendar-row-rect-child--' + this.which]
+      };
+      const style = [];
+      for (let item of this.items) {
+        const childrenStyle = [];
+        for (let child of item.children) {
+          childrenStyle.push({
+            ...basicStyle,
+            width: child.width + 'px',
+            height: child.height + 'px'
+          });
+        }
+        style.push(childrenStyle);
+      }
+      return style;
+    },
+    textStyle() {
+      const basicStyle = {
+        ...this.root.style['calendar-row-text'],
+        ...this.root.style['calendar-row-text--' + this.which]
+      };
+      return child => ({
+        ...basicStyle,
+        left: this.getTextX(child) + 'px'
+      });
+    }
   }
 });
 
@@ -3302,10 +3344,6 @@ if (false) { var CalendarRow_api; }
 CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 /* harmony default export */ var CalendarRow = (CalendarRow_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Calendar/Calendar.vue?vue&type=script&lang=js&
-//
-//
-//
-//
 //
 //
 //
@@ -3662,7 +3700,10 @@ var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
     "svg",
     {
       staticClass: "gantt-elastic__chart-dependency-lines-container",
-      style: _vm.root.style("chart-dependency-lines-container"),
+      style: Object.assign(
+        {},
+        _vm.root.style["chart-dependency-lines-container"]
+      ),
       attrs: { x: "0", y: "0", width: "100%", height: "100%" }
     },
     _vm._l(_vm.dependencyTasks, function(task) {
@@ -3673,8 +3714,9 @@ var DependencyLinesvue_type_template_id_f1cbf6ba_render = function() {
           return _c("path", {
             key: dependencyLine.id,
             staticClass: "gantt-elastic__chart-dependency-lines-path",
-            style: _vm.root.style(
-              "chart-dependency-lines-path",
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-dependency-lines-path"],
               task.style["chart-dependency-lines-path"]
             ),
             attrs: { task: task, d: dependencyLine.points }
@@ -3847,9 +3889,10 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
     {
       staticClass:
         "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-task-wrapper",
-      style: _vm.root.style(
-        "chart-row-bar-wrapper",
-        "chart-row-task-wrapper",
+      style: Object.assign(
+        {},
+        _vm.root.style["chart-row-bar-wrapper"],
+        _vm.root.style["chart-row-task-wrapper"],
         _vm.task.style["chart-row-bar-wrapper"]
       )
     },
@@ -3860,9 +3903,10 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
             {
               staticClass:
                 "gantt-elastic__chart-expander gantt-elastic__chart-expander--task",
-              style: _vm.root.style(
-                "chart-expander",
-                "chart-expander--task",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-expander"],
+                _vm.root.style["chart-expander--task"],
                 _vm.task.style["chart-expander"]
               ),
               attrs: {
@@ -3897,9 +3941,10 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
         {
           staticClass:
             "gantt-elastic__chart-row-bar gantt-elastic__chart-row-task",
-          style: _vm.root.style(
-            "chart-row-bar",
-            "chart-row-task",
+          style: Object.assign(
+            {},
+            _vm.root.style["chart-row-bar"],
+            _vm.root.style["chart-row-task"],
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
@@ -3956,9 +4001,10 @@ var Taskvue_type_template_id_e9c23eca_render = function() {
           _c("polygon", {
             staticClass:
               "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-task-polygon",
-            style: _vm.root.style(
-              "chart-row-bar-polygon",
-              "chart-row-task-polygon",
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-row-bar-polygon"],
+              _vm.root.style["chart-row-task-polygon"],
               _vm.task.style["base"],
               _vm.task.style["chart-row-bar-polygon"]
             ),
@@ -3997,7 +4043,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
     "svg",
     {
       staticClass: "gantt-elastic__chart-row-text-wrapper",
-      style: _vm.root.style("chart-row-text-wrapper"),
+      style: Object.assign({}, _vm.root.style["chart-row-text-wrapper"]),
       attrs: {
         x:
           _vm.task.x +
@@ -4017,7 +4063,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
             "div",
             {
               staticClass: "gantt-elastic__chart-row-text",
-              style: _vm.root.style("chart-row-text"),
+              style: Object.assign({}, _vm.root.style["chart-row-text"]),
               attrs: { xmlns: "http://www.w3.org/1999/xhtml" }
             },
             [
@@ -4029,11 +4075,9 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                         "gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--text",
                       style: Object.assign(
                         {},
-                        _vm.root.style(
-                          "chart-row-text-content",
-                          "chart-row-text-content--text"
-                        ),
-                        _vm.contentStyle
+                        _vm.root.style["chart-row-text-content"],
+                        _vm.root.style["chart-row-text-content--text"],
+                        { contentStyle: _vm.contentStyle }
                       )
                     },
                     [_c("div", [_vm._v(_vm._s(_vm.task.label))])]
@@ -4046,11 +4090,9 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                       "gantt-elastic__chart-row-text-content gantt-elastic__chart-row-text-content--html",
                     style: Object.assign(
                       {},
-                      _vm.root.style(
-                        "chart-row-text-content",
-                        "chart-row-text-content--html"
-                      ),
-                      _vm.contentStyle
+                      _vm.root.style["chart-row-text-content"],
+                      _vm.root.style["chart-row-text-content--html"],
+                      { contentStyle: _vm.contentStyle }
                     ),
                     domProps: { innerHTML: _vm._s(_vm.task.label) }
                   })
@@ -4111,6 +4153,14 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ var Textvue_type_script_lang_js_ = ({
   name: 'ChartText',
@@ -4126,7 +4176,7 @@ Textvue_type_template_id_459c2fe4_render._withStripped = true
      * @returns {number}
      */
     getWidth() {
-      const textStyle = this.root.style('chart-row-text');
+      const textStyle = this.root.style['chart-row-text'];
       this.root.state.ctx.font = `${textStyle['font-weight']} ${textStyle['font-size']} ${textStyle['font-family']}`;
       const textWidth = this.root.state.ctx.measureText(this.task.label).width;
       return textWidth + this.root.state.options.chart.text.xPadding * 2;
@@ -4202,8 +4252,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
     "g",
     {
       staticClass: "gantt-elastic__chart-row-progress-bar-wrapper",
-      style: _vm.root.style(
-        "chart-row-progress-bar-wrapper",
+      style: Object.assign(
+        {},
+        _vm.root.style["chart-row-progress-bar-wrapper"],
         _vm.task.style["chart-row-progress-bar-wrapper"]
       )
     },
@@ -4223,8 +4274,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
           [
             _c("line", {
               staticClass: "chart-row-progress-bar-line",
-              style: _vm.root.style(
-                "chart-row-progress-bar-line",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-row-progress-bar-line"],
                 _vm.task.style["chart-row-progress-bar-line"]
               ),
               attrs: {
@@ -4241,8 +4293,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
       _vm.root.state.options.chart.progress.bar
         ? _c("rect", {
             staticClass: "gantt-elastic__chart-row-progress-bar-solid",
-            style: _vm.root.style(
-              "chart-row-progress-bar-solid",
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-row-progress-bar-solid"],
               _vm.task.style["chart-row-progress-bar-solid"]
             ),
             attrs: { x: "0", y: "0", width: _vm.getProgressWidth }
@@ -4253,8 +4306,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
         ? _c("g", [
             _c("rect", {
               staticClass: "gantt-elastic__chart-row-progress-bar-pattern",
-              style: _vm.root.style(
-                "chart-row-progress-bar-pattern",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-row-progress-bar-pattern"],
                 _vm.task.style["chart-row-progress-bar-pattern"]
               ),
               attrs: {
@@ -4267,8 +4321,9 @@ var ProgressBarvue_type_template_id_4bc39355_render = function() {
             _vm._v(" "),
             _c("path", {
               staticClass: "gantt-elastic__chart-row-progress-bar-outline",
-              style: _vm.root.style(
-                "chart-row-progress-bar-outline",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-row-progress-bar-outline"],
                 _vm.task.style["base"],
                 _vm.task.style["chart-row-progress-bar-outline"]
               ),
@@ -4286,6 +4341,8 @@ ProgressBarvue_type_template_id_4bc39355_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/ProgressBar.vue?vue&type=template&id=4bc39355&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/ProgressBar.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -4549,6 +4606,12 @@ ProgressBar_component.options.__file = "src/components/Chart/ProgressBar.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4624,9 +4687,10 @@ var Milestonevue_type_template_id_3013006c_render = function() {
     {
       staticClass:
         "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-milestone-wrapper",
-      style: _vm.root.style(
-        "chart-row-bar-wrapper",
-        "chart-row-milestone-wrapper",
+      style: Object.assign(
+        {},
+        _vm.root.style["chart-row-bar-wrapper"],
+        _vm.root.style["chart-row-milestone-wrapper"],
         _vm.task.style["chart-row-bar-wrapper"]
       )
     },
@@ -4637,9 +4701,10 @@ var Milestonevue_type_template_id_3013006c_render = function() {
             {
               staticClass:
                 "gantt-elastic__chart-expander gantt-elastic__chart-expander--milestone",
-              style: _vm.root.style(
-                "chart-expander",
-                "chart-expander--milestone",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-expander"],
+                _vm.root.style["chart-expander--milestone"],
                 _vm.task.style["chart-expander"]
               ),
               attrs: {
@@ -4674,9 +4739,10 @@ var Milestonevue_type_template_id_3013006c_render = function() {
         {
           staticClass:
             "gantt-elastic__chart-row-bar gantt-elastic__chart-row-milestone",
-          style: _vm.root.style(
-            "chart-row-bar",
-            "chart-row-milestone",
+          style: Object.assign(
+            {},
+            _vm.root.style["chart-row-bar"],
+            _vm.root.style["chart-row-milestone"],
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
@@ -4733,9 +4799,10 @@ var Milestonevue_type_template_id_3013006c_render = function() {
           _c("polygon", {
             staticClass:
               "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-milestone-polygon",
-            style: _vm.root.style(
-              "chart-row-bar-polygon",
-              "chart-row-milestone-polygon",
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-row-bar-polygon"],
+              _vm.root.style["chart-row-milestone-polygon"],
               _vm.task.style["base"],
               _vm.task.style["chart-row-bar-polygon"]
             ),
@@ -4766,6 +4833,12 @@ Milestonevue_type_template_id_3013006c_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Row/Milestone.vue?vue&type=template&id=3013006c&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Milestone.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4919,9 +4992,10 @@ var Projectvue_type_template_id_077bbd73_render = function() {
     {
       staticClass:
         "gantt-elastic__chart-row-bar-wrapper gantt-elastic__chart-row-project-wrapper",
-      style: _vm.root.style(
-        "chart-row-bar-wrapper",
-        _vm.root.style("chart-row-project-wrapper"),
+      style: Object.assign(
+        {},
+        _vm.root.style["chart-row-bar-wrapper"],
+        _vm.root.style["chart-row-project-wrapper"],
         _vm.task.style["chart-row-bar-wrapper"]
       )
     },
@@ -4932,9 +5006,10 @@ var Projectvue_type_template_id_077bbd73_render = function() {
             {
               staticClass:
                 "gantt-elastic__chart-expander gantt-elastic__chart-expander--project",
-              style: _vm.root.style(
-                "chart-expander",
-                "chart-expander--project",
+              style: Object.assign(
+                {},
+                _vm.root.style["chart-expander"],
+                _vm.root.style["chart-expander--project"],
                 _vm.task.style["chart-expander"]
               ),
               attrs: {
@@ -4969,9 +5044,10 @@ var Projectvue_type_template_id_077bbd73_render = function() {
         {
           staticClass:
             "gantt-elastic__chart-row-bar gantt-elastic__chart-row-project",
-          style: _vm.root.style(
-            "chart-row-bar",
-            "chart-row-project",
+          style: Object.assign(
+            {},
+            _vm.root.style["chart-row-bar"],
+            _vm.root.style["chart-row-project"],
             _vm.task.style["chart-row-bar"]
           ),
           attrs: {
@@ -5028,9 +5104,10 @@ var Projectvue_type_template_id_077bbd73_render = function() {
           _c("path", {
             staticClass:
               "gantt-elastic__chart-row-bar-polygon gantt-elastic__chart-row-project-polygon",
-            style: _vm.root.style(
-              "chart-row-bar-polygon",
-              "chart-row-project-polygon",
+            style: Object.assign(
+              {},
+              _vm.root.style["chart-row-bar-polygon"],
+              _vm.root.style["chart-row-project-polygon"],
               _vm.task.style["base"],
               _vm.task.style["chart-row-bar-polygon"]
             ),
@@ -5061,6 +5138,10 @@ Projectvue_type_template_id_077bbd73_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Chart/Row/Project.vue?vue&type=template&id=077bbd73&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart/Row/Project.vue?vue&type=script&lang=js&
+//
+//
+//
+//
 //
 //
 //
@@ -5290,6 +5371,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
 //
 //
 //
+//
 
 
 
@@ -5333,7 +5415,7 @@ Project_component.options.__file = "src/components/Chart/Row/Project.vue"
      * @returns {string}
      */
     getViewBox() {
-      return `0 0 ${Math.round(this.getWidth)} ${this.root.state.options.allVisibleTasksHeight}`;
+      return `0 0 ${this.root.state.options.width} ${this.root.state.options.allVisibleTasksHeight}`;
     }
   }
 });
@@ -5364,6 +5446,12 @@ if (false) { var Chart_api; }
 Chart_component.options.__file = "src/components/Chart/Chart.vue"
 /* harmony default export */ var Chart = (Chart_component.exports);
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/components/MainView.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5770,13 +5858,19 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
       background: 'transparent',
       display: 'flex'
     },
+    'calendar-row-rect--month': {},
+    'calendar-row-rect--day': {},
+    'calendar-row-rect--hour': {},
     'calendar-row-rect-child': {
-      display: 'inline-block',
+      display: 'block',
       'border-right-width': '1px', // Calendar
       'border-right-color': '#dadada',
       'border-right-style': 'solid',
       position: 'relative'
     },
+    'calendar-row-rect-child--month': {},
+    'calendar-row-rect-child--day': { 'text-align': 'center' },
+    'calendar-row-rect-child--hour': { 'text-align': 'center' },
     'calendar-row-text': {
       'font-family': fontFamily, // GanttElastic
       'font-size': fontSize, //GanttElastic
@@ -5784,11 +5878,8 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
       display: 'inline-block',
       position: 'relative'
     },
-    'calendar-row-rect--month': {},
     'calendar-row-text--month': {},
-    'calendar-row-rect--day': {},
     'calendar-row-text--day': {},
-    'calendar-row-rect--hour': {},
     'calendar-row-text--hour': {},
     'task-list-wrapper': {},
     'task-list': { background: 'transparent', 'border-color': '#eee' },
@@ -6033,7 +6124,7 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
 }
 
 // EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
-var ResizeObserver_es = __webpack_require__(4);
+var ResizeObserver_es = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib??vue-loader-options!./src/GanttElastic.vue?vue&type=script&lang=js&
 //
@@ -6487,6 +6578,8 @@ function notEqualDeep(left, right, cache = []) {
   return false;
 }
 
+const styleCache = {};
+
 /**
  * GanttElastic
  * Main vue component
@@ -6522,6 +6615,8 @@ const GanttElastic = {
         tasksById: {},
         taskTree: {},
         ctx,
+        emitTasksChanges: true, // some operations may pause emitting changes to parent component
+        emitOptionsChanges: true, // some operations may pause emitting changes to parent component
         resizeObserver: null,
         unwatchTasks: null,
         unwatchOptions: null,
@@ -6555,26 +6650,6 @@ const GanttElastic = {
       const height = noScroll - withScroll;
       this.state.options.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
       return (this.state.options.scrollBarHeight = height);
-    },
-
-    /**
-     * Get style for specified class
-     *
-     * @param {object|string} mergeWith - merge multiple styles by className (without gantt-elastic__) or object with props
-     * @returns {object}
-     */
-    style(...mergeWith) {
-      let merged = this.state.options.style['*'];
-      mergeWith.forEach(objOrClassName => {
-        if (typeof objOrClassName === 'string') {
-          merged = Object.assign({}, merged, this.state.options.style[objOrClassName]);
-        } else if (typeof objOrClassName === 'object') {
-          merged = this.mergeDeepReactive(this, {}, merged, objOrClassName);
-        } else if (typeof objOrClassName === 'function') {
-          merged = Object.assign({}, objOrClassName());
-        }
-      });
-      return merged;
     },
 
     /**
@@ -6797,7 +6872,7 @@ const GanttElastic = {
         percentage += column.widthFromPercentage;
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
         final += column.finalWidth;
-        column.height = this.getTaskHeight() - this.style('grid-line-horizontal')['stroke-width'];
+        column.height = this.getTaskHeight() - this.style['grid-line-horizontal']['stroke-width'];
       });
       this.state.options.taskList.widthFromPercentage = percentage;
       this.state.options.taskList.finalWidth = final;
@@ -6947,7 +7022,7 @@ const GanttElastic = {
         return (
           this.state.options.row.height +
           this.state.options.chart.grid.horizontal.gap * 2 +
-          this.style('grid-line-horizontal')['stroke-width']
+          this.style['grid-line-horizontal']['stroke-width']
         );
       }
       return this.state.options.row.height + this.state.options.chart.grid.horizontal.gap * 2;
@@ -6983,7 +7058,7 @@ const GanttElastic = {
      * @returns {int} milliseconds
      */
     pixelOffsetXToTime(pixelOffsetX) {
-      let offset = pixelOffsetX + this.style('grid-line-vertical')['stroke-width'] / 2;
+      let offset = pixelOffsetX + this.style['grid-line-vertical']['stroke-width'] / 2;
       return offset * this.state.options.times.timePerPixel + this.state.options.times.firstTime;
     },
 
@@ -7187,7 +7262,7 @@ const GanttElastic = {
       this.state.options.times.totalViewDurationPx =
         this.state.options.times.totalViewDurationMs / this.state.options.times.timePerPixel;
       this.state.options.width =
-        this.state.options.times.totalViewDurationPx + this.style('grid-line-vertical')['stroke-width'];
+        this.state.options.times.totalViewDurationPx + this.style['grid-line-vertical']['stroke-width'];
     },
 
     /**
@@ -7269,7 +7344,7 @@ const GanttElastic = {
      * Compute width of calendar hours column widths basing on text widths
      */
     computeHourWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--hour');
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--hour'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs_min_default()('2018-01-01T00:00:00'); // any date will be good for hours
       let maxWidths = this.state.options.calendar.hour.maxWidths;
@@ -7300,7 +7375,7 @@ const GanttElastic = {
      * Compute calendar days column widths basing on text widths
      */
     computeDayWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--day');
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--day'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let currentDate = dayjs_min_default()(this.state.options.times.steps[0].time);
       let maxWidths = this.state.options.calendar.day.maxWidths;
@@ -7358,7 +7433,7 @@ const GanttElastic = {
      * Compute month calendar columns widths basing on text widths
      */
     computeMonthWidths() {
-      const style = this.style('calendar-row-text', 'calendar-row-text--month');
+      const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--month'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
       let maxWidths = this.state.options.calendar.month.maxWidths;
       this.state.options.calendar.month.widths = [];
@@ -7489,7 +7564,7 @@ const GanttElastic = {
       for (let index = 0; index < len; index++) {
         let task = visibleTasks[index];
         task.width =
-          task.duration / this.state.options.times.timePerPixel - this.style('grid-line-vertical')['stroke-width'];
+          task.duration / this.state.options.times.timePerPixel - this.style['grid-line-vertical']['stroke-width'];
         if (task.width < 0) {
           task.width = 0;
         }
@@ -7500,6 +7575,13 @@ const GanttElastic = {
           this.state.options.chart.grid.horizontal.gap;
       }
       return visibleTasks;
+    },
+
+    /**
+     * Style shortcut
+     */
+    style() {
+      return this.state.options.style;
     },
 
     /**
@@ -7556,8 +7638,8 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual) {
-          this.$emit('tasks-updated', tasks.map(task => mergeDeep({}, task)));
+        if (notEqual && this.state.emitTasksChanges) {
+          this.$emit('tasks-updated', tasks);
         }
       },
       { deep: true }
@@ -7566,8 +7648,8 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual) {
-          this.$emit('options-updated', mergeDeep({}, options));
+        if (notEqual && this.state.emitOptionsChanges) {
+          this.$emit('options-updated', options);
         }
       },
       { deep: true }
@@ -7639,7 +7721,7 @@ const GanttElastic = {
 // CONCATENATED MODULE: ./src/GanttElastic.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_GanttElasticvue_type_script_lang_js_ = (GanttElasticvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/GanttElastic.vue?vue&type=style&index=0&lang=css&
-var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(6);
+var GanttElasticvue_type_style_index_0_lang_css_ = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/GanttElastic.vue
 /* concated harmony reexport mergeDeep */__webpack_require__.d(__webpack_exports__, "mergeDeep", function() { return mergeDeep; });
@@ -7670,7 +7752,7 @@ GanttElastic_component.options.__file = "src/GanttElastic.vue"
 /* harmony default export */ var src_GanttElastic = __webpack_exports__["default"] = (GanttElastic_component.exports);
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
