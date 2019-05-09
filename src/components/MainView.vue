@@ -60,7 +60,7 @@
         :style="{
           ...root.style['chart-scroll-container'],
           ...root.style['chart-scroll-container--vertical'],
-          verticalStyle
+          ...verticalStyle
         }"
         ref="chartScrollContainerVertical"
         @scroll="onVerticalScroll"

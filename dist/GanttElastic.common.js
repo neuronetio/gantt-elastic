@@ -1334,7 +1334,7 @@ var MainViewvue_type_template_id_0bc4212e_render = function() {
                 {},
                 _vm.root.style["chart-scroll-container"],
                 _vm.root.style["chart-scroll-container--vertical"],
-                { verticalStyle: _vm.verticalStyle }
+                _vm.verticalStyle
               ),
               on: { scroll: _vm.onVerticalScroll }
             },
