@@ -135,7 +135,7 @@ export default {
     },
 
     /**
-     * Chceck if specified line is inside viewport (visible)
+     * Check if specified line is inside viewport (visible)
      *
      * @returns {function}
      */

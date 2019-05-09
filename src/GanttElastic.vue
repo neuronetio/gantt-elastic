@@ -526,63 +526,57 @@ const GanttElastic = {
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks() {
-      this.state.tasks = this.state.tasks.map(task => {
+    refreshTasks(tasks) {
+      return tasks.map(task => {
         if (typeof task.x === 'undefined') {
-          this.$set(task, 'x', 0);
+          task.x = 0;
         }
         if (typeof task.y === 'undefined') {
-          this.$set(task, 'y', 0);
+          task.y = 0;
         }
         if (typeof task.width === 'undefined') {
-          this.$set(task, 'width', 0);
+          task.width = 0;
         }
         if (typeof task.height === 'undefined') {
-          this.$set(task, 'height', 0);
-        }
-        if (typeof task.tooltip === 'undefined') {
-          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
-        }
-        if (typeof task.tooltip.visible === 'undefined') {
-          task.tooltip.visible = false;
+          task.height = 0;
         }
         if (typeof task.mouseOver === 'undefined') {
-          this.$set(task, 'mouseOver', false);
+          task.mouseOver = false;
         }
         if (typeof task.collapsed === 'undefined') {
-          this.$set(task, 'collapsed', false);
+          task.collapsed = false;
         }
         if (typeof task.dependentOn === 'undefined') {
-          this.$set(task, 'dependentOn', []);
+          task.dependentOn = [];
         }
         if (typeof task.parentId === 'undefined') {
-          this.$set(task, 'parentId', null);
+          task.parentId = null;
         }
         if (typeof task.style === 'undefined') {
-          this.$set(task, 'style', {});
+          task.style = {};
         }
         if (typeof task.children === 'undefined') {
-          this.$set(task, 'children', []);
+          task.children = [];
         }
         if (typeof task.allChildren === 'undefined') {
-          this.$set(task, 'allChildren', []);
+          task.allChildren = [];
         }
         if (typeof task.parents === 'undefined') {
-          this.$set(task, 'parents', []);
+          task.parents = [];
         }
         if (typeof task.parent === 'undefined') {
-          this.$set(task, 'parent', null);
+          task.parent = null;
         }
         if (typeof task.startTime === 'undefined') {
-          this.$set(task, 'startTime', dayjs(task.start).valueOf());
+          task.startTime = dayjs(task.start).valueOf();
         }
         if (typeof task.endTime === 'undefined' && task.hasOwnProperty('end')) {
-          this.$set(task, 'endTime', dayjs(task.end).valueOf());
+          task.endTime = dayjs(task.end).valueOf();
         } else if (typeof task.endTime === 'undefined' && task.hasOwnProperty('duration')) {
-          this.$set(task, 'endTime', task.startTime + task.duration);
+          task.endTime = task.startTime + task.duration;
         }
         if (typeof task.duration === 'undefined' && task.hasOwnProperty('endTime')) {
-          this.$set(task, 'duration', task.endTime - task.startTime);
+          task.duration = task.endTime - task.startTime;
         }
         return task;
       });
@@ -617,66 +611,34 @@ const GanttElastic = {
      * Initialize component
      */
     initialize(itsUpdate = '') {
-      const options = this.mergeDeep({}, getOptions(this.options), this.options);
-      const tasks = this.tasks.map(task => mergeDeep({}, task));
-      switch (itsUpdate) {
-        case 'tasks':
-          this.mergeDeepReactive(this, this.state, {
-            tasks: this.mapTasks(tasks, options)
-          });
-          break;
-        case 'options':
-          this.mergeDeepReactive(this, this.state, { options });
-          break;
-        default:
-          this.mergeDeepReactive(
-            this,
-            this.state,
-            { options },
-            {
-              tasks: this.mapTasks(tasks, options)
-            }
-          );
+      let options = this.mergeDeep({}, this.state.options, getOptions(this.options), this.options);
+      let tasks = this.mapTasks(this.tasks, options);
+      dayjs.locale(options.locale, null, true);
+      dayjs.locale(options.locale.name);
+      if (typeof options.taskList === 'undefined') {
+        options.taskList = {};
       }
-      dayjs.locale(this.state.options.locale, null, true);
-      dayjs.locale(this.state.options.locale.name);
-      if (typeof this.state.options.taskList === 'undefined') {
-        this.$set(this.state.options, 'taskList', {});
-      }
-      if (typeof this.state.options.taskList.columns === 'undefined') {
-        this.$set(this.state.options.taskList, 'columns', []);
-      }
-      this.state.options.taskList.columns = this.state.options.taskList.columns.map((column, index) => {
-        this.$set(column, 'thresholdPercent', 100);
-        this.$set(column, 'widthFromPercentage', 0);
-        this.$set(column, 'finalWidth', 0);
+      options.taskList.columns = options.taskList.columns.map((column, index) => {
+        column.thresholdPercent = 100;
+        column.widthFromPercentage = 0;
+        column.finalWidth = 0;
         if (typeof column.height === 'undefined') {
-          this.$set(column, 'height', 0);
+          column.height = 0;
         }
         if (typeof column.style === 'undefined') {
-          this.$set(column, 'style', {});
+          column.style = {};
         }
-        this.$set(column, '_id', `${index}-${column.label}`);
+        column._id = `${index}-${column.label}`;
         return column;
       });
-      if (itsUpdate === '' || itsUpdate === 'tasks') {
-        // initialize observer
-        this.refreshTasks();
-        this.$set(this.state, 'rootTask', {
-          id: null,
-          label: 'root',
-          children: [],
-          allChildren: [],
-          parents: [],
-          parent: null,
-          __root: true
-        });
-        this.resetTaskTree();
-        this.$set(this.state, 'taskTree', this.makeTaskTree(this.state.rootTask));
-        this.$set(this.state, 'tasks', this.state.taskTree.allChildren.map(childId => this.getTask(childId)));
-      }
+      this.state.options = mergeDeepReactive(this, {}, this.state.options, options);
+      tasks = this.refreshTasks(tasks);
+      this.state.tasksById = this.resetTaskTree(tasks);
+      this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
+      this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
+      this.emitOptionsChanges = true;
       this.$set(this.state.options, 'scrollBarHeight', this.getScrollBarHeight());
       this.$set(this.state.options, 'outerHeight', this.state.options.height + this.state.options.scrollBarHeight);
       this.globalOnResize();
@@ -752,20 +714,26 @@ const GanttElastic = {
     /**
      * Reset task tree - which is used to create tree like structure inside task list
      */
-    resetTaskTree() {
-      this.state.rootTask.children = [];
-      this.state.rootTask.allChildren = [];
-      this.state.rootTask.parent = null;
-      this.state.rootTask.parents = [];
-      this.state.tasksById = {};
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
+    resetTaskTree(tasks) {
+      this.$set(this.state, 'rootTask', {
+        id: null,
+        label: 'root',
+        children: [],
+        allChildren: [],
+        parents: [],
+        parent: null,
+        __root: true
+      });
+      const tasksById = {};
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let current = tasks[i];
         current.children = [];
         current.allChildren = [];
         current.parent = null;
         current.parents = [];
-        this.state.tasksById[current.id] = current;
+        tasksById[current.id] = current;
       }
+      return tasksById;
     },
 
     /**
@@ -774,9 +742,9 @@ const GanttElastic = {
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree(task) {
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
+    makeTaskTree(task, tasks) {
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let current = tasks[i];
         if (current.parentId === task.id) {
           if (task.parents.length) {
             task.parents.forEach(parent => current.parents.push(parent));
@@ -788,7 +756,7 @@ const GanttElastic = {
             current.parents = [];
             current.parent = null;
           }
-          current = this.makeTaskTree(current);
+          current = this.makeTaskTree(current, tasks);
           task.allChildren.push(current.id);
           task.children.push(current.id);
           current.allChildren.forEach(childId => task.allChildren.push(childId));
@@ -1510,7 +1478,7 @@ const GanttElastic = {
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
         if (notEqual && this.state.emitTasksChanges) {
-          this.$emit('tasks-updated', tasks);
+          this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
       { deep: true }
@@ -1520,7 +1488,7 @@ const GanttElastic = {
       options => {
         const notEqual = notEqualDeep(this.options, options);
         if (notEqual && this.state.emitOptionsChanges) {
-          this.$emit('options-updated', options);
+          this.$emit('options-updated', mergeDeep({}, options));
         }
       },
       { deep: true }
