@@ -9,9 +9,6 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
   return {
     fontSize,
     fontFamily,
-    '*': {
-      'box-sizing': 'border-box'
-    },
     'main-view': {
       background: '#FFFFFF'
     },

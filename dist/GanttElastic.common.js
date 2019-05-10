@@ -89,7 +89,7 @@ module.exports =
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(t,n){ true?module.exports=n():undefined}(this,function(){"use strict";var t="millisecond",n="second",e="minute",i="hour",r="day",s="week",u="month",a="quarter",o="year",h=/^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,f=/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,c=function(t,n,e){var i=String(t);return!i||i.length>=n?t:""+Array(n+1-i.length).join(e)+t},d={s:c,z:function(t){var n=-t.utcOffset(),e=Math.abs(n),i=Math.floor(e/60),r=e%60;return(n<=0?"+":"-")+c(i,2,"0")+":"+c(r,2,"0")},m:function(t,n){var e=12*(n.year()-t.year())+(n.month()-t.month()),i=t.clone().add(e,u),r=n-i<0,s=t.clone().add(e+(r?-1:1),u);return Number(-(e+(n-i)/(r?i-s:s-i))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:o,w:s,d:r,h:i,m:e,s:n,ms:t,Q:a}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},$={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},l="en",m={};m[l]=$;var y=function(t){return t instanceof S},M=function(t,n,e){var i;if(!t)return null;if("string"==typeof t)m[t]&&(i=t),n&&(m[t]=n,i=t);else{var r=t.name;m[r]=t,i=r}return e||(l=i),i},g=function(t,n,e){if(y(t))return t.clone();var i=n?"string"==typeof n?{format:n,pl:e}:n:{};return i.date=t,new S(i)},D=d;D.l=M,D.i=y,D.w=function(t,n){return g(t,{locale:n.$L,utc:n.$u})};var S=function(){function c(t){this.$L=this.$L||M(t.locale,null,!0)||l,this.parse(t)}var d=c.prototype;return d.parse=function(t){this.$d=function(t){var n=t.date,e=t.utc;if(null===n)return new Date(NaN);if(D.u(n))return new Date;if(n instanceof Date)return new Date(n);if("string"==typeof n&&!/Z$/i.test(n)){var i=n.match(h);if(i)return e?new Date(Date.UTC(i[1],i[2]-1,i[3]||1,i[4]||0,i[5]||0,i[6]||0,i[7]||0)):new Date(i[1],i[2]-1,i[3]||1,i[4]||0,i[5]||0,i[6]||0,i[7]||0)}return new Date(n)}(t),this.init()},d.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},d.$utils=function(){return D},d.isValid=function(){return!("Invalid Date"===this.$d.toString())},d.isSame=function(t,n){var e=g(t);return this.startOf(n)<=e&&e<=this.endOf(n)},d.isAfter=function(t,n){return g(t)<this.startOf(n)},d.isBefore=function(t,n){return this.endOf(n)<g(t)},d.$g=function(t,n,e){return D.u(t)?this[n]:this.set(e,t)},d.year=function(t){return this.$g(t,"$y",o)},d.month=function(t){return this.$g(t,"$M",u)},d.day=function(t){return this.$g(t,"$W",r)},d.date=function(t){return this.$g(t,"$D","date")},d.hour=function(t){return this.$g(t,"$H",i)},d.minute=function(t){return this.$g(t,"$m",e)},d.second=function(t){return this.$g(t,"$s",n)},d.millisecond=function(n){return this.$g(n,"$ms",t)},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,a){var h=this,f=!!D.u(a)||a,c=D.p(t),d=function(t,n){var e=D.w(h.$u?Date.UTC(h.$y,n,t):new Date(h.$y,n,t),h);return f?e:e.endOf(r)},$=function(t,n){return D.w(h.toDate()[t].apply(h.toDate(),(f?[0,0,0,0]:[23,59,59,999]).slice(n)),h)},l=this.$W,m=this.$M,y=this.$D,M="set"+(this.$u?"UTC":"");switch(c){case o:return f?d(1,0):d(31,11);case u:return f?d(1,m):d(0,m+1);case s:var g=this.$locale().weekStart||0,S=(l<g?l+7:l)-g;return d(f?y-S:y+(6-S),m);case r:case"date":return $(M+"Hours",0);case i:return $(M+"Minutes",1);case e:return $(M+"Seconds",2);case n:return $(M+"Milliseconds",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(s,a){var h,f=D.p(s),c="set"+(this.$u?"UTC":""),d=(h={},h[r]=c+"Date",h.date=c+"Date",h[u]=c+"Month",h[o]=c+"FullYear",h[i]=c+"Hours",h[e]=c+"Minutes",h[n]=c+"Seconds",h[t]=c+"Milliseconds",h)[f],$=f===r?this.$D+(a-this.$W):a;if(f===u||f===o){var l=this.clone().set("date",1);l.$d[d]($),l.init(),this.$d=l.set("date",Math.min(this.$D,l.daysInMonth())).toDate()}else d&&this.$d[d]($);return this.init(),this},d.set=function(t,n){return this.clone().$set(t,n)},d.get=function(t){return this[D.p(t)]()},d.add=function(t,a){var h,f=this;t=Number(t);var c=D.p(a),d=function(n){var e=new Date(f.$d);return e.setDate(e.getDate()+n*t),D.w(e,f)};if(c===u)return this.set(u,this.$M+t);if(c===o)return this.set(o,this.$y+t);if(c===r)return d(1);if(c===s)return d(7);var $=(h={},h[e]=6e4,h[i]=36e5,h[n]=1e3,h)[c]||1,l=this.valueOf()+t*$;return D.w(l,this)},d.subtract=function(t,n){return this.add(-1*t,n)},d.format=function(t){var n=this;if(!this.isValid())return"Invalid Date";var e=t||"YYYY-MM-DDTHH:mm:ssZ",i=D.z(this),r=this.$locale(),s=r.weekdays,u=r.months,a=function(t,n,e,i){return t&&t[n]||e[n].substr(0,i)},o=function(t){return D.s(n.$H%12||12,t,"0")},h={YY:String(this.$y).slice(-2),YYYY:String(this.$y),M:String(this.$M+1),MM:D.s(this.$M+1,2,"0"),MMM:a(r.monthsShort,this.$M,u,3),MMMM:u[this.$M],D:String(this.$D),DD:D.s(this.$D,2,"0"),d:String(this.$W),dd:a(r.weekdaysMin,this.$W,s,2),ddd:a(r.weekdaysShort,this.$W,s,3),dddd:s[this.$W],H:String(this.$H),HH:D.s(this.$H,2,"0"),h:o(1),hh:o(2),a:this.$H<12?"am":"pm",A:this.$H<12?"AM":"PM",m:String(this.$m),mm:D.s(this.$m,2,"0"),s:String(this.$s),ss:D.s(this.$s,2,"0"),SSS:D.s(this.$ms,3,"0"),Z:i};return e.replace(f,function(t,n){return n||h[t]||i.replace(":","")})},d.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},d.diff=function(t,h,f){var c,d=D.p(h),$=g(t),l=6e4*($.utcOffset()-this.utcOffset()),m=this-$,y=D.m(this,$);return y=(c={},c[o]=y/12,c[u]=y,c[a]=y/3,c[s]=(m-l)/6048e5,c[r]=(m-l)/864e5,c[i]=m/36e5,c[e]=m/6e4,c[n]=m/1e3,c)[d]||m,f?y:D.a(y)},d.daysInMonth=function(){return this.endOf(u).$D},d.$locale=function(){return m[this.$L]},d.locale=function(t,n){if(!t)return this.$L;var e=this.clone();return e.$L=M(t,n,!0),e},d.clone=function(){return D.w(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.$d.toISOString()},d.toString=function(){return this.$d.toUTCString()},c}();return g.prototype=S.prototype,g.extend=function(t,n){return t(n,S,g),g},g.locale=M,g.isDayjs=y,g.unix=function(t){return g(1e3*t)},g.en=m[l],g.Ls=m,g});
+!function(t,n){ true?module.exports=n():undefined}(this,function(){"use strict";var t="millisecond",n="second",e="minute",r="hour",i="day",s="week",u="month",o="quarter",a="year",h=/^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/,f=/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,c=function(t,n,e){var r=String(t);return!r||r.length>=n?t:""+Array(n+1-r.length).join(e)+t},d={s:c,z:function(t){var n=-t.utcOffset(),e=Math.abs(n),r=Math.floor(e/60),i=e%60;return(n<=0?"+":"-")+c(r,2,"0")+":"+c(i,2,"0")},m:function(t,n){var e=12*(n.year()-t.year())+(n.month()-t.month()),r=t.clone().add(e,u),i=n-r<0,s=t.clone().add(e+(i?-1:1),u);return Number(-(e+(n-r)/(i?r-s:s-r))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:a,w:s,d:i,h:r,m:e,s:n,ms:t,Q:o}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},$={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},l="en",m={};m[l]=$;var y=function(t){return t instanceof v},M=function(t,n,e){var r;if(!t)return null;if("string"==typeof t)m[t]&&(r=t),n&&(m[t]=n,r=t);else{var i=t.name;m[i]=t,r=i}return e||(l=r),r},g=function(t,n,e){if(y(t))return t.clone();var r=n?"string"==typeof n?{format:n,pl:e}:n:{};return r.date=t,new v(r)},D=d;D.l=M,D.i=y,D.w=function(t,n){return g(t,{locale:n.$L,utc:n.$u})};var v=function(){function c(t){this.$L=this.$L||M(t.locale,null,!0)||l,this.parse(t)}var d=c.prototype;return d.parse=function(t){this.$d=function(t){var n=t.date,e=t.utc;if(null===n)return new Date(NaN);if(D.u(n))return new Date;if(n instanceof Date)return new Date(n);if("string"==typeof n&&!/Z$/i.test(n)){var r=n.match(h);if(r)return e?new Date(Date.UTC(r[1],r[2]-1,r[3]||1,r[4]||0,r[5]||0,r[6]||0,r[7]||0)):new Date(r[1],r[2]-1,r[3]||1,r[4]||0,r[5]||0,r[6]||0,r[7]||0)}return new Date(n)}(t),this.init()},d.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},d.$utils=function(){return D},d.isValid=function(){return!("Invalid Date"===this.$d.toString())},d.isSame=function(t,n){var e=g(t);return this.startOf(n)<=e&&e<=this.endOf(n)},d.isAfter=function(t,n){return g(t)<this.startOf(n)},d.isBefore=function(t,n){return this.endOf(n)<g(t)},d.$g=function(t,n,e){return D.u(t)?this[n]:this.set(e,t)},d.year=function(t){return this.$g(t,"$y",a)},d.month=function(t){return this.$g(t,"$M",u)},d.day=function(t){return this.$g(t,"$W",i)},d.date=function(t){return this.$g(t,"$D","date")},d.hour=function(t){return this.$g(t,"$H",r)},d.minute=function(t){return this.$g(t,"$m",e)},d.second=function(t){return this.$g(t,"$s",n)},d.millisecond=function(n){return this.$g(n,"$ms",t)},d.unix=function(){return Math.floor(this.valueOf()/1e3)},d.valueOf=function(){return this.$d.getTime()},d.startOf=function(t,o){var h=this,f=!!D.u(o)||o,c=D.p(t),d=function(t,n){var e=D.w(h.$u?Date.UTC(h.$y,n,t):new Date(h.$y,n,t),h);return f?e:e.endOf(i)},$=function(t,n){return D.w(h.toDate()[t].apply(h.toDate(),(f?[0,0,0,0]:[23,59,59,999]).slice(n)),h)},l=this.$W,m=this.$M,y=this.$D,M="set"+(this.$u?"UTC":"");switch(c){case a:return f?d(1,0):d(31,11);case u:return f?d(1,m):d(0,m+1);case s:var g=this.$locale().weekStart||0,v=(l<g?l+7:l)-g;return d(f?y-v:y+(6-v),m);case i:case"date":return $(M+"Hours",0);case r:return $(M+"Minutes",1);case e:return $(M+"Seconds",2);case n:return $(M+"Milliseconds",3);default:return this.clone()}},d.endOf=function(t){return this.startOf(t,!1)},d.$set=function(s,o){var h,f=D.p(s),c="set"+(this.$u?"UTC":""),d=(h={},h[i]=c+"Date",h.date=c+"Date",h[u]=c+"Month",h[a]=c+"FullYear",h[r]=c+"Hours",h[e]=c+"Minutes",h[n]=c+"Seconds",h[t]=c+"Milliseconds",h)[f],$=f===i?this.$D+(o-this.$W):o;if(f===u||f===a){var l=this.clone().set("date",1);l.$d[d]($),l.init(),this.$d=l.set("date",Math.min(this.$D,l.daysInMonth())).toDate()}else d&&this.$d[d]($);return this.init(),this},d.set=function(t,n){return this.clone().$set(t,n)},d.get=function(t){return this[D.p(t)]()},d.add=function(t,o){var h,f=this;t=Number(t);var c=D.p(o),d=function(n){var e=g(f);return D.w(e.date(e.date()+Math.round(n*t)),f)};if(c===u)return this.set(u,this.$M+t);if(c===a)return this.set(a,this.$y+t);if(c===i)return d(1);if(c===s)return d(7);var $=(h={},h[e]=6e4,h[r]=36e5,h[n]=1e3,h)[c]||1,l=this.valueOf()+t*$;return D.w(l,this)},d.subtract=function(t,n){return this.add(-1*t,n)},d.format=function(t){var n=this;if(!this.isValid())return"Invalid Date";var e=t||"YYYY-MM-DDTHH:mm:ssZ",r=D.z(this),i=this.$locale(),s=this.$H,u=this.$m,o=this.$M,a=i.weekdays,h=i.months,c=function(t,r,i,s){return t&&(t[r]||t(n,e))||i[r].substr(0,s)},d=function(t){return D.s(s%12||12,t,"0")},$=i.meridiem||function(t,n,e){var r=t<12?"AM":"PM";return e?r.toLowerCase():r},l={YY:String(this.$y).slice(-2),YYYY:this.$y,M:o+1,MM:D.s(o+1,2,"0"),MMM:c(i.monthsShort,o,h,3),MMMM:h[o]||h(this,e),D:this.$D,DD:D.s(this.$D,2,"0"),d:String(this.$W),dd:c(i.weekdaysMin,this.$W,a,2),ddd:c(i.weekdaysShort,this.$W,a,3),dddd:a[this.$W],H:String(s),HH:D.s(s,2,"0"),h:d(1),hh:d(2),a:$(s,u,!0),A:$(s,u,!1),m:String(u),mm:D.s(u,2,"0"),s:String(this.$s),ss:D.s(this.$s,2,"0"),SSS:D.s(this.$ms,3,"0"),Z:r};return e.replace(f,function(t,n){return n||l[t]||r.replace(":","")})},d.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},d.diff=function(t,h,f){var c,d=D.p(h),$=g(t),l=6e4*($.utcOffset()-this.utcOffset()),m=this-$,y=D.m(this,$);return y=(c={},c[a]=y/12,c[u]=y,c[o]=y/3,c[s]=(m-l)/6048e5,c[i]=(m-l)/864e5,c[r]=m/36e5,c[e]=m/6e4,c[n]=m/1e3,c)[d]||m,f?y:D.a(y)},d.daysInMonth=function(){return this.endOf(u).$D},d.$locale=function(){return m[this.$L]},d.locale=function(t,n){if(!t)return this.$L;var e=this.clone();return e.$L=M(t,n,!0),e},d.clone=function(){return D.w(this.toDate(),this)},d.toDate=function(){return new Date(this.$d)},d.toJSON=function(){return this.toISOString()},d.toISOString=function(){return this.$d.toISOString()},d.toString=function(){return this.$d.toUTCString()},c}();return g.prototype=v.prototype,g.extend=function(t,n){return t(n,v,g),g},g.locale=M,g.isDayjs=y,g.unix=function(t){return g(1e3*t)},g.en=m[l],g.Ls=m,g});
 
 
 /***/ }),
@@ -2903,7 +2903,7 @@ Gridvue_type_template_id_2bf979a7_render._withStripped = true
     },
 
     /**
-     * Chceck if specified line is inside viewport (visible)
+     * Check if specified line is inside viewport (visible)
      *
      * @returns {function}
      */
@@ -5770,9 +5770,6 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
   return {
     fontSize,
     fontFamily,
-    '*': {
-      'box-sizing': 'border-box'
-    },
     'main-view': {
       background: '#FFFFFF'
     },
@@ -6169,21 +6166,7 @@ function getOptions(userOptions) {
   if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.name !== 'undefined') {
     localeName = userOptions.locale.name;
   }
-  let fontSize = '12px';
-  let fontFamily = window
-    .getComputedStyle(document.body)
-    .getPropertyValue('font-family')
-    .toString();
-  if (typeof userOptions.style !== 'undefined') {
-    if (typeof userOptions.style.fontSize !== 'undefined') {
-      fontSize = userOptions.fontSize;
-    }
-    if (typeof userOptions.style.fontFamily !== 'undefined') {
-      fontFamily = userOptions.style.fontFamily;
-    }
-  }
   return {
-    style: getStyle(fontSize, fontFamily),
     slots: {
       header: {}
     },
@@ -6430,6 +6413,28 @@ function getOptions(userOptions) {
 }
 
 /**
+ * Prepare style
+ *
+ * @returns {object}
+ */
+function prepareStyle(userStyle) {
+  let fontSize = '12px';
+  let fontFamily = window
+    .getComputedStyle(document.body)
+    .getPropertyValue('font-family')
+    .toString();
+  if (typeof userStyle !== 'undefined') {
+    if (typeof userStyle.fontSize !== 'undefined') {
+      fontSize = userOptions.fontSize;
+    }
+    if (typeof userStyle.fontFamily !== 'undefined') {
+      fontFamily = userStyle.fontFamily;
+    }
+  }
+  return getStyle(fontSize, fontFamily);
+}
+
+/**
  * Helper function to determine if specified variable is an object
  *
  * @param {any} item
@@ -6464,22 +6469,20 @@ function mergeDeep(target, ...sources) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          Object.assign(target, { [key]: {} });
+          target[key] = {};
         }
         target[key] = mergeDeep(target[key], source[key]);
       } else if (Array.isArray(source[key])) {
-        target[key] = source[key].map(item => {
+        target[key] = [];
+        for (let item of source[key]) {
           if (isObject(item)) {
-            return mergeDeep({}, item);
+            target[key].push(mergeDeep({}, item));
+            continue;
           }
-          return item;
-        });
-      } else if (typeof source[key] === 'function') {
-        if (source[key].toString().indexOf('[native code]') === -1) {
-          target[key] = source[key];
+          target[key].push(item);
         }
       } else {
-        Object.assign(target, { [key]: source[key] });
+        target[key] = source[key];
       }
     }
   }
@@ -6538,42 +6541,42 @@ function mergeDeepReactive(component, target, ...sources) {
  *
  * @returns {boolean}
  */
-function notEqualDeep(left, right, cache = []) {
+function notEqualDeep(left, right, cache = [], path = '') {
   if (typeof right !== typeof left) {
-    return { left, right, what: 'typeof' };
+    return { left, right, what: path + '.typeof' };
   } else if (Array.isArray(left) && !Array.isArray(right)) {
-    return { left, right, what: 'isArray' };
+    return { left, right, what: path + '.isArray' };
   } else if (Array.isArray(right) && !Array.isArray(left)) {
-    return { left, right, what: 'isArray' };
+    return { left, right, what: path + '.isArray' };
   } else if (Array.isArray(left) && Array.isArray(right)) {
     if (left.length !== right.length) {
-      return { left, right, what: 'length' };
+      return { left, right, what: path + '.length' };
     }
     let what;
     for (let index = 0, len = left.length; index < len; index++) {
-      if ((what = notEqualDeep(left[index], right[index], cache))) {
+      if ((what = notEqualDeep(left[index], right[index], cache, path + '.' + index))) {
         return what;
       }
     }
   } else if (isObject(left) && !isObject(right)) {
-    return { left, right, what: 'isObject' };
+    return { left, right, what: path + '.isObject' };
   } else if (isObject(right) && !isObject(left)) {
-    return { left, right, what: 'isObject' };
+    return { left, right, what: path + '.isObject' };
   } else if (isObject(left) && isObject(right)) {
     for (let key in left) {
       if (!left.hasOwnProperty(key) || !left.propertyIsEnumerable(key)) {
         continue;
       }
       if (!right.hasOwnProperty(key)) {
-        return { left, right, what: key };
+        return { left, right, what: path + '.' + key };
       }
       let what;
-      if ((what = notEqualDeep(left[key], right[key], cache))) {
+      if ((what = notEqualDeep(left[key], right[key], cache, path + '.' + key))) {
         return what;
       }
     }
   } else if (left !== right) {
-    return { left, right, what: '!==' };
+    return { left, right, what: path + '. !==' };
   }
   return false;
 }
@@ -6589,7 +6592,7 @@ const GanttElastic = {
   components: {
     MainView: MainView
   },
-  props: ['tasks', 'options'],
+  props: ['tasks', 'options', 'styleRules'],
   provide() {
     const provider = {};
     const self = this;
@@ -6606,11 +6609,13 @@ const GanttElastic = {
         options: {
           scrollBarHeight: 0,
           allVisibleTasksHeight: 0,
+          outerHeight: 0,
           scroll: {
             left: 0,
             top: 0
           }
         },
+        dynamicStyle: {},
         refs: {},
         tasksById: {},
         taskTree: {},
@@ -6620,6 +6625,7 @@ const GanttElastic = {
         resizeObserver: null,
         unwatchTasks: null,
         unwatchOptions: null,
+        unwatchStyle: null,
         unwatchOutputTasks: null,
         unwatchOutputOptions: null
       }
@@ -6648,73 +6654,67 @@ const GanttElastic = {
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
       const height = noScroll - withScroll;
-      this.state.options.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
+      this.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
       return (this.state.options.scrollBarHeight = height);
     },
 
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks() {
-      this.state.tasks = this.state.tasks.map(task => {
+    fillTasks(tasks) {
+      for (let task of tasks) {
         if (typeof task.x === 'undefined') {
-          this.$set(task, 'x', 0);
+          task.x = 0;
         }
         if (typeof task.y === 'undefined') {
-          this.$set(task, 'y', 0);
+          task.y = 0;
         }
         if (typeof task.width === 'undefined') {
-          this.$set(task, 'width', 0);
+          task.width = 0;
         }
         if (typeof task.height === 'undefined') {
-          this.$set(task, 'height', 0);
-        }
-        if (typeof task.tooltip === 'undefined') {
-          this.mergeDeepReactive(this, task, { tooltip: { visible: false } });
-        }
-        if (typeof task.tooltip.visible === 'undefined') {
-          task.tooltip.visible = false;
+          task.height = 0;
         }
         if (typeof task.mouseOver === 'undefined') {
-          this.$set(task, 'mouseOver', false);
+          task.mouseOver = false;
         }
         if (typeof task.collapsed === 'undefined') {
-          this.$set(task, 'collapsed', false);
+          task.collapsed = false;
         }
         if (typeof task.dependentOn === 'undefined') {
-          this.$set(task, 'dependentOn', []);
+          task.dependentOn = [];
         }
         if (typeof task.parentId === 'undefined') {
-          this.$set(task, 'parentId', null);
+          task.parentId = null;
         }
         if (typeof task.style === 'undefined') {
-          this.$set(task, 'style', {});
+          task.style = {};
         }
         if (typeof task.children === 'undefined') {
-          this.$set(task, 'children', []);
+          task.children = [];
         }
         if (typeof task.allChildren === 'undefined') {
-          this.$set(task, 'allChildren', []);
+          task.allChildren = [];
         }
         if (typeof task.parents === 'undefined') {
-          this.$set(task, 'parents', []);
+          task.parents = [];
         }
         if (typeof task.parent === 'undefined') {
-          this.$set(task, 'parent', null);
+          task.parent = null;
         }
         if (typeof task.startTime === 'undefined') {
-          this.$set(task, 'startTime', dayjs_min_default()(task.start).valueOf());
+          task.startTime = dayjs_min_default()(task.start).valueOf();
         }
         if (typeof task.endTime === 'undefined' && task.hasOwnProperty('end')) {
-          this.$set(task, 'endTime', dayjs_min_default()(task.end).valueOf());
+          task.endTime = dayjs_min_default()(task.end).valueOf();
         } else if (typeof task.endTime === 'undefined' && task.hasOwnProperty('duration')) {
-          this.$set(task, 'endTime', task.startTime + task.duration);
+          task.endTime = task.startTime + task.duration;
         }
         if (typeof task.duration === 'undefined' && task.hasOwnProperty('endTime')) {
-          this.$set(task, 'duration', task.endTime - task.startTime);
+          task.duration = task.endTime - task.startTime;
         }
-        return task;
-      });
+      }
+      return tasks;
     },
 
     /**
@@ -6724,91 +6724,66 @@ const GanttElastic = {
      * @param {Object} options
      */
     mapTasks(tasks, options) {
-      return tasks.map(task => {
-        return mergeDeep(
-          {},
-          {
-            ...task,
-            id: task[options.taskMapping.id],
-            start: task[options.taskMapping.start],
-            label: task[options.taskMapping.label],
-            duration: task[options.taskMapping.duration],
-            progress: task[options.taskMapping.progress],
-            type: task[options.taskMapping.type],
-            style: task[options.taskMapping.style],
-            collapsed: task[options.taskMapping.collapsed]
-          }
-        );
-      });
+      for (let [index, task] of tasks.entries()) {
+        tasks[index] = {
+          ...task,
+          id: task[options.taskMapping.id],
+          start: task[options.taskMapping.start],
+          label: task[options.taskMapping.label],
+          duration: task[options.taskMapping.duration],
+          progress: task[options.taskMapping.progress],
+          type: task[options.taskMapping.type],
+          style: task[options.taskMapping.style],
+          collapsed: task[options.taskMapping.collapsed]
+        };
+      }
+      return tasks;
     },
 
     /**
      * Initialize component
      */
     initialize(itsUpdate = '') {
-      const options = this.mergeDeep({}, getOptions(this.options), this.options);
-      const tasks = this.tasks.map(task => mergeDeep({}, task));
-      switch (itsUpdate) {
-        case 'tasks':
-          this.mergeDeepReactive(this, this.state, {
-            tasks: this.mapTasks(tasks, options)
-          });
-          break;
-        case 'options':
-          this.mergeDeepReactive(this, this.state, { options });
-          break;
-        default:
-          this.mergeDeepReactive(
-            this,
-            this.state,
-            { options },
-            {
-              tasks: this.mapTasks(tasks, options)
-            }
-          );
+      let options = mergeDeep({}, this.state.options, getOptions(this.options), this.options);
+      let tasks = this.mapTasks(this.tasks, options);
+      if (Object.keys(this.state.dynamicStyle).length === 0) {
+        this.initializeStyle();
       }
-      dayjs_min_default.a.locale(this.state.options.locale, null, true);
-      dayjs_min_default.a.locale(this.state.options.locale.name);
-      if (typeof this.state.options.taskList === 'undefined') {
-        this.$set(this.state.options, 'taskList', {});
+      dayjs_min_default.a.locale(options.locale, null, true);
+      dayjs_min_default.a.locale(options.locale.name);
+      if (typeof options.taskList === 'undefined') {
+        options.taskList = {};
       }
-      if (typeof this.state.options.taskList.columns === 'undefined') {
-        this.$set(this.state.options.taskList, 'columns', []);
-      }
-      this.state.options.taskList.columns = this.state.options.taskList.columns.map((column, index) => {
-        this.$set(column, 'thresholdPercent', 100);
-        this.$set(column, 'widthFromPercentage', 0);
-        this.$set(column, 'finalWidth', 0);
+      options.taskList.columns = options.taskList.columns.map((column, index) => {
+        column.thresholdPercent = 100;
+        column.widthFromPercentage = 0;
+        column.finalWidth = 0;
         if (typeof column.height === 'undefined') {
-          this.$set(column, 'height', 0);
+          column.height = 0;
         }
         if (typeof column.style === 'undefined') {
-          this.$set(column, 'style', {});
+          column.style = {};
         }
-        this.$set(column, '_id', `${index}-${column.label}`);
+        column._id = `${index}-${column.label}`;
         return column;
       });
-      if (itsUpdate === '' || itsUpdate === 'tasks') {
-        // initialize observer
-        this.refreshTasks();
-        this.$set(this.state, 'rootTask', {
-          id: null,
-          label: 'root',
-          children: [],
-          allChildren: [],
-          parents: [],
-          parent: null,
-          __root: true
-        });
-        this.resetTaskTree();
-        this.$set(this.state, 'taskTree', this.makeTaskTree(this.state.rootTask));
-        this.$set(this.state, 'tasks', this.state.taskTree.allChildren.map(childId => this.getTask(childId)));
-      }
+      this.state.options = options;
+      tasks = this.fillTasks(tasks);
+      this.state.tasksById = this.resetTaskTree(tasks);
+      this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
+      this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
-      this.$set(this.state.options, 'scrollBarHeight', this.getScrollBarHeight());
-      this.$set(this.state.options, 'outerHeight', this.state.options.height + this.state.options.scrollBarHeight);
+      this.state.options.scrollBarHeight = this.getScrollBarHeight();
+      this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
       this.globalOnResize();
+    },
+
+    /**
+     * Initialize style
+     */
+    initializeStyle() {
+      this.state.dynamicStyle = mergeDeep({}, prepareStyle(this.dynamicStyle), this.dynamicStyle);
     },
 
     /**
@@ -6881,20 +6856,26 @@ const GanttElastic = {
     /**
      * Reset task tree - which is used to create tree like structure inside task list
      */
-    resetTaskTree() {
-      this.state.rootTask.children = [];
-      this.state.rootTask.allChildren = [];
-      this.state.rootTask.parent = null;
-      this.state.rootTask.parents = [];
-      this.state.tasksById = {};
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
+    resetTaskTree(tasks) {
+      this.$set(this.state, 'rootTask', {
+        id: null,
+        label: 'root',
+        children: [],
+        allChildren: [],
+        parents: [],
+        parent: null,
+        __root: true
+      });
+      const tasksById = {};
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let current = tasks[i];
         current.children = [];
         current.allChildren = [];
         current.parent = null;
         current.parents = [];
-        this.state.tasksById[current.id] = current;
+        tasksById[current.id] = current;
       }
+      return tasksById;
     },
 
     /**
@@ -6903,9 +6884,9 @@ const GanttElastic = {
      * @param {object} task
      * @returns {object} tasks with children and parents
      */
-    makeTaskTree(task) {
-      for (let i = 0, len = this.state.tasks.length; i < len; i++) {
-        let current = this.state.tasks[i];
+    makeTaskTree(task, tasks) {
+      for (let i = 0, len = tasks.length; i < len; i++) {
+        let current = tasks[i];
         if (current.parentId === task.id) {
           if (task.parents.length) {
             task.parents.forEach(parent => current.parents.push(parent));
@@ -6917,7 +6898,7 @@ const GanttElastic = {
             current.parents = [];
             current.parent = null;
           }
-          current = this.makeTaskTree(current);
+          current = this.makeTaskTree(current, tasks);
           task.allChildren.push(current.id);
           task.children.push(current.id);
           current.allChildren.forEach(childId => task.allChildren.push(childId));
@@ -7104,10 +7085,10 @@ const GanttElastic = {
       this.state.options.scroll.chart.top = top;
       this.state.options.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.options.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.options.scroll.chart.dateTime.left = dayjs_min_default()(this.state.options.scroll.chart.time);
+      this.state.options.scroll.chart.dateTime.left = dayjs_min_default()(this.state.options.scroll.chart.time).valueOf();
       this.state.options.scroll.chart.dateTime.right = dayjs_min_default()(
         this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth)
-      );
+      ).valueOf();
       this.scrollTo(left, top);
     },
 
@@ -7581,7 +7562,7 @@ const GanttElastic = {
      * Style shortcut
      */
     style() {
-      return this.state.options.style;
+      return this.state.dynamicStyle;
     },
 
     /**
@@ -7621,7 +7602,7 @@ const GanttElastic = {
           this.setup('tasks');
         }
       },
-      { deep: true }
+      { deep: false }
     );
     this.state.unwatchOptions = this.$watch(
       'options',
@@ -7631,7 +7612,17 @@ const GanttElastic = {
           this.setup('options');
         }
       },
-      { deep: true }
+      { deep: false }
+    );
+    this.state.unwatchStyle = this.$watch(
+      'dynamicStyle',
+      style => {
+        const notEqual = notEqualDeep(style, this.dynamicStyle);
+        if (notEqual) {
+          this.initializeStyle();
+        }
+      },
+      { deep: true, immediate: true }
     );
 
     this.state.unwatchOutputTasks = this.$watch(
@@ -7639,7 +7630,7 @@ const GanttElastic = {
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
         if (notEqual && this.state.emitTasksChanges) {
-          this.$emit('tasks-updated', tasks);
+          this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
       { deep: true }
@@ -7649,7 +7640,7 @@ const GanttElastic = {
       options => {
         const notEqual = notEqualDeep(this.options, options);
         if (notEqual && this.state.emitOptionsChanges) {
-          this.$emit('options-updated', options);
+          this.$emit('options-updated', mergeDeep({}, options));
         }
       },
       { deep: true }
@@ -7704,6 +7695,7 @@ const GanttElastic = {
     this.state.resizeObserver.unobserve(this.$el.parentNode);
     this.state.unwatchTasks();
     this.state.unwatchOptions();
+    this.state.unwatchStyle();
     this.state.unwatchOutputTasks();
     this.state.unwatchOutputOptions();
     this.$emit('before-destroy');

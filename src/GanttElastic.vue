@@ -40,21 +40,7 @@ function getOptions(userOptions) {
   if (typeof userOptions.locale !== 'undefined' && typeof userOptions.locale.name !== 'undefined') {
     localeName = userOptions.locale.name;
   }
-  let fontSize = '12px';
-  let fontFamily = window
-    .getComputedStyle(document.body)
-    .getPropertyValue('font-family')
-    .toString();
-  if (typeof userOptions.style !== 'undefined') {
-    if (typeof userOptions.style.fontSize !== 'undefined') {
-      fontSize = userOptions.fontSize;
-    }
-    if (typeof userOptions.style.fontFamily !== 'undefined') {
-      fontFamily = userOptions.style.fontFamily;
-    }
-  }
   return {
-    style: getStyle(fontSize, fontFamily),
     slots: {
       header: {}
     },
@@ -301,6 +287,28 @@ function getOptions(userOptions) {
 }
 
 /**
+ * Prepare style
+ *
+ * @returns {object}
+ */
+function prepareStyle(userStyle) {
+  let fontSize = '12px';
+  let fontFamily = window
+    .getComputedStyle(document.body)
+    .getPropertyValue('font-family')
+    .toString();
+  if (typeof userStyle !== 'undefined') {
+    if (typeof userStyle.fontSize !== 'undefined') {
+      fontSize = userOptions.fontSize;
+    }
+    if (typeof userStyle.fontFamily !== 'undefined') {
+      fontFamily = userStyle.fontFamily;
+    }
+  }
+  return getStyle(fontSize, fontFamily);
+}
+
+/**
  * Helper function to determine if specified variable is an object
  *
  * @param {any} item
@@ -335,22 +343,20 @@ export function mergeDeep(target, ...sources) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (typeof target[key] === 'undefined') {
-          Object.assign(target, { [key]: {} });
+          target[key] = {};
         }
         target[key] = mergeDeep(target[key], source[key]);
       } else if (Array.isArray(source[key])) {
-        target[key] = source[key].map(item => {
+        target[key] = [];
+        for (let item of source[key]) {
           if (isObject(item)) {
-            return mergeDeep({}, item);
+            target[key].push(mergeDeep({}, item));
+            continue;
           }
-          return item;
-        });
-      } else if (typeof source[key] === 'function') {
-        if (source[key].toString().indexOf('[native code]') === -1) {
-          target[key] = source[key];
+          target[key].push(item);
         }
       } else {
-        Object.assign(target, { [key]: source[key] });
+        target[key] = source[key];
       }
     }
   }
@@ -409,42 +415,42 @@ export function mergeDeepReactive(component, target, ...sources) {
  *
  * @returns {boolean}
  */
-export function notEqualDeep(left, right, cache = []) {
+export function notEqualDeep(left, right, cache = [], path = '') {
   if (typeof right !== typeof left) {
-    return { left, right, what: 'typeof' };
+    return { left, right, what: path + '.typeof' };
   } else if (Array.isArray(left) && !Array.isArray(right)) {
-    return { left, right, what: 'isArray' };
+    return { left, right, what: path + '.isArray' };
   } else if (Array.isArray(right) && !Array.isArray(left)) {
-    return { left, right, what: 'isArray' };
+    return { left, right, what: path + '.isArray' };
   } else if (Array.isArray(left) && Array.isArray(right)) {
     if (left.length !== right.length) {
-      return { left, right, what: 'length' };
+      return { left, right, what: path + '.length' };
     }
     let what;
     for (let index = 0, len = left.length; index < len; index++) {
-      if ((what = notEqualDeep(left[index], right[index], cache))) {
+      if ((what = notEqualDeep(left[index], right[index], cache, path + '.' + index))) {
         return what;
       }
     }
   } else if (isObject(left) && !isObject(right)) {
-    return { left, right, what: 'isObject' };
+    return { left, right, what: path + '.isObject' };
   } else if (isObject(right) && !isObject(left)) {
-    return { left, right, what: 'isObject' };
+    return { left, right, what: path + '.isObject' };
   } else if (isObject(left) && isObject(right)) {
     for (let key in left) {
       if (!left.hasOwnProperty(key) || !left.propertyIsEnumerable(key)) {
         continue;
       }
       if (!right.hasOwnProperty(key)) {
-        return { left, right, what: key };
+        return { left, right, what: path + '.' + key };
       }
       let what;
-      if ((what = notEqualDeep(left[key], right[key], cache))) {
+      if ((what = notEqualDeep(left[key], right[key], cache, path + '.' + key))) {
         return what;
       }
     }
   } else if (left !== right) {
-    return { left, right, what: '!==' };
+    return { left, right, what: path + '. !==' };
   }
   return false;
 }
@@ -460,7 +466,7 @@ const GanttElastic = {
   components: {
     MainView
   },
-  props: ['tasks', 'options'],
+  props: ['tasks', 'options', 'styleRules'],
   provide() {
     const provider = {};
     const self = this;
@@ -477,11 +483,13 @@ const GanttElastic = {
         options: {
           scrollBarHeight: 0,
           allVisibleTasksHeight: 0,
+          outerHeight: 0,
           scroll: {
             left: 0,
             top: 0
           }
         },
+        dynamicStyle: {},
         refs: {},
         tasksById: {},
         taskTree: {},
@@ -491,6 +499,7 @@ const GanttElastic = {
         resizeObserver: null,
         unwatchTasks: null,
         unwatchOptions: null,
+        unwatchStyle: null,
         unwatchOutputTasks: null,
         unwatchOutputOptions: null
       }
@@ -519,15 +528,15 @@ const GanttElastic = {
       var withScroll = inner.offsetHeight;
       outer.parentNode.removeChild(outer);
       const height = noScroll - withScroll;
-      this.state.options.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
+      this.style['chart-scroll-container--vertical']['margin-left'] = `-${height}px`;
       return (this.state.options.scrollBarHeight = height);
     },
 
     /**
      * Fill out empty task properties and make it reactive
      */
-    refreshTasks(tasks) {
-      return tasks.map(task => {
+    fillTasks(tasks) {
+      for (let task of tasks) {
         if (typeof task.x === 'undefined') {
           task.x = 0;
         }
@@ -578,8 +587,8 @@ const GanttElastic = {
         if (typeof task.duration === 'undefined' && task.hasOwnProperty('endTime')) {
           task.duration = task.endTime - task.startTime;
         }
-        return task;
-      });
+      }
+      return tasks;
     },
 
     /**
@@ -589,30 +598,31 @@ const GanttElastic = {
      * @param {Object} options
      */
     mapTasks(tasks, options) {
-      return tasks.map(task => {
-        return mergeDeep(
-          {},
-          {
-            ...task,
-            id: task[options.taskMapping.id],
-            start: task[options.taskMapping.start],
-            label: task[options.taskMapping.label],
-            duration: task[options.taskMapping.duration],
-            progress: task[options.taskMapping.progress],
-            type: task[options.taskMapping.type],
-            style: task[options.taskMapping.style],
-            collapsed: task[options.taskMapping.collapsed]
-          }
-        );
-      });
+      for (let [index, task] of tasks.entries()) {
+        tasks[index] = {
+          ...task,
+          id: task[options.taskMapping.id],
+          start: task[options.taskMapping.start],
+          label: task[options.taskMapping.label],
+          duration: task[options.taskMapping.duration],
+          progress: task[options.taskMapping.progress],
+          type: task[options.taskMapping.type],
+          style: task[options.taskMapping.style],
+          collapsed: task[options.taskMapping.collapsed]
+        };
+      }
+      return tasks;
     },
 
     /**
      * Initialize component
      */
     initialize(itsUpdate = '') {
-      let options = this.mergeDeep({}, this.state.options, getOptions(this.options), this.options);
+      let options = mergeDeep({}, this.state.options, getOptions(this.options), this.options);
       let tasks = this.mapTasks(this.tasks, options);
+      if (Object.keys(this.state.dynamicStyle).length === 0) {
+        this.initializeStyle();
+      }
       dayjs.locale(options.locale, null, true);
       dayjs.locale(options.locale.name);
       if (typeof options.taskList === 'undefined') {
@@ -631,17 +641,23 @@ const GanttElastic = {
         column._id = `${index}-${column.label}`;
         return column;
       });
-      this.state.options = mergeDeepReactive(this, {}, this.state.options, options);
-      tasks = this.refreshTasks(tasks);
+      this.state.options = options;
+      tasks = this.fillTasks(tasks);
       this.state.tasksById = this.resetTaskTree(tasks);
       this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
       this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
       this.getScrollBarHeight();
-      this.emitOptionsChanges = true;
-      this.$set(this.state.options, 'scrollBarHeight', this.getScrollBarHeight());
-      this.$set(this.state.options, 'outerHeight', this.state.options.height + this.state.options.scrollBarHeight);
+      this.state.options.scrollBarHeight = this.getScrollBarHeight();
+      this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
       this.globalOnResize();
+    },
+
+    /**
+     * Initialize style
+     */
+    initializeStyle() {
+      this.state.dynamicStyle = mergeDeep({}, prepareStyle(this.dynamicStyle), this.dynamicStyle);
     },
 
     /**
@@ -943,10 +959,10 @@ const GanttElastic = {
       this.state.options.scroll.chart.top = top;
       this.state.options.scroll.chart.time = this.pixelOffsetXToTime(left);
       this.state.options.scroll.chart.timeCenter = this.pixelOffsetXToTime(left + chartContainerWidth / 2);
-      this.state.options.scroll.chart.dateTime.left = dayjs(this.state.options.scroll.chart.time);
+      this.state.options.scroll.chart.dateTime.left = dayjs(this.state.options.scroll.chart.time).valueOf();
       this.state.options.scroll.chart.dateTime.right = dayjs(
         this.pixelOffsetXToTime(left + this.state.refs.chart.clientWidth)
-      );
+      ).valueOf();
       this.scrollTo(left, top);
     },
 
@@ -1420,7 +1436,7 @@ const GanttElastic = {
      * Style shortcut
      */
     style() {
-      return this.state.options.style;
+      return this.state.dynamicStyle;
     },
 
     /**
@@ -1460,7 +1476,7 @@ const GanttElastic = {
           this.setup('tasks');
         }
       },
-      { deep: true }
+      { deep: false }
     );
     this.state.unwatchOptions = this.$watch(
       'options',
@@ -1470,7 +1486,17 @@ const GanttElastic = {
           this.setup('options');
         }
       },
-      { deep: true }
+      { deep: false }
+    );
+    this.state.unwatchStyle = this.$watch(
+      'dynamicStyle',
+      style => {
+        const notEqual = notEqualDeep(style, this.dynamicStyle);
+        if (notEqual) {
+          this.initializeStyle();
+        }
+      },
+      { deep: true, immediate: true }
     );
 
     this.state.unwatchOutputTasks = this.$watch(
@@ -1543,6 +1569,7 @@ const GanttElastic = {
     this.state.resizeObserver.unobserve(this.$el.parentNode);
     this.state.unwatchTasks();
     this.state.unwatchOptions();
+    this.state.unwatchStyle();
     this.state.unwatchOutputTasks();
     this.state.unwatchOutputOptions();
     this.$emit('before-destroy');
