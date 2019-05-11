@@ -710,7 +710,7 @@ const GanttElastic = {
     calculateTaskListColumnsDimensions() {
       let final = 0;
       let percentage = 0;
-      this.state.options.taskList.columns.forEach(column => {
+      for (let column of this.state.options.taskList.columns) {
         if (column.expander) {
           column.widthFromPercentage =
             ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.options.taskList.percent;
@@ -721,7 +721,7 @@ const GanttElastic = {
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style['grid-line-horizontal']['stroke-width'];
-      });
+      }
       this.state.options.taskList.widthFromPercentage = percentage;
       this.state.options.taskList.finalWidth = final;
     },
@@ -1502,7 +1502,7 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual) {
+        if (notEqual && this.state.emitTasksChanges) {
           this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
@@ -1512,7 +1512,7 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual) {
+        if (notEqual && this.state.emitOptionsChanges) {
           this.$emit('options-updated', mergeDeep({}, options));
         }
       },

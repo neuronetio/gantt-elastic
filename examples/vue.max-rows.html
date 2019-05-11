@@ -140,16 +140,12 @@
           'Display task list': 'Task list'
         }
       };
-
-      Vue.use(Vuex);
-      const store = new Vuex.Store({});
       // create instance
       const app = new Vue({
         components: {
           'gantt-elastic': GanttElastic,
           'gantt-elastic-header': Header
         },
-        store,
         data: {
           tasks,
           options
