@@ -53,7 +53,7 @@ and if you want default header
     <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
 
     <script src="https://unpkg.com/gantt-elastic/dist/bundle.js"></script>
-    <script src="https://unpkg.com/gantt-elastic-header/dist/Header.umd.js"></script>
+    <script src="https://unpkg.com/gantt-elastic-header@0.1.11/dist/Header.umd.js"></script>
   </head>
 
   <body>
@@ -225,10 +225,6 @@ and if you want default header
       ];
 
       const options = {
-        title: {
-          label: 'Your project title as html (link or whatever...)',
-          html: false
-        },
         taskList: {
           columns: [
             {
@@ -279,15 +275,6 @@ and if you want default header
               }
             }
           ]
-        },
-        locale: {
-          code: 'en',
-          Now: 'Now',
-          'X-Scale': 'Zoom-X',
-          'Y-Scale': 'Zoom-Y',
-          'Task list width': 'Task list',
-          'Before/After': 'Expand',
-          'Display task list': 'Task list'
         }
         /*locale:{
         name: 'pl', // name String
