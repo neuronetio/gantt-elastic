@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs" crossorigin="anonymous"></script>
     <script src="/dist/bundle.js"></script>
-    <script src="https://unpkg.com/gantt-elastic-header@0.1.1/dist/Header.umd.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/gantt-elastic-header@0.1.11/dist/Header.umd.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -240,10 +240,6 @@
         },
         maxRows: 100,
         maxHeight: 300,
-        title: {
-          label: 'Your project title as html (link or whatever...)',
-          html: false
-        },
         row: {
           height: 24
         },
@@ -320,15 +316,6 @@
               }
             }
           ]
-        },
-        locale: {
-          name: 'en',
-          Now: 'Now',
-          'X-Scale': 'Zoom-X',
-          'Y-Scale': 'Zoom-Y',
-          'Task list width': 'Task list',
-          'Before/After': 'Expand',
-          'Display task list': 'Task list'
         }
       };
 

@@ -44,10 +44,6 @@ function getOptions(userOptions) {
     slots: {
       header: {}
     },
-    title: {
-      label: 'gantt-elastic',
-      html: false
-    },
     taskMapping: {
       id: 'id',
       start: 'start',
@@ -241,12 +237,6 @@ function getOptions(userOptions) {
     },
     locale: {
       name: 'en',
-      Now: 'Now',
-      'X-Scale': 'Zoom-X',
-      'Y-Scale': 'Zoom-Y',
-      'Task list width': 'Task list',
-      'Before/After': 'Expand',
-      'Display task list': 'Show task list',
       weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
       weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
       weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
@@ -1585,7 +1575,8 @@ export default GanttElastic;
 </script>
 
 <style>
-.gantt-elastic * {
+[class^='gantt-elastic'],
+[class*=' gantt-elastic'] {
   box-sizing: border-box;
 }
 .gantt-elastic__main-view svg {

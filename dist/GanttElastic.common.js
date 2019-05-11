@@ -1095,7 +1095,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.gantt-elastic * {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n[class^='gantt-elastic'],\n[class*=' gantt-elastic'] {\n  box-sizing: border-box;\n}\n.gantt-elastic__main-view svg {\n  display: block;\n}\n.gantt-elastic__grid-horizontal-line,\n.gantt-elastic__grid-vertical-line {\n  stroke: #a0a0a0;\n  stroke-width: 1;\n}\nforeignObject > * {\n  margin: 0px;\n}\n.gantt-elastic .p-2 {\n  padding: 10rem;\n}\n.gantt-elastic__main-view-main-container,\n.gantt-elastic__main-view-container {\n  overflow: hidden;\n  max-width: 100%;\n}\n.gantt-elastic__task-list-header-column:last-of-type {\n  border-right: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item:last-of-type {\n  border-bottom: 1px solid #00000050;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover {\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value-container {\n  position: relative;\n  overflow: visible !important;\n}\n.gantt-elastic__task-list-item-value-wrapper:hover > .gantt-elastic__task-list-item-value {\n  position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -5801,52 +5801,6 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
       'max-width': '100%',
       height: '100%'
     },
-    header: {
-      'font-family': fontFamily,
-      margin: '0px auto',
-      background: '#f3f5f747',
-      padding: '10px',
-      overflow: 'hidden',
-      clear: 'both',
-      display: 'flex',
-      'justify-content': 'space-between'
-    },
-    'header-title': { float: 'left' },
-    'header-options': { float: 'right' },
-    'header-title--text': {
-      'font-size': '20px',
-      'vertical-align': 'middle',
-      'font-weight': '400',
-      'line-height': '35px',
-      'padding-left': '22px',
-      'letter-spacing': '1px'
-    },
-    'header-title--html': {
-      'font-size': '20px',
-      'vertical-align': 'middle',
-      'font-weight': '400',
-      'line-height': '35px',
-      'padding-left': '22px',
-      'letter-spacing': '1px'
-    },
-    'header-btn-recenter': {
-      background: '#95A5A6',
-      border: 'none',
-      outline: 'none',
-      cursor: 'pointer',
-      color: 'white',
-      'border-radius': '3px',
-      'margin-right': '27px',
-      'font-size': '16px',
-      padding: '8px 12px'
-    },
-    'header-slider': {},
-    'header-slider-wrapper': { display: 'inline-block', 'vertical-align': 'middle' },
-    'header-slider--slider': {},
-    'header-slider--process': { background: '#ccc' },
-    'header-task-list-switch--label': {},
-    'header-task-list-switch': { margin: '0px 15px', 'vertical-align': 'middle' },
-    'header-label': {},
     'calendar-wrapper': {
       'user-select': 'none'
     },
@@ -6183,10 +6137,6 @@ function getOptions(userOptions) {
     slots: {
       header: {}
     },
-    title: {
-      label: 'gantt-elastic',
-      html: false
-    },
     taskMapping: {
       id: 'id',
       start: 'start',
@@ -6380,12 +6330,6 @@ function getOptions(userOptions) {
     },
     locale: {
       name: 'en',
-      Now: 'Now',
-      'X-Scale': 'Zoom-X',
-      'Y-Scale': 'Zoom-Y',
-      'Task list width': 'Task list',
-      'Before/After': 'Expand',
-      'Display task list': 'Show task list',
       weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
       weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
       weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
@@ -6849,7 +6793,7 @@ const GanttElastic = {
     calculateTaskListColumnsDimensions() {
       let final = 0;
       let percentage = 0;
-      this.state.options.taskList.columns.forEach(column => {
+      for (let column of this.state.options.taskList.columns) {
         if (column.expander) {
           column.widthFromPercentage =
             ((this.getMaximalExpanderWidth() + column.width) / 100) * this.state.options.taskList.percent;
@@ -6860,7 +6804,7 @@ const GanttElastic = {
         column.finalWidth = (column.thresholdPercent * column.widthFromPercentage) / 100;
         final += column.finalWidth;
         column.height = this.getTaskHeight() - this.style['grid-line-horizontal']['stroke-width'];
-      });
+      }
       this.state.options.taskList.widthFromPercentage = percentage;
       this.state.options.taskList.finalWidth = final;
     },
@@ -7641,7 +7585,7 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual) {
+        if (notEqual && this.state.emitTasksChanges) {
           this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
@@ -7651,7 +7595,7 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual) {
+        if (notEqual && this.state.emitOptionsChanges) {
           this.$emit('options-updated', mergeDeep({}, options));
         }
       },
