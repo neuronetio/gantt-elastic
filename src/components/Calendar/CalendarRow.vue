@@ -22,7 +22,7 @@
       >
         <div
           :class="'gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--' + which"
-          :style="textStyle(item)"
+          :style="textStyle(child)"
         >
           {{ child.label }}
         </div>
@@ -90,10 +90,13 @@ export default {
         ...this.root.style['calendar-row-text'],
         ...this.root.style['calendar-row-text--' + this.which]
       };
-      return child => ({
-        ...basicStyle,
-        left: this.getTextX(child) + 'px'
-      });
+      return child => {
+        const style = { ...basicStyle };
+        if (this.which === 'month') {
+          style.left = this.getTextX(child) + 'px';
+        }
+        return style;
+      };
     }
   }
 };
