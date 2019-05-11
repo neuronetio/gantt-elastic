@@ -5937,7 +5937,7 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     },
     'task-list-expander-border': {
       fill: '#ffffffa0',
-      stroke: '#00000080'
+      stroke: '#000000A0'
     },
     'chart-expander-wrapper': {
       display: 'block',
@@ -5960,7 +5960,7 @@ function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-serif') {
     },
     'chart-expander-border': {
       fill: '#ffffffa0',
-      stroke: '#00000080'
+      stroke: '#000000A0'
     },
     'task-list-container': {},
     'task-list-header-label': {

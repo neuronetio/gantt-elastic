@@ -472,7 +472,6 @@
       }
 
       function changeOptions() {
-        console.log('before', app.options.taskList.columns[0]);
         const column = app.options.taskList.columns[0];
         column.label = 'Whooaa!';
         column.width = 100;
@@ -492,7 +491,6 @@
         app.options.times = { timeZoom: 2 };
         app.options.locale['Now'] = 'Center';
         ganttInstance.fixScrollPos();
-        console.log('after', app);
       }
 
       function destroy() {

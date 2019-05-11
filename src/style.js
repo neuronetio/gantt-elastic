@@ -154,7 +154,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     },
     'task-list-expander-border': {
       fill: '#ffffffa0',
-      stroke: '#00000080'
+      stroke: '#000000A0'
     },
     'chart-expander-wrapper': {
       display: 'block',
@@ -177,7 +177,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     },
     'chart-expander-border': {
       fill: '#ffffffa0',
-      stroke: '#00000080'
+      stroke: '#000000A0'
     },
     'task-list-container': {},
     'task-list-header-label': {
