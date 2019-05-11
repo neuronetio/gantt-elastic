@@ -19,7 +19,7 @@
   <body style="font-family:Roboto, Arial, sans-serif;">
     <div style="width:100%;height:100%">
       <div id="app" v-if="!destroy">
-        <gantt-elastic :tasks="tasks" :options="options">
+        <gantt-elastic :tasks="tasks" :options="options" :dynamic-style="dynamicStyle">
           <!--<gantt-header slot="header"></gantt-header>-->
           <gantt-footer slot="footer"></gantt-footer>
         </gantt-elastic>
@@ -63,7 +63,7 @@
           label: 'Make some noise',
           user:
             '<a href="https://www.google.com/search?q=John+Doe" target="_blank" style="color:#0077c0;">John Doe</a>',
-          start: getDate(-24 * 15),
+          start: getDate(-24 * 5),
           duration: 15 * 24 * 60 * 60 * 1000,
           percent: 85,
           type: 'project'

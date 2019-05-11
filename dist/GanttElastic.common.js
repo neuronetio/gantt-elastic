@@ -3198,7 +3198,7 @@ var CalendarRowvue_type_template_id_0daf06fb_render = function() {
                   class:
                     "gantt-elastic__calendar-row-text gantt-elastic__calendar-row-text--" +
                     _vm.which,
-                  style: _vm.textStyle(item)
+                  style: _vm.textStyle(child)
                 },
                 [_vm._v("\n        " + _vm._s(child.label) + "\n      ")]
               )
@@ -3310,10 +3310,13 @@ CalendarRowvue_type_template_id_0daf06fb_render._withStripped = true
         ...this.root.style['calendar-row-text'],
         ...this.root.style['calendar-row-text--' + this.which]
       };
-      return child => ({
-        ...basicStyle,
-        left: this.getTextX(child) + 'px'
-      });
+      return child => {
+        const style = { ...basicStyle };
+        if (this.which === 'month') {
+          style.left = this.getTextX(child) + 'px';
+        }
+        return style;
+      };
     }
   }
 });
@@ -3454,6 +3457,16 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         this.root.state.options.times.firstTime,
         this.root.state.options.times.lastTime
       );
+      if (monthsCount === 1) {
+        for (let formatName of formatNames) {
+          if (this.root.state.options.calendar.month.maxWidths[formatName] + additionalSpace <= fullWidth) {
+            return {
+              count: 1,
+              type: formatName
+            };
+          }
+        }
+      }
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
           if (
@@ -6592,7 +6605,7 @@ const GanttElastic = {
   components: {
     MainView: MainView
   },
-  props: ['tasks', 'options', 'styleRules'],
+  props: ['tasks', 'options', 'dynamicStyle'],
   provide() {
     const provider = {};
     const self = this;

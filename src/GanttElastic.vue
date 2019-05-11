@@ -466,7 +466,7 @@ const GanttElastic = {
   components: {
     MainView
   },
-  props: ['tasks', 'options', 'styleRules'],
+  props: ['tasks', 'options', 'dynamicStyle'],
   provide() {
     const provider = {};
     const self = this;

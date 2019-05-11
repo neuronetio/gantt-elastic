@@ -108,6 +108,16 @@ export default {
         this.root.state.options.times.firstTime,
         this.root.state.options.times.lastTime
       );
+      if (monthsCount === 1) {
+        for (let formatName of formatNames) {
+          if (this.root.state.options.calendar.month.maxWidths[formatName] + additionalSpace <= fullWidth) {
+            return {
+              count: 1,
+              type: formatName
+            };
+          }
+        }
+      }
       for (let months = monthsCount; months > 1; months = Math.ceil(months / 2)) {
         for (let formatName of formatNames) {
           if (
