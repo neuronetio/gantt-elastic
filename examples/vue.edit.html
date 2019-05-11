@@ -402,6 +402,7 @@
           app.tasks = tasks;
         });
         ganttInstance.$on('options-updated', options => {
+          //console.log('options updated', options);
           app.options = options;
         });
 
@@ -434,7 +435,7 @@
 
       function deleteRow() {
         const row = Number(document.getElementById('delrow').value);
-        app.tasks = ganttState.tasks.filter((task, index) => {
+        app.tasks = app.tasks.filter((task, index) => {
           if (index === row) {
             console.log('removing task', task, index);
           }
@@ -463,7 +464,6 @@
           type: 'project'
         };
         app.tasks.push(task);
-        console.log(app.tasks);
       }
 
       function addTasks() {
@@ -472,24 +472,27 @@
       }
 
       function changeOptions() {
-        app.options.taskList.columns[0].label = 'Whooaa!';
-        app.options.taskList.columns[0].width = 100;
-        app.options.taskList.columns[0].style = {
+        console.log('before', app.options.taskList.columns[0]);
+        const column = app.options.taskList.columns[0];
+        column.label = 'Whooaa!';
+        column.width = 100;
+        column.style = {
           'task-list-header-column': {
             background: 'red',
             color: 'white'
           }
         };
-        Vue.set(app.options.calendar, 'month', {
+        app.options.calendar.month = {
           format: {
             long: function() {
               return ':P';
             }
           }
-        });
-        Vue.set(app.options, 'times', { timeZoom: 2 });
+        };
+        app.options.times = { timeZoom: 2 };
         app.options.locale['Now'] = 'Center';
         ganttInstance.fixScrollPos();
+        console.log('after', app);
       }
 
       function destroy() {

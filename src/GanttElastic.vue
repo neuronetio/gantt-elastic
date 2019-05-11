@@ -1476,7 +1476,7 @@ const GanttElastic = {
           this.setup('tasks');
         }
       },
-      { deep: false }
+      { deep: true }
     );
     this.state.unwatchOptions = this.$watch(
       'options',
@@ -1486,7 +1486,7 @@ const GanttElastic = {
           this.setup('options');
         }
       },
-      { deep: false }
+      { deep: true }
     );
     this.state.unwatchStyle = this.$watch(
       'dynamicStyle',
@@ -1503,7 +1503,7 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual && this.state.emitTasksChanges) {
+        if (notEqual) {
           this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
@@ -1513,7 +1513,7 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual && this.state.emitOptionsChanges) {
+        if (notEqual) {
           this.$emit('options-updated', mergeDeep({}, options));
         }
       },
