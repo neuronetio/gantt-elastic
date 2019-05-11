@@ -26,7 +26,7 @@
           :style="{
             ...root.style['chart-row-text-content'],
             ...root.style['chart-row-text-content--text'],
-            contentStyle
+            ...contentStyle
           }"
           v-if="!html"
         >
@@ -37,7 +37,7 @@
           :style="{
             ...root.style['chart-row-text-content'],
             ...root.style['chart-row-text-content--html'],
-            contentStyle
+            ...contentStyle
           }"
           v-if="html"
           v-html="task.label"

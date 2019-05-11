@@ -18,7 +18,7 @@
     >
       <rect
         :class="getClassPrefix() + '-border'"
-        :style="{ ...root.style[getClassPrefix(false) + '-border'], borderStyle }"
+        :style="{ ...root.style[getClassPrefix(false) + '-border'], ...borderStyle }"
         :x="border"
         :y="border"
         :width="options.size - border * 2"

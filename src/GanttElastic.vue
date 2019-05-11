@@ -150,7 +150,6 @@ function getOptions(userOptions) {
           width: 40
         }
       ],
-      resizerWidth: 0,
       percent: 100,
       width: 0,
       finalWidth: 0,

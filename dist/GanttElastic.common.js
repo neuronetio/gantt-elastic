@@ -1601,7 +1601,7 @@ var Expandervue_type_template_id_09a21177_render = function() {
                 style: Object.assign(
                   {},
                   _vm.root.style[_vm.getClassPrefix(false) + "-border"],
-                  { borderStyle: _vm.borderStyle }
+                  _vm.borderStyle
                 ),
                 attrs: {
                   x: _vm.border,
@@ -4090,7 +4090,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                         {},
                         _vm.root.style["chart-row-text-content"],
                         _vm.root.style["chart-row-text-content--text"],
-                        { contentStyle: _vm.contentStyle }
+                        _vm.contentStyle
                       )
                     },
                     [_c("div", [_vm._v(_vm._s(_vm.task.label))])]
@@ -4105,7 +4105,7 @@ var Textvue_type_template_id_459c2fe4_render = function() {
                       {},
                       _vm.root.style["chart-row-text-content"],
                       _vm.root.style["chart-row-text-content--html"],
-                      { contentStyle: _vm.contentStyle }
+                      _vm.contentStyle
                     ),
                     domProps: { innerHTML: _vm._s(_vm.task.label) }
                   })
@@ -6289,7 +6289,6 @@ function getOptions(userOptions) {
           width: 40
         }
       ],
-      resizerWidth: 0,
       percent: 100,
       width: 0,
       finalWidth: 0,
@@ -7615,7 +7614,7 @@ const GanttElastic = {
           this.setup('tasks');
         }
       },
-      { deep: false }
+      { deep: true }
     );
     this.state.unwatchOptions = this.$watch(
       'options',
@@ -7625,7 +7624,7 @@ const GanttElastic = {
           this.setup('options');
         }
       },
-      { deep: false }
+      { deep: true }
     );
     this.state.unwatchStyle = this.$watch(
       'dynamicStyle',
@@ -7642,7 +7641,7 @@ const GanttElastic = {
       'outputTasks',
       tasks => {
         const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual && this.state.emitTasksChanges) {
+        if (notEqual) {
           this.$emit('tasks-updated', tasks.map(task => task));
         }
       },
@@ -7652,7 +7651,7 @@ const GanttElastic = {
       'outputOptions',
       options => {
         const notEqual = notEqualDeep(this.options, options);
-        if (notEqual && this.state.emitOptionsChanges) {
+        if (notEqual) {
           this.$emit('options-updated', mergeDeep({}, options));
         }
       },
