@@ -636,7 +636,6 @@ const GanttElastic = {
       this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
       this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
-      this.getScrollBarHeight();
       this.state.options.scrollBarHeight = this.getScrollBarHeight();
       this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
       this.globalOnResize();
