@@ -636,7 +636,6 @@ const GanttElastic = {
       this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
       this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
-      this.getScrollBarHeight();
       this.state.options.scrollBarHeight = this.getScrollBarHeight();
       this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
       this.globalOnResize();
@@ -1004,7 +1003,7 @@ const GanttElastic = {
      * Mouse wheel event handler
      */
     onWheelChart(ev) {
-      if (!ev.shiftKey) {
+      if (!ev.shiftKey && ev.deltaX === 0) {
         let top = this.state.options.scroll.top + ev.deltaY;
         const chartClientHeight = this.state.options.rowsHeight;
         const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
@@ -1014,8 +1013,18 @@ const GanttElastic = {
           top = scrollHeight;
         }
         this.scrollTo(null, top);
-      } else {
+      } else if (ev.shiftKey && ev.deltaX === 0) {
         let left = this.state.options.scroll.left + ev.deltaY;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        if (left < 0) {
+          left = 0;
+        } else if (left > scrollWidth) {
+          left = scrollWidth;
+        }
+        this.scrollTo(left);
+      } else {
+        let left = this.state.options.scroll.left + ev.deltaX;
         const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
         const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
