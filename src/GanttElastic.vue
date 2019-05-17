@@ -9,7 +9,7 @@
 <template>
   <div class="gantt-elastic" style="width:100%">
     <slot name="header"></slot>
-    <main-view></main-view>
+    <main-view ref="mainView"></main-view>
     <slot name="footer"></slot>
   </div>
 </template>
@@ -979,7 +979,7 @@ const GanttElastic = {
       if (left !== null) {
         this.state.refs.chartCalendarContainer.scrollLeft = left;
         this.state.refs.chartGraphContainer.scrollLeft = left;
-        this.state.refs.chartScrollContainerHorizontal.setScrollLeft(left);
+        this.$refs.mainView.setScrollLeft(left);
         this.state.options.scroll.left = left;
       }
       if (top !== null) {
