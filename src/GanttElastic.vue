@@ -979,7 +979,7 @@ const GanttElastic = {
       if (left !== null) {
         this.state.refs.chartCalendarContainer.scrollLeft = left;
         this.state.refs.chartGraphContainer.scrollLeft = left;
-        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
+        this.state.refs.chartScrollContainerHorizontal.setScrollLeft(left);
         this.state.options.scroll.left = left;
       }
       if (top !== null) {
