@@ -176,14 +176,6 @@ export default {
   },
   methods: {
     /**
-     * set scrollLeft and prevent event bubbling
-     */
-    setScrollLeft(left) {
-      ignoreScrollEvents  = true;
-      this.$refs.chartScrollContainerHorizontal.scrollLeft = left;
-    },
-
-    /**
      * Emit event when mouse is moving inside main view
      */
     mouseMove(event) {
@@ -201,9 +193,6 @@ export default {
      * Horizontal scroll event handler
      */
     onHorizontalScroll(ev) {
-      let ignore = ignoreScrollEvents;
-      ignoreScrollEvents = false;
-      if (ignore) return;
       this.root.$emit('chart-scroll-horizontal', ev);
     },
 

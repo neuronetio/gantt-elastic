@@ -940,6 +940,9 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart(left, top) {
+      if (this.state.options.scroll.chart.left === left && this.state.options.scroll.chart.top === top) {
+        return;
+      }
       const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       this.state.options.scroll.chart.left = left;
       this.state.options.scroll.chart.right = left + chartContainerWidth;
@@ -979,7 +982,7 @@ const GanttElastic = {
       if (left !== null) {
         this.state.refs.chartCalendarContainer.scrollLeft = left;
         this.state.refs.chartGraphContainer.scrollLeft = left;
-        this.$refs.mainView.setScrollLeft(left);
+        this.state.refs.chartScrollContainerHorizontal.scrollLeft = left;
         this.state.options.scroll.left = left;
       }
       if (top !== null) {

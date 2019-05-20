@@ -44,6 +44,9 @@ function expectAddTask(url) {
     expect(task.allChildren.length).to.equal(2);
     expect(task.children[0]).to.equal(8);
     expect(gantt.getTask(2).collapsed).to.equal(true);
+    expect(gantt.state.options.times.timeZoom).to.equal(17);
+    gantt.state.options.times.timeZoom = 10;
+    expect(gantt.state.options.times.timeZoom).to.equal(10);
     cy.get(
       'div.gantt-elastic__task-list-items > div:nth-child(2) > div:nth-child(2) > div > div.gantt-elastic__task-list-expander-wrapper > svg'
     )
@@ -61,6 +64,7 @@ function expectAddTask(url) {
         expect(task.allChildren.length).to.equal(3);
         expect(task.children[1]).to.equal(88);
         expect(gantt.getTask(2).collapsed).to.equal(false);
+        expect(gantt.state.options.times.timeZoom).to.equal(10);
       });
   });
 }

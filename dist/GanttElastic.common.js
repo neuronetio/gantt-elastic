@@ -1200,7 +1200,7 @@ var render = function() {
     [
       _vm._t("header"),
       _vm._v(" "),
-      _c("main-view"),
+      _c("main-view", { ref: "mainView" }),
       _vm._v(" "),
       _vm._t("footer")
     ],
@@ -5554,6 +5554,8 @@ Chart_component.options.__file = "src/components/Chart/Chart.vue"
 
 
 
+let ignoreScrollEvents = false;
+
 /* harmony default export */ var MainViewvue_type_script_lang_js_ = ({
   name: 'MainView',
   components: {
@@ -6729,7 +6731,6 @@ const GanttElastic = {
       this.state.taskTree = this.makeTaskTree(this.state.rootTask, tasks);
       this.state.tasks = this.state.taskTree.allChildren.map(childId => this.getTask(childId));
       this.calculateTaskListColumnsDimensions();
-      this.getScrollBarHeight();
       this.state.options.scrollBarHeight = this.getScrollBarHeight();
       this.state.options.outerHeight = this.state.options.height + this.state.options.scrollBarHeight;
       this.globalOnResize();
@@ -7034,6 +7035,9 @@ const GanttElastic = {
      * @param {number} top
      */
     _onScrollChart(left, top) {
+      if (this.state.options.scroll.chart.left === left && this.state.options.scroll.chart.top === top) {
+        return;
+      }
       const chartContainerWidth = this.state.refs.chartContainer.clientWidth;
       this.state.options.scroll.chart.left = left;
       this.state.options.scroll.chart.right = left + chartContainerWidth;
@@ -7097,7 +7101,7 @@ const GanttElastic = {
      * Mouse wheel event handler
      */
     onWheelChart(ev) {
-      if (!ev.shiftKey) {
+      if (!ev.shiftKey && ev.deltaX === 0) {
         let top = this.state.options.scroll.top + ev.deltaY;
         const chartClientHeight = this.state.options.rowsHeight;
         const scrollHeight = this.state.refs.chartGraph.scrollHeight - chartClientHeight;
@@ -7107,8 +7111,18 @@ const GanttElastic = {
           top = scrollHeight;
         }
         this.scrollTo(null, top);
-      } else {
+      } else if (ev.shiftKey && ev.deltaX === 0) {
         let left = this.state.options.scroll.left + ev.deltaY;
+        const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
+        const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
+        if (left < 0) {
+          left = 0;
+        } else if (left > scrollWidth) {
+          left = scrollWidth;
+        }
+        this.scrollTo(left);
+      } else {
+        let left = this.state.options.scroll.left + ev.deltaX;
         const chartClientWidth = this.state.refs.chartScrollContainerHorizontal.clientWidth;
         const scrollWidth = this.state.refs.chartScrollContainerHorizontal.scrollWidth - chartClientWidth;
         if (left < 0) {
