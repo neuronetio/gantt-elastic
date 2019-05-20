@@ -6783,7 +6783,7 @@ const GanttElastic = {
      * Synchronize scrollTop property when row height is changed
      */
     syncScrollTop() {
-      if (this.state.refs.taskListItems) {
+      if (this.state.refs.taskListItems && this.state.refs.chartGraph.scrollTop !== this.state.options.scroll.top) {
         this.state.options.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
       }
     },
@@ -7023,9 +7023,10 @@ const GanttElastic = {
      * @param {event} ev
      */
     onScrollChart(ev) {
-      const horizontal = this.state.refs.chartScrollContainerHorizontal;
-      const vertical = this.state.refs.chartScrollContainerVertical;
-      this._onScrollChart(horizontal.scrollLeft, vertical.scrollTop);
+      this._onScrollChart(
+        this.state.refs.chartScrollContainerHorizontal.scrollLeft,
+        this.state.refs.chartScrollContainerVertical.scrollTop
+      );
     },
 
     /**
