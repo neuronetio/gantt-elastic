@@ -7599,20 +7599,14 @@ const GanttElastic = {
     this.state.unwatchOutputTasks = this.$watch(
       'outputTasks',
       tasks => {
-        const notEqual = notEqualDeep(this.tasks, tasks);
-        if (notEqual && this.state.emitTasksChanges) {
-          this.$emit('tasks-updated', tasks.map(task => task));
-        }
+        this.$emit('tasks-updated', tasks.map(task => task));
       },
       { deep: true }
     );
     this.state.unwatchOutputOptions = this.$watch(
       'outputOptions',
       options => {
-        const notEqual = notEqualDeep(this.options, options);
-        if (notEqual && this.state.emitOptionsChanges) {
-          this.$emit('options-updated', mergeDeep({}, options));
-        }
+        this.$emit('options-updated', mergeDeep({}, options));
       },
       { deep: true }
     );

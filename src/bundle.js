@@ -11,9 +11,12 @@ import GanttElasticStandalone from './GanttElastic.standalone.vue';
 window.GanttElastic = {
   component: GanttElasticStandalone,
   mount(config) {
-    let { el, tasks, options } = config;
+    if (typeof config.dynamicStyle === 'undefined') {
+      config.dynamicStyle = {};
+    }
+    let { el, tasks, options, dynamicStyle } = config;
     const ganttElastic = GanttElasticStandalone; //mergeDeep({}, GanttElasticStandalone);
-    ganttElastic.data = { tasks, options };
+    ganttElastic.data = { tasks, options, dynamicStyle };
     return new Vue(ganttElastic)
       .$on('gantt-elastic-ready', ganttInstance => {
         if (typeof config.ready === 'function') {
