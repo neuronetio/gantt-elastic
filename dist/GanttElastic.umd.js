@@ -6194,8 +6194,8 @@ function getOptions(userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      firstTime: null, // firstDate getTime()
-      lastTime: null, // last date getTime()
+      firstTime: null,
+      lastTime: null,
       firstTaskTime: 0,
       lastTaskTime: 0,
       totalViewDurationMs: 0,
@@ -6788,7 +6788,10 @@ const GanttElastic = {
      * Synchronize scrollTop property when row height is changed
      */
     syncScrollTop() {
-      if (this.state.refs.taskListItems && this.state.refs.chartGraph.scrollTop !== this.state.options.scroll.top) {
+      if (
+        this.state.refs.taskListItems &&
+        this.state.refs.chartGraph.scrollTop !== this.state.refs.taskListItems.scrollTop
+      ) {
         this.state.options.scroll.top = this.state.refs.taskListItems.scrollTop = this.state.refs.chartScrollContainerVertical.scrollTop = this.state.refs.chartGraph.scrollTop;
       }
     },

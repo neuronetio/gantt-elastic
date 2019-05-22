@@ -374,7 +374,7 @@
       };
 
       // create instance
-      const app = new Vue({
+      const app = (window.app = new Vue({
         components: {
           'gantt-header': Header,
           'gantt-elastic': GanttElastic,
@@ -389,7 +389,7 @@
           headerOptions,
           destroy: false
         }
-      });
+      }));
 
       // gantt state which will be updated in realtime
       let ganttState, ganttInstance;
