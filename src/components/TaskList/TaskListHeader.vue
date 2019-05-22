@@ -114,7 +114,7 @@ export default {
      * Resizer mouse down event handler
      */
     resizerMouseDown(event, column) {
-      if (!this.resizerMoving) {
+      if (!this.resizer.moving) {
         this.resizer.moving = column;
         this.resizer.x = event.clientX;
         this.resizer.initialWidth = column.width;
@@ -127,11 +127,14 @@ export default {
      */
     resizerMouseMove(event) {
       if (this.resizer.moving) {
+        const lastWidth = this.resizer.moving.width;
         this.resizer.moving.width = this.resizer.initialWidth + event.clientX - this.resizer.x;
         if (this.resizer.moving.width < this.root.state.options.taskList.minWidth) {
           this.resizer.moving.width = this.root.state.options.taskList.minWidth;
         }
-        this.root.$emit('taskList-column-width-change', this.resizer.moving);
+        if (lastWidth !== this.resizer.moving.width) {
+          this.root.$emit('taskList-column-width-change', this.resizer.moving);
+        }
       }
     },
 
@@ -140,7 +143,6 @@ export default {
      */
     resizerMouseUp(event) {
       if (this.resizer.moving) {
-        this.root.$emit('taskList-column-width-change', this.resizer.moving);
         this.root.$emit('taskList-column-width-change-stop', this.resizer.moving);
         this.resizer.moving = false;
       }
