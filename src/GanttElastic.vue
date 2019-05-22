@@ -94,8 +94,8 @@ function getOptions(userOptions) {
       timeScale: 60 * 1000,
       timeZoom: 17,
       timePerPixel: 0,
-      firstTime: null, // firstDate getTime()
-      lastTime: null, // last date getTime()
+      firstTime: null,
+      lastTime: null,
       firstTaskTime: 0,
       lastTaskTime: 0,
       totalViewDurationMs: 0,
