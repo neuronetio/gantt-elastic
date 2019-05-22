@@ -126,10 +126,6 @@ export default {
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
-        for (let childId of task.allChildren) {
-          const child = this.root.getTask(childId);
-          child.collapsed = collapsed;
-        }
       });
     }
   }

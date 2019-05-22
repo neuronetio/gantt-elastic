@@ -1794,10 +1794,6 @@ Expandervue_type_template_id_09a21177_render._withStripped = true
       const collapsed = !this.collapsed;
       this.tasks.forEach(task => {
         task.collapsed = collapsed;
-        for (let childId of task.allChildren) {
-          const child = this.root.getTask(childId);
-          child.collapsed = collapsed;
-        }
       });
     }
   }
