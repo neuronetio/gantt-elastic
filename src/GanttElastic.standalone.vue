@@ -25,7 +25,8 @@ export default {
   props: ['header', 'footer'],
   data: {
     tasks: [],
-    options: {}
+    options: {},
+    dynamicStyle: {}
   }
 };
 </script>

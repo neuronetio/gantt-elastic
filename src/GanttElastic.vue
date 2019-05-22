@@ -60,7 +60,6 @@ function getOptions(userOptions) {
     outerHeight: 0,
     rowsHeight: 0,
     allVisibleTasksHeight: 0,
-    refs: {},
     scroll: {
       scrolling: false,
       dragXMoveMultiplier: 3,
@@ -122,7 +121,7 @@ function getOptions(userOptions) {
         bar: false
       },
       text: {
-        offset: 0,
+        offset: 4,
         xPadding: 10,
         display: true
       },
@@ -444,8 +443,6 @@ export function notEqualDeep(left, right, cache = [], path = '') {
   return false;
 }
 
-const styleCache = {};
-
 /**
  * GanttElastic
  * Main vue component
@@ -490,7 +487,8 @@ const GanttElastic = {
         unwatchOptions: null,
         unwatchStyle: null,
         unwatchOutputTasks: null,
-        unwatchOutputOptions: null
+        unwatchOutputOptions: null,
+        unwatchOutputStyle: null
       }
     };
   },
@@ -523,6 +521,8 @@ const GanttElastic = {
 
     /**
      * Fill out empty task properties and make it reactive
+     *
+     * @param {array} tasks
      */
     fillTasks(tasks) {
       for (let task of tasks) {
@@ -1504,14 +1504,21 @@ const GanttElastic = {
     this.state.unwatchOutputTasks = this.$watch(
       'outputTasks',
       tasks => {
-        this.$emit('tasks-updated', tasks.map(task => task));
+        this.$emit('tasks-changed', tasks.map(task => task));
       },
       { deep: true }
     );
     this.state.unwatchOutputOptions = this.$watch(
       'outputOptions',
       options => {
-        this.$emit('options-updated', mergeDeep({}, options));
+        this.$emit('options-changed', mergeDeep({}, options));
+      },
+      { deep: true }
+    );
+    this.state.unwatchOutputStyle = this.$watch(
+      'style',
+      style => {
+        this.$emit('dynamic-style-changed', mergeDeep({}, style));
       },
       { deep: true }
     );
@@ -1537,8 +1544,9 @@ const GanttElastic = {
     });
     this.state.resizeObserver.observe(this.$el.parentNode);
     this.globalOnResize();
+    this.$emit('ready', this);
     this.$root.$emit('gantt-elastic-mounted', this);
-    this.$emit('mounted');
+    this.$emit('mounted', this);
     this.$root.$emit('gantt-elastic-ready', this);
   },
 
@@ -1568,6 +1576,7 @@ const GanttElastic = {
     this.state.unwatchStyle();
     this.state.unwatchOutputTasks();
     this.state.unwatchOutputOptions();
+    this.state.unwatchOutputStyle();
     this.$emit('before-destroy');
   },
 

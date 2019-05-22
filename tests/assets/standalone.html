@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <div id="app" style="width:100%;height:100%;"></div>
+    <div id="gantt" style="width:100%;height:100%;"></div>
     <button id="btn-add" onclick="addTask()">Add task</button>
     <button id="btn-reset" onclick="addTasks()">Add tasks</button><br />
     <button id="btn-destroy" onclick="destroy()">Destroy</button><br />
@@ -319,19 +319,28 @@
         }
       };
 
-      GanttElastic.component.components['gantt-header'] = Header;
       const app = (window.app = GanttElastic.mount({
-        el: '#app',
-        tasks,
-        options,
+        el: '#gantt',
+        components: {
+          'gantt-header': Header
+        },
+        data: {
+          tasks: tasks,
+          options: options,
+          dynamicStyle: {}
+        },
         ready(ganttInstance) {
           console.log('ready!', ganttInstance);
-
-          ganttInstance.$on('tasks-updated', tasks => {
+          window.ganttInstance = ganttInstance;
+          ganttInstance.$on('tasks-changed', tasks => {
             app.tasks = tasks;
           });
-          ganttInstance.$on('options-updated', options => {
+          ganttInstance.$on('options-changed', options => {
+            console.log('options changed');
             app.options = options;
+          });
+          ganttInstance.$on('dynamic-style-changed', style => {
+            app.dynamicStyle = style;
           });
 
           ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
@@ -351,6 +360,8 @@
           });
         }
       }));
+
+      console.log('gantt', document.getElementById('gantt'));
 
       function update() {
         const row = document.getElementById('row').value;
@@ -391,6 +402,7 @@
         };
         app.tasks.push(task);
         console.log(app.tasks);
+        console.log(app);
       }
 
       function addTasks() {

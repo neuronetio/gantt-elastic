@@ -399,13 +399,17 @@
       app.$on('gantt-elastic-ready', ganttElasticInstance => {
         ganttInstance = ganttElasticInstance;
 
-        ganttInstance.$on('tasks-updated', tasks => {
+        ganttInstance.$on('tasks-changed', tasks => {
           //console.log('tasks updated', tasks);
           app.tasks = tasks;
         });
-        ganttInstance.$on('options-updated', options => {
+        ganttInstance.$on('options-changed', options => {
           //console.log('options updated', options);
           app.options = options;
+        });
+        ganttInstance.$on('dynamic-style-changed', style => {
+          console.log('style updated', style);
+          app.dynamicStyle = style;
         });
 
         ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {

@@ -5,25 +5,29 @@
  * @package GanttElasticStandalone
  */
 import Vue from 'vue';
-//import { mergeDeep } from './GanttElastic.vue';
+import { mergeDeep } from './GanttElastic.vue';
 import GanttElasticStandalone from './GanttElastic.standalone.vue';
 
 window.GanttElastic = {
   component: GanttElasticStandalone,
   mount(config) {
-    if (typeof config.dynamicStyle === 'undefined') {
-      config.dynamicStyle = {};
+    const ready = typeof config.ready === 'function' ? config.ready : () => {};
+    const cfg = mergeDeep({}, config);
+    if (typeof cfg.dynamicStyle === 'undefined') {
+      cfg.dynamicStyle = {};
     }
-    let { el, tasks, options, dynamicStyle } = config;
-    const ganttElastic = GanttElasticStandalone; //mergeDeep({}, GanttElasticStandalone);
-    ganttElastic.data = { tasks, options, dynamicStyle };
-    return new Vue(ganttElastic)
-      .$on('gantt-elastic-ready', ganttInstance => {
-        if (typeof config.ready === 'function') {
-          config.ready(ganttInstance);
-        }
-      })
-      .$mount(el);
+    const ganttElastic = GanttElasticStandalone;
+    for (let prop in cfg) {
+      if (['el', 'ready'].includes(prop)) {
+        continue;
+      }
+      if (typeof ganttElastic[prop] !== 'undefined') {
+        ganttElastic[prop] = { ...ganttElastic[prop], ...cfg[prop] };
+        continue;
+      }
+      ganttElastic[prop] = cfg[prop];
+    }
+    return new Vue(ganttElastic).$on('gantt-elastic-ready', ready).$mount(cfg.el);
   }
 };
 export default GanttElasticStandalone;

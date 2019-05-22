@@ -263,17 +263,23 @@
       GanttElastic.component.components['gantt-header'] = Header;
       const app = GanttElastic.mount({
         el: '#app', // <- your container id
-        tasks: tasks,
-        options: options,
+        data: {
+          tasks: tasks,
+          options: options,
+          dynamicStyle: {}
+        },
         ready(ganttInstance) {
           console.log('ready!', ganttInstance);
 
-          ganttInstance.$on('tasks-updated', tasks => {
+          ganttInstance.$on('tasks-changed', tasks => {
             console.log('tasks-updated', tasks, app);
             app.tasks = tasks;
           });
-          ganttInstance.$on('options-updated', options => {
+          ganttInstance.$on('options-changed', options => {
             app.options = options;
+          });
+          ganttInstance.$on('dynamic-style-changed', style => {
+            app.dynamicStyle = style;
           });
 
           ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {

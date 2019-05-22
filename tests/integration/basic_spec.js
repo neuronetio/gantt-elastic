@@ -1,5 +1,9 @@
 function expectIsMounted(url) {
   cy.viewport(1440, 900)
+    .document()
+    .then(doc => {
+      doc.body.innerHtml = '';
+    })
     .visit(url, { timeout: 10000 })
     .then(window => {
       expect(typeof window.GanttElastic).to.equal('object');
@@ -11,6 +15,10 @@ function expectIsMounted(url) {
 
 function expectTimeZoomChange(url) {
   cy.viewport(1440, 900)
+    .document()
+    .then(doc => {
+      doc.body.innerHtml = '';
+    })
     .visit(url, { timeout: 10000 })
     .then(window => {
       const timeZoomSelector = '.gantt-elastic__header-options > label:nth-child(2) .vue-slider-dot';
@@ -30,7 +38,7 @@ function expectTimeZoomChange(url) {
           pageY: offset.top
         })
         .trigger('mouseup', { force: true })
-        .wait(500)
+        .wait(100)
         .then(() => {
           expect(gantt.state.options.times.timeZoom).to.equal(12);
         });
@@ -39,9 +47,14 @@ function expectTimeZoomChange(url) {
 
 function expectAddTask(url) {
   cy.viewport(1440, 900)
+    .document()
+    .then(doc => {
+      doc.body.innerHtml = '';
+    })
     .visit(url, { timeout: 10000 })
     .then(window => {
       const gantt = window.app.$children[0];
+      expect(gantt).to.equal(window.ganttInstance);
       expect(gantt.state.tasks.length).to.equal(15);
       expect(typeof gantt.getTask).to.equal('function');
       const task = gantt.getTask(7);
@@ -56,13 +69,13 @@ function expectAddTask(url) {
         'div.gantt-elastic__task-list-items > div:nth-child(2) > div:nth-child(2) > div > div.gantt-elastic__task-list-expander-wrapper > svg'
       )
         .click()
-        .wait(500)
+        .wait(100)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(false);
           return cy.get('#btn-add');
         })
         .click()
-        .wait(1000)
+        .wait(100)
         .then(() => {
           const task = gantt.getTask(7);
           expect(task.children.length).to.equal(2);
@@ -76,6 +89,10 @@ function expectAddTask(url) {
 
 function expectCollapseExpandTask(url) {
   cy.viewport(1440, 900)
+    .document()
+    .then(doc => {
+      doc.body.innerHtml = '';
+    })
     .visit(url, { timeout: 10000 })
     .then(window => {
       const gantt = window.app.$children[0];
@@ -88,7 +105,7 @@ function expectCollapseExpandTask(url) {
         'div.gantt-elastic__task-list-items > div:nth-child(2) > div:nth-child(2) > div > div.gantt-elastic__task-list-expander-wrapper > svg'
       )
         .click()
-        .wait(100)
+        .wait(50)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(false);
           expect(gantt.getTask(7).collapsed).to.equal(true);
@@ -98,7 +115,7 @@ function expectCollapseExpandTask(url) {
           );
         })
         .click()
-        .wait(100)
+        .wait(50)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(false);
           expect(gantt.getTask(7).collapsed).to.equal(false);
@@ -109,7 +126,7 @@ function expectCollapseExpandTask(url) {
           );
         })
         .click()
-        .wait(100)
+        .wait(50)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(false);
           expect(gantt.getTask(7).collapsed).to.equal(true);
@@ -120,7 +137,7 @@ function expectCollapseExpandTask(url) {
           );
         })
         .click()
-        .wait(100)
+        .wait(50)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(true);
           expect(gantt.getTask(7).collapsed).to.equal(true);
@@ -131,7 +148,7 @@ function expectCollapseExpandTask(url) {
           );
         })
         .click()
-        .wait(100)
+        .wait(50)
         .then(() => {
           expect(gantt.getTask(2).collapsed).to.equal(false);
           expect(gantt.getTask(7).collapsed).to.equal(true);

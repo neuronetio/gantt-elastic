@@ -344,15 +344,6 @@
               }
             }
           ]
-        },
-        locale: {
-          name: 'en',
-          Now: 'Now',
-          'X-Scale': 'Zoom-X',
-          'Y-Scale': 'Zoom-Y',
-          'Task list width': 'Task list',
-          'Before/After': 'Expand',
-          'Display task list': 'Task list'
         }
       };
 
@@ -368,6 +359,7 @@
         data: {
           tasks: tasks.map(task => Object.assign({}, task)),
           options,
+          dynamicStyle: {},
           destroy: false
         }
       }));
@@ -378,13 +370,16 @@
       // listen to 'gantt-elastic.ready' or 'gantt-elastic.mounted' event
       // to get the gantt state for real time modification
       app.$on('gantt-elastic-ready', ganttElasticInstance => {
-        ganttInstance = ganttElasticInstance;
+        ganttInstance = window.ganttInstance = ganttElasticInstance;
 
-        ganttInstance.$on('tasks-updated', tasks => {
+        ganttInstance.$on('tasks-changed', tasks => {
           app.tasks = tasks;
         });
-        ganttInstance.$on('options-updated', options => {
+        ganttInstance.$on('options-changed', options => {
           app.options = options;
+        });
+        ganttInstance.$on('dynamic-style-changed', style => {
+          app.dynamicStyle = style;
         });
 
         ganttInstance.$on('chart-task-mouseenter', ({ data, event }) => {
