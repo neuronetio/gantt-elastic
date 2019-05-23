@@ -321,10 +321,10 @@
 
       const app = (window.app = GanttElastic.mount({
         el: '#gantt',
-        components: {
-          'gantt-header': Header
-        },
         data: {
+          components: {
+            header: Header
+          },
           tasks: tasks,
           options: options,
           dynamicStyle: {}

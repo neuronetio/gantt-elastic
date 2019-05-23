@@ -8,8 +8,8 @@
 -->
 <template>
   <gantt-elastic :tasks="tasks" :options="options">
-    <gantt-header slot="header"></gantt-header>
-    <gantt-footer slot="footer"></gantt-footer>
+    <component v-if="components.header" :is="components.header" slot="header"></component>
+    <component v-if="components.footer" :is="components.footer" slot="footer"></component>
   </gantt-elastic>
 </template>
 <script>
@@ -18,12 +18,11 @@ import GanttElastic from './GanttElastic.vue';
 export default {
   name: 'GanttElasticStandalone',
   components: {
-    'gantt-header': { template: `<div></div>` },
-    'gantt-elastic': GanttElastic,
-    'gantt-footer': { template: `<div></div>` }
+    'gantt-elastic': GanttElastic
   },
   props: ['header', 'footer'],
   data: {
+    components: {},
     tasks: [],
     options: {},
     dynamicStyle: {}
