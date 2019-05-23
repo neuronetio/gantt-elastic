@@ -40,7 +40,7 @@ and if you want default header
 
 `npm install --save gantt-elastic-header`
 
-### Standalone usage (vue.js bundled along with gantt-elastic component) for other frameworks like jQuery or pure vanilla js apps
+### Usage
 
 ```html
 <!DOCTYPE html>
