@@ -48,6 +48,7 @@ function getOptions(userOptions) {
       header: {}
     },
     taskMapping: {
+      //*
       id: 'id',
       start: 'start',
       label: 'label',
@@ -65,8 +66,8 @@ function getOptions(userOptions) {
     allVisibleTasksHeight: 0,
     scroll: {
       scrolling: false,
-      dragXMoveMultiplier: 3,
-      dragYMoveMultiplier: 2,
+      dragXMoveMultiplier: 3, //*
+      dragYMoveMultiplier: 2, //*
       top: 0,
       taskList: {
         left: 0,
@@ -90,12 +91,13 @@ function getOptions(userOptions) {
       }
     },
     scope: {
+      //*
       before: 1,
       after: 1
     },
     times: {
       timeScale: 60 * 1000,
-      timeZoom: 17,
+      timeZoom: 17, //*
       timePerPixel: 0,
       firstTime: null,
       lastTime: null,
@@ -103,44 +105,45 @@ function getOptions(userOptions) {
       lastTaskTime: 0,
       totalViewDurationMs: 0,
       totalViewDurationPx: 0,
-      stepDuration: 'day', // hour, month
+      stepDuration: 'day',
       steps: []
     },
     row: {
-      height: 24
+      height: 24 //*
     },
-    maxRows: 20,
-    maxHeight: 0,
+    maxRows: 20, //*
+    maxHeight: 0, //*
     chart: {
       grid: {
         horizontal: {
-          gap: 6
+          gap: 6 //*
         }
       },
       progress: {
-        width: 20,
-        height: 6,
+        width: 20, //*
+        height: 6, //*
         pattern: true,
         bar: false
       },
       text: {
-        offset: 4,
-        xPadding: 10,
-        display: true
+        offset: 4, //*
+        xPadding: 10, //*
+        display: true //*
       },
       expander: {
         type: 'chart',
-        display: false,
-        displayIfTaskListHidden: true,
-        offset: 4,
+        display: false, //*
+        displayIfTaskListHidden: true, //*
+        offset: 4, //*
         size: 18
       }
     },
     taskList: {
-      display: true,
-      resizeAfterThreshold: true,
-      widthThreshold: 75,
+      display: true, //*
+      resizeAfterThreshold: true, //*
+      widthThreshold: 75, //*
       columns: [
+        //*
         {
           id: 0,
           label: 'ID',
@@ -148,7 +151,7 @@ function getOptions(userOptions) {
           width: 40
         }
       ],
-      percent: 100,
+      percent: 100, //*
       width: 0,
       finalWidth: 0,
       widthFromPercentage: 0,
@@ -163,13 +166,13 @@ function getOptions(userOptions) {
       }
     },
     calendar: {
-      workingDays: [1, 2, 3, 4, 5],
-      gap: 6,
+      workingDays: [1, 2, 3, 4, 5], //*
+      gap: 6, //*
       height: 0,
       strokeWidth: 1,
       hour: {
-        height: 20,
-        display: true,
+        height: 20, //*
+        display: true, //*
         widths: [],
         maxWidths: { short: 0, medium: 0, long: 0 },
         formatted: {
@@ -178,6 +181,7 @@ function getOptions(userOptions) {
           short: []
         },
         format: {
+          //*
           long(date) {
             return date.format('HH:mm');
           },
@@ -190,8 +194,8 @@ function getOptions(userOptions) {
         }
       },
       day: {
-        height: 20,
-        display: true,
+        height: 20, //*
+        display: true, //*
         widths: [],
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
@@ -207,11 +211,12 @@ function getOptions(userOptions) {
         }
       },
       month: {
-        height: 20,
-        display: true,
+        height: 20, //*
+        display: true, //*
         widths: [],
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
+          //*
           short(date) {
             return date.format('MM');
           },
@@ -225,6 +230,7 @@ function getOptions(userOptions) {
       }
     },
     locale: {
+      //*
       name: 'en',
       weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
       weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
