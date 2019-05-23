@@ -3369,6 +3369,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
 
 
 
+
 /* harmony default export */ var Calendarvue_type_script_lang_js_ = ({
   name: 'Calendar',
   components: {
@@ -3494,16 +3495,18 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       if (!this.root.state.options.calendar.hour.display) {
         return allHours;
       }
-      for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
+      for (let hourIndex = 0, len = steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
           continue;
         }
         const hours = { key: hourIndex + 'step', children: [] };
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.root.state.options.times.steps[hourIndex].width.px / hoursCount.count;
+        const hourWidthPx = steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs_min_default()(this.root.state.options.times.steps[hourIndex].time).add(i * hourStep, 'hour');
+          const hour = i * hourStep;
           let index = hourIndex;
           if (hourIndex > 0) {
             index = hourIndex - Math.floor(hourIndex / 24) * 24;
@@ -3512,16 +3515,16 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
           if (typeof this.root.state.options.calendar.hour.widths[index] !== 'undefined') {
             textWidth = this.root.state.options.calendar.hour.widths[index][hoursCount.type];
           }
-          let x = this.root.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = steps[hourIndex].offset.px + hourWidthPx * i;
           hours.children.push({
             index: hourIndex,
-            key: this.root.state.options.times.steps[hourIndex].time + 'h' + i,
+            key: 'h' + i,
             x,
             y: this.root.state.options.calendar.day.height + this.root.state.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
             height: this.root.state.options.calendar.hour.height,
-            label: this.root.state.options.calendar.hour.format[hoursCount.type](date.toDate())
+            label: this.root.state.options.calendar.hour.formatted[hoursCount.type][hour]
           });
         }
         allHours.push(hours);
@@ -3543,30 +3546,32 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       if (daysCount.count === 0) {
         return days;
       }
-      const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
+      const dayStep = Math.ceil(steps.length / daysCount.count);
+      for (let dayIndex = 0, len = steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.root.state.options.times.steps[dayIndex + currentStep] !== 'undefined') {
-            dayWidthPx += this.root.state.options.times.steps[dayIndex + currentStep].width.px;
+          if (typeof steps[dayIndex + currentStep] !== 'undefined') {
+            dayWidthPx += steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = dayjs_min_default()(this.root.state.options.times.steps[dayIndex].time);
+        const date = dayjs_min_default()(steps[dayIndex].time);
         let textWidth = 0;
         if (typeof this.root.state.options.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.options.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.state.options.times.steps[dayIndex].offset.px;
+        let x = steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.root.state.options.times.steps[dayIndex].time + 'd',
+          key: steps[dayIndex].time + 'd',
           x,
           y: this.root.state.options.calendar.month.height,
           width: dayWidthPx,
           textWidth,
           height: this.root.state.options.calendar.day.height,
-          label: this.root.state.options.calendar.day.format[daysCount.type](date.toDate())
+          label: this.root.state.options.calendar.day.format[daysCount.type](date.locale(localeName))
         });
       }
       return days.map(item => ({
@@ -3589,6 +3594,8 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
       if (monthsCount.count === 0) {
         return months;
       }
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
       let formatNames = Object.keys(this.root.state.options.calendar.month.format);
       let currentDate = dayjs_min_default()(this.root.state.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
@@ -3614,7 +3621,7 @@ CalendarRow_component.options.__file = "src/components/Calendar/CalendarRow.vue"
         let choosenFormatName;
         for (let formatName of formatNames) {
           if (this.root.state.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
-            label = this.root.state.options.calendar.month.format[formatName](currentDate.toDate());
+            label = this.root.state.options.calendar.month.format[formatName](currentDate.locale(localeName));
             choosenFormatName = formatName;
           }
         }
@@ -6122,6 +6129,9 @@ function initVue() {
   }
 }
 initVue();
+
+let hourWidthCache = null;
+
 /**
  * Helper function to fill out empty options in user settings
  *
@@ -6262,21 +6272,20 @@ function getOptions(userOptions) {
         display: true,
         widths: [],
         maxWidths: { short: 0, medium: 0, long: 0 },
+        formatted: {
+          long: [],
+          medium: [],
+          short: []
+        },
         format: {
           long(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('HH:mm');
+            return date.format('HH:mm');
           },
           medium(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('HH:mm');
+            return date.format('HH:mm');
           },
           short(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('HH');
+            return date.format('HH');
           }
         }
       },
@@ -6287,19 +6296,13 @@ function getOptions(userOptions) {
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           long(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('DD dddd');
+            return date.format('DD dddd');
           },
           medium(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('DD ddd');
+            return date.format('DD ddd');
           },
           short(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('DD');
+            return date.format('DD');
           }
         }
       },
@@ -6310,19 +6313,13 @@ function getOptions(userOptions) {
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           short(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('MM');
+            return date.format('MM');
           },
           medium(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format("MMM 'YY");
+            return date.format("MMM 'YY");
           },
           long(date) {
-            return dayjs_min_default()(date)
-              .locale(localeName)
-              .format('MMMM YYYY');
+            return date.format('MMMM YYYY');
           }
         }
       }
@@ -7299,27 +7296,28 @@ const GanttElastic = {
     computeHourWidths() {
       const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--hour'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = dayjs_min_default()('2018-01-01T00:00:00'); // any date will be good for hours
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs_min_default()('2018-01-01T00:00:00').locale(localeName); // any date will be good for hours
       let maxWidths = this.state.options.calendar.hour.maxWidths;
-      this.state.options.calendar.hour.widths = [];
-      Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
+      if (maxWidths.length) {
+        return;
+      }
+      for (let formatName in this.state.options.calendar.hour.format) {
         maxWidths[formatName] = 0;
-      });
+      }
       for (let hour = 0; hour < 24; hour++) {
-        const widths = {
-          hour
-        };
-        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.hour.format[formatName](currentDate.toDate())
-          ).width;
-        });
+        let widths = { hour };
+        for (let formatName in this.state.options.calendar.hour.format) {
+          const hourFormatted = this.state.options.calendar.hour.format[formatName](currentDate);
+          this.state.options.calendar.hour.formatted[formatName].push(hourFormatted);
+          widths[formatName] = this.state.ctx.measureText(hourFormatted).width;
+        }
         this.state.options.calendar.hour.widths.push(widths);
-        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
+        for (let formatName in this.state.options.calendar.hour.format) {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
-        });
+        }
         currentDate = currentDate.add(1, 'hour');
       }
     },
@@ -7330,7 +7328,8 @@ const GanttElastic = {
     computeDayWidths() {
       const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--day'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = dayjs_min_default()(this.state.options.times.steps[0].time);
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs_min_default()(this.state.options.times.steps[0].time).locale(localeName);
       let maxWidths = this.state.options.calendar.day.maxWidths;
       this.state.options.calendar.day.widths = [];
       Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
@@ -7342,7 +7341,7 @@ const GanttElastic = {
         };
         Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
           widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.day.format[formatName](currentDate.toDate())
+            this.state.options.calendar.day.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.day.widths.push(widths);
@@ -7393,7 +7392,8 @@ const GanttElastic = {
       Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = dayjs_min_default()(this.state.options.times.firstTime);
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs_min_default()(this.state.options.times.firstTime).locale(localeName);
       const monthsCount = this.monthsCount(this.state.options.times.firstTime, this.state.options.times.lastTime);
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
@@ -7401,7 +7401,7 @@ const GanttElastic = {
         };
         Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
           widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.month.format[formatName](currentDate.toDate())
+            this.state.options.calendar.month.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.month.widths.push(widths);

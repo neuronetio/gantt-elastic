@@ -29,6 +29,9 @@ function initVue() {
   }
 }
 initVue();
+
+let hourWidthCache = null;
+
 /**
  * Helper function to fill out empty options in user settings
  *
@@ -169,21 +172,20 @@ function getOptions(userOptions) {
         display: true,
         widths: [],
         maxWidths: { short: 0, medium: 0, long: 0 },
+        formatted: {
+          long: [],
+          medium: [],
+          short: []
+        },
         format: {
           long(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('HH:mm');
+            return date.format('HH:mm');
           },
           medium(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('HH:mm');
+            return date.format('HH:mm');
           },
           short(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('HH');
+            return date.format('HH');
           }
         }
       },
@@ -194,19 +196,13 @@ function getOptions(userOptions) {
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           long(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('DD dddd');
+            return date.format('DD dddd');
           },
           medium(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('DD ddd');
+            return date.format('DD ddd');
           },
           short(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('DD');
+            return date.format('DD');
           }
         }
       },
@@ -217,19 +213,13 @@ function getOptions(userOptions) {
         maxWidths: { short: 0, medium: 0, long: 0 },
         format: {
           short(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('MM');
+            return date.format('MM');
           },
           medium(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format("MMM 'YY");
+            return date.format("MMM 'YY");
           },
           long(date) {
-            return dayjs(date)
-              .locale(localeName)
-              .format('MMMM YYYY');
+            return date.format('MMMM YYYY');
           }
         }
       }
@@ -1206,27 +1196,28 @@ const GanttElastic = {
     computeHourWidths() {
       const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--hour'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = dayjs('2018-01-01T00:00:00'); // any date will be good for hours
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs('2018-01-01T00:00:00').locale(localeName); // any date will be good for hours
       let maxWidths = this.state.options.calendar.hour.maxWidths;
-      this.state.options.calendar.hour.widths = [];
-      Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
+      if (maxWidths.length) {
+        return;
+      }
+      for (let formatName in this.state.options.calendar.hour.format) {
         maxWidths[formatName] = 0;
-      });
+      }
       for (let hour = 0; hour < 24; hour++) {
-        const widths = {
-          hour
-        };
-        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
-          widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.hour.format[formatName](currentDate.toDate())
-          ).width;
-        });
+        let widths = { hour };
+        for (let formatName in this.state.options.calendar.hour.format) {
+          const hourFormatted = this.state.options.calendar.hour.format[formatName](currentDate);
+          this.state.options.calendar.hour.formatted[formatName].push(hourFormatted);
+          widths[formatName] = this.state.ctx.measureText(hourFormatted).width;
+        }
         this.state.options.calendar.hour.widths.push(widths);
-        Object.keys(this.state.options.calendar.hour.format).forEach(formatName => {
+        for (let formatName in this.state.options.calendar.hour.format) {
           if (widths[formatName] > maxWidths[formatName]) {
             maxWidths[formatName] = widths[formatName];
           }
-        });
+        }
         currentDate = currentDate.add(1, 'hour');
       }
     },
@@ -1237,7 +1228,8 @@ const GanttElastic = {
     computeDayWidths() {
       const style = { ...this.style['calendar-row-text'], ...this.style['calendar-row-text--day'] };
       this.state.ctx.font = style['font-size'] + ' ' + style['font-family'];
-      let currentDate = dayjs(this.state.options.times.steps[0].time);
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs(this.state.options.times.steps[0].time).locale(localeName);
       let maxWidths = this.state.options.calendar.day.maxWidths;
       this.state.options.calendar.day.widths = [];
       Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
@@ -1249,7 +1241,7 @@ const GanttElastic = {
         };
         Object.keys(this.state.options.calendar.day.format).forEach(formatName => {
           widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.day.format[formatName](currentDate.toDate())
+            this.state.options.calendar.day.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.day.widths.push(widths);
@@ -1300,7 +1292,8 @@ const GanttElastic = {
       Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
         maxWidths[formatName] = 0;
       });
-      let currentDate = dayjs(this.state.options.times.firstTime);
+      const localeName = this.state.options.locale.name;
+      let currentDate = dayjs(this.state.options.times.firstTime).locale(localeName);
       const monthsCount = this.monthsCount(this.state.options.times.firstTime, this.state.options.times.lastTime);
       for (let month = 0; month < monthsCount; month++) {
         const widths = {
@@ -1308,7 +1301,7 @@ const GanttElastic = {
         };
         Object.keys(this.state.options.calendar.month.format).forEach(formatName => {
           widths[formatName] = this.state.ctx.measureText(
-            this.state.options.calendar.month.format[formatName](currentDate.toDate())
+            this.state.options.calendar.month.format[formatName](currentDate)
           ).width;
         });
         this.state.options.calendar.month.widths.push(widths);

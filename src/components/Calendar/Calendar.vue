@@ -22,6 +22,7 @@
 <script>
 import dayjs from 'dayjs';
 import CalendarRow from './CalendarRow.vue';
+
 export default {
   name: 'Calendar',
   components: {
@@ -147,16 +148,18 @@ export default {
       if (!this.root.state.options.calendar.hour.display) {
         return allHours;
       }
-      for (let hourIndex = 0, len = this.root.state.options.times.steps.length; hourIndex < len; hourIndex++) {
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
+      for (let hourIndex = 0, len = steps.length; hourIndex < len; hourIndex++) {
         const hoursCount = this.howManyHoursFit(hourIndex);
         if (hoursCount.count === 0) {
           continue;
         }
         const hours = { key: hourIndex + 'step', children: [] };
         const hourStep = 24 / hoursCount.count;
-        const hourWidthPx = this.root.state.options.times.steps[hourIndex].width.px / hoursCount.count;
+        const hourWidthPx = steps[hourIndex].width.px / hoursCount.count;
         for (let i = 0, len = hoursCount.count; i < len; i++) {
-          const date = dayjs(this.root.state.options.times.steps[hourIndex].time).add(i * hourStep, 'hour');
+          const hour = i * hourStep;
           let index = hourIndex;
           if (hourIndex > 0) {
             index = hourIndex - Math.floor(hourIndex / 24) * 24;
@@ -165,16 +168,16 @@ export default {
           if (typeof this.root.state.options.calendar.hour.widths[index] !== 'undefined') {
             textWidth = this.root.state.options.calendar.hour.widths[index][hoursCount.type];
           }
-          let x = this.root.state.options.times.steps[hourIndex].offset.px + hourWidthPx * i;
+          let x = steps[hourIndex].offset.px + hourWidthPx * i;
           hours.children.push({
             index: hourIndex,
-            key: this.root.state.options.times.steps[hourIndex].time + 'h' + i,
+            key: 'h' + i,
             x,
             y: this.root.state.options.calendar.day.height + this.root.state.options.calendar.month.height,
             width: hourWidthPx,
             textWidth,
             height: this.root.state.options.calendar.hour.height,
-            label: this.root.state.options.calendar.hour.format[hoursCount.type](date.toDate())
+            label: this.root.state.options.calendar.hour.formatted[hoursCount.type][hour]
           });
         }
         allHours.push(hours);
@@ -196,30 +199,32 @@ export default {
       if (daysCount.count === 0) {
         return days;
       }
-      const dayStep = Math.ceil(this.root.state.options.times.steps.length / daysCount.count);
-      for (let dayIndex = 0, len = this.root.state.options.times.steps.length; dayIndex < len; dayIndex += dayStep) {
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
+      const dayStep = Math.ceil(steps.length / daysCount.count);
+      for (let dayIndex = 0, len = steps.length; dayIndex < len; dayIndex += dayStep) {
         let dayWidthPx = 0;
         // day could be shorter (daylight saving time) so join widths and divide
         for (let currentStep = 0; currentStep < dayStep; currentStep++) {
-          if (typeof this.root.state.options.times.steps[dayIndex + currentStep] !== 'undefined') {
-            dayWidthPx += this.root.state.options.times.steps[dayIndex + currentStep].width.px;
+          if (typeof steps[dayIndex + currentStep] !== 'undefined') {
+            dayWidthPx += steps[dayIndex + currentStep].width.px;
           }
         }
-        const date = dayjs(this.root.state.options.times.steps[dayIndex].time);
+        const date = dayjs(steps[dayIndex].time);
         let textWidth = 0;
         if (typeof this.root.state.options.calendar.day.widths[dayIndex] !== 'undefined') {
           textWidth = this.root.state.options.calendar.day.widths[dayIndex][daysCount.type];
         }
-        let x = this.root.state.options.times.steps[dayIndex].offset.px;
+        let x = steps[dayIndex].offset.px;
         days.push({
           index: dayIndex,
-          key: this.root.state.options.times.steps[dayIndex].time + 'd',
+          key: steps[dayIndex].time + 'd',
           x,
           y: this.root.state.options.calendar.month.height,
           width: dayWidthPx,
           textWidth,
           height: this.root.state.options.calendar.day.height,
-          label: this.root.state.options.calendar.day.format[daysCount.type](date.toDate())
+          label: this.root.state.options.calendar.day.format[daysCount.type](date.locale(localeName))
         });
       }
       return days.map(item => ({
@@ -242,6 +247,8 @@ export default {
       if (monthsCount.count === 0) {
         return months;
       }
+      const steps = this.root.state.options.times.steps;
+      const localeName = this.root.state.options.locale.name;
       let formatNames = Object.keys(this.root.state.options.calendar.month.format);
       let currentDate = dayjs(this.root.state.options.times.firstTime);
       for (let monthIndex = 0; monthIndex < monthsCount.count; monthIndex++) {
@@ -267,7 +274,7 @@ export default {
         let choosenFormatName;
         for (let formatName of formatNames) {
           if (this.root.state.options.calendar.month.maxWidths[formatName] + 2 <= monthWidth) {
-            label = this.root.state.options.calendar.month.format[formatName](currentDate.toDate());
+            label = this.root.state.options.calendar.month.format[formatName](currentDate.locale(localeName));
             choosenFormatName = formatName;
           }
         }

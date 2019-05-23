@@ -27,6 +27,7 @@
     </div>
 
     modify task<br />
+    <input type="range" min="1" max="24" id="time-zoom" /><br />
     <input type="number" value="0" id="row" placeholder="which row?" />
     <input type="text" id="name" placeholder="name" value="label" />
     <input type="text" id="value" value="test" placeholder="value" onkeyup="update()" />
@@ -431,6 +432,11 @@
 
       // mount gantt to DOM
       app.$mount('#app');
+
+      document.getElementById('time-zoom').addEventListener('input', function timeZoomChange(ev) {
+        const zoom = ev.target.value;
+        app.options.times.timeZoom = zoom;
+      });
 
       function update() {
         const row = document.getElementById('row').value;
