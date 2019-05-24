@@ -10,7 +10,7 @@
 </div>
 
 <p>
-Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project manager, gantt project manager, responsive gantt ]
+Keywords: [ gantt, javascript gantt, gantt chart,js gantt,vue gantt,project manager,gantt project manager,responsive gantt ]
 </p>
 
 <h2><a href="http://neuronet.io" target="_blank">Gantt-elastic demo here</a></h2>
@@ -22,8 +22,6 @@ Keywords: [ gantt, javascript gantt, gantt chart, js gantt, vue gantt, project m
 ## Gantt-elastic
 
 is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
-
-gantt-elastic is not fully finished yet and may change (not released yet)
 
 ### If you want more activity in this repo give it a :star:
 
@@ -71,9 +69,9 @@ and if you want default header
       function getDate(hours) {
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
-        const currentMonth = currentDate.getMonth() + 1;
+        const currentMonth = currentDate.getMonth();
         const currentDay = currentDate.getDate();
-        const timeStamp = new Date(`${currentYear}-${currentMonth}-${currentDay} 00:00:00`).getTime();
+        const timeStamp = new Date(currentYear, currentMonth, currentDay, 0, 0, 0).getTime();
         return new Date(timeStamp + hours * 60 * 60 * 1000).getTime();
       }
 
