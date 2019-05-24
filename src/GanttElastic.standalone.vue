@@ -7,7 +7,7 @@
  */
 -->
 <template>
-  <gantt-elastic :tasks="tasks" :options="options">
+  <gantt-elastic :tasks="tasks" :options="options" :dynamicStyle="dynamicStyle">
     <component v-if="components.header" :is="components.header" slot="header"></component>
     <component v-if="components.footer" :is="components.footer" slot="footer"></component>
   </gantt-elastic>
