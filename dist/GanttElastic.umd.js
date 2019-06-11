@@ -2597,7 +2597,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         "div",
         {
           ref: "chartCalendarContainer",
-          staticClass: "gant-elastic__chart-calendar-container",
+          staticClass: "gantt-elastic__chart-calendar-container",
           style: Object.assign({}, _vm.root.style["chart-calendar-container"], {
             height: _vm.root.state.options.calendar.height + "px",
             "margin-bottom": _vm.root.state.options.calendar.gap + "px"
@@ -2611,7 +2611,7 @@ var Chartvue_type_template_id_67c3f5cd_render = function() {
         "div",
         {
           ref: "chartGraphContainer",
-          staticClass: "gant-elastic__chart-graph-container",
+          staticClass: "gantt-elastic__chart-graph-container",
           style: Object.assign({}, _vm.root.style["chart-graph-container"], {
             height:
               _vm.root.state.options.height -

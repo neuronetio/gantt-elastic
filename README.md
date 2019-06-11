@@ -358,11 +358,11 @@ new Vue({
 Take a look at this demo project: https://github.com/neuronetio/gantt-elastic-webpack for other bundlers use umd or commonjs from dist folder.
 
 ```javascript
-import GanttElastic from 'gant-elastic/dist/GantElastic.umd.js';
-import GanttElastic from 'gant-elastic/dist/GantElastic.common.js'; // same as import GanttElastic from 'gantt-elastic';
+import GanttElastic from 'gantt-elastic/dist/GantElastic.umd.js';
+import GanttElastic from 'gantt-elastic/dist/GantElastic.common.js'; // same as import GanttElastic from 'gantt-elastic';
 import GanttElastic from 'gantt-elastic/src/GantElastic.vue'; // if you want vue component directly without compilation - look above
 // and the same with require
-const GanttElastic = require('gant-elastic/dist/GantElastic.common.js');
+const GanttElastic = require('gantt-elastic/dist/GantElastic.common.js');
 ```
 
 ### uglifyjs

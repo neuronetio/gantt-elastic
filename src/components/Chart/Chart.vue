@@ -9,7 +9,7 @@
 <template>
   <div class="gantt-elastic__chart" :style="{ ...root.style['chart'] }" ref="chart">
     <div
-      class="gant-elastic__chart-calendar-container"
+      class="gantt-elastic__chart-calendar-container"
       ref="chartCalendarContainer"
       :style="{
         ...root.style['chart-calendar-container'],
@@ -20,7 +20,7 @@
       <calendar></calendar>
     </div>
     <div
-      class="gant-elastic__chart-graph-container"
+      class="gantt-elastic__chart-graph-container"
       ref="chartGraphContainer"
       :style="{
         ...root.style['chart-graph-container'],
