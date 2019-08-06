@@ -76,6 +76,7 @@ import DependencyLines from './DependencyLines.vue';
 import Task from './Row/Task.vue';
 import Milestone from './Row/Milestone.vue';
 import Project from './Row/Project.vue';
+import Group from './Row/Group.vue';
 export default {
   name: 'Chart',
   components: {
@@ -85,6 +86,7 @@ export default {
     Task,
     Milestone,
     Project,
+    Group,
     DaysHighlight
   },
   inject: ['root'],
