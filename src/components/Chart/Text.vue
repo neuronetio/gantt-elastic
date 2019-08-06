@@ -14,6 +14,17 @@
     :y="task.y - root.state.options.chart.grid.horizontal.gap"
     :width="getWidth"
     :height="getHeight"
+    @click="emitEvent('click', $event)"
+    @mouseenter="emitEvent('mouseenter', $event)"
+    @mouseover="emitEvent('mouseover', $event)"
+    @mouseout="emitEvent('mouseout', $event)"
+    @mousemove="emitEvent('mousemove', $event)"
+    @mousedown="emitEvent('mousedown', $event)"
+    @mouseup="emitEvent('mouseup', $event)"
+    @mousewheel="emitEvent('mousewheel', $event)"
+    @touchstart="emitEvent('touchstart', $event)"
+    @touchmove="emitEvent('touchmove', $event)"
+    @touchend="emitEvent('touchend', $event)"
   >
     <foreignObject x="0" y="0" width="100%" :height="getHeight">
       <div
@@ -100,6 +111,19 @@ export default {
         }
       }
       return false;
+    }
+  },
+  methods: {
+    /**
+     * Emit event
+     *
+     * @param {string} eventName
+     * @param {Event} event
+     */
+    emitEvent(eventName, event) {
+      if (!this.root.state.options.scroll.scrolling) {
+        this.root.$emit(`text-${this.task.type}-${eventName}`, { event, data: this.task });
+      }
     }
   }
 };
