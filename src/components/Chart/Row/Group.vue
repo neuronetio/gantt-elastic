@@ -2,7 +2,7 @@
 /**
  * @fileoverview Group component
  * @license MIT
- * @author Rafal Pospiech <neuronet.io@gmail.com>
+ * @author Gabriel Jimenez <gjimenez@nextdigital.es>
  * @package GanttElastic
  */
 -->
