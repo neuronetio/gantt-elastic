@@ -7,6 +7,9 @@
 <img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
 <img src="https://img.shields.io/npm/dm/gantt-elastic.svg">
 <img src="https://img.shields.io/npm/l/gantt-elastic.svg">
+<img src="https://img.shields.io/github/stars/neuronetio/gantt-elastic?style=flat">
+<img src="https://badge.fury.io/js/gantt-elastic.svg">
+<img src="https://img.shields.io/twitter/url/https/github.com/neuronetio/gantt-elastic?style=social">
 </div>
 
 <p>
