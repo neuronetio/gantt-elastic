@@ -7,7 +7,6 @@
 <img src="https://img.badgesize.io/neuronetio/gantt-elastic/master/dist/GanttElastic.umd.min.js.png?compression=gzip&label=gzipped">
 <img src="https://img.shields.io/npm/dm/gantt-elastic.svg">
 <img src="https://img.shields.io/npm/l/gantt-elastic.svg">
-<img src="https://img.shields.io/github/stars/neuronetio/gantt-elastic?style=flat">
 <img src="https://badge.fury.io/js/gantt-elastic.svg">
 <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fneuronetio%2Fgantt-elastic"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/neuronetio/gantt-elastic?style=social"></a>
 </div>
