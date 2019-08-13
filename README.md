@@ -9,7 +9,7 @@
 <img src="https://img.shields.io/npm/l/gantt-elastic.svg">
 <img src="https://img.shields.io/github/stars/neuronetio/gantt-elastic?style=flat">
 <img src="https://badge.fury.io/js/gantt-elastic.svg">
-<img src="https://img.shields.io/twitter/url/https/github.com/neuronetio/gantt-elastic?style=social">
+<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fneuronetio%2Fgantt-elastic"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/neuronetio/gantt-elastic?style=social"></a>
 </div>
 
 <p>
