@@ -283,7 +283,7 @@ function prepareStyle(userStyle) {
     .toString();
   if (typeof userStyle !== 'undefined') {
     if (typeof userStyle.fontSize !== 'undefined') {
-      fontSize = userOptions.fontSize;
+      fontSize = userStyle.fontSize;
     }
     if (typeof userStyle.fontFamily !== 'undefined') {
       fontFamily = userStyle.fontFamily;
