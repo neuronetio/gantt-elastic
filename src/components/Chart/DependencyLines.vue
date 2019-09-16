@@ -18,7 +18,7 @@
     <g v-for="task in dependencyTasks" :key="task.id" :task="task">
       <path
         class="gantt-elastic__chart-dependency-lines-path"
-        :style="{ ...root.style['chart-dependency-lines-path'], ...task.style['chart-dependency-lines-path'] }"
+        :style="{ ...root.style['chart-dependency-lines-path'], ...task.style['chart-dependency-lines-path'], ...task.style['chart-dependency-lines-path-' + dependencyLine.task_id] }"
         v-for="dependencyLine in task.dependencyLines"
         :key="dependencyLine.id"
         :task="task"
@@ -108,7 +108,7 @@ export default {
         .filter(task => typeof task.dependentOn !== 'undefined')
         .map(task => {
           task.dependencyLines = task.dependentOn.map(id => {
-            return { points: this.getPoints(id, task.id) };
+            return { points: this.getPoints(id, task.id), task_id: id };
           });
           return task;
         })
