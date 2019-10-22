@@ -1,6 +1,11 @@
 <h1>Gantt-elastic - Javascript Gantt Chart (editable, responsive)</h1>
 <h2>Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
 
+<br>
+<h3>Project moved to <a href="https://github.com/neuronetio/gantt-schedule-timeline-calendar">gantt-schedule-timeline-calendar</a></h3><br><br>
+
+
+
 <div style="display:block;text-align:center">
 <img src="https://api.codacy.com/project/badge/Grade/de39273bf6c84e81a4da175907122d5a">
 <img src="https://snyk.io/test/github/neuronetio/gantt-elastic/badge.svg">
