@@ -2,7 +2,7 @@
 <h2>Javascript Gantt Chart for vue, jquery, vanilla js and other frameworks</h2>
 
 <br>
-<h3>Project moved to <a href="https://github.com/neuronetio/gantt-schedule-timeline-calendar">gantt-schedule-timeline-calendar</a></h3><br><br>
+<h3>Project moved as next major version to <a href="https://github.com/neuronetio/gantt-schedule-timeline-calendar">gantt-schedule-timeline-calendar</a></h3><br><br>
 
 
 
@@ -30,12 +30,9 @@ Keywords: [ gantt, javascript gantt, gantt chart,js gantt,vue gantt,project mana
 
 is a vue component but it could be used in other frameworks or even with jQuery (vue is kind of elastic and lightweight framework).
 
-### If you want more activity in this repo give it a :star:
+[WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
 
-### Full documentation soon (for now take a look at examples folder)
-
-For now you can look at [WIKI](https://github.com/neuronetio/gantt-elastic/wiki)
-There is also full example vue project at https://github.com/neuronetio/vue-gantt-elastic
+[Vue Example](https://github.com/neuronetio/vue-gantt-elastic)
 
 ### Installation
 
