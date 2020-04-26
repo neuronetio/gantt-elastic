@@ -1326,13 +1326,18 @@ const GanttElastic = {
     prepareDates() {
       let firstTaskTime = Number.MAX_SAFE_INTEGER;
       let lastTaskTime = 0;
-      for (let index = 0, len = this.state.tasks.length; index < len; index++) {
-        let task = this.state.tasks[index];
-        if (task.startTime < firstTaskTime) {
-          firstTaskTime = task.startTime;
-        }
-        if (task.startTime + task.duration > lastTaskTime) {
-          lastTaskTime = task.startTime + task.duration;
+      if (!this.state.tasks || this.state.tasks.length === 0 ) {
+        firstTaskTime = dayjs().hour(0).minute(0).second(0).toDate().getTime();
+        lastTaskTime = dayjs().hour(0).minute(0).second(0).add(7, 'day').toDate().getTime();
+      } else {
+        for (let index = 0, len = this.state.tasks.length; index < len; index++) {
+          let task = this.state.tasks[index];
+          if (task.startTime < firstTaskTime) {
+            firstTaskTime = task.startTime;
+          }
+          if (task.startTime + task.duration > lastTaskTime) {
+            lastTaskTime = task.startTime + task.duration;
+          }
         }
       }
       this.state.options.times.firstTaskTime = firstTaskTime;
