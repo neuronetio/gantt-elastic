@@ -71,7 +71,21 @@ export default {
         this.column.events[eventName]({ event, data: this.task, column: this.column });
       }
       this.root.$emit(`taskList-${this.task.type}-${eventName}`, { event, data: this.task, column: this.column });
-    }
+    },
+
+    /**
+     * Get column style object
+     *
+     * @returns {object}
+     */
+    columnStyle () {
+      // the column style can be a function type with a param 'task'
+      // user can render a diff column style depend on some task attr
+      if (typeof this.column.style === 'function') {
+        return this.column.style(this.task)
+      }
+      return this.column.style
+    },
   },
   computed: {
     /**
@@ -101,7 +115,7 @@ export default {
     itemColumnStyle() {
       return {
         ...this.root.style['task-list-item-column'],
-        ...this.column.style['task-list-item-column'],
+        ...this.columnStyle()['task-list-item-column'],
         width: this.column.finalWidth + 'px',
         height: this.column.height + 'px'
       };
@@ -110,19 +124,22 @@ export default {
     wrapperStyle() {
       return {
         ...this.root.style['task-list-item-value-wrapper'],
-        ...this.column.style['task-list-item-value-wrapper']
+        ...this.columnStyle()['task-list-item-value-wrapper']
       };
     },
 
     containerStyle() {
       return {
         ...this.root.style['task-list-item-value-container'],
-        ...this.column.style['task-list-item-value-container']
+        ...this.columnStyle()['task-list-item-value-container']
       };
     },
 
     valueStyle() {
-      return { ...this.root.style['task-list-item-value'], ...this.column.style['task-list-item-value'] };
+      return {
+        ...this.root.style['task-list-item-value'],
+        ...this.columnStyle()['task-list-item-value']
+      };
     }
   }
 };
