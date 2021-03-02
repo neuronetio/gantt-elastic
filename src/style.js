@@ -10,7 +10,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     fontSize,
     fontFamily,
     'main-view': {
-      background: '#FFFFFF'
+      background: '#FFFFFF00'
     },
     'main-container-wrapper': {
       overflow: 'hidden',
@@ -32,7 +32,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     },
     calendar: {
       width: '100%',
-      background: '#f3f5f7',
+      background: '#f3f5f700',
       display: 'block'
     },
     'calendar-row': {
@@ -64,7 +64,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
     'calendar-row-text': {
       'font-family': fontFamily, // GanttElastic
       'font-size': fontSize, //GanttElastic
-      color: '#606060',
+      color: '#ccc',
       display: 'inline-block',
       position: 'relative'
     },
@@ -84,7 +84,7 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       'border-left': '1px solid #00000050',
       'box-sizing': 'border-box',
       display: 'flex',
-      background: '#f3f5f7',
+      background: '#f3f5f700',
       'border-color': 'transparent'
     },
     'task-list-expander-wrapper': {
@@ -200,8 +200,8 @@ export default function getStyle(fontSize = '12px', fontFamily = 'Arial, sans-se
       'line-height': '1.5em',
       'word-break': 'keep-all',
       'white-space': 'nowrap',
-      color: '#606060',
-      background: '#FFFFFF'
+      color: '#ccc',
+      background: '#FFFFFF00'
     },
     'grid-lines': {},
     'grid-line-horizontal': {
