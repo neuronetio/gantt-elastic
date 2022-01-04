@@ -3,6 +3,10 @@
 
 <br>
 <h3>Project moved as next major version to <a href="https://github.com/neuronetio/gantt-schedule-timeline-calendar">gantt-schedule-timeline-calendar</a></h3><br><br>
+<br>
+
+<strong>This project is not suitable for use in a production environment as it runs very slowly even in standard medium projects. This project has been completely rewritten and built with super performance in mind and is available in the new repository as a <a href="https://github.com/neuronetio/gantt-schedule-timeline-calendar">gantt-schedule-timeline-calendar</a>.</strong>
+
 
 <h2><a href="https://neuronet.io/gantt-elastic/" target="_blank">Gantt-elastic demo here</a></h2>
 
